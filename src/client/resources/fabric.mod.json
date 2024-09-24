@@ -1,0 +1,29 @@
+{
+    "schemaVersion": 1,
+    "id": "skycubed",
+    "version": "${version}",
+    "name": "SkyCubed",
+    "description": "",
+    "authors": [ ],
+    "contact": { },
+    "license": "MIT",
+    "icon": "assets/skycubed/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "main": [
+            "tech.thatgravyboat.skycubed.SkyCubed"
+        ]
+    },
+    "mixins": [
+        {
+            "config": "skycubed.client.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=0.16.5",
+        "fabric-language-kotlin": ">=1.12.2",
+        "fabric": "*",
+        "minecraft": "1.21.x"
+    }
+}

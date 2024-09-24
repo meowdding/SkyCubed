@@ -1,0 +1,34 @@
+[versions]
+
+# Minecraft
+minecraft = "1.21.1"
+loom = "1.7.1"
+loader = "0.16.5"
+
+# Dependencies
+fabric = "0.105.0+1.21.1"
+fabrickotlin = "1.12.2+kotlin.2.0.20"
+skyblockapi = "1.0.0-beta.6"
+hypixelapi = "1.0.1+build.1+mc1.21"
+rconfig = "3.0.3"
+rconfigkt = "3.0.2"
+
+# Dev Dependencies
+devauth = "1.2.1"
+
+[libraries]
+
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+loader = { module = "net.fabricmc:fabric-loader", version.ref = "loader" }
+fabric = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric" }
+fabrickotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabrickotlin" }
+skyblockapi = { module = "tech.thatgravyboat:skyblock-api-1.21.1", version.ref = "skyblockapi" }
+hypixelapi = { module = "maven.modrinth:hypixel-mod-api", version.ref = "hypixelapi" }
+rconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.21", version.ref = "rconfig" }
+rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21", version.ref = "rconfigkt" }
+
+devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth" }
+
+[plugins]
+
+loom = { id = "fabric-loom", version.ref = "loom" }
