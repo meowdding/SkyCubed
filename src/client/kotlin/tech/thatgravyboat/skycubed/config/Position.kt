@@ -7,20 +7,17 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 
 @ConfigObject
 class Position(
-    val flippable: Boolean = false,
     @field:ConfigEntry(id = "x", type = EntryType.INTEGER) var x: Int = 0,
     @field:ConfigEntry(id = "y", type = EntryType.INTEGER) var y: Int = 0,
-    @field:ConfigEntry(id = "flipped", type = EntryType.BOOLEAN) var flipped: Boolean = false
 ) {
 
-    val initalX = x
-    val initalY = y
+    private val initialPos = x to y
 
     operator fun component1(): Int = if (x < 0) McClient.window.guiScaledWidth + x else x
     operator fun component2(): Int = if (y < 0) McClient.window.guiScaledHeight + y else y
 
     fun reset() {
-        x = initalX
-        y = initalY
+        x = initialPos.first
+        y = initialPos.second
     }
 }

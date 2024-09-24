@@ -1,14 +1,11 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents.AfterMouseClick
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents.BeforeMouseClick
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.render.RenderHudEvent
+import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseClickEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
@@ -29,9 +26,11 @@ object Overlays {
         return screen is ChatScreen
     }
 
-    private fun render(graphics: GuiGraphics) {
+    @Subscription
+    fun onHudRender(event: RenderHudEvent) {
         if (!LocationAPI.isOnSkyblock) return
 
+        val graphics = event.graphics
         val screen = McScreen.self
         val (mouseX, mouseY) = McClient.mouse
         overlays.forEach {
@@ -55,23 +54,24 @@ object Overlays {
         }
     }
 
-    init {
-        HudRenderCallback.EVENT.register(HudRenderCallback { drawContext, _ -> render(drawContext) })
-        ScreenEvents.BEFORE_INIT.register(ScreenEvents.BeforeInit { _, screen, _, _ ->
-            if (isOverlayScreen(screen)) {
-                ScreenMouseEvents.beforeMouseClick(screen).register(BeforeMouseClick { _, mouseX, mouseY, button ->
-                    for (overlay in overlays) {
-                        if (!overlay.enabled) continue
-                        val (x, y) = overlay.position
-                        val (width, height) = overlay.bounds
-                        if ((mouseX - x).toInt() in 0..width && (mouseY - y).toInt() in 0..height) {
-                            McClient.self.setScreen(OverlayScreen(overlay))
-                            return@BeforeMouseClick
-                        }
-                    }
-                })
+    @Subscription
+    fun onMouseClick(event: ScreenMouseClickEvent.Pre) {
+        if (!LocationAPI.isOnSkyblock) return
+        if (!isOverlayScreen(event.screen)) return
+
+        for (overlay in overlays) {
+            if (!overlay.enabled) continue
+            val (x, y) = overlay.position
+            val (width, height) = overlay.bounds
+
+            if ((event.x - x).toInt() in 0..width && (event.y - y).toInt() in 0..height) {
+                McClient.self.setScreen(OverlayScreen(overlay))
+                return
             }
-        })
+        }
+    }
+
+    init {
         register(PlayerRpgOverlay)
     }
 }

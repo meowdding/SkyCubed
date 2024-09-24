@@ -3,9 +3,7 @@ package tech.thatgravyboat.skycubed.api.overlays
 import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
-import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
