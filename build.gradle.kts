@@ -54,7 +54,13 @@ dependencies {
     modImplementation(libs.rconfig)
     modImplementation(libs.rconfigkt)
 
+    include(libs.hypixelapi)
+    include(libs.skyblockapi)
+    include(libs.rconfig)
+    include(libs.rconfigkt)
+
     modRuntimeOnly(libs.devauth)
+    modRuntimeOnly(libs.modmenu)
 }
 
 tasks.processResources {

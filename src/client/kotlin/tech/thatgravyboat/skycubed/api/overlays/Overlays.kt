@@ -11,7 +11,9 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.features.rpg.PlayerRpgOverlay
+import tech.thatgravyboat.skycubed.features.PlayerRpgOverlay
+import tech.thatgravyboat.skycubed.features.TextOverlay
+import tech.thatgravyboat.skycubed.features.info.InfoOverlay
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 object Overlays {
@@ -36,20 +38,26 @@ object Overlays {
         overlays.forEach {
             if (!it.enabled) return@forEach
             val (x, y) = it.position
-            val (width, height) = it.bounds
             graphics.pushPop {
                 translate(x.toFloat(), y.toFloat(), 0f)
+                scale(it.position.scale, it.position.scale, 1f)
                 it.render(graphics, mouseX.toInt(), mouseY.toInt())
             }
 
-            if (isOverlayScreen(screen) && mouseX.toInt() - x in 0..width && mouseY.toInt() - y in 0..height) {
-                graphics.fill(x, y, x + width, y + height, 0x50000000)
-                graphics.renderOutline(x - 1, y - 1, width + 2, height + 2, 0xFFFFFFFF.toInt())
-                screen!!.setTooltipForNextRenderPass(Text.multiline(
-                    it.name,
-                    CommonText.EMPTY,
-                    Component.translatable("ui.skycubed.overlay.edit")
-                ))
+            val rect = it.editBounds * it.position.scale
+
+            if (isOverlayScreen(screen) && rect.contains(mouseX.toInt(), mouseY.toInt())) {
+                graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
+                graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
+                if (it.moveable) {
+                    screen!!.setTooltipForNextRenderPass(Text.multiline(
+                        it.name,
+                        CommonText.EMPTY,
+                        Component.translatable("ui.skycubed.overlay.edit")
+                    ))
+                } else {
+                    screen!!.setTooltipForNextRenderPass(it.name)
+                }
             }
         }
     }
@@ -59,12 +67,12 @@ object Overlays {
         if (!LocationAPI.isOnSkyblock) return
         if (!isOverlayScreen(event.screen)) return
 
-        for (overlay in overlays) {
+        for (overlay in overlays.reversed()) {
             if (!overlay.enabled) continue
-            val (x, y) = overlay.position
-            val (width, height) = overlay.bounds
+            if (!overlay.moveable) continue
+            val rect = overlay.editBounds * overlay.position.scale
 
-            if ((event.x - x).toInt() in 0..width && (event.y - y).toInt() in 0..height) {
+            if (rect.contains(event.x, event.y)) {
                 McClient.self.setScreen(OverlayScreen(overlay))
                 return
             }
@@ -73,5 +81,7 @@ object Overlays {
 
     init {
         register(PlayerRpgOverlay)
+        register(InfoOverlay)
+        TextOverlay.overlays.forEach(::register)
     }
 }

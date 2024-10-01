@@ -30,3 +30,18 @@ internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: I
         drawString(font, text, if (scale > 1f) (width - textWidth) / 2 else 0, 0, color, shadow)
     }
 }
+
+internal fun String?.capitalize(): String {
+    if (this == null) return ""
+    return this.replace("_", " ")
+        .lowercase()
+        .replaceFirstChar(Char::titlecase)
+}
+
+internal fun Int.toOrdinal(): String {
+    val suffixes = arrayOf("th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th")
+    return when {
+        this in 11..13 -> "${this}th"
+        else -> "${this}${suffixes[this % 10]}"
+    }
+}

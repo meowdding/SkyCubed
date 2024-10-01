@@ -4,6 +4,10 @@
     "package": "tech.thatgravyboat.skycubed.mixins",
     "compatibilityLevel": "JAVA_21",
     "client": [
+        "BossHealthOverlayAccessor",
+        "ChatComponentMixin",
+        "EffectRenderingInventoryScreenMixin",
+        "GuiGraphicsMixin"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -8,13 +8,14 @@ loader = "0.16.5"
 # Dependencies
 fabric = "0.105.0+1.21.1"
 fabrickotlin = "1.12.2+kotlin.2.0.20"
-skyblockapi = "1.0.0-beta.7"
+skyblockapi = "1.0.0-beta.26"
 hypixelapi = "1.0.1+build.1+mc1.21"
-rconfig = "3.0.3"
-rconfigkt = "3.0.2"
+rconfig = "3.0.4"
+rconfigkt = "3.0.3-beta.1"
 
 # Dev Dependencies
 devauth = "1.2.1"
+modmenu = "11.0.2"
 
 [libraries]
 
@@ -28,6 +29,7 @@ rconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fa
 rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21", version.ref = "rconfigkt" }
 
 devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 
 [plugins]
 

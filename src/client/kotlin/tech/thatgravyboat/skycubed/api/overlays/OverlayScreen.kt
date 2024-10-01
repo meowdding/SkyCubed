@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
+import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
@@ -15,10 +16,12 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
         super.render(graphics, mouseX, mouseY, partialTicks)
         val (x, y) = overlay.position
-        val (width, height) = overlay.bounds
+        val (width, height) = overlay.bounds * overlay.position.scale
+
         val hovered = mouseX - x in 0..width && mouseY - y in 0..height
         graphics.pushPop {
             translate(x.toFloat(), y.toFloat(), 0f)
+            scale(overlay.position.scale, overlay.position.scale, 1f)
             overlay.render(graphics, mouseX, mouseY)
         }
         if (hovered) {
@@ -26,6 +29,9 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
             graphics.renderOutline(x - 1, y - 1, width + 2, height + 2, 0xFFFFFFFF.toInt())
             setTooltipForNextRenderPass(overlay.name)
         }
+
+        graphics.drawCenteredString(font, "X: ${overlay.position.x}, Y: ${overlay.position.y}", (this.width / 2f).toInt(), this.height - 30, -1)
+        graphics.drawCenteredString(font, "Scale: ${overlay.position.scale}", (this.width / 2f).toInt(), this.height - 20, -1)
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, i: Int, f: Double, g: Double): Boolean {
@@ -43,7 +49,8 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         val (x, y) = overlay.position
-        val (width, height) = overlay.bounds
+        val (width, height) = overlay.bounds * overlay.position.scale
+
         if ((mouseX - x).toInt() in 0..width && (mouseY - y).toInt() in 0..height) {
             when (button) {
                 InputConstants.MOUSE_BUTTON_LEFT -> {
@@ -66,8 +73,19 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
             InputConstants.KEY_DOWN -> overlay.setY(overlay.position.y + multipiler)
             InputConstants.KEY_LEFT -> overlay.setX(overlay.position.x - multipiler)
             InputConstants.KEY_RIGHT -> overlay.setX(overlay.position.x + multipiler)
+            InputConstants.KEY_EQUALS -> overlay.position.scale += 0.1f
+            InputConstants.KEY_MINUS -> overlay.position.scale -= 0.1f
             else -> return super.keyPressed(key, scan, modifiers)
         }
         return true
     }
+
+    override fun onClose() {
+        super.onClose()
+        ConfigManager.save()
+    }
+}
+
+private operator fun Pair<Int, Int>.times(scale: Float): Pair<Int, Int> {
+    return (first * scale).toInt() to (second * scale).toInt()
 }
