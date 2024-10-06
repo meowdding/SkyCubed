@@ -6,7 +6,7 @@ import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.level.BlockMinedEvent
-import tech.thatgravyboat.skyblockapi.api.events.level.RightClickItemEvent
+import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEvent
 import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 
@@ -15,7 +15,7 @@ object CooldownManager {
     private val cooldowns: MutableMap<String, Pair<Long, Long>> = mutableMapOf()
 
     @Subscription
-    fun onItemRightClick(event: RightClickItemEvent) {
+    fun onItemRightClick(event: RightClickEvent) {
         val ability = event.stack.getData(DataTypes.COOLDOWN_ABILITY)
         if (ability != null) {
             addCooldown(ability.first, ability.second.inWholeMilliseconds)

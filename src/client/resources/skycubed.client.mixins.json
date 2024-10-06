@@ -7,7 +7,7 @@
         "BossHealthOverlayAccessor",
         "ChatComponentMixin",
         "EffectRenderingInventoryScreenMixin",
-        "GuiGraphicsMixin"
+        "GuiGraphicsMixin", "InventoryScreenMixin"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -68,11 +68,12 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
 
     override fun keyPressed(key: Int, scan: Int, modifiers: Int): Boolean {
         val multipiler = if (hasShiftDown()) 10 else 1
+        val (x, y) = overlay.position
         when (key) {
-            InputConstants.KEY_UP -> overlay.setY(overlay.position.y - multipiler)
-            InputConstants.KEY_DOWN -> overlay.setY(overlay.position.y + multipiler)
-            InputConstants.KEY_LEFT -> overlay.setX(overlay.position.x - multipiler)
-            InputConstants.KEY_RIGHT -> overlay.setX(overlay.position.x + multipiler)
+            InputConstants.KEY_UP -> overlay.setY(y - multipiler)
+            InputConstants.KEY_DOWN -> overlay.setY(y + multipiler)
+            InputConstants.KEY_LEFT -> overlay.setX(x - multipiler)
+            InputConstants.KEY_RIGHT -> overlay.setX(x + multipiler)
             InputConstants.KEY_EQUALS -> overlay.position.scale += 0.1f
             InputConstants.KEY_MINUS -> overlay.position.scale -= 0.1f
             else -> return super.keyPressed(key, scan, modifiers)

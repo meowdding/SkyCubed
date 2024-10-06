@@ -8,6 +8,9 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlays
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.CooldownManager
 import tech.thatgravyboat.skycubed.features.ElementHider
+import tech.thatgravyboat.skycubed.features.ItemBarManager
+import tech.thatgravyboat.skycubed.features.commands.hypixel.HypixelCommands
+import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
 import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
 
 class SkyCubed : ModInitializer {
@@ -18,6 +21,9 @@ class SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(ElementHider)
         SkyBlockAPI.eventBus.register(CooldownManager)
         SkyBlockAPI.eventBus.register(NotificationManager)
+        SkyBlockAPI.eventBus.register(ItemBarManager)
+        SkyBlockAPI.eventBus.register(HypixelCommands)
+        SkyBlockAPI.eventBus.register(EquipmentManager)
     }
 
     companion object {

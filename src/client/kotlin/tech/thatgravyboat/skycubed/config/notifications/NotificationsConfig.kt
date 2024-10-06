@@ -36,4 +36,10 @@ object NotificationsConfig {
     @ConfigOption.Separator("Miscellaneous")
     @ConfigEntry(id = "blocksInTheWay", type = EntryType.OBJECT)
     val blocksInTheWay = NotificationObject(hideMessage = true)
+
+    @ConfigEntry(id = "warping", type = EntryType.OBJECT)
+    val warping = NotificationObject(hideMessage = true)
+
+    @ConfigEntry(id = "combo", type = EntryType.OBJECT)
+    val combo = NotificationObject(hideMessage = true, showAsToast = true)
 }

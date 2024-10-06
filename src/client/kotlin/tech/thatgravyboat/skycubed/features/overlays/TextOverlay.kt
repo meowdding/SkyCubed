@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features
+package tech.thatgravyboat.skycubed.features.overlays
 
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics

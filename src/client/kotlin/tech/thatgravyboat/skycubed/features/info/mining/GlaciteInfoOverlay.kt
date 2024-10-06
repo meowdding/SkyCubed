@@ -1,11 +1,13 @@
-package tech.thatgravyboat.skycubed.features.info
+package tech.thatgravyboat.skycubed.features.info.mining
 
 import net.minecraft.client.gui.GuiGraphics
 import tech.thatgravyboat.skyblockapi.api.area.mining.PowderAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.Displays
+import tech.thatgravyboat.skycubed.features.info.CommonInfoDisplays
 
 object GlaciteInfoOverlay {
 
@@ -15,7 +17,7 @@ object GlaciteInfoOverlay {
             Displays.padding(1, Displays.sprite(SkyCubed.id("info/icons/glacite"), 8, 8)),
             Displays.text(
                 { PowderAPI.glacite.toFormattedString() },
-                { 0x55FFFFu }
+                { TextColor.AQUA.toUInt() }
             ),
         ))
     )

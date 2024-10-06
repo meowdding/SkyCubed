@@ -1,0 +1,181 @@
+[
+    {
+        "values": ["f", "friend"],
+        "children": [
+            "help",
+            "removeall",
+            "notifications",
+            {
+                "values": ["accept", "add", "best", "deny", "remove"],
+                "children": [
+                    {
+                        "name": "player"
+                    }
+                ]
+            },
+            {
+                "values": ["list"],
+                "children": [
+                    "best",
+                    {
+                        "name": "page"
+                    }
+                ]
+            },
+            {
+                "values": ["requests"],
+                "children": [
+                    {
+                        "name": "page"
+                    }
+                ]
+            },
+            {
+                "values": ["nickname"],
+                "children": [
+                    {
+                        "name": "friend",
+                        "children": [
+                            {
+                                "name": "nickname"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        "values": ["g", "guild"],
+        "children": [
+            "top", "toggle", "tagcolor", "tag", "slow", "settings", "rename", "quest", "permissions", "party", "onlinemode",
+            "online", "officerchat", "notifications", "mypermissions", "motd", "menu", "members", "log", "leave", "info", "history",
+            "help", "discord", "disband", "create", "chat", "accept",
+            {
+                "values": ["invite"],
+                "children": [
+                    {
+                        "name": "player"
+                    }
+                ]
+            },
+            {
+                "values": ["member", "kick", "transfer", "setrank", "promote", "demote"],
+                "children": [
+                    {
+                        "name": "member"
+                    }
+                ]
+            },
+            {
+                "values": ["mute", "unmute"],
+                "children": [
+                    "everyone",
+                    {
+                        "name": "member"
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        "values": ["warp"],
+        "children": [
+            "home", "island",
+            "hub", "village",
+            "museum",
+            "da",
+            "castle",
+            "crypts", "crypt",
+            "carnival",
+            "dungeon_hub", "dungeons", "dhub", "dh",
+            "barn",
+            "desert",
+            "trapper", "trap",
+            "park",
+            "howl", "howling_cave",
+            "jungle",
+            "gold",
+            "deep",
+            "dwarves", "dmines", "mines",
+            "forge",
+            "basecamp", "base", "camp", "glacite", "tunnel", "tunnels",
+            "crystals", "hollows", "ch",
+            "nucleus", "cn",
+            "spider", "spiders",
+            "top", "nest",
+            "arachne", "sanctuary",
+            "end",
+            "drag", "dragons",
+            "void", "sepulture",
+            "isle", "crimson", "nether",
+            "skull", "kuudra",
+            "tomb", "smold", "smoldering_tomb",
+            "wasteland",
+            "dragontail",
+            "scarleton",
+            "garden",
+            "jerry", "winter", "workshop"
+        ]
+    },
+
+    {
+        "values": ["p", "party"],
+        "children": [
+            "chat", "disband", "kickoffline", "leave", "list", "mute", "poll", "private", "settings", "warp",
+            {
+                "values": ["accept", "invite"],
+                "children": [
+                    {
+                        "name": "player"
+                    }
+                ]
+            },
+            {
+                "values": ["kick", "demote", "promote", "transfer"],
+                "children": [
+                    {
+                        "name": "member"
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        "values": [ "w", "msg", "tell" ],
+        "children": [
+            {
+                "name": "player",
+                "children": [
+                    {
+                        "name": "message",
+                        "greedy": true
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        "values": [ "boop" ],
+        "children": [
+            {
+                "name": "player"
+            }
+        ]
+    },
+
+    {
+        "values": [ "visit" ],
+        "children": [
+            {
+                "name": "player"
+            }
+        ]
+    }
+
+
+]

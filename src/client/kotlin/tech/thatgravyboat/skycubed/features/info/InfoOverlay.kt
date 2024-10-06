@@ -3,10 +3,15 @@ package tech.thatgravyboat.skycubed.features.info
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyblockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.features.info.farming.TrapperInfoOverlay
+import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
+import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
+import tech.thatgravyboat.skycubed.features.info.mining.GlaciteInfoOverlay
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
 import tech.thatgravyboat.skycubed.utils.Rect
 
@@ -31,8 +36,15 @@ object InfoOverlay : Overlay {
 
         when (LocationAPI.island) {
             SkyblockIsland.THE_RIFT -> RiftInfoOverlay.render(graphics)
-            SkyblockIsland.DWARVEN_MINES -> DwarvesInfoOverlay.render(graphics)
+            SkyblockIsland.DWARVEN_MINES -> when (LocationAPI.area) {
+                SkyBlockAreas.GREAT_LAKE,
+                SkyBlockAreas.GLACITE_TUNNELS,
+                SkyBlockAreas.BASECAMP,
+                SkyBlockAreas.FOSSIL_RESEARCH -> GlaciteInfoOverlay.render(graphics)
+                else -> DwarvesInfoOverlay.render(graphics)
+            }
             SkyblockIsland.CRYSTAL_HOLLOWS -> CrystalHollowsInfoOverlay.render(graphics)
+            SkyblockIsland.THE_BARN -> TrapperInfoOverlay.render(graphics)
             else -> MainInfoOverlay.render(graphics)
         }
     }
