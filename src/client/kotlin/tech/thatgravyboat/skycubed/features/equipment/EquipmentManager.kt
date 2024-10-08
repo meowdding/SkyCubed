@@ -45,7 +45,7 @@ object EquipmentManager {
             val y = topPos + index * 18
             graphics.blitSprite(slotTexture, leftPos, y, 18, 18)
             val stack = EquipmentAPI.equipment[slot] ?: ItemStack.EMPTY
-            if (mouseX in leftPos..leftPos + 18 && mouseY in y..y + 18) {
+            if (mouseX in leftPos + 1..leftPos + 16 && mouseY in y + 1..y + 16) {
                 graphics.fill(RenderType.guiOverlay(), leftPos + 1, y + 1, leftPos + 17, y + 17, -2130706433)
             }
             if (stack.isEmpty) {
@@ -65,7 +65,7 @@ object EquipmentManager {
         val (mouseX, mouseY) = McClient.mouse
         EquipmentSlot.entries.forEachIndexed { index, slot ->
             val slotY = y + index * 18
-            if (mouseX.toInt() in x..x + 18 && mouseY.toInt() in slotY..slotY + 18) {
+            if (mouseX.toInt() in x + 1..x + 16 && mouseY.toInt() in slotY + 1..slotY + 16) {
                 val stack = EquipmentAPI.equipment[slot]?.takeIf { !it.isEmpty } ?: return
                 event.graphics.renderTooltip(McClient.self.font, stack, mouseX.toInt(), mouseY.toInt())
             }
@@ -80,7 +80,7 @@ object EquipmentManager {
         val y = lastY + 7
         EquipmentSlot.entries.forEachIndexed { index, _ ->
             val slotY = y + index * 18
-            if (event.x.toInt() in x..x + 18 && event.y.toInt() in slotY..slotY + 18) {
+            if (event.x.toInt() in x + 1..x + 16 && event.y.toInt() in slotY + 1..slotY + 16) {
                 McClient.self.connection?.sendCommand("equipment")
             }
         }
@@ -100,8 +100,9 @@ object EquipmentManager {
     }
 
     private class HiddenSlot(val slot: Slot) : Slot(slot.container, slot.index, slot.x, slot.y) {
-        override fun isActive(): Boolean = !isEnabled
+        override fun isActive(): Boolean = !isEnabled && slot.isActive
         override fun getNoItemIcon() = this.slot.noItemIcon
-        override fun setByPlayer(itemStack: ItemStack, itemStack2: ItemStack) = this.slot.setByPlayer(itemStack, itemStack2)
+        override fun setByPlayer(itemStack: ItemStack, itemStack2: ItemStack) =
+            this.slot.setByPlayer(itemStack, itemStack2)
     }
 }

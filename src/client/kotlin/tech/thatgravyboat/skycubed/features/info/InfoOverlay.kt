@@ -8,6 +8,8 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyblockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.features.info.farming.FarmhouseInfoOverlay
+import tech.thatgravyboat.skycubed.features.info.farming.GardenInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.farming.TrapperInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
@@ -45,6 +47,11 @@ object InfoOverlay : Overlay {
             }
             SkyblockIsland.CRYSTAL_HOLLOWS -> CrystalHollowsInfoOverlay.render(graphics)
             SkyblockIsland.THE_BARN -> TrapperInfoOverlay.render(graphics)
+            SkyblockIsland.HUB -> when (LocationAPI.area) {
+                SkyBlockAreas.FARMHOUSE -> FarmhouseInfoOverlay.render(graphics)
+                else -> MainInfoOverlay.render(graphics)
+            }
+            SkyblockIsland.GARDEN -> GardenInfoOverlay.render(graphics)
             else -> MainInfoOverlay.render(graphics)
         }
     }

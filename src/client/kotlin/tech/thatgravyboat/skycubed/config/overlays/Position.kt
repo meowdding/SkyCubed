@@ -2,14 +2,13 @@ package tech.thatgravyboat.skycubed.config.overlays
 
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
-import com.teamresourceful.resourcefulconfig.api.types.options.EntryType
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 
 @ConfigObject
 class Position(
-    @ConfigEntry(id = "x", type = EntryType.INTEGER) var x: Int = 0,
-    @ConfigEntry(id = "y", type = EntryType.INTEGER) var y: Int = 0,
-    @ConfigEntry(id = "scale", type = EntryType.FLOAT) var scale: Float = 1.0f
+    @ConfigEntry(id = "x") var x: Int = 0,
+    @ConfigEntry(id = "y") var y: Int = 0,
+    @ConfigEntry(id = "scale") var scale: Float = 1.0f
 ) {
 
     private val initialPos = x to y

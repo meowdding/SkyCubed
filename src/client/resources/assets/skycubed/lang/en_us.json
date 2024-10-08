@@ -1,3 +1,55 @@
 {
-    "ui.skycubed.overlay.edit": "§6Click to edit position"
+    "ui.skycubed.overlay.edit": "§6Click to edit position",
+
+
+
+
+    "__config__": "",
+
+    "config.skycubed.notifications.friendJoinLeave": "Friend Join/Leave",
+    "config.skycubed.notifications.friendJoinLeave.desc": "Checks the following messages:\n§aFriend > §7Your Friend §eleft.",
+
+    "config.skycubed.notifications.guildJoinLeave": "Guild Join/Leave",
+    "config.skycubed.notifications.guildJoinLeave.desc": "Checks the following messages:\n§2Guild > §7Your Guild Member §eleft.",
+
+    "config.skycubed.notifications.hoppityYouFound": "Hoppity You Found",
+    "config.skycubed.notifications.hoppityYouFound.desc": "Checks the following messages:\n§d§lHOPPITY'S HUNT §7You found §aAmazon §7(§a§lUNCOMMON§7)!",
+
+    "config.skycubed.notifications.hoppityEggAppeared": "Hoppity Egg Appeared",
+    "config.skycubed.notifications.hoppityEggAppeared.desc": "Checks the following messages:\n§d§lHOPPITY'S HUNT §r§dA §6Chocolate Breakfast Egg §dhas appeared!",
+
+    "config.skycubed.notifications.skymall": "SkyMall",
+    "config.skycubed.notifications.skymall.desc": "Checks the following messages:\n",
+
+    "ronfig.skycubed.notifications.monolith": "Monolith",
+    "config.skycubed.notifications.monolith.desc": "Checks the following messages:\n§5§lMONOLITH! §r§aYou found a mysterious §5Dark Monolith §aand were rewarded §650,000 Coins§a!",
+
+    "config.skycubed.notifications.riftOrb": "Rift Orb",
+    "config.skycubed.notifications.riftOrb.desc": "Checks the following messages:\n",
+
+    "config.skycubed.notifications.blocksInTheWay": "Blocks In The Way",
+    "config.skycubed.notifications.blocksInTheWay.desc": "Checks the following messages:\n§cThere are blocks in the way!",
+
+    "config.skycubed.notifications.warping": "Warping",
+    "config.skycubed.notifications.warping.desc": "Checks the following messages:\n§7Warping...",
+
+    "config.skycubed.notifications.combo": "Combos",
+    "config.skycubed.notifications.combo.desc": "Checks the following messages:\n§6§l+30 Kill Combo §r§8+§610 §7coins per kill",
+
+
+    "config.skycubed.overlays.rpgEnabled": "Enable RPG Overlay",
+    "config.skycubed.overlays.rpgEnabled.desc": "Enables the RPG overlay",
+
+    "config.skycubed.overlays.healthEnabled": "Enable Health Text Overlay",
+    "config.skycubed.overlays.healthEnabled.desc": "Enables the health text overlay",
+    "config.skycubed.overlays.healthDisplay.disabled": "Disabled",
+    "config.skycubed.overlays.healthDisplay.normal": "Enabled",
+    "config.skycubed.overlays.healthDisplay.effective": "Effective HP",
+
+    "config.skycubed.overlays.manaEnabled": "Enable Mana Text Overlay",
+    "config.skycubed.overlays.manaEnabled.desc": "Enables the mana text overlay",
+
+    "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
+    "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay"
+
 }

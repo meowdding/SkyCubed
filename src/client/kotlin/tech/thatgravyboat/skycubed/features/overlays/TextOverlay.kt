@@ -7,6 +7,7 @@ import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.utils.font
@@ -29,8 +30,8 @@ class TextOverlay(
     companion object {
 
         val overlays = listOf(
-            TextOverlay(Text.of("Health"), OverlaysConfig.health, { OverlaysConfig.healthEnabled }, {
-                if (OverlaysConfig.showEffectiveHealth) {
+            TextOverlay(Text.of("Health"), OverlaysConfig.health, { OverlaysConfig.healthDisplay != HealthDisplay.DISABLED }, {
+                if (OverlaysConfig.healthDisplay == HealthDisplay.EFFECTIVE) {
                     val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
                     val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
                     Text.of("❤ $health/$maxHealth").withStyle(ChatFormatting.GREEN)
