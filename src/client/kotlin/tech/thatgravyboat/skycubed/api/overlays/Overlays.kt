@@ -4,6 +4,7 @@ import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderHudEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseClickEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -14,6 +15,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.features.info.InfoOverlay
+import tech.thatgravyboat.skycubed.features.overlays.CommissionsOverlay
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 object Overlays {
@@ -25,12 +27,13 @@ object Overlays {
     }
 
     private fun isOverlayScreen(screen: Screen?): Boolean {
-        return screen is ChatScreen
+        return screen is ChatScreen || screen is EditOverlaysScreen
     }
 
     @Subscription
     fun onHudRender(event: RenderHudEvent) {
         if (!LocationAPI.isOnSkyblock) return
+        if (McClient.self.options.hideGui) return
 
         val graphics = event.graphics
         val screen = McScreen.self
@@ -73,14 +76,26 @@ object Overlays {
             val rect = overlay.editBounds * overlay.position.scale
 
             if (rect.contains(event.x, event.y)) {
-                McClient.self.setScreen(OverlayScreen(overlay))
+                McClient.setScreen(OverlayScreen(overlay))
                 return
+            }
+        }
+    }
+
+    @Subscription
+    fun onCommandRegistration(event: RegisterCommandsEvent) {
+        event.register("skycubed") {
+            then("overlays") {
+                callback {
+                    McClient.setScreen(EditOverlaysScreen())
+                }
             }
         }
     }
 
     init {
         register(PlayerRpgOverlay)
+        register(CommissionsOverlay)
         register(InfoOverlay)
         TextOverlay.overlays.forEach(::register)
     }

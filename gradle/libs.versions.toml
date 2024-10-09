@@ -8,9 +8,13 @@ loader = "0.16.5"
 # Dependencies
 fabric = "0.105.0+1.21.1"
 fabrickotlin = "1.12.2+kotlin.2.0.20"
-skyblockapi = "1.0.0-beta.43"
+skyblockapi = "1.0.0-beta.44"
 hypixelapi = "1.0.1+build.1+mc1.21"
-rconfig = "3.0.6"
+rconfig = "3.0.7"
+rconfigkt = "3.0.8-beta.1"
+olympus = "1.0.7"
+rlib = "3.0.11"
+rlibkt = "2.0.2"
 
 # Dev Dependencies
 devauth = "1.2.1"
@@ -25,7 +29,10 @@ fabrickotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "
 skyblockapi = { module = "tech.thatgravyboat:skyblock-api-1.21.1", version.ref = "skyblockapi" }
 hypixelapi = { module = "maven.modrinth:hypixel-mod-api", version.ref = "hypixelapi" }
 rconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.21", version.ref = "rconfig" }
-rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21", version.ref = "rconfig" }
+rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21", version.ref = "rconfigkt" }
+olympus = { module = "earth.terrarium.olympus:olympus-fabric-1.21", version.ref = "olympus" }
+rlib = { module = "com.teamresourceful.resourcefullib:resourcefullib-fabric-1.21", version.ref = "rlib" }
+rlibkt = { module = "com.teamresourceful.resourcefullibkt:resourcefullibkt-fabric-1.21", version.ref = "rlibkt" }
 
 devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }

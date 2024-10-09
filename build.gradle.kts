@@ -53,11 +53,17 @@ dependencies {
     modImplementation(libs.skyblockapi)
     modImplementation(libs.rconfig)
     modImplementation(libs.rconfigkt)
+    modImplementation(libs.rlib)
+    modImplementation(libs.rlibkt)
+    modImplementation(libs.olympus)
 
     include(libs.hypixelapi)
     include(libs.skyblockapi)
     include(libs.rconfig)
     include(libs.rconfigkt)
+    include(libs.rlib)
+    include(libs.rlibkt)
+    include(libs.olympus)
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)

@@ -1,5 +1,6 @@
 {
-    "ui.skycubed.overlay.edit": "§6Click to edit position",
+    "ui.skycubed.overlay.edit": "§6Click to edit overlay.",
+    "ui.skycubed.overlay.edit.options": "§6Right Click to configure",
 
 
 
@@ -50,6 +51,36 @@
     "config.skycubed.overlays.manaEnabled.desc": "Enables the mana text overlay",
 
     "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
-    "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay"
+    "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay",
+
+    "config.skycubed.overlays.commissionsEnabled": "Enable Commissions Overlay",
+    "config.skycubed.overlays.commissionsEnabled.desc": "Enables the commissions overlay",
+
+    "config.skycubed.overlays.coldOverlay": "Cold Overlay Start",
+    "config.skycubed.overlays.coldOverlay.desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay",
+
+    "config.skycubed.chat.chatColors": "Chat Tab Colors",
+    "config.skycubed.chat.chatColors.desc": "Changes the color of the line next to a chat message to a color based on the message type",
+
+    "config.skycubed.chat.compactChat": "Compact Chat",
+    "config.skycubed.chat.compactChat.desc": "Makes the chat more compact by removing old messages of similar type. ie. cooldowns or lists or other spammy messages but important messages",
+
+    "config.skycubed.chat.messagesToClean": "Messages to Clean",
+    "config.skycubed.chat.messagesToClean.desc": "A list of message you would like to be removed from chat, these are written as regex patterns",
+
+    "__notifications__": "",
+
+    "skycubed.notifications": "Notifications",
+    "skycubed.notification.type.all": "All",
+    "skycubed.notification.type.friendJoinLeave": "Friend Join/Leave",
+    "skycubed.notification.type.guildJoinLeave": "Guild Join/Leave",
+    "skycubed.notification.type.hoppityYouFound": "Hoppity You Found",
+    "skycubed.notification.type.hoppityEggAppeared": "Hoppity Egg Appeared",
+    "skycubed.notification.type.skymall1": "SkyMall",
+    "skycubed.notification.type.monolith": "Monolith",
+    "skycubed.notification.type.riftOrb": "Rift Orb",
+    "skycubed.notification.type.blocksInTheWay": "Blocks In The Way",
+    "skycubed.notification.type.warping": "Warping",
+    "skycubed.notification.type.combo": "Combos"
 
 }

@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.api.displays
 
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -87,6 +88,16 @@ object Displays {
             val component: MutableComponent
                 get() = Text.of(text())
 
+            override fun getWidth() = component.width
+            override fun getHeight() = 10
+            override fun render(graphics: GuiGraphics) {
+                graphics.drawString(graphics.font, component, 0, 1, color().toInt(), shadow)
+            }
+        }
+    }
+
+    fun text(component: Component, color: () -> UInt = { 0xFFFFFFFFu }, shadow: Boolean = true): Display {
+        return object : Display {
             override fun getWidth() = component.width
             override fun getHeight() = 10
             override fun render(graphics: GuiGraphics) {

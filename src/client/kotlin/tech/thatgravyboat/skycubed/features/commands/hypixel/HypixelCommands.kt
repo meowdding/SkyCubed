@@ -4,11 +4,8 @@ import com.google.gson.JsonArray
 import com.mojang.brigadier.tree.RootCommandNode
 import kotlinx.coroutines.runBlocking
 import net.minecraft.commands.SharedSuggestionProvider
-import net.minecraft.network.protocol.game.ClientboundCommandsPacket
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
-import tech.thatgravyboat.skyblockapi.api.events.level.PacketReceivedEvent
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toData
 

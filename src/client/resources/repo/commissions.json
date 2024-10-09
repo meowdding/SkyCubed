@@ -1,0 +1,36 @@
+{
+    "Golden Goblin Slayer": {
+        "type": "boolean"
+    },
+    "Scrap Collector": {
+        "type": "boolean"
+    },
+
+    "Cliffside Veins Mithril": {
+        "type": "decimal",
+        "max": 250
+    },
+    "Lava Springs Mithril": {
+        "type": "decimal",
+        "max": 250
+    },
+
+    "Goblin Slayer": {
+        "type": "decimal",
+        "max": 250
+    },
+
+    "Corpse Looter": {
+        "type": "decimal",
+        "max": 2
+    },
+    "Maniac Slayer": {
+        "type": "decimal",
+        "max": 10
+    },
+
+    "Umber Collector": {
+        "type": "decimal",
+        "max": 1500
+    }
+}

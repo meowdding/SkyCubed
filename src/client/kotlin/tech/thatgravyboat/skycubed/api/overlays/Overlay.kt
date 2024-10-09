@@ -1,8 +1,10 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
+import earth.terrarium.olympus.client.ui.context.ContextMenu
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.Rect
 
@@ -10,17 +12,20 @@ interface Overlay {
 
     val name: Component
 
-    val moveable: Boolean
-        get() = true
-    val enabled: Boolean
-        get() = true
+    val moveable: Boolean get() = true
+    val enabled: Boolean get() = true
 
     val position: Position
     val bounds: Pair<Int, Int>
-    val editBounds: Rect
-        get() = Rect(position.x, position.y, bounds.first, bounds.second)
+    val editBounds: Rect get() = Rect(position.x, position.y, bounds.first, bounds.second)
 
     fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int)
+
+    fun onRightClick() = ContextMenu.open {
+        it.dangerButton(Text.of("Reset Position")) {
+            position.reset()
+        }
+    }
 
     fun setX(x: Int) {
         val width = McClient.window.guiScaledWidth

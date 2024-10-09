@@ -68,6 +68,7 @@
             "members",
             "log",
             "leave",
+            "list",
             "info",
             "history",
             "help",

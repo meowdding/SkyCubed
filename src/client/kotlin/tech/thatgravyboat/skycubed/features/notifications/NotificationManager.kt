@@ -3,8 +3,11 @@ package tech.thatgravyboat.skycubed.features.notifications
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
+import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentMatchResult
+import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
@@ -19,7 +22,7 @@ object NotificationManager {
             joinLeaveMessage(match, "Guild", TextColor.DARK_GREEN)
         },
 
-        NotificationType.single("warping", "Warping\\.\\.\\.") { NotificationsConfig.warping },
+        NotificationType.single("warping", "(?:Warping|Sending to server mini76K|Evacuating to Your Island)\\.{3}|Warped to .*") { NotificationsConfig.warping },
         NotificationType.single("blocksInTheWay", "There are blocks in the way!") { NotificationsConfig.blocksInTheWay },
 
         NotificationType.unique("hoppityYouFound", "HOPPITY'S HUNT You found .*") { NotificationsConfig.hoppityYouFound },
@@ -36,25 +39,25 @@ object NotificationManager {
         NotificationType.single("combo", "\\+\\d+ Kill Combo .*|Your Kill Combo has expired!.*") { NotificationsConfig.combo },
     )
 
-    private fun joinLeaveMessage(match: MatchGroupCollection, title: String, color: Int): Component = Text.multiline(
+    private fun joinLeaveMessage(match: ComponentMatchResult, title: String, color: Int): Component = Text.multiline(
         Text.of(title) { this.color = color },
         Text.join(
-            Text.of("${match["name"]?.value} ") { this.color = TextColor.GRAY },
-            Text.of("${match["reason"]?.value}.") { this.color = if (match["reason"]?.value == "joined") TextColor.GREEN else TextColor.RED }
+            match["name"] ?: CommonText.EMPTY,
+            CommonText.SPACE,
+            Text.of("${match["reason"]?.stripped}.") { this.color = if (match["reason"]?.stripped == "joined") TextColor.GREEN else TextColor.RED }
         )
     )
 
     @Subscription(priority = Subscription.HIGHEST, receiveCancelled = true)
     fun onChatMessage(event: ChatReceivedEvent) {
-        val message = event.text
         for (notification in notifications) {
             val config = notification.config()
             if (!config.shouldCheck()) continue
-            val match = notification.regex.matchEntire(message) ?: continue
+            val match = notification.regex.match(event.component) ?: continue
             if (config.showAsToast) {
                 NotificationToast.add(
                     notification.id,
-                    notification.factory(event.component, match.groups),
+                    notification.factory(event.component, match),
                     config.toastDuration
                 )
             }

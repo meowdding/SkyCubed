@@ -6,6 +6,7 @@ import net.fabricmc.loader.api.FabricLoader
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
 import java.nio.file.Files
 
 object ConfigManager {
@@ -21,8 +22,12 @@ object ConfigManager {
     fun onRegisterCommands(event: RegisterCommandsEvent) {
         event.register("skycubed") {
             callback {
-                McClient.tell {
-                    McClient.self.setScreen(ResourcefulConfigScreen.get(null, configurator, Config::class.java))
+                McClient.setScreen(ResourcefulConfigScreen.get(null, configurator, Config::class.java))
+            }
+
+            then("notifications") {
+                callback {
+                    McClient.setScreen(NotificationsScreen(null))
                 }
             }
         }

@@ -12,7 +12,8 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
     "skycubed/config",
     categories = [
         OverlaysConfig::class,
-        NotificationsConfig::class
+        NotificationsConfig::class,
+        ChatConfig::class,
     ]
 )
 object Config {

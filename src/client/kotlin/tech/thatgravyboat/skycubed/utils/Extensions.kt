@@ -35,7 +35,8 @@ internal fun String?.capitalize(): String {
     if (this == null) return ""
     return this.replace("_", " ")
         .lowercase()
-        .replaceFirstChar(Char::titlecase)
+        .split(" ")
+        .joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
 }
 
 internal fun Int.toOrdinal(): String {

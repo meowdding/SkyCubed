@@ -11,7 +11,7 @@ import tech.thatgravyboat.skycubed.utils.font
 
 data class NotificationToast(
     private var text: List<FormattedCharSequence>,
-    private val id: String?,
+    val id: String?,
     private val displayTime: Int
 ) : Toast {
 
@@ -22,7 +22,12 @@ data class NotificationToast(
     override fun height(): Int = (7 + text.size * 10).coerceAtLeast(32)
     override fun getToken(): Any = this.id ?: Toast.NO_TOKEN
 
-    override fun render(graphics: GuiGraphics, toastComponent: ToastComponent, l: Long): Toast.Visibility {
+    override fun render(graphics: GuiGraphics, ignored1: ToastComponent, ignored2: Long): Toast.Visibility {
+        render(graphics)
+        return if (this.removalTime <= System.currentTimeMillis()) Toast.Visibility.HIDE else Toast.Visibility.SHOW
+    }
+
+    fun render(graphics: GuiGraphics) {
         if (this.removalTime == -1L || this.replaced) {
             this.removalTime = System.currentTimeMillis() + this.displayTime
             this.replaced = false
@@ -35,8 +40,6 @@ data class NotificationToast(
         for (line in text.indices) {
             graphics.drawString(graphics.font, text[line], x, y + line * 10, -1, false)
         }
-
-        return if (this.removalTime <= System.currentTimeMillis()) Toast.Visibility.HIDE else Toast.Visibility.SHOW
     }
 
     fun replace(text: List<FormattedCharSequence>) {
@@ -47,6 +50,8 @@ data class NotificationToast(
     companion object {
 
         private val BACKGROUND = SkyCubed.id("notification")
+
+        private val notifications = mutableListOf<NotificationToast>()
 
         fun add(id: String?, text: Component, time: Int) {
             val component = McClient.toasts
@@ -59,7 +64,14 @@ data class NotificationToast(
                     return
                 }
             }
-            component.addToast(NotificationToast(list, id, time))
+            val toast = NotificationToast(list, id, time)
+            component.addToast(toast)
+            this.notifications.add(toast)
+            if (this.notifications.size > 50) {
+                this.notifications.removeFirst()
+            }
         }
+
+        fun notifications(): List<NotificationToast> = this.notifications
     }
 }

@@ -4,6 +4,8 @@ import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.Comment
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Hidden
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 
 @Category("overlays")
@@ -38,6 +40,22 @@ object OverlaysConfig {
     @ConfigEntry(id = "defenseEnabled", translation = "config.skycubed.overlays.defenseEnabled")
     @Comment("", translation = "config.skycubed.overlays.defenseEnabled.desc")
     var defenseEnabled = false
+
+    @Hidden @ConfigEntry(id = "commissions")
+    val commissions = Position(x = 0, y = 100)
+
+    @ConfigEntry(id = "commissionsEnabled", translation = "config.skycubed.overlays.commissionsEnabled")
+    @Comment("", translation = "config.skycubed.overlays.commissionsEnabled.desc")
+    var commissionsEnabled = true
+
+    @Hidden @ConfigEntry(id = "commissionsFormat")
+    var commissionsFormat = true
+
+    @Slider
+    @Range(min = 0.0, max = 100.0)
+    @ConfigEntry(id = "coldOverlay", translation = "config.skycubed.overlays.coldOverlay")
+    @Comment("", translation = "config.skycubed.overlays.coldOverlay.desc")
+    var coldOverlay = 80
 }
 
 enum class HealthDisplay : Translatable {

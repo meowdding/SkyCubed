@@ -3,7 +3,9 @@ package tech.thatgravyboat.skycubed.api.overlays
 import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
+import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.utils.pushPop
 
@@ -27,7 +29,11 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
         if (hovered) {
             graphics.fill(x, y, x + width, y + height, 0x50000000)
             graphics.renderOutline(x - 1, y - 1, width + 2, height + 2, 0xFFFFFFFF.toInt())
-            setTooltipForNextRenderPass(overlay.name)
+            setTooltipForNextRenderPass(Text.multiline(
+                overlay.name,
+                CommonText.EMPTY,
+                Component.translatable("ui.skycubed.overlay.edit.options")
+            ))
         }
 
         graphics.drawCenteredString(font, "X: ${overlay.position.x}, Y: ${overlay.position.y}", (this.width / 2f).toInt(), this.height - 30, -1)
@@ -59,7 +65,7 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
                     dragging = true
                 }
                 InputConstants.MOUSE_BUTTON_RIGHT -> {
-                    overlay.position.reset()
+                    overlay.onRightClick()
                 }
             }
         }

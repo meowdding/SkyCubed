@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.chat
 
 import net.minecraft.client.GuiMessageTag
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.config.ChatConfig
@@ -13,18 +14,19 @@ object ChatTabColors {
     private val partyMessageRegex = Regex("Party > .*")
     private val guildMessageRegex = Regex("Guild > .*")
 
-    private val playerMessageTag = GuiMessageTag(0x888888, null, null, "Hypixel Player")
+    private val playerMessageTag = GuiMessageTag(TextColor.DARK_GRAY, null, null, "Hypixel Player")
     private val friendMessageTag = GuiMessageTag(TextColor.GREEN, null, null, "Friend")
     private val partyMessageTag = GuiMessageTag(TextColor.BLUE, null, null, "Party")
     private val guildMessageTag = GuiMessageTag(TextColor.DARK_GREEN, null, null, "Guild")
 
     fun getChatColor(message: Component): GuiMessageTag? {
         if (!ChatConfig.chatColors) return null
+        val text = message.stripped
         return when {
-            playerMessageRegex.matches(message.stripped) -> playerMessageTag
-            friendJoinLeaveRegex.matches(message.stripped) -> friendMessageTag
-            partyMessageRegex.matches(message.stripped) -> partyMessageTag
-            guildMessageRegex.matches(message.stripped) -> guildMessageTag
+            playerMessageRegex.match(text) -> playerMessageTag
+            friendJoinLeaveRegex.match(text) -> friendMessageTag
+            partyMessageRegex.match(text) -> partyMessageTag
+            guildMessageRegex.match(text) -> guildMessageTag
             else -> null
         }
     }
