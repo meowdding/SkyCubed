@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
 import com.teamresourceful.resourcefullib.common.utils.TriState
+import com.teamresourceful.resourcefullibkt.client.pushPop
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
@@ -16,7 +17,6 @@ import net.minecraft.network.chat.Component
 import org.apache.commons.lang3.function.Consumers
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
-import tech.thatgravyboat.skycubed.utils.pushPop
 
 private const val PADDING = 10
 private const val WIDTH = 170

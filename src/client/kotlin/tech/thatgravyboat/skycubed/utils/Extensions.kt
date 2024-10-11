@@ -1,17 +1,12 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.mojang.blaze3d.vertex.PoseStack
+import com.teamresourceful.resourcefullibkt.client.pushPop
+import earth.terrarium.olympus.client.shader.builtin.RoundedRectShader
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.resources.ResourceLocation
 
 internal val GuiGraphics.font get() = Minecraft.getInstance().font
-
-internal inline fun GuiGraphics.pushPop(crossinline block: PoseStack.() -> Unit) {
-    this.pose().pushPose()
-    this.pose().block()
-    this.pose().popPose()
-}
 
 internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
     this.blitSprite(id, width, height, 0, 0, x, y, (width * percent).toInt(), height)
@@ -28,6 +23,22 @@ internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: I
         translate(x.toFloat(), y.toFloat(), 0f)
         scale(scale.coerceAtMost(1f), scale.coerceAtMost(1f), 1f)
         drawString(font, text, if (scale > 1f) (width - textWidth) / 2 else 0, 0, color, shadow)
+    }
+}
+
+internal fun GuiGraphics.fillRect(
+    x: Int, y: Int, width: Int, height: Int,
+    backgroundColor: Int, borderColor: Int = 0x00000000,
+    borderSize: Int = 0, radius: Int = 0
+) {
+    val xOffset = this.pose().last().pose().m30()
+    val yOffset = this.pose().last().pose().m31()
+    pushPop {
+        translate(-xOffset, -yOffset, 0f)
+        RoundedRectShader.fill(
+            this@fillRect, (x + xOffset).toInt(), (y + yOffset).toInt(), width, height,
+            backgroundColor, borderColor, radius.toFloat(), borderSize
+        )
     }
 }
 

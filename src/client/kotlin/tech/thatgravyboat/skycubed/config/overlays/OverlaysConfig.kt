@@ -56,6 +56,10 @@ object OverlaysConfig {
     @ConfigEntry(id = "coldOverlay", translation = "config.skycubed.overlays.coldOverlay")
     @Comment("", translation = "config.skycubed.overlays.coldOverlay.desc")
     var coldOverlay = 80
+
+    @ConfigEntry(id = "npcDialogue", translation = "config.skycubed.overlays.npcDialogue")
+    @Comment("", translation = "config.skycubed.overlays.npcDialogue.desc")
+    val npcDialogue = NpcOverlay()
 }
 
 enum class HealthDisplay : Translatable {

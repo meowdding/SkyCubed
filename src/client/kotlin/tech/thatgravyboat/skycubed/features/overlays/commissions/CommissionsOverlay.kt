@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.commissions
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import net.minecraft.client.gui.GuiGraphics
@@ -11,7 +11,6 @@ import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionFormatters
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import kotlin.time.Duration.Companion.seconds
 
@@ -24,7 +23,7 @@ object CommissionsOverlay : Overlay {
     )
 
     private val lines = CachedValue(1.seconds) {
-        val area = CommissionArea.entries.firstOrNull { it.areaCheck() } ?: return@CachedValue Displays.text("No commissions available")
+        val area = CommissionArea.entries.firstOrNull { it.areaCheck() } ?: return@CachedValue Displays.padding(4, Displays.text("No commissions available"))
         val commissions = CommissionsAPI.commissions.filter { it.area == area }.takeIf { it.isNotEmpty() } ?: return@CachedValue Displays.text("No commissions available")
         val lines = commissions.map { commission ->
             Displays.text(
@@ -44,7 +43,7 @@ object CommissionsOverlay : Overlay {
     override val enabled: Boolean get() = OverlaysConfig.commissionsEnabled
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (!SkyblockIsland.inAnyIsland(this.locations)) return
+        if (!SkyblockIsland.inAnyIsland(locations)) return
 
         graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
         lines.get().render(graphics)

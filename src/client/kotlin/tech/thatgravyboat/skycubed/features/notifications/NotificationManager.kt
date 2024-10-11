@@ -9,7 +9,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
 
 object NotificationManager {
@@ -62,7 +61,6 @@ object NotificationManager {
                 )
             }
             if (config.hideMessage) {
-                SkyCubed.logger.info("[Cancelled] [CHAT] ${event.text}")
                 event.cancel()
             }
             break

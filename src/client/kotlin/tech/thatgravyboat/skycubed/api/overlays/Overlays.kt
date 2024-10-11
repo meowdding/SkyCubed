@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
+import com.teamresourceful.resourcefullibkt.client.pushPop
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
@@ -12,11 +13,11 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.features.info.InfoOverlay
+import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
-import tech.thatgravyboat.skycubed.features.info.InfoOverlay
-import tech.thatgravyboat.skycubed.features.overlays.CommissionsOverlay
-import tech.thatgravyboat.skycubed.utils.pushPop
+import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
 
 object Overlays {
 
@@ -97,6 +98,7 @@ object Overlays {
         register(PlayerRpgOverlay)
         register(CommissionsOverlay)
         register(InfoOverlay)
+        register(DialogueOverlay)
         TextOverlay.overlays.forEach(::register)
     }
 }

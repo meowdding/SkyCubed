@@ -13,6 +13,7 @@ import tech.thatgravyboat.skycubed.features.chat.ChatManager
 import tech.thatgravyboat.skycubed.features.commands.hypixel.HypixelCommands
 import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
 import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
+import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 
 class SkyCubed : ModInitializer {
 
@@ -26,6 +27,7 @@ class SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(HypixelCommands)
         SkyBlockAPI.eventBus.register(EquipmentManager)
         SkyBlockAPI.eventBus.register(ChatManager)
+        SkyBlockAPI.eventBus.register(DialogueOverlay)
     }
 
     companion object {

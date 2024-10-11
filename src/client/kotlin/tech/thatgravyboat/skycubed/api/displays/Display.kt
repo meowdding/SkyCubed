@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.api.displays
 
+import com.teamresourceful.resourcefullibkt.client.pushPop
 import net.minecraft.client.gui.GuiGraphics
-import tech.thatgravyboat.skycubed.utils.pushPop
 
 interface Display {
 
@@ -10,9 +10,9 @@ interface Display {
 
     fun render(graphics: GuiGraphics)
 
-    fun render(graphics: GuiGraphics, x: Int, y: Int, alignment: Float = 0f) {
+    fun render(graphics: GuiGraphics, x: Int, y: Int, alignmentX: Float = 0f, alignmentY: Float = 0f) {
         graphics.pushPop {
-            translate((x - getWidth() * alignment).toDouble(), y.toDouble(), 0.0)
+            translate((x - getWidth() * alignmentX).toDouble(), (y - getHeight() * alignmentY).toDouble(), 0.0)
             render(graphics)
         }
     }
