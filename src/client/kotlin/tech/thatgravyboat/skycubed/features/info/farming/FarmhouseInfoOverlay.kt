@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.info.farming
 
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.api.area.hub.FarmhouseAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
@@ -16,17 +17,17 @@ object FarmhouseInfoOverlay {
         Displays.padding(3, 1, 2, 2, Displays.row(
             Displays.padding(1, Displays.sprite(SkyCubed.id("info/icons/gold"), 8, 8)),
             Displays.text(
-                { FarmhouseAPI.goldMedals?.toFormattedString() ?: "0" },
+                { FarmhouseAPI.goldMedals.toFormattedString() },
                 { TextColor.GOLD.toUInt() }
             ),
             Displays.padding(1, Displays.sprite(SkyCubed.id("info/icons/silver"), 8, 8)),
             Displays.text(
-                { FarmhouseAPI.silverMedals?.toFormattedString() ?: "0" },
+                { FarmhouseAPI.silverMedals.toFormattedString() },
                 { TextColor.WHITE.toUInt() }
             ),
             Displays.padding(1, Displays.sprite(SkyCubed.id("info/icons/bronze"), 8, 8)),
             Displays.text(
-                { FarmhouseAPI.bronzeMedals?.toFormattedString() ?: "0" },
+                { FarmhouseAPI.bronzeMedals.toFormattedString() },
                 { TextColor.RED.toUInt() }
             ),
         ))
@@ -36,7 +37,7 @@ object FarmhouseInfoOverlay {
         val width = McClient.window.guiScaledWidth
         val x = (width - 34) / 2
 
-        graphics.blitSprite(CommonInfoDisplays.BASE, x, 0, 34, 34)
+        graphics.blitSprite(RenderType::guiTextured, CommonInfoDisplays.BASE, x, 0, 34, 34)
 
         CommonInfoDisplays.locationDisplay.render(graphics, x, 2, 1f)
         medalsDisplay.render(graphics, x, 18, 1f)

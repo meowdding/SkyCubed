@@ -7,7 +7,7 @@ import net.minecraft.commands.SharedSuggestionProvider
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
-import tech.thatgravyboat.skyblockapi.utils.json.Json.toData
+import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
 
 
 object HypixelCommands {
@@ -16,9 +16,11 @@ object HypixelCommands {
 
     init {
         runBlocking {
-            runCatching {
-                val file = this.javaClass.getResourceAsStream("/repo/commands.json")?.readJson<JsonArray>() ?: return@runCatching
-                file.toData(LiteralHypixelCommand.CODEC.listOf())?.let(commands::addAll)
+            try {
+                val file = this.javaClass.getResourceAsStream("/repo/commands.json")?.readJson<JsonArray>() ?: return@runBlocking
+                file.toDataOrThrow(LiteralHypixelCommand.CODEC.listOf())?.let(commands::addAll)
+            }catch (e: Exception) {
+                println(e)
             }
         }
     }

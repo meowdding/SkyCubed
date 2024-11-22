@@ -1,7 +1,8 @@
 package tech.thatgravyboat.skycubed.api.displays
 
-import com.teamresourceful.resourcefullibkt.client.pushPop
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.components.PlayerFaceRenderer
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
@@ -10,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.utils.fillRect
 import tech.thatgravyboat.skycubed.utils.font
+import tech.thatgravyboat.skycubed.utils.pushPop
 
 private const val NO_SPLIT = -1
 
@@ -49,7 +51,7 @@ object Displays {
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
-                graphics.blitSprite(sprite, 0, 0, display.getWidth(), display.getHeight())
+                graphics.blitSprite(RenderType::guiTextured, sprite, 0, 0, display.getWidth(), display.getHeight())
                 display.render(graphics)
             }
         }
@@ -83,12 +85,34 @@ object Displays {
         }
     }
 
+    fun outline(color: () -> UInt, display: Display): Display {
+        return object : Display {
+            override fun getWidth() = display.getWidth() + 2
+            override fun getHeight() = display.getHeight() + 2
+            override fun render(graphics: GuiGraphics) {
+                display.render(graphics, 1, 1)
+                graphics.renderOutline(0, 0, getWidth(), getHeight(), color().toInt())
+            }
+        }
+    }
+
+    fun face(texture: () -> ResourceLocation, size: Int = 8): Display {
+        return object : Display {
+            override fun getWidth(): Int = size
+            override fun getHeight(): Int = size
+
+            override fun render(graphics: GuiGraphics) {
+                PlayerFaceRenderer.draw(graphics, texture(), 0, 0, 8, true, false, -1)
+            }
+        }
+    }
+
     fun sprite(sprite: ResourceLocation, width: Int, height: Int): Display {
         return object : Display {
             override fun getWidth() = width
             override fun getHeight() = height
             override fun render(graphics: GuiGraphics) {
-                graphics.blitSprite(sprite, width, height, 0, 0, 0, 0, width, height)
+                graphics.blitSprite(RenderType::guiTextured, sprite, width, height, 0, 0, 0, 0, width, height)
             }
         }
     }

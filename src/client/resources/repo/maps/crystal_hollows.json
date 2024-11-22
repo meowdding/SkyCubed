@@ -1,0 +1,33 @@
+[
+    {
+        "island": "CRYSTAL_HOLLOWS",
+        "default": "https://api.dediamondpro.dev/skyguide/medium/crystal_hollows.png",
+        "images": [
+            {
+                "image": "https://api.dediamondpro.dev/skyguide/medium/crystal_hollows_magma_fields.png",
+                "conditions": [
+                    "y < 64"
+                ]
+            }
+        ],
+        "topX": 200,
+        "topY": 200,
+        "bottomX": 824,
+        "bottomY": 824,
+        "pois": [
+            {
+                "type": "portal",
+                "pos": {
+                    "x": 513,
+                    "z": 513
+                },
+                "destination": "nucleus",
+                "tooltip": [
+                    "§aCrystal Nucleus",
+                    "",
+                    "§l§eClick to Warp!"
+                ]
+            }
+        ]
+    }
+]

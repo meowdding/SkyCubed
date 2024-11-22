@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    idea
     kotlin("jvm") version "2.0.20"
     alias(libs.plugins.loom)
     id("maven-publish")
@@ -44,7 +45,10 @@ repositories {
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
+    mappings(loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-1.21:2024.07.28@zip")
+    })
     modImplementation(libs.loader)
     modImplementation(libs.fabrickotlin)
     modImplementation(libs.fabric)
@@ -54,7 +58,6 @@ dependencies {
     modImplementation(libs.rconfig)
     modImplementation(libs.rconfigkt)
     modImplementation(libs.rlib)
-    modImplementation(libs.rlibkt)
     modImplementation(libs.olympus)
 
     include(libs.hypixelapi)
@@ -62,7 +65,6 @@ dependencies {
     include(libs.rconfig)
     include(libs.rconfigkt)
     include(libs.rlib)
-    include(libs.rlibkt)
     include(libs.olympus)
 
     modRuntimeOnly(libs.devauth)

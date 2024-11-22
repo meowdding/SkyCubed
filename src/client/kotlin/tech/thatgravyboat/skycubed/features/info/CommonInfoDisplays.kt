@@ -5,7 +5,7 @@ import tech.thatgravyboat.skyblockapi.api.area.SlayerType
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
-import tech.thatgravyboat.skyblockapi.api.location.SkyblockIsland
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.profile.CurrencyAPI
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.extentions.toRomanNumeral
@@ -24,9 +24,9 @@ object CommonInfoDisplays {
     private val riftIcon = Displays.sprite(SkyCubed.id("info/icons/locations/rift"), 8, 8)
     private val dwarvesIcon = Displays.sprite(SkyCubed.id("info/icons/locations/dwarves"), 8, 8)
     private val locationIcon = Displays.supplied { when (LocationAPI.island) {
-        SkyblockIsland.HUB -> hubIcon
-        SkyblockIsland.THE_RIFT -> riftIcon
-        SkyblockIsland.DWARVEN_MINES -> dwarvesIcon
+        SkyBlockIsland.HUB -> hubIcon
+        SkyBlockIsland.THE_RIFT -> riftIcon
+        SkyBlockIsland.DWARVEN_MINES -> dwarvesIcon
         else -> Displays.empty(8, 8)
     } }
 

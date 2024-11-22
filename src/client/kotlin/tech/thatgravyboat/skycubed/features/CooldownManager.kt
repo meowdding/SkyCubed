@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features
 
 import net.minecraft.world.item.ItemStack
-import tech.thatgravyboat.skyblockapi.api.data.SkyblockRarity
+import tech.thatgravyboat.skyblockapi.api.data.SkyBlockRarity
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -29,7 +29,7 @@ object CooldownManager {
         val id = McPlayer.heldItem.getData(DataTypes.ID)
         if (id == "TREECAPITATOR_AXE" || id == "JUNGLE_AXE") {
             var reduction = 0.0
-            if (PetsAPI.pet.equals("monkey", true) && PetsAPI.rarity != null && PetsAPI.rarity!! >= SkyblockRarity.LEGENDARY) {
+            if (PetsAPI.pet.equals("monkey", true) && PetsAPI.rarity != null && PetsAPI.rarity!! >= SkyBlockRarity.LEGENDARY) {
                 reduction = PetsAPI.level * 0.005
             }
             addCooldown("TreeCapitator", 2000 - (2000 * reduction).toLong())

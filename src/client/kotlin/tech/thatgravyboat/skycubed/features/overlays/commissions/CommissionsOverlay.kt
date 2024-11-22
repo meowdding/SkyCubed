@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
-import tech.thatgravyboat.skyblockapi.api.location.SkyblockIsland
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
@@ -17,9 +17,9 @@ import kotlin.time.Duration.Companion.seconds
 object CommissionsOverlay : Overlay {
 
     private val locations = setOf(
-        SkyblockIsland.DWARVEN_MINES,
-        SkyblockIsland.MINESHAFT,
-        SkyblockIsland.CRYSTAL_HOLLOWS,
+        SkyBlockIsland.DWARVEN_MINES,
+        SkyBlockIsland.MINESHAFT,
+        SkyBlockIsland.CRYSTAL_HOLLOWS,
     )
 
     private val lines = CachedValue(1.seconds) {
@@ -43,7 +43,7 @@ object CommissionsOverlay : Overlay {
     override val enabled: Boolean get() = OverlaysConfig.commissionsEnabled
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (!SkyblockIsland.inAnyIsland(locations)) return
+        if (!SkyBlockIsland.inAnyIsland(locations)) return
 
         graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
         lines.get().render(graphics)

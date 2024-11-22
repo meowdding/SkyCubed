@@ -6,10 +6,12 @@
     "client": [
         "BossHealthOverlayAccessor",
         "ChatComponentMixin",
-        "EffectRenderingInventoryScreenMixin",
+      "EffectsInInventoryMixin",
         "GuiGraphicsMixin",
+        "GuiMessageLineMixin",
         "GuiMixin",
-        "InventoryScreenMixin"
+        "InventoryScreenMixin",
+        "SkinManagerInvoker"
     ],
     "injectors": {
         "defaultRequire": 1

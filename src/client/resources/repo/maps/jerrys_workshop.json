@@ -1,0 +1,194 @@
+[
+    {
+        "island": "JERRYS_WORKSHOP",
+        "default": "https://api.dediamondpro.dev/skyguide/medium/jerry_workshop.png",
+        "topX": -140,
+        "topY": -114,
+        "bottomX": 125,
+        "bottomY": 132,
+        "pois": [
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/1692e62b41114c5b1a5e9e36c06798278eb6a5126dc26ddb166d2021fe0fa00e",
+                "link": "https://wiki.hypixel.net/St._Jerry",
+                "position": {
+                    "x": -22,
+                    "z": 92
+                },
+                "tooltip": [
+                    "§9St. Jerry",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/e16f96c756defee639089b7029014310724df0ef30c7510f2d72ac9e0dacf7d3",
+                "link": "https://wiki.hypixel.net/Frosty",
+                "position": {
+                    "x": -1,
+                    "z": 92
+                },
+                "tooltip": [
+                    "§9Frosty",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/5936478121fb7494d4d0e4dfff1b54fa8887d51bb89723a83eb092d486f9eb4",
+                "link": "https://wiki.hypixel.net/Banker_Barry",
+                "position": {
+                    "x": 20,
+                    "z": 44
+                },
+                "tooltip": [
+                    "§9Banker Barry",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/87791acd4868b5f2b2c1756af93b53de120bdf732b056bad6027265dbb1135f5",
+                "link": "https://wiki.hypixel.net/Gulliver",
+                "position": {
+                    "x": 68,
+                    "z": 33
+                },
+                "tooltip": [
+                    "§9Gulliver",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/b0e2ef8b47d63dba37558811818d1cb6293ad0e3284c02051ccfc4d911839bbf",
+                "link": "https://wiki.hypixel.net/Gary",
+                "position": {
+                    "x": 53,
+                    "z": 56
+                },
+                "tooltip": [
+                    "§9Gary",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/bfe22b150e25c50c6bbb3325e8cf35b6435c71c8336aea6abde25b19e365de7f",
+                "link": "https://wiki.hypixel.net/Sherry",
+                "position": {
+                    "x": 6,
+                    "z": 95
+                },
+                "tooltip": [
+                    "§9Sherry",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/4a02f4fd2d68a78b8da3a46b3d004ad9472453c80828b7354a2590a17948c198",
+                "link": "https://wiki.hypixel.net/Einary",
+                "position": {
+                    "x": -16,
+                    "z": 63
+                },
+                "tooltip": [
+                    "§9Einary",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/fea8647a61da25091e7177ead88299d7d7b94bb439240401b2e7a2de83d69385",
+                "link": "https://wiki.hypixel.net/Maaike",
+                "position": {
+                    "x": 49,
+                    "z": 50
+                },
+                "tooltip": [
+                    "§9Maaike",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/fea8647a61da25091e7177ead88299d7d7b94bb439240401b2e7a2de83d69385",
+                "link": "https://wiki.hypixel.net/Mees",
+                "position": {
+                    "x": 80,
+                    "z": 72
+                },
+                "tooltip": [
+                    "§9Mees",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/fea8647a61da25091e7177ead88299d7d7b94bb439240401b2e7a2de83d69385",
+                "link": "https://wiki.hypixel.net/Daan",
+                "position": {
+                    "x": 80,
+                    "z": 110
+                },
+                "tooltip": [
+                    "§9Daan",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/fea8647a61da25091e7177ead88299d7d7b94bb439240401b2e7a2de83d69385",
+                "link": "https://wiki.hypixel.net/Helena",
+                "position": {
+                    "x": 36,
+                    "z": 75
+                },
+                "tooltip": [
+                    "§9Helena",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/9c3b72242f38b15c1312fac84e7cc73329236d20218e0ab78d08e2ac47806a48",
+                "link": "https://wiki.hypixel.net/Terry",
+                "position": {
+                    "x": -92,
+                    "z": 25
+                },
+                "tooltip": [
+                    "§9Terry",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            },
+            {
+                "type": "npc",
+                "texture": "http://textures.minecraft.net/texture/fea8647a61da25091e7177ead88299d7d7b94bb439240401b2e7a2de83d69385",
+                "link": "https://wiki.hypixel.net/Dirk",
+                "position": {
+                    "x": 79,
+                    "z": 55
+                },
+                "tooltip": [
+                    "§9Dirk",
+                    "",
+                    "§7§lClick to view wiki"
+                ]
+            }
+        ]
+    }
+]

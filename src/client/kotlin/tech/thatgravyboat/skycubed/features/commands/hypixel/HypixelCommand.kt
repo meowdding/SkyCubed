@@ -38,7 +38,7 @@ sealed interface HypixelCommand {
 data class ArgumentHypixelCommand(
     val name: String,
     val greedy: Boolean = false,
-    val suggestions: List<String>,
+    val suggestions: HypixelCommandSuggestion,
     val children: List<HypixelCommand>,
 ) : HypixelCommand {
 
@@ -46,7 +46,7 @@ data class ArgumentHypixelCommand(
         val argument = if (greedy) StringArgumentType.greedyString() else StringArgumentType.string()
         return listOf(ClientCommandManager.argument(name, argument).apply {
             suggests { _, builder ->
-                SharedSuggestionProvider.suggest(suggestions, builder)
+                SharedSuggestionProvider.suggest(suggestions(), builder)
             }
 
             executes {
@@ -64,7 +64,9 @@ data class ArgumentHypixelCommand(
             it.group(
                 Codec.STRING.fieldOf("name").forGetter(ArgumentHypixelCommand::name),
                 Codec.BOOL.optionalFieldOf("greedy", false).forGetter(ArgumentHypixelCommand::greedy),
-                Codec.STRING.listOf().optionalFieldOf("suggestions", listOf()).forGetter(ArgumentHypixelCommand::suggestions),
+                HypixelCommandSuggestions.CODEC
+                    .optionalFieldOf("suggestions", HypixelCommandSuggestions.NONE)
+                    .forGetter(ArgumentHypixelCommand::suggestions),
                 HypixelCommand.CODEC.listOf().optionalFieldOf("children", listOf()).forGetter(ArgumentHypixelCommand::children),
             ).apply(it, ::ArgumentHypixelCommand)
         }

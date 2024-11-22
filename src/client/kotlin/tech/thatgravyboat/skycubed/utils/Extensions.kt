@@ -1,19 +1,19 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.teamresourceful.resourcefullibkt.client.pushPop
 import earth.terrarium.olympus.client.shader.builtin.RoundedRectShader
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
 internal val GuiGraphics.font get() = Minecraft.getInstance().font
 
 internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
-    this.blitSprite(id, width, height, 0, 0, x, y, (width * percent).toInt(), height)
+    this.blitSprite(RenderType::guiTextured, id, width, height, 0, 0, x, y, (width * percent).toInt(), height)
 }
 
 internal fun GuiGraphics.blitSpritePercentY(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
-    this.blitSprite(id, width, height, 0, 0, x, y, width, (height * percent).toInt())
+    this.blitSprite(RenderType::guiTextured, id, width, height, 0, 0, x, y, width, (height * percent).toInt())
 }
 
 internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: Int, color: Int, shadow: Boolean = true) {

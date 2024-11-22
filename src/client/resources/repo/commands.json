@@ -6,10 +6,19 @@
             "removeall",
             "notifications",
             {
-                "values": [ "accept", "add", "best", "deny", "remove" ],
+                "values": [ "accept", "add", "deny" ],
                 "children": [
                     {
                         "name": "player"
+                    }
+                ]
+            },
+            {
+                "values": [ "remove", "best" ],
+                "children": [
+                    {
+                        "name": "player",
+                        "suggestions": "friends"
                     }
                 ]
             },
@@ -180,7 +189,8 @@
                 "values": [ "kick", "demote", "promote", "transfer" ],
                 "children": [
                     {
-                        "name": "member"
+                        "name": "member",
+                        "suggestions": "party"
                     }
                 ]
             }
@@ -191,6 +201,7 @@
         "children": [
             {
                 "name": "player",
+                "suggestions": "players",
                 "children": [
                     {
                         "name": "message",
@@ -204,7 +215,8 @@
         "values": [ "boop" ],
         "children": [
             {
-                "name": "player"
+                "name": "player",
+                "suggestions": "players"
             }
         ]
     },
@@ -212,7 +224,8 @@
         "values": [ "visit" ],
         "children": [
             {
-                "name": "player"
+                "name": "player",
+                "suggestions": "players"
             }
         ]
     }

@@ -29,7 +29,7 @@ object EquipmentManager {
     private var lastY: Int = 0
 
     private val isEnabled: Boolean
-        get() = Config.equipmentSlots && LocationAPI.isOnSkyblock
+        get() = Config.equipmentSlots && LocationAPI.isOnSkyBlock
 
     fun onRenderScreen(screen: InventoryScreen, graphics: GuiGraphics, left: Int, top: Int, mouseX: Int, mouseY: Int) {
         if (!this.isEnabled) return
@@ -43,13 +43,13 @@ object EquipmentManager {
 
         EquipmentSlot.entries.forEachIndexed { index, slot ->
             val y = topPos + index * 18
-            graphics.blitSprite(slotTexture, leftPos, y, 18, 18)
+            graphics.blitSprite(RenderType::guiTextured, slotTexture, leftPos, y, 18, 18)
             val stack = EquipmentAPI.equipment[slot] ?: ItemStack.EMPTY
             if (mouseX in leftPos + 1..leftPos + 16 && mouseY in y + 1..y + 16) {
                 graphics.fill(RenderType.guiOverlay(), leftPos + 1, y + 1, leftPos + 17, y + 17, -2130706433)
             }
             if (stack.isEmpty) {
-                graphics.blitSprite(getEmptySlotTexture(slot), leftPos + 1, y + 1, 16, 16)
+                graphics.blitSprite(RenderType::guiTextured, getEmptySlotTexture(slot), leftPos + 1, y + 1, 16, 16)
             } else {
                 graphics.renderFakeItem(stack, leftPos + 1, y + 1)
             }

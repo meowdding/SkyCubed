@@ -1,8 +1,10 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
+import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.toasts.Toast
-import net.minecraft.client.gui.components.toasts.ToastComponent
+import net.minecraft.client.gui.components.toasts.ToastManager
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import net.minecraft.util.FormattedCharSequence
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -20,11 +22,19 @@ data class NotificationToast(
 
     override fun width(): Int = 160
     override fun height(): Int = (7 + text.size * 10).coerceAtLeast(32)
+
     override fun getToken(): Any = this.id ?: Toast.NO_TOKEN
 
-    override fun render(graphics: GuiGraphics, ignored1: ToastComponent, ignored2: Long): Toast.Visibility {
+    override fun render(graphics: GuiGraphics, font: Font, ignored2: Long) {
         render(graphics)
+    }
+
+    override fun getWantedVisibility(): Toast.Visibility {
         return if (this.removalTime <= System.currentTimeMillis()) Toast.Visibility.HIDE else Toast.Visibility.SHOW
+    }
+
+    override fun update(toastManager: ToastManager, l: Long) {
+
     }
 
     fun render(graphics: GuiGraphics) {
@@ -32,7 +42,7 @@ data class NotificationToast(
             this.removalTime = System.currentTimeMillis() + this.displayTime
             this.replaced = false
         }
-        graphics.blitSprite(BACKGROUND, 0, 0, this.width(), this.height())
+        graphics.blitSprite(RenderType::guiTextured, BACKGROUND, 0, 0, this.width(), this.height())
 
         val y = 1 + this.height() / 2 - text.size * 5
         val x = 4

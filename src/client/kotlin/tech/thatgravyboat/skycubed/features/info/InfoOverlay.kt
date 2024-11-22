@@ -4,7 +4,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
-import tech.thatgravyboat.skyblockapi.api.location.SkyblockIsland
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.Position
@@ -37,21 +37,21 @@ object InfoOverlay : Overlay {
         editBounds.y = position.y
 
         when (LocationAPI.island) {
-            SkyblockIsland.THE_RIFT -> RiftInfoOverlay.render(graphics)
-            SkyblockIsland.DWARVEN_MINES -> when (LocationAPI.area) {
+            SkyBlockIsland.THE_RIFT -> RiftInfoOverlay.render(graphics)
+            SkyBlockIsland.DWARVEN_MINES -> when (LocationAPI.area) {
                 SkyBlockAreas.GREAT_LAKE,
                 SkyBlockAreas.GLACITE_TUNNELS,
                 SkyBlockAreas.BASECAMP,
                 SkyBlockAreas.FOSSIL_RESEARCH -> GlaciteInfoOverlay.render(graphics)
                 else -> DwarvesInfoOverlay.render(graphics)
             }
-            SkyblockIsland.CRYSTAL_HOLLOWS -> CrystalHollowsInfoOverlay.render(graphics)
-            SkyblockIsland.THE_BARN -> TrapperInfoOverlay.render(graphics)
-            SkyblockIsland.HUB -> when (LocationAPI.area) {
+            SkyBlockIsland.CRYSTAL_HOLLOWS -> CrystalHollowsInfoOverlay.render(graphics)
+            SkyBlockIsland.THE_BARN -> TrapperInfoOverlay.render(graphics)
+            SkyBlockIsland.HUB -> when (LocationAPI.area) {
                 SkyBlockAreas.FARMHOUSE -> FarmhouseInfoOverlay.render(graphics)
                 else -> MainInfoOverlay.render(graphics)
             }
-            SkyblockIsland.GARDEN -> GardenInfoOverlay.render(graphics)
+            SkyBlockIsland.GARDEN -> GardenInfoOverlay.render(graphics)
             else -> MainInfoOverlay.render(graphics)
         }
     }

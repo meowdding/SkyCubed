@@ -1,14 +1,13 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
-import com.teamresourceful.resourcefullibkt.client.pushPop
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderHudEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseClickEvent
-import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -18,6 +17,7 @@ import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
+import tech.thatgravyboat.skycubed.utils.pushPop
 
 object Overlays {
 
@@ -32,8 +32,8 @@ object Overlays {
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onHudRender(event: RenderHudEvent) {
-        if (!LocationAPI.isOnSkyblock) return
         if (McClient.self.options.hideGui) return
 
         val graphics = event.graphics
@@ -67,8 +67,8 @@ object Overlays {
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onMouseClick(event: ScreenMouseClickEvent.Pre) {
-        if (!LocationAPI.isOnSkyblock) return
         if (!isOverlayScreen(event.screen)) return
 
         for (overlay in overlays.reversed()) {

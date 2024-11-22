@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
@@ -43,7 +44,7 @@ object PlayerRpgOverlay : Overlay {
         val airPercent = McPlayer.air.toFloat() / McPlayer.maxAir.toFloat()
         val manaUsePercent = (McPlayer.heldItem.getData(DataTypes.RIGHT_CLICK_MANA_ABILITY)?.second?.toFloat() ?: 0f) / StatsAPI.maxMana.toFloat()
 
-        graphics.blitSprite(BASE, 0, 0, WIDTH, HEIGHT)
+        graphics.blitSprite(RenderType::guiTextured, BASE, 0, 0, WIDTH, HEIGHT)
         graphics.blitSpritePercentX(HEALTH, 47, 23, 70, 5, healthPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(ABSORPTION, 47, 23, 70, 5, absorptionPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA_DEPLETED, 47, 18, 57, 4, manaUsePercent.coerceIn(0f, 1f))
@@ -53,7 +54,7 @@ object PlayerRpgOverlay : Overlay {
         graphics.drawScaledString("${McPlayer.xpLevel}", 3, 33, 16, 0x78EC20)
 
         if (airPercent < 1f) {
-            graphics.blitSprite(AIR_BASE, 38, 34, 64, 6)
+            graphics.blitSprite(RenderType::guiTextured, AIR_BASE, 38, 34, 64, 6)
             graphics.blitSpritePercentX(AIR, 40, 34, 60, 4, airPercent.coerceIn(0f, 1f))
         }
     }

@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.info
 
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -84,7 +85,7 @@ object RiftInfoOverlay {
         val width = McClient.window.guiScaledWidth
         val x = (width - 34) / 2
 
-        graphics.blitSprite(CommonInfoDisplays.BASE, x, 0, 34, 34)
+        graphics.blitSprite(RenderType::guiTextured, CommonInfoDisplays.BASE, x, 0, 34, 34)
         baseDisplay.render(graphics, x, 0)
 
         CommonInfoDisplays.locationDisplay.render(graphics, x, 2, 1f)

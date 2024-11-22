@@ -1,0 +1,46 @@
+[
+    {
+        "island": "DUNGEON_HUB",
+        "default": "https://api.dediamondpro.dev/skyguide/medium/dungeon_hub.png",
+        "images": [
+            {
+                "image": "https://api.dediamondpro.dev/skyguide/medium/dungeon_hub_underground.png",
+                "conditions": [
+                    "y < 75"
+                ]
+            }
+        ],
+        "topX": -146,
+        "topY": -92,
+        "bottomX": 21,
+        "bottomY": 144,
+        "pois": [
+            {
+                "type": "portal",
+                "pos": {
+                    "x": -30,
+                    "z": 0
+                },
+                "destination": "dungeon_hub",
+                "tooltip": [
+                    "§aDungeon Hub",
+                    "",
+                    "§l§eClick to Warp!"
+                ]
+            },
+            {
+                "type": "portal",
+                "pos": {
+                    "x": 20,
+                    "z": 0
+                },
+                "destination": "hub",
+                "tooltip": [
+                    "§aThe Hub",
+                    "",
+                    "§l§eClick to Warp!"
+                ]
+            }
+        ]
+    }
+]

@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.api.displays
 
-import com.teamresourceful.resourcefullibkt.client.pushPop
 import net.minecraft.client.gui.GuiGraphics
+import tech.thatgravyboat.skycubed.utils.pushPop
 
 interface Display {
 
