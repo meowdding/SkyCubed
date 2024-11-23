@@ -14,16 +14,16 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
-import tech.thatgravyboat.skycubed.utils.ResetingState
+import tech.thatgravyboat.skycubed.utils.ResettingState
 import tech.thatgravyboat.skycubed.utils.children
 
 class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val search = State.of("")
-    private val xOffset = ResetingState.of {
+    private val xOffset = ResettingState.of {
         McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x
     }
-    private val zOffset = ResetingState.of {
+    private val zOffset = ResettingState.of {
         McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z
     }
     private val scale = State.of(1f)

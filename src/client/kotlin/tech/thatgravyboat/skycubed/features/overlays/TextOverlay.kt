@@ -4,13 +4,13 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
-import tech.thatgravyboat.skycubed.utils.font
+import tech.thatgravyboat.skycubed.config.overlays.Position
 import kotlin.math.roundToInt
 
 class TextOverlay(
@@ -24,7 +24,7 @@ class TextOverlay(
     override val enabled: Boolean get() = this.isEnabled()
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        graphics.drawString(graphics.font, text(), 0, 1, 0xFFFFFF)
+        graphics.drawString(McFont.self, text(), 0, 1, 0xFFFFFF)
     }
 
     companion object {

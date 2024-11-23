@@ -103,7 +103,7 @@ object CommonInfoDisplays {
         RIGHT_LINE,
         Displays.padding(0, 3, 2, 2, Displays.row(
             Displays.padding(1, seasonIcon),
-            Displays.text({ "${DateTimeAPI.season?.name.capitalize()} ${DateTimeAPI.day.toOrdinal()}" }),
+            Displays.text({ "${DateTimeAPI.season?.name?.capitalize().orEmpty()} ${DateTimeAPI.day.toOrdinal()}" }),
         ))
     )
 

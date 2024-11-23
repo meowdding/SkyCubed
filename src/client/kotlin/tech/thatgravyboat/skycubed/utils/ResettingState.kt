@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.utils
 
 import earth.terrarium.olympus.client.utils.State
 
-class ResetingState<T>(private val initializer: () -> T) : State<T> {
+class ResettingState<T>(private val initializer: () -> T) : State<T> {
 
     private var value: T = initializer()
 
@@ -16,6 +16,6 @@ class ResetingState<T>(private val initializer: () -> T) : State<T> {
     }
 
     companion object {
-        fun <T> of(initializer: () -> T): ResetingState<T> = ResetingState(initializer)
+        fun <T> of(initializer: () -> T): ResettingState<T> = ResettingState(initializer)
     }
 }
