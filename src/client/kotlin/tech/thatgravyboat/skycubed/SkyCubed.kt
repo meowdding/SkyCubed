@@ -17,7 +17,7 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 
-class SkyCubed : ModInitializer {
+object SkyCubed : ModInitializer {
 
     override fun onInitialize() {
         SkyBlockAPI.eventBus.register(ConfigManager)
@@ -34,12 +34,10 @@ class SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(RepoDebug)
     }
 
-    companion object {
 
-        val logger = LogUtils.getLogger()
+    val logger = LogUtils.getLogger()
 
-        fun id(path: String): ResourceLocation {
-            return ResourceLocation.fromNamespaceAndPath("skycubed", path)
-        }
+    fun id(path: String): ResourceLocation {
+        return ResourceLocation.fromNamespaceAndPath("skycubed", path)
     }
 }

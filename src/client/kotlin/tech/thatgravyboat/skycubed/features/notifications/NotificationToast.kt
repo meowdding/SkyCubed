@@ -8,8 +8,8 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import net.minecraft.util.FormattedCharSequence
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.utils.font
 
 data class NotificationToast(
     private var text: List<FormattedCharSequence>,
@@ -48,7 +48,7 @@ data class NotificationToast(
         val x = 4
 
         for (line in text.indices) {
-            graphics.drawString(graphics.font, text[line], x, y + line * 10, -1, false)
+            graphics.drawString(McFont.self, text[line], x, y + line * 10, -1, false)
         }
     }
 

@@ -7,10 +7,10 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.utils.fillRect
-import tech.thatgravyboat.skycubed.utils.font
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 private const val NO_SPLIT = -1
@@ -130,12 +130,17 @@ object Displays {
             override fun getWidth() = component.width
             override fun getHeight() = 10
             override fun render(graphics: GuiGraphics) {
-                graphics.drawString(graphics.font, component, 0, 1, color().toInt(), shadow)
+                graphics.drawString(McFont.self, component, 0, 1, color().toInt(), shadow)
             }
         }
     }
 
-    fun text(component: Component, maxWidth: Int = NO_SPLIT, color: () -> UInt = { 0xFFFFFFFFu }, shadow: Boolean = true): Display {
+    fun text(
+        component: Component,
+        maxWidth: Int = NO_SPLIT,
+        color: () -> UInt = { 0xFFFFFFFFu },
+        shadow: Boolean = true
+    ): Display {
         val font = McClient.self.font
         val lines = if (maxWidth == NO_SPLIT) listOf(component.visualOrderText) else font.split(component, maxWidth)
         val width = lines.maxOfOrNull { font.width(it) } ?: 0
