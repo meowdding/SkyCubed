@@ -16,6 +16,7 @@ import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
+import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 
 object SkyCubed : ModInitializer {
 
@@ -32,6 +33,7 @@ object SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(DialogueOverlay)
         SkyBlockAPI.eventBus.register(Maps)
         SkyBlockAPI.eventBus.register(RepoDebug)
+        SkyBlockAPI.eventBus.register(CompactTablist)
     }
 
 
