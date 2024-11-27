@@ -11,7 +11,10 @@
     "environment": "client",
     "entrypoints": {
         "main": [
-            "tech.thatgravyboat.skycubed.SkyCubed"
+            {
+                "adapter": "kotlin",
+                "value": "tech.thatgravyboat.skycubed.SkyCubed"
+            }
         ]
     },
     "mixins": [
