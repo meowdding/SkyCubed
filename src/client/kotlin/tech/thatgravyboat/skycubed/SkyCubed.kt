@@ -9,7 +9,6 @@ import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.CooldownManager
 import tech.thatgravyboat.skycubed.features.ElementHider
 import tech.thatgravyboat.skycubed.features.ItemBarManager
-import tech.thatgravyboat.skycubed.features.RepoDebug
 import tech.thatgravyboat.skycubed.features.chat.ChatManager
 import tech.thatgravyboat.skycubed.features.commands.hypixel.HypixelCommands
 import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
@@ -32,7 +31,6 @@ object SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(ChatManager)
         SkyBlockAPI.eventBus.register(DialogueOverlay)
         SkyBlockAPI.eventBus.register(Maps)
-        SkyBlockAPI.eventBus.register(RepoDebug)
         SkyBlockAPI.eventBus.register(CompactTablist)
     }
 

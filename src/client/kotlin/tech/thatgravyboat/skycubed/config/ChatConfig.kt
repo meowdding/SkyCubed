@@ -22,7 +22,7 @@ object ChatConfig {
         arrayOf(
             "^Profile ID:",
             "^You are playing on profile:",
-            "^\\\\[WATCHDOG ANNOUNCEMENT]",
+            "^\\[WATCHDOG ANNOUNCEMENT]",
             "^Watchdog has banned",
             "^Staff have banned an additional",
             "^Blacklisted modifications are a bannable offense!",

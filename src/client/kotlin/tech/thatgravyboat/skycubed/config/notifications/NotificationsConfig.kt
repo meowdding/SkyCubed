@@ -57,4 +57,12 @@ object NotificationsConfig {
     @ConfigEntry(id = "combo", translation = "config.skycubed.notifications.combo")
     @Comment("", translation = "config.skycubed.notifications.combo.desc")
     val combo = NotificationObject(hideMessage = true, showAsToast = true)
+
+    @ConfigEntry(id = "fishing", translation = "config.skycubed.notifications.fishing")
+    @Comment("", translation = "config.skycubed.notifications.fishing.desc")
+    val fishing = NotificationObject(hideMessage = true, showAsToast = true)
+
+    @ConfigEntry(id = "gifts", translation = "config.skycubed.notifications.gifts")
+    @Comment("", translation = "config.skycubed.notifications.gifts.desc")
+    val gifts = NotificationObject(hideMessage = true, showAsToast = true)
 }

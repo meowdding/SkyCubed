@@ -13,11 +13,13 @@ object ChatTabColors {
     private val friendJoinLeaveRegex = Regex("Friend > \\w{3,16} (joined|left)\\.")
     private val partyMessageRegex = Regex("Party > .*")
     private val guildMessageRegex = Regex("Guild > .*")
+    private val privateMessageRegex = Regex("(?:To|From) .*: .*")
 
     private val playerMessageTag = GuiMessageTag(TextColor.DARK_GRAY, null, null, "Hypixel Player")
     private val friendMessageTag = GuiMessageTag(TextColor.GREEN, null, null, "Friend")
     private val partyMessageTag = GuiMessageTag(TextColor.BLUE, null, null, "Party")
     private val guildMessageTag = GuiMessageTag(TextColor.DARK_GREEN, null, null, "Guild")
+    private val privateMessageTag = GuiMessageTag(TextColor.LIGHT_PURPLE, null, null, "Private Message")
 
     fun getChatColor(message: Component): GuiMessageTag? {
         if (!ChatConfig.chatColors) return null
@@ -27,6 +29,7 @@ object ChatTabColors {
             friendJoinLeaveRegex.match(text) -> friendMessageTag
             partyMessageRegex.match(text) -> partyMessageTag
             guildMessageRegex.match(text) -> guildMessageTag
+            privateMessageRegex.match(text) -> privateMessageTag
             else -> null
         }
     }

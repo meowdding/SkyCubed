@@ -9,6 +9,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
+import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import kotlin.math.roundToInt
@@ -30,7 +31,7 @@ class TextOverlay(
     companion object {
 
         val overlays = listOf(
-            TextOverlay(Text.of("Health"), OverlaysConfig.health, { OverlaysConfig.healthDisplay != HealthDisplay.DISABLED }, {
+            TextOverlay(Text.of("Health"), OverlayPositions.health, { OverlaysConfig.healthDisplay != HealthDisplay.DISABLED }, {
                 if (OverlaysConfig.healthDisplay == HealthDisplay.EFFECTIVE) {
                     val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
                     val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
@@ -39,10 +40,10 @@ class TextOverlay(
                     Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}").withStyle(ChatFormatting.RED)
                 }
             }),
-            TextOverlay(Text.of("Mana"), OverlaysConfig.mana, { OverlaysConfig.manaEnabled }, {
+            TextOverlay(Text.of("Mana"), OverlayPositions.mana, { OverlaysConfig.manaEnabled }, {
                 Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}").withStyle(ChatFormatting.AQUA)
             }),
-            TextOverlay(Text.of("Defense"), OverlaysConfig.defense, { OverlaysConfig.defenseEnabled }, {
+            TextOverlay(Text.of("Defense"), OverlayPositions.defense, { OverlaysConfig.defenseEnabled }, {
                 Text.of("❈ ${StatsAPI.defense}").withStyle(ChatFormatting.GREEN)
             })
         )

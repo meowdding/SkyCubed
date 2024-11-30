@@ -24,7 +24,7 @@ object CommissionFormatters {
     }
 
     fun format(name: String, decimal: Float): Component {
-        if (!OverlaysConfig.commissionsFormat) return PercentCommissionFormatter.format(decimal)
+        if (!OverlaysConfig.commissions.format) return PercentCommissionFormatter.format(decimal)
         val area = CommissionArea.entries.firstOrNull { it.areaCheck() } ?: return PercentCommissionFormatter.format(decimal)
         return formatters[area.name]?.get(name)?.format(decimal) ?: PercentCommissionFormatter.format(decimal)
     }

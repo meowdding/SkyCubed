@@ -9,6 +9,7 @@ object ChatManager {
     private val compactMessage = mapOf(
         "exp" to Regex("^You earned .* from playing SkyBlock!"),
         "cooldowns" to Regex("^(?:Whoa! Slow down there!|This menu has been throttled! Please slow down\\.\\.\\.)"),
+        "item_cooldowns" to Regex("^This ability is on cooldown for \\d+s\\."),
         "friends_list" to Regex("^-*\\n *(?:<<)? Friends \\("),
         "pickaxe_ability" to Regex("^You used your .* Ability!"),
     )

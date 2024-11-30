@@ -33,9 +33,13 @@ object NotificationManager {
 
         NotificationType.single("monolith", "MONOLITH! .*") { NotificationsConfig.monolith },
 
-        NotificationType.single("rift_orb", "ORB! Picked up +25 Motes, recovered +2ф Rift Time!") { NotificationsConfig.riftOrb },
+        NotificationType.single("rift_orb", "ORB! Picked up \\+25 Motes, recovered \\+2ф Rift Time!") { NotificationsConfig.riftOrb },
 
         NotificationType.single("combo", "\\+\\d+ Kill Combo .*|Your Kill Combo has expired!.*") { NotificationsConfig.combo },
+
+        NotificationType.single("fishing", "TROPHY FISH! .*|GOOD CATCH! .*") { NotificationsConfig.fishing },
+
+        NotificationType.single("gifts", "GIFT! .*") { NotificationsConfig.gifts },
     )
 
     private fun joinLeaveMessage(match: ComponentMatchResult, title: String, color: Int): Component = Text.multiline(

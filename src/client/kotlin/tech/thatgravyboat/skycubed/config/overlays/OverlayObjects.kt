@@ -12,3 +12,10 @@ class NpcOverlay(
     @ConfigEntry(id = "durationForActionMessage") var durationForActionMessage: Float = 10f,
     @ConfigEntry(id = "radius") @Range(min = 0.0, max = 15.0) @Slider var overlayRadius: Float = 0f,
 )
+
+@ConfigObject
+class CommissionOverlay(
+    @ConfigEntry(id = "enabled") var enabled: Boolean = true,
+    @ConfigEntry(id = "format") var format: Boolean = true,
+    @ConfigEntry(id = "background") var background: Boolean = false,
+)

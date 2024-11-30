@@ -10,6 +10,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.utils.blitSpritePercentX
@@ -33,7 +34,7 @@ object PlayerRpgOverlay : Overlay {
 
     override val name: Component = Text.of("Player RPG Hud")
     override val enabled: Boolean get() = OverlaysConfig.rpgEnabled
-    override val position: Position = OverlaysConfig.rpg
+    override val position: Position = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {

@@ -14,7 +14,6 @@ rconfig = "3.3.0"
 rconfigkt = "3.3.0"
 olympus = "1.1.0"
 rlib = "3.3.0"
-rlibkt = "2.3.0"
 
 # Dev Dependencies
 devauth = "1.2.1"
@@ -32,7 +31,6 @@ rconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fa
 rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21.3", version.ref = "rconfigkt" }
 olympus = { module = "earth.terrarium.olympus:olympus-fabric-1.21.3", version.ref = "olympus" }
 rlib = { module = "com.teamresourceful.resourcefullib:resourcefullib-fabric-1.21.3", version.ref = "rlib" }
-rlibkt = { module = "com.teamresourceful.resourcefullibkt:resourcefullibkt-fabric-1.21.3", version.ref = "rlibkt" }
 
 devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
