@@ -1,11 +1,13 @@
 package tech.thatgravyboat.skycubed.api.displays
 
+import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.FormattedCharSequence
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -40,8 +42,11 @@ object Displays {
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
+                RenderSystem.enableBlend()
+                RenderSystem.overlayBlendFunc()
                 graphics.fillRect(0, 0, getWidth(), getHeight(), color.toInt(), radius = radius.toInt())
                 display.render(graphics)
+                RenderSystem.disableBlend()
             }
         }
     }
@@ -153,6 +158,24 @@ object Displays {
                 lines.forEachIndexed { index, line ->
                     graphics.drawString(font, line, 0, index * font.lineHeight, color().toInt(), shadow)
                 }
+            }
+        }
+    }
+
+    fun text(
+        sequence: FormattedCharSequence,
+        color: () -> UInt = { 0xFFFFFFFFu },
+        shadow: Boolean = true
+    ): Display {
+        val font = McFont.self
+        val width = font.width(sequence)
+        val height = font.lineHeight
+
+        return object : Display {
+            override fun getWidth() = width
+            override fun getHeight() = height
+            override fun render(graphics: GuiGraphics) {
+                graphics.drawString(font, sequence, 0, 1, color().toInt(), shadow)
             }
         }
     }
