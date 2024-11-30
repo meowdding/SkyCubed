@@ -157,30 +157,38 @@ object Displays {
         }
     }
 
-    fun row(vararg displays: Display): Display {
+    fun row(vararg displays: Display, spacing: Int = 0): Display {
         return object : Display {
-            override fun getWidth() = displays.sumOf { it.getWidth() }
+            override fun getWidth() = displays.sumOf { it.getWidth() } + spacing * (displays.size - 1)
             override fun getHeight() = displays.maxOf { it.getHeight() }
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    displays.forEach {
-                        it.render(graphics)
-                        translate(it.getWidth().toFloat(), 0f, 0f)
+                    displays.forEachIndexed { index, display ->
+                        display.render(graphics)
+                        if (index < displays.size - 1) {
+                            translate((display.getWidth() + spacing).toFloat(), 0f, 0f)
+                        } else {
+                            translate(display.getWidth().toFloat(), 0f, 0f)
+                        }
                     }
                 }
             }
         }
     }
 
-    fun column(vararg displays: Display): Display {
+    fun column(vararg displays: Display, spacing: Int = 0): Display {
         return object : Display {
             override fun getWidth() = displays.maxOf { it.getWidth() }
-            override fun getHeight() = displays.sumOf { it.getHeight() }
+            override fun getHeight() = displays.sumOf { it.getHeight() } + spacing * (displays.size - 1)
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    displays.forEach {
-                        it.render(graphics)
-                        translate(0f, it.getHeight().toFloat(), 0f)
+                    displays.forEachIndexed { index, display ->
+                        display.render(graphics)
+                        if (index < displays.size - 1) {
+                            translate(0f, (display.getHeight() + spacing).toFloat(), 0f)
+                        } else {
+                            translate(0f, display.getHeight().toFloat(), 0f)
+                        }
                     }
                 }
             }
