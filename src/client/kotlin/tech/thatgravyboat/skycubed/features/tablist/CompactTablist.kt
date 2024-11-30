@@ -23,12 +23,10 @@ object CompactTablist {
 
     @Subscription
     fun onTablistUpdate(event: TabListChangeEvent) {
-        val segments = splitListIntoParts(
-            event.new.flatMap { it + listOf(CommonText.EMPTY) }
-                .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
-                .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty),
-            4,
-        )
+        val segments = event.new.flatMap { it + listOf(CommonText.EMPTY) }
+            .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
+            .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty)
+            .splitListIntoParts(4)
             .map { it.flatMap { it + listOf(CommonText.EMPTY) } }
             .map { list ->
                 list.map { component ->
@@ -80,8 +78,8 @@ object CompactTablist {
     }
 
 
-    fun splitListIntoParts(input: List<Segment>, numberOfParts: Int): List<List<Segment>> {
-        val totalSize = input.sumOf { it.size }
+    fun List<Segment>.splitListIntoParts(numberOfParts: Int): List<List<Segment>> {
+        val totalSize = this.sumOf { it.size }
 
         val baseSize = totalSize / numberOfParts
         val extraSize = totalSize % numberOfParts
@@ -93,7 +91,7 @@ object CompactTablist {
 
         var extraParts = extraSize
 
-        for (segment in input) {
+        for (segment in this) {
             currentPart.add(segment)
             currentSize += segment.size
 
