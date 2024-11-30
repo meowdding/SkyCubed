@@ -28,4 +28,8 @@ object Config {
 
     @ConfigEntry(id = "equipmentSlots")
     var equipmentSlots: Boolean = true
+
+    // TODO MOVE
+    @ConfigEntry(id = "compactTablist")
+    var compactTablist: Boolean = true
 }

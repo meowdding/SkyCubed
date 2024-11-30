@@ -1,11 +1,13 @@
 package tech.thatgravyboat.skycubed.api.displays
 
+import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.FormattedCharSequence
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -40,8 +42,11 @@ object Displays {
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
+                RenderSystem.enableBlend()
+                RenderSystem.overlayBlendFunc()
                 graphics.fillRect(0, 0, getWidth(), getHeight(), color.toInt(), radius = radius.toInt())
                 display.render(graphics)
+                RenderSystem.disableBlend()
             }
         }
     }
@@ -157,30 +162,56 @@ object Displays {
         }
     }
 
-    fun row(vararg displays: Display): Display {
+    fun text(
+        sequence: FormattedCharSequence,
+        color: () -> UInt = { 0xFFFFFFFFu },
+        shadow: Boolean = true
+    ): Display {
+        val font = McFont.self
+        val width = font.width(sequence)
+        val height = font.lineHeight
+
         return object : Display {
-            override fun getWidth() = displays.sumOf { it.getWidth() }
+            override fun getWidth() = width
+            override fun getHeight() = height
+            override fun render(graphics: GuiGraphics) {
+                graphics.drawString(font, sequence, 0, 1, color().toInt(), shadow)
+            }
+        }
+    }
+
+    fun row(vararg displays: Display, spacing: Int = 0): Display {
+        return object : Display {
+            override fun getWidth() = displays.sumOf { it.getWidth() } + spacing * (displays.size - 1)
             override fun getHeight() = displays.maxOf { it.getHeight() }
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    displays.forEach {
-                        it.render(graphics)
-                        translate(it.getWidth().toFloat(), 0f, 0f)
+                    displays.forEachIndexed { index, display ->
+                        display.render(graphics)
+                        if (index < displays.size - 1) {
+                            translate((display.getWidth() + spacing).toFloat(), 0f, 0f)
+                        } else {
+                            translate(display.getWidth().toFloat(), 0f, 0f)
+                        }
                     }
                 }
             }
         }
     }
 
-    fun column(vararg displays: Display): Display {
+    fun column(vararg displays: Display, spacing: Int = 0): Display {
         return object : Display {
             override fun getWidth() = displays.maxOf { it.getWidth() }
-            override fun getHeight() = displays.sumOf { it.getHeight() }
+            override fun getHeight() = displays.sumOf { it.getHeight() } + spacing * (displays.size - 1)
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    displays.forEach {
-                        it.render(graphics)
-                        translate(0f, it.getHeight().toFloat(), 0f)
+                    displays.forEachIndexed { index, display ->
+                        display.render(graphics)
+                        if (index < displays.size - 1) {
+                            translate(0f, (display.getHeight() + spacing).toFloat(), 0f)
+                        } else {
+                            translate(0f, display.getHeight().toFloat(), 0f)
+                        }
                     }
                 }
             }
