@@ -43,7 +43,6 @@ object Displays {
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
                 RenderSystem.enableBlend()
-                RenderSystem.overlayBlendFunc()
                 graphics.fillRect(0, 0, getWidth(), getHeight(), color.toInt(), radius = radius.toInt())
                 display.render(graphics)
                 RenderSystem.disableBlend()
