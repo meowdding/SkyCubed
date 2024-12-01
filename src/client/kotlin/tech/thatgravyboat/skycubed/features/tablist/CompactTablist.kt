@@ -37,7 +37,7 @@ object CompactTablist {
         createDisplay(lastTablist, event.newHeader)
     }
 
-    fun createDisplay(tablist: List<List<Component>>, footer: Component) {
+    private fun createDisplay(tablist: List<List<Component>>, footer: Component) {
         val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }
             .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
             .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty)
@@ -107,7 +107,7 @@ object CompactTablist {
     }
 
 
-    fun List<Segment>.splitListIntoParts(numberOfParts: Int): List<List<Segment>> {
+    private fun List<Segment>.splitListIntoParts(numberOfParts: Int): List<List<Segment>> {
         val totalSize = this.sumOf { it.size }
 
         val baseSize = totalSize / numberOfParts
