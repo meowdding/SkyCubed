@@ -79,12 +79,12 @@ object Displays {
         }
     }
 
-    fun center(width: Int, height: Int, display: Display): Display {
+    fun center(width: Int = -1, height: Int = -1, display: Display): Display {
         return object : Display {
-            override fun getWidth() = width
-            override fun getHeight() = height
+            override fun getWidth() = if (width == -1) display.getWidth() else width
+            override fun getHeight() = if (height == -1) display.getHeight() else height
             override fun render(graphics: GuiGraphics) {
-                display.render(graphics, (width - display.getWidth()) / 2, (height - display.getHeight()) / 2)
+                display.render(graphics, (getWidth() - display.getWidth()) / 2, (getHeight() - display.getHeight()) / 2)
             }
         }
     }
@@ -182,7 +182,7 @@ object Displays {
     fun row(vararg displays: Display, spacing: Int = 0): Display {
         return object : Display {
             override fun getWidth() = displays.sumOf { it.getWidth() } + spacing * (displays.size - 1)
-            override fun getHeight() = displays.maxOf { it.getHeight() }
+            override fun getHeight() = displays.maxOfOrNull { it.getHeight() } ?: 0
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
                     displays.forEachIndexed { index, display ->
@@ -200,7 +200,7 @@ object Displays {
 
     fun column(vararg displays: Display, spacing: Int = 0): Display {
         return object : Display {
-            override fun getWidth() = displays.maxOf { it.getWidth() }
+            override fun getWidth() = displays.maxOfOrNull { it.getWidth() } ?: 0
             override fun getHeight() = displays.sumOf { it.getHeight() } + spacing * (displays.size - 1)
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {

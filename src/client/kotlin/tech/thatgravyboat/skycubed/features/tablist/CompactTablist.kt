@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
@@ -19,8 +20,7 @@ typealias Segment = List<Component>
 
 object CompactTablist {
 
-    private var mainElement: Display? = null
-    private var footerElement: Display? = null
+    private var display: Display? = null
     private var lastTablist: List<List<Component>> = emptyList()
     private var lastFooter: Component? = null
     private val titleRegex = "\\s+Info".toRegex()
@@ -33,8 +33,7 @@ object CompactTablist {
 
     @Subscription
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
-        // TODO: when sbapi is updated, change newHeader to newFooter
-        createDisplay(lastTablist, event.newHeader)
+        createDisplay(lastTablist, event.newFooter)
     }
 
     private fun createDisplay(tablist: List<List<Component>>, footer: Component) {
@@ -67,41 +66,28 @@ object CompactTablist {
             )
         }
 
-        mainElement = Displays.row(
-            *columns.toTypedArray(),
-            spacing = 5
-        )
+        val mainElement = Displays.row(*columns.toTypedArray(), spacing = 5)
 
         val split = McFont.self.split(footer, Int.MAX_VALUE)
-        footerElement = Displays.column(
-            *split.map { Displays.center(mainElement?.getWidth() ?: 0, 10, Displays.text(it)) }.toTypedArray(),
+        val footerElement = Displays.column(
+            *split.map { Displays.center(mainElement.getWidth(), 10, Displays.text(it)) }.toTypedArray(),
         )
 
         lastTablist = tablist
         lastFooter = footer
+
+        display = Displays.background(
+            0xA0000000u, 2f,
+            Displays.padding(5, Displays.column(mainElement, footerElement)),
+        )
     }
 
     fun renderCompactTablist(graphics: GuiGraphics): Boolean {
         if (!Config.compactTablist) return false
-        val mainElement = mainElement ?: return false
-        val footerElement = footerElement ?: return false
+        if (!LocationAPI.isOnSkyBlock) return false
+        val display = display ?: return false
 
-        val display = Displays.background(
-            0xA0000000u,
-            2f,
-            Displays.padding(
-                5,
-                Displays.column(
-                    mainElement,
-                    footerElement,
-                ),
-            ),
-        )
-
-        val width = McClient.window.guiScaledWidth
-        val x = width / 2 - display.getWidth() / 2
-
-        display.render(graphics, x, 3)
+        Displays.center(width =  graphics.guiWidth(), display = display).render(graphics, 0, 3)
 
         return true
     }
