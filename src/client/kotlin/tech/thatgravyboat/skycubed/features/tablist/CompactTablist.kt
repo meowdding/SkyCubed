@@ -7,14 +7,24 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
+import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
+import tech.thatgravyboat.skycubed.api.displays.toColumn
+import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.config.Config
+import tech.thatgravyboat.skycubed.utils.formatReadableTime
+import tech.thatgravyboat.skycubed.utils.until
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 
 typealias Segment = List<Component>
 
@@ -22,21 +32,25 @@ object CompactTablist {
 
     private var display: Display? = null
     private var lastTablist: List<List<Component>> = emptyList()
-    private var lastFooter: Component? = null
     private val titleRegex = "\\s+Info".toRegex()
     private val playerRegex = "\\[(?<level>\\d+)] (?<name>[\\w_-]+).*".toRegex()
+    private var boosterCookieInFooter = false
+    private var godPotionInFooter = false
 
     @Subscription
     fun onTablistUpdate(event: TabListChangeEvent) {
-        createDisplay(event.new, lastFooter ?: CommonText.EMPTY)
+        createDisplay(event.new)
     }
 
     @Subscription
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
-        createDisplay(lastTablist, event.newFooter)
+        boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
+        godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
+
+        createDisplay(lastTablist)
     }
 
-    private fun createDisplay(tablist: List<List<Component>>, footer: Component) {
+    private fun createDisplay(tablist: List<List<Component>>) {
         val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }
             .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
             .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty)
@@ -66,15 +80,44 @@ object CompactTablist {
             )
         }
 
-        val mainElement = Displays.row(*columns.toTypedArray(), spacing = 5)
+        val mainElement = columns.toRow(10)
 
-        val split = McFont.self.split(footer, Int.MAX_VALUE)
-        val footerElement = Displays.column(
-            *split.map { Displays.center(mainElement.getWidth(), 10, Displays.text(it)) }.toTypedArray(),
-        )
+        // todo potions
+        val footerLines = buildList {
+            fun createDuration(
+                label: String,
+                duration: Duration,
+                activeColor: Int,
+                inactiveText: String = ": Inactive"
+            ) = Text.join(
+                Text.of(label) {
+                    this.color = activeColor
+                    this.bold = true
+                },
+                Text.of(
+                    if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
+                    else inactiveText
+                ) {
+                    this.color = TextColor.GRAY
+                }
+            )
+
+            if (boosterCookieInFooter) {
+                add(createDuration("Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
+            }
+            if (godPotionInFooter) {
+                add(createDuration("God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
+            }
+
+            if (size > 1) {
+                add(0, CommonText.EMPTY)
+            }
+        }.toMutableList()
+
+        val footerElement = Displays.center(mainElement.getWidth(), display = footerLines.toColumn())
+
 
         lastTablist = tablist
-        lastFooter = footer
 
         display = Displays.background(
             0xA0000000u, 2f,
@@ -87,7 +130,7 @@ object CompactTablist {
         if (!LocationAPI.isOnSkyBlock) return false
         val display = display ?: return false
 
-        Displays.center(width =  graphics.guiWidth(), display = display).render(graphics, 0, 3)
+        Displays.center(width = graphics.guiWidth(), display = display).render(graphics, 0, 3)
 
         return true
     }
