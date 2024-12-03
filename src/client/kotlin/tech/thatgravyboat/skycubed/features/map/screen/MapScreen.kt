@@ -20,21 +20,39 @@ import tech.thatgravyboat.skycubed.utils.children
 class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val search = State.of("")
-    private val xOffset = ResettingState.of {
-        McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x
-    }
-    private val zOffset = ResettingState.of {
-        McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z
-    }
-    private val scale = State.of(1f)
 
     private val map = DropdownState.of(Maps.getMapsForLocation())
     private var lastMap = map.get()
+
+    private val xOffset = ResettingState.of {
+        if (map.get() == Maps.getMapsForLocationOrNull()) {
+            McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x
+        } else {
+            val maps = Maps.getMaps(map.get())
+            val min = maps.minOfOrNull { it.topX } ?: 0
+            val max = maps.maxOfOrNull { it.bottomX } ?: 0
+            min + (max - min) / 2
+        }
+    }
+    private val zOffset = ResettingState.of {
+        if (map.get() == Maps.getMapsForLocationOrNull()) {
+            McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z
+        } else {
+            val maps = Maps.getMaps(map.get())
+            val min = maps.minOfOrNull { it.topY } ?: 0
+            val max = maps.maxOfOrNull { it.bottomY } ?: 0
+            min + (max - min) / 2
+        }
+    }
+    private val scale = ResettingState.of {
+        1f
+    }
 
     override fun init() {
         if (lastMap != map.get()) {
             xOffset.reset()
             zOffset.reset()
+            scale.reset()
             lastMap = map.get()
         }
 
@@ -66,7 +84,7 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                     contents.addChild(Widgets.dropdown(
                         map,
                         Maps.getMaps(),
-                        { Text.of(it ?: "") },
+                        { map -> Text.translatable("maps.skycubed.$map") },
                         { button -> button.withSize(150, 20) },
                         { }
                     ))
