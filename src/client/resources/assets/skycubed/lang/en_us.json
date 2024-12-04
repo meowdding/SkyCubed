@@ -81,6 +81,14 @@
     "skycubed.notification.type.riftOrb": "Rift Orb",
     "skycubed.notification.type.blocksInTheWay": "Blocks In The Way",
     "skycubed.notification.type.warping": "Warping",
-    "skycubed.notification.type.combo": "Combos"
+    "skycubed.notification.type.combo": "Combos",
+
+    "__map__": "",
+
+    "maps.skycubed.main": "Main Islands",
+    "maps.skycubed.rift": "The Rift",
+    "maps.skycubed.crystal_hollows": "Crystal Hollows",
+    "maps.skycubed.dungeon_hub": "Dungeon Hub",
+    "maps.skycubed.jerrys_workshop": "Jerry's Workshop"
 
 }

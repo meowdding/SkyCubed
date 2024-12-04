@@ -7,7 +7,9 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import earth.terrarium.olympus.client.components.Widgets
+import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
+import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.ui.modals.Modals
 import net.minecraft.Util
@@ -55,14 +57,16 @@ data class NpcPoi(
                 "§9${link.removePrefix("https://").removePrefix("http://")}"
             ))
             .withAction(Widgets.button {
+                it.withSize(70, 20)
                 it.withRenderer(WidgetRenderers.text(Text.of("Close")))
                 it.withCallback {
                     McScreen.self?.onClose()
                 }
             })
             .withAction(Widgets.button {
+                it.withSize(70, 20)
                 it.withTexture(UIConstants.PRIMARY_BUTTON)
-                it.withRenderer(WidgetRenderers.text(Text.of("Open")))
+                it.withRenderer(WidgetRenderers.text<Button?>(Text.of("Open")).withColor(MinecraftColors.WHITE))
                 it.withCallback {
                     Util.getPlatform().openUri(link)
                 }
