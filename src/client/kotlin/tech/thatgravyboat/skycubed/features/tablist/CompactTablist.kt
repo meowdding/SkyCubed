@@ -20,12 +20,31 @@ import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.config.Config
+import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
+import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
+import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import tech.thatgravyboat.skycubed.utils.until
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
-typealias Segment = List<Component>
+private typealias Segment = List<Line>
+
+// todo: maybe emblems?
+private data class Line(
+    val component: Component,
+    val face: PlayerSkin? = null,
+    val skyblockLevel: Int? = null
+) {
+    val string: String get() = component.string
+    val stripped: String get() = component.stripped
+
+    companion object {
+        fun List<Component>.toLines() = map { Line(it) }
+        fun Component.toLine() = Line(this)
+        val EMPTY = Line(CommonText.EMPTY)
+    }
+}
 
 object CompactTablist {
 
@@ -50,21 +69,24 @@ object CompactTablist {
     }
 
     private fun createDisplay(tablist: List<List<Component>>) {
-        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }.addFooterSegment()
-            .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
-            .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty)
+        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }.toLines().addFooterSegment()
+            .map { if (titleRegex.match(it.stripped)) EMPTY else it }.chunked { it.string.isBlank() }
+            .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Line>::isEmpty)
             .splitListIntoParts(4)
-            .map { it.flatMap { it + listOf(CommonText.EMPTY) } }
+            .map { it.flatMap { it + listOf(EMPTY) } }
             .map { list ->
-                list.map { component ->
+                list.map { line ->
                     var skin: PlayerSkin? = null
-                    playerRegex.match(component.string, "level", "name") { (level, name) ->
+                    var skyblockLevel: Int? = null
+                    playerRegex.match(line.string, "level", "name") { (level, name) ->
                         skin = McClient.players.firstOrNull { it.profile.name == name }?.skin
+                        skyblockLevel = level.toInt()
                     }
-                    component to skin
+                    Line(line.component, skin, skyblockLevel)
                 }
             }
 
+        // TODO: Sort by skyblock level
         val columns = segments.map { segment ->
             Displays.column(
                 *segment.map { (component, skin) ->
@@ -107,7 +129,7 @@ object CompactTablist {
             ) {
                 this.color = TextColor.GRAY
             }
-        )
+        ).toLine()
 
         if (boosterCookieInFooter) {
             add(createDuration("Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
@@ -117,11 +139,11 @@ object CompactTablist {
         }
 
         if (size > 1) {
-            add(0, CommonText.EMPTY)
+            add(0, EMPTY)
             add(1, Text.of("Other:") {
                 this.color = TextColor.YELLOW
                 this.bold = true
-            })
+            }.toLine())
         }
     }
 
