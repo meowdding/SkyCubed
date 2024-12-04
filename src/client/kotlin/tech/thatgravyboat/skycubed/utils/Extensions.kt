@@ -1,11 +1,14 @@
 package tech.thatgravyboat.skycubed.utils
 
 import earth.terrarium.olympus.client.shader.builtin.RoundedRectShader
-import net.minecraft.client.Minecraft
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 
 internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
     this.blitSprite(RenderType::guiTextured, id, width, height, 0, 0, x, y, (width * percent).toInt(), height)
@@ -51,3 +54,34 @@ internal fun Int.toOrdinal(): String {
         else -> "${this}${suffixes[this % 10]}"
     }
 }
+
+// Taken from https://github.com/j10a1n15/CustomScoreboard/
+internal fun Duration.formatReadableTime(biggestUnit: DurationUnit, maxUnits: Int = 1): String {
+    val units = listOf(
+        DurationUnit.DAYS to this.inWholeDays,
+        DurationUnit.HOURS to this.inWholeHours % 24,
+        DurationUnit.MINUTES to this.inWholeMinutes % 60,
+        DurationUnit.SECONDS to this.inWholeSeconds % 60,
+        DurationUnit.MILLISECONDS to this.inWholeMilliseconds % 1000,
+    )
+
+    val unitNames = mapOf(
+        DurationUnit.DAYS to "d",
+        DurationUnit.HOURS to "h",
+        DurationUnit.MINUTES to "min",
+        DurationUnit.SECONDS to "s",
+        DurationUnit.MILLISECONDS to "ms",
+    )
+
+    val filteredUnits = units.dropWhile { it.first != biggestUnit }
+        .filter { it.second > 0 }
+        .take(maxUnits)
+
+    return filteredUnits.joinToString(", ") { (unit, value) ->
+        "$value${unitNames[unit]}"
+    }.ifEmpty { "0 seconds" }
+}
+
+// stolen from api :333333
+internal fun currentInstant(): Instant = Clock.System.now()
+internal fun Instant.until(): Duration = this - currentInstant()

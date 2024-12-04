@@ -3,55 +3,91 @@ package tech.thatgravyboat.skycubed.features.tablist
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
+import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
+import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.config.Config
+import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
+import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
+import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
+import tech.thatgravyboat.skycubed.utils.formatReadableTime
+import tech.thatgravyboat.skycubed.utils.until
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 
-typealias Segment = List<Component>
+private typealias Segment = List<Line>
+
+// todo: maybe emblems?
+private data class Line(
+    val component: Component,
+    val face: PlayerSkin? = null,
+    val skyblockLevel: Int? = null
+) {
+    val string: String get() = component.string
+    val stripped: String get() = component.stripped
+
+    companion object {
+        fun List<Component>.toLines() = map { Line(it) }
+        fun Component.toLine() = Line(this)
+        val EMPTY = Line(CommonText.EMPTY)
+    }
+}
 
 object CompactTablist {
 
     private var display: Display? = null
     private var lastTablist: List<List<Component>> = emptyList()
-    private var lastFooter: Component? = null
     private val titleRegex = "\\s+Info".toRegex()
     private val playerRegex = "\\[(?<level>\\d+)] (?<name>[\\w_-]+).*".toRegex()
+    private var boosterCookieInFooter = false
+    private var godPotionInFooter = false
 
     @Subscription
     fun onTablistUpdate(event: TabListChangeEvent) {
-        createDisplay(event.new, lastFooter ?: CommonText.EMPTY)
+        createDisplay(event.new)
     }
 
     @Subscription
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
-        createDisplay(lastTablist, event.newFooter)
+        boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
+        godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
+
+        createDisplay(lastTablist)
     }
 
-    private fun createDisplay(tablist: List<List<Component>>, footer: Component) {
-        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }
-            .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
-            .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty)
+    private fun createDisplay(tablist: List<List<Component>>) {
+        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }.toLines().addFooterSegment()
+            .map { if (titleRegex.match(it.stripped)) EMPTY else it }.chunked { it.string.isBlank() }
+            .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Line>::isEmpty)
             .splitListIntoParts(4)
-            .map { it.flatMap { it + listOf(CommonText.EMPTY) } }
+            .map { it.flatMap { it + listOf(EMPTY) } }
             .map { list ->
-                list.map { component ->
+                list.map { line ->
                     var skin: PlayerSkin? = null
-                    playerRegex.match(component.string, "level", "name") { (level, name) ->
+                    var skyblockLevel: Int? = null
+                    playerRegex.match(line.string, "level", "name") { (level, name) ->
                         skin = McClient.players.firstOrNull { it.profile.name == name }?.skin
+                        skyblockLevel = level.toInt()
                     }
-                    component to skin
+                    Line(line.component, skin, skyblockLevel)
                 }
             }
 
+        // TODO: Sort by skyblock level
         val columns = segments.map { segment ->
             Displays.column(
                 *segment.map { (component, skin) ->
@@ -66,20 +102,64 @@ object CompactTablist {
             )
         }
 
-        val mainElement = Displays.row(*columns.toTypedArray(), spacing = 5)
-
-        val split = McFont.self.split(footer, Int.MAX_VALUE)
-        val footerElement = Displays.column(
-            *split.map { Displays.center(mainElement.getWidth(), 10, Displays.text(it)) }.toTypedArray(),
-        )
+        val mainElement = columns.toRow(5)
 
         lastTablist = tablist
-        lastFooter = footer
 
         display = Displays.background(
             0xA0000000u, 2f,
-            Displays.padding(5, Displays.column(mainElement, footerElement)),
+            Displays.padding(5, mainElement),
         )
+    }
+
+    // TODO: Potion effects
+    private fun Segment.addFooterSegment(): Segment = this + buildList {
+        fun createDuration(
+            label: String,
+            duration: Duration,
+            activeColor: Int,
+            inactiveText: String = ": Inactive"
+        ) = Text.join(
+            Text.of(label) {
+                this.color = activeColor
+                this.bold = true
+            },
+            Text.of(
+                if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
+                else inactiveText
+            ).withColor(TextColor.GRAY)
+        ).toLine()
+
+        if (boosterCookieInFooter) {
+            add(createDuration("Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
+        }
+        if (godPotionInFooter) {
+            add(createDuration("God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
+        }
+        if (SpookyFestivalAPI.onGoing) {
+            add(
+                Text.join(
+                    Text.of("Spooky Festival") {
+                        this.color = TextColor.GOLD
+                        this.bold = true
+                    },
+                    Text.of(": ").withColor(TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.greenCandy.toString()).withColor(TextColor.GREEN),
+                    Text.of(", ").withColor(TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.purpleCandy.toString()).withColor(TextColor.DARK_PURPLE),
+                    Text.of(" (").withColor(TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.points.toString()).withColor(TextColor.GOLD),
+                    Text.of(")").withColor(TextColor.GRAY)
+                ).toLine()
+            )
+        }
+
+        if (size > 1) {
+            add(0, Text.of("Other:") {
+                this.color = TextColor.YELLOW
+                this.bold = true
+            }.toLine())
+        }
     }
 
     fun renderCompactTablist(graphics: GuiGraphics): Boolean {
@@ -87,7 +167,7 @@ object CompactTablist {
         if (!LocationAPI.isOnSkyBlock) return false
         val display = display ?: return false
 
-        Displays.center(width =  graphics.guiWidth(), display = display).render(graphics, 0, 3)
+        Displays.center(width = graphics.guiWidth(), display = display).render(graphics, 0, 3)
 
         return true
     }
