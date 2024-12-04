@@ -35,7 +35,7 @@ object DialogueOverlay : Overlay {
     private var displayedYesNo = false
     private var display: Display = Displays.empty()
 
-    override val name: Component = Component.literal("Dialogue")
+    override val name: Component = Text.of("Dialogue")
     override val position: Position = Position()
     override val bounds: Pair<Int, Int> = 0 to 0
     override val moveable: Boolean = false
