@@ -18,7 +18,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.config.Config
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
@@ -51,7 +50,7 @@ object CompactTablist {
     }
 
     private fun createDisplay(tablist: List<List<Component>>) {
-        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }
+        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }.addFooterSegment()
             .map { if (titleRegex.match(it.stripped)) CommonText.EMPTY else it }.chunked { it.string.isBlank() }
             .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Component>::isEmpty)
             .splitListIntoParts(4)
@@ -82,47 +81,48 @@ object CompactTablist {
 
         val mainElement = columns.toRow(10)
 
-        // todo potions
-        val footerLines = buildList {
-            fun createDuration(
-                label: String,
-                duration: Duration,
-                activeColor: Int,
-                inactiveText: String = ": Inactive"
-            ) = Text.join(
-                Text.of(label) {
-                    this.color = activeColor
-                    this.bold = true
-                },
-                Text.of(
-                    if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
-                    else inactiveText
-                ) {
-                    this.color = TextColor.GRAY
-                }
-            )
-
-            if (boosterCookieInFooter) {
-                add(createDuration("Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
-            }
-            if (godPotionInFooter) {
-                add(createDuration("God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
-            }
-
-            if (size > 1) {
-                add(0, CommonText.EMPTY)
-            }
-        }.toMutableList()
-
-        val footerElement = Displays.center(mainElement.getWidth(), display = footerLines.toColumn())
-
-
         lastTablist = tablist
 
         display = Displays.background(
             0xA0000000u, 2f,
-            Displays.padding(5, Displays.column(mainElement, footerElement)),
+            Displays.padding(5, mainElement),
         )
+    }
+
+    // TODO: Potion effects
+    private fun Segment.addFooterSegment(): Segment = this + buildList {
+        fun createDuration(
+            label: String,
+            duration: Duration,
+            activeColor: Int,
+            inactiveText: String = ": Inactive"
+        ) = Text.join(
+            Text.of(label) {
+                this.color = activeColor
+                this.bold = true
+            },
+            Text.of(
+                if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
+                else inactiveText
+            ) {
+                this.color = TextColor.GRAY
+            }
+        )
+
+        if (boosterCookieInFooter) {
+            add(createDuration("Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
+        }
+        if (godPotionInFooter) {
+            add(createDuration("God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
+        }
+
+        if (size > 1) {
+            add(0, CommonText.EMPTY)
+            add(1, Text.of("Other:") {
+                this.color = TextColor.YELLOW
+                this.bold = true
+            })
+        }
     }
 
     fun renderCompactTablist(graphics: GuiGraphics): Boolean {
