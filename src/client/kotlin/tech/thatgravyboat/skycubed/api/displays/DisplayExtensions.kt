@@ -12,7 +12,8 @@ fun List<Any>.toColumn(spacing: Int = 0): Display {
                 is Display -> it
                 else -> throw IllegalArgumentException("Unsupported type: ${it::class.simpleName}")
             }
-        }.toTypedArray()
+        }.toTypedArray(),
+        spacing = spacing
     )
 }
 
@@ -25,6 +26,7 @@ fun List<Any>.toRow(spacing: Int = 0): Display {
                 is Display -> it
                 else -> throw IllegalArgumentException("Unsupported type: ${it::class.simpleName}")
             }
-        }.toTypedArray()
+        }.toTypedArray(),
+        spacing = spacing
     )
 }

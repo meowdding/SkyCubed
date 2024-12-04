@@ -101,7 +101,7 @@ object CompactTablist {
             )
         }
 
-        val mainElement = columns.toRow(10)
+        val mainElement = columns.toRow(5)
 
         lastTablist = tablist
 
@@ -139,8 +139,7 @@ object CompactTablist {
         }
 
         if (size > 1) {
-            add(0, EMPTY)
-            add(1, Text.of("Other:") {
+            add(0, Text.of("Other:") {
                 this.color = TextColor.YELLOW
                 this.bold = true
             }.toLine())
