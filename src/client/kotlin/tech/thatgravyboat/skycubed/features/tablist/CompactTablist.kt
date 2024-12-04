@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.tablist
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
@@ -126,9 +127,7 @@ object CompactTablist {
             Text.of(
                 if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
                 else inactiveText
-            ) {
-                this.color = TextColor.GRAY
-            }
+            ).withColor(TextColor.GRAY)
         ).toLine()
 
         if (boosterCookieInFooter) {
@@ -136,6 +135,23 @@ object CompactTablist {
         }
         if (godPotionInFooter) {
             add(createDuration("God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
+        }
+        if (SpookyFestivalAPI.onGoing) {
+            add(
+                Text.join(
+                    Text.of("Spooky Festival") {
+                        this.color = TextColor.GOLD
+                        this.bold = true
+                    },
+                    Text.of(": ").withColor(TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.greenCandy.toString()).withColor(TextColor.GREEN),
+                    Text.of(", ").withColor(TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.purpleCandy.toString()).withColor(TextColor.DARK_PURPLE),
+                    Text.of(" (").withColor(TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.points.toString()).withColor(TextColor.GOLD),
+                    Text.of(")").withColor(TextColor.GRAY)
+                ).toLine()
+            )
         }
 
         if (size > 1) {
