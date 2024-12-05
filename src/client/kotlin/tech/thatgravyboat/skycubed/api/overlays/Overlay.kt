@@ -17,7 +17,10 @@ interface Overlay {
 
     val position: Position
     val bounds: Pair<Int, Int>
-    val editBounds: Rect get() = Rect(position.x, position.y, bounds.first, bounds.second)
+    val editBounds: Rect get() {
+        val (x, y) = position
+        return Rect(x, y, bounds.first, bounds.second)
+    }
 
     fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int)
 
