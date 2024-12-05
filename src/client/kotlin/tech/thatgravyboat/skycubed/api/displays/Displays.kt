@@ -223,7 +223,10 @@ object Displays {
             override fun getWidth() = 16 * scale
             override fun getHeight() = 16 * scale
             override fun render(graphics: GuiGraphics) {
-                graphics.renderItem(item, 0, 0, scale)
+                graphics.pushPop {
+                    scale(scale.toFloat(), scale.toFloat(), 1f)
+                    graphics.renderItem(item, 0, 0)
+                }
             }
         }
     }
