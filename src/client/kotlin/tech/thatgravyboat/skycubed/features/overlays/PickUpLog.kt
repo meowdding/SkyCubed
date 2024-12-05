@@ -7,6 +7,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.PlayerInventoryChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
@@ -31,7 +32,8 @@ object PickUpLog : Overlay {
 
     @Subscription
     fun onInvChange(event: PlayerInventoryChangeEvent) {
-        if (event.slot == 9) return
+        if (event.slot == 8) return
+        if (McClient.self.screen != null) return
 
         val newStack = event.item
         val oldStack = lastInventory[event.slot]
