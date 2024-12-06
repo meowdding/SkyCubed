@@ -7,8 +7,9 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.PlayerInventoryChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
-import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.extentions.isSameItem
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toColumn
@@ -24,8 +25,8 @@ object PickUpLog : Overlay {
     private var dimension = 0 to 0
     private var display: Display? = null
 
-    private val addedItems = mutableListOf<PickupItem>()
-    private val removedItems = mutableListOf<PickupItem>()
+    private val addedItems = mutableListOf<PickUpLogItem>()
+    private val removedItems = mutableListOf<PickUpLogItem>()
     private var lastInventory = mutableMapOf<Int, ItemStack>()
 
     private var lastWorldSwitchTime: Long? = null
@@ -33,7 +34,6 @@ object PickUpLog : Overlay {
     @Subscription
     fun onInvChange(event: PlayerInventoryChangeEvent) {
         if (event.slot == 8) return
-        if (McClient.self.screen != null) return
 
         val newStack = event.item
         val oldStack = lastInventory[event.slot]
@@ -49,14 +49,14 @@ object PickUpLog : Overlay {
                 removedItems to (oldStack ?: newStack)
             }
 
-            val existingItem = targetList.find { it.stack.item == stackToUse.item }
+            val existingItem = targetList.find { it.stack.isSameItem(stackToUse) }
             if (existingItem != null) {
                 targetList[targetList.indexOf(existingItem)] = existingItem.copy(
                     difference = existingItem.difference + diff,
                     time = System.currentTimeMillis()
                 )
             } else {
-                targetList.add(PickupItem(stackToUse.copy(), diff, System.currentTimeMillis()))
+                targetList.add(PickUpLogItem(stackToUse.copy(), diff, System.currentTimeMillis()))
             }
 
             addedItems.removeIf { it.difference == 0 }
@@ -86,7 +86,7 @@ object PickUpLog : Overlay {
         }.toColumn()
     }
 
-    private fun List<PickupItem>.compact() =
+    private fun List<PickUpLogItem>.compact() =
         takeIf { !PickUpLogConfig.compact } ?: groupBy { it.stack.item }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter { it.difference != 0 }
@@ -102,11 +102,11 @@ object PickUpLog : Overlay {
     }
 }
 
-enum class PickUpComponents(val display: (PickupItem) -> Display) {
-    ITEM_STACK({ Displays.item(it.stack) }),
+enum class PickUpLogComponents(val display: (PickUpLogItem) -> Display) {
+    ITEM_STACK({ Displays.item(it.stack, 20, 30) }),
     DIFFERENCE({
-        if (it.difference < 0) Displays.text("§c${it.difference}")
-        else Displays.text("§a+${it.difference}")
+        if (it.difference < 0) Displays.text(Text.of(it.difference.toString()).withColor(TextColor.RED))
+        else Displays.text(Text.of("+${it.difference}").withColor(TextColor.GREEN))
     }),
     NAME({ Displays.text(it.stack.hoverName) }),
     ;
@@ -117,7 +117,7 @@ enum class PickUpComponents(val display: (PickupItem) -> Display) {
 
 }
 
-data class PickupItem(
+data class PickUpLogItem(
     val stack: ItemStack,
     val difference: Int,
     val time: Long,

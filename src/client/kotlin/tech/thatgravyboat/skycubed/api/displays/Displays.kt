@@ -218,13 +218,13 @@ object Displays {
         }
     }
 
-    fun item(item: ItemStack, scale: Int = 1): Display {
+    fun item(item: ItemStack, width: Int = 16, height: Int = 16): Display {
         return object : Display {
-            override fun getWidth() = 16 * scale
-            override fun getHeight() = 16 * scale
+            override fun getWidth() = width
+            override fun getHeight() = height
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    scale(scale.toFloat(), scale.toFloat(), 1f)
+                    scale(width / 16f, height / 16f, 1f)
                     graphics.renderItem(item, 0, 0)
                 }
             }
