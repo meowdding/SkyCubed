@@ -103,7 +103,7 @@ object PickUpLog : Overlay {
 }
 
 enum class PickUpLogComponents(val display: (PickUpLogItem) -> Display) {
-    ITEM_STACK({ Displays.item(it.stack, 20, 30) }),
+    ITEM_STACK({ Displays.item(it.stack) }),
     DIFFERENCE({
         if (it.difference < 0) Displays.text(Text.of(it.difference.toString()).withColor(TextColor.RED))
         else Displays.text(Text.of("+${it.difference}").withColor(TextColor.GREEN))
