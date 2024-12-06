@@ -25,6 +25,7 @@ object Maps {
         "main",
         "rift",
         "crystal_hollows",
+        "dwarves",
         "dungeon_hub",
         "jerrys_workshop",
     )
@@ -71,7 +72,13 @@ object Maps {
         }
     }
 
-    fun getCurrentOffset(): BlockPos = currentIsland?.let { BlockPos(it.offsetX, 0, it.offsetY) } ?: BlockPos.ZERO
+    fun getCurrentOffset(): BlockPos = currentIsland?.let {
+        BlockPos(it.offsetX, 0, it.offsetY)
+    } ?: BlockPos.ZERO
+
+    fun getCurrentPlayerOffset(): BlockPos = currentIsland?.let {
+        BlockPos(it.offsetX + it.playerOffsetX, 0, it.offsetY + it.playerOffsetY)
+    } ?: BlockPos.ZERO
 
     fun getMapsForLocationOrNull(): String? = LocationAPI.island?.let(islands::get)
 

@@ -86,8 +86,9 @@ class MapsWidget(
 
             if (showPlayer) {
                 graphics.pushPop {
-                    val x = McPlayer.self!!.blockX + Maps.getCurrentOffset().x
-                    val z = McPlayer.self!!.blockZ + Maps.getCurrentOffset().z
+                    val offset = Maps.getCurrentPlayerOffset()
+                    val x = McPlayer.self!!.blockX + offset.x
+                    val z = McPlayer.self!!.blockZ + offset.z
                     translate(x + width / 2f, z + height / 2f, 0f)
                     val profile = McClient.self.player?.skin ?: return
                     scale(1f / scale, 1f / scale, 1f)

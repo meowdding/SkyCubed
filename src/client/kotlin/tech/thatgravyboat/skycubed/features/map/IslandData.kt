@@ -24,6 +24,8 @@ data class IslandData(
     val bottomY: Int,
     val offsetX: Int,
     val offsetY: Int,
+    val playerOffsetX: Int,
+    val playerOffsetY: Int,
     val pois: List<Poi>
 ) {
 
@@ -63,8 +65,10 @@ data class IslandData(
             Codec.INT.fieldOf("topY").forGetter(IslandData::topY),
             Codec.INT.fieldOf("bottomX").forGetter(IslandData::bottomX),
             Codec.INT.fieldOf("bottomY").forGetter(IslandData::bottomY),
-            Codec.INT.optionalFieldOf("offsetX", 1).forGetter(IslandData::offsetX),
-            Codec.INT.optionalFieldOf("offsetY", 1).forGetter(IslandData::offsetY),
+            Codec.INT.optionalFieldOf("offsetX", 0).forGetter(IslandData::offsetX),
+            Codec.INT.optionalFieldOf("offsetY", 0).forGetter(IslandData::offsetY),
+            Codec.INT.optionalFieldOf("playerOffsetX", 0).forGetter(IslandData::playerOffsetX),
+            Codec.INT.optionalFieldOf("playerOffsetY", 0).forGetter(IslandData::playerOffsetY),
             Poi.CODEC.listOf().optionalFieldOf("pois", listOf()).forGetter(IslandData::pois)
         ).apply(it, ::IslandData) }
     }
