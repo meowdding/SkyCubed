@@ -20,9 +20,8 @@ import tech.thatgravyboat.skycubed.config.PickUpLogConfig
 object PickUpLog : Overlay {
     override val name = Text.of("Item Pick Up Log")
     override val position = PickUpLogConfig.position
-    override val bounds get() = dimension
+    override val bounds get() = display?.let { it.getWidth() to it.getHeight() } ?: (0 to 0)
 
-    private var dimension = 0 to 0
     private var display: Display? = null
 
     private val addedItems = mutableListOf<PickUpLogItem>()
@@ -93,7 +92,6 @@ object PickUpLog : Overlay {
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         display?.render(graphics)
-        dimension = display?.let { it.getWidth() to it.getHeight() } ?: (0 to 0)
     }
 
     @Subscription
