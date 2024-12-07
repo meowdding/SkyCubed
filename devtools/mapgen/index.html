@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
+    <script src="tojson.js"></script>
+    <script src="blocks.js"></script>
+</head>
+<style>
+    html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+
+        margin: 0;
+        padding: 1rem;
+
+        height: calc(100% - 2rem);
+        width: calc(100% - 2rem);
+    }
+</style>
+<body>
+    <div id="blocklyDiv"></div>
+    <textarea id="output" disabled></textarea>
+</body>
+<script src="init.js"></script>
+</html>

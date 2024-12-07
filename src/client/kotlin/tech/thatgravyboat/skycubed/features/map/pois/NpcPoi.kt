@@ -80,7 +80,7 @@ data class NpcPoi(
             Codec.STRING.fieldOf("texture").forGetter(NpcPoi::texture),
             Codec.STRING.fieldOf("link").forGetter(NpcPoi::link),
             ComponentSerialization.CODEC.listOf().fieldOf("tooltip").forGetter(NpcPoi::tooltip),
-            Codecs.vec2i("x", "z").fieldOf("position").forGetter(NpcPoi::position)
+            Codecs.vec2i("x", "z").fieldOf("position").forGetter(NpcPoi::position),
         ).apply(it, ::NpcPoi) }
     }
 }

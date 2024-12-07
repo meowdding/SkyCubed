@@ -13,6 +13,9 @@ interface Poi {
     val enabled: Boolean
         get() = true
 
+    val significant: Boolean
+        get() = true
+
     val tooltip: List<Component>
     val position: Vector2i
     val bounds: Vector2i

@@ -9,7 +9,8 @@ import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.api.displays.Display
 
 class ConditionalPoi(
-    val condition: Condition,
+    val enabledCondition: Condition,
+    val significanceCondition: Condition,
     val poi: Poi
 ) : Poi {
 
@@ -18,7 +19,8 @@ class ConditionalPoi(
     override val position: Vector2i get() = poi.position
     override val bounds: Vector2i get() = poi.bounds
     override val display: Display get() = poi.display
-    override val enabled: Boolean get() = condition.test() && poi.enabled
+    override val enabled: Boolean get() = enabledCondition.test() && poi.enabled
+    override val significant: Boolean get() = significanceCondition.test() && poi.significant
 
     override fun click() {
         poi.click()
@@ -27,7 +29,8 @@ class ConditionalPoi(
     companion object {
 
         val CODEC: MapCodec<ConditionalPoi> = RecordCodecBuilder.mapCodec { it.group(
-            Condition.CODEC.fieldOf("condition").forGetter(ConditionalPoi::condition),
+            Condition.CODEC.optionalFieldOf("enabled", Condition.TRUE).forGetter(ConditionalPoi::enabledCondition),
+            Condition.CODEC.optionalFieldOf("significant", Condition.TRUE).forGetter(ConditionalPoi::significanceCondition),
             Codec.lazyInitialized { Poi.CODEC }.fieldOf("poi").forGetter(ConditionalPoi::poi)
         ).apply(it, ::ConditionalPoi) }
     }

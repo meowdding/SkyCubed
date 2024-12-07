@@ -7,8 +7,17 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skyblockapi.utils.json.Json
+import java.io.InputStream
+import kotlin.reflect.jvm.javaType
+import kotlin.reflect.typeOf
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
+
+val commentRegex = Regex("(^\\s*//.*$)|(/\\*(\\*(?!/)|[^*])*\\*/)", RegexOption.MULTILINE)
+
+inline fun <reified T : Any> InputStream.readJsonc(): T =
+    Json.gson.fromJson(bufferedReader().readText().replace(commentRegex, ""), typeOf<T>().javaType)
 
 internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
     this.blitSprite(RenderType::guiTextured, id, width, height, 0, 0, x, y, (width * percent).toInt(), height)

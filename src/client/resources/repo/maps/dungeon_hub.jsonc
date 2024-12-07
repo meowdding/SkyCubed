@@ -5,9 +5,10 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/dungeon_hub_underground.png",
-                "conditions": [
-                    "y < 75"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 75"
+                }
             }
         ],
         "topX": -146,

@@ -95,7 +95,7 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                 xOffset = xOffset,
                 zOffset = zOffset,
                 scale = scale,
-                filter = { it.enabled && it.filter(search.get()) },
+                filter = { it.enabled && it.filter(search.get()) && (search.get().isNotEmpty() || it.significant) },
                 width = this.width,
                 height = this.height - 30
             ))

@@ -11,6 +11,8 @@ import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.text.CommonText
+import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.getValue
@@ -66,8 +68,8 @@ class MapsWidget(
                     graphics.blit(RenderType::guiTextured, texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
                 }
 
-                map.pois.forEach poiforeach@ { poi ->
-                    if (!filter(poi)) return@poiforeach
+                map.pois.forEachIndexed { index, poi ->
+                    if (!filter(poi)) return@forEachIndexed
 
                     graphics.pushPop {
                         val mapX = poi.position.x + width / 2f
@@ -77,7 +79,11 @@ class MapsWidget(
                         poi.display.render(graphics)
 
                         if (isMouseOver(poi, mouseX - x, mouseY - y)) {
-                            ScreenUtils.setTooltip(poi.tooltip)
+                            if (McClient.isDev) {
+                                ScreenUtils.setTooltip(poi.tooltip + listOf(CommonText.EMPTY, Text.of("Id: $index")))
+                            } else {
+                                ScreenUtils.setTooltip(poi.tooltip)
+                            }
                             cursor = Cursor.POINTER
                         }
                     }
@@ -125,7 +131,7 @@ class MapsWidget(
         if (button == InputConstants.MOUSE_BUTTON_LEFT) {
             maps.forEach { map ->
                 map.pois.forEach { poi ->
-                    if (isMouseOver(poi, mouseX.toInt() - x, mouseY.toInt() - y) && poi.enabled) {
+                    if (isMouseOver(poi, mouseX.toInt() - x, mouseY.toInt() - y) && filter(poi)) {
                         poi.click()
                         return true
                     }

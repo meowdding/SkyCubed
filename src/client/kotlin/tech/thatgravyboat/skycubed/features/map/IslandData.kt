@@ -9,15 +9,14 @@ import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.codecs.EnumCodec
-import tech.thatgravyboat.skycubed.api.conditions.LocationCondition
-import tech.thatgravyboat.skycubed.api.conditions.LocationConditions
+import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.features.map.texture.MapImage
 
 data class IslandData(
     val island: SkyBlockIsland,
     val default: MapImage,
-    val images: List<Pair<LocationCondition, MapImage>>,
+    val images: List<Pair<Condition, MapImage>>,
     val topX: Int,
     val topY: Int,
     val bottomX: Int,
@@ -30,7 +29,7 @@ data class IslandData(
 ) {
 
     private val cache: Cache<BlockPos, MapImage> = CacheBuilder.newBuilder()
-        .maximumSize(50)
+        .maximumSize(25)
         .build()
 
     val width = bottomX - topX
@@ -47,14 +46,14 @@ data class IslandData(
     fun getTexture(): MapImage {
         if (island != LocationAPI.island) return default
         val pos = McPlayer.self?.blockPosition() ?: return default
-        return cache.get(pos) { images.find { it.first(pos) }?.second ?: default }
+        return cache.get(pos) { images.find { it.first.test() }?.second ?: default }
     }
 
     companion object {
 
-        private val IMAGES_CODEC: Codec<Pair<LocationCondition, MapImage>> = RecordCodecBuilder.create { it.group(
-            LocationConditions.CODEC.fieldOf("conditions").forGetter(Pair<LocationCondition, MapImage>::first),
-            MapImage.CODEC.fieldOf("image").forGetter(Pair<LocationCondition, MapImage>::second)
+        private val IMAGES_CODEC: Codec<Pair<Condition, MapImage>> = RecordCodecBuilder.create { it.group(
+            Condition.CODEC.fieldOf("condition").forGetter(Pair<Condition, MapImage>::first),
+            MapImage.CODEC.fieldOf("image").forGetter(Pair<Condition, MapImage>::second)
         ).apply(it, ::Pair) }
 
         val CODEC: Codec<IslandData> = RecordCodecBuilder.create { it.group(

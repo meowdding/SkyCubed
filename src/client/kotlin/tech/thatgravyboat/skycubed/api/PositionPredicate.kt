@@ -1,24 +1,21 @@
-package tech.thatgravyboat.skycubed.api.conditions
+package tech.thatgravyboat.skycubed.api
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
 import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skycubed.SkyCubed
 
-typealias LocationCondition = (BlockPos) -> Boolean
+typealias PositionPredicate = (BlockPos) -> Boolean
 
-object LocationConditions {
+object PositionPredicates {
 
     private val regex = Regex("(?<variable>[x-z])(?<operator>[<>])(?<value>-?\\d+)")
-    val CODEC = Codec.STRING.listOf().flatComapMap(LocationConditions::of) { DataResult.error { "Can't be encoded" } }
+    val CODEC = Codec.STRING.listOf().flatComapMap(PositionPredicates::of) { DataResult.error { "Can't be encoded" } }
 
-    val TRUE = { _: BlockPos -> true }
-    val FALSE = { _: BlockPos -> false }
-
-    private fun of(conditionStrings: List<String>): LocationCondition {
+    fun of(conditionStrings: List<String>): PositionPredicate {
         val conditions = conditionStrings.mapNotNull { of(it) }
         if (conditions.isEmpty()) {
-            return TRUE
+            return { _: BlockPos -> true }
         } else if (conditions.size == 1) {
             return conditions.first()
         } else {
@@ -28,7 +25,7 @@ object LocationConditions {
         }
     }
 
-    private fun of(condition: String): LocationCondition? {
+    fun of(condition: String): PositionPredicate? {
         val parsedConditions = condition.lowercase()
             .replace(" ", "")
             .split("&&")
@@ -40,7 +37,7 @@ object LocationConditions {
             return null
         }
 
-        val conditions: List<LocationCondition> = parsedConditions
+        val conditions: List<PositionPredicate> = parsedConditions
             .mapNotNull { it?.destructured }
             .mapNotNull { (variable, operator, value) ->
                 val valueInt = value.toInt()

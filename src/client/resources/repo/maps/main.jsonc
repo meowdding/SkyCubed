@@ -5,19 +5,43 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/hub_museum.png",
-                "conditions": [
-                    "x > -72 && x < -3 && y < 80 && z > 61 && z < 99",
-                    "y < 64 && x > -39 && x < 53 && z > 10 && z < 142"
-                ]
+                "condition": {
+                    "condition": "or",
+                    "conditions": [
+                        {
+                            "condition": "position",
+                            "position": "x > -72 && x < -3 && y < 80 && z > 61 && z < 99"
+                        },
+                        {
+                            "condition": "position",
+                            "position": "y < 64 && x > -39 && x < 53 && z > 10 && z < 142"
+                        }
+                    ]
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/hub_crypts.png",
-                "conditions": [
-                    "y < 65 && x > -194 && x < -62 && z < -73 && z > -148",
-                    "y < 67 && z < -111 && z > -172 && x > -62 && x < -35",
-                    "y < 75 && x > -35 && x < -5 && z < -150 && z > -177",
-                    "y < 69 && x > -22 && x < 66 && z < -177 && z > -232"
-                ]
+                "condition": {
+                    "condition": "or",
+                    "conditions": [
+                        {
+                            "condition": "position",
+                            "position": "y < 65 && x > -194 && x < -62 && z < -73 && z > -148"
+                        },
+                        {
+                            "condition": "position",
+                            "position": "y < 67 && z < -111 && z > -172 && x > -62 && x < -35"
+                        },
+                        {
+                            "condition": "position",
+                            "position": "y < 75 && x > -35 && x < -5 && z < -150 && z > -177"
+                        },
+                        {
+                            "condition": "position",
+                            "position": "y < 69 && x > -22 && x < 66 && z < -177 && z > -232"
+                        }
+                    ]
+                }
             }
         ],
         "topX": -298,
@@ -92,9 +116,13 @@
             },
             {
                 "type": "conditional",
-                "condition": {
-                    "condition": "season",
-                    "seasons": ["EARLY_WINTER", "WINTER", "LATE_WINTER"]
+                "enabled": {
+                    "condition": "or",
+                    "conditions": [
+                        { "condition": "season", "season": "EARLY_WINTER" },
+                        { "condition": "season", "season": "WINTER" },
+                        { "condition": "season", "season": "LATE_WINTER" }
+                    ]
                 },
                 "poi": {
                     "type": "portal",
@@ -118,9 +146,10 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/spiders_den_underground.png",
-                "conditions": [
-                    "y<77"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 77"
+                }
             }
         ],
         "topX": -408,
@@ -175,10 +204,19 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/park_howling_cave.png",
-                "conditions": [
-                    "x < -336 && x > -402 && y < 80",
-                    "x < -320 && x > -351 && y < 92 && z < -50 && z > -65"
-                ]
+                "condition": {
+                    "condition": "or",
+                    "conditions": [
+                        {
+                            "condition": "position",
+                            "position": "x < -336 && x > -402 && y < 80"
+                        },
+                        {
+                            "condition": "position",
+                            "position": "x < -320 && x > -351 && y < 92 && z < -50 && z > -65"
+                        }
+                    ]
+                }
             }
         ],
         "topX": -500,
@@ -233,9 +271,10 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/farming_islands_underground.png",
-                "conditions": [
-                    "y<60"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 60"
+                }
             }
         ],
         "topX": 82,
@@ -326,15 +365,17 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/end_underground-1.png",
-                "conditions": [
-                    "y < 115 && x < -512"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 115 && x < -512"
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/end_underground-2.png",
-                "conditions": [
-                    "y < 60"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 60"
+                }
             }
         ],
         "topX": -790,
@@ -389,9 +430,10 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/gold_mine_underground.png",
-                "conditions": [
-                    "y<72"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 72"
+                }
             }
         ],
         "topX": -90,
@@ -420,39 +462,45 @@
         "images": [
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/deep_caverns_obsidian_sanctuary.png",
-                "conditions": [
-                    "y < 20"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 20"
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/deep_caverns_diamond_reserve.png",
-                "conditions": [
-                    "y < 42"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 42"
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/deep_caverns_slimehill.png",
-                "conditions": [
-                    "y < 72"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 72"
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/deep_caverns_pigmen_den.png",
-                "conditions": [
-                    "y < 109"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 109"
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/deep_caverns_lapis_quarry.png",
-                "conditions": [
-                    "y < 130"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 130"
+                }
             },
             {
                 "image": "https://api.dediamondpro.dev/skyguide/medium/deep_caverns_gunpowder_mines.png",
-                "conditions": [
-                    "y < 170 && z < 54"
-                ]
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 170 && z < 54"
+                }
             }
         ],
         "topX": -86,

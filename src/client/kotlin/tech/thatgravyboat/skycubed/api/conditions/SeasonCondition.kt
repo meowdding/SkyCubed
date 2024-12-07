@@ -5,17 +5,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.teamresourceful.resourcefullib.common.codecs.EnumCodec
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
-import tech.thatgravyboat.skyblockapi.utils.codecs.CodecUtils
 
-data class SeasonCondition(private val seasons: MutableSet<SkyBlockSeason>) : Condition {
+data class SeasonCondition(private val season: SkyBlockSeason) : Condition {
 
     override val id: String = "season"
-    override fun test(): Boolean = DateTimeAPI.season in this.seasons
+    override fun test(): Boolean = DateTimeAPI.season == this.season
 
     companion object {
 
         val CODEC: MapCodec<SeasonCondition> = RecordCodecBuilder.mapCodec { it.group(
-            CodecUtils.set(EnumCodec.of(SkyBlockSeason::class.java)).fieldOf("seasons").forGetter(SeasonCondition::seasons)
+            EnumCodec.of(SkyBlockSeason::class.java).fieldOf("season").forGetter(SeasonCondition::season)
         ).apply(it, ::SeasonCondition) }
     }
 }
