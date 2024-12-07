@@ -14,6 +14,7 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
         OverlaysConfig::class,
         NotificationsConfig::class,
         ChatConfig::class,
+        PickUpLogConfig::class,
     ]
 )
 object Config {

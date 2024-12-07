@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.features.info.InfoOverlay
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
+import tech.thatgravyboat.skycubed.features.overlays.PickUpLog
 import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
@@ -99,6 +100,7 @@ object Overlays {
         register(CommissionsOverlay)
         register(InfoOverlay)
         register(DialogueOverlay)
+        register(PickUpLog)
         TextOverlay.overlays.forEach(::register)
     }
 }

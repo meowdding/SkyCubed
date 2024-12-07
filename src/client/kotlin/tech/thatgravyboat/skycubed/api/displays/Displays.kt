@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.FormattedCharSequence
+import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -212,6 +213,19 @@ object Displays {
                             translate(0f, display.getHeight().toFloat(), 0f)
                         }
                     }
+                }
+            }
+        }
+    }
+
+    fun item(item: ItemStack, width: Int = 16, height: Int = 16): Display {
+        return object : Display {
+            override fun getWidth() = width
+            override fun getHeight() = height
+            override fun render(graphics: GuiGraphics) {
+                graphics.pushPop {
+                    scale(width / 16f, height / 16f, 1f)
+                    graphics.renderItem(item, 0, 0)
                 }
             }
         }
