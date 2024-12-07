@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.features.overlays.PickUpLogComponents
+import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 
 @Category("pickUpLog")
 object PickUpLogConfig {

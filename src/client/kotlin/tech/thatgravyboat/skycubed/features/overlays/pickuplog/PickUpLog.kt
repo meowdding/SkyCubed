@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.world.item.ItemStack
@@ -9,13 +9,12 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.PlayerInventoryChangeEve
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.utils.extentions.isSameItem
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.PickUpLogConfig
+import tech.thatgravyboat.skycubed.utils.findWithIndex
 
 object PickUpLog : Overlay {
     override val name = Text.of("Item Pick Up Log")
@@ -36,10 +35,7 @@ object PickUpLog : Overlay {
 
         val newStack = event.item
         val oldStack = lastInventory[event.slot]
-
-        val newCount = newStack.count
-        val oldCount = oldStack?.count ?: 0
-        val diff = newCount - oldCount
+        val diff = newStack.count - (oldStack?.count ?: 0)
 
         if (diff != 0) {
             val (targetList, stackToUse) = if (diff > 0) {
@@ -48,18 +44,15 @@ object PickUpLog : Overlay {
                 removedItems to (oldStack ?: newStack)
             }
 
-            val existingItem = targetList.find { it.stack.isSameItem(stackToUse) }
+            val existingItem = targetList.findWithIndex { it.stack.isSameItem(stackToUse) }
             if (existingItem != null) {
-                targetList[targetList.indexOf(existingItem)] = existingItem.copy(
-                    difference = existingItem.difference + diff,
-                    time = System.currentTimeMillis()
-                )
+                targetList[existingItem.index] = existingItem.value + diff
             } else {
                 targetList.add(PickUpLogItem(stackToUse.copy(), diff, System.currentTimeMillis()))
             }
 
-            addedItems.removeIf { it.difference == 0 }
-            removedItems.removeIf { it.difference == 0 }
+            addedItems.removeIf(PickUpLogItem::isEmpty)
+            removedItems.removeIf(PickUpLogItem::isEmpty)
             updateDisplay()
         }
 
@@ -80,7 +73,7 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = listOf(addedItems, removedItems).flatten().compact().map {
+        display = (addedItems + removedItems).compact().map {
             PickUpLogConfig.appearance.map { component -> component.display(it) }.toRow(5)
         }.toColumn()
     }
@@ -88,7 +81,7 @@ object PickUpLog : Overlay {
     private fun List<PickUpLogItem>.compact() =
         takeIf { !PickUpLogConfig.compact } ?: groupBy { it.stack.item }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
-        }.filter { it.difference != 0 }
+        }.filter(PickUpLogItem::isNotEmpty)
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         display?.render(graphics)
@@ -100,23 +93,3 @@ object PickUpLog : Overlay {
     }
 }
 
-enum class PickUpLogComponents(val display: (PickUpLogItem) -> Display) {
-    ITEM_STACK({ Displays.item(it.stack) }),
-    DIFFERENCE({
-        if (it.difference < 0) Displays.text(Text.of(it.difference.toString()).withColor(TextColor.RED))
-        else Displays.text(Text.of("+${it.difference}").withColor(TextColor.GREEN))
-    }),
-    NAME({ Displays.text(it.stack.hoverName) }),
-    ;
-
-    private val formattedName = name.split("_").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercase) }
-
-    override fun toString() = formattedName
-
-}
-
-data class PickUpLogItem(
-    val stack: ItemStack,
-    val difference: Int,
-    val time: Long,
-)

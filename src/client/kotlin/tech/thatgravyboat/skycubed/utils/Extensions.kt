@@ -94,3 +94,7 @@ internal fun Duration.formatReadableTime(biggestUnit: DurationUnit, maxUnits: In
 // stolen from api :333333
 internal fun currentInstant(): Instant = Clock.System.now()
 internal fun Instant.until(): Duration = this - currentInstant()
+
+internal fun <T> List<T>.findWithIndex(predicate: (T) -> Boolean): IndexedValue<T>? {
+    return this.withIndex().find { predicate(it.value) }
+}
