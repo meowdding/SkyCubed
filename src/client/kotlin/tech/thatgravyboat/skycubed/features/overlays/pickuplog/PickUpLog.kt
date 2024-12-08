@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.world.item.ItemStack
@@ -15,21 +15,13 @@ import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.displays.toRow
-import tech.thatgravyboat.skycubed.api.overlays.EditOverlaysScreen
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.OverlayScreen
 import tech.thatgravyboat.skycubed.config.PickUpLogConfig
-import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogItem
+import tech.thatgravyboat.skycubed.utils.Rect
 import tech.thatgravyboat.skycubed.utils.findWithIndex
 
 object PickUpLog : Overlay {
-    override val name = Text.of("Item Pick Up Log")
-    override val position = PickUpLogConfig.position
-    override val bounds
-        get() = (if ((EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()) && display == null) exampleDisplay else display)
-            ?.let { it.getWidth() to it.getHeight() } ?: (0 to 0)
 
-    private var display: Display? = null
     private val exampleDisplay by lazy {
         Displays.column(
             Displays.row(
@@ -47,11 +39,36 @@ object PickUpLog : Overlay {
         )
     }
 
+    override val name = Text.of("Item Pick Up Log")
+    override val position = PickUpLogConfig.position
+    override val bounds get() = exampleDisplay.getWidth() to exampleDisplay.getHeight()
+    override val editBounds: Rect get() {
+        if (display != null) {
+            val (x, y) = position
+            val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
+            val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
+            return Rect(x + relativeX, y + relativeY, display?.getWidth() ?: 0, display?.getHeight() ?: 0)
+        }
+        return Rect(position, exampleDisplay.getWidth(), exampleDisplay.getHeight())
+    }
+
+    private var display: Display? = null
+
     private val addedItems = mutableListOf<PickUpLogItem>()
     private val removedItems = mutableListOf<PickUpLogItem>()
     private var lastInventory = mutableMapOf<Int, ItemStack>()
 
     private var lastWorldSwitchTime: Long? = null
+
+    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        if (Overlay.isEditing()) {
+            exampleDisplay.render(graphics)
+        } else if (display != null) {
+            val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
+            val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
+            display!!.render(graphics, relativeX, relativeY)
+        }
+    }
 
     @Subscription
     fun onInvChange(event: PlayerInventoryChangeEvent) {
@@ -92,6 +109,11 @@ object PickUpLog : Overlay {
         updateDisplay()
     }
 
+    @Subscription
+    fun onServerChange(event: ServerChangeEvent) {
+        lastWorldSwitchTime = System.currentTimeMillis()
+    }
+
     private fun updateDisplay() {
         if (System.currentTimeMillis() - (lastWorldSwitchTime ?: 0) < 5000) {
             display = null
@@ -102,25 +124,12 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = items.compact().map {
-            PickUpLogConfig.appearance.map { component -> component.display(it) }.toRow(5)
-        }.toColumn()
+        display = items.compact().map { PickUpLogConfig.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun List<PickUpLogItem>.compact() =
         takeIf { !PickUpLogConfig.compact } ?: groupBy { it.stack.item }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter(PickUpLogItem::isNotEmpty)
-
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if ((EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()) && display == null) {
-            exampleDisplay.render(graphics)
-        } else display?.render(graphics)
-    }
-
-    @Subscription
-    fun onServerChange(event: ServerChangeEvent) {
-        lastWorldSwitchTime = System.currentTimeMillis()
-    }
 }
 

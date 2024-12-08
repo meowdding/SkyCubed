@@ -16,6 +16,9 @@ class Position(
     operator fun component1(): Int = if (x < 0) McClient.window.guiScaledWidth + x else x
     operator fun component2(): Int = if (y < 0) McClient.window.guiScaledHeight + y else y
 
+    fun isRight(): Boolean = x < 0
+    fun isBottom(): Boolean = y < 0
+
     fun reset() {
         x = initialPos.first
         y = initialPos.second

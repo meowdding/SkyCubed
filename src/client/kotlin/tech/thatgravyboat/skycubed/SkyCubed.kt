@@ -15,7 +15,7 @@ import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
-import tech.thatgravyboat.skycubed.features.overlays.PickUpLog
+import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 
 object SkyCubed : ModInitializer {

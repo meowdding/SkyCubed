@@ -41,4 +41,9 @@ interface Overlay {
         if (bounds.second == 0 || bounds.second >= height) return
         position.y = if (y < height / 2) y.coerceAtLeast(0) else (y - height).coerceAtMost(-bounds.second)
     }
+
+    companion object {
+
+        fun isEditing() = EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()
+    }
 }
