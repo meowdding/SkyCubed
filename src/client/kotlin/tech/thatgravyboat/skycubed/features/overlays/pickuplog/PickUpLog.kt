@@ -1,7 +1,8 @@
-package tech.thatgravyboat.skycubed.features.overlays.pickuplog
+package tech.thatgravyboat.skycubed.features.overlays
 
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
@@ -9,19 +10,42 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.PlayerInventoryChangeEve
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.utils.extentions.isSameItem
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.api.displays.Display
+import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.displays.toRow
+import tech.thatgravyboat.skycubed.api.overlays.EditOverlaysScreen
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.OverlayScreen
 import tech.thatgravyboat.skycubed.config.PickUpLogConfig
+import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogItem
 import tech.thatgravyboat.skycubed.utils.findWithIndex
 
 object PickUpLog : Overlay {
     override val name = Text.of("Item Pick Up Log")
     override val position = PickUpLogConfig.position
-    override val bounds get() = display?.let { it.getWidth() to it.getHeight() } ?: (0 to 0)
+    override val bounds
+        get() = (if ((EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()) && display == null) exampleDisplay else display)
+            ?.let { it.getWidth() to it.getHeight() } ?: (0 to 0)
 
     private var display: Display? = null
+    private val exampleDisplay by lazy {
+        Displays.column(
+            Displays.row(
+                Displays.item(Items.EGG.defaultInstance, 10, 10),
+                Displays.text(Text.of("Egg")),
+                Displays.text(Text.of("+20").withColor(TextColor.GREEN)),
+                spacing = 5,
+            ),
+            Displays.row(
+                Displays.item(Items.EGG.defaultInstance, 10, 10),
+                Displays.text(Text.of("Egg")),
+                Displays.text(Text.of("-17").withColor(TextColor.RED)),
+                spacing = 5,
+            )
+        )
+    }
 
     private val addedItems = mutableListOf<PickUpLogItem>()
     private val removedItems = mutableListOf<PickUpLogItem>()
@@ -73,7 +97,12 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = (addedItems + removedItems).compact().map {
+        val items = addedItems + removedItems
+        if (items.isEmpty()) {
+            display = null
+            return
+        }
+        display = items.compact().map {
             PickUpLogConfig.appearance.map { component -> component.display(it) }.toRow(5)
         }.toColumn()
     }
@@ -84,7 +113,9 @@ object PickUpLog : Overlay {
         }.filter(PickUpLogItem::isNotEmpty)
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display?.render(graphics)
+        if ((EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()) && display == null) {
+            exampleDisplay.render(graphics)
+        } else display?.render(graphics)
     }
 
     @Subscription
