@@ -3,6 +3,8 @@ package tech.thatgravyboat.skycubed.api.displays
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
+import net.minecraft.client.gui.components.Renderable
+import net.minecraft.client.gui.layouts.LayoutElement
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -227,6 +229,17 @@ object Displays {
                     scale(width / 16f, height / 16f, 1f)
                     graphics.renderItem(item, 0, 0)
                 }
+            }
+        }
+    }
+
+    fun <T> renderable(renderable: T, width: Int = -1, height: Int = -1): Display
+        where T: Renderable, T: LayoutElement {
+        return object : Display {
+            override fun getWidth(): Int = if (width == -1) renderable.width else width
+            override fun getHeight(): Int = if (height == -1) renderable.height else height
+            override fun render(graphics: GuiGraphics) {
+                renderable.render(graphics, -1, -1, 0f)
             }
         }
     }

@@ -19,3 +19,12 @@ class ResettingState<T>(private val initializer: () -> T) : State<T> {
         fun <T> of(initializer: () -> T): ResettingState<T> = ResettingState(initializer)
     }
 }
+
+class GettingState<T>(private val getter: () -> T) : State<T> {
+    override fun get(): T = getter()
+    override fun set(p0: T) {}
+
+    companion object {
+        fun <T> of(getter: () -> T): GettingState<T> = GettingState(getter)
+    }
+}

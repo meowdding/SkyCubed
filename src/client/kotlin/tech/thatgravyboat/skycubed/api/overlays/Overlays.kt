@@ -1,8 +1,8 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
+import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
@@ -12,12 +12,15 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.features.info.InfoOverlay
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
-import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
+import tech.thatgravyboat.skycubed.features.overlays.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
+import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 object Overlays {
@@ -58,7 +61,11 @@ object Overlays {
                     screen!!.setTooltipForNextRenderPass(Text.multiline(
                         it.name,
                         CommonText.EMPTY,
-                        Component.translatable("ui.skycubed.overlay.edit")
+                        Text.translatable("ui.skycubed.overlay.edit"),
+                        Text.of("SkyCubed") {
+                            this.color = TextColor.BLUE
+                            this.withStyle(ChatFormatting.ITALIC)
+                        }
                     ))
                 } else {
                     screen!!.setTooltipForNextRenderPass(it.name)
@@ -88,9 +95,7 @@ object Overlays {
     fun onCommandRegistration(event: RegisterCommandsEvent) {
         event.register("skycubed") {
             then("overlays") {
-                callback {
-                    McClient.setScreen(EditOverlaysScreen())
-                }
+                callback { McClient.setScreen(EditOverlaysScreen()) }
             }
         }
     }
@@ -101,6 +106,7 @@ object Overlays {
         register(InfoOverlay)
         register(DialogueOverlay)
         register(PickUpLog)
+        register(MinimapOverlay)
         TextOverlay.overlays.forEach(::register)
     }
 }

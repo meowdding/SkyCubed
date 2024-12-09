@@ -17,7 +17,9 @@ val Layout.children: List<LayoutElement>
     }
 
 inline fun GuiGraphics.scissor(x: Int, y: Int, width: Int, height: Int, action: () -> Unit) {
-    this.enableScissor(x, y, x + width, y + height)
+    val xTranslation = this.pose().last().pose().m30()
+    val yTranslation = this.pose().last().pose().m31()
+    this.enableScissor(xTranslation.toInt() + x, yTranslation.toInt() + y, xTranslation.toInt() + x + width, yTranslation.toInt() + y + height)
     action()
     this.disableScissor()
 }

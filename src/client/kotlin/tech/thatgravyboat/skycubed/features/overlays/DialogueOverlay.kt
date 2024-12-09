@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -42,6 +43,7 @@ object DialogueOverlay : Overlay {
     override val enabled: Boolean get() = OverlaysConfig.npcDialogue.enabled
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onChatReceived(event: ChatReceivedEvent) {
         if (!enabled) return
 

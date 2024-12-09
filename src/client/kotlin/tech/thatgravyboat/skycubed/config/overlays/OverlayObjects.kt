@@ -2,8 +2,10 @@ package tech.thatgravyboat.skycubed.config.overlays
 
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
+import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 
 @ConfigObject
 class NpcOverlay(
@@ -18,4 +20,18 @@ class CommissionOverlay(
     @ConfigEntry(id = "enabled") var enabled: Boolean = true,
     @ConfigEntry(id = "format") var format: Boolean = true,
     @ConfigEntry(id = "background") var background: Boolean = false,
+)
+
+@ConfigObject
+class PickupLogOverlay(
+    @ConfigEntry(id = "enabled") var enabled: Boolean = true,
+    @ConfigEntry(id = "compact") var compact: Boolean = false,
+    @ConfigEntry(id = "appearance")
+    @ConfigOption.Draggable
+    var appearance: Array<PickUpLogComponents> = PickUpLogComponents.entries.toTypedArray(),
+)
+
+@ConfigObject
+class MapOverlay(
+    @ConfigEntry(id = "enabled") var enabled: Boolean = false,
 )

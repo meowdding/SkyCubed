@@ -4,6 +4,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.PlayerInventoryChangeEvent
@@ -16,7 +17,8 @@ import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.PickUpLogConfig
+import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
+import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.utils.Rect
 import tech.thatgravyboat.skycubed.utils.findWithIndex
 
@@ -40,7 +42,7 @@ object PickUpLog : Overlay {
     }
 
     override val name = Text.of("Item Pick Up Log")
-    override val position = PickUpLogConfig.position
+    override val position = OverlayPositions.pickupLog
     override val bounds get() = exampleDisplay.getWidth() to exampleDisplay.getHeight()
     override val editBounds: Rect get() {
         if (display != null) {
@@ -71,6 +73,7 @@ object PickUpLog : Overlay {
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onInvChange(event: PlayerInventoryChangeEvent) {
         if (event.slot == 8) return
 
@@ -124,11 +127,11 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = items.compact().map { PickUpLogConfig.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
+        display = items.compact().map { OverlaysConfig.pickupLog.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun List<PickUpLogItem>.compact() =
-        takeIf { !PickUpLogConfig.compact } ?: groupBy { it.stack.item }.map { (_, items) ->
+        takeIf { !OverlaysConfig.pickupLog.compact } ?: groupBy { it.stack.item }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter(PickUpLogItem::isNotEmpty)
 }
