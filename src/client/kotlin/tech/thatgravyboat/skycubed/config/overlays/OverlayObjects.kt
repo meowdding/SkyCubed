@@ -25,7 +25,8 @@ class CommissionOverlay(
 @ConfigObject
 class PickupLogOverlay(
     @ConfigEntry(id = "enabled") var enabled: Boolean = true,
-    @ConfigEntry(id = "compact") var compact: Boolean = false,
+    @ConfigEntry(id = "compact") var compact: Boolean = true,
+    @ConfigEntry(id = "time") @Range(min = 1.0, max = 30.0) var time: Int = 5,
     @ConfigEntry(id = "appearance")
     @ConfigOption.Draggable
     var appearance: Array<PickUpLogComponents> = PickUpLogComponents.entries.toTypedArray(),
