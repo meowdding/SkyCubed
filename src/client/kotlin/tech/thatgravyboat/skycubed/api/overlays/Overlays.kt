@@ -31,8 +31,20 @@ object Overlays {
         overlays.add(overlay)
     }
 
-    private fun isOverlayScreen(screen: Screen?): Boolean {
-        return screen is ChatScreen || screen is EditOverlaysScreen
+    private fun isOverlayScreen(screen: Screen?, mouseX: Int, mouseY: Int): Boolean {
+        return (screen is ChatScreen && !isWithinChatBounds(mouseX, mouseY)) || screen is EditOverlaysScreen
+    }
+
+    private fun isWithinChatBounds(mouseX: Int, mouseY: Int): Boolean {
+        val window = McClient.window
+        val chat = McClient.chat
+
+        val height = chat.height
+        val width = chat.width
+        val x = 0
+        val y = window.guiScaledHeight - 40 - height
+
+        return mouseX in x..width && mouseY in y..window.guiScaledHeight - 40
     }
 
     @Subscription
@@ -54,7 +66,7 @@ object Overlays {
 
             val rect = it.editBounds * it.position.scale
 
-            if (isOverlayScreen(screen) && rect.contains(mouseX.toInt(), mouseY.toInt())) {
+            if (isOverlayScreen(screen, mouseX.toInt(), mouseY.toInt()) && rect.contains(mouseX.toInt(), mouseY.toInt())) {
                 graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
                 graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
                 if (it.moveable) {
@@ -77,7 +89,7 @@ object Overlays {
     @Subscription
     @OnlyOnSkyBlock
     fun onMouseClick(event: ScreenMouseClickEvent.Pre) {
-        if (!isOverlayScreen(event.screen)) return
+        if (!isOverlayScreen(event.screen, event.x.toInt(), event.y.toInt())) return
 
         for (overlay in overlays.reversed()) {
             if (!overlay.enabled) continue

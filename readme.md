@@ -1,0 +1,56 @@
+# SkyCubed
+
+
+# Features
+
+- Overlays
+  - Mini Map
+  - Mining Commissions
+  - Pickup Log
+  - Info Overlay
+    - The Rift
+      - Timecharm and Engima display
+      - Motes Display
+      - Rift Time Display
+    - Farmhouse
+      - Medals Display
+    - Dwarven Mines
+      - Mithril Powder Display
+    - Crystal Hollows
+      - Gemstone Powder Display
+    - Glacite Mines
+      - Glacite Powder Display
+    - The Barn
+      - Pelts Display
+    - The Garden
+      - Bronze Display
+    - Main
+      - Location
+      - Time
+      - Date (Season/Day)
+      - Currency (Purse/Bits)
+  - RPG
+    - Rpg style display with:
+      - Health
+      - Mana (Displays how much held item will use)
+      - XP
+      - Air (if in water)
+  - Text Overlays
+    - Health (Effective if enabled)
+    - Mana
+    - Defense
+  - Dialogue/NPC text
+    - If enabled will remove npc chat messages and put them in a display on screen like in other games.
+- Cooldowns, Will apply the vanilla cooldown effect to items with cooldowns
+- Element hider, will allow you to hide vanilla gui elements on screen
+- Item Bars, will add durability bars for drill fuel and snowballs in snow launchers
+- Compact Tab List, changes the vanilla tab list to a custom compact version
+- Notifications, removed certain chat messages and changes them to notifications (fully customizable)
+  - Temporarily will show up as a toast but in the pause menu there is a notifications but you can see all of them in.
+- Equipment display, like armor will show up next to your player in inventory and will show your equipment.
+- Chat tab colors
+  - Will change the color of the line next to a chat message to the type of message it is, ie. private message, guild message, system message, public message
+- Compact messages
+  - Will compact/make only 1 message visible in chat at a time for certain messages like EXP gains on hypixel network, cooldowns, pickaxe abilities
+- Chat hider
+  - A config option that will hide certain messages based off of a regex.

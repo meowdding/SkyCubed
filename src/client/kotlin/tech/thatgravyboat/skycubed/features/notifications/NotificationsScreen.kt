@@ -11,7 +11,6 @@ import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.ui.UIIcons
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.StringWidget
-import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import org.apache.commons.lang3.function.Consumers
@@ -23,9 +22,7 @@ private const val PADDING = 10
 private const val WIDTH = 170
 private const val FULL_WIDTH = WIDTH + PADDING * 2
 
-class NotificationsScreen(parent: Screen?) : Overlay(parent) {
-
-    constructor() : this(McScreen.self)
+class NotificationsScreen : Overlay(McScreen.self) {
 
     private val category: DropdownState<String?> = DropdownState.empty()
 

@@ -5,12 +5,12 @@ import tech.thatgravyboat.skyblockapi.api.area.SlayerType
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
-import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.profile.CurrencyAPI
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.extentions.toRomanNumeral
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.Displays
+import tech.thatgravyboat.skycubed.features.info.icons.LocationIcons
 import tech.thatgravyboat.skycubed.utils.capitalize
 import tech.thatgravyboat.skycubed.utils.toOrdinal
 
@@ -20,22 +20,10 @@ object CommonInfoDisplays {
     val RIGHT_LINE = SkyCubed.id("info/right")
     val LEFT_LINE = SkyCubed.id("info/left")
 
-    private val hubIcon = Displays.sprite(SkyCubed.id("info/icons/locations/hub"), 8, 8)
-    private val riftIcon = Displays.sprite(SkyCubed.id("info/icons/locations/rift"), 8, 8)
-    private val dwarvesIcon = Displays.sprite(SkyCubed.id("info/icons/locations/dwarves"), 8, 8)
-    private val jerryIcon = Displays.sprite(SkyCubed.id("info/icons/locations/jerry"), 8, 8)
-    private val locationIcon = Displays.supplied { when (LocationAPI.island) {
-        SkyBlockIsland.HUB -> hubIcon
-        SkyBlockIsland.THE_RIFT -> riftIcon
-        SkyBlockIsland.DWARVEN_MINES -> dwarvesIcon
-        SkyBlockIsland.JERRYS_WORKSHOP -> jerryIcon
-        else -> Displays.empty(8, 8)
-    } }
-
     val locationDisplay = Displays.background(
         LEFT_LINE,
         Displays.padding(3, 1, 2, 2, Displays.row(
-            Displays.padding(1, locationIcon),
+            Displays.padding(1, LocationIcons),
             Displays.text({ LocationAPI.area.name }),
         ))
     )

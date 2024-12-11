@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Hidden
 
 @Category("positions")
+@Hidden
 object OverlayPositions {
 
     @Hidden @ConfigEntry(id = "rpg")

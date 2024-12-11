@@ -9,7 +9,6 @@ import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.Display
@@ -31,10 +30,10 @@ data class EffigyPoi(
     override val tooltip: List<Component> = listOf(
         Text.of("Effigy") { color = TextColor.RED },
         CommonText.EMPTY,
-        Text.of("Click to navigate to") {
-            bold = true
-            color = TextColor.YELLOW
-        }
+//        Text.of("Click to navigate to") {
+//            bold = true
+//            color = TextColor.YELLOW
+//        }
     )
 
     override fun click() {

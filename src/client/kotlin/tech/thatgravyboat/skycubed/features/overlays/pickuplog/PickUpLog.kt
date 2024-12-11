@@ -61,7 +61,7 @@ object PickUpLog : Overlay {
     private val addedItems = mutableListOf<PickUpLogItem>()
     private val removedItems = mutableListOf<PickUpLogItem>()
 
-    private var ignoreCheck = false
+    private var lastWorldSwap = System.currentTimeMillis()
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         if (Overlay.isEditing()) {
@@ -85,11 +85,13 @@ object PickUpLog : Overlay {
             .mapValues { (_, value) -> value.first() to value.sumOf(ItemStack::getCount) }
             .map { Triple(it.key, it.value.first, it.value.second) }
 
+        val isSwappingWorlds = lastWorldSwap + 5000 > System.currentTimeMillis()
+
         val foundIds = mutableSetOf<String>()
         for ((key, item, count) in flattenedInventory) {
             foundIds.add(key)
 
-            if (!ignoreCheck) {
+            if (!isSwappingWorlds) {
                 val diff = count - (inventory[key]?.count ?: 0)
                 if (diff < 0) {
                     removedItems.add(PickUpLogItem(item.copy(), diff, System.currentTimeMillis()))
@@ -103,7 +105,9 @@ object PickUpLog : Overlay {
 
         for (key in (inventory.keys - foundIds)) {
             val item = inventory.remove(key) ?: continue
-            removedItems.add(PickUpLogItem(item.copy(), -item.count, System.currentTimeMillis()))
+            if (!isSwappingWorlds) {
+                removedItems.add(PickUpLogItem(item.copy(), -item.count, System.currentTimeMillis()))
+            }
         }
 
         val currentTime = System.currentTimeMillis()
@@ -111,13 +115,13 @@ object PickUpLog : Overlay {
         addedItems.removeIf { it.time + timealive < currentTime }
         removedItems.removeIf { it.time + timealive < currentTime }
         updateDisplay()
-
-        ignoreCheck = false
     }
 
     @Subscription
     fun onServerChange(event: ServerChangeEvent) {
-        ignoreCheck = true
+        lastWorldSwap = System.currentTimeMillis()
+        addedItems.clear()
+        removedItems.clear()
     }
 
     private fun updateDisplay() {

@@ -33,7 +33,7 @@ object PlayerRpgOverlay : Overlay {
     private val AIR = SkyCubed.id("rpg/air/normal")
 
     override val name: Component = Text.of("Player RPG Hud")
-    override val enabled: Boolean get() = OverlaysConfig.rpgEnabled
+    override val enabled: Boolean get() = OverlaysConfig.rpg.enabled
     override val position: Position = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 

@@ -48,7 +48,7 @@ internal fun GuiGraphics.fillRect(
         translate(-xOffset, -yOffset, 0f)
         RoundedRectShader.fill(
             this@fillRect, (x + xOffset).toInt(), (y + yOffset).toInt(), width, height,
-            backgroundColor, borderColor, radius.toFloat(), borderSize
+            backgroundColor, borderColor, width.coerceAtMost(height) * (radius / 100f), borderSize
         )
     }
 }

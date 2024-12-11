@@ -7,51 +7,38 @@ import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 
-@Category(
-    "overlays",
-    categories = [
-        OverlayPositions::class
-    ]
-)
+@Category("overlays", categories = [OverlayPositions::class])
 object OverlaysConfig {
 
-    @ConfigEntry(id = "rpgEnabled", translation = "config.skycubed.overlays.rpgEnabled")
-    @Comment("", translation = "config.skycubed.overlays.rpgEnabled.desc")
-    var rpgEnabled = true
+    @ConfigEntry(id = "rpg", translation = "config.skycubed.overlays.rpg")
+    @Comment("", translation = "config.skycubed.overlays.rpg.desc")
+    val rpg = RpgOverlay()
 
-    @ConfigEntry(id = "healthEnabled", translation = "config.skycubed.overlays.healthEnabled")
-    @Comment("", translation = "config.skycubed.overlays.healthEnabled.desc")
-    var healthDisplay = HealthDisplay.NORMAL
+    @ConfigEntry(id = "text", translation = "config.skycubed.overlays.text")
+    @Comment("", translation = "config.skycubed.overlays.text.desc")
+    val text = TextOverlays()
 
-    @ConfigEntry(id = "manaEnabled", translation = "config.skycubed.overlays.manaEnabled")
-    @Comment("", translation = "config.skycubed.overlays.manaEnabled.desc")
-    var manaEnabled = true
+    @ConfigEntry(id = "map", translation = "config.skycubed.overlays.map")
+    @Comment("", translation = "config.skycubed.overlays.map.desc")
+    val map = MapOverlay()
 
-    @ConfigEntry(id = "defenseEnabled", translation = "config.skycubed.overlays.defenseEnabled")
-    @Comment("", translation = "config.skycubed.overlays.defenseEnabled.desc")
-    var defenseEnabled = false
+    @ConfigEntry(id = "pickupLog", translation = "config.skycubed.overlays.pickuplog")
+    @Comment("", translation = "config.skycubed.overlays.pickuplog.desc")
+    val pickupLog = PickupLogOverlay()
 
     @ConfigEntry(id = "commissions", translation = "config.skycubed.overlays.commissions")
     @Comment("", translation = "config.skycubed.overlays.commissions.desc")
     val commissions = CommissionOverlay()
 
+    @ConfigEntry(id = "npc", translation = "config.skycubed.overlays.npc")
+    @Comment("", translation = "config.skycubed.overlays.npc.desc")
+    val npc = NpcOverlay()
+
     @Slider
-    @Range(min = 0.0, max = 100.0)
+    @Range(min = 0.0, max = 99.0)
     @ConfigEntry(id = "coldOverlay", translation = "config.skycubed.overlays.coldOverlay")
     @Comment("", translation = "config.skycubed.overlays.coldOverlay.desc")
     var coldOverlay = 80
-
-    @ConfigEntry(id = "npcDialogue", translation = "config.skycubed.overlays.npcDialogue")
-    @Comment("", translation = "config.skycubed.overlays.npcDialogue.desc")
-    val npcDialogue = NpcOverlay()
-
-    @ConfigEntry(id = "pickupLog", translation = "config.skycubed.overlays.pickupLog")
-    @Comment("", translation = "config.skycubed.overlays.pickupLog.desc")
-    val pickupLog = PickupLogOverlay()
-
-    @ConfigEntry(id = "map", translation = "config.skycubed.overlays.map")
-    @Comment("", translation = "config.skycubed.overlays.map.desc")
-    val map = MapOverlay()
 }
 
 enum class HealthDisplay : Translatable {

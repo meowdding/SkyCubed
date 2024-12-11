@@ -24,7 +24,7 @@ object DownloadedAsset {
         "files.teamresourceful.com",
         "raw.githubusercontent.com",
         "femboy-hooters.net",
-        "api.dediamondpro.dev" // TODO REMOVE THIS
+        "api.dediamondpro.dev"
     )
 
     private val CLIENT: HttpClient = HttpClient

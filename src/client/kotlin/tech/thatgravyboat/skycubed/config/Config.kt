@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.config
 
 import com.teamresourceful.resourcefulconfig.api.annotations.Config
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Select
 import tech.thatgravyboat.skyblockapi.api.events.info.ActionBarWidget
 import tech.thatgravyboat.skyblockapi.api.events.render.HudElement
@@ -16,6 +17,7 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
         ChatConfig::class,
     ]
 )
+@ConfigInfo.Provider(ConfigInfoProvider::class)
 object Config {
 
     @ConfigEntry(id = "hiddenActionBarWidgets")

@@ -2,10 +2,10 @@
     "ui.skycubed.overlay.edit": "§6Click to edit overlay.",
     "ui.skycubed.overlay.edit.options": "§6Right Click to configure",
 
-
-
-
     "__config__": "",
+
+    "config.info.skycubed.modrinth": "Modrinth",
+    "config.info.skycubed.github": "GitHub",
 
     "config.skycubed.notifications.friendJoinLeave": "Friend Join/Leave",
     "config.skycubed.notifications.friendJoinLeave.desc": "Checks the following messages:\n§aFriend > §7Your Friend §eleft.",
@@ -22,7 +22,7 @@
     "config.skycubed.notifications.skymall": "SkyMall",
     "config.skycubed.notifications.skymall.desc": "Checks the following messages:\n",
 
-    "ronfig.skycubed.notifications.monolith": "Monolith",
+    "config.skycubed.notifications.monolith": "Monolith",
     "config.skycubed.notifications.monolith.desc": "Checks the following messages:\n§5§lMONOLITH! §r§aYou found a mysterious §5Dark Monolith §aand were rewarded §650,000 Coins§a!",
 
     "config.skycubed.notifications.riftOrb": "Rift Orb",
@@ -37,27 +37,93 @@
     "config.skycubed.notifications.combo": "Combos",
     "config.skycubed.notifications.combo.desc": "Checks the following messages:\n§6§l+30 Kill Combo §r§8+§610 §7coins per kill",
 
+    "config.skycubed.notifications.fishing": "Fishing",
+    "config.skycubed.notifications.fishing.desc": "Checks the following messages:\n",
 
-    "config.skycubed.overlays.rpgEnabled": "Enable RPG Overlay",
-    "config.skycubed.overlays.rpgEnabled.desc": "Enables the RPG overlay",
+    "config.skycubed.notifications.gifts": "Gifts",
+    "config.skycubed.notifications.gifts.desc": "Checks the following messages:\n§2§lGIFT!§r§aYou found a §fWhite Gift§a! §7(§f1§7/§a20§7)",
 
-    "config.skycubed.overlays.healthEnabled": "Enable Health Text Overlay",
-    "config.skycubed.overlays.healthEnabled.desc": "Enables the health text overlay",
-    "config.skycubed.overlays.healthDisplay.disabled": "Disabled",
-    "config.skycubed.overlays.healthDisplay.normal": "Enabled",
-    "config.skycubed.overlays.healthDisplay.effective": "Effective HP",
+    "//Overlays": "",
 
-    "config.skycubed.overlays.manaEnabled": "Enable Mana Text Overlay",
-    "config.skycubed.overlays.manaEnabled.desc": "Enables the mana text overlay",
+    "config.skycubed.overlays.rpg": "Rpg Overlay",
+    "config.skycubed.overlays.rpg.desc": "Settings for the rpg overlay.",
 
-    "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
-    "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay",
+        "config.skycubed.overlays.rpg.enabled": "Enable RPG Overlay",
+        "config.skycubed.overlays.rpg.enabled.desc": "Enables the RPG overlay, showing mana, health, and xp bars.",
 
-    "config.skycubed.overlays.commissionsEnabled": "Enable Commissions Overlay",
-    "config.skycubed.overlays.commissionsEnabled.desc": "Enables the commissions overlay",
+
+    "config.skycubed.overlays.text": "Text Overlays",
+    "config.skycubed.overlays.text.desc": "Settings for the the various text overlays.",
+
+        "config.skycubed.overlays.healthEnabled": "Enable Health Text Overlay",
+        "config.skycubed.overlays.healthEnabled.desc": "Enables the health text overlay",
+        "config.skycubed.overlays.healthDisplay.disabled": "Disabled",
+        "config.skycubed.overlays.healthDisplay.normal": "Enabled",
+        "config.skycubed.overlays.healthDisplay.effective": "Effective HP",
+
+        "config.skycubed.overlays.manaEnabled": "Enable Mana Text Overlay",
+        "config.skycubed.overlays.manaEnabled.desc": "Enables the mana text overlay",
+
+        "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
+        "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay",
+
+
+    "config.skycubed.overlays.map": "SkyBlock Mini-Map Overlay",
+    "config.skycubed.overlays.map.desc": "Settings the minimap overlay.",
+
+        "config.skycubed.overlays.map.enabled": "Enable minimap Overlay",
+        "config.skycubed.overlays.map.enabled.desc": "Enables the minimap overlay, showing where you are on SkyBlock.",
+
+
+    "config.skycubed.overlays.pickuplog": "Item Pickup Log Overlay",
+    "config.skycubed.overlays.pickuplog.desc": "Settings the Item Pickup Log overlay.",
+
+        "config.skycubed.overlays.pickuplog.enabled": "Enable item pickup log Overlay",
+        "config.skycubed.overlays.pickuplog.enabled.desc": "Enables the pickup log overlay, showing which items that have been added or removed from your inventory.",
+
+        "config.skycubed.overlays.pickuplog.compact": "Compact pickup log lines",
+        "config.skycubed.overlays.pickuplog.compact.desc": "With this enabled it will compact them into the differences ie. if you had 3 of an item added and then 1 of the item removed itd only show as +2.",
+
+        "config.skycubed.overlays.pickuplog.time": "Log Time",
+        "config.skycubed.overlays.pickuplog.time.desc": "How long an individual entry should be shown for after it has happened, this is in seconds.",
+
+        "config.skycubed.overlays.pickuplog.appearance": "Appearance",
+        "config.skycubed.overlays.pickuplog.appearance.desc": "The order of how a display should be shown on screen. ie. if you want the items after the text or before.",
+
+
+    "config.skycubed.overlays.commissions": "Commissions Overlay",
+    "config.skycubed.overlays.commissions.desc": "Settings for the mining commissions overlay.",
+
+        "config.skycubed.overlays.commissions.enabled": "Enable Commissions Overlay",
+        "config.skycubed.overlays.commissions.enabled.desc": "Enables the commissions overlay, showing which commissions you have on mining islands.",
+
+        "config.skycubed.overlays.commissions.format": "Format Commission Displays",
+        "config.skycubed.overlays.commissions.format.desc": "If enabled the commissions will display as a number out of another number or a check mark instead of just a percentage.",
+
+        "config.skycubed.overlays.commissions.background": "Textured Background",
+        "config.skycubed.overlays.commissions.background.desc": "If enabled the overlay will have a textured background instead of a transparent black background.",
+
+
+    "config.skycubed.overlays.npc": "Npc Dialogue Overlay",
+    "config.skycubed.overlays.npc.desc": "Settings the npc dialogue overlay.",
+
+        "config.skycubed.overlays.npc.enabled": "Enable NPC dialogue Overlay",
+        "config.skycubed.overlays.npc.enabled.desc": "If enabled the NPC messages will no longer go to chat but will instead go to an overlay.",
+
+        "config.skycubed.overlays.npc.durationPerMessage": "Duration per Message",
+        "config.skycubed.overlays.npc.durationPerMessage.desc": "The time in seconds of how long a message should be displayed for.",
+
+        "config.skycubed.overlays.npc.durationForActionMessage": "Duration per Action Message",
+        "config.skycubed.overlays.npc.durationForActionMessage.desc": "The time in seconds of how long an action message should be displayed for. ie. a message that you have to choose an option from.",
+
+        "config.skycubed.overlays.npc.radius": "Background Radius",
+        "config.skycubed.overlays.npc.radius.desc": "The radius of how round the overlay should be.",
+
 
     "config.skycubed.overlays.coldOverlay": "Cold Overlay Start",
     "config.skycubed.overlays.coldOverlay.desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay",
+
+    "//Chat": "",
 
     "config.skycubed.chat.chatColors": "Chat Tab Colors",
     "config.skycubed.chat.chatColors.desc": "Changes the color of the line next to a chat message to a color based on the message type",

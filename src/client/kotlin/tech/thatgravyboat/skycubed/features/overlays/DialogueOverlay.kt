@@ -40,7 +40,7 @@ object DialogueOverlay : Overlay {
     override val position: Position = Position()
     override val bounds: Pair<Int, Int> = 0 to 0
     override val moveable: Boolean = false
-    override val enabled: Boolean get() = OverlaysConfig.npcDialogue.enabled
+    override val enabled: Boolean get() = OverlaysConfig.npc.enabled
 
     @Subscription
     @OnlyOnSkyBlock
@@ -61,7 +61,7 @@ object DialogueOverlay : Overlay {
     fun onTick(event: TickEvent) {
         if (!enabled) return
 
-        val config = OverlaysConfig.npcDialogue
+        val config = OverlaysConfig.npc
 
         if (System.currentTimeMillis() > nextCheck) {
             nextCheck = System.currentTimeMillis() + (config.durationPerMessage * 1000f).toLong()
@@ -75,7 +75,7 @@ object DialogueOverlay : Overlay {
                         Displays.empty(0, 5),
                         Displays.background(
                             BACKGROUND_COLOR,
-                            OverlaysConfig.npcDialogue.overlayRadius,
+                            OverlaysConfig.npc.overlayRadius.toFloat(),
                             Displays.padding(
                                 5,
                                 Displays.text(Text.join(
@@ -94,7 +94,7 @@ object DialogueOverlay : Overlay {
 
                 display = Displays.background(
                     BACKGROUND_COLOR,
-                    OverlaysConfig.npcDialogue.overlayRadius,
+                    OverlaysConfig.npc.overlayRadius.toFloat(),
                     Displays.padding(
                         5,
                         Displays.text(Text.multiline(name, message), McClient.window.guiScaledWidth / 2)

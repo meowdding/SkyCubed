@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.map.texture
 import com.mojang.blaze3d.platform.NativeImage
 import com.mojang.blaze3d.platform.TextureUtil
 import com.mojang.blaze3d.systems.RenderSystem
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.SimpleTexture
 import net.minecraft.resources.ResourceLocation
@@ -22,12 +21,6 @@ class DownloadedTexture(
 
     private var future: CompletableFuture<Void>? = null
     private var uploaded = false
-
-    constructor(url: String, location: ResourceLocation) : this(
-        FabricLoader.getInstance().configDir.resolve("skycubed").resolve("map").resolve(DownloadedAsset.getUrlHash(url)).toFile(),
-        url,
-        location
-    )
 
     private fun loadCallback(image: NativeImage) {
         Minecraft.getInstance().execute {

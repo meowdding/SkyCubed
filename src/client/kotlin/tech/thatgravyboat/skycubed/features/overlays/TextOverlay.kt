@@ -31,8 +31,8 @@ class TextOverlay(
     companion object {
 
         val overlays = listOf(
-            TextOverlay(Text.of("Health"), OverlayPositions.health, { OverlaysConfig.healthDisplay != HealthDisplay.DISABLED }, {
-                if (OverlaysConfig.healthDisplay == HealthDisplay.EFFECTIVE) {
+            TextOverlay(Text.of("Health"), OverlayPositions.health, { OverlaysConfig.text.healthDisplay != HealthDisplay.DISABLED }, {
+                if (OverlaysConfig.text.healthDisplay == HealthDisplay.EFFECTIVE) {
                     val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
                     val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
                     Text.of("❤ $health/$maxHealth").withStyle(ChatFormatting.GREEN)
@@ -40,10 +40,10 @@ class TextOverlay(
                     Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}").withStyle(ChatFormatting.RED)
                 }
             }),
-            TextOverlay(Text.of("Mana"), OverlayPositions.mana, { OverlaysConfig.manaEnabled }, {
+            TextOverlay(Text.of("Mana"), OverlayPositions.mana, { OverlaysConfig.text.manaEnabled }, {
                 Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}").withStyle(ChatFormatting.AQUA)
             }),
-            TextOverlay(Text.of("Defense"), OverlayPositions.defense, { OverlaysConfig.defenseEnabled }, {
+            TextOverlay(Text.of("Defense"), OverlayPositions.defense, { OverlaysConfig.text.defenseEnabled }, {
                 Text.of("❈ ${StatsAPI.defense}").withStyle(ChatFormatting.GREEN)
             })
         )
