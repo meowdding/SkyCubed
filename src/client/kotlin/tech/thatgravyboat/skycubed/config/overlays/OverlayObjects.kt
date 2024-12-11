@@ -6,8 +6,10 @@ import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
+import com.teamresourceful.resourcefulconfig.api.types.entries.Observable
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
+import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
 
 @ConfigObject
 class InfoHudOverlay : Translatable {
@@ -52,7 +54,11 @@ class TabListOverlay : Translatable {
 
     @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.tablist.enabled")
     @Comment("", translation = "config.skycubed.overlays.tablist.enabled.desc")
-    var enabled: Boolean = true
+    val enabled: Observable<Boolean> = Observable.of(true)
+
+    @ConfigEntry(id = "sorting", translation = "config.skycubed.overlays.tablist.sorting")
+    @Comment("", translation = "config.skycubed.overlays.tablist.sorting.desc")
+    var sorting: Observable<CompactTablistSorting> = Observable.of(CompactTablistSorting.NORMAL)
 
     override fun getTranslationKey(): String = "Edit Tab List Overlay"
 }
