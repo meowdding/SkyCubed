@@ -35,6 +35,7 @@ private typealias Segment = List<Line>
 private data class Line(
     val component: Component,
     val face: PlayerSkin? = null,
+    val playerName: String? = null,
     val skyblockLevel: Int? = null
 ) {
     val string: String get() = component.string
@@ -47,6 +48,17 @@ private data class Line(
     }
 }
 
+enum class CompactTablistSorting {
+    NORMAL,
+    SKYBLOCK_LEVEL,
+    ALPHABETICAL,
+    ;
+
+    private val formattedName = name.split("_").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercase) }
+
+    override fun toString() = formattedName
+}
+
 object CompactTablist {
 
     private var display: Display? = null
@@ -56,15 +68,31 @@ object CompactTablist {
     private var boosterCookieInFooter = false
     private var godPotionInFooter = false
 
+    init {
+        OverlaysConfig.tablist.enabled.addListener { old, new ->
+            if (new) {
+                createDisplay(lastTablist)
+            } else {
+                display = null
+            }
+        }
+        OverlaysConfig.tablist.sorting.addListener { old, new ->
+            createDisplay(lastTablist)
+        }
+    }
+
     @Subscription
     fun onTablistUpdate(event: TabListChangeEvent) {
-        createDisplay(event.new)
+        lastTablist = event.new
+        if (!isEnabled()) return
+        createDisplay(lastTablist)
     }
 
     @Subscription
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
         boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
         godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
+        if (!isEnabled()) return
 
         createDisplay(lastTablist)
     }
@@ -77,17 +105,34 @@ object CompactTablist {
             .map { it.flatMap { it + listOf(EMPTY) } }
             .map { list ->
                 list.map { line ->
+                    var playerName: String? = null
                     var skin: PlayerSkin? = null
                     var skyblockLevel: Int? = null
                     playerRegex.match(line.string, "level", "name") { (level, name) ->
+                        playerName = name
                         skin = McClient.players.firstOrNull { it.profile.name == name }?.skin
                         skyblockLevel = level.toInt()
                     }
-                    Line(line.component, skin, skyblockLevel)
+                    Line(line.component, skin, playerName, skyblockLevel)
+                }
+            }.map { lines ->
+                val linesWithLevels = lines.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
+                    when (OverlaysConfig.tablist.sorting.get()) {
+                        CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
+                        CompactTablistSorting.ALPHABETICAL -> o1.playerName?.lowercase()
+                            ?.compareTo(o2?.playerName?.lowercase() ?: "") ?: 0
+
+                        else -> 0
+                    }
+                }
+
+                val iterator = linesWithLevels.iterator()
+
+                lines.map { line ->
+                    if (line.skyblockLevel != null) iterator.next() else line
                 }
             }
 
-        // TODO: Sort by skyblock level
         val columns = segments.map { segment ->
             Displays.column(
                 *segment.map { (component, skin) ->
@@ -103,8 +148,6 @@ object CompactTablist {
         }
 
         val mainElement = columns.toRow(5)
-
-        lastTablist = tablist
 
         display = Displays.background(
             0xA0000000u, 2f,
@@ -163,8 +206,7 @@ object CompactTablist {
     }
 
     fun renderCompactTablist(graphics: GuiGraphics): Boolean {
-        if (!OverlaysConfig.tablist.enabled) return false
-        if (!LocationAPI.isOnSkyBlock) return false
+        if (!isEnabled()) return false
         val display = display ?: return false
 
         Displays.center(width = graphics.guiWidth(), display = display).render(graphics, 0, 3)
@@ -211,6 +253,7 @@ object CompactTablist {
         return result
     }
 
+    private fun isEnabled() = LocationAPI.isOnSkyBlock && OverlaysConfig.tablist.enabled.get()
 
     // todo make public in sbapi
     fun <T> List<T>.chunked(predicate: (T) -> Boolean): MutableList<MutableList<T>> {
