@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skycubed.config.ChatConfig
+import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 
 object ChatTabColors {
 

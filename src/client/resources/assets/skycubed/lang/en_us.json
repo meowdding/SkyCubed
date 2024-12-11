@@ -7,6 +7,20 @@
     "config.info.skycubed.modrinth": "Modrinth",
     "config.info.skycubed.github": "GitHub",
 
+    "config.skycubed.general.keybinds": "Keybinds",
+    "config.skycubed.general.keybinds.desc": "SkyCubed uses the vanilla keybinds/controls menu for its buttons, you can use the button to open it here.",
+    "config.skycubed.general.keybinds.text": "Open",
+
+    "config.skycubed.general.notifications": "Notifications",
+    "config.skycubed.general.notifications.desc": "SkyCubed has a notification system, you can click the button below to view past notifications, you can also find a notification button in the pause menu.",
+    "config.skycubed.general.notifications.text": "Open",
+
+    "config.skycubed.general.hiddenHudElements": "Hidden Hud Elements",
+    "config.skycubed.general.hiddenHudElements.desc": "Allows you to hide certain elements of the Vanilla hud on your screen.",
+
+    "config.skycubed.general.hiddenActionBarWidgets": "Hidden Action Bar Elements",
+    "config.skycubed.general.hiddenActionBarWidgets.desc": "Allows you to hide certain action bar elements that hypixel send but are replaced by mod displays.",
+
     "config.skycubed.notifications.friendJoinLeave": "Friend Join/Leave",
     "config.skycubed.notifications.friendJoinLeave.desc": "Checks the following messages:\n§aFriend > §7Your Friend §eleft.",
 
@@ -45,6 +59,12 @@
 
     "//Overlays": "",
 
+    "config.skycubed.overlays.info": "Info Hud Overlay",
+    "config.skycubed.overlays.info.desc": "Settings for the info hud overlay.",
+
+        "config.skycubed.overlays.info.enabled": "Enable Info Hud Overlay",
+        "config.skycubed.overlays.info.enabled.desc": "Enables the Info Hud overlay, show location, currency, time, and location specific info.",
+
     "config.skycubed.overlays.rpg": "Rpg Overlay",
     "config.skycubed.overlays.rpg.desc": "Settings for the rpg overlay.",
 
@@ -66,6 +86,12 @@
 
         "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
         "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay",
+
+    "config.skycubed.overlays.tablist": "Custom Tab List Overlay",
+    "config.skycubed.overlays.tablist.desc": "Settings for the custom tab list overlay.",
+
+        "config.skycubed.overlays.tablist.enabled": "Enable the custom tab list",
+        "config.skycubed.overlays.tablist.enabled.desc": "Enables the custom tab list, this tab list is a compact customizable version of the vanilla one for skyblock.",
 
 
     "config.skycubed.overlays.map": "SkyBlock Mini-Map Overlay",
@@ -133,6 +159,11 @@
 
     "config.skycubed.chat.messagesToClean": "Messages to Clean",
     "config.skycubed.chat.messagesToClean.desc": "A list of message you would like to be removed from chat, these are written as regex patterns",
+
+    "//Screens": "",
+
+    "config.skycubed.screens.equipment": "Show Equipment",
+    "config.skycubed.screens.equipment.desc": "Shows your equipment in your inventory next to your player like armor.",
 
     "__notifications__": "",
 

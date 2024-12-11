@@ -4,11 +4,16 @@ import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.Comment
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.SearchTerm
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 
 @Category("overlays", categories = [OverlayPositions::class])
 object OverlaysConfig {
+
+    @ConfigEntry(id = "info", translation = "config.skycubed.overlays.info")
+    @Comment("", translation = "config.skycubed.overlays.info.desc")
+    val info = InfoHudOverlay()
 
     @ConfigEntry(id = "rpg", translation = "config.skycubed.overlays.rpg")
     @Comment("", translation = "config.skycubed.overlays.rpg.desc")
@@ -17,6 +22,11 @@ object OverlaysConfig {
     @ConfigEntry(id = "text", translation = "config.skycubed.overlays.text")
     @Comment("", translation = "config.skycubed.overlays.text.desc")
     val text = TextOverlays()
+
+    @ConfigEntry(id = "tablist", translation = "config.skycubed.overlays.tablist")
+    @Comment("", translation = "config.skycubed.overlays.tablist.desc")
+    @SearchTerm("tablist")
+    val tablist = TabListOverlay()
 
     @ConfigEntry(id = "map", translation = "config.skycubed.overlays.map")
     @Comment("", translation = "config.skycubed.overlays.map.desc")

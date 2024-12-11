@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.config
+package tech.thatgravyboat.skycubed.config.chat
 
 import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.Comment

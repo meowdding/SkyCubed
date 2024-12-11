@@ -10,6 +10,16 @@ import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 
 @ConfigObject
+class InfoHudOverlay : Translatable {
+
+    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.info.enabled")
+    @Comment("", translation = "config.skycubed.overlays.info.enabled.desc")
+    var enabled: Boolean = true
+
+    override fun getTranslationKey(): String = "Edit Info Hud Overlay"
+}
+
+@ConfigObject
 class RpgOverlay : Translatable {
 
     @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.rpg.enabled")
@@ -36,6 +46,17 @@ class TextOverlays : Translatable {
 
     override fun getTranslationKey(): String = "Edit Text Overlays"
 }
+
+@ConfigObject
+class TabListOverlay : Translatable {
+
+    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.tablist.enabled")
+    @Comment("", translation = "config.skycubed.overlays.tablist.enabled.desc")
+    var enabled: Boolean = true
+
+    override fun getTranslationKey(): String = "Edit Tab List Overlay"
+}
+
 
 @ConfigObject
 class MapOverlay : Translatable {

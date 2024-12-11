@@ -15,7 +15,7 @@ import tech.thatgravyboat.skyblockapi.api.profile.equipment.EquipmentAPI
 import tech.thatgravyboat.skyblockapi.api.profile.equipment.EquipmentSlot
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.config.Config
+import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 
 object EquipmentManager {
 
@@ -28,8 +28,7 @@ object EquipmentManager {
     private var lastX: Int = 0
     private var lastY: Int = 0
 
-    private val isEnabled: Boolean
-        get() = Config.equipmentSlots && LocationAPI.isOnSkyBlock
+    private val isEnabled: Boolean get() = ScreensConfig.equipment && LocationAPI.isOnSkyBlock
 
     fun onRenderScreen(screen: InventoryScreen, graphics: GuiGraphics, left: Int, top: Int, mouseX: Int, mouseY: Int) {
         if (!this.isEnabled) return

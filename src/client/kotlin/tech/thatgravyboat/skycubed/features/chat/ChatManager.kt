@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.features.chat
 
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
-import tech.thatgravyboat.skycubed.config.ChatConfig
+import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 
 object ChatManager {
 

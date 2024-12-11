@@ -20,7 +20,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.displays.toRow
-import tech.thatgravyboat.skycubed.config.Config
+import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
@@ -163,7 +163,7 @@ object CompactTablist {
     }
 
     fun renderCompactTablist(graphics: GuiGraphics): Boolean {
-        if (!Config.compactTablist) return false
+        if (!OverlaysConfig.tablist.enabled) return false
         if (!LocationAPI.isOnSkyBlock) return false
         val display = display ?: return false
 
