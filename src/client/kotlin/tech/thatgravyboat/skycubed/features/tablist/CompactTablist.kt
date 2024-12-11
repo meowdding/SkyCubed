@@ -76,7 +76,7 @@ object CompactTablist {
                 display = null
             }
         }
-        OverlaysConfig.tablist.sorting.addListener { old, new ->
+        OverlaysConfig.tablist.sorting.addListener { _, _ ->
             createDisplay(lastTablist)
         }
     }
