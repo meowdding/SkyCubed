@@ -9,6 +9,7 @@ import earth.terrarium.olympus.client.layouts.Layouts
 import earth.terrarium.olympus.client.ui.Overlay
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.ui.UIIcons
+import earth.terrarium.olympus.client.ui.UITexts
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.StringWidget
 import net.minecraft.client.renderer.RenderType
@@ -53,7 +54,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
                     .withChild(Widgets.button {
                         it.withSize(24, 24)
                         it.withRenderer(WidgetRenderers.icon<Button?>(UIIcons.CROSS).withCentered(12, 12))
-                        it.withTooltip(UIConstants.BACK)
+                        it.withTooltip(UITexts.BACK)
                         it.withCallback { this.onClose() }
                     })
             )
