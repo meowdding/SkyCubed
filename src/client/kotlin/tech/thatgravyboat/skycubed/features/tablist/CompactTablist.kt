@@ -21,11 +21,13 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
+import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
+import tech.thatgravyboat.skycubed.utils.ContributorHandler
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import tech.thatgravyboat.skycubed.utils.until
 import kotlin.time.Duration
@@ -33,12 +35,12 @@ import kotlin.time.DurationUnit
 
 private typealias Segment = List<Line>
 
-// todo: maybe emblems?
 private data class Line(
     val component: Component,
-    val face: PlayerSkin? = null,
-    val playerName: String? = null,
-    val skyblockLevel: Int? = null
+    var face: PlayerSkin? = null,
+    var playerName: String? = null,
+    var skyblockLevel: Int? = null,
+    var contribEmblem: String? = null
 ) {
     val string: String get() = component.string
     val stripped: String get() = component.stripped
@@ -102,71 +104,73 @@ object CompactTablist {
 
     private fun createDisplay(tablist: List<List<Component>>) {
         val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }.toLines().addFooterSegment()
-            .map { if (titleRegex.match(it.stripped)) EMPTY else it }.chunked { it.string.isBlank() }
+            .map { if (titleRegex.match(it.stripped)) EMPTY else it }
+            .chunked { it.string.isBlank() }
             .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Line>::isEmpty)
             .splitListIntoParts(4)
             .map { it.flatMap { it + listOf(EMPTY) } }
-            .map { list ->
-                list.map { line ->
-                    var playerName: String? = null
-                    var skin: PlayerSkin? = null
-                    var skyblockLevel: Int? = null
-                    playerRegex.match(line.string, "level", "name") { (level, name) ->
-                        playerName = name
-                        skin = McClient.players.firstOrNull { it.profile.name == name }?.skin
-                        skyblockLevel = level.toInt()
-                    }
-                    Line(line.component, skin, playerName, skyblockLevel)
-                }
-            }.map { lines ->
-                val linesWithLevels = lines.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
-                    when (OverlaysConfig.tablist.sorting.get()) {
-                        CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
-                        CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
-                        CompactTablistSorting.FRIENDS -> {
-                            val o1Friend = o1?.playerName?.let(FriendsAPI::getFriend)
-                            val o2Friend = o2?.playerName?.let(FriendsAPI::getFriend)
-                            return@sortedWith when {
-                                o1Friend == null && o2Friend == null -> 0 // Not Friends
-                                o1Friend == null -> -1 // o2 is friends but o1 is not
-                                o2Friend == null -> 1 // o1 is friends but o2 is not
-                                o1Friend.bestFriend && o2Friend.bestFriend -> 0 // o1 and o2 are both best friends
-                                o1Friend.bestFriend -> 1 // o1 is best friends but o2 is not
-                                o2Friend.bestFriend -> -1 // o2 is best friends but o1 is not
-                                else -> 0 // o1 and o2 are both friends but not best friends
-                            }
-                        }
-                        else -> 0
-                    }
-                }
+            .map { list -> list.map { it.formatPlayer() } }
+            .map { it.sortPlayers() }
 
-                val iterator = linesWithLevels.iterator()
-
-                lines.map { line ->
-                    if (line.skyblockLevel != null) iterator.next() else line
-                }
-            }
-
-        val columns = segments.map { segment ->
-            Displays.column(
-                *segment.map { (component, skin) ->
-                    skin?.let {
-                        Displays.row(
-                            Displays.face({ it.texture }),
-                            Displays.text(component),
-                            spacing = 3
-                        )
-                    } ?: Displays.text(component)
-                }.toTypedArray()
-            )
-        }
-
-        val mainElement = columns.toRow(5)
+        val mainElement = segments.map { segment ->
+            segment.map { line ->
+                line.face?.let { face ->
+                    listOfNotNull(
+                        Displays.face({ face.texture }),
+                        Displays.text(line.component),
+                        line.contribEmblem?.let { Displays.text(it) },
+                    ).toRow(3)
+                } ?: Displays.text(line.component)
+            }.toColumn()
+        }.toRow(5)
 
         display = Displays.background(
             0xA0000000u, 2f,
             Displays.padding(5, mainElement),
         )
+    }
+
+    private fun Line.formatPlayer(): Line {
+        playerRegex.match(this.string, "level", "name") { (level, name) ->
+            val player = McClient.players.firstOrNull { it.profile.name == name }
+            val contributor = ContributorHandler.contributors.firstOrNull { it.uuid == player?.profile?.id }
+
+            playerName = name
+            face = player?.skin
+            skyblockLevel = level.toInt()
+            contributor?.symbol?.let { contribEmblem = it }
+        }
+        return this
+    }
+
+    private fun List<Line>.sortPlayers(): List<Line> {
+        val linesWithLevels = this.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
+            when (OverlaysConfig.tablist.sorting.get()) {
+                CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
+                CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
+                CompactTablistSorting.FRIENDS -> {
+                    val o1Friend = o1?.playerName?.let(FriendsAPI::getFriend)
+                    val o2Friend = o2?.playerName?.let(FriendsAPI::getFriend)
+                    return@sortedWith when {
+                        o1Friend == null && o2Friend == null -> 0 // Not Friends
+                        o1Friend == null -> -1 // o2 is friends but o1 is not
+                        o2Friend == null -> 1 // o1 is friends but o2 is not
+                        o1Friend.bestFriend && o2Friend.bestFriend -> 0 // o1 and o2 are both best friends
+                        o1Friend.bestFriend -> 1 // o1 is best friends but o2 is not
+                        o2Friend.bestFriend -> -1 // o2 is best friends but o1 is not
+                        else -> 0 // o1 and o2 are both friends but not best friends
+                    }
+                }
+
+                else -> 0
+            }
+        }
+
+        val iterator = linesWithLevels.iterator()
+
+        return this.map { line ->
+            if (line.skyblockLevel != null) iterator.next() else line
+        }
     }
 
     // TODO: Potion effects

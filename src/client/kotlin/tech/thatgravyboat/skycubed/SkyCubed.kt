@@ -18,6 +18,7 @@ import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 import tech.thatgravyboat.skycubed.features.overlays.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
+import tech.thatgravyboat.skycubed.utils.ContributorHandler
 
 object SkyCubed : ModInitializer {
 
@@ -36,6 +37,7 @@ object SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(CompactTablist)
         SkyBlockAPI.eventBus.register(PickUpLog)
         SkyBlockAPI.eventBus.register(MinimapOverlay)
+        SkyBlockAPI.eventBus.register(ContributorHandler)
     }
 
 
