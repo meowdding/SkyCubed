@@ -133,7 +133,7 @@ object CompactTablist {
     private fun Line.formatPlayer(): Line {
         playerRegex.match(this.string, "level", "name") { (level, name) ->
             val player = McClient.players.firstOrNull { it.profile.name == name }
-            val contributor = ContributorHandler.contributors.firstOrNull { it.uuid == player?.profile?.id }
+            val contributor = ContributorHandler.contributors[player?.profile?.id]
 
             playerName = name
             face = player?.skin

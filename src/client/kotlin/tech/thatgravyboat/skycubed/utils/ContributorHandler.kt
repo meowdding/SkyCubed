@@ -1,19 +1,18 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.google.gson.annotations.Expose
 import kotlinx.coroutines.runBlocking
 import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import java.util.*
 
 object ContributorHandler {
-    var contributors: List<ContributorJson> = emptyList()
+    var contributors: Map<UUID, ContributorData> = emptyMap()
         private set
 
     init {
         runBlocking {
             try {
                 val data = this.javaClass.getResourceAsStream("/repo/contributors.json")
-                    ?.readJson<List<ContributorJson>>() ?: return@runBlocking
+                    ?.readJson<Map<UUID, ContributorData>>() ?: return@runBlocking
                 contributors = data
             } catch (e: Exception) {
                 println(e)
@@ -22,7 +21,6 @@ object ContributorHandler {
     }
 }
 
-data class ContributorJson(
-    @Expose val uuid: UUID,
-    @Expose val symbol: String
+data class ContributorData(
+    val symbol: String,
 )
