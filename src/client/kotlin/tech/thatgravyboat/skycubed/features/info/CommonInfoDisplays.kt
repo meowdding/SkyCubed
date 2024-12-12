@@ -11,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.toRomanNumeral
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.features.info.icons.LocationIcons
+import tech.thatgravyboat.skycubed.features.info.icons.SlayerIcons
 import tech.thatgravyboat.skycubed.utils.capitalize
 import tech.thatgravyboat.skycubed.utils.toOrdinal
 
@@ -28,17 +29,11 @@ object CommonInfoDisplays {
         ))
     )
 
-    private val riftSlayerIcon = Displays.sprite(SkyCubed.id("info/icons/slayers/vampire"), 8, 8)
-    private val slayerIcon = Displays.supplied { when (SlayerAPI.type) {
-        SlayerType.RIFTSTALKER_BLOODFIEND -> riftSlayerIcon
-        else -> Displays.empty(8, 8)
-    } }
-
     val slayerDisplay = Displays.background(
         LEFT_LINE,
         Displays.padding(
             3, 1, 2, 2, Displays.row(
-                Displays.padding(1, slayerIcon),
+                Displays.padding(1, SlayerIcons),
                 Displays.empty(2, 10),
                 Displays.text(
                     {

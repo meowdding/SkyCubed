@@ -9,7 +9,9 @@ import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
+import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.extentions.chunked
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -52,6 +54,7 @@ enum class CompactTablistSorting {
     NORMAL,
     SKYBLOCK_LEVEL,
     ALPHABETICAL,
+    FRIENDS,
     ;
 
     private val formattedName = name.split("_").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercase) }
@@ -119,9 +122,20 @@ object CompactTablist {
                 val linesWithLevels = lines.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
                     when (OverlaysConfig.tablist.sorting.get()) {
                         CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
-                        CompactTablistSorting.ALPHABETICAL -> o1.playerName?.lowercase()
-                            ?.compareTo(o2?.playerName?.lowercase() ?: "") ?: 0
-
+                        CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
+                        CompactTablistSorting.FRIENDS -> {
+                            val o1Friend = o1?.playerName?.let(FriendsAPI::getFriend)
+                            val o2Friend = o2?.playerName?.let(FriendsAPI::getFriend)
+                            return@sortedWith when {
+                                o1Friend == null && o2Friend == null -> 0 // Not Friends
+                                o1Friend == null -> -1 // o2 is friends but o1 is not
+                                o2Friend == null -> 1 // o1 is friends but o2 is not
+                                o1Friend.bestFriend && o2Friend.bestFriend -> 0 // o1 and o2 are both best friends
+                                o1Friend.bestFriend -> 1 // o1 is best friends but o2 is not
+                                o2Friend.bestFriend -> -1 // o2 is best friends but o1 is not
+                                else -> 0 // o1 and o2 are both friends but not best friends
+                            }
+                        }
                         else -> 0
                     }
                 }
@@ -254,18 +268,4 @@ object CompactTablist {
     }
 
     private fun isEnabled() = LocationAPI.isOnSkyBlock && OverlaysConfig.tablist.enabled.get()
-
-    // todo make public in sbapi
-    fun <T> List<T>.chunked(predicate: (T) -> Boolean): MutableList<MutableList<T>> {
-        val chunks = mutableListOf<MutableList<T>>()
-        for (element in this) {
-            val currentChunk = chunks.lastOrNull()
-            if (currentChunk == null || predicate(element)) {
-                chunks.add(mutableListOf(element))
-            } else {
-                currentChunk.add(element)
-            }
-        }
-        return chunks
-    }
 }

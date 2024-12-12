@@ -58,7 +58,7 @@ class TabListOverlay : Translatable {
 
     @ConfigEntry(id = "sorting", translation = "config.skycubed.overlays.tablist.sorting")
     @Comment("", translation = "config.skycubed.overlays.tablist.sorting.desc")
-    var sorting: Observable<CompactTablistSorting> = Observable.of(CompactTablistSorting.NORMAL)
+    val sorting: Observable<CompactTablistSorting> = Observable.of(CompactTablistSorting.NORMAL)
 
     override fun getTranslationKey(): String = "Edit Tab List Overlay"
 }

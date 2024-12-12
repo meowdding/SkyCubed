@@ -2,9 +2,15 @@
     {
         "values": [ "f", "friend" ],
         "children": [
-            "help",
-            "removeall",
-            "notifications",
+            {
+                "name": "arg",
+                "greedy": false,
+                "suggestions": [
+                    "help",
+                    "removeall",
+                    "notifications"
+                ]
+            },
             {
                 "values": [ "accept", "add", "deny" ],
                 "children": [

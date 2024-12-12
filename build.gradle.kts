@@ -73,6 +73,9 @@ dependencies {
 
 tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from("src/client/resources")
+
     filesMatching(listOf("fabric.mod.json")) {
         expand("version" to project.version)
     }

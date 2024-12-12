@@ -59,7 +59,7 @@ object NotificationManager {
                         it.withSize(20, 20)
                         it.withPosition(McClient.window.guiScaledWidth - 25, 5)
                         it.withRenderer(WidgetRenderers.icon<Button>(UIIcons.BOX)
-                            .withColor(MinecraftColors.GRAY)
+                            .withColor(MinecraftColors.DARK_GRAY)
                             .withCentered(14, 14)
                             .withPaddingBottom(2)
                         )

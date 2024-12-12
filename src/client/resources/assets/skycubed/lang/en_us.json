@@ -92,9 +92,9 @@
 
         "config.skycubed.overlays.tablist.enabled": "Enable the custom tab list",
         "config.skycubed.overlays.tablist.enabled.desc": "Enables the custom tab list, this tab list is a compact customizable version of the vanilla one for skyblock.",
-    "config.skycubed.overlays.tablist.sorting": "Player Sorting",
-    "config.skycubed.overlays.tablist.sorting.desc": "The way the players should be sorted in the tab list.",
 
+        "config.skycubed.overlays.tablist.sorting": "Player Sorting",
+        "config.skycubed.overlays.tablist.sorting.desc": "The way the players should be sorted in the tab list.",
 
     "config.skycubed.overlays.map": "SkyBlock Mini-Map Overlay",
     "config.skycubed.overlays.map.desc": "Settings the minimap overlay.",

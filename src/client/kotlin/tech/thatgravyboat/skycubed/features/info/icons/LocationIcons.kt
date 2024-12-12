@@ -9,21 +9,27 @@ import tech.thatgravyboat.skycubed.api.displays.Displays
 
 object LocationIcons : Display {
 
-    private val hubIcon = Displays.sprite(SkyCubed.id("info/icons/locations/hub"), 8, 8)
-    private val riftIcon = Displays.sprite(SkyCubed.id("info/icons/locations/rift"), 8, 8)
-    private val dwarvesIcon = Displays.sprite(SkyCubed.id("info/icons/locations/dwarves"), 8, 8)
-    private val jerryIcon = Displays.sprite(SkyCubed.id("info/icons/locations/jerry"), 8, 8)
+    private val hub = Displays.sprite(SkyCubed.id("info/icons/locations/hub"), 8, 8)
+    private val rift = Displays.sprite(SkyCubed.id("info/icons/locations/rift"), 8, 8)
+    private val dwarves = Displays.sprite(SkyCubed.id("info/icons/locations/dwarves"), 8, 8)
+    private val jerry = Displays.sprite(SkyCubed.id("info/icons/locations/jerry"), 8, 8)
+    private val garden = Displays.sprite(SkyCubed.id("info/icons/locations/garden"), 8, 8)
+    private val kuudra = Displays.sprite(SkyCubed.id("info/icons/locations/kuudra"), 8, 8)
+    private val mines = Displays.sprite(SkyCubed.id("info/icons/locations/mines"), 8, 8)
 
     override fun getWidth(): Int = 8
     override fun getHeight(): Int = 8
 
     override fun render(graphics: GuiGraphics) {
         when (LocationAPI.island) {
-            SkyBlockIsland.HUB -> hubIcon
-            SkyBlockIsland.THE_RIFT -> riftIcon
-            SkyBlockIsland.DWARVEN_MINES -> dwarvesIcon
-            SkyBlockIsland.JERRYS_WORKSHOP -> jerryIcon
-            else -> Displays.empty(8, 8)
+            SkyBlockIsland.HUB -> hub
+            SkyBlockIsland.THE_RIFT -> rift
+            SkyBlockIsland.DWARVEN_MINES -> dwarves
+            SkyBlockIsland.GOLD_MINES, SkyBlockIsland.DEEP_CAVERNS -> mines
+            SkyBlockIsland.JERRYS_WORKSHOP -> jerry
+            SkyBlockIsland.GARDEN -> garden
+            SkyBlockIsland.KUUDRA -> kuudra
+            else -> hub
         }.render(graphics)
     }
 }
