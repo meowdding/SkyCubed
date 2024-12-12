@@ -72,7 +72,7 @@ dependencies {
 }
 
 tasks.processResources {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
     from("src/client/resources")
 
