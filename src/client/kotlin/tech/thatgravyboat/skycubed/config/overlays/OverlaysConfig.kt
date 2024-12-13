@@ -3,11 +3,13 @@ package tech.thatgravyboat.skycubed.config.overlays
 import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.Comment
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.SearchTerm
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 
+@ConfigInfo(titleTranslation = "config.skycubed.overlays.title")
 @Category("overlays", categories = [OverlayPositions::class])
 object OverlaysConfig {
 

@@ -1,7 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info
 
 import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
-import tech.thatgravyboat.skyblockapi.api.area.SlayerType
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -43,7 +42,7 @@ object CommonInfoDisplays {
                             SlayerAPI.text != null -> SlayerAPI.text
                             else ->  "§e${SlayerAPI.current}§7/§c${SlayerAPI.max}"
                         }
-                        return@text "§a${SlayerAPI.level.toRomanNumeral()} $suffix"
+                        return@text "§a${SlayerAPI.level.toRomanNumeral(true)} $suffix"
                     }
                 ),
             )

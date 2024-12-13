@@ -5,12 +5,11 @@ import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIIcons
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
-import net.fabricmc.fabric.api.client.screen.v1.Screens
 import net.minecraft.client.gui.screens.PauseScreen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
+import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenInitializedEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentMatchResult
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -51,28 +50,6 @@ object NotificationManager {
         NotificationType.single("gifts", "GIFT! .*") { NotificationsConfig.gifts },
     )
 
-    init {
-        ScreenEvents.AFTER_INIT.register { _, screen, _, _ ->
-            if (screen is PauseScreen) {
-                Screens.getButtons(screen).add(
-                    Widgets.button {
-                        it.withSize(20, 20)
-                        it.withPosition(McClient.window.guiScaledWidth - 25, 5)
-                        it.withRenderer(WidgetRenderers.icon<Button>(UIIcons.BOX)
-                            .withColor(MinecraftColors.DARK_GRAY)
-                            .withCentered(14, 14)
-                            .withPaddingBottom(2)
-                        )
-                        it.withTooltip(Text.of("Open SkyCubed Notifications"))
-                        it.withCallback {
-                            McClient.setScreen(NotificationsScreen())
-                        }
-                    }
-                )
-            }
-        }
-    }
-
     private fun joinLeaveMessage(match: ComponentMatchResult, title: String, color: Int): Component = Text.multiline(
         Text.of(title) { this.color = color },
         Text.join(
@@ -81,6 +58,27 @@ object NotificationManager {
             Text.of("${match["reason"]?.stripped}.") { this.color = if (match["reason"]?.stripped == "joined") TextColor.GREEN else TextColor.RED }
         )
     )
+
+    @Subscription
+    fun onScreenInit(event: ScreenInitializedEvent) {
+        if (event.screen is PauseScreen) {
+            event.widgets.add(
+                Widgets.button {
+                    it.withSize(20, 20)
+                    it.withPosition(McClient.window.guiScaledWidth - 25, 5)
+                    it.withRenderer(WidgetRenderers.icon<Button>(UIIcons.BOX)
+                        .withColor(MinecraftColors.DARK_GRAY)
+                        .withCentered(14, 14)
+                        .withPaddingBottom(2)
+                    )
+                    it.withTooltip(Text.of("Open SkyCubed Notifications"))
+                    it.withCallback {
+                        McClient.setScreen(NotificationsScreen())
+                    }
+                }
+            )
+        }
+    }
 
     @Subscription(priority = Subscription.HIGHEST, receiveCancelled = true)
     fun onChatMessage(event: ChatReceivedEvent) {

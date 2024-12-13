@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import tech.thatgravyboat.skycubed.features.CooldownManager;
+import tech.thatgravyboat.skycubed.features.items.CooldownManager;
 
 @Mixin(GuiGraphics.class)
 public class GuiGraphicsMixin {

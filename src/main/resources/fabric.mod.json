@@ -3,9 +3,16 @@
     "id": "skycubed",
     "version": "${version}",
     "name": "SkyCubed",
-    "description": "",
-    "authors": [ ],
-    "contact": { },
+    "description": "SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI in-game to be more inline into it looking like its own game.",
+    "contact": {
+        "homepage": "https://modrinth.com/project/skycubed",
+        "issues": "https://github.com/ThatGravyBoat/SkyCubed/issues",
+        "sources": "https://github.com/ThatGravyBoat/SkyCubed"
+    },
+    "authors": [
+        "ThatGravyBoat",
+        "j10a1n15"
+    ],
     "license": "MIT",
     "icon": "assets/skycubed/icon.png",
     "environment": "client",

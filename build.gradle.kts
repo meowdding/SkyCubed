@@ -31,6 +31,7 @@ loom {
     mods {
         register("skycubed") {
             sourceSet("client")
+            sourceSet("main")
         }
     }
 }
@@ -73,8 +74,6 @@ dependencies {
 
 tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
-    from("src/client/resources")
 
     filesMatching(listOf("fabric.mod.json")) {
         expand("version" to project.version)

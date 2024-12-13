@@ -12,7 +12,7 @@ class ConfigInfoProvider : ResourcefulConfigInfo {
     private val self = FabricLoader.getInstance().getModContainer("skycubed").get()
 
     override fun title(): TranslatableValue = TranslatableValue("SkyCubed (v${self.metadata.version.friendlyString})")
-    override fun description(): TranslatableValue = TranslatableValue(self.metadata.description)
+    override fun description(): TranslatableValue = TranslatableValue("SkyBlock UI overhaul mod.")
 
     override fun links(): Array<ResourcefulConfigLink> = arrayOf(
         ResourcefulConfigLink.create(

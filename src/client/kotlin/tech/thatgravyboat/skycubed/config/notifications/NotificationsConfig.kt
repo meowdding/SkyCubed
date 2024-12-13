@@ -1,10 +1,8 @@
 package tech.thatgravyboat.skycubed.config.notifications
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Category
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
+import com.teamresourceful.resourcefulconfig.api.annotations.*
 
+@ConfigInfo(titleTranslation = "config.skycubed.notifications.title")
 @Category("notifications")
 object NotificationsConfig {
 

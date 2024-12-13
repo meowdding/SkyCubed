@@ -3,7 +3,9 @@ package tech.thatgravyboat.skycubed.config.screens
 import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.Comment
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
 
+@ConfigInfo(titleTranslation = "config.skycubed.screens.title")
 @Category("screens")
 object ScreensConfig {
 

@@ -10,6 +10,7 @@ import tech.thatgravyboat.skyblockapi.api.events.render.HudElement
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skycubed.config.chat.ChatConfig
+import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
@@ -20,8 +21,9 @@ import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
     categories = [
         OverlaysConfig::class,
         ScreensConfig::class,
-        NotificationsConfig::class,
+        ItemsConfig::class,
         ChatConfig::class,
+        NotificationsConfig::class,
     ]
 )
 @ConfigInfo.Provider(ConfigInfoProvider::class)

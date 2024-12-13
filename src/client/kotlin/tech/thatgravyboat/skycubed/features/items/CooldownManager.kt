@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features
+package tech.thatgravyboat.skycubed.features.items
 
 import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.data.SkyBlockRarity
@@ -9,6 +9,7 @@ import tech.thatgravyboat.skyblockapi.api.events.level.BlockMinedEvent
 import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEvent
 import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 
 object CooldownManager {
 
@@ -62,6 +63,7 @@ object CooldownManager {
     }
 
     fun getCooldown(stack: ItemStack): Float? {
+        if (!ItemsConfig.cooldowns) return null
         val id = getCooldownId(stack) ?: return null
         val cooldown = cooldowns[id] ?: return null
         val start = cooldown.first
