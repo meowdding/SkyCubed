@@ -3,6 +3,8 @@ package tech.thatgravyboat.skycubed.features.tablist
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.FormattedText
+import net.minecraft.network.chat.Style
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
@@ -11,7 +13,9 @@ import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.extentions.chunked
+import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -72,9 +76,10 @@ object CompactTablist {
     private val playerRegex = "\\[(?<level>\\d+)] (?<name>[\\w_-]+).*".toRegex()
     private var boosterCookieInFooter = false
     private var godPotionInFooter = false
+    private var filteredFooter: List<FormattedText> = emptyList()
 
     init {
-        OverlaysConfig.tablist.enabled.addListener { old, new ->
+        OverlaysConfig.tablist.enabled.addListener { _, new ->
             if (new) {
                 createDisplay(lastTablist)
             } else {
@@ -97,6 +102,7 @@ object CompactTablist {
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
         boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
         godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
+        handleLeftOverFooterLines(event.newFooter)
         if (!isEnabled()) return
 
         createDisplay(lastTablist)
@@ -124,10 +130,33 @@ object CompactTablist {
             }.toColumn()
         }.toRow(5)
 
+        val footerElement =  filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
+
         display = Displays.background(
             0xA0000000u, 2f,
-            Displays.padding(5, mainElement),
+            Displays.padding(5, listOf(mainElement, footerElement).toColumn()),
         )
+    }
+
+    val footerLinesToRemove = listOf(
+        "Cookie Buff",
+        "God Potion",
+        "Spooky Festival",
+        "STORE.HYPIXEL.NET",
+        "Ranks, Boosters & MORE!",
+        "Not active! Obtain booster cookies",
+        "shop in the hub.",
+        "Use \"/effects\" to see the effects!",
+    )
+
+    private fun handleLeftOverFooterLines(footer: Component) {
+        val split = McFont.self.splitter.splitLines(footer, Int.MAX_VALUE, Style.EMPTY)
+
+        val filteredFooter = split.filter { it.string.stripColor().isNotBlank() }
+
+        this.filteredFooter = filteredFooter.filter { line ->
+            footerLinesToRemove.none { line.string.contains(it) }
+        }.takeIf { it.size > 2 } ?: emptyList()
     }
 
     private fun Line.formatPlayer(): Line {
@@ -192,15 +221,15 @@ object CompactTablist {
         ).toLine()
 
         if (boosterCookieInFooter) {
-            add(createDuration("Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
+            add(createDuration(" Cookie Buff", EffectsAPI.boosterCookieExpireTime.until(), TextColor.LIGHT_PURPLE))
         }
         if (godPotionInFooter) {
-            add(createDuration("God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
+            add(createDuration(" God Potion", EffectsAPI.godPotionDuration, TextColor.RED))
         }
         if (SpookyFestivalAPI.onGoing) {
             add(
                 Text.join(
-                    Text.of("Spooky Festival") {
+                    Text.of(" Spooky Festival") {
                         this.color = TextColor.GOLD
                         this.bold = true
                     },
