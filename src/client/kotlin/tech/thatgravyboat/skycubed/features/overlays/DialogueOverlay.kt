@@ -126,7 +126,7 @@ object DialogueOverlay : Overlay {
                     Displays.padding(
                         5,
                         listOfNotNull(
-                            entity?.let { Displays.entity(it, 0, 0, 60, 60, 30, 80f, 50f) },
+                            entity?.let { Displays.entity(it, 0, 0, 60, 60, 30, 80f, 40f) },
                             Displays.text(
                                 Text.multiline(name, message),
                                 McClient.window.guiScaledWidth / 3,
