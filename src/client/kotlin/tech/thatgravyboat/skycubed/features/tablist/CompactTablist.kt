@@ -147,6 +147,8 @@ object CompactTablist {
         "Not active! Obtain booster cookies",
         "shop in the hub.",
         "Use \"/effects\" to see the effects!",
+        "Use \"/effects\" to see them!",
+        "Active Effects",
     )
 
     private fun handleLeftOverFooterLines(footer: Component) {
@@ -156,7 +158,7 @@ object CompactTablist {
 
         this.filteredFooter = filteredFooter.filter { line ->
             footerLinesToRemove.none { line.string.contains(it) }
-        }.takeIf { it.size > 1 } ?: emptyList()
+        }
     }
 
     private fun Line.formatPlayer(): Line {
