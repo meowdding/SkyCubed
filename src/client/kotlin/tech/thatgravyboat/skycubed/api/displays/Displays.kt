@@ -6,7 +6,9 @@ import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.components.Renderable
 import net.minecraft.client.gui.layouts.LayoutElement
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.locale.Language
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.FormattedCharSequence
@@ -181,6 +183,12 @@ object Displays {
             }
         }
     }
+
+    fun text(
+        text: FormattedText,
+        color: () -> UInt = { 0xFFFFFFFFu },
+        shadow: Boolean = true,
+    ) = text(Language.getInstance().getVisualOrder(text), color, shadow)
 
     fun row(vararg displays: Display, spacing: Int = 0): Display {
         return object : Display {
