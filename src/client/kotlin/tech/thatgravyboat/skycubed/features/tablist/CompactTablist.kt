@@ -156,7 +156,7 @@ object CompactTablist {
 
         this.filteredFooter = filteredFooter.filter { line ->
             footerLinesToRemove.none { line.string.contains(it) }
-        }.takeIf { it.size > 2 } ?: emptyList()
+        }.takeIf { it.size > 1 } ?: emptyList()
     }
 
     private fun Line.formatPlayer(): Line {
