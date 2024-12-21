@@ -25,7 +25,6 @@ import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.mixins.LevelInvoker
 
 private const val BACKGROUND_COLOR = 0xA0000000u
 
@@ -114,10 +113,9 @@ object DialogueOverlay : Overlay {
                 }
             } else {
                 val (name, message) = queue.removeFirstOrNull() ?: return
-                val armorStands = (McLevel.self as LevelInvoker).callGetEntities().all.filterIsInstance<ArmorStand>()
                 val entity = lastClickedEntities.keys.find { npc ->
-                    val armorStandsAtNpc = armorStands.filter { npc.x == it.x && npc.z == it.z }
-                    armorStandsAtNpc.any { it.customName?.stripped == name.stripped }
+                    McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
+                        .any { it.customName?.stripped == name.stripped }
                 } ?: lastClickedEntities.keys.firstOrNull()
 
                 display = Displays.background(
