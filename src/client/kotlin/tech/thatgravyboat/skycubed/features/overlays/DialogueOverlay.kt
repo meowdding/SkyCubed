@@ -25,6 +25,7 @@ import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
+import kotlin.math.max
 
 private const val BACKGROUND_COLOR = 0xA0000000u
 
@@ -47,9 +48,11 @@ object DialogueOverlay : Overlay {
     override val position: Position = Position()
     override val bounds: Pair<Int, Int> = 0 to 0
     override val moveable: Boolean = false
-    override val enabled: Boolean get() = OverlaysConfig.npc.enabled
+    override val enabled: Boolean get() = config.enabled
 
-    private val displayDuration get() = (OverlaysConfig.npc.durationPerMessage * 1000f).toLong()
+    private val config get() = OverlaysConfig.npc
+    private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
+    private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 
     private val yesNoDisplay by lazy {
         Displays.padding(
@@ -92,21 +95,19 @@ object DialogueOverlay : Overlay {
     fun onTick(event: TickEvent) {
         if (!enabled) return
 
-        val config = OverlaysConfig.npc
-
         if (System.currentTimeMillis() > nextCheck) {
             nextCheck = System.currentTimeMillis() + displayDuration
 
             if (queue.isEmpty()) {
                 if (yesNo != null && !displayedYesNo) {
                     displayedYesNo = true
-                    nextCheck = System.currentTimeMillis() + (config.durationForActionMessage * 1000f).toLong()
+                    nextCheck = System.currentTimeMillis() + displayActionDuration
                     display = Displays.column(
                         display,
                         Displays.empty(0, 5),
                         Displays.background(
                             BACKGROUND_COLOR,
-                            OverlaysConfig.npc.overlayRadius.toFloat(),
+                            config.overlayRadius.toFloat(),
                             yesNoDisplay,
                         )
                     )
@@ -124,11 +125,11 @@ object DialogueOverlay : Overlay {
 
                 display = Displays.background(
                     BACKGROUND_COLOR,
-                    OverlaysConfig.npc.overlayRadius.toFloat(),
+                    config.overlayRadius.toFloat(),
                     Displays.padding(
                         5,
                         listOfNotNull(
-                            entity?.let { Displays.entity(it, 0, 0, 60, 60, 30, 80f, 40f) },
+                            entity?.let { Displays.entity(it, 60, 60, 30, 80f, 40f) },
                             Displays.text(
                                 Text.multiline(name, message),
                                 McClient.window.guiScaledWidth / 3,
@@ -149,8 +150,9 @@ object DialogueOverlay : Overlay {
     }
 
     private fun reset() {
-        lastClickedEntities =
-            lastClickedEntities.filterValues { it + displayDuration + 5000 > System.currentTimeMillis() }.toMutableMap()
+        lastClickedEntities = lastClickedEntities.filterValues {
+            it + max(displayDuration, displayActionDuration) + 5000 > System.currentTimeMillis()
+        }.toMutableMap()
         yesNo = null
         displayedYesNo = false
         display = Displays.empty()

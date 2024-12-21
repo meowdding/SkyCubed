@@ -259,80 +259,63 @@ object Displays {
 
     fun entity(
         entity: LivingEntity,
-        startX: Int,
-        startY: Int,
-        endX: Int,
-        endY: Int,
+        with: Int,
+        height: Int,
         scale: Int,
         mouseX: Float = -1f,
         mouseY: Float = -1f,
         spinning: Boolean = false,
     ): Display {
         return object : Display {
-            override fun getWidth() = endX - startX
-            override fun getHeight() = endY - startY
+            override fun getWidth() = with
+            override fun getHeight() = height
             override fun render(graphics: GuiGraphics) {
-                val centerX = (endX - startX) / 2f
-                val centerY = (endY - startY) / 2f
+                val centerX = with / 2f
+                val centerY = height / 2f
                 val eyesX = mouseX.takeIf { it != -1f } ?: centerX
                 val eyesY = mouseY.takeIf { it != -1f } ?: centerY
 
-                renderEntityOnScreenFollowsMouse(graphics, entity, centerX, centerY, scale, eyesX, eyesY, spinning)
+                val rotationX = atan((centerX - eyesX) / 40.0).toFloat()
+                val rotationY = atan((centerY - eyesY) / 40.0).toFloat()
+                val baseRotation = Quaternionf().rotateZ(Math.PI.toFloat())
+                val tiltRotation = Quaternionf().rotateX(rotationY * 20.0f * (Math.PI.toFloat() / 180f))
+
+                if (spinning) {
+                    val currentTime = System.currentTimeMillis() % 3600
+                    val spinAngle = (currentTime / 10.0) % 360.0
+                    baseRotation.mul(Quaternionf().rotateY(Math.toRadians(spinAngle).toFloat()))
+                }
+
+                baseRotation.mul(tiltRotation)
+                val originalBodyRotation = entity.yBodyRot
+                val originalYRotation = entity.yRot
+                val originalXRotation = entity.xRot
+                val originalHeadRotationPrev = entity.yHeadRotO
+                val originalHeadRotation = entity.yHeadRot
+                entity.yBodyRot = 180.0f + rotationX * 20.0f
+                entity.yRot = 180.0f + rotationX * 40.0f
+                entity.xRot = -rotationY * 20.0f
+                entity.yHeadRot = entity.yRot
+                entity.yHeadRotO = entity.yRot
+                val entityScale = entity.scale
+                val positionOffset = Vector3f(0.0f, entity.bbHeight / 2.0f * entityScale, 0.0f)
+                val scaledSize = scale / entityScale
+                renderEntityInInventory(
+                    graphics,
+                    centerX,
+                    centerY,
+                    scaledSize,
+                    positionOffset,
+                    baseRotation,
+                    tiltRotation,
+                    entity
+                )
+                entity.yBodyRot = originalBodyRotation
+                entity.yRot = originalYRotation
+                entity.xRot = originalXRotation
+                entity.yHeadRotO = originalHeadRotationPrev
+                entity.yHeadRot = originalHeadRotation
             }
         }
     }
-
-    fun renderEntityOnScreenFollowsMouse(
-        guiGraphics: GuiGraphics,
-        entity: LivingEntity,
-        centerX: Float,
-        centerY: Float,
-        scale: Int,
-        mouseX: Float = centerX,
-        mouseY: Float = centerY,
-        spinning: Boolean = false
-    ) {
-        val rotationX = atan((centerX - mouseX) / 40.0).toFloat()
-        val rotationY = atan((centerY - mouseY) / 40.0).toFloat()
-        val baseRotation = Quaternionf().rotateZ(Math.PI.toFloat())
-        val tiltRotation = Quaternionf().rotateX(rotationY * 20.0f * (Math.PI.toFloat() / 180f))
-
-        if (spinning) {
-            val currentTime = System.currentTimeMillis() % 3600
-            val spinAngle = (currentTime / 10.0) % 360.0
-            baseRotation.mul(Quaternionf().rotateY(Math.toRadians(spinAngle).toFloat()))
-        }
-
-        baseRotation.mul(tiltRotation)
-        val originalBodyRotation = entity.yBodyRot
-        val originalYRotation = entity.yRot
-        val originalXRotation = entity.xRot
-        val originalHeadRotationPrev = entity.yHeadRotO
-        val originalHeadRotation = entity.yHeadRot
-        entity.yBodyRot = 180.0f + rotationX * 20.0f
-        entity.yRot = 180.0f + rotationX * 40.0f
-        entity.xRot = -rotationY * 20.0f
-        entity.yHeadRot = entity.yRot
-        entity.yHeadRotO = entity.yRot
-        val entityScale = entity.scale
-        val positionOffset = Vector3f(0.0f, entity.bbHeight / 2.0f * entityScale, 0.0f)
-        val scaledSize = scale / entityScale
-        renderEntityInInventory(
-            guiGraphics,
-            centerX,
-            centerY,
-            scaledSize,
-            positionOffset,
-            baseRotation,
-            tiltRotation,
-            entity
-        )
-        entity.yBodyRot = originalBodyRotation
-        entity.yRot = originalYRotation
-        entity.xRot = originalXRotation
-        entity.yHeadRotO = originalHeadRotationPrev
-        entity.yHeadRot = originalHeadRotation
-    }
-
-
 }
