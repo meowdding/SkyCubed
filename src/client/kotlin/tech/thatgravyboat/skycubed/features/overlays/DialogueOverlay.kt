@@ -49,6 +49,8 @@ object DialogueOverlay : Overlay {
     override val moveable: Boolean = false
     override val enabled: Boolean get() = OverlaysConfig.npc.enabled
 
+    private val displayDuration get() = (OverlaysConfig.npc.durationPerMessage * 1000f).toLong()
+
     private val yesNoDisplay by lazy {
         Displays.padding(
             5,
@@ -93,7 +95,7 @@ object DialogueOverlay : Overlay {
         val config = OverlaysConfig.npc
 
         if (System.currentTimeMillis() > nextCheck) {
-            nextCheck = System.currentTimeMillis() + (config.durationPerMessage * 1000f).toLong()
+            nextCheck = System.currentTimeMillis() + displayDuration
 
             if (queue.isEmpty()) {
                 if (yesNo != null && !displayedYesNo) {
@@ -117,6 +119,8 @@ object DialogueOverlay : Overlay {
                     McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
                         .any { it.customName?.stripped == name.stripped }
                 } ?: lastClickedEntities.keys.firstOrNull()
+
+                entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
 
                 display = Displays.background(
                     BACKGROUND_COLOR,
@@ -146,7 +150,7 @@ object DialogueOverlay : Overlay {
 
     private fun reset() {
         lastClickedEntities =
-            lastClickedEntities.filterValues { it > System.currentTimeMillis() - 20000 }.toMutableMap()
+            lastClickedEntities.filterValues { it + displayDuration + 5000 > System.currentTimeMillis() }.toMutableMap()
         yesNo = null
         displayedYesNo = false
         display = Displays.empty()
