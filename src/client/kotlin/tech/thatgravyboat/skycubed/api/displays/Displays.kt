@@ -265,7 +265,8 @@ object Displays {
         endY: Int,
         scale: Int,
         mouseX: Float = -1f,
-        mouseY: Float = -1f
+        mouseY: Float = -1f,
+        spinning: Boolean = false,
     ): Display {
         return object : Display {
             override fun getWidth() = endX - startX
@@ -276,7 +277,7 @@ object Displays {
                 val eyesX = mouseX.takeIf { it != -1f } ?: centerX
                 val eyesY = mouseY.takeIf { it != -1f } ?: centerY
 
-                renderEntityOnScreenFollowsMouse(graphics, entity, centerX, centerY, scale, eyesX, eyesY)
+                renderEntityOnScreenFollowsMouse(graphics, entity, centerX, centerY, scale, eyesX, eyesY, spinning)
             }
         }
     }
@@ -289,11 +290,19 @@ object Displays {
         scale: Int,
         mouseX: Float = centerX,
         mouseY: Float = centerY,
+        spinning: Boolean = false
     ) {
         val rotationX = atan((centerX - mouseX) / 40.0).toFloat()
         val rotationY = atan((centerY - mouseY) / 40.0).toFloat()
         val baseRotation = Quaternionf().rotateZ(Math.PI.toFloat())
         val tiltRotation = Quaternionf().rotateX(rotationY * 20.0f * (Math.PI.toFloat() / 180f))
+
+        if (spinning) {
+            val currentTime = System.currentTimeMillis() % 3600
+            val spinAngle = (currentTime / 10.0) % 360.0
+            baseRotation.mul(Quaternionf().rotateY(Math.toRadians(spinAngle).toFloat()))
+        }
+
         baseRotation.mul(tiltRotation)
         val originalBodyRotation = entity.yBodyRot
         val originalYRotation = entity.yRot
@@ -324,5 +333,6 @@ object Displays {
         entity.yHeadRotO = originalHeadRotationPrev
         entity.yHeadRot = originalHeadRotation
     }
+
 
 }
