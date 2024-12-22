@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI;
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions;
@@ -47,22 +48,22 @@ public class GuiMixin {
         }
     }
 
-    @WrapOperation(method = "renderItemHotbar", at = @At("HEAD"))
-    private void wrapRenderItemHotbar(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci, Operation<Void> operation) {
-        if (OverlaysConfig.INSTANCE.getMovableHotbar()) {
-            guiGraphics.pose().pushPose();
+    @Inject(method = "renderItemHotbar", at = @At("HEAD"))
+    private void startMainHudTranslate(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (!OverlaysConfig.INSTANCE.getMovableHotbar()) return;
+        guiGraphics.pose().pushPose();
 
-            // Reset the Hotbar to the top left
-            guiGraphics.pose().translate(-((float) guiGraphics.guiWidth() / 2 - 91), -(guiGraphics.guiHeight() - 22), 0);
+        // Reset the Hotbar to top left
+        guiGraphics.pose().translate(-((float) guiGraphics.guiWidth() / 2 - 91), -(guiGraphics.guiHeight() - 22), 0);
 
-            Position position = OverlayPositions.INSTANCE.getHotbar();
-            guiGraphics.pose().translate(position.component1(), position.component2(), 0);
-        }
-
-        operation.call(guiGraphics, deltaTracker, ci);
-
-        if (OverlaysConfig.INSTANCE.getMovableHotbar()) {
-            guiGraphics.pose().popPose();
-        }
+        Position position = OverlayPositions.INSTANCE.getHotbar();
+        guiGraphics.pose().translate(position.component1(), position.component2(), 0);
     }
+
+    @Inject(method = "renderItemHotbar", at = @At("TAIL"))
+    private void endMainHudTranslate(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (!OverlaysConfig.INSTANCE.getMovableHotbar()) return;
+        guiGraphics.pose().popPose();
+    }
+
 }
