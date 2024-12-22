@@ -69,7 +69,7 @@ object DialogueOverlay : Overlay {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onChatReceived(event: ChatReceivedEvent) {
+    fun onChatReceived(event: ChatReceivedEvent.Pre) {
         if (!enabled) return
 
         regex.match(event.component, "name", "message") { (name, message) ->

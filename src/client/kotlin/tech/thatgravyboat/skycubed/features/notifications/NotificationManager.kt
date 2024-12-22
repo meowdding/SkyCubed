@@ -81,7 +81,7 @@ object NotificationManager {
     }
 
     @Subscription(priority = Subscription.HIGHEST, receiveCancelled = true)
-    fun onChatMessage(event: ChatReceivedEvent) {
+    fun onChatMessage(event: ChatReceivedEvent.Pre) {
         for (notification in notifications) {
             val config = notification.config()
             if (!config.shouldCheck()) continue
