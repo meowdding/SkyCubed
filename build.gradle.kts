@@ -34,6 +34,17 @@ loom {
             sourceSet("main")
         }
     }
+
+    afterEvaluate {
+        val mixinPath = configurations.compileClasspath.get()
+            .files { it.group == "net.fabricmc" && it.name == "sponge-mixin" }
+            .first()
+        runConfigs {
+            "client" {
+                vmArgs.add("-javaagent:$mixinPath")
+            }
+        }
+    }
 }
 
 repositories {

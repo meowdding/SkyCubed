@@ -6,12 +6,12 @@ import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skycubed.api.overlays.Overlays
 import tech.thatgravyboat.skycubed.config.ConfigManager
-import tech.thatgravyboat.skycubed.features.items.CooldownManager
 import tech.thatgravyboat.skycubed.features.ElementHider
-import tech.thatgravyboat.skycubed.features.items.ItemBarManager
 import tech.thatgravyboat.skycubed.features.chat.ChatManager
 import tech.thatgravyboat.skycubed.features.commands.hypixel.HypixelCommands
 import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
+import tech.thatgravyboat.skycubed.features.items.CooldownManager
+import tech.thatgravyboat.skycubed.features.items.ItemBarManager
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
