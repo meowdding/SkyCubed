@@ -29,4 +29,8 @@ object OverlayPositions {
     @Hidden @ConfigEntry(id = "map")
     val map = Position(x = -90, y = 0)
 
+    @Hidden
+    @ConfigEntry(id = "hotbar")
+    val hotbar = Position(x = 100, y = 100)
+
 }

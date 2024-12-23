@@ -4,9 +4,7 @@ import com.teamresourceful.resourcefulconfig.api.annotations.Category
 import com.teamresourceful.resourcefulconfig.api.annotations.Comment
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.SearchTerm
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.*
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 
 @ConfigInfo(titleTranslation = "config.skycubed.overlays.title")
@@ -51,6 +49,10 @@ object OverlaysConfig {
     @ConfigEntry(id = "coldOverlay", translation = "config.skycubed.overlays.coldOverlay")
     @Comment("", translation = "config.skycubed.overlays.coldOverlay.desc")
     var coldOverlay = 80
+
+    @ConfigEntry(id = "movableHotbar", translation = "config.skycubed.overlays.movableHotbar")
+    @Comment("", translation = "config.skycubed.overlays.movableHotbar.desc")
+    var movableHotbar = false
 }
 
 enum class HealthDisplay : Translatable {

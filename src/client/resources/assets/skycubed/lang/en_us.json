@@ -117,6 +117,9 @@
     "config.skycubed.overlays.coldOverlay": "Cold Overlay Start",
     "config.skycubed.overlays.coldOverlay.desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay",
 
+    "config.skycubed.overlays.movableHotbar": "Movable Hotbar",
+    "config.skycubed.overlays.movableHotbar.desc": "Allows you to move the hotbar around the screen.",
+
     "//Chat": "",
 
     "config.skycubed.chat.title": "Chat",
