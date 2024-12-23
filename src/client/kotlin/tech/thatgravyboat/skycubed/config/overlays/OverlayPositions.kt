@@ -31,6 +31,6 @@ object OverlayPositions {
 
     @Hidden
     @ConfigEntry(id = "hotbar")
-    val hotbar = Position(x = 100, y = 100)
+    val hotbar = Position(x = 0, y = -22)
 
 }

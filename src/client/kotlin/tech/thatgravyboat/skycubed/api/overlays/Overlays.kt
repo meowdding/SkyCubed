@@ -17,6 +17,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.features.info.InfoOverlay
 import tech.thatgravyboat.skycubed.features.overlays.*
 import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
+import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.utils.pushPop
 

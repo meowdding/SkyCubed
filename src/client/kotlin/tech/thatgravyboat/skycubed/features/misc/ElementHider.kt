@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features
+package tech.thatgravyboat.skycubed.features.misc
 
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock

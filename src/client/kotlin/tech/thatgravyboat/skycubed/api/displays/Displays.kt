@@ -17,7 +17,6 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import org.joml.Quaternionf
 import org.joml.Vector3f
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
@@ -155,7 +154,7 @@ object Displays {
         color: () -> UInt = { 0xFFFFFFFFu },
         shadow: Boolean = true
     ): Display {
-        val font = McClient.self.font
+        val font = McFont.self
         val lines = if (maxWidth == NO_SPLIT) listOf(component.visualOrderText) else font.split(component, maxWidth)
         val width = lines.maxOfOrNull { font.width(it) } ?: 0
         val height = lines.size * font.lineHeight

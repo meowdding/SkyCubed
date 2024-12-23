@@ -74,7 +74,7 @@ object PickUpLog : Overlay {
     }
 
     @Subscription
-    @TimePassed("10t")
+    @TimePassed("1s")
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
         val flattenedInventory = McPlayer.inventory

@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.equipment.EquipmentAPI
 import tech.thatgravyboat.skyblockapi.api.profile.equipment.EquipmentSlot
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 
@@ -66,7 +67,7 @@ object EquipmentManager {
             val slotY = y + index * 18
             if (mouseX.toInt() in x + 1..x + 16 && mouseY.toInt() in slotY + 1..slotY + 16) {
                 val stack = EquipmentAPI.equipment[slot]?.takeIf { !it.isEmpty } ?: return
-                event.graphics.renderTooltip(McClient.self.font, stack, mouseX.toInt(), mouseY.toInt())
+                event.graphics.renderTooltip(McFont.self, stack, mouseX.toInt(), mouseY.toInt())
             }
         }
     }

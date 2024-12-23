@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.items
 
+import net.minecraft.util.Mth
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
-import tech.thatgravyboat.skyblockapi.api.datatype.defaults.LoreDataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderItemBarEvent
@@ -10,7 +10,7 @@ import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 
 object ItemBarManager {
 
-    // TODO pickobolus and armadillo egg
+    // TODO armadillo egg
 
     @Subscription
     fun onRenderItemBar(event: RenderItemBarEvent) {
@@ -19,9 +19,13 @@ object ItemBarManager {
             event.color = TextColor.DARK_GREEN
             event.percent = it.first.toFloat() / it.second.toFloat()
         }
-        event.item.getData(LoreDataTypes.SNOWBALLS)?.let {
+        event.item.getData(DataTypes.SNOWBALLS)?.let {
             event.color = TextColor.WHITE
             event.percent = it.first.toFloat() / it.second.toFloat()
+        }
+        event.item.getData(DataTypes.PICKONIMBUS_DURABILITY)?.let {
+            event.percent = it / 2000f
+            event.color = Mth.hsvToRgb(event.percent / 3.0F, 1.0F, 1.0F)
         }
     }
 

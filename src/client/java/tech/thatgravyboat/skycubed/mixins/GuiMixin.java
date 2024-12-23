@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,6 +15,7 @@ import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI;
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions;
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig;
 import tech.thatgravyboat.skycubed.config.overlays.Position;
+import tech.thatgravyboat.skycubed.features.overlays.MovableHotbar;
 
 @Mixin(Gui.class)
 public class GuiMixin {
@@ -49,22 +51,26 @@ public class GuiMixin {
 
     @WrapMethod(method = "renderItemHotbar")
     private void wrapRenderItemHotbar(GuiGraphics guiGraphics, DeltaTracker deltaTracker, Operation<Void> original) {
-        if (!OverlaysConfig.INSTANCE.getMovableHotbar()) {
+        if (!MovableHotbar.INSTANCE.getEnabled()) {
             original.call(guiGraphics, deltaTracker);
             return;
         }
 
-        guiGraphics.pose().pushPose();
-
-        // Reset the Hotbar to top left
-        guiGraphics.pose().translate(-((float) guiGraphics.guiWidth() / 2 - 91), -(guiGraphics.guiHeight() - 22), 0);
+        PoseStack stack = guiGraphics.pose();
+        stack.pushPose();
 
         Position position = OverlayPositions.INSTANCE.getHotbar();
-        guiGraphics.pose().translate(position.component1(), position.component2(), 0);
+        float scale = position.getScale();
+
+        stack.translate(position.component1(), position.component2(), 0);
+        stack.scale(scale, scale, 1f);
+
+        // Reset the Hotbar to top left
+        stack.translate(-((float) guiGraphics.guiWidth() / 2 - 91), -(guiGraphics.guiHeight() - 22), 0);
 
         original.call(guiGraphics, deltaTracker);
 
-        guiGraphics.pose().popPose();
+        stack.popPose();
     }
 
 }

@@ -15,7 +15,7 @@ import net.minecraft.client.gui.components.StringWidget
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
 import org.apache.commons.lang3.function.Consumers
-import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skycubed.utils.pushPop
 
@@ -49,7 +49,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
                     .withChild(StringWidget(
                         WIDTH - 24, 24,
                         Component.translatable("skycubed.notifications"),
-                        McClient.self.font
+                        McFont.self
                     ).alignLeft())
                     .withChild(Widgets.button {
                         it.withSize(24, 24)
