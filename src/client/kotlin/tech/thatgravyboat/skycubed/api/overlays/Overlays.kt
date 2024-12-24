@@ -48,7 +48,7 @@ object Overlays {
     @Subscription
     @OnlyOnSkyBlock
     fun onHudRender(event: RenderHudEvent) {
-        if (McClient.self.options.hideGui) return
+        if (McClient.options.hideGui) return
 
         val graphics = event.graphics
         val screen = McScreen.self

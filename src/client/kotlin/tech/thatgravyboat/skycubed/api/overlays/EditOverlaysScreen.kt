@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.api.overlays
 
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
-import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 
 class EditOverlaysScreen : Screen(CommonText.EMPTY) {
@@ -13,6 +13,6 @@ class EditOverlaysScreen : Screen(CommonText.EMPTY) {
     }
 
     companion object {
-        fun inScreen() = McClient.self.screen is EditOverlaysScreen
+        fun inScreen() = McScreen.self is EditOverlaysScreen
     }
 }

@@ -46,15 +46,14 @@ object CooldownManager {
     }
 
     private fun isOnCooldown(ability: String): Boolean {
-        return cooldowns[ability]?.let { it.second > System.currentTimeMillis() } ?: false
+        return cooldowns[ability]?.let { it.second > System.currentTimeMillis() } == true
     }
 
     private fun isWearingBatPerson(): Boolean {
-        val armor = McPlayer.self?.inventory?.armor ?: return false
-        return armor[0].getData(DataTypes.ID) == "BAT_PERSON_BOOTS" &&
-                armor[1].getData(DataTypes.ID) == "BAT_PERSON_LEGGINGS" &&
-                armor[2].getData(DataTypes.ID) == "BAT_PERSON_CHESTPLATE" &&
-                armor[3].getData(DataTypes.ID) == "BAT_PERSON_HELMET"
+        return McPlayer.boots.getData(DataTypes.ID) == "BAT_PERSON_BOOTS" &&
+                McPlayer.leggings.getData(DataTypes.ID) == "BAT_PERSON_LEGGINGS" &&
+                McPlayer.chestplate.getData(DataTypes.ID) == "BAT_PERSON_CHESTPLATE" &&
+                McPlayer.helmet.getData(DataTypes.ID) == "BAT_PERSON_HELMET"
     }
 
     private fun addCooldown(ability: String, duration: Long) {

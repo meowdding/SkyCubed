@@ -45,7 +45,7 @@ object Config {
 
     @ConfigButton(title = "config.skycubed.general.keybinds", text = "Open")
     @Comment("config.skycubed.general.keybinds.desc")
-    val ignored1 = { McClient.setScreen(KeyBindsScreen(McScreen.self, McClient.self.options))}
+    val ignored1 = { McClient.setScreen(KeyBindsScreen(McScreen.self, McClient.options))}
 
     @ConfigButton(title = "config.skycubed.general.notifications", text = "Open")
     @Comment("config.skycubed.general.notifications.desc")

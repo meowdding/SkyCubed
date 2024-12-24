@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.ConfigManager
@@ -94,7 +94,7 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
     }
 
     companion object {
-        fun inScreen() = McClient.self.screen is OverlayScreen
+        fun inScreen() = McScreen.self is OverlayScreen
     }
 }
 

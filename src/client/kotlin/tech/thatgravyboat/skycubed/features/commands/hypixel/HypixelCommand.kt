@@ -10,7 +10,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.minecraft.commands.SharedSuggestionProvider
-import net.minecraft.network.protocol.game.ServerboundChatCommandPacket
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import java.util.function.Function
 
@@ -50,7 +49,7 @@ data class ArgumentHypixelCommand(
             }
 
             executes {
-                McClient.self.connection?.send(ServerboundChatCommandPacket(it.input))
+                McClient.sendCommand(it.input)
                 1
             }
 
@@ -83,7 +82,7 @@ data class LiteralHypixelCommand(
         return values.map { value ->
             ClientCommandManager.literal(value).apply {
                 executes {
-                    McClient.self.connection?.send(ServerboundChatCommandPacket(it.input))
+                    McClient.sendCommand(it.input)
                     1
                 }
                 children.forEach { child -> child.toCommand().forEach(::then) }
