@@ -275,7 +275,7 @@ object Displays {
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    operations(graphics.pose())
+                    operations()
                     display.render(graphics)
                 }
             }
