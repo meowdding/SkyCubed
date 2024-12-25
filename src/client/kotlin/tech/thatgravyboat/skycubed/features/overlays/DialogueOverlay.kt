@@ -14,22 +14,23 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
-import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.toRow
+import tech.thatgravyboat.skycubed.api.displays.asLayer
+import tech.thatgravyboat.skycubed.api.displays.toColumn
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import kotlin.math.max
 
-private const val BACKGROUND_COLOR = 0xA0000000u
-
 object DialogueOverlay : Overlay {
+
+    private val BOX = SkyCubed.id("background")
 
     private val regex = ComponentRegex("\\[NPC] (?<name>[\\w.\\s]+): (?<message>.+)")
     private val yesNoRegex = listOf(
@@ -53,19 +54,6 @@ object DialogueOverlay : Overlay {
     private val config get() = OverlaysConfig.npc
     private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
-
-    private val yesNoDisplay by lazy {
-        Displays.padding(
-            5,
-            Displays.text(
-                Text.join(
-                    Text.of("[Y]es") { this.color = TextColor.GREEN },
-                    CommonText.SPACE,
-                    Text.of("[N]o") { this.color = TextColor.RED }
-                )
-            )
-        )
-    }
 
     @Subscription
     @OnlyOnSkyBlock
@@ -102,15 +90,25 @@ object DialogueOverlay : Overlay {
                 if (yesNo != null && !displayedYesNo) {
                     displayedYesNo = true
                     nextCheck = System.currentTimeMillis() + displayActionDuration
-                    display = Displays.column(
-                        display,
-                        Displays.empty(0, 5),
-                        Displays.background(
-                            BACKGROUND_COLOR,
-                            config.overlayRadius.toFloat(),
-                            yesNoDisplay,
-                        )
+
+                    val options = listOf(
+                        Text.of("[Y]es") { this.color = TextColor.GREEN },
+                        Text.of("[N]o") { this.color = TextColor.RED }
                     )
+
+                    val yesNoDisplay = options.map {
+                        Displays.background(BOX, Displays.padding(5, Displays.text(it)))
+                    }.toColumn(10)
+
+                    display = listOf(
+                        display,
+                        Displays.transformed(
+                            display.getWidth() - yesNoDisplay.getWidth() - 10f,
+                            -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
+                            0f,
+                            yesNoDisplay
+                        )
+                    ).asLayer()
                 } else {
                     reset()
                 }
@@ -123,20 +121,33 @@ object DialogueOverlay : Overlay {
 
                 entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
 
-                display = Displays.background(
-                    BACKGROUND_COLOR,
-                    config.overlayRadius.toFloat(),
-                    Displays.padding(
-                        5,
-                        listOfNotNull(
-                            entity?.let { Displays.entity(it, 60, 60, 30, 80f, 40f) },
-                            Displays.text(
-                                Text.multiline(name, message),
-                                McClient.window.guiScaledWidth / 3,
-                            ),
-                        ).toRow()
+                val entityDisplay = entity?.let {
+                    Displays.transformed(0f, 0f, -1000f, Displays.entity(it, 60, 60, 35, 80f, 40f))
+                }
+
+                val npcNameDisplay = Displays.transformed(
+                    60f, -8f, 0f,
+                    Displays.background(
+                        BOX,
+                        Displays.padding(5, Displays.text(name, McClient.window.guiScaledWidth / 3))
                     )
                 )
+
+                val npcTextDisplay = Displays.padding(15, Displays.text(message, McClient.window.guiScaledWidth / 3))
+
+                display = listOfNotNull(
+                    entityDisplay,
+                    Displays.transformed(
+                        0f, 40f, 0f,
+                        Displays.background(
+                            BOX,
+                            listOf(
+                                npcNameDisplay,
+                                npcTextDisplay,
+                            ).asLayer(),
+                        ),
+                    )
+                ).asLayer()
             }
         }
 
@@ -160,7 +171,7 @@ object DialogueOverlay : Overlay {
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 90, 0.5f, 1f)
+        display.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
     }
 
 }

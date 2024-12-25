@@ -257,6 +257,29 @@ object Displays {
         }
     }
 
+    fun layered(vararg displays: Display): Display {
+        return object : Display {
+            override fun getWidth() = displays.maxOfOrNull { it.getWidth() } ?: 0
+            override fun getHeight() = displays.maxOfOrNull { it.getHeight() } ?: 0
+            override fun render(graphics: GuiGraphics) {
+                displays.forEach { it.render(graphics) }
+            }
+        }
+    }
+
+    fun transformed(x: Float, y: Float, z: Float, display: Display): Display {
+        return object : Display {
+            override fun getWidth() = display.getWidth()
+            override fun getHeight() = display.getHeight()
+            override fun render(graphics: GuiGraphics) {
+                graphics.pushPop {
+                    translate(x, y, z)
+                    display.render(graphics)
+                }
+            }
+        }
+    }
+
     fun entity(
         entity: LivingEntity,
         with: Int,

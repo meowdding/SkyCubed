@@ -30,3 +30,16 @@ fun List<Any>.toRow(spacing: Int = 0): Display {
         spacing = spacing
     )
 }
+
+fun List<Any>.asLayer(): Display {
+    return Displays.layered(
+        *this.map {
+            when (it) {
+                is String -> Displays.text(it)
+                is Component -> Displays.text(it)
+                is Display -> it
+                else -> throw IllegalArgumentException("Unsupported type: ${it::class.simpleName}")
+            }
+        }.toTypedArray()
+    )
+}

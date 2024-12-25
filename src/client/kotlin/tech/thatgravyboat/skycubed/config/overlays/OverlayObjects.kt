@@ -5,7 +5,6 @@ import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Slider
 import com.teamresourceful.resourcefulconfig.api.types.entries.Observable
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
@@ -130,11 +129,6 @@ class NpcOverlay : Translatable {
     @ConfigEntry(id = "durationForActionMessage", translation = "config.skycubed.overlays.npc.durationForActionMessage")
     @Comment("", translation = "config.skycubed.overlays.npc.durationForActionMessage.desc")
     var durationForActionMessage: Float = 10f
-
-    @ConfigEntry(id = "radius", translation = "config.skycubed.overlays.npc.radius")
-    @Comment("", translation = "config.skycubed.overlays.npc.radius.desc")
-    @Slider @Range(min = 0.0, max = 50.0)
-    var overlayRadius: Int = 0
 
     override fun getTranslationKey(): String = "Edit NPC Overlay"
 }
