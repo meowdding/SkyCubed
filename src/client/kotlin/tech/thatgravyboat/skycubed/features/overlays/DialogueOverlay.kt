@@ -102,12 +102,16 @@ object DialogueOverlay : Overlay {
 
                     display = listOf(
                         display,
-                        Displays.transformed(
-                            display.getWidth() - yesNoDisplay.getWidth() - 10f,
-                            -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                            0f,
+                        Displays.pushPop(
+                            {
+                                translate(
+                                    display.getWidth() - yesNoDisplay.getWidth() - 10f,
+                                    -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
+                                    -1000f
+                                )
+                            },
                             yesNoDisplay
-                        )
+                        ),
                     ).asLayer()
                 } else {
                     reset()
@@ -122,11 +126,14 @@ object DialogueOverlay : Overlay {
                 entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
 
                 val entityDisplay = entity?.let {
-                    Displays.transformed(0f, 0f, -1000f, Displays.entity(it, 60, 60, 35, 80f, 40f))
+                    Displays.pushPop(
+                        { translate(0f, 0f, -1000f) },
+                        Displays.entity(it, 60, 60, 35, 80f, 40f)
+                    )
                 }
 
-                val npcNameDisplay = Displays.transformed(
-                    60f, -8f, 0f,
+                val npcNameDisplay = Displays.pushPop(
+                    { translate(60f, -8f, 0f) },
                     Displays.background(
                         BOX,
                         Displays.padding(5, Displays.text(name, McClient.window.guiScaledWidth / 3))
@@ -137,8 +144,8 @@ object DialogueOverlay : Overlay {
 
                 display = listOfNotNull(
                     entityDisplay,
-                    Displays.transformed(
-                        0f, 40f, 0f,
+                    Displays.pushPop(
+                        { translate(0f, 40f, 0f) },
                         Displays.background(
                             BOX,
                             listOf(

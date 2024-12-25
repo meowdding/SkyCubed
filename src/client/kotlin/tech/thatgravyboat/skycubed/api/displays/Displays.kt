@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.api.displays
 
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.components.Renderable
@@ -267,13 +268,14 @@ object Displays {
         }
     }
 
-    fun transformed(x: Float, y: Float, z: Float, display: Display): Display {
+    fun pushPop(operations: PoseStack.() -> Unit, display: Display): Display {
         return object : Display {
+            // Does not account for scaling
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
                 graphics.pushPop {
-                    translate(x, y, z)
+                    operations(graphics.pose())
                     display.render(graphics)
                 }
             }
