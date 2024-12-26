@@ -110,9 +110,6 @@
         "config.skycubed.overlays.npc.durationForActionMessage": "Duration per Action Message",
         "config.skycubed.overlays.npc.durationForActionMessage.desc": "The time in seconds of how long an action message should be displayed for. ie. a message that you have to choose an option from.",
 
-        "config.skycubed.overlays.npc.radius": "Background Radius",
-        "config.skycubed.overlays.npc.radius.desc": "The radius of how round the overlay should be.",
-
 
     "config.skycubed.overlays.coldOverlay": "Cold Overlay Start",
     "config.skycubed.overlays.coldOverlay.desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay",
