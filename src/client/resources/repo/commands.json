@@ -235,5 +235,37 @@
                 "suggestions": "players"
             }
         ]
+    },
+    {
+        "values": [ "joininstance", "joindungeon", "joinkuudra" ],
+        "children": [
+            {
+                "name": "location",
+                "suggestions": [
+                    "CATACOMBS_ENTRANCE",
+                    "CATACOMBS_FLOOR_ONE",
+                    "CATACOMBS_FLOOR_TWO",
+                    "CATACOMBS_FLOOR_THREE",
+                    "CATACOMBS_FLOOR_FOUR",
+                    "CATACOMBS_FLOOR_FIVE",
+                    "CATACOMBS_FLOOR_SIX",
+                    "CATACOMBS_FLOOR_SEVEN",
+
+                    "MASTER_CATACOMBS_FLOOR_ONE",
+                    "MASTER_CATACOMBS_FLOOR_TWO",
+                    "MASTER_CATACOMBS_FLOOR_THREE",
+                    "MASTER_CATACOMBS_FLOOR_FOUR",
+                    "MASTER_CATACOMBS_FLOOR_FIVE",
+                    "MASTER_CATACOMBS_FLOOR_SIX",
+                    "MASTER_CATACOMBS_FLOOR_SEVEN",
+
+                    "KUUDRA_NORMAL",
+                    "KUUDRA_HOT",
+                    "KUUDRA_BURNING",
+                    "KUUDRA_FIERY",
+                    "KUUDRA_INFERNAL"
+                ]
+            }
+        ]
     }
 ]

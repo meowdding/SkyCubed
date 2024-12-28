@@ -68,6 +68,9 @@
         "config.skycubed.overlays.map.enabled": "Enable minimap Overlay",
         "config.skycubed.overlays.map.enabled.desc": "Enables the minimap overlay, showing where you are on SkyBlock.",
 
+        "config.skycubed.overlays.map.dungeonMap": "Enable Dungeon Map",
+        "config.skycubed.overlays.map.dungeonMap.desc": "Shows a map in place of the minimap in dungeons.",
+
 
     "config.skycubed.overlays.pickuplog": "Item Pickup Log Overlay",
     "config.skycubed.overlays.pickuplog.desc": "Settings the Item Pickup Log overlay.",
@@ -113,6 +116,9 @@
 
     "config.skycubed.overlays.coldOverlay": "Cold Overlay Start",
     "config.skycubed.overlays.coldOverlay.desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay",
+
+    "config.skycubed.overlays.movableHotbar": "Movable Hotbar",
+    "config.skycubed.overlays.movableHotbar.desc": "Allows you to move the hotbar around the screen.",
 
     "//Chat": "",
 

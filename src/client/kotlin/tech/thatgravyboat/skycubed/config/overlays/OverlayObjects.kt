@@ -70,6 +70,10 @@ class MapOverlay : Translatable {
     @Comment("", translation = "config.skycubed.overlays.map.enabled.desc")
     var enabled: Boolean = false
 
+    @ConfigEntry(id = "dungeonMap", translation = "config.skycubed.overlays.map.dungeonMap")
+    @Comment("", translation = "config.skycubed.overlays.map.dungeonMap.desc")
+    var dungeonMap: Boolean = true
+
     override fun getTranslationKey(): String = "Edit Map Overlay"
 }
 

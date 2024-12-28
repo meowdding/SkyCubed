@@ -97,7 +97,7 @@ class MapsWidget(
                         val x = McPlayer.self!!.blockX + offset.x
                         val z = McPlayer.self!!.blockZ + offset.z
                         translate(x + width / 2f, z + height / 2f, 0f)
-                        val profile = McClient.self.player?.skin ?: return
+                        val profile = McPlayer.skin ?: return
                         scale(1f / scale, 1f / scale, 1f)
 
                         rotateAround(Axis.ZP.rotationDegrees(180 + McPlayer.self!!.yHeadRot), 0f, 0f, 0f)

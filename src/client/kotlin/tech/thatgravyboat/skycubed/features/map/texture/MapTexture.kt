@@ -3,10 +3,10 @@ package tech.thatgravyboat.skycubed.features.map.texture
 import com.mojang.blaze3d.platform.NativeImage
 import com.mojang.blaze3d.platform.TextureUtil
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.SimpleTexture
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.resources.ResourceManager
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.features.map.texture.DownloadedAsset.runDownload
 import java.io.File
 import java.io.FileInputStream
@@ -23,7 +23,7 @@ class DownloadedTexture(
     private var uploaded = false
 
     private fun loadCallback(image: NativeImage) {
-        Minecraft.getInstance().execute {
+        McClient.tell {
             this.uploaded = true
             if (!RenderSystem.isOnRenderThread()) {
                 RenderSystem.recordRenderCall { this.upload(image) }
@@ -39,7 +39,7 @@ class DownloadedTexture(
     }
 
     override fun load(manager: ResourceManager) {
-        Minecraft.getInstance().execute {
+        McClient.tell {
             if (!this.uploaded) {
                 runCatching { super.load(manager) }
                 this.uploaded = true
@@ -61,7 +61,7 @@ class DownloadedTexture(
     private fun load(file: File): Optional<NativeImage> {
         return try {
             Optional.of(NativeImage.read(FileInputStream(file)))
-        } catch (ignored: Exception) {
+        } catch (_: Exception) {
             Optional.empty()
         }
     }

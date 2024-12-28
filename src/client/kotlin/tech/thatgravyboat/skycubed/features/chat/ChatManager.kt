@@ -26,19 +26,23 @@ object ChatManager {
     }
 
     @Subscription
-    fun onChatReceived(event: ChatReceivedEvent) {
-        if (ChatConfig.compactChat) {
-            for ((id, regex) in compactMessage) {
-                if (regex.find(event.text) != null) {
-                    event.id = id
-                    return
-                }
-            }
-        }
+    fun onChatReceivedPre(event: ChatReceivedEvent.Pre) {
         if (cleanMessages.isNotEmpty()) {
             for (regex in cleanMessages) {
                 if (regex.find(event.text) != null) {
                     event.cancel()
+                    return
+                }
+            }
+        }
+    }
+
+    @Subscription
+    fun onChatReceivedPost(event: ChatReceivedEvent.Post) {
+        if (ChatConfig.compactChat) {
+            for ((id, regex) in compactMessage) {
+                if (regex.find(event.text) != null) {
+                    event.id = id
                     return
                 }
             }

@@ -28,7 +28,7 @@ object InfoOverlay : Overlay {
     override val editBounds: Rect = Rect(position.x, position.y, 34, 34)
 
     private fun getY(): Int {
-        val bossOverlay = McClient.self.gui.bossOverlay as? BossHealthOverlayAccessor ?: return 0
+        val bossOverlay = McClient.gui.bossOverlay as? BossHealthOverlayAccessor ?: return 0
         if (bossOverlay.events.isEmpty()) return 0
         return 17 + (bossOverlay.events.size - 1) * 19
     }

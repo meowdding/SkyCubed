@@ -18,7 +18,6 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import org.joml.Quaternionf
 import org.joml.Vector3f
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
@@ -156,17 +155,16 @@ object Displays {
         color: () -> UInt = { 0xFFFFFFFFu },
         shadow: Boolean = true
     ): Display {
-        val font = McClient.self.font
-        val lines = if (maxWidth == NO_SPLIT) listOf(component.visualOrderText) else font.split(component, maxWidth)
-        val width = lines.maxOfOrNull { font.width(it) } ?: 0
-        val height = lines.size * font.lineHeight
+        val lines = if (maxWidth == NO_SPLIT) listOf(component.visualOrderText) else McFont.split(component, maxWidth)
+        val width = lines.maxOfOrNull(McFont::width) ?: 0
+        val height = lines.size * McFont.height
 
         return object : Display {
             override fun getWidth() = width
             override fun getHeight() = height
             override fun render(graphics: GuiGraphics) {
                 lines.forEachIndexed { index, line ->
-                    graphics.drawString(font, line, 0, index * font.lineHeight, color().toInt(), shadow)
+                    graphics.drawString(McFont.self, line, 0, index * McFont.height, color().toInt(), shadow)
                 }
             }
         }
@@ -177,15 +175,11 @@ object Displays {
         color: () -> UInt = { 0xFFFFFFFFu },
         shadow: Boolean = true
     ): Display {
-        val font = McFont.self
-        val width = font.width(sequence)
-        val height = font.lineHeight
-
         return object : Display {
-            override fun getWidth() = width
-            override fun getHeight() = height
+            override fun getWidth() = McFont.width(sequence)
+            override fun getHeight() = McFont.height
             override fun render(graphics: GuiGraphics) {
-                graphics.drawString(font, sequence, 0, 1, color().toInt(), shadow)
+                graphics.drawString(McFont.self, sequence, 0, 1, color().toInt(), shadow)
             }
         }
     }

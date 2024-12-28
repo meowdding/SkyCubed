@@ -34,6 +34,17 @@ loom {
             sourceSet("main")
         }
     }
+
+    afterEvaluate {
+        val mixinPath = configurations.compileClasspath.get()
+            .files { it.group == "net.fabricmc" && it.name == "sponge-mixin" }
+            .first()
+        runConfigs {
+            "client" {
+                vmArgs.add("-javaagent:$mixinPath")
+            }
+        }
+    }
 }
 
 repositories {
@@ -48,7 +59,7 @@ dependencies {
     minecraft(libs.minecraft)
     mappings(loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.21:2024.07.28@zip")
+        parchment("org.parchmentmc.data:parchment-1.21.3:2024.12.07@zip")
     })
     modImplementation(libs.loader)
     modImplementation(libs.fabrickotlin)

@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.map
 
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
@@ -24,12 +24,16 @@ object MinimapOverlay : Overlay {
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
-    override val enabled: Boolean get() = display != null && OverlaysConfig.map.enabled
+    override val enabled: Boolean get() = (display != null || DungeonMap.canRender) && OverlaysConfig.map.enabled
 
     private var display: Display? = null
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display?.render(graphics)
+        if (display != null) {
+            display!!.render(graphics)
+        } else {
+            DungeonMap.render(graphics)
+        }
     }
 
     @Subscription

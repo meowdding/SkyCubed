@@ -15,11 +15,9 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.features.info.InfoOverlay
-import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
-import tech.thatgravyboat.skycubed.features.overlays.MinimapOverlay
-import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
-import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
+import tech.thatgravyboat.skycubed.features.overlays.*
 import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
+import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.utils.pushPop
 
@@ -50,7 +48,7 @@ object Overlays {
     @Subscription
     @OnlyOnSkyBlock
     fun onHudRender(event: RenderHudEvent) {
-        if (McClient.self.options.hideGui) return
+        if (McClient.options.hideGui) return
 
         val graphics = event.graphics
         val screen = McScreen.self
@@ -119,6 +117,7 @@ object Overlays {
         register(DialogueOverlay)
         register(PickUpLog)
         register(MinimapOverlay)
+        register(MovableHotbar)
         TextOverlay.overlays.forEach(::register)
     }
 }

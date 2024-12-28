@@ -28,6 +28,8 @@ object ChatConfig {
             "^Watchdog has banned",
             "^Staff have banned an additional",
             "^Blacklisted modifications are a bannable offense!",
+            "^Couldn't warp you! Try again later.",
+            "^ *A FIRE SALE.*to grab yours!$",
         )
     )
 

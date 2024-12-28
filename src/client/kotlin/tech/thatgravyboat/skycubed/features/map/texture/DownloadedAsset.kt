@@ -3,9 +3,9 @@ package tech.thatgravyboat.skycubed.features.map.texture
 import com.google.common.hash.Hashing
 import com.teamresourceful.resourcefullib.common.lib.Constants
 import net.minecraft.Util
-import net.minecraft.client.Minecraft
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -48,15 +48,15 @@ object DownloadedAsset {
                     if (response.statusCode() / 100 != 2) return@ifPresent
                     FileUtils.copyInputStreamToFile(response.body(), file)
 
-                    Minecraft.getInstance().execute {
+                    McClient.tell {
                         runCatching {
                             FileUtils.openInputStream(file).use { stream ->
                                 callback.accept(stream)
                             }
                         }
                     }
-                } catch (ignored: IOException) {
-                } catch (ignored: InterruptedException) {
+                } catch (_: IOException) {
+                } catch (_: InterruptedException) {
                 }
             }
         }, Util.backgroundExecutor())
