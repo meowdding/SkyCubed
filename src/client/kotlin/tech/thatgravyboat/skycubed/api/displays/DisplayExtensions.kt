@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.api.displays
 import net.minecraft.network.chat.Component
 
 
-fun List<Any>.toColumn(spacing: Int = 0): Display {
+fun List<Any>.toColumn(spacing: Int = 0, horizontalAlignment: HorizontalAlignment = HorizontalAlignment.LEFT): Display {
     return Displays.column(
         *this.map {
             when (it) {
@@ -13,7 +13,8 @@ fun List<Any>.toColumn(spacing: Int = 0): Display {
                 else -> throw IllegalArgumentException("Unsupported type: ${it::class.simpleName}")
             }
         }.toTypedArray(),
-        spacing = spacing
+        spacing = spacing,
+        horizontalAlignment = horizontalAlignment,
     )
 }
 

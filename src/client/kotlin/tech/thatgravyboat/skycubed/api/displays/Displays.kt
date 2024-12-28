@@ -209,19 +209,31 @@ object Displays {
         }
     }
 
-    fun column(vararg displays: Display, spacing: Int = 0): Display {
+    fun column(
+        vararg displays: Display,
+        spacing: Int = 0,
+        horizontalAlignment: HorizontalAlignment = HorizontalAlignment.LEFT
+    ): Display {
         return object : Display {
             override fun getWidth() = displays.maxOfOrNull { it.getWidth() } ?: 0
             override fun getHeight() = displays.sumOf { it.getHeight() } + spacing * (displays.size - 1)
+
             override fun render(graphics: GuiGraphics) {
+                val maxWidth = getWidth()
+
                 graphics.pushPop {
+                    var currentY = 0
+
                     displays.forEachIndexed { index, display ->
-                        display.render(graphics)
-                        if (index < displays.size - 1) {
-                            translate(0f, (display.getHeight() + spacing).toFloat(), 0f)
-                        } else {
-                            translate(0f, display.getHeight().toFloat(), 0f)
+                        val xOffset = when (horizontalAlignment) {
+                            HorizontalAlignment.LEFT -> 0
+                            HorizontalAlignment.CENTER -> (maxWidth - display.getWidth()) / 2
+                            HorizontalAlignment.RIGHT -> maxWidth - display.getWidth()
                         }
+
+                        translate(xOffset.toFloat(), currentY.toFloat(), 0f)
+                        display.render(graphics)
+                        currentY += display.getHeight() + spacing
                     }
                 }
             }

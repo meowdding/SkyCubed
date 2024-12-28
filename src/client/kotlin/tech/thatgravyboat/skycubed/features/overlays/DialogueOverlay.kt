@@ -19,10 +19,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.asLayer
-import tech.thatgravyboat.skycubed.api.displays.toColumn
+import tech.thatgravyboat.skycubed.api.displays.*
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
@@ -98,7 +95,7 @@ object DialogueOverlay : Overlay {
 
                     val yesNoDisplay = options.map {
                         Displays.background(BOX, Displays.padding(5, Displays.text(it)))
-                    }.toColumn(10)
+                    }.toColumn(10, HorizontalAlignment.RIGHT)
 
                     display = listOf(
                         display,
