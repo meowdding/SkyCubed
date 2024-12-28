@@ -224,7 +224,7 @@ object Displays {
                 graphics.pushPop {
                     var currentY = 0
 
-                    displays.forEachIndexed { index, display ->
+                    displays.forEach { display ->
                         val xOffset = when (horizontalAlignment) {
                             HorizontalAlignment.LEFT -> 0
                             HorizontalAlignment.CENTER -> (maxWidth - display.getWidth()) / 2
