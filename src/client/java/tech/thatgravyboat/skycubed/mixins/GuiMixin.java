@@ -62,11 +62,11 @@ public class GuiMixin {
         Position position = OverlayPositions.INSTANCE.getHotbar();
         float scale = position.getScale();
 
-        // Reset the Hotbar to top left
-        stack.translate(-((float) guiGraphics.guiWidth() / 2 - 91), -(guiGraphics.guiHeight() - 22), 0);
-
         stack.translate(position.component1(), position.component2(), 0);
         stack.scale(scale, scale, 1f);
+
+        // Reset the Hotbar to top left
+        stack.translate(-((float) guiGraphics.guiWidth() / 2 - 91), -(guiGraphics.guiHeight() - 22), 0);
 
         original.call(guiGraphics, deltaTracker);
 
