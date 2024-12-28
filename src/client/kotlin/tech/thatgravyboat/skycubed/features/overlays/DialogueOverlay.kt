@@ -95,7 +95,7 @@ object DialogueOverlay : Overlay {
 
                     val yesNoDisplay = options.map {
                         Displays.background(BOX, Displays.padding(5, Displays.text(it)))
-                    }.toColumn(10, HorizontalAlignment.RIGHT)
+                    }.toColumn(10, Alignment.START)
 
                     display = listOf(
                         display,

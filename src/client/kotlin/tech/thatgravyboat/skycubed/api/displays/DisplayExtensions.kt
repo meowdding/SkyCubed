@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.api.displays
 import net.minecraft.network.chat.Component
 
 
-fun List<Any>.toColumn(spacing: Int = 0, horizontalAlignment: HorizontalAlignment = HorizontalAlignment.LEFT): Display {
+fun List<Any>.toColumn(spacing: Int = 0, horizontalAlignment: Alignment = Alignment.START): Display {
     return Displays.column(
         *this.map {
             when (it) {

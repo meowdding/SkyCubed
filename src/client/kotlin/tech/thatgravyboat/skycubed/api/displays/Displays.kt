@@ -212,7 +212,7 @@ object Displays {
     fun column(
         vararg displays: Display,
         spacing: Int = 0,
-        horizontalAlignment: HorizontalAlignment = HorizontalAlignment.LEFT
+        horizontalAlignment: Alignment = Alignment.START
     ): Display {
         return object : Display {
             override fun getWidth() = displays.maxOfOrNull { it.getWidth() } ?: 0
@@ -226,9 +226,9 @@ object Displays {
 
                     displays.forEach { display ->
                         val xOffset = when (horizontalAlignment) {
-                            HorizontalAlignment.LEFT -> 0
-                            HorizontalAlignment.CENTER -> (maxWidth - display.getWidth()) / 2
-                            HorizontalAlignment.RIGHT -> maxWidth - display.getWidth()
+                            Alignment.START -> 0
+                            Alignment.CENTER -> (maxWidth - display.getWidth()) / 2
+                            Alignment.END -> maxWidth - display.getWidth()
                         }
 
                         translate(xOffset.toFloat(), currentY.toFloat(), 0f)
