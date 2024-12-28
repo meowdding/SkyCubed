@@ -225,15 +225,17 @@ object Displays {
                     var currentY = 0
 
                     displays.forEach { display ->
-                        val xOffset = when (horizontalAlignment) {
-                            Alignment.START -> 0
-                            Alignment.CENTER -> (maxWidth - display.getWidth()) / 2
-                            Alignment.END -> maxWidth - display.getWidth()
-                        }
+                        graphics.pushPop {
+                            val yOffset = when (horizontalAlignment) {
+                                Alignment.START -> 0
+                                Alignment.CENTER -> (maxWidth - display.getWidth()) / 2
+                                Alignment.END -> maxWidth - display.getWidth()
+                            }
 
-                        translate(xOffset.toFloat(), currentY.toFloat(), 0f)
-                        display.render(graphics)
-                        currentY += display.getHeight() + spacing
+                            translate(yOffset.toFloat(), currentY.toFloat(), 0f)
+                            display.render(graphics)
+                            currentY += display.getHeight() + spacing
+                        }
                     }
                 }
             }
