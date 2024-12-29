@@ -3,9 +3,11 @@ package tech.thatgravyboat.skycubed.features.overlays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
+import sun.java2d.cmm.Profile
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
+import tech.thatgravyboat.skyblockapi.api.profile.profile.ProfileAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -28,6 +30,7 @@ object PlayerRpgOverlay : Overlay {
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
     private val MANA_NEEDED = SkyCubed.id("rpg/mana/needed")
     private val XP = SkyCubed.id("rpg/xp")
+    private val SKYBLOCK_XP = SkyCubed.id("rpg/xp") // TODO
 
     private val AIR_BASE = SkyCubed.id("rpg/air/base")
     private val AIR = SkyCubed.id("rpg/air/normal")
@@ -42,6 +45,7 @@ object PlayerRpgOverlay : Overlay {
         val absorptionPercent = healthPercent - 1f
         val manaPercent = StatsAPI.mana.toFloat() / StatsAPI.maxMana.toFloat()
         val xpPercent = McPlayer.xpLevelProgress
+        val skyblockLevelPercent = ProfileAPI.sbLevelProgress / 100f
         val airPercent = McPlayer.air.toFloat() / McPlayer.maxAir.toFloat()
         val manaUsePercent = (McPlayer.heldItem.getData(DataTypes.RIGHT_CLICK_MANA_ABILITY)?.second?.toFloat() ?: 0f) / StatsAPI.maxMana.toFloat()
 
@@ -51,8 +55,14 @@ object PlayerRpgOverlay : Overlay {
         graphics.blitSpritePercentX(MANA_DEPLETED, 47, 18, 57, 4, manaUsePercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA, 47, 18, 57, 4, manaPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA_NEEDED, 47, 18, 57, 4, manaUsePercent.coerceAtMost(manaPercent).coerceIn(0f, 1f))
-        graphics.blitSpritePercentX(XP, 47, 29, 67, 4, xpPercent.coerceIn(0f, 1f))
-        graphics.drawScaledString("${McPlayer.xpLevel}", 3, 33, 16, 0x78EC20)
+
+        if (OverlaysConfig.rpg.skyblockLevel) {
+            graphics.blitSpritePercentX(SKYBLOCK_XP, 47, 29, 67, 4, skyblockLevelPercent.coerceIn(0f, 1f))
+            graphics.drawScaledString("${ProfileAPI.sbLevel}", 3, 33, 16, 0x55FFFF)
+        } else {
+            graphics.blitSpritePercentX(XP, 47, 29, 67, 4, xpPercent.coerceIn(0f, 1f))
+            graphics.drawScaledString("${McPlayer.xpLevel}", 3, 33, 16, 0x78EC20)
+        }
 
         if (airPercent < 1f) {
             graphics.blitSprite(RenderType::guiTextured, AIR_BASE, 38, 34, 64, 6)
