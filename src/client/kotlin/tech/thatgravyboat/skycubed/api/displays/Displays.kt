@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.api.displays
 
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.components.Renderable
@@ -208,18 +209,32 @@ object Displays {
         }
     }
 
-    fun column(vararg displays: Display, spacing: Int = 0): Display {
+    fun column(
+        vararg displays: Display,
+        spacing: Int = 0,
+        horizontalAlignment: Alignment = Alignment.START
+    ): Display {
         return object : Display {
             override fun getWidth() = displays.maxOfOrNull { it.getWidth() } ?: 0
             override fun getHeight() = displays.sumOf { it.getHeight() } + spacing * (displays.size - 1)
+
             override fun render(graphics: GuiGraphics) {
+                val maxWidth = getWidth()
+
                 graphics.pushPop {
-                    displays.forEachIndexed { index, display ->
-                        display.render(graphics)
-                        if (index < displays.size - 1) {
-                            translate(0f, (display.getHeight() + spacing).toFloat(), 0f)
-                        } else {
-                            translate(0f, display.getHeight().toFloat(), 0f)
+                    var currentY = 0
+
+                    displays.forEach { display ->
+                        graphics.pushPop {
+                            val yOffset = when (horizontalAlignment) {
+                                Alignment.START -> 0
+                                Alignment.CENTER -> (maxWidth - display.getWidth()) / 2
+                                Alignment.END -> maxWidth - display.getWidth()
+                            }
+
+                            translate(yOffset.toFloat(), currentY.toFloat(), 0f)
+                            display.render(graphics)
+                            currentY += display.getHeight() + spacing
                         }
                     }
                 }
@@ -247,6 +262,30 @@ object Displays {
             override fun getHeight(): Int = if (height == -1) renderable.height else height
             override fun render(graphics: GuiGraphics) {
                 renderable.render(graphics, -1, -1, 0f)
+            }
+        }
+    }
+
+    fun layered(vararg displays: Display): Display {
+        return object : Display {
+            override fun getWidth() = displays.maxOfOrNull { it.getWidth() } ?: 0
+            override fun getHeight() = displays.maxOfOrNull { it.getHeight() } ?: 0
+            override fun render(graphics: GuiGraphics) {
+                displays.forEach { it.render(graphics) }
+            }
+        }
+    }
+
+    fun pushPop(operations: PoseStack.() -> Unit, display: Display): Display {
+        return object : Display {
+            // Does not account for scaling
+            override fun getWidth() = display.getWidth()
+            override fun getHeight() = display.getHeight()
+            override fun render(graphics: GuiGraphics) {
+                graphics.pushPop {
+                    operations()
+                    display.render(graphics)
+                }
             }
         }
     }
