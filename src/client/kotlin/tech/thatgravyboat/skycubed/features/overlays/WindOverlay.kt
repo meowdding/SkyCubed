@@ -33,7 +33,7 @@ object WindOverlay {
                     (event.graphics.guiHeight() / 2).toFloat(),
                     0.0F
                 );
-                event.graphics.pose().scale(1.2F, 1.2F, 1.2F);
+                scale(1.2F, 1.2F, 1.2F);
 
                 val width = font.width(windCompassComponent)
                 event.graphics.drawStringWithBackdrop(font, windCompassComponent, -width / 2, -10, width, 0xffffff);
