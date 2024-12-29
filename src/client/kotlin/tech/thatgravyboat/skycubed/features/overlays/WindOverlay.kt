@@ -77,7 +77,6 @@ object WindOverlay {
     }
 
     @Subscription
-    @OnlyIn(SkyBlockIsland.DWARVEN_MINES, SkyBlockIsland.CRYSTAL_HOLLOWS)
     fun onServerChange(event: ServerChangeEvent) {
         windCompassComponent = null
         index = null
