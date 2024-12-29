@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.overlays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
-import sun.java2d.cmm.Profile
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
