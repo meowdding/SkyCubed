@@ -28,7 +28,7 @@ object WindOverlay {
             val font = McClient.self.font
 
             event.graphics.pushPop {
-                event.graphics.pose().translate(
+                translate(
                     (event.graphics.guiWidth() / 2).toFloat(),
                     (event.graphics.guiHeight() / 2).toFloat(),
                     0.0F
