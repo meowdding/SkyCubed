@@ -37,6 +37,9 @@
         "config.skycubed.overlays.rpg.enabled": "Enable RPG Overlay",
         "config.skycubed.overlays.rpg.enabled.desc": "Enables the RPG overlay, showing mana, health, and xp bars.",
 
+        "config.skycubed.overlays.rpg.skyblockLevel": "SkyBlock Level in XP",
+        "config.skycubed.overlays.rpg.skyblockLevel.desc": "If enabled the XP bar will show your SkyBlock level instead of your normal XP.",
+
 
     "config.skycubed.overlays.text": "Text Overlays",
     "config.skycubed.overlays.text.desc": "Settings for the the various text overlays.",
