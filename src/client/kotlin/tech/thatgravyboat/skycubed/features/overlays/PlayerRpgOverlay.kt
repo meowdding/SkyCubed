@@ -29,7 +29,7 @@ object PlayerRpgOverlay : Overlay {
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
     private val MANA_NEEDED = SkyCubed.id("rpg/mana/needed")
     private val XP = SkyCubed.id("rpg/xp")
-    private val SKYBLOCK_XP = SkyCubed.id("rpg/xp") // TODO
+    private val SKYBLOCK_XP = SkyCubed.id("rpg/skyblock_xp")
 
     private val AIR_BASE = SkyCubed.id("rpg/air/base")
     private val AIR = SkyCubed.id("rpg/air/normal")
