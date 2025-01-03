@@ -3,11 +3,13 @@ package tech.thatgravyboat.skycubed.features.overlays
 import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.decoration.ArmorStand
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
+import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -70,9 +72,19 @@ object DialogueOverlay : Overlay {
     @Subscription
     @OnlyOnSkyBlock
     fun onEntityClick(event: RightClickEntityEvent) {
+        handleEntityClick(event.entity)
+    }
+
+    @Subscription
+    @OnlyOnSkyBlock
+    fun onEntityLeftClick(event: LeftClickEntityEvent) {
+        handleEntityClick(event.entity)
+    }
+
+    private fun handleEntityClick(event: Entity) {
         if (!enabled) return
 
-        val entity = event.entity as? LivingEntity ?: return
+        val entity = event as? LivingEntity ?: return
         lastClickedEntities[entity] = System.currentTimeMillis()
     }
 
