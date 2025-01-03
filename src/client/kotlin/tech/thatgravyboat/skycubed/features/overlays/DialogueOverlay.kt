@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -25,11 +26,10 @@ import tech.thatgravyboat.skycubed.api.displays.*
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.math.max
 
 object DialogueOverlay : Overlay {
-
-    private val BOX = SkyCubed.id("background")
 
     private val regex = ComponentRegex("\\[NPC] (?<name>[\\w.\\s]+): (?<message>.+)")
     private val yesNoRegex = listOf(
@@ -41,7 +41,8 @@ object DialogueOverlay : Overlay {
     private var nextCheck = 0L
     private var yesNo: Pair<String, String>? = null
     private var displayedYesNo = false
-    private var display: Display = Displays.empty()
+    private var hudOverlayDisplay: Display = Displays.empty()
+    private var inventoryOverlayDisplay: Display = Displays.empty()
     private var lastClickedEntities: MutableMap<LivingEntity, Long> = mutableMapOf()
 
     override val name: Component = Text.of("Dialogue")
@@ -97,12 +98,12 @@ object DialogueOverlay : Overlay {
 
             if (queue.isEmpty()) {
                 if (yesNo != null && !displayedYesNo) {
-                    display = createYesNoDisplay()
+                    hudOverlayDisplay = createYesNoDisplay()
                 } else {
                     reset()
                 }
             } else {
-                createMainDisplay()?.let { display = it}
+                createMainDisplay()?.let { hudOverlayDisplay = it }
             }
         }
 
@@ -134,7 +135,7 @@ object DialogueOverlay : Overlay {
         val npcNameDisplay = Displays.pushPop(
             { translate(60f, -8f, 0f) },
             Displays.background(
-                BOX,
+                backgroundBox,
                 Displays.padding(5, Displays.text(name, McClient.window.guiScaledWidth / 3))
             )
         )
@@ -146,7 +147,7 @@ object DialogueOverlay : Overlay {
             Displays.pushPop(
                 { translate(0f, 40f, 0f) },
                 Displays.background(
-                    BOX,
+                    backgroundBox,
                     listOf(
                         npcNameDisplay,
                         npcTextDisplay,
@@ -166,15 +167,15 @@ object DialogueOverlay : Overlay {
         )
 
         val yesNoDisplay = options.map {
-            Displays.background(BOX, Displays.padding(5, Displays.text(it)))
+            Displays.background(backgroundBox, Displays.padding(5, Displays.text(it)))
         }.toColumn(10, Alignment.START)
 
         return listOf(
-            display,
+            hudOverlayDisplay,
             Displays.pushPop(
                 {
                     translate(
-                        display.getWidth() - yesNoDisplay.getWidth() - 10f,
+                        hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
                         -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
                         -1000f
                     )
@@ -190,12 +191,23 @@ object DialogueOverlay : Overlay {
         }.toMutableMap()
         yesNo = null
         displayedYesNo = false
-        display = Displays.empty()
+        hudOverlayDisplay = Displays.empty()
+        inventoryOverlayDisplay = Displays.empty()
         nextCheck = 0
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
+        if (McScreen.self != null) {
+            inventoryOverlayDisplay.render(
+                graphics,
+                5,
+                graphics.guiHeight() / 2 - inventoryOverlayDisplay.getHeight() / 2,
+                0.5f,
+                1f
+            )
+        } else {
+            hudOverlayDisplay.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
+        }
     }
 
 }
