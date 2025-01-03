@@ -14,6 +14,7 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.CachedValue
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.time.Duration.Companion.seconds
 
 object CommissionsOverlay : Overlay {
@@ -38,7 +39,7 @@ object CommissionsOverlay : Overlay {
         }
         if (OverlaysConfig.commissions.background) {
             Displays.background(
-                SkyCubed.id("background"),
+                backgroundBox,
                 Displays.padding(4, Displays.column(*lines.toTypedArray()))
             )
         } else {

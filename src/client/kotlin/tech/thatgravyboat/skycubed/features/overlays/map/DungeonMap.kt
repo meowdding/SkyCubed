@@ -13,6 +13,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import tech.thatgravyboat.skycubed.utils.pushPop
 
 object DungeonMap {
@@ -24,7 +25,7 @@ object DungeonMap {
         state.texture ?: return
 
         graphics.blitSprite(
-            RenderType::guiTextured, SkyCubed.id("background"),
+            RenderType::guiTextured, backgroundBox,
             0, 0,
             90, 90
         )

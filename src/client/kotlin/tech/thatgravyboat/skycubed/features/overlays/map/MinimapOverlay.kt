@@ -18,6 +18,7 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
 object MinimapOverlay : Overlay {
 
@@ -40,7 +41,7 @@ object MinimapOverlay : Overlay {
     fun onChange(event: IslandChangeEvent) {
         display = getMapsForLocationOrNull()?.let {
             Displays.background(
-                SkyCubed.id("background"),
+                backgroundBox,
                 Displays.background(
                     0xFF0000FFu,
                     0f,
