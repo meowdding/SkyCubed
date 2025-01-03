@@ -97,73 +97,12 @@ object DialogueOverlay : Overlay {
 
             if (queue.isEmpty()) {
                 if (yesNo != null && !displayedYesNo) {
-                    displayedYesNo = true
-                    nextCheck = System.currentTimeMillis() + displayActionDuration
-
-                    val options = listOf(
-                        Text.of("[Y]es") { this.color = TextColor.GREEN },
-                        Text.of("[N]o") { this.color = TextColor.RED }
-                    )
-
-                    val yesNoDisplay = options.map {
-                        Displays.background(BOX, Displays.padding(5, Displays.text(it)))
-                    }.toColumn(10, Alignment.START)
-
-                    display = listOf(
-                        display,
-                        Displays.pushPop(
-                            {
-                                translate(
-                                    display.getWidth() - yesNoDisplay.getWidth() - 10f,
-                                    -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                                    -1000f
-                                )
-                            },
-                            yesNoDisplay
-                        ),
-                    ).asLayer()
+                    display = createYesNoDisplay()
                 } else {
                     reset()
                 }
             } else {
-                val (name, message) = queue.removeFirstOrNull() ?: return
-                val entity = lastClickedEntities.keys.find { npc ->
-                    McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
-                        .any { it.customName?.stripped == name.stripped }
-                } ?: lastClickedEntities.keys.firstOrNull()
-
-                entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
-
-                val entityDisplay = entity?.let {
-                    Displays.pushPop(
-                        { translate(0f, 0f, -1000f) },
-                        Displays.entity(it, 60, 60, 35, 80f, 40f)
-                    )
-                }
-
-                val npcNameDisplay = Displays.pushPop(
-                    { translate(60f, -8f, 0f) },
-                    Displays.background(
-                        BOX,
-                        Displays.padding(5, Displays.text(name, McClient.window.guiScaledWidth / 3))
-                    )
-                )
-
-                val npcTextDisplay = Displays.padding(15, Displays.text(message, McClient.window.guiScaledWidth / 3))
-
-                display = listOfNotNull(
-                    entityDisplay,
-                    Displays.pushPop(
-                        { translate(0f, 40f, 0f) },
-                        Displays.background(
-                            BOX,
-                            listOf(
-                                npcNameDisplay,
-                                npcTextDisplay,
-                            ).asLayer(),
-                        ),
-                    )
-                ).asLayer()
+                createMainDisplay()?.let { display = it}
             }
         }
 
@@ -174,6 +113,75 @@ object DialogueOverlay : Overlay {
         val command = if (isYes) yesCommand else if (isNo) noCommand else return
         McClient.sendCommand(command.removePrefix("/"))
         reset()
+    }
+
+    private fun createMainDisplay(): Display? {
+        val (name, message) = queue.removeFirstOrNull() ?: return null
+        val entity = lastClickedEntities.keys.find { npc ->
+            McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
+                .any { it.customName?.stripped == name.stripped }
+        } ?: lastClickedEntities.keys.firstOrNull()
+
+        entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
+
+        val entityDisplay = entity?.let {
+            Displays.pushPop(
+                { translate(0f, 0f, -1000f) },
+                Displays.entity(it, 60, 60, 35, 80f, 40f)
+            )
+        }
+
+        val npcNameDisplay = Displays.pushPop(
+            { translate(60f, -8f, 0f) },
+            Displays.background(
+                BOX,
+                Displays.padding(5, Displays.text(name, McClient.window.guiScaledWidth / 3))
+            )
+        )
+
+        val npcTextDisplay = Displays.padding(15, Displays.text(message, McClient.window.guiScaledWidth / 3))
+
+        return listOfNotNull(
+            entityDisplay,
+            Displays.pushPop(
+                { translate(0f, 40f, 0f) },
+                Displays.background(
+                    BOX,
+                    listOf(
+                        npcNameDisplay,
+                        npcTextDisplay,
+                    ).asLayer(),
+                ),
+            )
+        ).asLayer()
+    }
+
+    private fun createYesNoDisplay(): Display {
+        displayedYesNo = true
+        nextCheck = System.currentTimeMillis() + displayActionDuration
+
+        val options = listOf(
+            Text.of("[Y]es") { this.color = TextColor.GREEN },
+            Text.of("[N]o") { this.color = TextColor.RED }
+        )
+
+        val yesNoDisplay = options.map {
+            Displays.background(BOX, Displays.padding(5, Displays.text(it)))
+        }.toColumn(10, Alignment.START)
+
+        return listOf(
+            display,
+            Displays.pushPop(
+                {
+                    translate(
+                        display.getWidth() - yesNoDisplay.getWidth() - 10f,
+                        -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
+                        -1000f
+                    )
+                },
+                yesNoDisplay
+            ),
+        ).asLayer()
     }
 
     private fun reset() {
