@@ -61,11 +61,11 @@ object DialogueOverlay : Overlay {
 
         regex.match(event.component, "name", "message") { (name, message) ->
             queue.add(name to message)
-            event.cancel()
+            if (config.hideChatMessage) event.cancel()
         }
         yesNoRegex.match(event.component, "yes", "no") { (yes, no) ->
             yesNo = (yes.style.clickEvent?.value ?: "") to (no.style.clickEvent?.value ?: "")
-            event.cancel()
+            if (config.hideChatMessage) event.cancel()
         }
     }
 
