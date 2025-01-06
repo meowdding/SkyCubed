@@ -1,25 +1,37 @@
 package tech.thatgravyboat.skycubed.features.map.texture
 
+import com.mojang.blaze3d.platform.NativeImage
 import com.mojang.serialization.Codec
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.client.renderer.texture.SimpleTexture
+import net.minecraft.client.renderer.texture.DynamicTexture
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skycubed.features.map.texture.DownloadedAsset.runDownload
+import java.io.File
+import java.io.FileInputStream
 
 class MapImage(private val url: String) {
 
     private val id: String = DownloadedAsset.getUrlHash(url)
     private val location: ResourceLocation = ResourceLocation.fromNamespaceAndPath("skycubed_map", this.id)
-    private var texture: SimpleTexture? = null
+    private val file: File = FabricLoader.getInstance().configDir.resolve("skycubed").resolve("map").resolve(this.id).toFile()
+
+    private var uploaded: Boolean = false
+    private var image: NativeImage? = null
+
+    private fun loadFromFile() {
+        this.image = this.file.takeIf { it.isFile }?.runCatching { NativeImage.read(FileInputStream(this)) }?.getOrNull()
+        this.image?.let { image -> McClient.self.textureManager.register(this.location, DynamicTexture(image)) }
+    }
 
     fun getId(): ResourceLocation {
-        if (this.texture == null) {
-            this.texture = DownloadedTexture(
-                FabricLoader.getInstance().configDir.resolve("skycubed").resolve("map").resolve(this.id).toFile(),
-                url,
-                this.location
-            )
-            McClient.self.textureManager.register(this.location, this.texture!!)
+        if (!this.uploaded) {
+            this.loadFromFile()
+
+            if (this.image != null) {
+                runDownload(this.url, this.file, this::loadFromFile)
+            }
+            this.uploaded = true
         }
         return this.location
     }
