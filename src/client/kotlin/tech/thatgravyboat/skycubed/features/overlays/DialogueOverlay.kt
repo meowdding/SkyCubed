@@ -11,17 +11,18 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
 import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEntityEvent
+import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
+import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.*
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
@@ -55,6 +56,8 @@ object DialogueOverlay : Overlay {
     private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 
+    private var containerLeftPos: Int? = null
+
     @Subscription
     @OnlyOnSkyBlock
     fun onChatReceived(event: ChatReceivedEvent.Pre) {
@@ -68,6 +71,12 @@ object DialogueOverlay : Overlay {
             yesNo = (yes.style.clickEvent?.value ?: "") to (no.style.clickEvent?.value ?: "")
             if (config.hideChatMessage) event.cancel()
         }
+    }
+
+    @Subscription
+    @OnlyOnSkyBlock
+    fun onInventoryInit(event: ContainerInitializedEvent) {
+        containerLeftPos = event.screen.left
     }
 
     @Subscription
@@ -104,7 +113,11 @@ object DialogueOverlay : Overlay {
                     reset()
                 }
             } else {
-                createMainDisplay()?.let { hudOverlayDisplay = it }
+                val (name, message) = queue.removeFirstOrNull() ?: return
+                createMainDisplay(name, message, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
+                val inventoryOverlayWidth =
+                    containerLeftPos.takeIf { it != null } ?: (McClient.window.guiScaledWidth / 4)
+                createMainDisplay(name, message, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
             }
         }
 
@@ -117,8 +130,7 @@ object DialogueOverlay : Overlay {
         reset()
     }
 
-    private fun createMainDisplay(): Display? {
-        val (name, message) = queue.removeFirstOrNull() ?: return null
+    private fun createMainDisplay(name: Component, message: Component, maxWidth: Int): Display? {
         val entity = lastClickedEntities.keys.find { npc ->
             McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
                 .any { it.customName?.stripped == name.stripped }
@@ -137,11 +149,11 @@ object DialogueOverlay : Overlay {
             { translate(60f, -8f, 0f) },
             Displays.background(
                 backgroundBox,
-                Displays.padding(5, Displays.text(name, McClient.window.guiScaledWidth / 3))
+                Displays.padding(5, Displays.text(name, maxWidth))
             )
         )
 
-        val npcTextDisplay = Displays.padding(15, Displays.text(message, McClient.window.guiScaledWidth / 3))
+        val npcTextDisplay = Displays.padding(15, Displays.text(message, maxWidth))
 
         return listOfNotNull(
             entityDisplay,
@@ -203,8 +215,6 @@ object DialogueOverlay : Overlay {
                 graphics,
                 5,
                 graphics.guiHeight() / 2 - inventoryOverlayDisplay.getHeight() / 2,
-                0.5f,
-                1f
             )
         } else {
             hudOverlayDisplay.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
