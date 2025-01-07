@@ -90,6 +90,7 @@ object DialogueOverlay : Overlay {
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
         if (!enabled) return
 
