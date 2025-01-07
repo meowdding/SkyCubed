@@ -16,10 +16,12 @@ val Layout.children: List<LayoutElement>
         return children
     }
 
+fun PoseStack.translate(x: Int, y: Int, z: Int) {
+    this.translate(x.toFloat(), y.toFloat(), z.toFloat())
+}
+
 inline fun GuiGraphics.scissor(x: Int, y: Int, width: Int, height: Int, action: () -> Unit) {
-    val xTranslation = this.pose().last().pose().m30()
-    val yTranslation = this.pose().last().pose().m31()
-    this.enableScissor(xTranslation.toInt() + x, yTranslation.toInt() + y, xTranslation.toInt() + x + width, yTranslation.toInt() + y + height)
+    this.enableScissor(x, y, x + width, y + height)
     action()
     this.disableScissor()
 }

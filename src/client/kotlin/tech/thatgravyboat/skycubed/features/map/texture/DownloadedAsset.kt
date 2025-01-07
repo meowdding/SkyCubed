@@ -8,14 +8,12 @@ import org.apache.commons.io.FilenameUtils
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import java.io.File
 import java.io.IOException
-import java.io.InputStream
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.util.*
 import java.util.concurrent.CompletableFuture
-import java.util.function.Consumer
 
 object DownloadedAsset {
 
@@ -32,7 +30,7 @@ object DownloadedAsset {
         .followRedirects(HttpClient.Redirect.NORMAL)
         .build()
 
-    fun runDownload(uri: String?, file: File, callback: Consumer<InputStream?>): CompletableFuture<Void> {
+    fun runDownload(uri: String?, file: File, callback: () -> Unit): CompletableFuture<Void> {
         return CompletableFuture.runAsync({
             createUrl(uri).ifPresent { url: URI? ->
                 try {
@@ -48,13 +46,7 @@ object DownloadedAsset {
                     if (response.statusCode() / 100 != 2) return@ifPresent
                     FileUtils.copyInputStreamToFile(response.body(), file)
 
-                    McClient.tell {
-                        runCatching {
-                            FileUtils.openInputStream(file).use { stream ->
-                                callback.accept(stream)
-                            }
-                        }
-                    }
+                    McClient.tell { callback() }
                 } catch (_: IOException) {
                 } catch (_: InterruptedException) {
                 }
