@@ -11,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
 import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEntityEvent
+import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -28,6 +29,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import tech.thatgravyboat.skycubed.utils.pushPop
 import kotlin.math.max
 
 object DialogueOverlay : Overlay {
@@ -140,7 +142,7 @@ object DialogueOverlay : Overlay {
 
         val entityDisplay = entity?.let {
             Displays.pushPop(
-                { translate(0f, 0f, -1000f) },
+                { translate(0f, 0f, -100f) },
                 Displays.entity(it, 60, 60, 35, 80f, 40f)
             )
         }
@@ -207,6 +209,18 @@ object DialogueOverlay : Overlay {
         hudOverlayDisplay = Displays.empty()
         inventoryOverlayDisplay = Displays.empty()
         nextCheck = 0
+    }
+
+    @Subscription
+    @OnlyOnSkyBlock
+    fun onForeground(event: RenderScreenForegroundEvent) {
+        if (!enabled) return
+        val graphics = event.graphics
+
+        graphics.pushPop {
+            translate(0f, 0f, 100f)
+            render(graphics, 0, 0)
+        }
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
