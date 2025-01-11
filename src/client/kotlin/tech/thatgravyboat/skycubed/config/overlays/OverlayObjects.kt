@@ -138,5 +138,9 @@ class NpcOverlay : Translatable {
     @Comment("", translation = "config.skycubed.overlays.npc.durationForActionMessage.desc")
     var durationForActionMessage: Float = 10f
 
+    @ConfigEntry(id = "hideChatMessage", translation = "config.skycubed.overlays.npc.hideChatMessage")
+    @Comment("", translation = "config.skycubed.overlays.npc.hideChatMessage.desc")
+    var hideChatMessage: Boolean = true
+
     override fun getTranslationKey(): String = "Edit NPC Overlay"
 }
