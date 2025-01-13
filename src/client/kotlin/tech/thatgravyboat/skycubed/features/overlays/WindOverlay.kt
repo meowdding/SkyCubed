@@ -35,8 +35,8 @@ object WindOverlay {
                 );
                 scale(1.2F, 1.2F, 1.2F);
 
-                val width = font.width(windCompassComponent)
-                event.graphics.drawStringWithBackdrop(font, windCompassComponent, -width / 2, -10, width, 0xffffff);
+                val width = font.width(windCompassComponent!!)
+                event.graphics.drawStringWithBackdrop(font, windCompassComponent!!, -width / 2, -10, width, 0xffffff);
             }
         }
     }
@@ -48,16 +48,16 @@ object WindOverlay {
         if (index == null && !checked) {
             scoreboard.forEachIndexed { index, line ->
                 if (line.stripped == "Wind Compass") {
-                    this.index = index+1
-                    windCompassComponent = scoreboard[this.index!!]
+                    this.index = index + 1
+                    windCompassComponent = scoreboard.getOrNull(this.index!!)
                     return@forEachIndexed
                 }
             }
             checked = true
         } else if (index != null) {
-            val line = scoreboard[this.index!!]
-            val previousLine = scoreboard[this.index!! - 1]
-            if (previousLine.stripped == "Wind Compass") {
+            val line = scoreboard.getOrNull(this.index!!)
+            val previousLine = scoreboard.getOrNull(this.index!! - 1)
+            if (previousLine?.stripped == "Wind Compass") {
                 windCompassComponent = line
             } else {
                 index = null
