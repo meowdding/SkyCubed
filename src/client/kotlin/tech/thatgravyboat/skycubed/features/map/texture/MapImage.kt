@@ -24,11 +24,22 @@ class MapImage(private val url: String) {
         this.image?.let { image -> McClient.self.textureManager.register(this.location, DynamicTexture(image)) }
     }
 
+    private fun loadDefaultTexture() {
+        val default = NativeImage(16, 16, false)
+        for (i in 0 until default.width) {
+            for (j in 0 until default.height) {
+                default.setPixel(i, j, 0)
+            }
+        }
+        McClient.self.textureManager.register(this.location, DynamicTexture(default))
+    }
+
     fun getId(): ResourceLocation {
         if (!this.uploaded) {
+            this.loadDefaultTexture()
             this.loadFromFile()
 
-            if (this.image != null) {
+            if (this.image == null) {
                 runDownload(this.url, this.file, this::loadFromFile)
             }
             this.uploaded = true

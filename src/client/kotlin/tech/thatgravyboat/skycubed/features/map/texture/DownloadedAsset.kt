@@ -7,12 +7,10 @@ import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import java.io.File
-import java.io.IOException
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
-import java.util.*
 import java.util.concurrent.CompletableFuture
 
 object DownloadedAsset {
@@ -32,24 +30,19 @@ object DownloadedAsset {
 
     fun runDownload(uri: String?, file: File, callback: () -> Unit): CompletableFuture<Void> {
         return CompletableFuture.runAsync({
-            createUrl(uri).ifPresent { url: URI? ->
-                try {
-                    val request = HttpRequest.newBuilder(url)
-                        .GET()
-                        .build()
+            createUrl(uri)?.runCatching {
+                val request = HttpRequest.newBuilder(this)
+                    .GET()
+                    .build()
 
-                    val response =
-                        CLIENT.send(
-                            request,
-                            HttpResponse.BodyHandlers.ofInputStream()
-                        )
-                    if (response.statusCode() / 100 != 2) return@ifPresent
+                val response = CLIENT.send(request, HttpResponse.BodyHandlers.ofInputStream())
+                if (response.statusCode() / 100 == 2) {
                     FileUtils.copyInputStreamToFile(response.body(), file)
 
                     McClient.tell { callback() }
-                } catch (_: IOException) {
-                } catch (_: InterruptedException) {
                 }
+            }?.onFailure { exception ->
+                Constants.LOGGER.error("Failed to download asset from URI: $uri", exception)
             }
         }, Util.backgroundExecutor())
     }
@@ -60,18 +53,12 @@ object DownloadedAsset {
         return Hashing.sha1().hashUnencodedChars(hashedUrl).toString()
     }
 
-    private fun createUrl(string: String?): Optional<URI> {
-        if (string == null) return Optional.empty()
-        try {
-            val url = URI.create(string)
-            if (!ALLOWED_DOMAINS.contains(url.host)) {
-                Constants.LOGGER.warn("Tried to load texture from disallowed domain: {}", url.host)
-                return Optional.empty()
-            }
-            if (url.scheme != "https") return Optional.empty()
-            return Optional.of(url)
-        } catch (ignored: Exception) {
-            return Optional.empty()
-        }
-    }
+    private fun createUrl(string: String?): URI? = string?.runCatching {
+        val url = URI.create(this)
+        if (!ALLOWED_DOMAINS.contains(url.host)) error("Tried to load texture from disallowed domain: ${url.host}")
+        if (url.scheme != "https") error("Invalid scheme")
+        url
+    }?.onFailure { exception ->
+        Constants.LOGGER.error("Failed to create URI from string: $string", exception)
+    }?.getOrNull()
 }
