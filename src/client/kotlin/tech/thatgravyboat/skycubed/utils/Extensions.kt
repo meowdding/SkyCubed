@@ -1,12 +1,16 @@
 package tech.thatgravyboat.skycubed.utils
 
+import com.mojang.blaze3d.platform.InputConstants
 import earth.terrarium.olympus.client.shader.builtin.RoundedRectShader
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ClickType
+import net.minecraft.world.inventory.Slot
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.json.Json
 import java.io.InputStream
 import kotlin.reflect.jvm.javaType
@@ -39,7 +43,7 @@ internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: I
 
 internal fun GuiGraphics.fillRect(
     x: Int, y: Int, width: Int, height: Int,
-    backgroundColor: Int, borderColor: Int = 0x00000000,
+    backgroundColor: Int, borderColor: Int = 0x0,
     borderSize: Int = 0, radius: Int = 0
 ) {
     val xOffset = this.pose().last().pose().m30()
@@ -91,10 +95,13 @@ internal fun Duration.formatReadableTime(biggestUnit: DurationUnit, maxUnits: In
     }.ifEmpty { "0 seconds" }
 }
 
-// stolen from api :333333
-internal fun currentInstant(): Instant = Clock.System.now()
-internal fun Instant.until(): Duration = this - currentInstant()
-
-internal fun <T> List<T>.findWithIndex(predicate: (T) -> Boolean): IndexedValue<T>? {
-    return this.withIndex().find { predicate(it.value) }
+fun AbstractContainerMenu.click(slot: Slot) {
+    val player = McPlayer.self ?: return
+    McClient.self.gameMode?.handleInventoryMouseClick(
+        this.containerId,
+        slot.index,
+        InputConstants.MOUSE_BUTTON_LEFT,
+        ClickType.PICKUP,
+        player
+    )
 }

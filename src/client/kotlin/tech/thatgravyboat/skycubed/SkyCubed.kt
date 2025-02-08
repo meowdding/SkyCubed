@@ -10,6 +10,7 @@ import tech.thatgravyboat.skycubed.features.misc.ElementHider
 import tech.thatgravyboat.skycubed.features.chat.ChatManager
 import tech.thatgravyboat.skycubed.features.commands.hypixel.HypixelCommands
 import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
+import tech.thatgravyboat.skycubed.features.equipment.wardobe.WardrobeFeature
 import tech.thatgravyboat.skycubed.features.items.CooldownManager
 import tech.thatgravyboat.skycubed.features.items.ItemBarManager
 import tech.thatgravyboat.skycubed.features.map.Maps
@@ -44,6 +45,7 @@ object SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(DungeonMap)
         SkyBlockAPI.eventBus.register(ContributorHandler)
         SkyBlockAPI.eventBus.register(UpdateChecker)
+        SkyBlockAPI.eventBus.register(WardrobeFeature)
     }
 
 

@@ -7,7 +7,6 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.displays.Display
 import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
@@ -42,19 +41,15 @@ object MinimapOverlay : Overlay {
         display = getMapsForLocationOrNull()?.let {
             Displays.background(
                 backgroundBox,
-                Displays.background(
-                    0xFF0000FFu,
-                    0f,
-                    Displays.center(90, 90, Displays.renderable(MapsWidget(
-                        it,
-                        GettingState.of { McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x },
-                        GettingState.of { McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z },
-                        State.of(1f),
-                        { false },
-                        86,
-                        86
-                    )))
-                )
+                Displays.center(90, 90, Displays.renderable(MapsWidget(
+                    it,
+                    GettingState.of { McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x },
+                    GettingState.of { McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z },
+                    State.of(1f),
+                    { false },
+                    86,
+                    86
+                )))
             )
         }
     }

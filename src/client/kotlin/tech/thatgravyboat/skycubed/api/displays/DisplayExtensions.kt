@@ -1,5 +1,7 @@
 package tech.thatgravyboat.skycubed.api.displays
 
+import earth.terrarium.olympus.client.components.Widgets
+import earth.terrarium.olympus.client.components.buttons.Button
 import net.minecraft.network.chat.Component
 
 
@@ -43,4 +45,15 @@ fun List<Any>.asLayer(): Display {
             }
         }.toTypedArray()
     )
+}
+
+fun Display.asWidget(): Button {
+    return Widgets.button()
+        .withTexture(null)
+        .withSize(this.getWidth(), this.getHeight())
+        .withRenderer { graphics, context, _ ->
+            val offsetX = (context.width - this.getWidth()) / 2f
+            val offsetY = (context.height - this.getHeight()) / 2f
+            this.render(graphics, context.x, context.y, offsetX, offsetY)
+        }
 }

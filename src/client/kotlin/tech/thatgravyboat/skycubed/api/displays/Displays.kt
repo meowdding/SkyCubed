@@ -47,17 +47,28 @@ object Displays {
         }
     }
 
-    fun background(color: UInt, radius: Float, display: Display): Display {
+    fun background(color: UInt, radius: Float, border: UInt = 0x0u, display: Display): Display {
         return object : Display {
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
                 RenderSystem.enableBlend()
-                graphics.fillRect(0, 0, getWidth(), getHeight(), color.toInt(), radius = radius.toInt())
+                graphics.fillRect(
+                    0, 0,
+                    getWidth(), getHeight(),
+                    color.toInt(),
+                    border.toInt(),
+                    2,
+                    radius.toInt()
+                )
                 display.render(graphics)
                 RenderSystem.disableBlend()
             }
         }
+    }
+
+    fun background(color: UInt, radius: Float, display: Display): Display {
+        return background(color, radius, 0x0u, display)
     }
 
     fun background(sprite: ResourceLocation, display: Display): Display {
@@ -292,7 +303,7 @@ object Displays {
 
     fun entity(
         entity: LivingEntity,
-        with: Int,
+        width: Int,
         height: Int,
         scale: Int,
         mouseX: Float = -1f,
@@ -300,10 +311,10 @@ object Displays {
         spinning: Boolean = false,
     ): Display {
         return object : Display {
-            override fun getWidth() = with
+            override fun getWidth() = width
             override fun getHeight() = height
             override fun render(graphics: GuiGraphics) {
-                val centerX = with / 2f
+                val centerX = width / 2f
                 val centerY = height / 2f
                 val eyesX = mouseX.takeIf { it != -1f } ?: centerX
                 val eyesY = mouseY.takeIf { it != -1f } ?: centerY

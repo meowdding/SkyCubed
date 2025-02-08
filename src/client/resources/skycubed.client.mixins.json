@@ -1,23 +1,29 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "tech.thatgravyboat.skycubed.mixins",
-  "compatibilityLevel": "JAVA_21",
-  "client": [
-    "BossHealthOverlayAccessor",
-    "ChatComponentMixin",
-    "EffectsInInventoryMixin",
-    "GuiGraphicsMixin",
-    "GuiMessageLineMixin",
-    "GuiMixin",
-    "InventoryScreenMixin",
-    "SkinManagerInvoker"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "mixins": [
-    "ClientboundCommandsPacketMixin",
-    "PlayerTabOverlayMixin"
-  ]
+    "required": true,
+    "minVersion": "0.8",
+    "package": "tech.thatgravyboat.skycubed.mixins",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+        "BossHealthOverlayAccessor",
+        "ChatComponentMixin",
+        "EffectsInInventoryMixin",
+        "GuiGraphicsMixin",
+        "GuiMessageLineMixin",
+        "GuiMixin",
+        "InventoryScreenMixin",
+        "SkinManagerInvoker",
+        "displayplayer.CustomHeadLayerMixin",
+        "displayplayer.EquipmentLayerRendererMixin",
+        "displayplayer.HumanoidArmorLayerMixin",
+        "displayplayer.PlayerRendererMixin",
+        "displayplayer.SkullBlockRendererMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "mixins": [
+        "ClientboundCommandsPacketMixin",
+        "PlayerTabOverlayMixin",
+        "displayplayer.PlayerRenderStateMixin"
+    ]
 }

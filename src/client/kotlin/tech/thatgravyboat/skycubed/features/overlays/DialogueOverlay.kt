@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.overlays
 
 import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -224,7 +225,7 @@ object DialogueOverlay : Overlay {
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (McScreen.self != null) {
+        if (McScreen.self != null && !McScreen.isOf<ChatScreen>()) {
             inventoryOverlayDisplay.render(
                 graphics,
                 5,

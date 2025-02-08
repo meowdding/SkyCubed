@@ -13,5 +13,7 @@ object ScreensConfig {
     @Comment("", translation = "config.skycubed.screens.equipment.desc")
     var equipment = true
 
-
+    @ConfigEntry(id = "wardrobe", translation = "config.skycubed.screens.wardrobe")
+    @Comment("", translation = "config.skycubed.screens.wardrobe.desc")
+    val wardrobe = WardrobeConfig()
 }

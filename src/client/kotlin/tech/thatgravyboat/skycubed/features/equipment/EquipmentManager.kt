@@ -5,7 +5,6 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
@@ -17,6 +16,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
+import tech.thatgravyboat.skycubed.utils.HiddenSlot
 
 object EquipmentManager {
 
@@ -96,13 +96,7 @@ object EquipmentManager {
     private fun replaceSlot(menu: AbstractContainerMenu) {
         if (menu.slots.size < 46) return
         if (menu.slots[45] is HiddenSlot) return
-        menu.slots[45] = HiddenSlot(menu.slots[45])
+        menu.slots[45] = HiddenSlot(menu.slots[45]) { !isEnabled }
     }
 
-    private class HiddenSlot(val slot: Slot) : Slot(slot.container, slot.index, slot.x, slot.y) {
-        override fun isActive(): Boolean = !isEnabled && slot.isActive
-        override fun getNoItemIcon() = this.slot.noItemIcon
-        override fun setByPlayer(itemStack: ItemStack, itemStack2: ItemStack) =
-            this.slot.setByPlayer(itemStack, itemStack2)
-    }
 }
