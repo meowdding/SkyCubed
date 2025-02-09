@@ -306,8 +306,8 @@ object Displays {
         width: Int,
         height: Int,
         scale: Int,
-        mouseX: Float = -1f,
-        mouseY: Float = -1f,
+        mouseX: Float = Float.NaN,
+        mouseY: Float = Float.NaN,
         spinning: Boolean = false,
     ): Display {
         return object : Display {
@@ -316,8 +316,8 @@ object Displays {
             override fun render(graphics: GuiGraphics) {
                 val centerX = width / 2f
                 val centerY = height / 2f
-                val eyesX = mouseX.takeIf { it != -1f } ?: centerX
-                val eyesY = mouseY.takeIf { it != -1f } ?: centerY
+                val eyesX = mouseX.takeIf { !it.isNaN() } ?: centerX
+                val eyesY = mouseY.takeIf { !it.isNaN() } ?: centerY
 
                 val rotationX = atan((centerX - eyesX) / 40.0).toFloat()
                 val rotationY = atan((centerY - eyesY) / 40.0).toFloat()
