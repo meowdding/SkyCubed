@@ -7,6 +7,7 @@ import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.AbstractWidget
+import net.minecraft.client.gui.components.WidgetSprites
 import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.layouts.LinearLayout
 import net.minecraft.client.gui.screens.Screen
@@ -22,6 +23,7 @@ import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import tech.thatgravyboat.skycubed.utils.click
 
+private const val BUTTON_SPACING = 3
 private const val CARD_SPACING = 6
 private const val ASPECT_RATIO = 3.0 / 2.0
 
@@ -30,19 +32,25 @@ private const val HOVER_COLOR = 0xFFAAAAAAu
 private const val SELECTED_COLOR = 0xFFFFFFFFu
 private const val BACKGROUND_RADIUS = 10f
 
+private const val GO_BACK_SLOT = 48
+private const val CLOSE_SLOT = 49
 private const val NEXT_PAGE_SLOT = 53
 private const val PREV_PAGE_SLOT = 45
 
 object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val TITLE by lazy {
-        Displays.background(BACKGROUND_COLOR, BACKGROUND_RADIUS, Displays.padding(
-            30, 30, 8, 8,
-            Displays.text(Text.join(
-                Text.of("Wardrobe").withColor(TextColor.WHITE),
-                Text.of(" ʙʏ sᴋʏᴄᴜʙᴇᴅ").withColor(TextColor.GRAY)
-            ))
-        ))
+        Displays.background(
+            BACKGROUND_COLOR, BACKGROUND_RADIUS, Displays.padding(
+                30, 30, 8, 8,
+                Displays.text(
+                    Text.join(
+                        Text.of("Wardrobe").withColor(TextColor.WHITE),
+                        Text.of(" ʙʏ sᴋʏᴄᴜʙᴇᴅ").withColor(TextColor.GRAY)
+                    )
+                )
+            )
+        ).asWidget()
     }
 
     var screen: Screen? = null
@@ -60,18 +68,24 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
     override fun init() {
         val displayWidth = ((this.width - 90) / 9.0).toInt()
 
-        val header = TITLE.asWidget()
-        val footer = Widgets.button()
-            .withTexture(UIConstants.DARK_BUTTON)
-            .withSize(60, 20)
-            .withRenderer(WidgetRenderers.text<AbstractWidget>(Text.of("Edit"))
-                .withColor(MinecraftColors.WHITE)
-                .withCenterAlignment()
-            )
-            .withCallback {
-                WardrobeFeature.isEditing = true
-                this.removed()
+        val footer = LinearLayout.horizontal().spacing(BUTTON_SPACING)
+
+        footer.addChild(createButton(UIConstants.DARK_BUTTON, "Back") {
+            (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
+                menu.click(menu.slots[GO_BACK_SLOT])
             }
+        })
+
+        footer.addChild(createButton(UIConstants.DANGER_BUTTON, "Close") {
+            (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
+                menu.click(menu.slots[CLOSE_SLOT])
+            }
+        })
+
+        footer.addChild(createButton(UIConstants.PRIMARY_BUTTON, "Edit") {
+            WardrobeFeature.isEditing = true
+            this.removed()
+        })
 
         val rows = LinearLayout.vertical().spacing(CARD_SPACING)
 
@@ -109,12 +123,14 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                             ).render(graphics, context.x, context.y)
                         }
                     }
-                    it.withTexture(when {
-                        ScreensConfig.wardrobe.textured && slot.id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
-                        ScreensConfig.wardrobe.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
-                        ScreensConfig.wardrobe.textured -> UIConstants.BUTTON
-                        else -> null
-                    })
+                    it.withTexture(
+                        when {
+                            ScreensConfig.wardrobe.textured && slot.id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
+                            ScreensConfig.wardrobe.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
+                            ScreensConfig.wardrobe.textured -> UIConstants.BUTTON
+                            else -> null
+                        }
+                    )
                     it.withSize(displayWidth, (displayWidth * ASPECT_RATIO).toInt())
                     it.withCallback {
                         (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
@@ -135,11 +151,12 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
         }
 
         rows.arrangeElements()
+        footer.arrangeElements()
         FrameLayout.centerInRectangle(rows, 0, 0, this.width, this.height)
-        FrameLayout.centerInRectangle(header, 0, rows.y - header.height - CARD_SPACING, this.width, header.height)
+        FrameLayout.centerInRectangle(TITLE, 0, rows.y - TITLE.height - CARD_SPACING, this.width, TITLE.height)
         FrameLayout.centerInRectangle(footer, 0, rows.y + rows.height + CARD_SPACING, this.width, footer.height)
 
-        header.visitWidgets(this::addRenderableWidget)
+        TITLE.visitWidgets(this::addRenderableWidget)
         rows.visitWidgets(this::addRenderableWidget)
         footer.visitWidgets(this::addRenderableWidget)
     }
@@ -153,4 +170,18 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
         this.renderBlurredBackground()
         this.renderTransparentBackground(graphics)
     }
+
+    private fun createButton(
+        sprite: WidgetSprites,
+        text: String,
+        callback: () -> Unit
+    ) = Widgets.button()
+        .withTexture(sprite)
+        .withSize(60, 20)
+        .withRenderer(
+            WidgetRenderers.text<AbstractWidget>(Text.of(text))
+                .withColor(MinecraftColors.WHITE)
+                .withCenterAlignment()
+        )
+        .withCallback(callback)
 }
