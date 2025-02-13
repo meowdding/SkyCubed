@@ -36,7 +36,7 @@ object ParkInfoOverlay {
             Displays.padding(
                 3, 1, 2, 2, Displays.row(
                     Displays.padding(1, Displays.sprite(SkyCubed.id("info/icons/bucket"), 8, 8)),
-                    Displays.text(rainTime ?: Text.of("N/A").withColor(TextColor.RED))
+                    Displays.text { rainTime ?: Text.of("N/A").withColor(TextColor.RED) }
                 )
             )
         )
