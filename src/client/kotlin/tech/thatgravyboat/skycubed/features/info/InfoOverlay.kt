@@ -12,6 +12,7 @@ import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.info.farming.FarmhouseInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.farming.GardenInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.farming.TrapperInfoOverlay
+import tech.thatgravyboat.skycubed.features.info.foraging.ParkInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.GlaciteInfoOverlay
@@ -54,6 +55,7 @@ object InfoOverlay : Overlay {
                 else -> MainInfoOverlay.render(graphics)
             }
             SkyBlockIsland.GARDEN -> GardenInfoOverlay.render(graphics)
+            SkyBlockIsland.THE_PARK -> ParkInfoOverlay.render(graphics)
             else -> MainInfoOverlay.render(graphics)
         }
     }
