@@ -30,16 +30,17 @@ object ParkInfoOverlay {
         }
     }
 
-    private val rainTimeDisplay
-        get() = Displays.background(
+    private val rainTimeDisplay by lazy {
+        Displays.background(
             CommonInfoDisplays.LEFT_LINE,
             Displays.padding(
                 3, 1, 2, 2, Displays.row(
                     Displays.padding(1, Displays.sprite(SkyCubed.id("info/icons/bucket"), 8, 8)),
-                    Displays.text { rainTime ?: Text.of("N/A").withColor(TextColor.RED) }
+                    Displays.component({ rainTime ?: Text.of("N/A").withColor(TextColor.RED) })
                 )
             )
         )
+    }
 
     fun render(graphics: GuiGraphics) {
         val width = McClient.window.guiScaledWidth
