@@ -152,11 +152,11 @@ object DialogueOverlay : Overlay {
             { translate(60f, -8f, 0f) },
             Displays.background(
                 backgroundBox,
-                Displays.padding(5, Displays.text(name, maxWidth))
+                Displays.padding(5, Displays.component(name, maxWidth))
             )
         )
 
-        val npcTextDisplay = Displays.text(message, maxWidth)
+        val npcTextDisplay = Displays.component(message, maxWidth)
 
         return listOfNotNull(
             entityDisplay,

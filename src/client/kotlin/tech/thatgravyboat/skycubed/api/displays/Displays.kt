@@ -160,7 +160,17 @@ object Displays {
         }
     }
 
-    fun text(
+    fun component(component: () -> Component, color: () -> UInt = { 0xFFFFFFFFu }, shadow: Boolean = true): Display {
+        return object : Display {
+            override fun getWidth() = component().width
+            override fun getHeight() = 10
+            override fun render(graphics: GuiGraphics) {
+                graphics.drawString(McFont.self, component(), 0, 1, color().toInt(), shadow)
+            }
+        }
+    }
+
+    fun component(
         component: Component,
         maxWidth: Int = NO_SPLIT,
         color: () -> UInt = { 0xFFFFFFFFu },
