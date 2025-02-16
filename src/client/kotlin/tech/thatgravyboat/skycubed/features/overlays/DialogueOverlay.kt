@@ -156,7 +156,7 @@ object DialogueOverlay : Overlay {
             )
         )
 
-        val npcTextDisplay = Displays.padding(15, Displays.text(message, maxWidth))
+        val npcTextDisplay = Displays.text(message, maxWidth)
 
         return listOfNotNull(
             entityDisplay,
@@ -166,7 +166,7 @@ object DialogueOverlay : Overlay {
                     backgroundBox,
                     listOf(
                         npcNameDisplay,
-                        npcTextDisplay,
+                        Displays.padding(15, ((maxWidth * 0.8f).toInt() - npcTextDisplay.getWidth()).coerceAtLeast(0) + 15, 15, 15, npcTextDisplay)
                     ).asLayer(),
                 ),
             )
