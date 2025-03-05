@@ -7,7 +7,6 @@ import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
-import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -74,7 +73,6 @@ object PickUpLog : Overlay {
     }
 
     @Subscription
-    @TimePassed("1s")
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
         val flattenedInventory = McPlayer.inventory
@@ -110,6 +108,9 @@ object PickUpLog : Overlay {
             }
         }
 
+        addedItems.compactAndCombineTimeAndApply()
+        removedItems.compactAndCombineTimeAndApply()
+
         val currentTime = System.currentTimeMillis()
         val timealive = OverlaysConfig.pickupLog.time * 1000
         addedItems.removeIf { it.time + timealive < currentTime }
@@ -133,8 +134,23 @@ object PickUpLog : Overlay {
         display = items.compact().map { OverlaysConfig.pickupLog.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
+    private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {
+        val compacted = compactAndCombineTime()
+        clear()
+        addAll(compacted)
+    }
+
+    /**
+     * Combines items with the same unique id, combines their time and difference
+     */
+    private fun MutableList<PickUpLogItem>.compactAndCombineTime() =
+        groupBy { it.stack.getUniqueId() }.map { (_, items) ->
+            val item = items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
+            item.copy(time = items.maxOf { it.time })
+        }
+
     private fun List<PickUpLogItem>.compact() =
-        takeIf { !OverlaysConfig.pickupLog.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
+        takeUnless { OverlaysConfig.pickupLog.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter(PickUpLogItem::isNotEmpty)
 
