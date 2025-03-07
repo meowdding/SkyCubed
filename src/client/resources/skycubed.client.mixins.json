@@ -23,6 +23,7 @@
     },
     "mixins": [
         "ClientboundCommandsPacketMixin",
+        "CommandDispatcherMixin",
         "PlayerTabOverlayMixin",
         "displayplayer.PlayerRenderStateMixin"
     ]
