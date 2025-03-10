@@ -71,6 +71,7 @@ dependencies {
     modImplementation(libs.rconfigkt)
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
+    modImplementation(libs.modmenu)
 
     include(libs.hypixelapi)
     include(libs.skyblockapi)
@@ -80,7 +81,7 @@ dependencies {
     include(libs.olympus)
 
     modRuntimeOnly(libs.devauth)
-    modRuntimeOnly(libs.modmenu)
+
 }
 
 tasks.processResources {

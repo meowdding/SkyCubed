@@ -22,6 +22,12 @@
                 "adapter": "kotlin",
                 "value": "tech.thatgravyboat.skycubed.SkyCubed"
             }
+        ],
+        "modmenu": [
+            {
+                "adapter": "kotlin",
+                "value": "tech.thatgravyboat.skycubed.config.ModMenuCompat"
+            }
         ]
     },
     "mixins": [
