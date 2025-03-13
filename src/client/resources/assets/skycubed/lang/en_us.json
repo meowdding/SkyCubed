@@ -148,12 +148,6 @@
 
     "config.skycubed.screens.equipment": "Show Equipment",
     "config.skycubed.screens.equipment.desc": "Shows your equipment in your inventory next to your player like armor.",
-    "config.skycubed.screens.wardrobe": "Custom Wardrobe",
-    "config.skycubed.screens.wardrobe.desc": "Allows you to customize the wardrobe screen.",
-    "config.skycubed.screens.wardrobe.enabled": "Enable Custom Wardrobe",
-    "config.skycubed.screens.wardrobe.enabled.desc": "Enables the custom wardrobe screen.",
-    "config.skycubed.screens.wardrobe.textures": "Textures",
-    "config.skycubed.screens.wardrobe.textures.desc": "Use Textures instead of transparent colored squares.",
 
     "config.skycubed.screens.wardrobe": "Custom Wardrobe",
     "config.skycubed.screens.wardrobe.desc": "Changes the wardrobe to be a custom wardrobe with more options.",
