@@ -155,6 +155,15 @@
     "config.skycubed.screens.wardrobe.textures": "Textures",
     "config.skycubed.screens.wardrobe.textures.desc": "Use Textures instead of transparent colored squares.",
 
+    "config.skycubed.screens.wardrobe": "Custom Wardrobe",
+    "config.skycubed.screens.wardrobe.desc": "Changes the wardrobe to be a custom wardrobe with more options.",
+
+        "config.skycubed.screens.wardrobe.enabled": "Enabled",
+        "config.skycubed.screens.wardrobe.enabled.desc": "Enables the custom wardrobe.",
+
+        "config.skycubed.screens.wardrobe.textures": "Textures",
+        "config.skycubed.screens.wardrobe.textures.desc": "Changes it from transparent squares to actual textures.",
+
     "//Items": "",
 
     "config.skycubed.items.title": "Items",

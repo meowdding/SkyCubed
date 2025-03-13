@@ -13,6 +13,7 @@ import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
 object HypixelCommands {
 
     private val commands: MutableList<LiteralHypixelCommand> = mutableListOf()
+    private val roots: MutableList<String> = mutableListOf()
 
     init {
         runBlocking {
@@ -21,6 +22,10 @@ object HypixelCommands {
                 file.toDataOrThrow(LiteralHypixelCommand.CODEC.listOf())?.let(commands::addAll)
             }catch (e: Exception) {
                 println(e)
+            }
+
+            for (command in commands) {
+                roots.addAll(command.values)
             }
         }
     }
@@ -33,6 +38,10 @@ object HypixelCommands {
                 root.children.removeIf { node -> node.name.equals(value, true) }
             }
         }
+    }
+
+    fun isRootCommand(command: String): Boolean {
+        return roots.contains(command)
     }
 
     @Subscription
