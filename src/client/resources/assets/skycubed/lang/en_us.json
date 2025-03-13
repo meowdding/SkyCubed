@@ -169,6 +169,12 @@
     "config.skycubed.items.cooldowns.desc": "Adds vanilla cooldowns to SkyBlock items.",
 
     "//Notifications": "",
+    "config.skycubed.notification.hideChatMessage": "Hide Chat Messages",
+    "config.skycubed.notification.hideChatMessage.desc": "If enabled the chat messages will be hidden when a notification is displayed.",
+    "config.skycubed.notification.showAsToast": "Show as Toast",
+    "config.skycubed.notification.showAsToast.desc": "If enabled the notifications will show as a toast message.",
+    "config.skycubed.notification.toastDuration": "Toast Duration",
+    "config.skycubed.notification.toastDuration.desc": "The time in seconds of how long a toast notification should be displayed for.",
 
     "config.skycubed.notifications.title": "Notifications",
 
