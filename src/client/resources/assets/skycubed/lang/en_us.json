@@ -168,6 +168,13 @@
     "config.skycubed.items.cooldowns": "Item Cooldowns",
     "config.skycubed.items.cooldowns.desc": "Adds vanilla cooldowns to SkyBlock items.",
 
+    "//Rendering": "",
+
+    "config.skycubed.render.title": "Rendering",
+
+    "config.skycubed.render.showOwnTag": "Render own name tag",
+    "config.skycubed.render.showOwnTag.desc": "Renders your own name tag in thrid person",
+
     "//Notifications": "",
     "config.skycubed.notification.hideChatMessage": "Hide Chat Messages",
     "config.skycubed.notification.hideChatMessage.desc": "If enabled the chat messages will be hidden when a notification is displayed.",
