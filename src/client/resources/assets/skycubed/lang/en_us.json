@@ -173,7 +173,7 @@
     "config.skycubed.render.title": "Rendering",
 
     "config.skycubed.render.showOwnTag": "Render own name tag",
-    "config.skycubed.render.showOwnTag.desc": "Renders your own name tag in thrid person",
+    "config.skycubed.render.showOwnTag.desc": "Renders your own name tag in third person.",
 
     "//Notifications": "",
     "config.skycubed.notification.hideChatMessage": "Hide Chat Messages",
