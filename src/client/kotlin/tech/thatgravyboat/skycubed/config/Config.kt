@@ -13,6 +13,7 @@ import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
 
@@ -24,6 +25,7 @@ import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
         ItemsConfig::class,
         ChatConfig::class,
         NotificationsConfig::class,
+        RenderingConfig::class
     ]
 )
 @ConfigInfo.Provider(ConfigInfoProvider::class)
