@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.utils
 
 import com.mojang.blaze3d.platform.InputConstants
-import earth.terrarium.olympus.client.shader.builtin.RoundedRectShader
+import earth.terrarium.olympus.client.pipelines.RoundedRectanage
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
@@ -50,7 +50,7 @@ internal fun GuiGraphics.fillRect(
     val yOffset = this.pose().last().pose().m31()
     pushPop {
         translate(-xOffset, -yOffset, 0f)
-        RoundedRectShader.fill(
+        RoundedRectanage.draw(
             this@fillRect, (x + xOffset).toInt(), (y + yOffset).toInt(), width, height,
             backgroundColor, borderColor, width.coerceAtMost(height) * (radius / 100f), borderSize
         )

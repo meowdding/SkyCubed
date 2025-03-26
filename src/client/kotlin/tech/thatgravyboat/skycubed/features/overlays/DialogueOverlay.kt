@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.overlays
 import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
+import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -71,7 +72,10 @@ object DialogueOverlay : Overlay {
             if (config.hideChatMessage) event.cancel()
         }
         yesNoRegex.match(event.component, "yes", "no") { (yes, no) ->
-            yesNo = (yes.style.clickEvent?.value ?: "") to (no.style.clickEvent?.value ?: "")
+            yesNo = Pair(
+                ((yes.style.clickEvent as? ClickEvent.RunCommand)?.command ?: ""),
+                ((no.style.clickEvent as? ClickEvent.RunCommand)?.command ?: ""),
+            )
             if (config.hideChatMessage) event.cancel()
         }
     }

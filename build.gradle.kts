@@ -68,14 +68,14 @@ dependencies {
     modImplementation(libs.hypixelapi)
     modImplementation(libs.skyblockapi)
     modImplementation(libs.rconfig)
-    modImplementation(libs.rconfigkt)
+    modImplementation(libs.rconfigkt) { isTransitive = false }
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
 
     include(libs.hypixelapi)
     include(libs.skyblockapi)
     include(libs.rconfig)
-    include(libs.rconfigkt)
+    include(libs.rconfigkt) { isTransitive = false }
     include(libs.rlib)
     include(libs.olympus)
 

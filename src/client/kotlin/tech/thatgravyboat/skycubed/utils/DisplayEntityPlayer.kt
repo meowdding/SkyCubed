@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile
 import net.minecraft.Util
 import net.minecraft.client.player.RemotePlayer
 import net.minecraft.client.resources.PlayerSkin
+import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.player.PlayerModelPart
 import net.minecraft.world.item.ItemStack
@@ -23,9 +24,10 @@ class DisplayEntityPlayer(
     private val hasNoArmor: Boolean = armor.all(ItemStack::isEmpty)
 
     init {
-        for (i in 0 until 4) {
-            inventory.armor[i] = armor.reversed()[i]
-        }
+        equipment.set(EquipmentSlot.HEAD, armor[3])
+        equipment.set(EquipmentSlot.CHEST, armor[2])
+        equipment.set(EquipmentSlot.LEGS, armor[1])
+        equipment.set(EquipmentSlot.FEET, armor[0])
     }
 
     override fun getSkin(): PlayerSkin = this.skin ?: super.getSkin()

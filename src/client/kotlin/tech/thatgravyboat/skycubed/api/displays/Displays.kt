@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.api.displays
 
-import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
@@ -52,7 +51,6 @@ object Displays {
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
             override fun render(graphics: GuiGraphics) {
-                RenderSystem.enableBlend()
                 graphics.fillRect(
                     0, 0,
                     getWidth(), getHeight(),
@@ -62,7 +60,6 @@ object Displays {
                     radius.toInt()
                 )
                 display.render(graphics)
-                RenderSystem.disableBlend()
             }
         }
     }

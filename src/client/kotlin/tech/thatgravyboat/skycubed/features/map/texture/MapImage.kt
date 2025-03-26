@@ -21,7 +21,7 @@ class MapImage(private val url: String) {
 
     private fun loadFromFile() {
         this.image = this.file.takeIf { it.isFile }?.runCatching { NativeImage.read(FileInputStream(this)) }?.getOrNull()
-        this.image?.let { image -> McClient.self.textureManager.register(this.location, DynamicTexture(image)) }
+        this.image?.let { image -> McClient.self.textureManager.register(this.location, DynamicTexture({ "Map $url" }, image)) }
     }
 
     private fun loadDefaultTexture() {
@@ -31,7 +31,7 @@ class MapImage(private val url: String) {
                 default.setPixel(i, j, 0)
             }
         }
-        McClient.self.textureManager.register(this.location, DynamicTexture(default))
+        McClient.self.textureManager.register(this.location, DynamicTexture({ "Map Default $url" }, default))
     }
 
     fun getId(): ResourceLocation {
