@@ -248,6 +248,8 @@
     "__keybinds__": "",
 
     "key.skycubed.category": "SkyCubed",
-    "key.skycubed.map": "Open Map"
+    "key.skycubed.map": "Open Map",
+
+    "theme.jade.skycubed": "SkyCubed"
 
 }
