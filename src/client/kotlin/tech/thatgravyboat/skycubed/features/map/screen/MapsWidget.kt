@@ -66,18 +66,7 @@ class MapsWidget(
                                 0xFF3F3F3F.toInt()
                             )
                         }
-                        graphics.blit(
-                            RenderType::guiTextured,
-                            texture.getId(),
-                            0,
-                            0,
-                            0f,
-                            0f,
-                            map.width,
-                            map.height,
-                            map.width,
-                            map.height
-                        )
+                        graphics.blit(RenderType::guiTextured, texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
                     }
 
                     map.pois.forEachIndexed { index, poi ->
@@ -92,12 +81,7 @@ class MapsWidget(
 
                             if (isMouseOver(poi, mouseX - x, mouseY - y)) {
                                 if (McClient.isDev) {
-                                    ScreenUtils.setTooltip(
-                                        poi.tooltip + listOf(
-                                            CommonText.EMPTY,
-                                            Text.of("Id: $index")
-                                        )
-                                    )
+                                    ScreenUtils.setTooltip(poi.tooltip + listOf(CommonText.EMPTY, Text.of("Id: $index")))
                                 } else {
                                     ScreenUtils.setTooltip(poi.tooltip)
                                 }
