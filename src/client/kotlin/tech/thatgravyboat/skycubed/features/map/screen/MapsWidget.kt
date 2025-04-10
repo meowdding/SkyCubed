@@ -17,6 +17,7 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.pushPop
+import tech.thatgravyboat.skycubed.utils.scissor
 import tech.thatgravyboat.skycubed.utils.setValue
 
 class MapsWidget(
@@ -42,9 +43,10 @@ class MapsWidget(
     override fun renderWidget(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         this.cursor = Cursor.DEFAULT
 
+        graphics.scissor(x, y, width, height) {
             graphics.pushPop {
                 translate(x.toFloat(), y.toFloat(), 0f)
-
+                scale(scale, scale, 1f)
                 translate(-xOffset.toFloat(), -zOffset.toFloat(), 0f)
 
                 maps.forEach { map ->
@@ -64,7 +66,18 @@ class MapsWidget(
                                 0xFF3F3F3F.toInt()
                             )
                         }
-                        graphics.blit(RenderType::guiTextured, texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
+                        graphics.blit(
+                            RenderType::guiTextured,
+                            texture.getId(),
+                            0,
+                            0,
+                            0f,
+                            0f,
+                            map.width,
+                            map.height,
+                            map.width,
+                            map.height
+                        )
                     }
 
                     map.pois.forEachIndexed { index, poi ->
@@ -79,7 +92,12 @@ class MapsWidget(
 
                             if (isMouseOver(poi, mouseX - x, mouseY - y)) {
                                 if (McClient.isDev) {
-                                    ScreenUtils.setTooltip(poi.tooltip + listOf(CommonText.EMPTY, Text.of("Id: $index")))
+                                    ScreenUtils.setTooltip(
+                                        poi.tooltip + listOf(
+                                            CommonText.EMPTY,
+                                            Text.of("Id: $index")
+                                        )
+                                    )
                                 } else {
                                     ScreenUtils.setTooltip(poi.tooltip)
                                 }
@@ -104,6 +122,7 @@ class MapsWidget(
                     }
                 }
             }
+        }
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, dragX: Double, dragY: Double): Boolean {
