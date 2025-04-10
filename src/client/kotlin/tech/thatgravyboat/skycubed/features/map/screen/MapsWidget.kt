@@ -17,7 +17,6 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.pushPop
-import tech.thatgravyboat.skycubed.utils.scissor
 import tech.thatgravyboat.skycubed.utils.setValue
 
 class MapsWidget(
@@ -43,10 +42,9 @@ class MapsWidget(
     override fun renderWidget(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         this.cursor = Cursor.DEFAULT
 
-        graphics.scissor(x, y, width, height) {
             graphics.pushPop {
                 translate(x.toFloat(), y.toFloat(), 0f)
-                scale(scale, scale, 1f)
+
                 translate(-xOffset.toFloat(), -zOffset.toFloat(), 0f)
 
                 maps.forEach { map ->
@@ -106,7 +104,6 @@ class MapsWidget(
                     }
                 }
             }
-        }
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, dragX: Double, dragY: Double): Boolean {
