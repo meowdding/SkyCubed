@@ -1,8 +1,9 @@
 package tech.thatgravyboat.skycubed
 
-import com.mojang.logging.LogUtils
 import net.fabricmc.api.ModInitializer
 import net.minecraft.resources.ResourceLocation
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skycubed.api.overlays.Overlays
 import tech.thatgravyboat.skycubed.config.ConfigManager
@@ -25,7 +26,7 @@ import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
 
-object SkyCubed : ModInitializer {
+object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") {
 
     override fun onInitialize() {
         SkyBlockAPI.eventBus.register(ConfigManager)
@@ -49,9 +50,6 @@ object SkyCubed : ModInitializer {
         SkyBlockAPI.eventBus.register(WardrobeFeature)
         SkyBlockAPI.eventBus.register(ParkInfoOverlay)
     }
-
-
-    val logger = LogUtils.getLogger()
 
     fun id(path: String): ResourceLocation {
         return ResourceLocation.fromNamespaceAndPath("skycubed", path)
