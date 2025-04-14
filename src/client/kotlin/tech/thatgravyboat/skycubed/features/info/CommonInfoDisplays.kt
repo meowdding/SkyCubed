@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info
 
-import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
+import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
