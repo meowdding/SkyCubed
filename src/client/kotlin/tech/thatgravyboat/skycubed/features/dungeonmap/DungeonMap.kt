@@ -368,7 +368,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
     private operator fun <T> Array<Array<T?>>.get(roomPos: RoomPosition): T? {
         if (roomPos.x < 0 || roomPos.y < 0 || roomPos.x >= this.size || roomPos.y >= this[0].size) {
-            SkyCubed.logger.warn("Tried to access room out of bounds at ({},{})", roomPos.x, roomPos.y)
+            SkyCubed.warn("Tried to access room out of bounds at ({},{})", roomPos.x, roomPos.y)
             return null
         }
         return this[roomPos.x][roomPos.y]
@@ -376,7 +376,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
     private operator fun <T> Array<Array<T?>>.set(roomPos: RoomPosition, value: T?) {
         if (roomPos.x < 0 || roomPos.y < 0 || roomPos.x >= this.size || roomPos.y >= this[0].size) {
-            SkyCubed.logger.warn("Tried to set room out of bounds at ({},{})", roomPos.x, roomPos.y)
+            SkyCubed.warn("Tried to set room out of bounds at ({},{})", roomPos.x, roomPos.y)
             return
         }
         this[roomPos.x][roomPos.y] = value
