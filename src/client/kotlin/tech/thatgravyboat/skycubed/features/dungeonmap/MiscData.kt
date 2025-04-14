@@ -22,6 +22,10 @@ enum class Checkmark(val color: Byte) {
     DONE(30);
 
     companion object {
-        fun getByColor(color: Byte) = entries.firstOrNull { it.color == color } ?: UNKNOWN
+        fun getByColor(color: Byte) = entries.firstOrNull { it.color == color }
     }
+}
+
+enum class DungeonPhase {
+     BEFORE, CLEAR, BLOOD, BOSS, AFTER
 }

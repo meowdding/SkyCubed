@@ -9,6 +9,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlays
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.chat.ChatManager
 import tech.thatgravyboat.skycubed.features.commands.hypixel.HypixelCommands
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonFeatures
 import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager
 import tech.thatgravyboat.skycubed.features.equipment.wardobe.WardrobeFeature
 import tech.thatgravyboat.skycubed.features.info.foraging.ParkInfoOverlay
@@ -49,6 +50,7 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
         SkyBlockAPI.eventBus.register(UpdateChecker)
         SkyBlockAPI.eventBus.register(WardrobeFeature)
         SkyBlockAPI.eventBus.register(ParkInfoOverlay)
+        SkyBlockAPI.eventBus.register(DungeonFeatures)
     }
 
     fun id(path: String): ResourceLocation {

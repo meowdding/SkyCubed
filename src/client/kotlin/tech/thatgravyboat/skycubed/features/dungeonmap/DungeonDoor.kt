@@ -1,17 +1,17 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
-import org.joml.Vector2i
+import earth.terrarium.olympus.client.utils.Orientation
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 
 /**
- * A door in the map, only created once but can have a changing type since doors can be updated
+ * A door in the map, only created once but can have a changing type since doors can be updated.
+ *
+ * @param orientation horizontal = left; vertical = top
  */
-data class DungeonDoor(val pos: Vector2i, val orientation: DungeonDoorOrientation, var type: DungeonDoorType)
-
-/**
- * Rotation of the door, used to be a boolean but that was annoying so its this now
- */
-enum class DungeonDoorOrientation {
-    LEFT, BOTTOM
+data class DungeonDoor(val pos: DungeonPosition<*>, val orientation: Orientation, var type: DungeonDoorType) {
+    fun isAt(orientation: Orientation, mapPosition: DungeonPosition<*>): Boolean {
+        return pos.inWorldSpace() == mapPosition.inWorldSpace() && this.orientation == orientation
+    }
 }
 
 /**
@@ -28,6 +28,6 @@ enum class DungeonDoorType(val color: Byte) {
     UNKNOWN(DungeonRoomType.UNKNOWN.color);
 
     companion object {
-        fun getByColor(color: Byte) = entries.firstOrNull { it.color == color }?: UNKNOWN
+        fun getByColor(color: Byte) = entries.firstOrNull { it.color == color }
     }
 }

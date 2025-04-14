@@ -1,23 +1,37 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
+import net.minecraft.world.level.material.MapColor
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
+
+class DungeonRoom(val instance: DungeonInstance, var roomType: DungeonRoomType, val positions: MutableList<DungeonPosition<*>> = mutableListOf()) {
+    var mergedWith: DungeonRoom? = null
+    var checkmark: Checkmark = Checkmark.OPENED
+    var puzzleDirty = false
+    var puzzleId = -1
+}
+
 /**
  * The type of room and the corresponding map color.
  */
-enum class DungeonRoomType(val color: Byte) {
+enum class DungeonRoomType(val color: Byte, private val _displayColor: Int) {
 
-    NORMAL(63),
-    SPAWN(30),
-    PUZZLE(66),
-    FAIRY(82),
-    TRAP(62),
-    MINIBOSS(74),
-    BLOOD(18),
-    UNKNOWN(85);
+    NORMAL(63, MapColor.DIRT.col),
+    SPAWN(30, MapColor.COLOR_GREEN.col),
+    PUZZLE(66, MapColor.COLOR_PURPLE.col),
+    FAIRY(82, MapColor.COLOR_PINK.col),
+    BLOOD(18, MapColor.COLOR_RED.col),
+    TRAP(62, MapColor.COLOR_ORANGE.col),
+    MINIBOSS(74, MapColor.COLOR_YELLOW.col),
+    UNKNOWN(85, MapColor.COLOR_GRAY.col);
+
+    val displayColor: Int get() = 0xFF000000u.toInt().or(this._displayColor)
 
     companion object {
-        fun byColor(value: Byte): DungeonRoomType {
-            return entries.firstOrNull { it.color == value } ?: UNKNOWN
+        fun getByColor(value: Byte): DungeonRoomType? {
+            return entries.firstOrNull { it.color == value }
         }
+
+
     }
 
     fun isColor(byte: Byte) = color == byte
