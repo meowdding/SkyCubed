@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
-import tech.thatgravyboat.skycubed.api.displays.Display
+import tech.thatgravyboat.lib.displays.Display
 
 interface Poi {
 

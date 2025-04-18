@@ -6,10 +6,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentSerialization
 import org.joml.Vector2i
+import tech.thatgravyboat.lib.displays.Display
+import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.utils.Codecs
 
 data class PortalPoi(

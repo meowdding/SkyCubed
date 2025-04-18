@@ -11,10 +11,9 @@ import tech.thatgravyboat.skyblockapi.api.events.level.PacketReceivedEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
-import tech.thatgravyboat.skycubed.SkyCubed
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
-import tech.thatgravyboat.skycubed.utils.pushPop
 
 object DungeonMap {
 
@@ -32,7 +31,7 @@ object DungeonMap {
 
         graphics.blit(
             RenderType::guiTextured, state.texture!!,
-            0 ,0,
+            0, 0,
             0f, 0f,
             90, 90,
             128, 128,
@@ -52,7 +51,7 @@ object DungeonMap {
 
                     graphics.blitSprite(
                         RenderType::guiTextured, sprite,
-                        0 ,0,
+                        0, 0,
                         8, 8
                     )
                 }

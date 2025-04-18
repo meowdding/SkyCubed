@@ -1,10 +1,8 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.mojang.blaze3d.vertex.PoseStack
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.utils.State
-import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.layouts.Layout
 import net.minecraft.client.gui.layouts.LayoutElement
@@ -29,24 +27,4 @@ fun LayoutElement.asDebugWidget(): AbstractWidget {
         }
         .withSize(this.width, this.height)
         .withPosition(this.x, this.y)
-}
-
-fun PoseStack.translate(x: Int, y: Int, z: Int) {
-    this.translate(x.toFloat(), y.toFloat(), z.toFloat())
-}
-
-inline fun GuiGraphics.scissor(x: Int, y: Int, width: Int, height: Int, action: () -> Unit) {
-    this.enableScissor(x, y, x + width, y + height)
-    action()
-    this.disableScissor()
-}
-
-inline fun GuiGraphics.pushPop(action: PoseStack.() -> Unit) {
-    this.pose().pushPop(action)
-}
-
-inline fun PoseStack.pushPop(action: PoseStack.() -> Unit) {
-    this.pushPose()
-    this.action()
-    this.popPose()
 }

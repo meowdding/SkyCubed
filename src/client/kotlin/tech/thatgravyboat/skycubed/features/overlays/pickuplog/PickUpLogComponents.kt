@@ -1,9 +1,9 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
+import tech.thatgravyboat.lib.displays.Display
+import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 
 enum class PickUpLogComponents(val display: (PickUpLogItem) -> Display) {
     ITEM_STACK({ Displays.item(it.stack, 10, 10) }),

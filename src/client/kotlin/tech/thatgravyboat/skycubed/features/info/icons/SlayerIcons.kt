@@ -1,11 +1,11 @@
 package tech.thatgravyboat.skycubed.features.info.icons
 
 import net.minecraft.client.gui.GuiGraphics
-import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
-import tech.thatgravyboat.skyblockapi.api.area.SlayerType
+import tech.thatgravyboat.lib.displays.Display
+import tech.thatgravyboat.lib.displays.Displays
+import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
+import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerType
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 
 object SlayerIcons : Display {
 

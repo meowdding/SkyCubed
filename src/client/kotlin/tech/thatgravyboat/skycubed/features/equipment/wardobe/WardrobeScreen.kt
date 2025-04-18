@@ -12,13 +12,14 @@ import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.layouts.LinearLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import tech.thatgravyboat.lib.displays.Displays
+import tech.thatgravyboat.lib.displays.asWidget
 import tech.thatgravyboat.skyblockapi.api.profile.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.asWidget
+import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import tech.thatgravyboat.skycubed.utils.click
@@ -40,7 +41,7 @@ private const val PREV_PAGE_SLOT = 45
 object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val TITLE by lazy {
-        Displays.background(
+        ExtraDisplays.background(
             BACKGROUND_COLOR, BACKGROUND_RADIUS, Displays.padding(
                 30, 30, 8, 8,
                 Displays.text(
@@ -111,7 +112,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                         if (ScreensConfig.wardrobe.textured) {
                             entityDisplay.render(graphics, context.x, context.y)
                         } else {
-                            Displays.background(
+                            ExtraDisplays.background(
                                 BACKGROUND_COLOR,
                                 BACKGROUND_RADIUS,
                                 when {

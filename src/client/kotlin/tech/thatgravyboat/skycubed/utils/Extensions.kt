@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.Slot
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.json.Json
 import java.io.InputStream
 import kotlin.reflect.jvm.javaType
@@ -56,9 +57,6 @@ internal fun GuiGraphics.fillRect(
         )
     }
 }
-
-internal fun String.capitalize() =
-    replace("_", " ").lowercase().split(" ").joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
 
 internal fun Int.toOrdinal(): String {
     val suffixes = arrayOf("th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th")

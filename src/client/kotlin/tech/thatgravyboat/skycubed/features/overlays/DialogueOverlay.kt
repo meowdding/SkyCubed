@@ -8,6 +8,11 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.decoration.ArmorStand
+import tech.thatgravyboat.lib.displays.Alignment
+import tech.thatgravyboat.lib.displays.Display
+import tech.thatgravyboat.lib.displays.Displays
+import tech.thatgravyboat.lib.displays.asLayer
+import tech.thatgravyboat.lib.displays.toColumn
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
@@ -20,18 +25,17 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.api.displays.*
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
-import tech.thatgravyboat.skycubed.utils.pushPop
 import kotlin.math.max
 
 object DialogueOverlay : Overlay {
@@ -146,34 +150,37 @@ object DialogueOverlay : Overlay {
         entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
 
         val entityDisplay = entity?.let {
-            Displays.pushPop(
-                { translate(0f, 0f, -100f) },
-                Displays.entity(it, 60, 60, 35, 80f, 40f)
-            )
+            Displays.pushPop(Displays.entity(it, 60, 60, 35, 80f, 40f))
+            { translate(0f, 0f, -100f) }
         }
 
         val npcNameDisplay = Displays.pushPop(
-            { translate(60f, -8f, 0f) },
             Displays.background(
                 backgroundBox,
                 Displays.padding(5, Displays.component(name, maxWidth))
             )
-        )
+        ) { translate(60f, -8f, 0f) }
 
         val npcTextDisplay = Displays.component(message, maxWidth)
 
         return listOfNotNull(
             entityDisplay,
             Displays.pushPop(
-                { translate(0f, 40f, 0f) },
                 Displays.background(
                     backgroundBox,
                     listOf(
                         npcNameDisplay,
-                        Displays.padding(15, ((maxWidth * 0.8f).toInt() - npcTextDisplay.getWidth()).coerceAtLeast(0) + 15, 15, 15, npcTextDisplay)
+                        Displays.padding(
+                            15,
+                            ((maxWidth * 0.8f).toInt() - npcTextDisplay.getWidth()).coerceAtLeast(0) + 15,
+                            15,
+                            15,
+                            npcTextDisplay
+                        )
                     ).asLayer(),
-                ),
+                )
             )
+            { translate(0f, 40f, 0f) },
         ).asLayer()
     }
 
@@ -192,16 +199,14 @@ object DialogueOverlay : Overlay {
 
         return listOf(
             hudOverlayDisplay,
-            Displays.pushPop(
-                {
-                    translate(
-                        hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
-                        -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                        -1000f
-                    )
-                },
-                yesNoDisplay
-            ),
+            Displays.pushPop(yesNoDisplay)
+            {
+                translate(
+                    hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
+                    -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
+                    -1000f
+                )
+            }
         ).asLayer()
     }
 

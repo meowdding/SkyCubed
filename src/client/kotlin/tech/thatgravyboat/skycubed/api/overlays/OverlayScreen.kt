@@ -5,10 +5,10 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.ConfigManager
-import tech.thatgravyboat.skycubed.utils.pushPop
 
 class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
 
