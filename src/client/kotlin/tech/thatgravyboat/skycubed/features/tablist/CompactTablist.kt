@@ -5,6 +5,10 @@ import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
+import tech.thatgravyboat.lib.displays.Display
+import tech.thatgravyboat.lib.displays.Displays
+import tech.thatgravyboat.lib.displays.toColumn
+import tech.thatgravyboat.lib.displays.toRow
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
@@ -24,10 +28,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.time.until
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.toColumn
-import tech.thatgravyboat.skycubed.api.displays.toRow
+import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
@@ -130,9 +131,10 @@ object CompactTablist {
             }.toColumn()
         }.toRow(5)
 
-        val footerElement =  filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
+        val footerElement =
+            filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
 
-        display = Displays.background(
+        display = ExtraDisplays.background(
             0xA0000000u, 2f,
             Displays.padding(5, listOf(mainElement, footerElement).toColumn()),
         )
