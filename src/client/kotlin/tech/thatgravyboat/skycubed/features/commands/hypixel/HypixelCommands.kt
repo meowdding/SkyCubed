@@ -6,9 +6,8 @@ import kotlinx.coroutines.runBlocking
 import net.minecraft.commands.SharedSuggestionProvider
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
-import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
-
+import tech.thatgravyboat.skycubed.SkyCubed
 
 object HypixelCommands {
 
@@ -18,9 +17,9 @@ object HypixelCommands {
     init {
         runBlocking {
             try {
-                val file = this.javaClass.getResourceAsStream("/repo/commands.json")?.readJson<JsonArray>() ?: return@runBlocking
+                val file = SkyCubed.loadFromRepo<JsonArray>("commands")
                 file.toDataOrThrow(LiteralHypixelCommand.CODEC.listOf())?.let(commands::addAll)
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 println(e)
             }
 

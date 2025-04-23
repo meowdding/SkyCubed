@@ -5,8 +5,8 @@ import com.mojang.serialization.Codec
 import kotlinx.coroutines.runBlocking
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
-import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toData
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 
 object CommissionFormatters {
@@ -16,7 +16,7 @@ object CommissionFormatters {
     init {
         runBlocking {
             runCatching {
-                val file = this.javaClass.getResourceAsStream("/repo/commissions.json")?.readJson<JsonObject>() ?: return@runCatching
+                val file = SkyCubed.loadFromRepo<JsonObject>("commissions")
                 file.toData(Codec.unboundedMap(Codec.STRING, Codec.unboundedMap(Codec.STRING, CommissionFormatter.CODEC)))
                     ?.let(formatters::putAll)
             }
