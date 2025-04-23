@@ -3,9 +3,9 @@ package tech.thatgravyboat.skycubed.features.map.pois
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import me.owdding.lib.displays.Display
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
-import tech.thatgravyboat.lib.displays.Display
 import tech.thatgravyboat.skycubed.api.conditions.Condition
 
 class ConditionalPoi(

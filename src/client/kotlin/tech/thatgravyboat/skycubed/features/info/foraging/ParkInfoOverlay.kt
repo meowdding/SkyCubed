@@ -1,9 +1,9 @@
 package tech.thatgravyboat.skycubed.features.info.foraging
 
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyWidget

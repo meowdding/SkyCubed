@@ -3,11 +3,11 @@ package tech.thatgravyboat.skycubed.features.map.pois
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentSerialization
 import org.joml.Vector2i
-import tech.thatgravyboat.lib.displays.Display
-import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.utils.Codecs

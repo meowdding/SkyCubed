@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info
 
-import tech.thatgravyboat.lib.displays.Displays
+import me.owdding.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason

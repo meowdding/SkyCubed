@@ -1,9 +1,9 @@
 package tech.thatgravyboat.skycubed.features.overlays.commissions
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland

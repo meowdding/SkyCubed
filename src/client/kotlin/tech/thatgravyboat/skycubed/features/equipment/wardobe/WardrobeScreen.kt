@@ -5,6 +5,8 @@ import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIConstants
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.WidgetSprites
@@ -12,8 +14,6 @@ import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.layouts.LinearLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import tech.thatgravyboat.lib.displays.Displays
-import tech.thatgravyboat.lib.displays.asWidget
 import tech.thatgravyboat.skyblockapi.api.profile.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText

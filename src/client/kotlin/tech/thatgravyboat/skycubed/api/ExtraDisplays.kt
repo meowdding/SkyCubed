@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.api
 
+import me.owdding.lib.displays.Display
 import net.minecraft.client.gui.GuiGraphics
-import tech.thatgravyboat.lib.displays.Display
 import tech.thatgravyboat.skycubed.utils.fillRect
 
 object ExtraDisplays {

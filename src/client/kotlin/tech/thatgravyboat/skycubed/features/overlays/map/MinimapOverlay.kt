@@ -1,10 +1,10 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
 import earth.terrarium.olympus.client.utils.State
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.lib.displays.Display
-import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer

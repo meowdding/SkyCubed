@@ -1,14 +1,14 @@
 package tech.thatgravyboat.skycubed.features.tablist
 
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.toRow
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
-import tech.thatgravyboat.lib.displays.Display
-import tech.thatgravyboat.lib.displays.Displays
-import tech.thatgravyboat.lib.displays.toColumn
-import tech.thatgravyboat.lib.displays.toRow
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent

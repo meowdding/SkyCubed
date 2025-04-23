@@ -1,12 +1,12 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.toRow
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
-import tech.thatgravyboat.lib.displays.Display
-import tech.thatgravyboat.lib.displays.Displays
-import tech.thatgravyboat.lib.displays.toColumn
-import tech.thatgravyboat.lib.displays.toRow
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription

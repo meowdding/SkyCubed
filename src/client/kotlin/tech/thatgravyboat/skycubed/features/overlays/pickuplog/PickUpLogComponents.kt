@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
-import tech.thatgravyboat.lib.displays.Display
-import tech.thatgravyboat.lib.displays.Displays
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 

@@ -1,8 +1,8 @@
 package tech.thatgravyboat.skycubed.features.info.farming
 
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.area.farming.TrapperAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString

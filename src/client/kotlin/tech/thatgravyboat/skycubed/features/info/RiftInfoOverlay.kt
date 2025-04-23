@@ -1,8 +1,8 @@
 package tech.thatgravyboat.skycubed.features.info
 
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import tech.thatgravyboat.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI

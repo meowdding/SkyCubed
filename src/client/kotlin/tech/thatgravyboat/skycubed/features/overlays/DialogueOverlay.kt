@@ -1,6 +1,11 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import com.mojang.blaze3d.platform.InputConstants
+import me.owdding.lib.displays.Alignment
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.asLayer
+import me.owdding.lib.displays.toColumn
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.network.chat.ClickEvent
@@ -8,11 +13,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.decoration.ArmorStand
-import tech.thatgravyboat.lib.displays.Alignment
-import tech.thatgravyboat.lib.displays.Display
-import tech.thatgravyboat.lib.displays.Displays
-import tech.thatgravyboat.lib.displays.asLayer
-import tech.thatgravyboat.lib.displays.toColumn
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent

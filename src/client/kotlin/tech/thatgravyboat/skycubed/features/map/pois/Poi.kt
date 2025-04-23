@@ -2,9 +2,9 @@ package tech.thatgravyboat.skycubed.features.map.pois
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
+import me.owdding.lib.displays.Display
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
-import tech.thatgravyboat.lib.displays.Display
 
 interface Poi {
 
