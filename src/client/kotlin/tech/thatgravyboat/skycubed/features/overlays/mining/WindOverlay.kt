@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.mining
 
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
