@@ -1,5 +1,9 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.toRow
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -14,10 +18,6 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.toColumn
-import tech.thatgravyboat.skycubed.api.displays.toRow
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
@@ -45,15 +45,16 @@ object PickUpLog : Overlay {
     override val name = Text.of("Item Pick Up Log")
     override val position = OverlayPositions.pickupLog
     override val bounds get() = exampleDisplay.getWidth() to exampleDisplay.getHeight()
-    override val editBounds: Rect get() {
-        if (display != null) {
-            val (x, y) = position
-            val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
-            val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
-            return Rect(x + relativeX, y + relativeY, display?.getWidth() ?: 0, display?.getHeight() ?: 0)
+    override val editBounds: Rect
+        get() {
+            if (display != null) {
+                val (x, y) = position
+                val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
+                val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
+                return Rect(x + relativeX, y + relativeY, display?.getWidth() ?: 0, display?.getHeight() ?: 0)
+            }
+            return Rect(position, exampleDisplay.getWidth(), exampleDisplay.getHeight())
         }
-        return Rect(position, exampleDisplay.getWidth(), exampleDisplay.getHeight())
-    }
 
     private var display: Display? = null
 
@@ -133,7 +134,8 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = items.compact().map { OverlaysConfig.pickupLog.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
+        display = items.compact()
+            .map { OverlaysConfig.pickupLog.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {

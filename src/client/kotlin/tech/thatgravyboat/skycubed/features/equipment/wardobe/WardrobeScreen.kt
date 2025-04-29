@@ -5,6 +5,8 @@ import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIConstants
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.WidgetSprites
@@ -17,8 +19,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.asWidget
+import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import tech.thatgravyboat.skycubed.utils.click
@@ -40,7 +41,7 @@ private const val PREV_PAGE_SLOT = 45
 object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val TITLE by lazy {
-        Displays.background(
+        ExtraDisplays.background(
             BACKGROUND_COLOR, BACKGROUND_RADIUS, Displays.padding(
                 30, 30, 8, 8,
                 Displays.text(
@@ -111,7 +112,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                         if (ScreensConfig.wardrobe.textured) {
                             entityDisplay.render(graphics, context.x, context.y)
                         } else {
-                            Displays.background(
+                            ExtraDisplays.background(
                                 BACKGROUND_COLOR,
                                 BACKGROUND_RADIUS,
                                 when {

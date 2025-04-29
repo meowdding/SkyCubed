@@ -92,6 +92,7 @@
             "create",
             "chat",
             "accept",
+            "confirm",
             {
                 "values": [ "invite" ],
                 "children": [

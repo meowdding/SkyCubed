@@ -3,10 +3,10 @@ package tech.thatgravyboat.skycubed.features.map.pois
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import me.owdding.lib.displays.Display
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
 import tech.thatgravyboat.skycubed.api.conditions.Condition
-import tech.thatgravyboat.skycubed.api.displays.Display
 
 class ConditionalPoi(
     val enabledCondition: Condition,
@@ -28,10 +28,13 @@ class ConditionalPoi(
 
     companion object {
 
-        val CODEC: MapCodec<ConditionalPoi> = RecordCodecBuilder.mapCodec { it.group(
-            Condition.CODEC.optionalFieldOf("enabled", Condition.TRUE).forGetter(ConditionalPoi::enabledCondition),
-            Condition.CODEC.optionalFieldOf("significant", Condition.TRUE).forGetter(ConditionalPoi::significanceCondition),
-            Codec.lazyInitialized { Poi.CODEC }.fieldOf("poi").forGetter(ConditionalPoi::poi)
-        ).apply(it, ::ConditionalPoi) }
+        val CODEC: MapCodec<ConditionalPoi> = RecordCodecBuilder.mapCodec {
+            it.group(
+                Condition.CODEC.optionalFieldOf("enabled", Condition.TRUE).forGetter(ConditionalPoi::enabledCondition),
+                Condition.CODEC.optionalFieldOf("significant", Condition.TRUE)
+                    .forGetter(ConditionalPoi::significanceCondition),
+                Codec.lazyInitialized { Poi.CODEC }.fieldOf("poi").forGetter(ConditionalPoi::poi)
+            ).apply(it, ::ConditionalPoi)
+        }
     }
 }

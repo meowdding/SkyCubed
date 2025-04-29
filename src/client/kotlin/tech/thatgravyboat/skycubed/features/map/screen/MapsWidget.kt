@@ -11,13 +11,13 @@ import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
+import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.getValue
-import tech.thatgravyboat.skycubed.utils.pushPop
-import tech.thatgravyboat.skycubed.utils.scissor
 import tech.thatgravyboat.skycubed.utils.setValue
 
 class MapsWidget(

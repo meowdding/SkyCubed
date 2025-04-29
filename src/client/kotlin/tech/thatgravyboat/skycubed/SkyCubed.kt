@@ -1,10 +1,13 @@
 package tech.thatgravyboat.skycubed
 
+import kotlinx.coroutines.runBlocking
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
+import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skycubed.api.overlays.Overlays
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.chat.ChatManager
@@ -26,8 +29,11 @@ import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
+import java.nio.file.Files
 
 object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") {
+
+    val mod = FabricLoader.getInstance().getModContainer("skycubed").orElseThrow()
 
     override fun onInitialize() {
         SkyBlockAPI.eventBus.register(ConfigManager)
@@ -55,5 +61,14 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
 
     fun id(path: String): ResourceLocation {
         return ResourceLocation.fromNamespaceAndPath("skycubed", path)
+    }
+
+    inline fun <reified T : Any> loadFromRepo(file: String) = runBlocking {
+        try {
+            mod.findPath("repo/$file.json").orElseThrow()?.let(Files::readString)?.readJson<T>() ?: return@runBlocking null
+        } catch (e: Exception) {
+            error("Failed to load $file from repo", e)
+            null
+        }
     }
 }

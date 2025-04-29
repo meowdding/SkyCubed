@@ -24,10 +24,10 @@ class DisplayEntityPlayer(
     private val hasNoArmor: Boolean = armor.all(ItemStack::isEmpty)
 
     init {
-        equipment.set(EquipmentSlot.HEAD, armor[3])
-        equipment.set(EquipmentSlot.CHEST, armor[2])
-        equipment.set(EquipmentSlot.LEGS, armor[1])
-        equipment.set(EquipmentSlot.FEET, armor[0])
+        equipment.set(EquipmentSlot.HEAD, armor[0])
+        equipment.set(EquipmentSlot.CHEST, armor[1])
+        equipment.set(EquipmentSlot.LEGS, armor[2])
+        equipment.set(EquipmentSlot.FEET, armor[3])
     }
 
     override fun getSkin(): PlayerSkin = this.skin ?: super.getSkin()
