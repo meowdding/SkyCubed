@@ -39,7 +39,7 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
                 -200.0,
                 -200 + (rooms * 32.0),
                 0.0,
-                (6 * combinedSize) * ((rooms.toDouble()) / max)
+                max * (combinedSize + 2.0) - hallwaySize
             ).roundToInt() - 2
         }
     }

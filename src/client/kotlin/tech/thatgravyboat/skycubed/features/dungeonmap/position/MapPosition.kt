@@ -65,7 +65,7 @@ class MapPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<M
         return Mth.clampedMap(
             value.toDouble(),
             topLeft.toDouble(),
-            bottomRight.toDouble(),
+            bottomRight.toDouble() + hallwaySize,
             -200.0,
             -200 + (rooms * 32.0)
         ).roundToInt()

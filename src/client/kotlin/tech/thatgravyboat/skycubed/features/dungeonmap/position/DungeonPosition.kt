@@ -27,4 +27,7 @@ abstract class DungeonPosition<out T: DungeonPosition<T>>(x: Int, y: Int, val in
     protected abstract val self: T
     abstract fun copy(): T
 
+    operator fun component1() = x
+    operator fun component2() = y
+
 }

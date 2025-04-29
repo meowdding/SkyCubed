@@ -36,8 +36,8 @@ class DungeonMap(val instance: DungeonInstance) {
     val roomAndDoorSize get() = roomWidth + HALLWAY_SIZE
     val doorPositions by lazy {
         mapOf(
-            Orientation.HORIZONTAL to Vector2i(-halfRoomWidth - 2, halfRoomWidth / 2),
-            Orientation.VERTICAL to Vector2i(halfRoomWidth / 2, -halfRoomWidth - 2),
+            Orientation.HORIZONTAL to Vector2i(-halfRoomWidth - 3, halfRoomWidth / 2 - 2),
+            Orientation.VERTICAL to Vector2i(halfRoomWidth / 2 - 2, -halfRoomWidth - 3),
         )
     }
 
@@ -354,7 +354,7 @@ class DungeonMap(val instance: DungeonInstance) {
             ) as MapPosition // new vector may not be needed since convertTo creates a new instance anyway (most times)?
 
             doorPositions.entries.forEach doors@{ (orientation, position) ->
-                val doorType = DungeonDoorType.getByColor(mapData.colorAt(mapPosition.add(position))) ?: return@doors
+                val doorType = DungeonDoorType.getByColor(mapData.colorAt(mapPosition.copy().add(position), true)) ?: return@doors
 
                 doors.find { it.isAt(orientation, mapPosition) }?.let { door ->
                     door.type = doorType

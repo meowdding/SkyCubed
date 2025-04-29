@@ -1,77 +1,80 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
-import com.mojang.math.Axis
+import earth.terrarium.olympus.client.constants.MinecraftColors
+import earth.terrarium.olympus.client.utils.Orientation
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.state.MapRenderState
-import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket
-import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
-import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
-import tech.thatgravyboat.skyblockapi.api.events.level.PacketReceivedEvent
-import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
-import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McLevel
-import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
-import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import net.minecraft.util.Mth
+import net.minecraft.world.level.material.MapColor
+import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonFeatures
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.RenderPosition
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.combinedSize
 
 object DungeonMap {
 
-    private val state = MapRenderState()
-    val canRender: Boolean get() = state.texture != null && state.decorations.isNotEmpty() && OverlaysConfig.map.dungeonMap
+    val canRender: Boolean get() = true
 
     fun render(graphics: GuiGraphics) {
-        state.texture ?: return
+        val instance = DungeonFeatures.currentInstance ?: return
+        val dungeonMap = instance.map ?: return
 
-        graphics.blitSprite(
-            RenderType::guiTextured, backgroundBox,
-            0, 0,
-            90, 90
-        )
+        graphics.fill(0, 0, 26 * 5, 26 * 5, -1)
 
-        graphics.blit(
-            RenderType::guiTextured, state.texture!!,
-            0, 0,
-            0f, 0f,
-            90, 90,
-            128, 128,
-            128, 128
-        )
+        val rooms = dungeonMap.roomMap.flatten().distinct().filterNotNull()
+        rooms.forEach { room ->
+            val positions = room.positions.map { it.convertTo<RoomPosition>() }
 
-        graphics.pushPop {
-            for (decoration in state.decorations) {
-                translate(0f, 0f, 0.02f)
-
-                graphics.pushPop decoration@ {
-                    translate(((decoration.x.toFloat() / 2) + 64f) * 0.703125f, ((decoration.y.toFloat() / 2) + 64f) * 0.703125f, 0f)
-                    mulPose(Axis.ZP.rotationDegrees(((decoration.rot + 8) * 360) / 16f))
-                    translate(-4f, -4f, 0f)
-
-                    val sprite = decoration.atlasSprite ?: return@decoration
-
-                    graphics.blitSprite(
-                        RenderType::guiTextured, sprite,
-                        0, 0,
-                        8, 8
-                    )
-                }
+            positions.forEach { (x, y) ->
+                graphics.fill(
+                    ((combinedSize + 2) * x),
+                    ((combinedSize + 2) * y),
+                    ((combinedSize + 2) * x) + combinedSize,
+                    ((combinedSize + 2) * y) + combinedSize,
+                    0xFF000000u.toInt().or(room.hashCode())
+                )
             }
         }
-    }
 
-    @Subscription
-    fun onChange(event: IslandChangeEvent) {
-        state.texture = null
-    }
-
-    @Subscription
-    @OnlyOnSkyBlock
-    fun onPacket(event: PacketReceivedEvent) {
-        val mapid = (event.packet as? ClientboundMapItemDataPacket)?.mapId?.takeIf { it.id == 1024 } ?: return
-        McClient.tell {
-            McLevel.self.getMapData(mapid)?.let { data ->
-                McClient.self.mapRenderer.extractRenderState(mapid, data, state)
+        dungeonMap.doors.forEach { door ->
+            val pos = door.pos.convertTo<RoomPosition>()
+            val x = when (door.orientation) {
+                Orientation.VERTICAL -> pos.x * (combinedSize + 2)
+                Orientation.HORIZONTAL -> pos.x * (combinedSize + 2) - 2
             }
+            val y = when (door.orientation) {
+                Orientation.VERTICAL -> pos.y * (combinedSize + 2) - 2
+                Orientation.HORIZONTAL -> pos.y * (combinedSize + 2)
+            }
+
+            graphics.fill(
+                x,
+                y,
+                x + (if (door.orientation == Orientation.VERTICAL) combinedSize else 2),
+                y + (if (door.orientation == Orientation.VERTICAL) 2 else combinedSize),
+                MapColor.getColorFromPackedId(door.type.color.toInt())
+            )
+        }
+
+        instance.players.filterNotNull().forEach { player ->
+            val renderPosition = player.position.convertTo<RenderPosition>()
+            graphics.run {
+                fill(
+                        renderPosition.x,
+                        renderPosition.y,
+                        renderPosition.x + 10,
+                        renderPosition.y + 10,
+                        if (player.isSelf) -1 else player.hashCode().or(0xFF000000u.toInt())
+                    )
+            }
+
+            graphics.drawString(McFont.self,
+                "${player.position.x()} ${player.position.y()}",
+                renderPosition.x - 5,
+                renderPosition.y - 12,
+                MinecraftColors.RED.value
+            )
         }
     }
 
