@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
+import kotlinx.datetime.Instant
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyIn
@@ -13,11 +14,15 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
+import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import kotlin.time.Duration.Companion.seconds
 
 object WindOverlay {
 
     private var windCompassComponent: Component? = null
+    private var windEnded: Instant = Instant.DISTANT_PAST
 
     @Subscription
     @OnlyIn(SkyBlockIsland.DWARVEN_MINES, SkyBlockIsland.CRYSTAL_HOLLOWS)
@@ -42,6 +47,7 @@ object WindOverlay {
     @TimePassed("2t")
     @OnlyIn(SkyBlockIsland.DWARVEN_MINES, SkyBlockIsland.CRYSTAL_HOLLOWS)
     fun onTick(event: TickEvent) {
+        if (windEnded.since() < 5.seconds) return
         val scoreboard = McClient.scoreboard.toList()
         val index = scoreboard.indexOfFirst { it.stripped == "Wind Compass" }.takeUnless { it == -1 } ?: return
 
@@ -53,6 +59,7 @@ object WindOverlay {
     fun onChatMessage(event: ChatReceivedEvent) {
         if (event.text.contains("GONE WITH THE WIND ENDED!")) {
             windCompassComponent = null
+            windEnded = currentInstant()
         }
     }
 
