@@ -24,6 +24,6 @@ object ExtraDisplays {
     }
 
     fun background(color: UInt, radius: Float, display: Display): Display {
-        return background(color, radius, 0x0u, display)
+        return background(color, radius, color, display)
     }
 }

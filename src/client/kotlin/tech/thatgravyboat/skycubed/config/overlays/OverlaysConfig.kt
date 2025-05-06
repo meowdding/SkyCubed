@@ -28,6 +28,10 @@ object OverlaysConfig {
     @SearchTerm("tablist")
     val tablist = TabListOverlay()
 
+    @ConfigEntry(id = "sack", translation = "config.skycubed.overlays.sack")
+    @Comment("", translation = "config.skycubed.overlays.sack.desc")
+    val sack = SackOverlay()
+
     @ConfigEntry(id = "map", translation = "config.skycubed.overlays.map")
     @Comment("", translation = "config.skycubed.overlays.map.desc")
     val map = MapOverlay()

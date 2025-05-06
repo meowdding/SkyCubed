@@ -66,6 +66,19 @@ class TabListOverlay : Translatable {
     override fun getTranslationKey(): String = "Edit Tab List Overlay"
 }
 
+@ConfigObject
+class SackOverlay : Translatable {
+
+    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.sack.enabled")
+    @Comment("", translation = "config.skycubed.overlays.sack.enabled.desc")
+    var enabled: Boolean = true
+
+    @ConfigOption.Hidden
+    var sackItems: MutableList<String> = mutableListOf()
+
+    override fun getTranslationKey(): String = "Edit Sack Overlay"
+}
+
 
 @ConfigObject
 class MapOverlay : Translatable {
