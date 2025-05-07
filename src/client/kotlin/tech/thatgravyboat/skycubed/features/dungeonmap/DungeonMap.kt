@@ -14,15 +14,14 @@ import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.MapPosition
-import tech.thatgravyboat.skycubed.features.dungeonmap.position.MutableVec2i
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.Rectangle2D
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
 
-private val HALLWAY_SIZE = 4
+private const val HALLWAY_SIZE = 4
 
 class DungeonMap(val instance: DungeonInstance) {
 
-    val roomsPerAxis = MutableVec2i()
+    val roomsPerAxis = Vector2i()
     val mapBox = Rectangle2D()
     val roomMap: Array<Array<DungeonRoom?>> = Array(instance.getRoomAmount()) { arrayOfNulls(instance.getRoomAmount()) }
     val puzzles: MutableList<DungeonRoom> = mutableListOf()
@@ -50,6 +49,13 @@ class DungeonMap(val instance: DungeonInstance) {
 
     fun onRemove() {
         SkyBlockAPI.eventBus.unregister(this)
+    }
+
+    fun getRoom(x: Int, y: Int): DungeonRoom? {
+        if (x < 0 || y < 0 || x >= roomMap.size) return null
+        val row = roomMap[x]
+        if (y >= row.size) return null
+        return row[y]
     }
 
     private fun processWithCachedInfo() {
@@ -104,8 +110,8 @@ class DungeonMap(val instance: DungeonInstance) {
         if (this.mapBox.isDefined()) parseRooms(mapData)
 
         if (mapBox.isDefined()) {
-            mapData.colorAt(mapBox.topLeft(), debug = true)
-            mapData.colorAt(mapBox.bottomRight(), debug = true)
+            mapData.colorAt(mapBox.topLeft())
+            mapData.colorAt(mapBox.bottomRight())
         }
         parseDecorations(mapData)
     }
@@ -115,6 +121,7 @@ class DungeonMap(val instance: DungeonInstance) {
         mapData.decorations.forEach { decoration ->
             index = this.instance.applyOffset(index)
             val player = instance.players[index] ?: return@forEach
+            index++
             with(decoration) {
                 player.setPosition(MapPosition((x + 128) / 2, (y + 128) / 2, instance))
             }
@@ -302,7 +309,7 @@ class DungeonMap(val instance: DungeonInstance) {
         mapPosition: MapPosition,
         mapData: MapItemSavedData,
     ): DungeonRoom? {
-        if (DungeonRoomType.NORMAL.isColor(mapData.colorAt(mapPosition, debug = true))) {
+        if (DungeonRoomType.NORMAL.isColor(mapData.colorAt(mapPosition))) {
             return getRoomAt(roomPosition)
         }
         return null

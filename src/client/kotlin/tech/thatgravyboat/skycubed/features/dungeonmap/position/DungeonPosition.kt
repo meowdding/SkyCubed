@@ -1,8 +1,9 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap.position
 
+import org.joml.Vector2i
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonInstance
 
-abstract class DungeonPosition<out T: DungeonPosition<T>>(x: Int, y: Int, val instance: DungeonInstance) : MutableVec2i(x, y) {
+abstract class DungeonPosition<T: DungeonPosition<T>>(x: Int, y: Int, val instance: DungeonInstance) : Vector2i(x, y) {
 
     inline fun <reified T : DungeonPosition<T>> convertTo(): T {
         return when (T::class) {
@@ -29,5 +30,4 @@ abstract class DungeonPosition<out T: DungeonPosition<T>>(x: Int, y: Int, val in
 
     operator fun component1() = x
     operator fun component2() = y
-
 }

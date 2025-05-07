@@ -1,7 +1,6 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
-import net.minecraft.client.player.LocalPlayer
-import net.minecraft.world.entity.player.Player
+import net.minecraft.client.player.AbstractClientPlayer
 import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonClass
 import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonPlayer
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
@@ -20,8 +19,17 @@ class DungeonPlayer(
 
 ) {
 
+    val oldPosition: DungeonPosition<*> = position.copy()
+
+    var rotationOld: Int = 0
     var rotation: Int = 0
-    var uuid: UUID? = null
+        set(value) {
+            rotationOld = field
+            field = value
+        }
+
+    private var player: AbstractClientPlayer? = null
+    private var uuid: UUID? = null
         get() {
             if (field == null) {
                 field = tryFindUUID()
@@ -29,11 +37,12 @@ class DungeonPlayer(
             return field
         }
 
+
     private fun tryFindUUID(): UUID? {
         if (!McLevel.hasLevel) return null
         return McLevel.self.players().filter { it.name != null }
             .firstOrNull { it.name.stripped.equals(name, ignoreCase = true) }?.also {
-                this.player = it
+                this.player = it as? AbstractClientPlayer
             }?.uuid
     }
 
@@ -44,6 +53,7 @@ class DungeonPlayer(
     }
 
     fun setPosition(mapPosition: DungeonPosition<*>) {
+        this.oldPosition.set(this.position)
         this.position.set(mapPosition.inWorldSpace())
     }
 
@@ -51,7 +61,9 @@ class DungeonPlayer(
         this.rotation = Math.round((rotation * (360 / 16f)) % 360)
     }
 
-    var player: Player? = null
-    val isSelf: Boolean get() = player is LocalPlayer
+    fun getPlayer(): AbstractClientPlayer? {
+        if (uuid == null) return null
+        return player
+    }
 
 }

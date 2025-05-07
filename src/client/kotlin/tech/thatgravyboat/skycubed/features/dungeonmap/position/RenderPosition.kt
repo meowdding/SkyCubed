@@ -5,9 +5,9 @@ import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonInstance
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-val roomWidth = 20
-val hallwaySize = 4
-val combinedSize = roomWidth + hallwaySize
+const val roomWidth = 20
+const val hallwaySize = 4
+const val combinedSize = roomWidth + hallwaySize
 
 class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<RenderPosition>(x, y, instance) {
     companion object {

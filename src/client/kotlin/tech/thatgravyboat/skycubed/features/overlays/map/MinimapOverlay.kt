@@ -24,14 +24,14 @@ object MinimapOverlay : Overlay {
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
-    override val enabled: Boolean get() = (display != null || DungeonMap.canRender) && OverlaysConfig.map.enabled
+    override val enabled: Boolean get() = (display != null && OverlaysConfig.map.enabled) || DungeonMap.canRender
 
     private var display: Display? = null
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (display != null) {
+        if (display != null && OverlaysConfig.map.enabled) {
             display!!.render(graphics)
-        } else {
+        } else if (DungeonMap.canRender) {
             DungeonMap.render(graphics)
         }
     }

@@ -6,6 +6,10 @@ import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 class DungeonRoom(val instance: DungeonInstance, var roomType: DungeonRoomType, val positions: MutableList<DungeonPosition<*>> = mutableListOf()) {
     var mergedWith: DungeonRoom? = null
     var checkmark: Checkmark = Checkmark.OPENED
+        set(value) {
+            if (!this.roomType.isAllowed(value)) return
+            field = value
+        }
     var puzzleDirty = false
     var puzzleId = -1
 }
@@ -26,15 +30,20 @@ enum class DungeonRoomType(val color: Byte, private val _displayColor: Int) {
 
     val displayColor: Int get() = 0xFF000000u.toInt().or(this._displayColor)
 
+    fun isColor(byte: Byte) = color == byte
+
+    fun isAllowed(checkmark: Checkmark): Boolean = when (checkmark) {
+        Checkmark.DONE -> this != SPAWN
+        Checkmark.FAILED -> this == PUZZLE
+        Checkmark.UNKNOWN -> this == UNKNOWN
+        else -> true
+    }
+
     companion object {
         fun getByColor(value: Byte): DungeonRoomType? {
             return entries.firstOrNull { it.color == value }
         }
-
-
     }
-
-    fun isColor(byte: Byte) = color == byte
 }
 
 /**

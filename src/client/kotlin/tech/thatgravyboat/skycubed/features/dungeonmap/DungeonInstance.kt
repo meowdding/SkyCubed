@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.dungeonmap
 import net.minecraft.world.phys.Vec3
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonAPI
-import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonFloor
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyWidget
 import tech.thatgravyboat.skyblockapi.api.events.info.SecretsActionBarWidgetChangeEvent
@@ -59,17 +58,7 @@ class DungeonInstance(val serverId: String) {
 
     @Subscription(priority = Subscription.LOWEST)
     fun onAreaChange(event: AreaChangeEvent) {
-        floor = when (DungeonAPI.dungeonFloor) { // todo move to sbapi
-            DungeonFloor.E -> 0
-            DungeonFloor.F1, DungeonFloor.M1 -> 1
-            DungeonFloor.F2, DungeonFloor.M2 -> 2
-            DungeonFloor.F3, DungeonFloor.M3 -> 3
-            DungeonFloor.F4, DungeonFloor.M4 -> 4
-            DungeonFloor.F5, DungeonFloor.M5 -> 5
-            DungeonFloor.F6, DungeonFloor.M6 -> 6
-            DungeonFloor.F7, DungeonFloor.M7 -> 7
-            else -> -1
-        }
+        floor = DungeonAPI.dungeonFloor?.floorNumber ?: -1
     }
 
     @Subscription(Subscription.LOWEST)
@@ -80,7 +69,6 @@ class DungeonInstance(val serverId: String) {
                 players[index] = DungeonPlayer(player.name, player.classLevel ?: -1, player.dungeonClass, this)
             }
             this.players[index]?.update(player)
-            println("Setting player ${player.name} to $index")
             this.playerIdMap[player.name] = index++
         }
         DungeonAPI.ownPlayer?.let { player ->
@@ -88,7 +76,6 @@ class DungeonInstance(val serverId: String) {
                 players[index] = DungeonPlayer(player.name, player.classLevel ?: -1, player.dungeonClass, this)
             }
             players[index]?.update(player)
-            println("Setting player ${player.name} to $index")
             playerIdMap[player.name] = index
         }
     }
@@ -127,21 +114,14 @@ class DungeonInstance(val serverId: String) {
         return index
     }
 
-    fun getRoomAmount(): Int {
-        return when (this.floor) {
-            0 -> 4
-            in 1..3 -> 5
-            in 4..7 -> 6
-            else -> -1
-        }
+    fun getRoomAmount(): Int = when (this.floor) {
+        0 -> 4
+        in 1..3 -> 5
+        in 4..7 -> 6
+        else -> -1
     }
 
-    fun isLastColumnPuzzlesOnly(): Boolean {
-        return when (this.floor) {
-            in 4..6 -> true
-            else -> false
-        }
-    }
+    fun isLastColumnPuzzlesOnly(): Boolean = this.floor in 4..6
 
     fun getPlayerPosition(): DungeonPosition<*> {
         return (McPlayer.self?.position() ?: Vec3.ZERO).let { WorldPosition(it.x.toInt(), it.z.toInt(), this) }

@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
 import earth.terrarium.olympus.client.utils.Orientation
+import net.minecraft.world.level.material.MapColor
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 
 /**
@@ -26,6 +27,8 @@ enum class DungeonDoorType(val color: Byte) {
     MINIBOSS(DungeonRoomType.MINIBOSS.color),
     FAIRY(DungeonRoomType.FAIRY.color),
     UNKNOWN(DungeonRoomType.UNKNOWN.color);
+
+    fun getColor() = MapColor.getColorFromPackedId(color.toInt())
 
     companion object {
         fun getByColor(color: Byte) = entries.firstOrNull { it.color == color }

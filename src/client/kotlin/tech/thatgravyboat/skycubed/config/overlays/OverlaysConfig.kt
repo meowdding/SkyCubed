@@ -32,6 +32,10 @@ object OverlaysConfig {
     @Comment("", translation = "config.skycubed.overlays.map.desc")
     val map = MapOverlay()
 
+    @ConfigEntry(id = "dungeonMap", translation = "config.skycubed.overlays.dungeonMap")
+    @Comment("", translation = "config.skycubed.overlays.dungeonMap.desc")
+    val dungeonMap = DungeonMapOverlay()
+
     @ConfigEntry(id = "pickupLog", translation = "config.skycubed.overlays.pickuplog")
     @Comment("", translation = "config.skycubed.overlays.pickuplog.desc")
     val pickupLog = PickupLogOverlay()
