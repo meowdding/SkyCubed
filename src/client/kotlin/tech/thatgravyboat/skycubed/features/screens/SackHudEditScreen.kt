@@ -20,6 +20,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.cleanName
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
+import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.config.overlays.SackOverlay
 
 class SackHudEditScreen : BaseUiScreen() {
@@ -33,6 +34,7 @@ class SackHudEditScreen : BaseUiScreen() {
         get() = SackOverlay.sackItems.toMutableList()
         private set(value) {
             SackOverlay.sackItems = value.toTypedArray()
+            ConfigManager.save()
         }
 
     override fun create(bg: DisplayWidget) {
