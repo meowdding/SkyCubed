@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.features.screens
 
-import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.base.ListWidget
 import earth.terrarium.olympus.client.utils.ListenableState
 import me.owdding.ktmodules.Module
@@ -101,6 +100,7 @@ class SackHudEditScreen : BaseUiScreen() {
             width = columnWidth - 10,
             onChange = { updateList(it) },
         )
+
         widget(list)
         if (left) updateList(leftSearch) else updateList(rightSearch)
     }
@@ -115,28 +115,5 @@ class SackHudEditScreen : BaseUiScreen() {
                 }
             }
         }
-    }
-
-    // TODO: move into mlib
-    fun LayoutBuilder.textInput(
-        state: ListenableState<String>,
-        placeholder: String = "",
-        width: Int,
-        height: Int = 20,
-        onChange: (String) -> Unit = {},
-        onEnter: (String) -> Unit = {},
-    ) {
-        val input = Widgets.textInput(state) { box ->
-            box.withEnterCallback {
-                onEnter(box.value)
-            }
-            box.withChangeCallback {
-                onChange(it)
-            }
-        }
-        input.withPlaceholder(placeholder)
-        input.withSize(width, height)
-
-        widget(input)
     }
 }
