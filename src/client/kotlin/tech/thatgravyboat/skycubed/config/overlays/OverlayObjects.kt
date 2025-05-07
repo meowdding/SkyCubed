@@ -73,8 +73,9 @@ class SackOverlay : Translatable {
     @Comment("", translation = "config.skycubed.overlays.sack.enabled.desc")
     var enabled: Boolean = true
 
+    @ConfigEntry(id = "sackItems")
     @ConfigOption.Hidden
-    var sackItems: MutableList<String> = mutableListOf()
+    var sackItems: Array<String> = emptyArray()
 
     override fun getTranslationKey(): String = "Edit Sack Overlay"
 }

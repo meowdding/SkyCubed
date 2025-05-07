@@ -28,7 +28,6 @@ class SackHudEditScreen : BaseUiScreen() {
     val rightState: ListenableState<String> = ListenableState.of("")
     var leftSearch = ""
     var rightSearch = ""
-    var selectedItems = OverlaysConfig.sack.sackItems
 
     override fun create(bg: DisplayWidget) {
         val columnWidth = (uiWidth - 13) / 2
@@ -73,10 +72,10 @@ class SackHudEditScreen : BaseUiScreen() {
                     string(v.hoverName)
                 }.asButton {
                     if (selectedItems.contains(k)) {
-                        selectedItems.remove(k)
+                        selectedItems = selectedItems.filter { it != k }
                         rebuildWidgets()
                     } else {
-                        selectedItems.add(k)
+                        selectedItems += k
                         rebuildWidgets()
                     }
                 }.let {
@@ -97,6 +96,12 @@ class SackHudEditScreen : BaseUiScreen() {
 
     @Module
     companion object {
+        var selectedItems: List<String>
+            get() = OverlaysConfig.sack.sackItems.toMutableList()
+            private set(value) {
+                OverlaysConfig.sack.sackItems = value.toTypedArray()
+            }
+
         @Subscription
         fun onCommand(event: RegisterCommandsEvent) {
             event.register("sackhud") {
