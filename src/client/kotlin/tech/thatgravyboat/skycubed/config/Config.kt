@@ -1,14 +1,14 @@
 package tech.thatgravyboat.skycubed.config
 
-import com.teamresourceful.resourcefulconfig.api.annotations.*
-import com.teamresourceful.resourcefulconfig.api.annotations.Config
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Select
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Separator
+import com.teamresourceful.resourcefulconfig.api.types.info.ResourcefulConfigLink
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
+import com.teamresourceful.resourcefulconfigkt.api.ConfigKt
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen
 import tech.thatgravyboat.skyblockapi.api.events.info.ActionBarWidget
 import tech.thatgravyboat.skyblockapi.api.events.render.HudElement
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
@@ -17,39 +17,67 @@ import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
 
-@Config(
-    "skycubed/config",
-    categories = [
-        OverlaysConfig::class,
-        ScreensConfig::class,
-        ItemsConfig::class,
-        ChatConfig::class,
-        NotificationsConfig::class,
-        RenderingConfig::class
-    ]
-)
-@ConfigInfo.Provider(ConfigInfoProvider::class)
-object Config {
+object Config : ConfigKt("skycubed/config") {
 
-    @Separator("General", description = "General options for the mod that dont fit into a specific category.")
+    override val name: TranslatableValue = Literal("SkyCubed (v${SkyCubed.mod.metadata.version.friendlyString})")
+    override val description: TranslatableValue = Literal("SkyBlock UI overhaul mod.")
+    override val links: Array<ResourcefulConfigLink> = arrayOf(
+        ResourcefulConfigLink.create(
+            "https://modrinth.com/project/skycubed",
+            "modrinth",
+            TranslatableValue("Modrinth", "config.info.skycubed.modrinth")
+        ),
+        ResourcefulConfigLink.create(
+            "https://github.com/ThatGravyBoat/SkyCubed",
+            "code",
+            TranslatableValue("GitHub", "config.info.skycubed.github")
+        )
+    )
 
-    @ConfigEntry(id = "hiddenActionBarWidgets", translation = "config.skycubed.general.hiddenActionBarWidgets")
-    @Comment("", translation = "config.skycubed.general.hiddenActionBarWidgets.desc")
-    @Select("Hide")
-    var hiddenActionBarWidgets: Array<ActionBarWidget> = arrayOf()
+    init {
+        category(OverlaysConfig)
+        category(ScreensConfig)
+        category(ItemsConfig)
+        category(ChatConfig)
+        category(NotificationsConfig)
+        category(RenderingConfig)
+    }
 
-    @ConfigEntry(id = "hiddenHudElements", translation = "config.skycubed.general.hiddenHudElements")
-    @Comment("", translation = "config.skycubed.general.hiddenHudElements.desc")
-    @Select("Hide")
-    var hiddenHudElements: Array<HudElement> = arrayOf()
+    init {
+        separator {
+            this.title = "General"
+            this.description = "General options for the mod that dont fit into a specific category."
+        }
+    }
 
-    @Separator("Quick Access", description = "SkyCubed makes use of multiple screens for different things so they will be in this section.")
+    val hiddenActionBarWidgets by select<ActionBarWidget>("hiddenActionBarWidgets") {
+        this.translation = "config.skycubed.general.hiddenActionBarWidgets"
+    }
 
-    @ConfigButton(title = "config.skycubed.general.keybinds", text = "Open")
-    @Comment("config.skycubed.general.keybinds.desc")
-    val ignored1 = { McClient.setScreen(KeyBindsScreen(McScreen.self, McClient.options))}
+    val hiddenHudElements by select<HudElement>("hiddenHudElements") {
+        this.translation = "config.skycubed.general.hiddenHudElements"
+    }
 
-    @ConfigButton(title = "config.skycubed.general.notifications", text = "Open")
-    @Comment("config.skycubed.general.notifications.desc")
-    val ignored2 = { McClient.setScreen(NotificationsScreen())}
+    init {
+        separator {
+            this.title = "Quick Access"
+            this.description = "SkyCubed makes use of multiple screens for different things so they will be in this section."
+        }
+
+        button {
+            this.title = "config.skycubed.general.keybinds"
+            this.text = "Open"
+            this.onClick {
+                McClient.setScreen(KeyBindsScreen(McScreen.self, McClient.options))
+            }
+        }
+
+        button {
+            this.title = "config.skycubed.general.notifications"
+            this.text = "Open"
+            this.onClick {
+                McClient.setScreen(NotificationsScreen())
+            }
+        }
+    }
 }

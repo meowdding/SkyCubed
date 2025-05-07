@@ -5,7 +5,6 @@ import me.owdding.lib.displays.*
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
@@ -32,7 +31,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.overlays.NpcOverlay
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.math.max
@@ -59,7 +58,7 @@ object DialogueOverlay : Overlay {
     override val moveable: Boolean = false
     override val enabled: Boolean get() = config.enabled
 
-    private val config get() = OverlaysConfig.npc
+    private val config get() = NpcOverlay
     private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 

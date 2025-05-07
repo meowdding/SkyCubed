@@ -1,15 +1,17 @@
 package tech.thatgravyboat.skycubed.config.overlays
 
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
+import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 
-@ConfigObject
 class Position(
-    @ConfigEntry(id = "x") var x: Int = 0,
-    @ConfigEntry(id = "y") var y: Int = 0,
-    @ConfigEntry(id = "scale") var scale: Float = 1.0f
-) {
+    x: Int = 0,
+    y: Int = 0,
+    scale: Float = 1.0f
+) : ObjectKt() {
+
+    var x: Int by int("x", x)
+    var y: Int by int("y", y)
+    var scale: Float by float("scale", scale)
 
     private val initialPos = x to y
 
