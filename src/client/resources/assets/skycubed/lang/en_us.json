@@ -62,7 +62,7 @@
         "config.skycubed.overlays.sacks.enabled": "Enable Sack Overlay",
         "config.skycubed.overlays.sacks.enabled.desc": "Enables the sack overlay, showing specified items in your sack.\nYou can edit these items with /skycubed sackhud.",
 
-        "config.skycubed.overlays.sack.background": "Background",
+        "config.skycubed.overlays.sacks.background": "Background",
         "config.skycubed.overlays.sacks.background.desc": "Use the SkyCubed background texture instead of a color.",
 
     "config.skycubed.overlays.tablist": "Custom Tab List Overlay",
