@@ -113,6 +113,7 @@ object Overlays {
     init {
         register(PlayerRpgOverlay)
         register(CommissionsOverlay)
+        register(SackOverlay)
         register(InfoOverlay)
         register(DialogueOverlay)
         register(PickUpLog)
