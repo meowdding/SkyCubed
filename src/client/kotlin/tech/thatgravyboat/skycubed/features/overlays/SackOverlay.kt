@@ -31,6 +31,8 @@ object SackOverlay : Overlay {
     override val enabled: Boolean get() = SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
 
     private val display = CachedValue(1.seconds) {
+        if (SackOverlayConfig.sackItems.isEmpty()) return@CachedValue Displays.empty(0, 0)
+
         val display = DisplayFactory.vertical {
             SackOverlayConfig.sackItems.forEach { item ->
                 val stack = SackCodecs.sackItems[item] ?: return@forEach
@@ -57,7 +59,7 @@ object SackOverlay : Overlay {
 
     override fun onRightClick() = ContextMenu.open {
         it.button(Text.of("Open Sack Edit Screen")) {
-            McClient.setScreen(SackHudEditScreen())
+            McClient.tell { McClient.setScreen(SackHudEditScreen()) }
         }
         it.button(Text.of("${if (SackOverlayConfig.background) "Disable" else "Enable"} Custom Background")) {
             SackOverlayConfig.background = !SackOverlayConfig.background

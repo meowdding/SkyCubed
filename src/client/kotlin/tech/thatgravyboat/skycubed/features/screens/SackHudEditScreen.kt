@@ -8,10 +8,7 @@ import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.builder.LayoutBuilder
 import me.owdding.lib.builder.LayoutBuilder.Companion.setPos
 import me.owdding.lib.builder.LayoutFactory
-import me.owdding.lib.displays.Alignment
-import me.owdding.lib.displays.DisplayWidget
-import me.owdding.lib.displays.Displays
-import me.owdding.lib.displays.asButton
+import me.owdding.lib.displays.*
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -74,11 +71,17 @@ class SackHudEditScreen : BaseUiScreen() {
                 items.filter { (k, v) ->
                     k.lowercase().contains(input, true) || v.cleanName.contains(input, true)
                 }
-            }.forEach { (k, v) ->
-                DisplayFactory.horizontal(alignment = Alignment.CENTER) {
-                    display(Displays.item(v))
-                    string(v.hoverName)
-                }.asButton {
+            }.onEachIndexed { i, (k, v) ->
+                val color = if (i % 2 == 0) 0xFFA1A3A3u else 0xFFC7C6C9u
+                val display = DisplayFactory.vertical {
+                    spacer(width = columnWidth - 40)
+                    horizontal(5, Alignment.CENTER) {
+                        display(Displays.item(v))
+                        string(v.hoverName)
+                    }
+                }
+
+                ExtraDisplays.background(color, 1f, display.withPadding(2)).asButton {
                     if (selectedItems.contains(k)) {
                         selectedItems = selectedItems.filter { it != k }
                         rebuildWidgets()
