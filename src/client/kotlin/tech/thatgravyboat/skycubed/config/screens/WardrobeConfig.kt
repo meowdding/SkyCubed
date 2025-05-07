@@ -1,20 +1,14 @@
 package tech.thatgravyboat.skycubed.config.screens
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
-import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
+import tech.thatgravyboat.skycubed.config.overlays.Overlay
 
-@ConfigObject
-class WardrobeConfig : Translatable {
+object WardrobeConfig : Overlay("Edit Wardrobe Config") {
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.screens.wardrobe.enabled")
-    @Comment("", translation = "config.skycubed.screens.wardrobe.enabled.desc")
-    var enabled = true
+    var enabled by boolean("enabled", true) {
+        this.translation = "config.skycubed.screens.wardrobe.enabled"
+    }
 
-    @ConfigEntry(id = "textures", translation = "config.skycubed.screens.wardrobe.textures")
-    @Comment("", translation = "config.skycubed.screens.wardrobe.textures.desc")
-    var textured = false
-
-    override fun getTranslationKey(): String = "Edit Wardrobe Config"
+    var textured by boolean("textures", false) {
+        this.translation = "config.skycubed.screens.wardrobe.textures"
+    }
 }

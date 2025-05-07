@@ -11,7 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseReleasedEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
+import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 
 object WardrobeFeature {
 
@@ -82,5 +82,5 @@ object WardrobeFeature {
     }
 
     private fun Screen.isEnabled() =
-        this.title.stripped.lowercase().startsWith("wardrobe") && ScreensConfig.wardrobe.enabled
+        this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
 }

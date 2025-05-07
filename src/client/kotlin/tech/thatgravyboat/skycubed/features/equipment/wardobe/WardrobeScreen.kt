@@ -20,7 +20,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
-import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
+import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import tech.thatgravyboat.skycubed.utils.click
 
@@ -109,7 +109,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                             context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y
                         )
 
-                        if (ScreensConfig.wardrobe.textured) {
+                        if (WardrobeConfig.textured) {
                             entityDisplay.render(graphics, context.x, context.y)
                         } else {
                             ExtraDisplays.background(
@@ -126,9 +126,9 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                     }
                     it.withTexture(
                         when {
-                            ScreensConfig.wardrobe.textured && slot.id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
-                            ScreensConfig.wardrobe.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
-                            ScreensConfig.wardrobe.textured -> UIConstants.BUTTON
+                            WardrobeConfig.textured && slot.id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
+                            WardrobeConfig.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
+                            WardrobeConfig.textured -> UIConstants.BUTTON
                             else -> null
                         }
                     )
