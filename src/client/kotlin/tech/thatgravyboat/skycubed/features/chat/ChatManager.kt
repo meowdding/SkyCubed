@@ -15,24 +15,12 @@ object ChatManager {
         "gifts" to Regex("Can't place gifts this close to spawn!|You cannot place a gift so close to an NPC!|This gift is for \\w+, sorry!"),
     )
 
-    private var cleanMessages = ChatConfig.messagesToClean.get().map(::Regex)
-
-    init {
-        ChatConfig.messagesToClean.addListener { _, new ->
-            cleanMessages = new.mapNotNull {
-                runCatching { Regex(it) }.getOrNull()
-            }
-        }
-    }
-
     @Subscription
     fun onChatReceivedPre(event: ChatReceivedEvent.Pre) {
-        if (cleanMessages.isNotEmpty()) {
-            for (regex in cleanMessages) {
-                if (regex.find(event.text) != null) {
-                    event.cancel()
-                    return
-                }
+        for (regex in ChatConfig.messagesToClean) {
+            if (regex.find(event.text) != null) {
+                event.cancel()
+                return
             }
         }
     }

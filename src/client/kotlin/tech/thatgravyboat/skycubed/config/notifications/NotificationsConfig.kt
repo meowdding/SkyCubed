@@ -1,8 +1,11 @@
 package tech.thatgravyboat.skycubed.config.notifications
 
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
 import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
 object NotificationsConfig : CategoryKt("notifications") {
+
+    override val name: TranslatableValue = Translated("config.skycubed.notifications.title")
 
     init {
         separator {
