@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
 import earth.terrarium.olympus.client.utils.State
+import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
@@ -19,6 +20,7 @@ import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
+@Module
 object MinimapOverlay : Overlay {
 
     override val name: Component = Text.of("Minimap")

@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
 import com.mojang.math.Axis
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.state.MapRenderState
@@ -15,6 +16,7 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
+@Module
 object DungeonMap {
 
     private val state = MapRenderState()

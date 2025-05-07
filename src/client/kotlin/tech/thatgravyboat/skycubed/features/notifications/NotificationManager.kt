@@ -5,6 +5,7 @@ import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIIcons
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.screens.PauseScreen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -19,6 +20,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
 
+@Module
 object NotificationManager {
 
     private val notifications = listOf(

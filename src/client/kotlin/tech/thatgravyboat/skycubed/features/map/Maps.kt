@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
 import kotlinx.coroutines.runBlocking
+import me.owdding.ktmodules.Module
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.KeyMapping
 import net.minecraft.core.BlockPos
@@ -20,6 +21,7 @@ import tech.thatgravyboat.skycubed.features.map.screen.MapScreen
 import tech.thatgravyboat.skycubed.utils.readJsonc
 import java.util.function.Function
 
+@Module
 object Maps {
 
     private val TYPES = arrayOf(

@@ -1,9 +1,11 @@
 package tech.thatgravyboat.skycubed.utils
 
 import kotlinx.coroutines.runBlocking
+import me.owdding.ktmodules.Module
 import tech.thatgravyboat.skycubed.SkyCubed
 import java.util.*
 
+@Module
 object ContributorHandler {
     var contributors: Map<UUID, ContributorData> = emptyMap()
         private set
