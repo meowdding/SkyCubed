@@ -15,6 +15,7 @@ object OverlaysConfig : CategoryKt("overlays") {
         obj("rpg", RpgOverlay) { this.translation = "config.skycubed.overlays.rpg" }
         obj("text", TextOverlays) { this.translation = "config.skycubed.overlays.text" }
         obj("tablist", TabListOverlay) { this.translation = "config.skycubed.overlays.tablist" }
+        obj("sack", SackOverlay) { this.translation = "config.skycubed.overlays.sack" }
         obj("map", MapOverlay) { this.translation = "config.skycubed.overlays.map" }
         obj("pickupLog", PickupLogOverlay) { this.translation = "config.skycubed.overlays.pickuplog" }
         obj("commissions", CommissionOverlay) { this.translation = "config.skycubed.overlays.commissions" }
@@ -25,13 +26,6 @@ object OverlaysConfig : CategoryKt("overlays") {
         this.translation = "config.skycubed.overlays.coldOverlay"
         this.range = 0..99
     }
-    @ConfigEntry(id = "sack", translation = "config.skycubed.overlays.sack")
-    @Comment("", translation = "config.skycubed.overlays.sack.desc")
-    val sack = SackOverlay()
-
-    @ConfigEntry(id = "map", translation = "config.skycubed.overlays.map")
-    @Comment("", translation = "config.skycubed.overlays.map.desc")
-    val map = MapOverlay()
 
     var movableHotbar by boolean("movableHotbar", false) {
         this.translation = "config.skycubed.overlays.movableHotbar"

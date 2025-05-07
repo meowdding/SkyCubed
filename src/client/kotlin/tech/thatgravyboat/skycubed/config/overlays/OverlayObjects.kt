@@ -1,9 +1,5 @@
 package tech.thatgravyboat.skycubed.config.overlays
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
@@ -49,22 +45,18 @@ object TextOverlays : Overlay("Edit Text Overlays") {
     }
 }
 
-@ConfigObject
-class SackOverlay : Translatable {
+object SackOverlay : Overlay("Edit Sack Overlay") {
+    var enabled by boolean(true) {
+        this.translation = "config.skycubed.overlays.sack.enabled"
+    }
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.sack.enabled")
-    @Comment("", translation = "config.skycubed.overlays.sack.enabled.desc")
-    var enabled: Boolean = false
+    var background by boolean(false) {
+        this.translation = "config.skycubed.overlays.sack.background"
+    }
 
-    @ConfigEntry(id = "background", translation = "config.skycubed.overlays.sack.background")
-    @Comment("", translation = "config.skycubed.overlays.sack.background.desc")
-    var background: Boolean = false
-
-    @ConfigEntry(id = "sackItems")
-    @ConfigOption.Hidden
-    var sackItems: Array<String> = emptyArray()
-
-    override fun getTranslationKey(): String = "Edit Sack Overlay"
+    var sackItems by strings("") {
+        this.condition = { false }
+    }
 }
 
 object TabListOverlay : Overlay("Edit Tab List Overlay") {
