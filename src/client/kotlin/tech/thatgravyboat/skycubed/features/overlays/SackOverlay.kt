@@ -17,7 +17,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.config.overlays.SackOverlay
+import tech.thatgravyboat.skycubed.config.overlays.SackOverlayConfig
 import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
@@ -28,11 +28,11 @@ object SackOverlay : Overlay {
     override val name: Component = Text.of("Sack Overlay")
     override val position: Position get() = OverlayPositions.sack
     override val bounds get() = display.get().getWidth() to display.get().getHeight()
-    override val enabled: Boolean get() = SackOverlay.enabled && SackOverlay.sackItems.isNotEmpty()
+    override val enabled: Boolean get() = SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
 
     private val display = CachedValue(1.seconds) {
         val display = DisplayFactory.vertical {
-            SackOverlay.sackItems.forEach { item ->
+            SackOverlayConfig.sackItems.forEach { item ->
                 val stack = SackCodecs.sackItems[item] ?: return@forEach
                 horizontal(5, Alignment.CENTER) {
                     display(Displays.item(stack))
@@ -43,7 +43,7 @@ object SackOverlay : Overlay {
             }
         }
 
-        if (SackOverlay.background) {
+        if (SackOverlayConfig.background) {
             Displays.background(SkyCubedTextures.backgroundBox, display.withPadding(4))
         } else {
             display.withPadding(4)
@@ -59,8 +59,8 @@ object SackOverlay : Overlay {
         it.button(Text.of("Open Sack Edit Screen")) {
             McClient.setScreen(SackHudEditScreen())
         }
-        it.button(Text.of("${if (SackOverlay.background) "Disable" else "Enable"} Custom Background")) {
-            SackOverlay.background = !SackOverlay.background
+        it.button(Text.of("${if (SackOverlayConfig.background) "Disable" else "Enable"} Custom Background")) {
+            SackOverlayConfig.background = !SackOverlayConfig.background
             display.invalidate()
         }
         it.divider()
