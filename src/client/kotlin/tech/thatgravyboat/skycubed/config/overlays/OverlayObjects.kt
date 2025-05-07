@@ -54,7 +54,7 @@ object SackOverlayConfig : Overlay("Edit Sack Overlay") {
         this.translation = "config.skycubed.overlays.sacks.background"
     }
 
-    var sackItems by stringsWithId("abcdefghijklmnopqrstuvwxyz") {
+    var sackItems by strings() {
         this.condition = { false }
     }
 }
