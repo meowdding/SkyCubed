@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.items
 
+import me.owdding.ktmodules.Module
 import net.minecraft.util.Mth
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
@@ -8,6 +9,7 @@ import tech.thatgravyboat.skyblockapi.api.events.render.RenderItemBarEvent
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 
+@Module
 object ItemBarManager {
 
     // TODO armadillo egg

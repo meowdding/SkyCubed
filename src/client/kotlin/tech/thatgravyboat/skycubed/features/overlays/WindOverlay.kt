@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import kotlinx.datetime.Instant
+import me.owdding.ktmodules.Module
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyIn
@@ -19,6 +20,7 @@ import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import kotlin.time.Duration.Companion.seconds
 
+@Module
 object WindOverlay {
 
     private var windCompassComponent: Component? = null

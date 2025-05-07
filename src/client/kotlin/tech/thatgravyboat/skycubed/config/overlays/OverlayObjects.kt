@@ -45,6 +45,20 @@ object TextOverlays : Overlay("Edit Text Overlays") {
     }
 }
 
+object SackOverlayConfig : Overlay("Edit Sack Overlay") {
+    var enabled by boolean(true) {
+        this.translation = "config.skycubed.overlays.sacks.enabled"
+    }
+
+    var background by boolean(false) {
+        this.translation = "config.skycubed.overlays.sacks.background"
+    }
+
+    var sackItems by strings() {
+        this.condition = { false }
+    }
+}
+
 object TabListOverlay : Overlay("Edit Tab List Overlay") {
 
     var enabled by observable(boolean("enabled", true) {

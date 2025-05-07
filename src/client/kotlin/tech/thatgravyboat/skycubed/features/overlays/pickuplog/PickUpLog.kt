@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
+import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
@@ -23,6 +24,7 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlay
 import tech.thatgravyboat.skycubed.utils.Rect
 
+@Module
 object PickUpLog : Overlay {
 
     private val exampleDisplay by lazy {

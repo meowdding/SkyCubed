@@ -1,9 +1,11 @@
 package tech.thatgravyboat.skycubed.features.chat
 
+import me.owdding.ktmodules.Module
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
 import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 
+@Module
 object ChatManager {
 
     private val compactMessage = mapOf(
