@@ -23,6 +23,10 @@ object OverlayPositions {
     @Hidden @ConfigEntry(id = "commissions")
     val commissions = Position(x = 0, y = 100)
 
+    @Hidden
+    @ConfigEntry(id = "sack")
+    val sack = Position(x = 200, y = 5)
+
     @Hidden @ConfigEntry(id = "pickupLog")
     val pickupLog = Position(x = 0, y = 150)
 

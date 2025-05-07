@@ -71,7 +71,11 @@ class SackOverlay : Translatable {
 
     @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.sack.enabled")
     @Comment("", translation = "config.skycubed.overlays.sack.enabled.desc")
-    var enabled: Boolean = true
+    var enabled: Boolean = false
+
+    @ConfigEntry(id = "background", translation = "config.skycubed.overlays.sack.background")
+    @Comment("", translation = "config.skycubed.overlays.sack.background.desc")
+    var background: Boolean = false
 
     @ConfigEntry(id = "sackItems")
     @ConfigOption.Hidden
