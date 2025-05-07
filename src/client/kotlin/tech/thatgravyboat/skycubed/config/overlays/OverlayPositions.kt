@@ -41,4 +41,8 @@ object OverlayPositions : CategoryKt("positions") {
     val hotbar = obj("hotbar", Position(x = 0, y = -22)) {
         this.translation = "config.skycubed.positions.hotbar"
     }
+
+    val pity = obj("pity", Position(x = 200, y = 5)) {
+        this.translation = "config.skycubed.positions.pity"
+    }
 }
