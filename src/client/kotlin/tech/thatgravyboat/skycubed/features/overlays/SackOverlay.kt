@@ -2,12 +2,17 @@ package tech.thatgravyboat.skycubed.features.overlays
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.builder.DisplayFactory
+import me.owdding.lib.displays.Alignment
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.profile.sacks.SacksAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
@@ -29,9 +34,11 @@ object SackOverlay : Overlay {
         val display = DisplayFactory.vertical {
             SackOverlay.sackItems.forEach { item ->
                 val stack = SackCodecs.sackItems[item] ?: return@forEach
-                horizontal {
+                horizontal(5, Alignment.CENTER) {
                     display(Displays.item(stack))
                     string(stack.hoverName)
+                    val sackItems = SacksAPI.sackItems[item] ?: 0
+                    string(Text.of("x${sackItems.toFormattedString()}") { color = TextColor.PINK })
                 }
             }
         }
