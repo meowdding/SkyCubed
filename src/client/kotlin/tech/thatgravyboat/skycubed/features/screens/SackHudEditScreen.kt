@@ -106,7 +106,7 @@ class SackHudEditScreen : BaseUiScreen() {
     companion object {
         @Subscription
         fun onCommand(event: RegisterCommandsEvent) {
-            event.register("sackhud") {
+            event.register("skycubed sackhud") {
                 callback {
                     McClient.setScreen(SackHudEditScreen())
                 }
