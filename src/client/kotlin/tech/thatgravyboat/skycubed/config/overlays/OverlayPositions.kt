@@ -26,7 +26,7 @@ object OverlayPositions : CategoryKt("positions") {
         this.translation = "config.skycubed.positions.commissions"
     }
 
-    val sack = obj("sack", Position(x = 200, y = 5)) {
+    val sack = obj("sack", Position(x = -300, y = 10)) {
         this.translation = "config.skycubed.positions.sack"
     }
 
