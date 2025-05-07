@@ -19,7 +19,7 @@ import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.time.Duration.Companion.seconds
 
 object SackOverlay : Overlay {
-    val config get() = OverlaysConfig.sack
+    private val config get() = OverlaysConfig.sack
 
     override val name: Component = Text.of("Sack Overlay")
     override val position: Position get() = OverlayPositions.sack

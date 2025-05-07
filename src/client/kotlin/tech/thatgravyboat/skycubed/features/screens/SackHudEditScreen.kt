@@ -29,6 +29,12 @@ class SackHudEditScreen : BaseUiScreen() {
     var leftSearch = ""
     var rightSearch = ""
 
+    var selectedItems: List<String>
+        get() = OverlaysConfig.sack.sackItems.toMutableList()
+        private set(value) {
+            OverlaysConfig.sack.sackItems = value.toTypedArray()
+        }
+
     override fun create(bg: DisplayWidget) {
         val columnWidth = (uiWidth - 13) / 2
         LayoutFactory.horizontal {
@@ -96,12 +102,6 @@ class SackHudEditScreen : BaseUiScreen() {
 
     @Module
     companion object {
-        var selectedItems: List<String>
-            get() = OverlaysConfig.sack.sackItems.toMutableList()
-            private set(value) {
-                OverlaysConfig.sack.sackItems = value.toTypedArray()
-            }
-
         @Subscription
         fun onCommand(event: RegisterCommandsEvent) {
             event.register("sackhud") {
