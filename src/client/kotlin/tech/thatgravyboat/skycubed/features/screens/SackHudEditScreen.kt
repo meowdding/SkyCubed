@@ -20,7 +20,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.cleanName
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.overlays.SackOverlay
 
 class SackHudEditScreen : BaseUiScreen() {
 
@@ -30,9 +30,9 @@ class SackHudEditScreen : BaseUiScreen() {
     var rightSearch = ""
 
     var selectedItems: List<String>
-        get() = OverlaysConfig.sack.sackItems.toMutableList()
+        get() = SackOverlay.sackItems.toMutableList()
         private set(value) {
-            OverlaysConfig.sack.sackItems = value.toTypedArray()
+            SackOverlay.sackItems = value.toTypedArray()
         }
 
     override fun create(bg: DisplayWidget) {
