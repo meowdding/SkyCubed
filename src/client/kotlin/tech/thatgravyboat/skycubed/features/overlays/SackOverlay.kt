@@ -43,13 +43,11 @@ object SackOverlay : Overlay {
                     string(Text.of("x${sackItems.toFormattedString()}") { color = TextColor.PINK })
                 }
             }
-        }
+        }.withPadding(4)
 
         if (SackOverlayConfig.background) {
-            Displays.background(SkyCubedTextures.backgroundBox, display.withPadding(4))
-        } else {
-            display.withPadding(4)
-        }
+            Displays.background(SkyCubedTextures.backgroundBox, display)
+        } else display
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
