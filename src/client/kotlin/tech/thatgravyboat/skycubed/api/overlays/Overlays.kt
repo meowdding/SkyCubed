@@ -19,8 +19,10 @@ import tech.thatgravyboat.skycubed.features.info.InfoOverlay
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 import tech.thatgravyboat.skycubed.features.overlays.MovableHotbar
 import tech.thatgravyboat.skycubed.features.overlays.PlayerRpgOverlay
+import tech.thatgravyboat.skycubed.features.overlays.SackOverlay
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
+import tech.thatgravyboat.skycubed.features.overlays.mining.PityOverlay
 import tech.thatgravyboat.skycubed.features.overlays.mining.commissions.CommissionsOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 
@@ -122,6 +124,7 @@ object Overlays {
         register(PickUpLog)
         register(MinimapOverlay)
         register(MovableHotbar)
+        register(PityOverlay)
         TextOverlay.overlays.forEach(::register)
     }
 }

@@ -29,6 +29,7 @@ import tech.thatgravyboat.skycubed.features.notifications.NotificationManager
 import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay
 import tech.thatgravyboat.skycubed.features.overlays.map.DungeonMap
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
+import tech.thatgravyboat.skycubed.features.overlays.mining.PityOverlay
 import tech.thatgravyboat.skycubed.features.overlays.mining.WindOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
@@ -60,6 +61,7 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
         SkyBlockAPI.eventBus.register(UpdateChecker)
         SkyBlockAPI.eventBus.register(WardrobeFeature)
         SkyBlockAPI.eventBus.register(ParkInfoOverlay)
+        SkyBlockAPI.eventBus.register(PityOverlay)
 
         SkyCubedModules.init { SkyBlockAPI.eventBus.register(it) }
     }
