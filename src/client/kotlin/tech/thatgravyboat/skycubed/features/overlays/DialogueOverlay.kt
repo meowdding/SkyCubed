@@ -1,13 +1,10 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import com.mojang.blaze3d.platform.InputConstants
-import me.owdding.lib.displays.Alignment
-import me.owdding.lib.displays.Display
-import me.owdding.lib.displays.Displays
-import me.owdding.lib.displays.asLayer
-import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.*
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
@@ -26,6 +23,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
+import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -33,7 +31,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.overlays.NpcOverlay
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.math.max
@@ -60,7 +58,7 @@ object DialogueOverlay : Overlay {
     override val moveable: Boolean = false
     override val enabled: Boolean get() = config.enabled
 
-    private val config get() = OverlaysConfig.npc
+    private val config get() = NpcOverlay
     private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 
@@ -150,8 +148,22 @@ object DialogueOverlay : Overlay {
         entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
 
         val entityDisplay = entity?.let {
-            Displays.pushPop(Displays.entity(it, 60, 60, 35, 80f, 40f))
-            { translate(0f, 0f, -100f) }
+            val display = Displays.entity(it, 60, 60, 35, 80f, 40f)
+            object : Display {
+                override fun getWidth(): Int = display.getWidth()
+                override fun getHeight(): Int = display.getHeight()
+                override fun render(graphics: GuiGraphics) {
+                    val width = getWidth()
+                    val height = getHeight()
+                    val half = width / 2
+                    graphics.pushPop {
+                        translate(0f, 0f, -100f)
+                        graphics.scissor(-half, -height, width * 2, height * 2) {
+                            display.render(graphics)
+                        }
+                    }
+                }
+            }
         }
 
         val npcNameDisplay = Displays.pushPop(
@@ -234,13 +246,14 @@ object DialogueOverlay : Overlay {
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (McScreen.self != null && !McScreen.isOf<ChatScreen>()) {
+        val screen = McScreen.self
+        if (screen is AbstractContainerScreen<*>) {
             inventoryOverlayDisplay.render(
                 graphics,
                 5,
                 graphics.guiHeight() / 2 - inventoryOverlayDisplay.getHeight() / 2,
             )
-        } else {
+        } else if (screen is ChatScreen || screen == null) {
             hudOverlayDisplay.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
         }
     }

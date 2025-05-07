@@ -1,62 +1,39 @@
 package tech.thatgravyboat.skycubed.config.overlays
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Category
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.*
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
+import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
-@ConfigInfo(titleTranslation = "config.skycubed.overlays.title")
-@Category("overlays", categories = [OverlayPositions::class])
-object OverlaysConfig {
+object OverlaysConfig : CategoryKt("overlays") {
 
-    @ConfigEntry(id = "info", translation = "config.skycubed.overlays.info")
-    @Comment("", translation = "config.skycubed.overlays.info.desc")
-    val info = InfoHudOverlay()
+    override val name: TranslatableValue = Translated("config.skycubed.overlays.title")
 
-    @ConfigEntry(id = "rpg", translation = "config.skycubed.overlays.rpg")
-    @Comment("", translation = "config.skycubed.overlays.rpg.desc")
-    val rpg = RpgOverlay()
+    init {
+        category(OverlayPositions)
 
-    @ConfigEntry(id = "text", translation = "config.skycubed.overlays.text")
-    @Comment("", translation = "config.skycubed.overlays.text.desc")
-    val text = TextOverlays()
+        obj("info", InfoHudOverlay) { this.translation = "config.skycubed.overlays.info" }
+        obj("rpg", RpgOverlay) { this.translation = "config.skycubed.overlays.rpg" }
+        obj("text", TextOverlays) { this.translation = "config.skycubed.overlays.text" }
+        obj("tablist", TabListOverlay) { this.translation = "config.skycubed.overlays.tablist" }
+        obj("sack", SackOverlayConfig) { this.translation = "config.skycubed.overlays.sacks" }
+        obj("map", MapOverlay) { this.translation = "config.skycubed.overlays.map" }
+        obj("pickupLog", PickupLogOverlay) { this.translation = "config.skycubed.overlays.pickuplog" }
+        obj("commissions", CommissionOverlay) { this.translation = "config.skycubed.overlays.commissions" }
+        obj("npc", NpcOverlay) { this.translation = "config.skycubed.overlays.npc" }
+    }
 
-    @ConfigEntry(id = "tablist", translation = "config.skycubed.overlays.tablist")
-    @Comment("", translation = "config.skycubed.overlays.tablist.desc")
-    @SearchTerm("tablist")
-    val tablist = TabListOverlay()
+    var coldOverlay by int("coldOverlay", 80) {
+        this.translation = "config.skycubed.overlays.coldOverlay"
+        this.range = 0..99
+    }
 
-    @ConfigEntry(id = "map", translation = "config.skycubed.overlays.map")
-    @Comment("", translation = "config.skycubed.overlays.map.desc")
-    val map = MapOverlay()
+    var movableHotbar by boolean("movableHotbar", false) {
+        this.translation = "config.skycubed.overlays.movableHotbar"
+    }
 
-    @ConfigEntry(id = "pickupLog", translation = "config.skycubed.overlays.pickuplog")
-    @Comment("", translation = "config.skycubed.overlays.pickuplog.desc")
-    val pickupLog = PickupLogOverlay()
-
-    @ConfigEntry(id = "commissions", translation = "config.skycubed.overlays.commissions")
-    @Comment("", translation = "config.skycubed.overlays.commissions.desc")
-    val commissions = CommissionOverlay()
-
-    @ConfigEntry(id = "npc", translation = "config.skycubed.overlays.npc")
-    @Comment("", translation = "config.skycubed.overlays.npc.desc")
-    val npc = NpcOverlay()
-
-    @Slider
-    @Range(min = 0.0, max = 99.0)
-    @ConfigEntry(id = "coldOverlay", translation = "config.skycubed.overlays.coldOverlay")
-    @Comment("", translation = "config.skycubed.overlays.coldOverlay.desc")
-    var coldOverlay = 80
-
-    @ConfigEntry(id = "movableHotbar", translation = "config.skycubed.overlays.movableHotbar")
-    @Comment("", translation = "config.skycubed.overlays.movableHotbar.desc")
-    var movableHotbar = false
-
-    @ConfigEntry(id = "windOverlay", translation = "config.skycubed.overlays.windOverlay")
-    @Comment("", translation = "config.skycubed.overlays.windOverlay.desc")
-    var windOverlay = false
+    var windOverlay by boolean("windOverlay", false) {
+        this.translation = "config.skycubed.overlays.windOverlay"
+    }
 }
 
 enum class HealthDisplay : Translatable {

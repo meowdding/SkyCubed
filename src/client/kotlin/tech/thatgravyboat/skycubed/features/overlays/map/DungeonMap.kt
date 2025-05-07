@@ -12,13 +12,13 @@ import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.overlays.MapOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
 object DungeonMap {
 
     private val state = MapRenderState()
-    val canRender: Boolean get() = state.texture != null && state.decorations.isNotEmpty() && OverlaysConfig.map.dungeonMap
+    val canRender: Boolean get() = state.texture != null && state.decorations.isNotEmpty() && MapOverlay.dungeonMap
 
     fun render(graphics: GuiGraphics) {
         state.texture ?: return
