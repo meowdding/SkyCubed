@@ -47,11 +47,11 @@ object TextOverlays : Overlay("Edit Text Overlays") {
 
 object SackOverlay : Overlay("Edit Sack Overlay") {
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.sack.enabled"
+        this.translation = "config.skycubed.overlays.sacks.enabled"
     }
 
     var background by boolean(false) {
-        this.translation = "config.skycubed.overlays.sack.background"
+        this.translation = "config.skycubed.overlays.sacks.background"
     }
 
     var sackItems by strings("") {
