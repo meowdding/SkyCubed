@@ -25,9 +25,10 @@ object OverlayPositions : CategoryKt("positions") {
     val commissions = obj("commissions", Position(x = 0, y = 100)) {
         this.translation = "config.skycubed.positions.commissions"
     }
-    @Hidden
-    @ConfigEntry(id = "sack")
-    val sack = Position(x = 200, y = 5)
+
+    val sack = obj("sack", Position(x = 200, y = 5)) {
+        this.translation = "config.skycubed.positions.sack"
+    }
 
     val pickupLog = obj("pickupLog", Position(x = 0, y = 150)) {
         this.translation = "config.skycubed.positions.pickupLog"
