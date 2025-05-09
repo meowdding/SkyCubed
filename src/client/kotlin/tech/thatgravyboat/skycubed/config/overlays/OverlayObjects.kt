@@ -16,10 +16,6 @@ object InfoHudOverlay : Overlay("Edit Info Hud Overlay") {
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.info.enabled"
     }
-
-    var actualPlayer by boolean(false) {
-        this.translation = "config.skycubed.overlays.rpg.actualPlayer"
-    }
 }
 
 object RpgOverlay : Overlay("Edit RPG Overlay") {
@@ -30,6 +26,10 @@ object RpgOverlay : Overlay("Edit RPG Overlay") {
 
     var skyblockLevel by boolean("skyblockLevel", false) {
         this.translation = "config.skycubed.overlays.rpg.skyblockLevel"
+    }
+
+    var actualPlayer by boolean("actualPlayer", false) {
+        this.translation = "config.skycubed.overlays.rpg.actualPlayer"
     }
 }
 
