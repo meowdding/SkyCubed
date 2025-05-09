@@ -6,6 +6,16 @@ plugins {
     kotlin("jvm") version "2.0.20"
     alias(libs.plugins.loom)
     id("maven-publish")
+    alias(libs.plugins.meowdding.resources)
+    alias(libs.plugins.meowdding.repo)
+    alias(libs.plugins.ksp)
+}
+
+ksp {
+    arg("meowdding.modules.project_name", project.name)
+    arg("meowdding.modules.package", "me.owdding.skycubed.generated")
+    arg("meowdding.codecs.project_name", project.name)
+    arg("meowdding.codecs.package", "me.owdding.skycubed.generated")
 }
 
 base {
@@ -84,6 +94,19 @@ dependencies {
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
+
+    compileOnly(libs.meowdding.ktmodules) { isTransitive = false }
+    ksp(libs.meowdding.ktmodules) { isTransitive = false }
+    compileOnly(libs.meowdding.ktcodecs)
+    ksp(libs.meowdding.ktcodecs)
+}
+
+compactingResources {
+    basePath = "repo"
+}
+
+repo {
+    sacks { includeAll() }
 }
 
 tasks.processResources {
@@ -93,6 +116,8 @@ tasks.processResources {
         expand("version" to project.version)
     }
 }
+
+tasks.withType<ProcessResources>().configureEach { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
 
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"

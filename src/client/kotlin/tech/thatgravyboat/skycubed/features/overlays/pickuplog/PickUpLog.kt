@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
+import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
@@ -20,9 +21,10 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlay
 import tech.thatgravyboat.skycubed.utils.Rect
 
+@Module
 object PickUpLog : Overlay {
 
     private val exampleDisplay by lazy {
@@ -115,7 +117,7 @@ object PickUpLog : Overlay {
         removedItems.compactAndCombineTimeAndApply()
 
         val currentTime = System.currentTimeMillis()
-        val timealive = OverlaysConfig.pickupLog.time * 1000
+        val timealive = PickupLogOverlay.time * 1000
         addedItems.removeIf { it.time + timealive < currentTime }
         removedItems.removeIf { it.time + timealive < currentTime }
         updateDisplay()
@@ -135,7 +137,7 @@ object PickUpLog : Overlay {
             return
         }
         display = items.compact()
-            .map { OverlaysConfig.pickupLog.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
+            .map { PickupLogOverlay.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {
@@ -154,7 +156,7 @@ object PickUpLog : Overlay {
         }
 
     private fun List<PickUpLogItem>.compact() =
-        takeUnless { OverlaysConfig.pickupLog.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
+        takeUnless { PickupLogOverlay.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter(PickUpLogItem::isNotEmpty)
 

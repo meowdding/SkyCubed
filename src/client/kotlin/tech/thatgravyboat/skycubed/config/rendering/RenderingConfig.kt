@@ -1,16 +1,13 @@
 package tech.thatgravyboat.skycubed.config.rendering
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Category
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
+import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
-@ConfigInfo(titleTranslation = "config.skycubed.render.title")
-@Category("render")
-object RenderingConfig {
+object RenderingConfig : CategoryKt("render") {
 
-    @ConfigEntry(id = "showOwnTag", translation = "config.skycubed.render.showOwnTag")
-    @Comment("", translation = "config.skycubed.render.showOwnTag.desc")
-    var showOwnTag = false
+    override val name: TranslatableValue = Translated("config.skycubed.render.title")
 
+    var showOwnTag by boolean("showOwnTag", false) {
+        this.translation = "config.skycubed.render.showOwnTag"
+    }
 }

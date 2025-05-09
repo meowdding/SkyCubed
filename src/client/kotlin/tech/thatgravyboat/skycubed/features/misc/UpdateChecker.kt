@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.misc
 
 import com.google.gson.JsonArray
 import kotlinx.coroutines.runBlocking
+import me.owdding.ktmodules.Module
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.Version
 import net.minecraft.SharedConstants
@@ -19,6 +20,7 @@ import kotlin.time.Duration.Companion.seconds
 
 private const val URL = "https://api.modrinth.com/v2/project/skycubed/version"
 
+@Module
 object UpdateChecker {
 
     private var firstLoad = true

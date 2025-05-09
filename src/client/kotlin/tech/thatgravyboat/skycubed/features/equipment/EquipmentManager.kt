@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.equipment
 
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.client.renderer.RenderType
@@ -18,6 +19,7 @@ import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.utils.HiddenSlot
 
+@Module
 object EquipmentManager {
 
     private val slotTexture = ResourceLocation.withDefaultNamespace("container/slot")

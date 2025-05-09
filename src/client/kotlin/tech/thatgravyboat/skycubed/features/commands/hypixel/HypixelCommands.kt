@@ -3,12 +3,14 @@ package tech.thatgravyboat.skycubed.features.commands.hypixel
 import com.google.gson.JsonArray
 import com.mojang.brigadier.tree.RootCommandNode
 import kotlinx.coroutines.runBlocking
+import me.owdding.ktmodules.Module
 import net.minecraft.commands.SharedSuggestionProvider
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
 import tech.thatgravyboat.skycubed.SkyCubed
 
+@Module
 object HypixelCommands {
 
     private val commands: MutableList<LiteralHypixelCommand> = mutableListOf()

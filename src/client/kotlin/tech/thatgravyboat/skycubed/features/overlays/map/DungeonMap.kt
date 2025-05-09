@@ -1,13 +1,14 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
 import com.mojang.math.Axis
+import me.owdding.ktmodules.Module
 import earth.terrarium.olympus.client.utils.Orientation
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
+import tech.thatgravyboat.skycubed.config.overlays.MapOverlay
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.features.dungeonmap.*
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonMap
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RenderPosition
@@ -15,6 +16,7 @@ import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.combinedSize
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
+@Module
 object DungeonMap {
 
     private val greenCheckmark = SkyCubed.id("map/dungeons/green_checkmark")
@@ -22,7 +24,7 @@ object DungeonMap {
     private val cross = SkyCubed.id("map/dungeons/cross")
     private val questionMark = SkyCubed.id("map/dungeons/question_mark")
 
-    val canRender: Boolean get() = OverlaysConfig.dungeonMap.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
+    val canRender: Boolean get() = MapOverlay.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
 
     fun render(graphics: GuiGraphics) {
         val instance = DungeonFeatures.currentInstance ?: return
