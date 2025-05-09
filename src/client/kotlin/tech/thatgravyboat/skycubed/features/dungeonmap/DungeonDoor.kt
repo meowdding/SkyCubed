@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
 import earth.terrarium.olympus.client.utils.Orientation
-import net.minecraft.world.level.material.MapColor
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType.entries
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 
 /**
@@ -18,17 +18,18 @@ data class DungeonDoor(val pos: DungeonPosition<*>, val orientation: Orientation
 /**
  * The different types of doors and their respective map color.
  */
-enum class DungeonDoorType(val color: Byte) {
-    NORMAL(DungeonRoomType.NORMAL.color),
-    WITHER(119),
-    BLOOD(DungeonRoomType.BLOOD.color),
-    PUZZLE(DungeonRoomType.PUZZLE.color),
-    TRAP(DungeonRoomType.TRAP.color),
-    MINIBOSS(DungeonRoomType.MINIBOSS.color),
-    FAIRY(DungeonRoomType.FAIRY.color),
-    UNKNOWN(DungeonRoomType.UNKNOWN.color);
+enum class DungeonDoorType(val color: Byte, val defaultDisplayColor: Int) {
+    NORMAL(DungeonRoomType.NORMAL.color, DungeonRoomType.NORMAL.defaultDisplayColor),
+    WITHER(119, 0x0D0D0D),
+    BLOOD(DungeonRoomType.BLOOD.color, DungeonRoomType.BLOOD.defaultDisplayColor),
+    PUZZLE(DungeonRoomType.PUZZLE.color, DungeonRoomType.PUZZLE.defaultDisplayColor),
+    TRAP(DungeonRoomType.TRAP.color, DungeonRoomType.TRAP.defaultDisplayColor),
+    MINIBOSS(DungeonRoomType.MINIBOSS.color, DungeonRoomType.MINIBOSS.defaultDisplayColor),
+    FAIRY(DungeonRoomType.FAIRY.color, DungeonRoomType.FAIRY.defaultDisplayColor),
+    UNKNOWN(DungeonRoomType.UNKNOWN.color, DungeonRoomType.UNKNOWN.defaultDisplayColor),
+    ;
 
-    fun getColor() = MapColor.getColorFromPackedId(color.toInt())
+    var displayColor: Int = defaultDisplayColor
 
     companion object {
         fun getByColor(color: Byte) = entries.firstOrNull { it.color == color }

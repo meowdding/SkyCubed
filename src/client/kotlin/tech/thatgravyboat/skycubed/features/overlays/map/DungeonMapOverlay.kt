@@ -1,30 +1,29 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
 import com.mojang.math.Axis
-import me.owdding.ktmodules.Module
 import earth.terrarium.olympus.client.utils.Orientation
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
-import tech.thatgravyboat.skycubed.config.overlays.MapOverlay
 import tech.thatgravyboat.skycubed.SkyCubed
+import tech.thatgravyboat.skycubed.config.overlays.DungeonMapoverlay
 import tech.thatgravyboat.skycubed.features.dungeonmap.*
-import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonMap
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RenderPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.combinedSize
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
 @Module
-object DungeonMap {
+object DungeonMapOverlay {
 
     private val greenCheckmark = SkyCubed.id("map/dungeons/green_checkmark")
     private val whiteCheckmark = SkyCubed.id("map/dungeons/white_checkmark")
     private val cross = SkyCubed.id("map/dungeons/cross")
     private val questionMark = SkyCubed.id("map/dungeons/question_mark")
 
-    val canRender: Boolean get() = MapOverlay.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
+    val canRender: Boolean get() = DungeonMapoverlay.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
 
     fun render(graphics: GuiGraphics) {
         val instance = DungeonFeatures.currentInstance ?: return
@@ -69,8 +68,8 @@ object DungeonMap {
         val y = pos.y * (combinedSize + 2)
 
         when (door.orientation) {
-            Orientation.VERTICAL -> graphics.color(x + 6, y - 2, combinedSize - 12, 2, door.type.getColor())
-            Orientation.HORIZONTAL -> graphics.color(x - 2, y + 6, 2, combinedSize - 12, door.type.getColor())
+            Orientation.VERTICAL -> graphics.color(x + 6, y - 2, combinedSize - 12, 2, door.type.displayColor)
+            Orientation.HORIZONTAL -> graphics.color(x - 2, y + 6, 2, combinedSize - 12, door.type.displayColor)
         }
     }
 

@@ -41,9 +41,6 @@ class DungeonMap(val instance: DungeonInstance) {
     }
 
     init {
-        roomMap.forEach {
-            println(it.joinToString(" | ", prefix = "[ ", postfix = " ]"))
-        }
         SkyBlockAPI.eventBus.register(this)
     }
 
@@ -169,7 +166,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
             this.mapBox.left = left
             this.mapBox.top = top
-            mapData.colorAt(left, top, debug = true)
+            mapData.colorAt(left, top)
 
             var roomsPerRow = 0
             var mostRight = this.mapBox.left
@@ -192,7 +189,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
             this.mapBox.right = mostRight
             this.mapBox.bottom = mostDown
-            mapData.colorAt(mostDown, mostDown, debug = true)
+            mapData.colorAt(mostDown, mostDown)
 
             break
         }

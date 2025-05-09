@@ -17,6 +17,7 @@ object OverlaysConfig : CategoryKt("overlays") {
         obj("tablist", TabListOverlay) { this.translation = "config.skycubed.overlays.tablist" }
         obj("sack", SackOverlayConfig) { this.translation = "config.skycubed.overlays.sacks" }
         obj("map", MapOverlay) { this.translation = "config.skycubed.overlays.map" }
+        obj("dungeonmap", DungeonMapoverlay) { this.translation = "config.skycubed.overlays.dungeonmap" }
         obj("pickupLog", PickupLogOverlay) { this.translation = "config.skycubed.overlays.pickuplog" }
         obj("commissions", CommissionOverlay) { this.translation = "config.skycubed.overlays.commissions" }
         obj("npc", NpcOverlay) { this.translation = "config.skycubed.overlays.npc" }

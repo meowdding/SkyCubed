@@ -2,9 +2,14 @@ package tech.thatgravyboat.skycubed.config.overlays
 
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
+
+// This is because we need to use the property delegate in the init block
+private val EMPTY_PROPERTY = object {}
 
 open class Overlay(private val title: String) : ObjectKt(), Translatable {
 
@@ -79,9 +84,46 @@ object MapOverlay : Overlay("Edit Map Overlay") {
     var enabled by boolean("enabled", false) {
         this.translation = "config.skycubed.overlays.map.enabled"
     }
+}
 
-    var dungeonMap by boolean("dungeonMap", true) {
-        this.translation = "config.skycubed.overlays.map.dungeonMap"
+object DungeonMapoverlay : Overlay("Edit Dungeon Map Overlay") {
+
+    var enabled by boolean("enabled", false) {
+        this.translation = "config.skycubed.overlays.dungeonmap.enabled"
+    }
+
+    init {
+        separator {
+            this.title = "config.skycubed.overlays.dungeonmap.roomColors"
+            this.description = "config.skycubed.overlays.dungeonmap.roomColors.desc"
+        }
+
+        for (type in DungeonRoomType.entries) {
+            val id = type.name.lowercase()
+            observable(color("${id}_room", type.defaultDisplayColor) {
+                this.allowAlpha = false
+                this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
+                this.translation = "config.skycubed.overlays.dungeonmap.roomColors.$id"
+            }) { _, new ->
+                type.displayColor = new
+            }.provideDelegate(this, ::EMPTY_PROPERTY)
+        }
+
+        separator {
+            this.title = "config.skycubed.overlays.dungeonmap.doorColors"
+            this.description = "config.skycubed.overlays.dungeonmap.doorColors.desc"
+        }
+
+        for (type in DungeonDoorType.entries) {
+            val id = type.name.lowercase()
+            observable(color("${id}_door", type.defaultDisplayColor) {
+                this.allowAlpha = false
+                this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
+                this.translation = "config.skycubed.overlays.dungeonmap.doorColors.$id"
+            }) { _, new ->
+                type.displayColor = new
+            }.provideDelegate(this, ::EMPTY_PROPERTY)
+        }
     }
 }
 

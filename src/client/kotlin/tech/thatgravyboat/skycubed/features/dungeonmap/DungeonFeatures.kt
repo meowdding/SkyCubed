@@ -1,11 +1,13 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
+import me.owdding.ktmodules.Module
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyIn
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 
+@Module
 object DungeonFeatures {
 
     var currentInstance: DungeonInstance? = null

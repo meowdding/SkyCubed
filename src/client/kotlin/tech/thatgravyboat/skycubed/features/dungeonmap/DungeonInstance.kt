@@ -5,7 +5,6 @@ import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyWidget
-import tech.thatgravyboat.skyblockapi.api.events.info.SecretsActionBarWidgetChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidget
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidgetChangeEvent
@@ -49,11 +48,6 @@ class DungeonInstance(val serverId: String) {
 
     init {
         SkyBlockAPI.eventBus.register(this)
-    }
-
-    @Subscription
-    fun onSecretWidgetChange(event: SecretsActionBarWidgetChangeEvent) {
-        event.new.forEach { println(it) }
     }
 
     @Subscription(priority = Subscription.LOWEST)
