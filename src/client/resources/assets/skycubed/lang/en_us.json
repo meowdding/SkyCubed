@@ -56,6 +56,15 @@
         "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
         "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay",
 
+    "config.skycubed.overlays.sacks": "Sack Overlay",
+    "config.skycubed.overlays.sacks.desc": "Settings for the sack overlay.",
+
+        "config.skycubed.overlays.sacks.enabled": "Enable Sack Overlay",
+        "config.skycubed.overlays.sacks.enabled.desc": "Enables the sack overlay, showing specified items in your sack.\nYou can edit these items with /skycubed sackhud.",
+
+        "config.skycubed.overlays.sacks.background": "Background",
+        "config.skycubed.overlays.sacks.background.desc": "Use the SkyCubed background texture instead of a color.",
+
     "config.skycubed.overlays.tablist": "Custom Tab List Overlay",
     "config.skycubed.overlays.tablist.desc": "Settings for the custom tab list overlay.",
 
@@ -149,6 +158,15 @@
     "config.skycubed.screens.equipment": "Show Equipment",
     "config.skycubed.screens.equipment.desc": "Shows your equipment in your inventory next to your player like armor.",
 
+    "config.skycubed.screens.wardrobe": "Custom Wardrobe",
+    "config.skycubed.screens.wardrobe.desc": "Changes the wardrobe to be a custom wardrobe with more options.",
+
+        "config.skycubed.screens.wardrobe.enabled": "Enabled",
+        "config.skycubed.screens.wardrobe.enabled.desc": "Enables the custom wardrobe.",
+
+        "config.skycubed.screens.wardrobe.textures": "Textures",
+        "config.skycubed.screens.wardrobe.textures.desc": "Changes it from transparent squares to actual textures.",
+
     "//Items": "",
 
     "config.skycubed.items.title": "Items",
@@ -159,7 +177,20 @@
     "config.skycubed.items.cooldowns": "Item Cooldowns",
     "config.skycubed.items.cooldowns.desc": "Adds vanilla cooldowns to SkyBlock items.",
 
+    "//Rendering": "",
+
+    "config.skycubed.render.title": "Rendering",
+
+    "config.skycubed.render.showOwnTag": "Render own name tag",
+    "config.skycubed.render.showOwnTag.desc": "Renders your own name tag in third person.",
+
     "//Notifications": "",
+    "config.skycubed.notification.hideChatMessage": "Hide Chat Messages",
+    "config.skycubed.notification.hideChatMessage.desc": "If enabled the chat messages will be hidden when a notification is displayed.",
+    "config.skycubed.notification.showAsToast": "Show as Toast",
+    "config.skycubed.notification.showAsToast.desc": "If enabled the notifications will show as a toast message.",
+    "config.skycubed.notification.toastDuration": "Toast Duration",
+    "config.skycubed.notification.toastDuration.desc": "The time in seconds of how long a toast notification should be displayed for.",
 
     "config.skycubed.notifications.title": "Notifications",
 
@@ -226,6 +257,8 @@
     "__keybinds__": "",
 
     "key.skycubed.category": "SkyCubed",
-    "key.skycubed.map": "Open Map"
+    "key.skycubed.map": "Open Map",
+
+    "theme.jade.skycubed": "SkyCubed"
 
 }

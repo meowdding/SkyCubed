@@ -7,7 +7,7 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlay
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.info.farming.FarmhouseInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.farming.GardenInfoOverlay
@@ -23,7 +23,7 @@ object InfoOverlay : Overlay {
 
     override val name: Component = Component.literal("Info Overlay")
     override val position: Position = Position()
-    override val enabled: Boolean get() = OverlaysConfig.info.enabled
+    override val enabled: Boolean get() = InfoHudOverlay.enabled
     override val moveable: Boolean = false
     override val bounds: Pair<Int, Int> = 34 to 34
     override val editBounds: Rect = Rect(position.x, position.y, 34, 34)

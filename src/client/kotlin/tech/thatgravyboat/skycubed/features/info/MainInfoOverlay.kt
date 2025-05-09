@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.features.info
 
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
+import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 
 object MainInfoOverlay {

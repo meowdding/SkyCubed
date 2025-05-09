@@ -1,19 +1,17 @@
 package tech.thatgravyboat.skycubed.config.screens
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Category
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
+import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
-@ConfigInfo(titleTranslation = "config.skycubed.screens.title")
-@Category("screens")
-object ScreensConfig {
+object ScreensConfig : CategoryKt("screens") {
 
-    @ConfigEntry(id = "equipment", translation = "config.skycubed.screens.equipment")
-    @Comment("", translation = "config.skycubed.screens.equipment.desc")
-    var equipment = true
+    override val name: TranslatableValue = Translated("config.skycubed.screens.title")
 
-    @ConfigEntry(id = "wardrobe", translation = "config.skycubed.screens.wardrobe")
-    @Comment("", translation = "config.skycubed.screens.wardrobe.desc")
-    val wardrobe = WardrobeConfig()
+    var equipment by boolean("equipment", true) {
+        this.translation = "config.skycubed.screens.equipment"
+    }
+
+    init {
+        obj("wardrobe", WardrobeConfig) { this.translation = "config.skycubed.screens.wardrobe" }
+    }
 }

@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
+import me.owdding.ktmodules.Module
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
@@ -10,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.events.render.RenderHudEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseClickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
@@ -19,8 +21,8 @@ import tech.thatgravyboat.skycubed.features.overlays.*
 import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
-import tech.thatgravyboat.skycubed.utils.pushPop
 
+@Module
 object Overlays {
 
     private val overlays = mutableListOf<Overlay>()
@@ -113,6 +115,7 @@ object Overlays {
     init {
         register(PlayerRpgOverlay)
         register(CommissionsOverlay)
+        register(SackOverlay)
         register(InfoOverlay)
         register(DialogueOverlay)
         register(PickUpLog)

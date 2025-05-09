@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
 import com.mojang.blaze3d.platform.InputConstants
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenBackgroundEvent
@@ -11,8 +12,9 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseReleasedEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
+import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 
+@Module
 object WardrobeFeature {
 
     private val regex = Regex("Wardrobe \\((?<currentPage>\\d+)/\\d+\\)")
@@ -82,5 +84,5 @@ object WardrobeFeature {
     }
 
     private fun Screen.isEnabled() =
-        this.title.stripped.lowercase().startsWith("wardrobe") && ScreensConfig.wardrobe.enabled
+        this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
 }

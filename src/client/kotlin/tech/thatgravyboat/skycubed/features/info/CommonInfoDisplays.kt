@@ -1,17 +1,17 @@
 package tech.thatgravyboat.skycubed.features.info
 
-import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
+import me.owdding.lib.displays.Displays
+import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.CurrencyAPI
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.extentions.toRomanNumeral
+import tech.thatgravyboat.skyblockapi.utils.extentions.toTitleCase
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.features.info.icons.LocationIcons
 import tech.thatgravyboat.skycubed.features.info.icons.SlayerIcons
-import tech.thatgravyboat.skycubed.utils.capitalize
 import tech.thatgravyboat.skycubed.utils.toOrdinal
 
 object CommonInfoDisplays {
@@ -87,7 +87,7 @@ object CommonInfoDisplays {
         RIGHT_LINE,
         Displays.padding(0, 3, 2, 2, Displays.row(
             Displays.padding(1, seasonIcon),
-            Displays.text({ "${DateTimeAPI.season?.name?.capitalize().orEmpty()} ${DateTimeAPI.day.toOrdinal()}" }),
+            Displays.text({ "${DateTimeAPI.season?.name?.toTitleCase().orEmpty()} ${DateTimeAPI.day.toOrdinal()}" }),
         ))
     )
 

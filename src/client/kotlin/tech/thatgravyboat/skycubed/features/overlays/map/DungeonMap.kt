@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
 import com.mojang.math.Axis
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.state.MapRenderState
@@ -11,15 +12,15 @@ import tech.thatgravyboat.skyblockapi.api.events.level.PacketReceivedEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
-import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
+import tech.thatgravyboat.skycubed.config.overlays.MapOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
-import tech.thatgravyboat.skycubed.utils.pushPop
 
+@Module
 object DungeonMap {
 
     private val state = MapRenderState()
-    val canRender: Boolean get() = state.texture != null && state.decorations.isNotEmpty() && OverlaysConfig.map.dungeonMap
+    val canRender: Boolean get() = state.texture != null && state.decorations.isNotEmpty() && MapOverlay.dungeonMap
 
     fun render(graphics: GuiGraphics) {
         state.texture ?: return
@@ -32,7 +33,7 @@ object DungeonMap {
 
         graphics.blit(
             RenderType::guiTextured, state.texture!!,
-            0 ,0,
+            0, 0,
             0f, 0f,
             90, 90,
             128, 128,
@@ -52,7 +53,7 @@ object DungeonMap {
 
                     graphics.blitSprite(
                         RenderType::guiTextured, sprite,
-                        0 ,0,
+                        0, 0,
                         8, 8
                     )
                 }

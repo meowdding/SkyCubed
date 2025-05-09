@@ -6,6 +6,16 @@ plugins {
     kotlin("jvm") version "2.0.20"
     alias(libs.plugins.loom)
     id("maven-publish")
+    alias(libs.plugins.meowdding.resources)
+    alias(libs.plugins.meowdding.repo)
+    alias(libs.plugins.ksp)
+}
+
+ksp {
+    arg("meowdding.modules.project_name", project.name)
+    arg("meowdding.modules.package", "me.owdding.skycubed.generated")
+    arg("meowdding.codecs.project_name", project.name)
+    arg("meowdding.codecs.package", "me.owdding.skycubed.generated")
 }
 
 base {
@@ -52,6 +62,7 @@ repositories {
     maven(url = "https://repo.hypixel.net/repository/Hypixel/")
     maven(url = "https://api.modrinth.com/maven")
     maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+    maven(url = "https://maven.nucleoid.xyz")
     mavenLocal()
 }
 
@@ -68,19 +79,34 @@ dependencies {
     modImplementation(libs.hypixelapi)
     modImplementation(libs.skyblockapi)
     modImplementation(libs.rconfig)
-    modImplementation(libs.rconfigkt)
+    modImplementation(libs.rconfigkt) { isTransitive = false }
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
+    modImplementation(libs.meowdding.lib)
 
     include(libs.hypixelapi)
     include(libs.skyblockapi)
     include(libs.rconfig)
-    include(libs.rconfigkt)
+    include(libs.rconfigkt) { isTransitive = false }
     include(libs.rlib)
     include(libs.olympus)
+    include(libs.meowdding.lib)
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
+
+    compileOnly(libs.meowdding.ktmodules) { isTransitive = false }
+    ksp(libs.meowdding.ktmodules) { isTransitive = false }
+    compileOnly(libs.meowdding.ktcodecs)
+    ksp(libs.meowdding.ktcodecs)
+}
+
+compactingResources {
+    basePath = "repo"
+}
+
+repo {
+    sacks { includeAll() }
 }
 
 tasks.processResources {
@@ -90,6 +116,8 @@ tasks.processResources {
         expand("version" to project.version)
     }
 }
+
+tasks.withType<ProcessResources>().configureEach { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
 
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"

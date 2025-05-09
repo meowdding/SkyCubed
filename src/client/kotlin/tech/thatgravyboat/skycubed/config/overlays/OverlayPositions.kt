@@ -1,36 +1,44 @@
 package tech.thatgravyboat.skycubed.config.overlays
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Category
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Hidden
+import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
-@Category("positions")
-@Hidden
-object OverlayPositions {
+object OverlayPositions : CategoryKt("positions") {
 
-    @Hidden @ConfigEntry(id = "rpg")
-    val rpg = Position(x = 5, y = 5)
+    override val hidden: Boolean = true
 
-    @Hidden @ConfigEntry(id = "health")
-    val health = Position(x = 54, y = 16, scale = 0.5f)
+    val rpg = obj("rpg", Position(x = 5, y = 5)) {
+        this.translation = "config.skycubed.positions.rpg"
+    }
 
-    @Hidden @ConfigEntry(id = "mana")
-    val mana = Position(x = 54, y = 10, scale = 0.5f)
+    val health = obj("health", Position(x = 54, y = 16, scale = 0.5f)) {
+        this.translation = "config.skycubed.positions.health"
+    }
 
-    @Hidden @ConfigEntry(id = "defense")
-    val defense = Position(x = 90, y = 3)
+    val mana = obj("mana", Position(x = 54, y = 10, scale = 0.5f)) {
+        this.translation = "config.skycubed.positions.mana"
+    }
 
-    @Hidden @ConfigEntry(id = "commissions")
-    val commissions = Position(x = 0, y = 100)
+    val defense = obj("defense", Position(x = 90, y = 3)) {
+        this.translation = "config.skycubed.positions.defense"
+    }
 
-    @Hidden @ConfigEntry(id = "pickupLog")
-    val pickupLog = Position(x = 0, y = 150)
+    val commissions = obj("commissions", Position(x = 0, y = 100)) {
+        this.translation = "config.skycubed.positions.commissions"
+    }
 
-    @Hidden @ConfigEntry(id = "map")
-    val map = Position(x = -90, y = 0)
+    val sack = obj("sack", Position(x = -300, y = 10)) {
+        this.translation = "config.skycubed.positions.sack"
+    }
 
-    @Hidden
-    @ConfigEntry(id = "hotbar")
-    val hotbar = Position(x = 0, y = -22)
+    val pickupLog = obj("pickupLog", Position(x = 0, y = 150)) {
+        this.translation = "config.skycubed.positions.pickupLog"
+    }
 
+    val map = obj("map", Position(x = -90, y = 0)) {
+        this.translation = "config.skycubed.positions.map"
+    }
+
+    val hotbar = obj("hotbar", Position(x = 0, y = -22)) {
+        this.translation = "config.skycubed.positions.hotbar"
+    }
 }

@@ -1,5 +1,10 @@
 package tech.thatgravyboat.skycubed.features.tablist
 
+import me.owdding.ktmodules.Module
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.toRow
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
@@ -24,11 +29,8 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.time.until
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
-import tech.thatgravyboat.skycubed.api.displays.toColumn
-import tech.thatgravyboat.skycubed.api.displays.toRow
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.api.ExtraDisplays
+import tech.thatgravyboat.skycubed.config.overlays.TabListOverlay
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
@@ -68,6 +70,7 @@ enum class CompactTablistSorting {
     override fun toString() = formattedName
 }
 
+@Module
 object CompactTablist {
 
     private var display: Display? = null
@@ -78,16 +81,15 @@ object CompactTablist {
     private var godPotionInFooter = false
     private var filteredFooter: List<FormattedText> = emptyList()
 
-    init {
-        OverlaysConfig.tablist.enabled.addListener { _, new ->
-            if (new) {
-                createDisplay(lastTablist)
-            } else {
-                display = null
-            }
-        }
-        OverlaysConfig.tablist.sorting.addListener { _, _ ->
+    fun onSortingUpdate() {
+        createDisplay(lastTablist)
+    }
+
+    fun onEnabledDisabled(enabled: Boolean) {
+        if (enabled) {
             createDisplay(lastTablist)
+        } else {
+            display = null
         }
     }
 
@@ -130,9 +132,10 @@ object CompactTablist {
             }.toColumn()
         }.toRow(5)
 
-        val footerElement =  filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
+        val footerElement =
+            filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
 
-        display = Displays.background(
+        display = ExtraDisplays.background(
             0xA0000000u, 2f,
             Displays.padding(5, listOf(mainElement, footerElement).toColumn()),
         )
@@ -176,7 +179,7 @@ object CompactTablist {
 
     private fun List<Line>.sortPlayers(): List<Line> {
         val linesWithLevels = this.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
-            when (OverlaysConfig.tablist.sorting.get()) {
+            when (TabListOverlay.sorting) {
                 CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
                 CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
                 CompactTablistSorting.FRIENDS -> {
@@ -302,5 +305,5 @@ object CompactTablist {
         return result
     }
 
-    private fun isEnabled() = LocationAPI.isOnSkyBlock && OverlaysConfig.tablist.enabled.get()
+    private fun isEnabled() = LocationAPI.isOnSkyBlock && TabListOverlay.enabled
 }

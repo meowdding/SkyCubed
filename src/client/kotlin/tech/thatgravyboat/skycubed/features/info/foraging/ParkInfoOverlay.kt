@@ -1,5 +1,7 @@
 package tech.thatgravyboat.skycubed.features.info.foraging
 
+import me.owdding.ktmodules.Module
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
@@ -14,9 +16,9 @@ import tech.thatgravyboat.skyblockapi.utils.regex.component.anyMatch
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.features.info.CommonInfoDisplays
 
+@Module
 object ParkInfoOverlay {
     private var rainTime: Component? = null
     private val rainTimeRegex = ComponentRegex(" Rain: (?<time>.*)")

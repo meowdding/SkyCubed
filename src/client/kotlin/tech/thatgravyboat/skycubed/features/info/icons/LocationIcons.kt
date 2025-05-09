@@ -1,11 +1,11 @@
 package tech.thatgravyboat.skycubed.features.info.icons
 
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 
 object LocationIcons : Display {
 

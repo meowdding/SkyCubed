@@ -19,6 +19,8 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
+import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.config.overlays.RpgOverlay
 import tech.thatgravyboat.skycubed.utils.blitSpritePercentX
 import tech.thatgravyboat.skycubed.utils.drawScaledString
 import tech.thatgravyboat.skycubed.utils.pushPop
@@ -49,7 +51,7 @@ object PlayerRpgOverlay : Overlay {
     private val AIR = SkyCubed.id("rpg/air/normal")
 
     override val name: Component = Text.of("Player RPG Hud")
-    override val enabled: Boolean get() = OverlaysConfig.rpg.enabled
+    override val enabled: Boolean get() = RpgOverlay.enabled
     override val position: Position = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
@@ -112,7 +114,7 @@ object PlayerRpgOverlay : Overlay {
             val coercedManaPercent = manaUsePercent.coerceAtMost(manaPercent).coerceIn(0f, 1f)
             graphics.blitSpritePercentX(MANA_NEEDED, 47, 18, 57, 4, coercedManaPercent)
 
-            if (OverlaysConfig.rpg.skyblockLevel) {
+            if (RpgOverlay.skyblockLevel) {
                 graphics.blitSpritePercentX(SKYBLOCK_XP, 47, 29, 67, 4, skyblockLevelPercent.coerceIn(0f, 1f))
                 graphics.drawScaledString("${ProfileAPI.sbLevel}", 3, 33, 16, 0x55FFFF)
             } else {

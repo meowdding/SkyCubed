@@ -5,8 +5,8 @@ import com.mojang.blaze3d.platform.InputConstants
 import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
-import com.teamresourceful.resourcefullib.common.lib.Constants
 import kotlinx.coroutines.runBlocking
+import me.owdding.ktmodules.Module
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.KeyMapping
 import net.minecraft.core.BlockPos
@@ -16,10 +16,12 @@ import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.map.screen.MapScreen
 import tech.thatgravyboat.skycubed.utils.readJsonc
 import java.util.function.Function
 
+@Module
 object Maps {
 
     private val TYPES = arrayOf(
@@ -47,7 +49,7 @@ object Maps {
                         .parse(JsonOps.INSTANCE, file)
 
                     result.ifError {
-                        Constants.LOGGER.error("Error parsing maps/$type.json, error: {}", it)
+                        SkyCubed.error("Error parsing maps/$type.json, error: {}", it)
                     }
                     result.ifSuccess { islands ->
                         groups[type] = islands

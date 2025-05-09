@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info.farming
 
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.api.area.hub.FarmhouseAPI
@@ -7,7 +8,6 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.features.info.CommonInfoDisplays
 
 object FarmhouseInfoOverlay {

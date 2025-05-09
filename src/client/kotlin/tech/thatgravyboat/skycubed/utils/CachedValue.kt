@@ -20,4 +20,6 @@ class CachedValue<T>(private val cacheTime: Duration, private val supplier: () -
     fun invalidate() {
         value = null
     }
+
+    operator fun invoke(): T = get()
 }
