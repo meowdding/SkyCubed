@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.config.overlays
 
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
+import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
@@ -86,7 +87,7 @@ object MapOverlay : Overlay("Edit Map Overlay") {
     }
 }
 
-object DungeonMapoverlay : Overlay("Edit Dungeon Map Overlay") {
+object DungeonMapOverlayConfig : Overlay("Edit Dungeon Map Overlay") {
 
     var enabled by boolean("enabled", false) {
         this.translation = "config.skycubed.overlays.dungeonmap.enabled"
@@ -100,8 +101,7 @@ object DungeonMapoverlay : Overlay("Edit Dungeon Map Overlay") {
 
         for (type in DungeonRoomType.entries) {
             val id = type.name.lowercase()
-            observable(color("${id}_room", type.defaultDisplayColor) {
-                this.allowAlpha = false
+            observable(color("${id}_room", ARGB.opaque(type.defaultDisplayColor)) {
                 this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
                 this.translation = "config.skycubed.overlays.dungeonmap.roomColors.$id"
             }) { _, new ->
@@ -116,8 +116,7 @@ object DungeonMapoverlay : Overlay("Edit Dungeon Map Overlay") {
 
         for (type in DungeonDoorType.entries) {
             val id = type.name.lowercase()
-            observable(color("${id}_door", type.defaultDisplayColor) {
-                this.allowAlpha = false
+            observable(color("${id}_door", ARGB.opaque(type.defaultDisplayColor)) {
                 this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
                 this.translation = "config.skycubed.overlays.dungeonmap.doorColors.$id"
             }) { _, new ->

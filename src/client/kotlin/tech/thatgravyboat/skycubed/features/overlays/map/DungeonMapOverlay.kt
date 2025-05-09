@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.config.overlays.DungeonMapoverlay
+import tech.thatgravyboat.skycubed.config.overlays.DungeonMapOverlayConfig
 import tech.thatgravyboat.skycubed.features.dungeonmap.*
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RenderPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
@@ -23,7 +23,7 @@ object DungeonMapOverlay {
     private val cross = SkyCubed.id("map/dungeons/cross")
     private val questionMark = SkyCubed.id("map/dungeons/question_mark")
 
-    val canRender: Boolean get() = DungeonMapoverlay.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
+    val canRender: Boolean get() = DungeonMapOverlayConfig.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
 
     fun render(graphics: GuiGraphics) {
         val instance = DungeonFeatures.currentInstance ?: return

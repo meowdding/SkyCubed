@@ -1,5 +1,8 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
+import tech.thatgravyboat.skycubed.features.dungeonmap.Checkmark.entries
+
+
 /**
  * A checkmark on the dungeon map, failed is only applied to puzzle room types.
  */
@@ -16,5 +19,9 @@ enum class Checkmark(val color: Byte) {
 }
 
 enum class DungeonPhase {
-     BEFORE, CLEAR, BLOOD, BOSS, AFTER
+    BEFORE,
+    CLEAR,
+    BLOOD,
+    BOSS,
+    AFTER
 }

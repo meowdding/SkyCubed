@@ -195,14 +195,7 @@ class DungeonMap(val instance: DungeonInstance) {
         }
     }
 
-    private val roomPositions
-        get() = buildList {
-            roomMap.indices.map { x ->
-                roomMap.indices.map { y ->
-                    add(RoomPosition(x, y, instance))
-                }
-            }
-        }
+    private val roomPositions get() = roomMap.indices.flatMap { x -> roomMap.indices.map { y -> RoomPosition(x, y, instance) } }
 
 
     private fun setRoomAt(position: RoomPosition, room: DungeonRoom) {

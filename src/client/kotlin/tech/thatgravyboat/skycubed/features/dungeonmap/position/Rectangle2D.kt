@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.features.dungeonmap.position
 import org.joml.Vector2i
 import kotlin.math.abs
 
-data class Rectangle2D(var top: Int, var left: Int, var right: Int, var bottom: Int)  {
+data class Rectangle2D(var top: Int, var left: Int, var right: Int, var bottom: Int) {
     constructor() : this(0, 0, 0, 0)
 
     fun includes(point: Vector2i) = includes(point.x, point.y)

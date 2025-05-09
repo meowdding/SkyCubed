@@ -8,6 +8,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.WorldPosition
 import java.util.*
+import kotlin.math.roundToInt
 
 class DungeonPlayer(
     var name: String,
@@ -17,7 +18,7 @@ class DungeonPlayer(
     val position: DungeonPosition<*> = WorldPosition(0, 0, instance),
     var isDead: Boolean = false,
 
-) {
+    ) {
 
     val oldPosition: DungeonPosition<*> = position.copy()
 
@@ -58,7 +59,7 @@ class DungeonPlayer(
     }
 
     fun setRotation(rotation: Byte) {
-        this.rotation = Math.round((rotation * (360 / 16f)) % 360)
+        this.rotation = ((rotation * (360 / 16f)) % 360).roundToInt()
     }
 
     fun getPlayer(): AbstractClientPlayer? {

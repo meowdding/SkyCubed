@@ -75,13 +75,13 @@
         "config.skycubed.overlays.tablist.sorting.desc": "The way the players should be sorted in the tab list.",
 
     "config.skycubed.overlays.map": "SkyBlock Mini-Map Overlay",
-    "config.skycubed.overlays.map.desc": "Settings the minimap overlay.",
+    "config.skycubed.overlays.map.desc": "Settings for the minimap overlay.",
 
         "config.skycubed.overlays.map.enabled": "Enable minimap Overlay",
         "config.skycubed.overlays.map.enabled.desc": "Enables the minimap overlay, showing where you are on SkyBlock.",
 
     "config.skycubed.overlays.dungeonmap": "Dungeon Map Overlay",
-    "config.skycubed.overlays.dungeonmap.desc": "Settings the minimap overlay for dungeons.",
+    "config.skycubed.overlays.dungeonmap.desc": "Settings for the minimap overlay for dungeons.",
 
         "config.skycubed.overlays.dungeonmap.enabled": "Enable Dungeon Map Overlay",
         "config.skycubed.overlays.dungeonmap.enabled.desc": "Enables the dungeon map overlay, showing where you are in dungeons.",

@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap.position
 
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonInstance
+import kotlin.math.roundToInt
 
 class RoomPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<RoomPosition>(x, y, instance) {
     companion object {
@@ -15,7 +16,7 @@ class RoomPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<
         }
 
         private fun convertToRoomIndex(value: Int): Int {
-            return (Math.round((value + 200) / 32 * 2.0) / 2).toInt()
+            return (((value + 200) / 32 * 2.0).roundToInt() / 2).toInt()
         }
 
     }

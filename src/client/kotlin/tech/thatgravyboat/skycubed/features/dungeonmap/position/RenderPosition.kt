@@ -21,14 +21,14 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
                     fromWorldSpace(
                         this.x,
                         instance.getRoomAmount(),
-                        instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0
+                        instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0,
                     ),
                     fromWorldSpace(
                         this.y,
                         instance.getRoomAmount(),
-                        instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0
+                        instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0,
                     ),
-                    instance
+                    instance,
                 )
             }
         }
@@ -39,7 +39,7 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
                 -200.0,
                 -200 + (rooms * 32.0),
                 0.0,
-                max * (combinedSize + 2.0) - hallwaySize
+                max * (combinedSize + 2.0) - hallwaySize,
             ).roundToInt() - 2
         }
     }
@@ -48,14 +48,14 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
         convertToWorldSpace(
             this.x,
             instance.getRoomAmount(),
-            instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0
+            instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0,
         ),
         convertToWorldSpace(
             this.y,
             instance.getRoomAmount(),
-            instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0
+            instance.map?.roomsPerAxis?.let { max(it.x, it.y) } ?: 0,
         ),
-        instance
+        instance,
     )
 
     override val self: RenderPosition = this
@@ -67,7 +67,7 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
             0.0,
             (6 * combinedSize) * ((rooms.toDouble()) / max),
             -200.0,
-            -200 + (rooms * 32.0)
+            -200 + (rooms * 32.0),
         ).roundToInt() - 2
     }
 
