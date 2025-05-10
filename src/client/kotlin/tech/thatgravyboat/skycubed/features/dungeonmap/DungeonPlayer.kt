@@ -18,7 +18,7 @@ class DungeonPlayer(
     val position: DungeonPosition<*> = WorldPosition(0, 0, instance),
     var isDead: Boolean = false,
 
-    ) {
+) {
 
     val oldPosition: DungeonPosition<*> = position.copy()
 
