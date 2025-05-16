@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
+import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -17,6 +18,7 @@ import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeE
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
+import tech.thatgravyboat.skyblockapi.api.profile.party.PartyAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.extentions.chunked
@@ -36,6 +38,7 @@ import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
@@ -46,7 +49,7 @@ private data class Line(
     var face: PlayerSkin? = null,
     var playerName: String? = null,
     var skyblockLevel: Int? = null,
-    var contribEmblem: String? = null
+    var extraEmblems: MutableList<Component> = mutableListOf(),
 ) {
     val string: String get() = component.string
     val stripped: String get() = component.stripped
@@ -126,7 +129,7 @@ object CompactTablist {
                     listOfNotNull(
                         Displays.face({ face.texture }),
                         Displays.text(line.component),
-                        line.contribEmblem?.let { Displays.text(it) },
+                        *line.extraEmblems.map { Displays.text(it) }.toTypedArray(),
                     ).toRow(3)
                 } ?: Displays.text(line.component)
             }.toColumn()
@@ -163,6 +166,7 @@ object CompactTablist {
             footerLinesToRemove.none { line.string.contains(it) }
         }
     }
+    val i = AtomicInteger()
 
     private fun Line.formatPlayer(): Line {
         playerRegex.match(this.string, "level", "name") { (level, name) ->
@@ -172,7 +176,29 @@ object CompactTablist {
             playerName = name
             face = player?.skin
             skyblockLevel = level.toInt()
-            contributor?.symbol?.let { contribEmblem = it }
+            // party > coop > friends > guild
+            // Todo add apis for this in sbapi
+            val isCoop = false
+            val isGuild = false
+            fun addExtraTag(mutableComponent: MutableComponent) {
+                extraEmblems.add(mutableComponent)
+            }
+            when {
+                PartyAPI.members.any { it.name == playerName } -> addExtraTag(
+                    Text.of("ᴘ") {
+                        if (PartyAPI.leader?.name == playerName) {
+                            this.color = TextColor.GOLD
+                        } else {
+                            this.color = TextColor.BLUE
+                        }
+                    },
+                )
+                isCoop -> addExtraTag(Text.of("ᴄ") { this.color = TextColor.AQUA })
+                FriendsAPI.friends.any { it.name == playerName } -> addExtraTag(Text.of("ꜰ") { this.color = TextColor.GREEN })
+                isGuild -> addExtraTag(Text.of("ɢ") { this.color = TextColor.DARK_GREEN })
+                else -> {}
+            }
+            contributor?.symbol?.let { extraEmblems.add(Text.of(it)) }
         }
         return this
     }
@@ -213,7 +239,7 @@ object CompactTablist {
             label: String,
             duration: Duration,
             activeColor: Int,
-            inactiveText: String = ": Inactive"
+            inactiveText: String = ": Inactive",
         ) = Text.join(
             Text.of(label) {
                 this.color = activeColor
@@ -221,8 +247,8 @@ object CompactTablist {
             },
             Text.of(
                 if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
-                else inactiveText
-            ).withColor(TextColor.GRAY)
+                else inactiveText,
+            ).withColor(TextColor.GRAY),
         ).toLine()
 
         if (boosterCookieInFooter) {
@@ -244,16 +270,19 @@ object CompactTablist {
                     Text.of(SpookyFestivalAPI.purpleCandy.toString()).withColor(TextColor.DARK_PURPLE),
                     Text.of(" (").withColor(TextColor.GRAY),
                     Text.of(SpookyFestivalAPI.points.toString()).withColor(TextColor.GOLD),
-                    Text.of(")").withColor(TextColor.GRAY)
-                ).toLine()
+                    Text.of(")").withColor(TextColor.GRAY),
+                ).toLine(),
             )
         }
 
         if (size > 1) {
-            add(0, Text.of("Other:") {
-                this.color = TextColor.YELLOW
-                this.bold = true
-            }.toLine())
+            add(
+                0,
+                Text.of("Other:") {
+                    this.color = TextColor.YELLOW
+                    this.bold = true
+                }.toLine(),
+            )
         }
     }
 
