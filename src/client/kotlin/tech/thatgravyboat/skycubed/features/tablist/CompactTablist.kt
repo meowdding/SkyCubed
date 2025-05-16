@@ -38,7 +38,6 @@ import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
-import java.util.concurrent.atomic.AtomicInteger
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
@@ -166,7 +165,6 @@ object CompactTablist {
             footerLinesToRemove.none { line.string.contains(it) }
         }
     }
-    val i = AtomicInteger()
 
     private fun Line.formatPlayer(): Line {
         playerRegex.match(this.string, "level", "name") { (level, name) ->
