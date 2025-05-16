@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
-import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -178,22 +177,22 @@ object CompactTablist {
             // Todo add apis for this in sbapi
             val isCoop = false
             val isGuild = false
-            fun addExtraTag(mutableComponent: MutableComponent) {
-                extraEmblems.add(mutableComponent)
+            fun addExtraTag(emblem: String, color: Int) {
+                extraEmblems.add(Text.of(emblem) { this.color = color })
             }
             when {
                 PartyAPI.members.any { it.name == playerName } -> addExtraTag(
-                    Text.of("ᴘ") {
-                        if (PartyAPI.leader?.name == playerName) {
-                            this.color = TextColor.GOLD
-                        } else {
-                            this.color = TextColor.BLUE
-                        }
+                    "ᴘ",
+                    if (PartyAPI.leader?.name == playerName) {
+                        TextColor.GOLD
+                    } else {
+                        TextColor.BLUE
                     },
                 )
-                isCoop -> addExtraTag(Text.of("ᴄ") { this.color = TextColor.AQUA })
-                FriendsAPI.friends.any { it.name == playerName } -> addExtraTag(Text.of("ꜰ") { this.color = TextColor.GREEN })
-                isGuild -> addExtraTag(Text.of("ɢ") { this.color = TextColor.DARK_GREEN })
+
+                isCoop -> addExtraTag("ᴄ", TextColor.AQUA)
+                FriendsAPI.friends.any { it.name == playerName } -> addExtraTag("ꜰ", TextColor.GREEN)
+                isGuild -> addExtraTag("ɢ", TextColor.DARK_GREEN)
                 else -> {}
             }
             contributor?.symbol?.let { extraEmblems.add(Text.of(it)) }
