@@ -138,7 +138,12 @@ object PickupLogOverlay : Overlay("Edit Pickup Log Overlay") {
 
     var time by int("time", 5) {
         this.translation = "config.skycubed.overlays.pickuplog.time"
-        this.range = 1..30
+        this.range = 1..60
+        this.slider = true
+    }
+
+    var sackItems by boolean(false) {
+        this.translation = "config.skycubed.overlays.pickuplog.sackItems"
     }
 
     var appearance by draggable<PickUpLogComponents>("appearance", *PickUpLogComponents.entries.toTypedArray()) {

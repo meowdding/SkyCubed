@@ -139,6 +139,9 @@
         "config.skycubed.overlays.pickuplog.time": "Log Time",
         "config.skycubed.overlays.pickuplog.time.desc": "How long an individual entry should be shown for after it has happened, this is in seconds.",
 
+        "config.skycubed.overlays.pickuplog.sackItems": "Allow Sack Items",
+        "config.skycubed.overlays.pickuplog.sackItems.desc": "If enabled the items in your sack will also be shown in the pickup log.",
+
         "config.skycubed.overlays.pickuplog.appearance": "Appearance",
         "config.skycubed.overlays.pickuplog.appearance.desc": "The order of how a display should be shown on screen. ie. if you want the items after the text or before.",
 

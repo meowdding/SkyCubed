@@ -12,9 +12,10 @@ import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
-import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
+import tech.thatgravyboat.skyblockapi.api.events.hypixel.SacksChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
+import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
@@ -77,7 +78,6 @@ object PickUpLog : Overlay {
     }
 
     @Subscription
-    @TimePassed("2t")
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
         val flattenedInventory = McPlayer.inventory
@@ -124,6 +124,20 @@ object PickUpLog : Overlay {
     }
 
     @Subscription
+    fun onSack(event: SacksChangeEvent) {
+        if (!PickupLogOverlay.sackItems) return
+
+        event.changedItems.forEach { (item, diff) ->
+            val stack = RepoItemsAPI.getItem(item)
+            if (diff < 0) {
+                removedItems.add(PickUpLogItem(stack, diff, System.currentTimeMillis()))
+            } else if (diff > 0) {
+                addedItems.add(PickUpLogItem(stack, diff, System.currentTimeMillis()))
+            }
+        }
+    }
+
+    @Subscription
     fun onServerChange(event: ServerChangeEvent) {
         lastWorldSwap = System.currentTimeMillis()
         addedItems.clear()
@@ -136,8 +150,7 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = items.compact()
-            .map { PickupLogOverlay.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
+        display = items.compact().map { PickupLogOverlay.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {
