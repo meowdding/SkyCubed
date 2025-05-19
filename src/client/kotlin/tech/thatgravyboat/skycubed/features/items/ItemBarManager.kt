@@ -29,7 +29,9 @@ object ItemBarManager {
             event.percent = it / 2000f
             event.color = Mth.hsvToRgb(event.percent / 3.0F, 1.0F, 1.0F)
         }
+        event.item.getData(DataTypes.SECONDS_HELD)?.let {
+            event.percent = it / 1_000_000f
+            event.color = TextColor.GOLD
+        }
     }
-
-    //
 }
