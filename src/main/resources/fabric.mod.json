@@ -22,6 +22,12 @@
                 "adapter": "kotlin",
                 "value": "tech.thatgravyboat.skycubed.SkyCubed"
             }
+        ],
+        "rei_client": [
+            {
+                "adapter": "kotlin",
+                "value": "tech.thatgravyboat.skycubed.compatibility.REICompatability"
+            }
         ]
     },
     "mixins": [

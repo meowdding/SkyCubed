@@ -54,9 +54,13 @@ object Config : ConfigKt("skycubed/config") {
         this.translation = "config.skycubed.general.hiddenActionBarWidgets"
     }
 
-    val hiddenHudElements by select<HudElement>("hiddenHudElements") {
-        this.translation = "config.skycubed.general.hiddenHudElements"
-    }
+    val hiddenHudElements by transform(
+        select<HudElement>("hiddenHudElements") {
+            this.translation = "config.skycubed.general.hiddenHudElements"
+        },
+        { it.toTypedArray() },
+        { it.toSet() }
+    )
 
     init {
         separator {
