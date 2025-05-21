@@ -9,6 +9,22 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.ConfigManager
+import tech.thatgravyboat.skycubed.utils.keysOf
+
+private val ADD_KEY = keysOf(
+    setOf(InputConstants.KEY_EQUALS, InputConstants.KEY_ADD),
+    setOf("+"),
+)
+
+private val MINUS_KEY = keysOf(
+    setOf(InputConstants.KEY_MINUS),
+    setOf("-"),
+)
+
+private val UP_KEY = keysOf(InputConstants.KEY_UP)
+private val DOWN_KEY = keysOf(InputConstants.KEY_DOWN)
+private val LEFT_KEY = keysOf(InputConstants.KEY_LEFT)
+private val RIGHT_KEY = keysOf(InputConstants.KEY_RIGHT)
 
 class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
 
@@ -30,11 +46,13 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
         if (hovered) {
             graphics.fill(x, y, x + width, y + height, 0x50000000)
             graphics.renderOutline(x - 1, y - 1, width + 2, height + 2, 0xFFFFFFFF.toInt())
-            setTooltipForNextRenderPass(Text.multiline(
-                overlay.name,
-                CommonText.EMPTY,
-                Component.translatable("ui.skycubed.overlay.edit.options")
-            ))
+            setTooltipForNextRenderPass(
+                Text.multiline(
+                    overlay.name,
+                    CommonText.EMPTY,
+                    Component.translatable("ui.skycubed.overlay.edit.options"),
+                ),
+            )
         }
 
         graphics.drawCenteredString(font, "X: ${overlay.position.x}, Y: ${overlay.position.y}", (this.width / 2f).toInt(), this.height - 30, -1)
@@ -65,6 +83,7 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
                     relativeY = (mouseY - y).toInt()
                     dragging = true
                 }
+
                 InputConstants.MOUSE_BUTTON_RIGHT -> {
                     overlay.onRightClick()
                 }
@@ -76,13 +95,14 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
     override fun keyPressed(key: Int, scan: Int, modifiers: Int): Boolean {
         val multiplier = if (hasShiftDown()) 10 else 1
         val (x, y) = overlay.position
-        when (key) {
-            InputConstants.KEY_UP -> overlay.setY(y - multiplier)
-            InputConstants.KEY_DOWN -> overlay.setY(y + multiplier)
-            InputConstants.KEY_LEFT -> overlay.setX(x - multiplier)
-            InputConstants.KEY_RIGHT -> overlay.setX(x + multiplier)
-            InputConstants.KEY_EQUALS -> overlay.position.scale += 0.1f
-            InputConstants.KEY_MINUS -> overlay.position.scale -= 0.1f
+
+        when {
+            UP_KEY.isKey(key, scan) -> overlay.setY(y - multiplier)
+            DOWN_KEY.isKey(key, scan) -> overlay.setY(y + multiplier)
+            LEFT_KEY.isKey(key, scan) -> overlay.setX(x - multiplier)
+            RIGHT_KEY.isKey(key, scan) -> overlay.setX(x + multiplier)
+            ADD_KEY.isKey(key, scan) -> overlay.position.scale += 0.1f
+            MINUS_KEY.isKey(key, scan) -> overlay.position.scale -= 0.1f
             else -> return super.keyPressed(key, scan, modifiers)
         }
         return true
