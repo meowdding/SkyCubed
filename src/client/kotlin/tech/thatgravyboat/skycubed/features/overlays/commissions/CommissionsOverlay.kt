@@ -9,7 +9,7 @@ import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlay
+import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.CachedValue
@@ -36,7 +36,7 @@ object CommissionsOverlay : Overlay {
                 )
             )
         }
-        if (CommissionOverlay.background) {
+        if (CommissionOverlayConfig.background) {
             Displays.background(
                 backgroundBox,
                 Displays.padding(4, Displays.column(*lines.toTypedArray()))
@@ -49,7 +49,7 @@ object CommissionsOverlay : Overlay {
     override val name: Component = Text.of("Commissions")
     override val position: Position get() = OverlayPositions.commissions
     override val bounds: Pair<Int, Int> get() = lines.get().getWidth() to lines.get().getHeight()
-    override val enabled: Boolean get() = CommissionOverlay.enabled && SkyBlockIsland.inAnyIsland(locations)
+    override val enabled: Boolean get() = CommissionOverlayConfig.enabled && SkyBlockIsland.inAnyIsland(locations)
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
@@ -57,12 +57,12 @@ object CommissionsOverlay : Overlay {
     }
 
     override fun onRightClick() = ContextMenu.open {
-        it.button(Text.of("${if (CommissionOverlay.format) "Disable" else "Enable"} Formatting")) {
-            CommissionOverlay.format = !CommissionOverlay.format
+        it.button(Text.of("${if (CommissionOverlayConfig.format) "Disable" else "Enable"} Formatting")) {
+            CommissionOverlayConfig.format = !CommissionOverlayConfig.format
             lines.invalidate()
         }
-        it.button(Text.of("${if (CommissionOverlay.background) "Disable" else "Enable"} Custom Background")) {
-            CommissionOverlay.background = !CommissionOverlay.background
+        it.button(Text.of("${if (CommissionOverlayConfig.background) "Disable" else "Enable"} Custom Background")) {
+            CommissionOverlayConfig.background = !CommissionOverlayConfig.background
             lines.invalidate()
         }
         it.divider()

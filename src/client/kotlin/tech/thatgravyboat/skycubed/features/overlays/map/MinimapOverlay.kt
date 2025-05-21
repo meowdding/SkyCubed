@@ -11,7 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.MapOverlay
+import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.map.Maps
@@ -26,12 +26,12 @@ object MinimapOverlay : Overlay {
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
-    override val enabled: Boolean get() = (display != null && MapOverlay.enabled) || DungeonMapOverlay.canRender
+    override val enabled: Boolean get() = (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender
 
     private var display: Display? = null
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (display != null && MapOverlay.enabled) {
+        if (display != null && MapOverlayConfig.enabled) {
             display!!.render(graphics)
         } else if (DungeonMapOverlay.canRender) {
             DungeonMapOverlay.render(graphics)

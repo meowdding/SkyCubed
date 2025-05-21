@@ -31,7 +31,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.time.until
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
-import tech.thatgravyboat.skycubed.config.overlays.TabListOverlay
+import tech.thatgravyboat.skycubed.config.overlays.TabListOverlayConfig
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
@@ -86,7 +86,7 @@ object CompactTablist {
         createDisplay(lastTablist)
     }
 
-    fun onEnabledDisabled(enabled: Boolean) {
+    fun onToggle(enabled: Boolean) {
         if (enabled) {
             createDisplay(lastTablist)
         } else {
@@ -202,7 +202,7 @@ object CompactTablist {
 
     private fun List<Line>.sortPlayers(): List<Line> {
         val linesWithLevels = this.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
-            when (TabListOverlay.sorting) {
+            when (TabListOverlayConfig.sorting) {
                 CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
                 CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
                 CompactTablistSorting.FRIENDS -> {
@@ -331,5 +331,5 @@ object CompactTablist {
         return result
     }
 
-    private fun isEnabled() = LocationAPI.isOnSkyBlock && TabListOverlay.enabled
+    private fun isEnabled() = LocationAPI.isOnSkyBlock && TabListOverlayConfig.enabled
 }
