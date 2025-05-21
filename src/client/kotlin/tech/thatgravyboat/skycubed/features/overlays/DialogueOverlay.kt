@@ -32,7 +32,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.NpcOverlay
+import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.math.max
@@ -60,7 +60,7 @@ object DialogueOverlay : Overlay {
     override val moveable: Boolean = false
     override val enabled: Boolean get() = config.enabled
 
-    private val config get() = NpcOverlay
+    private val config get() = NpcOverlayConfig
     private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 

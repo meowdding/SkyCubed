@@ -22,7 +22,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlay
+import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlayConfig
 import tech.thatgravyboat.skycubed.utils.Rect
 
 @Module
@@ -117,7 +117,7 @@ object PickUpLog : Overlay {
         removedItems.compactAndCombineTimeAndApply()
 
         val currentTime = System.currentTimeMillis()
-        val timealive = PickupLogOverlay.time * 1000
+        val timealive = PickupLogOverlayConfig.time * 1000
         addedItems.removeIf { it.time + timealive < currentTime }
         removedItems.removeIf { it.time + timealive < currentTime }
         updateDisplay()
@@ -125,7 +125,7 @@ object PickUpLog : Overlay {
 
     @Subscription
     fun onSack(event: SacksChangeEvent) {
-        if (!PickupLogOverlay.sackItems) return
+        if (!PickupLogOverlayConfig.sackItems) return
 
         event.changedItems.forEach { (item, diff) ->
             val stack = RepoItemsAPI.getItem(item)
@@ -150,7 +150,7 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = items.compact().map { PickupLogOverlay.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
+        display = items.compact().map { PickupLogOverlayConfig.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {
@@ -169,7 +169,7 @@ object PickUpLog : Overlay {
         }
 
     private fun List<PickUpLogItem>.compact() =
-        takeUnless { PickupLogOverlay.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
+        takeUnless { PickupLogOverlayConfig.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter(PickUpLogItem::isNotEmpty)
 

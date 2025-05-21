@@ -11,16 +11,16 @@ object OverlaysConfig : CategoryKt("overlays") {
     init {
         category(OverlayPositions)
 
-        obj("info", InfoHudOverlay) { this.translation = "config.skycubed.overlays.info" }
-        obj("rpg", RpgOverlay) { this.translation = "config.skycubed.overlays.rpg" }
-        obj("text", TextOverlays) { this.translation = "config.skycubed.overlays.text" }
-        obj("tablist", TabListOverlay) { this.translation = "config.skycubed.overlays.tablist" }
+        obj("info", InfoHudOverlayConfig) { this.translation = "config.skycubed.overlays.info" }
+        obj("rpg", RpgOverlayConfig) { this.translation = "config.skycubed.overlays.rpg" }
+        obj("text", TextOverlaysConfig) { this.translation = "config.skycubed.overlays.text" }
+        obj("tablist", TabListOverlayConfig) { this.translation = "config.skycubed.overlays.tablist" }
         obj("sack", SackOverlayConfig) { this.translation = "config.skycubed.overlays.sacks" }
-        obj("map", MapOverlay) { this.translation = "config.skycubed.overlays.map" }
+        obj("map", MapOverlayConfig) { this.translation = "config.skycubed.overlays.map" }
         obj("dungeonmap", DungeonMapOverlayConfig) { this.translation = "config.skycubed.overlays.dungeonmap" }
-        obj("pickupLog", PickupLogOverlay) { this.translation = "config.skycubed.overlays.pickuplog" }
-        obj("commissions", CommissionOverlay) { this.translation = "config.skycubed.overlays.commissions" }
-        obj("npc", NpcOverlay) { this.translation = "config.skycubed.overlays.npc" }
+        obj("pickupLog", PickupLogOverlayConfig) { this.translation = "config.skycubed.overlays.pickuplog" }
+        obj("commissions", CommissionOverlayConfig) { this.translation = "config.skycubed.overlays.commissions" }
+        obj("npc", NpcOverlayConfig) { this.translation = "config.skycubed.overlays.npc" }
     }
 
     var coldOverlay by int("coldOverlay", 80) {

@@ -1,8 +1,8 @@
 package tech.thatgravyboat.skycubed.config.screens
 
-import tech.thatgravyboat.skycubed.config.overlays.Overlay
+import tech.thatgravyboat.skycubed.config.overlays.OverlayConfig
 
-object WardrobeConfig : Overlay("Edit Wardrobe Config") {
+object WardrobeConfig : OverlayConfig("Edit Wardrobe Config") {
 
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.screens.wardrobe.enabled"

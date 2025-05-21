@@ -11,7 +11,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.config.overlays.TextOverlays
+import tech.thatgravyboat.skycubed.config.overlays.TextOverlaysConfig
 import kotlin.math.roundToInt
 
 class TextOverlay(
@@ -31,21 +31,30 @@ class TextOverlay(
     companion object {
 
         val overlays = listOf(
-            TextOverlay(Text.of("Health"), OverlayPositions.health, { TextOverlays.healthDisplay != HealthDisplay.DISABLED }, {
-                if (TextOverlays.healthDisplay == HealthDisplay.EFFECTIVE) {
-                    val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
-                    val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
-                    Text.of("❤ $health/$maxHealth").withStyle(ChatFormatting.GREEN)
-                } else {
-                    Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}").withStyle(ChatFormatting.RED)
-                }
-            }),
-            TextOverlay(Text.of("Mana"), OverlayPositions.mana, { TextOverlays.manaEnabled }, {
-                Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}").withStyle(ChatFormatting.AQUA)
-            }),
-            TextOverlay(Text.of("Defense"), OverlayPositions.defense, { TextOverlays.defenseEnabled }, {
-                Text.of("❈ ${StatsAPI.defense}").withStyle(ChatFormatting.GREEN)
-            })
+            TextOverlay(
+                Text.of("Health"), OverlayPositions.health, { TextOverlaysConfig.healthDisplay != HealthDisplay.DISABLED },
+                {
+                    if (TextOverlaysConfig.healthDisplay == HealthDisplay.EFFECTIVE) {
+                        val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
+                        val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
+                        Text.of("❤ $health/$maxHealth").withStyle(ChatFormatting.GREEN)
+                    } else {
+                        Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}").withStyle(ChatFormatting.RED)
+                    }
+                },
+            ),
+            TextOverlay(
+                Text.of("Mana"), OverlayPositions.mana, { TextOverlaysConfig.manaEnabled },
+                {
+                    Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}").withStyle(ChatFormatting.AQUA)
+                },
+            ),
+            TextOverlay(
+                Text.of("Defense"), OverlayPositions.defense, { TextOverlaysConfig.defenseEnabled },
+                {
+                    Text.of("❈ ${StatsAPI.defense}").withStyle(ChatFormatting.GREEN)
+                },
+            ),
         )
     }
 }

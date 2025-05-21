@@ -12,12 +12,12 @@ import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
 // This is because we need to use the property delegate in the init block
 private val EMPTY_PROPERTY = object {}
 
-open class Overlay(private val title: String) : ObjectKt(), Translatable {
+open class OverlayConfig(private val title: String) : ObjectKt(), Translatable {
 
     override fun getTranslationKey(): String = this.title
 }
 
-object InfoHudOverlay : Overlay("Edit Info Hud Overlay") {
+object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
 
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.info.enabled"
@@ -25,7 +25,7 @@ object InfoHudOverlay : Overlay("Edit Info Hud Overlay") {
 
 }
 
-object RpgOverlay : Overlay("Edit RPG Overlay") {
+object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.rpg.enabled"
@@ -36,7 +36,7 @@ object RpgOverlay : Overlay("Edit RPG Overlay") {
     }
 }
 
-object TextOverlays : Overlay("Edit Text Overlays") {
+object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
 
     var healthDisplay by enum<HealthDisplay>("healthDisplay", HealthDisplay.NORMAL) {
         this.translation = "config.skycubed.overlays.healthDisplay"
@@ -51,7 +51,7 @@ object TextOverlays : Overlay("Edit Text Overlays") {
     }
 }
 
-object SackOverlayConfig : Overlay("Edit Sack Overlay") {
+object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
     var enabled by boolean(true) {
         this.translation = "config.skycubed.overlays.sacks.enabled"
     }
@@ -65,7 +65,7 @@ object SackOverlayConfig : Overlay("Edit Sack Overlay") {
     }
 }
 
-object TabListOverlay : Overlay("Edit Tab List Overlay") {
+object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
 
     var enabled by observable(boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.tablist.enabled"
@@ -80,14 +80,14 @@ object TabListOverlay : Overlay("Edit Tab List Overlay") {
     }
 }
 
-object MapOverlay : Overlay("Edit Map Overlay") {
+object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
 
     var enabled by boolean("enabled", false) {
         this.translation = "config.skycubed.overlays.map.enabled"
     }
 }
 
-object DungeonMapOverlayConfig : Overlay("Edit Dungeon Map Overlay") {
+object DungeonMapOverlayConfig : OverlayConfig("Edit Dungeon Map Overlay") {
 
     var enabled by boolean("enabled", false) {
         this.translation = "config.skycubed.overlays.dungeonmap.enabled"
@@ -126,7 +126,7 @@ object DungeonMapOverlayConfig : Overlay("Edit Dungeon Map Overlay") {
     }
 }
 
-object PickupLogOverlay : Overlay("Edit Pickup Log Overlay") {
+object PickupLogOverlayConfig : OverlayConfig("Edit Pickup Log Overlay") {
 
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.pickuplog.enabled"
@@ -151,7 +151,7 @@ object PickupLogOverlay : Overlay("Edit Pickup Log Overlay") {
     }
 }
 
-object CommissionOverlay : Overlay("Edit Commissions Overlay") {
+object CommissionOverlayConfig : OverlayConfig("Edit Commissions Overlay") {
 
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.commissions.enabled"
@@ -166,7 +166,7 @@ object CommissionOverlay : Overlay("Edit Commissions Overlay") {
     }
 }
 
-object NpcOverlay : Overlay("Edit NPC Overlay") {
+object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
 
     var enabled by boolean("enabled", true) {
         this.translation = "config.skycubed.overlays.npc.enabled"
