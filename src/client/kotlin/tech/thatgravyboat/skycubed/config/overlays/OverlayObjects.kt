@@ -72,7 +72,7 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
             this.translation = "config.skycubed.overlays.tablist.enabled"
         },
     ) { _, new ->
-        CompactTablist.onEnabledDisabled(new)
+        CompactTablist.onToggle(new)
     }
 
     var sorting by observable(

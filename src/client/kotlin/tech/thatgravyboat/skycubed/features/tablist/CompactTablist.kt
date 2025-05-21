@@ -86,7 +86,7 @@ object CompactTablist {
         createDisplay(lastTablist)
     }
 
-    fun onEnabledDisabled(enabled: Boolean) {
+    fun onToggle(enabled: Boolean) {
         if (enabled) {
             createDisplay(lastTablist)
         } else {
