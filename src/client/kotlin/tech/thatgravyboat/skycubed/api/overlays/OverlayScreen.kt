@@ -1,6 +1,8 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
 import com.mojang.blaze3d.platform.InputConstants
+import me.owdding.lib.utils.keys
+import me.owdding.lib.utils.keysOf
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
@@ -9,17 +11,18 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.ConfigManager
-import tech.thatgravyboat.skycubed.utils.keysOf
 
-private val ADD_KEY = keysOf(
-    setOf(InputConstants.KEY_EQUALS, InputConstants.KEY_ADD),
-    setOf("+"),
-)
+private val ADD_KEY = keys {
+    withSymbol("+")
+    withKey(InputConstants.KEY_EQUALS)
+    withKey(InputConstants.KEY_ADD)
+}
 
-private val MINUS_KEY = keysOf(
-    setOf(InputConstants.KEY_MINUS),
-    setOf("-"),
-)
+private val MINUS_KEY = keys {
+    withSymbol("-")
+    withKey(InputConstants.KEY_MINUS)
+    withKey(InputConstants.KEY_ADD)
+}
 
 private val UP_KEY = keysOf(InputConstants.KEY_UP)
 private val DOWN_KEY = keysOf(InputConstants.KEY_DOWN)
@@ -97,12 +100,12 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
         val (x, y) = overlay.position
 
         when {
-            UP_KEY.isKey(key, scan) -> overlay.setY(y - multiplier)
-            DOWN_KEY.isKey(key, scan) -> overlay.setY(y + multiplier)
-            LEFT_KEY.isKey(key, scan) -> overlay.setX(x - multiplier)
-            RIGHT_KEY.isKey(key, scan) -> overlay.setX(x + multiplier)
-            ADD_KEY.isKey(key, scan) -> overlay.position.scale += 0.1f
-            MINUS_KEY.isKey(key, scan) -> overlay.position.scale -= 0.1f
+            UP_KEY.isDown(key, scan) -> overlay.setY(y - multiplier)
+            DOWN_KEY.isDown(key, scan) -> overlay.setY(y + multiplier)
+            LEFT_KEY.isDown(key, scan) -> overlay.setX(x - multiplier)
+            RIGHT_KEY.isDown(key, scan) -> overlay.setX(x + multiplier)
+            ADD_KEY.isDown(key, scan) -> overlay.position.scale += 0.1f
+            MINUS_KEY.isDown(key, scan) -> overlay.position.scale -= 0.1f
             else -> return super.keyPressed(key, scan, modifiers)
         }
         return true
