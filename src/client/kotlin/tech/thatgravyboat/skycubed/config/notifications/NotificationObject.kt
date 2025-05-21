@@ -12,11 +12,11 @@ class NotificationObject(
         this.translation = "config.skycubed.notification.hideChatMessage"
     }
 
-    var showAsToast by boolean("showAsToast", showAsToast) {
+    var showAsToast by boolean(showAsToast) {
         this.translation = "config.skycubed.notification.showAsToast"
     }
 
-    var toastDuration by int("toastDuration", toastDuration) {
+    var toastDuration by int(toastDuration) {
         this.translation = "config.skycubed.notification.toastDuration"
         this.range = 0..30000
         this.slider = true
