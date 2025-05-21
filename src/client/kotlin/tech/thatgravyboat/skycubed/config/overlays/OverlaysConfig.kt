@@ -23,16 +23,16 @@ object OverlaysConfig : CategoryKt("overlays") {
         obj("npc", NpcOverlayConfig) { this.translation = "config.skycubed.overlays.npc" }
     }
 
-    var coldOverlay by int("coldOverlay", 80) {
+    var coldOverlay by int(80) {
         this.translation = "config.skycubed.overlays.coldOverlay"
         this.range = 0..99
     }
 
-    var movableHotbar by boolean("movableHotbar", false) {
+    var movableHotbar by boolean(false) {
         this.translation = "config.skycubed.overlays.movableHotbar"
     }
 
-    var windOverlay by boolean("windOverlay", false) {
+    var windOverlay by boolean(false) {
         this.translation = "config.skycubed.overlays.windOverlay"
     }
 }
