@@ -26,7 +26,7 @@ import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 @AutoCollect("RegisteredOverlays")
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.CLASS)
-annotation class RegisterOverlay()
+annotation class RegisterOverlay
 
 @Module
 object Overlays {
