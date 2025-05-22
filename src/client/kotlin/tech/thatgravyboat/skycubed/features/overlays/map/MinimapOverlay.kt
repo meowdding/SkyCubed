@@ -11,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
@@ -21,6 +22,7 @@ import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
 @Module
+@RegisterOverlay
 object MinimapOverlay : Overlay {
 
     override val name: Component = Text.of("Minimap")

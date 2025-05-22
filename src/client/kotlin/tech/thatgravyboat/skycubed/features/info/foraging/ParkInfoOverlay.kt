@@ -10,7 +10,6 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyWidget
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidget
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidgetChangeEvent
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.anyMatch
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -45,15 +44,12 @@ object ParkInfoOverlay {
     }
 
     fun render(graphics: GuiGraphics) {
-        val width = McClient.window.guiScaledWidth
-        val x = (width - 34) / 2
+        graphics.blitSprite(RenderType::guiTextured, CommonInfoDisplays.BASE, 0, 0, 34, 34)
 
-        graphics.blitSprite(RenderType::guiTextured, CommonInfoDisplays.BASE, x, 0, 34, 34)
-
-        CommonInfoDisplays.locationDisplay.render(graphics, x, 2, 1f)
-        rainTimeDisplay.render(graphics, x, 18, 1f)
-        CommonInfoDisplays.baseDisplay.render(graphics, x, 0)
-        CommonInfoDisplays.dateDisplay.render(graphics, x + 34, 2)
-        CommonInfoDisplays.currencyDisplay.render(graphics, x + 34, 18)
+        CommonInfoDisplays.locationDisplay.render(graphics, 0, 2, 1f)
+        rainTimeDisplay.render(graphics, 0, 18, 1f)
+        CommonInfoDisplays.baseDisplay.render(graphics, 0, 0)
+        CommonInfoDisplays.dateDisplay.render(graphics, 34, 2)
+        CommonInfoDisplays.currencyDisplay.render(graphics, 34, 18)
     }
 }
