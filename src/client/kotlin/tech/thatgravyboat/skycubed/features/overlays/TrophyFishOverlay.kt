@@ -94,7 +94,7 @@ object TrophyFishOverlay : Overlay {
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
-            SackOverlay.position.reset()
+            position.reset()
         }
     }
 
