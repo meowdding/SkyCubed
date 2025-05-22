@@ -78,7 +78,7 @@
         "config.skycubed.overlays.trophyFish.showNumbers.desc": "If enabled, will show the amount of trophy fishes you caught instead of a cross or checkmark.",
 
         "config.skycubed.overlays.trophyFish.showTotal": "Show Total Caught",
-        "config.skycubed.overlays.trophyFish.showTotal.desc": "If enabled, will show the total amount each of the types you caught.",
+        "config.skycubed.overlays.trophyFish.showTotal.desc": "If enabled, will show the total amount of each type you caught.",
 
         "config.skycubed.overlays.trophyFish.hideUnlocked": "Hide Unlocked",
         "config.skycubed.overlays.trophyFish.hideUnlocked.desc": "If enabled, will hide the trophy fish you have already unlocked.",
