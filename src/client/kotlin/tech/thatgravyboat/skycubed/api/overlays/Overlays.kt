@@ -58,17 +58,11 @@ object Overlays {
         overlays.forEach {
             if (!it.enabled) return@forEach
             val (x, y) = it.position
-            graphics.pushPop {
-                translate(x.toFloat(), y.toFloat(), 0f)
-                scale(it.position.scale, it.position.scale, 1f)
-                it.render(graphics, mouseX.toInt(), mouseY.toInt())
-            }
 
             val rect = it.editBounds * it.position.scale
+            var hovered = isOverlayScreen(screen, mouseX.toInt(), mouseY.toInt()) && rect.contains(mouseX.toInt(), mouseY.toInt())
 
-            if (isOverlayScreen(screen, mouseX.toInt(), mouseY.toInt()) && rect.contains(mouseX.toInt(), mouseY.toInt())) {
-                graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
-                graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
+            if (hovered) {
                 if (it.moveable) {
                     screen!!.setTooltipForNextRenderPass(Text.multiline(
                         it.name,
@@ -82,6 +76,17 @@ object Overlays {
                 } else {
                     screen!!.setTooltipForNextRenderPass(it.name)
                 }
+            }
+
+            graphics.pushPop {
+                translate(x.toFloat(), y.toFloat(), 0f)
+                scale(it.position.scale, it.position.scale, 1f)
+                it.render(graphics, mouseX.toInt(), mouseY.toInt())
+            }
+
+            if (hovered) {
+                graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
+                graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
             }
         }
     }

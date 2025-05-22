@@ -71,6 +71,22 @@ object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
         this.translation = "config.skycubed.overlays.trophyFish.enabled"
     }
 
+    var background by boolean(false) {
+        this.translation = "config.skycubed.overlays.trophyFish.background"
+    }
+
+    var showNumbers by boolean(true) {
+        this.translation = "config.skycubed.overlays.trophyFish.showNumbers"
+    }
+
+    var showTotal by boolean(true) {
+        this.translation = "config.skycubed.overlays.trophyFish.showTotal"
+    }
+
+    var hideUnlocked by boolean(false) {
+        this.translation = "config.skycubed.overlays.trophyFish.hideUnlocked"
+    }
+
 }
 
 object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {

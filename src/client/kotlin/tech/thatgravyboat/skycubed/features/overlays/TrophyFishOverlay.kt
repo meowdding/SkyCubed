@@ -6,6 +6,8 @@ import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.withPadding
+import me.owdding.lib.displays.withTooltip
 import me.owdding.lib.utils.KnownMods
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -25,29 +27,58 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.TrophyFishOverlayConfig
 import tech.thatgravyboat.skycubed.utils.CachedValue
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.time.Duration.Companion.seconds
 
 @Module
 object TrophyFishOverlay : Overlay {
 
+    private val config get() = TrophyFishOverlayConfig
+
+    private val title by lazy {
+        DisplayFactory.horizontal {
+            string("Trophy Fish") {
+                color = TextColor.ORANGE
+                bold = true
+            }
+            if (!KnownMods.SKYBLOCK_PV.installed) {
+                display(
+                    Displays.text(
+                        Text.of(" ⓘ") {
+                            color = TextColor.GRAY
+                        },
+                    ).withTooltip {
+                        add("Tip: With SkyBlockPv installed,") { color = TextColor.GRAY }
+                        add("you can easily update your Trophy Fish data") { color = TextColor.GRAY }
+                        add("by opening your own profile.") { color = TextColor.GRAY }
+                    },
+                )
+            }
+        }
+    }
+
     override val name: Component = Text.of("Trophy Fish Overlay")
     override val position: Position get() = OverlayPositions.trophyFish
     override val bounds get() = display.getWidth() to display.getHeight()
-    override val enabled: Boolean get() = TrophyFishOverlayConfig.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
+    override val enabled: Boolean get() = config.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
 
     private val displayValue = CachedValue(5.seconds) {
-        TrophyFishType.entries.map { it.createDisplay() }.toColumn()
+        val display = listOf(title, *TrophyFishType.entries.map { it.createDisplay() }.toTypedArray()).toColumn().withPadding(2)
+        if (config.background) {
+            Displays.background(SkyCubedTextures.backgroundBox, display)
+        } else display
     }
     private val display by displayValue
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        graphics.fill(0, 0, SackOverlay.bounds.first, SackOverlay.bounds.second, 0x50000000)
+        graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
         display.render(graphics)
     }
 
@@ -56,6 +87,10 @@ object TrophyFishOverlay : Overlay {
             it.button(Text.of("Open SkyBlockPv to update data")) {
                 McClient.self.connection?.sendCommand("pv ${McPlayer.name}")
             }
+        }
+        it.button(Text.of("${if (config.background) "Disable" else "Enable"} Custom Background")) {
+            config.background = !config.background
+            displayValue.invalidate()
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
@@ -72,12 +107,23 @@ object TrophyFishOverlay : Overlay {
 
         display(Displays.item(this@createDisplay.diamond))
         caught.forEach { (t, a) ->
-            string(a.toFormattedString()) {
-                withStyle(t.nameSuffix.style)
+            val unlocked = a > 0
+            if (config.hideUnlocked && unlocked) return@forEach
+            if (config.showNumbers) {
+                string(a.toFormattedString()) {
+                    withStyle(t.nameSuffix.style)
+                }
+            } else {
+                string("✔".takeIf { unlocked } ?: "✘") {
+                    withStyle(t.nameSuffix.style)
+                }
             }
         }
-        string(caught.sumOf { it.value }.toFormattedString()) {
-            color = TextColor.GRAY
+
+        if (config.showTotal) {
+            string(caught.sumOf { it.value }.toFormattedString()) {
+                color = TextColor.GRAY
+            }
         }
     }
 
