@@ -30,6 +30,10 @@ object OverlayPositions : CategoryKt("positions") {
         this.translation = "config.skycubed.positions.sack"
     }
 
+    val trophyFish = obj("trophyFish", Position(x = -600, y = 10)) {
+        this.translation = "config.skycubed.positions.trophyFish"
+    }
+
     val pickupLog = obj("pickupLog", Position(x = 0, y = 150)) {
         this.translation = "config.skycubed.positions.pickupLog"
     }
