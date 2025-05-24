@@ -63,10 +63,16 @@ repositories {
     maven(url = "https://api.modrinth.com/maven")
     maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
     maven(url = "https://maven.nucleoid.xyz")
+    maven(url = "https://maven.shedaniel.me/")
     mavenLocal()
 }
 
 dependencies {
+    compileOnly(libs.meowdding.ktmodules)
+    ksp(libs.meowdding.ktmodules)
+    compileOnly(libs.meowdding.ktcodecs)
+    ksp(libs.meowdding.ktcodecs)
+
     minecraft(libs.minecraft)
     mappings(loom.layered {
         officialMojangMappings()
@@ -84,6 +90,8 @@ dependencies {
     modImplementation(libs.olympus)
     modImplementation(libs.meowdding.lib)
 
+    modImplementation(libs.rei) { isTransitive = false }
+
     include(libs.hypixelapi)
     include(libs.skyblockapi)
     include(libs.rconfig)
@@ -94,11 +102,6 @@ dependencies {
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
-
-    compileOnly(libs.meowdding.ktmodules) { isTransitive = false }
-    ksp(libs.meowdding.ktmodules) { isTransitive = false }
-    compileOnly(libs.meowdding.ktcodecs)
-    ksp(libs.meowdding.ktcodecs)
 }
 
 compactingResources {

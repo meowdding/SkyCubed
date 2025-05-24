@@ -7,7 +7,7 @@ object ScreensConfig : CategoryKt("screens") {
 
     override val name: TranslatableValue = Translated("config.skycubed.screens.title")
 
-    var equipment by boolean("equipment", true) {
+    var equipment by boolean(true) {
         this.translation = "config.skycubed.screens.equipment"
     }
 

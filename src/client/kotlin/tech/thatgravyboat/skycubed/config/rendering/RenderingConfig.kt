@@ -7,7 +7,7 @@ object RenderingConfig : CategoryKt("render") {
 
     override val name: TranslatableValue = Translated("config.skycubed.render.title")
 
-    var showOwnTag by boolean("showOwnTag", false) {
+    var showOwnTag by boolean(false) {
         this.translation = "config.skycubed.render.showOwnTag"
     }
 }

@@ -7,11 +7,11 @@ object ItemsConfig : CategoryKt("items") {
 
     override val name: TranslatableValue = Translated("config.skycubed.items.title")
 
-    var itembars by boolean("itembars", true) {
+    var itembars by boolean(true) {
         this.translation = "config.skycubed.items.itembars"
     }
 
-    var cooldowns by boolean("cooldowns", true) {
+    var cooldowns by boolean(true) {
         this.translation = "config.skycubed.items.cooldowns"
     }
 }

@@ -11,15 +11,17 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.config.overlays.RpgOverlay
+import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.utils.blitSpritePercentX
 import tech.thatgravyboat.skycubed.utils.drawScaledString
 
 private const val WIDTH = 119
 private const val HEIGHT = 48
 
+@RegisterOverlay
 object PlayerRpgOverlay : Overlay {
 
     private val BASE = SkyCubed.id("rpg/base")
@@ -35,7 +37,7 @@ object PlayerRpgOverlay : Overlay {
     private val AIR = SkyCubed.id("rpg/air/normal")
 
     override val name: Component = Text.of("Player RPG Hud")
-    override val enabled: Boolean get() = RpgOverlay.enabled
+    override val enabled: Boolean get() = RpgOverlayConfig.enabled
     override val position: Position = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
@@ -55,7 +57,7 @@ object PlayerRpgOverlay : Overlay {
         graphics.blitSpritePercentX(MANA, 47, 18, 57, 4, manaPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA_NEEDED, 47, 18, 57, 4, manaUsePercent.coerceAtMost(manaPercent).coerceIn(0f, 1f))
 
-        if (RpgOverlay.skyblockLevel) {
+        if (RpgOverlayConfig.skyblockLevel) {
             graphics.blitSpritePercentX(SKYBLOCK_XP, 47, 29, 67, 4, skyblockLevelPercent.coerceIn(0f, 1f))
             graphics.drawScaledString("${ProfileAPI.sbLevel}", 3, 33, 16, 0x55FFFF)
         } else {
