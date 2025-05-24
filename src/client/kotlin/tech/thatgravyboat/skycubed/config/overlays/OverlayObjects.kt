@@ -67,7 +67,7 @@ object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
 
 object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
 
-    var enabled by boolean(true) {
+    var enabled by boolean(false) {
         this.translation = "config.skycubed.overlays.trophyFish.enabled"
     }
 

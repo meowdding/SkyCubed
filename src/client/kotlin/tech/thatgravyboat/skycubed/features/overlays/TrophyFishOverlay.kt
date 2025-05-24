@@ -3,11 +3,7 @@ package tech.thatgravyboat.skycubed.features.overlays
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
-import me.owdding.lib.displays.Alignment
-import me.owdding.lib.displays.Displays
-import me.owdding.lib.displays.toColumn
-import me.owdding.lib.displays.withPadding
-import me.owdding.lib.displays.withTooltip
+import me.owdding.lib.displays.*
 import me.owdding.lib.utils.KnownMods
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -30,6 +26,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.TrophyFishOverlayConfig
@@ -38,6 +35,7 @@ import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.time.Duration.Companion.seconds
 
 @Module
+@RegisterOverlay
 object TrophyFishOverlay : Overlay {
 
     private val config get() = TrophyFishOverlayConfig
