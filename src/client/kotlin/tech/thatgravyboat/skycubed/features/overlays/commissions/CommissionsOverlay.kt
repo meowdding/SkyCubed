@@ -9,6 +9,7 @@ import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
@@ -16,6 +17,7 @@ import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.time.Duration.Companion.seconds
 
+@RegisterOverlay
 object CommissionsOverlay : Overlay {
 
     private val locations = setOf(

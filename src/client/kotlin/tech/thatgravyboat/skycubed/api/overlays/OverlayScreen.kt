@@ -64,8 +64,10 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, i: Int, f: Double, g: Double): Boolean {
         if (dragging) {
-            overlay.setX(mouseX.toInt() - relativeX)
-            overlay.setY(mouseY.toInt() - relativeY)
+            when {
+                EditableProperty.X in overlay.properties -> overlay.setX(mouseX.toInt() - relativeX)
+                EditableProperty.Y in overlay.properties -> overlay.setY(mouseY.toInt() - relativeY)
+            }
         }
         return true
     }
@@ -98,14 +100,15 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
     override fun keyPressed(key: Int, scan: Int, modifiers: Int): Boolean {
         val multiplier = if (hasShiftDown()) 10 else 1
         val (x, y) = overlay.position
+        val scale = overlay.position.scale
 
         when {
-            UP_KEY.isDown(key, scan) -> overlay.setY(y - multiplier)
-            DOWN_KEY.isDown(key, scan) -> overlay.setY(y + multiplier)
-            LEFT_KEY.isDown(key, scan) -> overlay.setX(x - multiplier)
-            RIGHT_KEY.isDown(key, scan) -> overlay.setX(x + multiplier)
-            ADD_KEY.isDown(key, scan) -> overlay.position.scale += 0.1f
-            MINUS_KEY.isDown(key, scan) -> overlay.position.scale -= 0.1f
+            UP_KEY.isDown(key, scan) && EditableProperty.Y in overlay.properties -> overlay.setY(y - multiplier)
+            DOWN_KEY.isDown(key, scan) && EditableProperty.Y in overlay.properties -> overlay.setY(y + multiplier)
+            LEFT_KEY.isDown(key, scan) && EditableProperty.X in overlay.properties -> overlay.setX(x - multiplier)
+            RIGHT_KEY.isDown(key, scan) && EditableProperty.X in overlay.properties -> overlay.setX(x + multiplier)
+            ADD_KEY.isDown(key, scan) && EditableProperty.SCALE in overlay.properties -> overlay.setScale(scale + 0.1f)
+            MINUS_KEY.isDown(key, scan) && EditableProperty.SCALE in overlay.properties -> overlay.setScale(scale - 0.1f)
             else -> return super.keyPressed(key, scan, modifiers)
         }
         return true

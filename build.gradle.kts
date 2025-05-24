@@ -68,6 +68,11 @@ repositories {
 }
 
 dependencies {
+    compileOnly(libs.meowdding.ktmodules)
+    ksp(libs.meowdding.ktmodules)
+    compileOnly(libs.meowdding.ktcodecs)
+    ksp(libs.meowdding.ktcodecs)
+
     minecraft(libs.minecraft)
     mappings(loom.layered {
         officialMojangMappings()
@@ -97,11 +102,6 @@ dependencies {
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
-
-    compileOnly(libs.meowdding.ktmodules) { isTransitive = false }
-    ksp(libs.meowdding.ktmodules) { isTransitive = false }
-    compileOnly(libs.meowdding.ktcodecs)
-    ksp(libs.meowdding.ktcodecs)
 }
 
 compactingResources {

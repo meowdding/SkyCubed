@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
@@ -23,6 +24,7 @@ import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.time.Duration.Companion.seconds
 
+@RegisterOverlay
 object SackOverlay : Overlay {
 
     override val name: Component = Text.of("Sack Overlay")
