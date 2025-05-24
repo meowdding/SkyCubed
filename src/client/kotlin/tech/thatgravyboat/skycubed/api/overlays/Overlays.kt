@@ -1,9 +1,13 @@
 package tech.thatgravyboat.skycubed.api.overlays
 
+import me.owdding.ktmodules.AutoCollect
 import me.owdding.ktmodules.Module
+import me.owdding.skycubed.generated.SkyCubedRegisteredOverlays
 import net.minecraft.ChatFormatting
+import net.minecraft.client.gui.components.Tooltip
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
@@ -16,11 +20,13 @@ import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.features.info.InfoOverlay
-import tech.thatgravyboat.skycubed.features.overlays.*
-import tech.thatgravyboat.skycubed.features.overlays.commissions.CommissionsOverlay
-import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
-import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLog
+import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
+
+
+@AutoCollect("RegisteredOverlays")
+@Retention(AnnotationRetention.SOURCE)
+@Target(AnnotationTarget.CLASS)
+annotation class RegisterOverlay
 
 @Module
 object Overlays {
@@ -69,8 +75,8 @@ object Overlays {
             if (isOverlayScreen(screen, mouseX.toInt(), mouseY.toInt()) && rect.contains(mouseX.toInt(), mouseY.toInt())) {
                 graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
                 graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
-                if (it.moveable) {
-                    screen!!.setTooltipForNextRenderPass(Text.multiline(
+                if (it.properties.isNotEmpty()) {
+                    val text = Tooltip.splitTooltip(McClient.self, Text.multiline(
                         it.name,
                         CommonText.EMPTY,
                         Text.translatable("ui.skycubed.overlay.edit"),
@@ -79,8 +85,10 @@ object Overlays {
                             this.withStyle(ChatFormatting.ITALIC)
                         }
                     ))
+                    screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
                 } else {
-                    screen!!.setTooltipForNextRenderPass(it.name)
+                    val text = Tooltip.splitTooltip(McClient.self, it.name)
+                    screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
                 }
             }
         }
@@ -93,7 +101,7 @@ object Overlays {
 
         for (overlay in overlays.reversed()) {
             if (!overlay.enabled) continue
-            if (!overlay.moveable) continue
+            if (overlay.properties.isEmpty()) continue
             val rect = overlay.editBounds * overlay.position.scale
 
             if (rect.contains(event.x, event.y)) {
@@ -113,14 +121,7 @@ object Overlays {
     }
 
     init {
-        register(PlayerRpgOverlay)
-        register(CommissionsOverlay)
-        register(SackOverlay)
-        register(InfoOverlay)
-        register(DialogueOverlay)
-        register(PickUpLog)
-        register(MinimapOverlay)
-        register(MovableHotbar)
+        SkyCubedRegisteredOverlays.collected.forEach(::register)
         TextOverlay.overlays.forEach(::register)
     }
 }
