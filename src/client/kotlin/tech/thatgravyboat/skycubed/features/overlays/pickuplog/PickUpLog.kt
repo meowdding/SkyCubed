@@ -21,11 +21,13 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlayConfig
 import tech.thatgravyboat.skycubed.utils.Rect
 
 @Module
+@RegisterOverlay
 object PickUpLog : Overlay {
 
     private val exampleDisplay by lazy {

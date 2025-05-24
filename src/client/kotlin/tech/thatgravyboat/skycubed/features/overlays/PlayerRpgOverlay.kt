@@ -11,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
@@ -20,6 +21,7 @@ import tech.thatgravyboat.skycubed.utils.drawScaledString
 private const val WIDTH = 119
 private const val HEIGHT = 48
 
+@RegisterOverlay
 object PlayerRpgOverlay : Overlay {
 
     private val BASE = SkyCubed.id("rpg/base")
