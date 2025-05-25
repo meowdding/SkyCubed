@@ -43,7 +43,7 @@ interface Overlay {
     }
 
     fun setScale(scale: Float) {
-        position.scale = (scale * 100f).toInt() / 100f
+        position.scale = (scale * 10f).toInt() / 10f
     }
 
     companion object {
