@@ -32,6 +32,7 @@ import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.TrophyFishOverlayConfig
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
+import tech.thatgravyboat.skycubed.utils.invalidateCache
 import kotlin.time.Duration.Companion.seconds
 
 @Module
@@ -67,13 +68,12 @@ object TrophyFishOverlay : Overlay {
     override val bounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = config.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
 
-    private val displayValue = CachedValue(5.seconds) {
+    private val display by CachedValue(5.seconds) {
         val display = listOf(title, *TrophyFishType.entries.map { it.createDisplay() }.toTypedArray()).toColumn().withPadding(2)
         if (config.background) {
             Displays.background(SkyCubedTextures.backgroundBox, display)
         } else display
     }
-    private val display by displayValue
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
@@ -90,7 +90,7 @@ object TrophyFishOverlay : Overlay {
         }
         it.button(Text.of("${if (config.background) "Disable" else "Enable"} Custom Background")) {
             config.background = !config.background
-            displayValue.invalidate()
+            this::display.invalidateCache()
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
