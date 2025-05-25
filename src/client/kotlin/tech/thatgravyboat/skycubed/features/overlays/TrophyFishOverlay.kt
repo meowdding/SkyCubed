@@ -90,7 +90,7 @@ object TrophyFishOverlay : Overlay {
         }
         it.button(Text.of("${if (config.background) "Disable" else "Enable"} Custom Background")) {
             config.background = !config.background
-            this::display.invalidateCache()
+            ::display.invalidateCache()
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
@@ -130,5 +130,5 @@ object TrophyFishOverlay : Overlay {
     @OptIn(SkyBlockPvRequired::class)
     @Subscription(event = [TrophyFishCaughtEvent::class, SkyBlockPvOpenedEvent::class, ContainerCloseEvent::class, ProfileChangeEvent::class])
     @OnlyIn(SkyBlockIsland.CRIMSON_ISLE)
-    fun onInvalidate() = displayValue.invalidate()
+    fun onInvalidate() = ::display.invalidateCache()
 }
