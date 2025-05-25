@@ -85,7 +85,7 @@ object TrophyFishOverlay : Overlay {
             it.button(Text.of("Open SkyBlockPv to update data")) {
                 // TODO: remove backwards compat with 1.21.6 or 1.22
                 val command = if (KnownMods.SKYBLOCK_PV.version!! > "1.2.0") "sbpv pv" else "pv"
-                McClient.self.connection?.sendCommand("$command ${McPlayer.name}")
+                McClient.sendCommand("$command ${McPlayer.name}")
             }
         }
         it.button(Text.of("${if (config.background) "Disable" else "Enable"} Custom Background")) {
