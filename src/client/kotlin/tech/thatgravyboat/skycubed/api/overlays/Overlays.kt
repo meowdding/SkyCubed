@@ -76,15 +76,19 @@ object Overlays {
                 graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
                 graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
                 if (it.properties.isNotEmpty()) {
-                    val text = Tooltip.splitTooltip(McClient.self, Text.multiline(
-                        it.name,
-                        CommonText.EMPTY,
-                        Text.translatable("ui.skycubed.overlay.edit"),
-                        Text.of("SkyCubed") {
-                            this.color = TextColor.BLUE
-                            this.withStyle(ChatFormatting.ITALIC)
-                        }
-                    ))
+                    val text = Tooltip.splitTooltip(
+                        McClient.self,
+                        Text.multiline(
+                            it.name,
+                            CommonText.EMPTY,
+                            Text.translatable("ui.skycubed.overlay.edit"),
+                            Text.of("SkyCubed") {
+                                this.color = TextColor.BLUE
+                                this.withStyle(ChatFormatting.ITALIC)
+                            },
+                        ),
+                    )
+                    screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
                     screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
                 } else {
                     val text = Tooltip.splitTooltip(McClient.self, it.name)
