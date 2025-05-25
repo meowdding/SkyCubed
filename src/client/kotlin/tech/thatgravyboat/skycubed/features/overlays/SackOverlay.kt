@@ -22,6 +22,7 @@ import tech.thatgravyboat.skycubed.config.overlays.SackOverlayConfig
 import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
+import tech.thatgravyboat.skycubed.utils.invalidateCache
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
@@ -29,10 +30,10 @@ object SackOverlay : Overlay {
 
     override val name: Component = Text.of("Sack Overlay")
     override val position: Position get() = OverlayPositions.sack
-    override val bounds get() = display.get().getWidth() to display.get().getHeight()
+    override val bounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
 
-    private val display = CachedValue(1.seconds) {
+    private val display by CachedValue(1.seconds) {
         if (SackOverlayConfig.sackItems.isEmpty()) return@CachedValue Displays.empty(0, 0)
 
         val display = DisplayFactory.vertical {
@@ -54,7 +55,7 @@ object SackOverlay : Overlay {
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
-        display.get().render(graphics)
+        display.render(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {
@@ -63,7 +64,7 @@ object SackOverlay : Overlay {
         }
         it.button(Text.of("${if (SackOverlayConfig.background) "Disable" else "Enable"} Custom Background")) {
             SackOverlayConfig.background = !SackOverlayConfig.background
-            display.invalidate()
+            this::display.invalidateCache()
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {

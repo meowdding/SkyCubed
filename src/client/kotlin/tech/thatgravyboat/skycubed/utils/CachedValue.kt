@@ -1,5 +1,7 @@
 package tech.thatgravyboat.skycubed.utils
 
+import kotlin.reflect.KProperty0
+import kotlin.reflect.jvm.isAccessible
 import kotlin.time.Duration
 
 class CachedValue<T>(private val cacheTime: Duration, private val supplier: () -> T) {
@@ -22,4 +24,9 @@ class CachedValue<T>(private val cacheTime: Duration, private val supplier: () -
     }
 
     operator fun invoke(): T = get()
+}
+
+fun KProperty0<*>.invalidateCache() {
+    this.isAccessible = true
+    (this.getDelegate() as? CachedValue<*>)?.invalidate()
 }

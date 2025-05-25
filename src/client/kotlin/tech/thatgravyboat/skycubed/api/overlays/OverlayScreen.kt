@@ -64,10 +64,8 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, i: Int, f: Double, g: Double): Boolean {
         if (dragging) {
-            when {
-                EditableProperty.X in overlay.properties -> overlay.setX(mouseX.toInt() - relativeX)
-                EditableProperty.Y in overlay.properties -> overlay.setY(mouseY.toInt() - relativeY)
-            }
+            if (EditableProperty.X in overlay.properties) overlay.setX(mouseX.toInt() - relativeX)
+            if (EditableProperty.Y in overlay.properties) overlay.setY(mouseY.toInt() - relativeY)
         }
         return true
     }
