@@ -1,328 +1,422 @@
 {
-    "ui.skycubed.overlay.edit": "§6Click to edit overlay.",
-    "ui.skycubed.overlay.edit.options": "§6Right Click to configure",
-
-    "__config__": "",
-
-    "config.info.skycubed.modrinth": "Modrinth",
-    "config.info.skycubed.github": "GitHub",
-
-    "config.skycubed.general.keybinds": "Keybinds",
-    "config.skycubed.general.keybinds.desc": "SkyCubed uses the vanilla keybinds/controls menu for its buttons, you can use the button to open it here.",
-    "config.skycubed.general.keybinds.text": "Open",
-
-    "config.skycubed.general.notifications": "Notifications",
-    "config.skycubed.general.notifications.desc": "SkyCubed has a notification system, you can click the button below to view past notifications, you can also find a notification button in the pause menu.",
-    "config.skycubed.general.notifications.text": "Open",
-
-    "config.skycubed.general.hiddenHudElements": "Hidden Hud Elements",
-    "config.skycubed.general.hiddenHudElements.desc": "Allows you to hide certain elements of the Vanilla hud on your screen.",
-
-    "config.skycubed.general.hiddenActionBarWidgets": "Hidden Action Bar Elements",
-    "config.skycubed.general.hiddenActionBarWidgets.desc": "Allows you to hide certain action bar elements that hypixel send but are replaced by mod displays.",
-
-    "//Overlays": "",
-
-    "config.skycubed.overlays.title": "Overlays",
-
-    "config.skycubed.overlays.info": "Info Hud Overlay",
-    "config.skycubed.overlays.info.desc": "Settings for the info hud overlay.",
-
-        "config.skycubed.overlays.info.enabled": "Enable Info Hud Overlay",
-        "config.skycubed.overlays.info.enabled.desc": "Enables the Info Hud overlay, show location, currency, time, and location specific info.",
-
-    "config.skycubed.overlays.rpg": "Rpg Overlay",
-    "config.skycubed.overlays.rpg.desc": "Settings for the rpg overlay.",
-
-        "config.skycubed.overlays.rpg.enabled": "Enable RPG Overlay",
-        "config.skycubed.overlays.rpg.enabled.desc": "Enables the RPG overlay, showing mana, health, and xp bars.",
-
-        "config.skycubed.overlays.rpg.skyblockLevel": "SkyBlock Level in XP",
-        "config.skycubed.overlays.rpg.skyblockLevel.desc": "If enabled the XP bar will show your SkyBlock level instead of your normal XP.",
-
-
-    "config.skycubed.overlays.text": "Text Overlays",
-    "config.skycubed.overlays.text.desc": "Settings for the the various text overlays.",
-
-        "config.skycubed.overlays.healthEnabled": "Enable Health Text Overlay",
-        "config.skycubed.overlays.healthEnabled.desc": "Enables the health text overlay",
-        "config.skycubed.overlays.healthDisplay.disabled": "Disabled",
-        "config.skycubed.overlays.healthDisplay.normal": "Enabled",
-        "config.skycubed.overlays.healthDisplay.effective": "Effective HP",
-
-        "config.skycubed.overlays.manaEnabled": "Enable Mana Text Overlay",
-        "config.skycubed.overlays.manaEnabled.desc": "Enables the mana text overlay",
-
-        "config.skycubed.overlays.defenseEnabled": "Enable Defense Text Overlay",
-        "config.skycubed.overlays.defenseEnabled.desc": "Enables the defense text overlay",
-
-    "config.skycubed.overlays.sacks": "Sack Overlay",
-    "config.skycubed.overlays.sacks.desc": "Settings for the sack overlay.",
-
-        "config.skycubed.overlays.sacks.enabled": "Enable Sack Overlay",
-        "config.skycubed.overlays.sacks.enabled.desc": "Enables the sack overlay, showing specified items in your sack.\nYou can edit these items with /skycubed sackhud.",
-
-        "config.skycubed.overlays.sacks.background": "Background",
-        "config.skycubed.overlays.sacks.background.desc": "Use the SkyCubed background texture instead of a color.",
-
-    "config.skycubed.overlays.trophyFish": "Trophy Fish Overlay",
-    "config.skycubed.overlays.trophyFish.desc": "Settings for the trophy fish overlay.",
-
-        "config.skycubed.overlays.trophyFish.enabled": "Enable Trophy Fish Overlay",
-        "config.skycubed.overlays.trophyFish.enabled.desc": "Enables the trophy fish overlay, showing the trophy fish you have caught.",
-
-        "config.skycubed.overlays.trophyFish.background": "Background",
-        "config.skycubed.overlays.trophyFish.background.desc": "Use the SkyCubed background texture instead of a color.",
-
-        "config.skycubed.overlays.trophyFish.showNumbers": "Show Numbers",
-        "config.skycubed.overlays.trophyFish.showNumbers.desc": "If enabled, will show the amount of trophy fishes you caught instead of a cross or checkmark.",
-
-        "config.skycubed.overlays.trophyFish.showTotal": "Show Total Caught",
-        "config.skycubed.overlays.trophyFish.showTotal.desc": "If enabled, will show the total amount of each type you caught.",
-
-        "config.skycubed.overlays.trophyFish.hideUnlocked": "Hide Unlocked",
-        "config.skycubed.overlays.trophyFish.hideUnlocked.desc": "If enabled, will hide the trophy fish you have already unlocked.",
-
-    "config.skycubed.overlays.tablist": "Custom Tab List Overlay",
-    "config.skycubed.overlays.tablist.desc": "Settings for the custom tab list overlay.",
-
-        "config.skycubed.overlays.tablist.enabled": "Enable the custom tab list",
-        "config.skycubed.overlays.tablist.enabled.desc": "Enables the custom tab list, this tab list is a compact customizable version of the vanilla one for skyblock.",
-
-        "config.skycubed.overlays.tablist.sorting": "Player Sorting",
-        "config.skycubed.overlays.tablist.sorting.desc": "The way the players should be sorted in the tab list.",
-
-    "config.skycubed.overlays.map": "SkyBlock Mini-Map Overlay",
-    "config.skycubed.overlays.map.desc": "Settings for the minimap overlay.",
-
-        "config.skycubed.overlays.map.enabled": "Enable minimap Overlay",
-        "config.skycubed.overlays.map.enabled.desc": "Enables the minimap overlay, showing where you are on SkyBlock.",
-
-    "config.skycubed.overlays.dungeonmap": "Dungeon Map Overlay",
-    "config.skycubed.overlays.dungeonmap.desc": "Settings for the minimap overlay for dungeons.",
-
-        "config.skycubed.overlays.dungeonmap.enabled": "Enable Dungeon Map Overlay",
-        "config.skycubed.overlays.dungeonmap.enabled.desc": "Enables the dungeon map overlay, showing where you are in dungeons.",
-
-        "config.skycubed.overlays.dungeonmap.roomColors": "Dungeon Room Colors",
-        "config.skycubed.overlays.dungeonmap.roomColors.desc": "The colors of the rooms in dungeons.",
-
-        "config.skycubed.overlays.dungeonmap.roomColors.normal": "Normal",
-        "config.skycubed.overlays.dungeonmap.roomColors.normal.desc": "Normal room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.spawn": "Spawn",
-        "config.skycubed.overlays.dungeonmap.roomColors.spawn.desc": "Spawn room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.puzzle": "Puzzle",
-        "config.skycubed.overlays.dungeonmap.roomColors.puzzle.desc": "Puzzle room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.fairy": "Fairy",
-        "config.skycubed.overlays.dungeonmap.roomColors.fairy.desc": "Fairy room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.blood": "Blood",
-        "config.skycubed.overlays.dungeonmap.roomColors.blood.desc": "Blood room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.trap": "Trap",
-        "config.skycubed.overlays.dungeonmap.roomColors.trap.desc": "Trap room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.miniboss": "Miniboss",
-        "config.skycubed.overlays.dungeonmap.roomColors.miniboss.desc": "Miniboss room color.",
-        "config.skycubed.overlays.dungeonmap.roomColors.unknown": "Unknown",
-        "config.skycubed.overlays.dungeonmap.roomColors.unknown.desc": "Unknown room color.",
-
-        "config.skycubed.overlays.dungeonmap.doorColors": "Dungeon Door Colors",
-        "config.skycubed.overlays.dungeonmap.doorColors.desc": "The colors of the doors in dungeons.",
-
-        "config.skycubed.overlays.dungeonmap.doorColors.normal": "Normal",
-        "config.skycubed.overlays.dungeonmap.doorColors.normal.desc": "Normal door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.wither": "Wither",
-        "config.skycubed.overlays.dungeonmap.doorColors.wither.desc": "Wither door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.puzzle": "Puzzle",
-        "config.skycubed.overlays.dungeonmap.doorColors.puzzle.desc": "Puzzle door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.fairy": "Fairy",
-        "config.skycubed.overlays.dungeonmap.doorColors.fairy.desc": "Fairy door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.blood": "Blood",
-        "config.skycubed.overlays.dungeonmap.doorColors.blood.desc": "Blood door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.trap": "Trap",
-        "config.skycubed.overlays.dungeonmap.doorColors.trap.desc": "Trap door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.miniboss": "Miniboss",
-        "config.skycubed.overlays.dungeonmap.doorColors.miniboss.desc": "Miniboss door color.",
-        "config.skycubed.overlays.dungeonmap.doorColors.unknown": "Unknown",
-        "config.skycubed.overlays.dungeonmap.doorColors.unknown.desc": "Unknown door color.",
-
-
-    "config.skycubed.overlays.pickuplog": "Item Pickup Log Overlay",
-    "config.skycubed.overlays.pickuplog.desc": "Settings the Item Pickup Log overlay.",
-
-        "config.skycubed.overlays.pickuplog.enabled": "Enable item pickup log Overlay",
-        "config.skycubed.overlays.pickuplog.enabled.desc": "Enables the pickup log overlay, showing which items that have been added or removed from your inventory.",
-
-        "config.skycubed.overlays.pickuplog.compact": "Compact pickup log lines",
-        "config.skycubed.overlays.pickuplog.compact.desc": "With this enabled it will compact them into the differences ie. if you had 3 of an item added and then 1 of the item removed itd only show as +2.",
-
-        "config.skycubed.overlays.pickuplog.time": "Log Time",
-        "config.skycubed.overlays.pickuplog.time.desc": "How long an individual entry should be shown for after it has happened, this is in seconds.",
-
-        "config.skycubed.overlays.pickuplog.sackItems": "Allow Sack Items",
-        "config.skycubed.overlays.pickuplog.sackItems.desc": "If enabled the items in your sack will also be shown in the pickup log.",
-
-        "config.skycubed.overlays.pickuplog.appearance": "Appearance",
-        "config.skycubed.overlays.pickuplog.appearance.desc": "The order of how a display should be shown on screen. ie. if you want the items after the text or before.",
-
-
-    "config.skycubed.overlays.commissions": "Commissions Overlay",
-    "config.skycubed.overlays.commissions.desc": "Settings for the mining commissions overlay.",
-
-        "config.skycubed.overlays.commissions.enabled": "Enable Commissions Overlay",
-        "config.skycubed.overlays.commissions.enabled.desc": "Enables the commissions overlay, showing which commissions you have on mining islands.",
-
-        "config.skycubed.overlays.commissions.format": "Format Commission Displays",
-        "config.skycubed.overlays.commissions.format.desc": "If enabled the commissions will display as a number out of another number or a check mark instead of just a percentage.",
-
-        "config.skycubed.overlays.commissions.background": "Textured Background",
-        "config.skycubed.overlays.commissions.background.desc": "If enabled the overlay will have a textured background instead of a transparent black background.",
-
-
-    "config.skycubed.overlays.npc": "Npc Dialogue Overlay",
-    "config.skycubed.overlays.npc.desc": "Settings the npc dialogue overlay.",
-
-        "config.skycubed.overlays.npc.enabled": "Enable NPC dialogue Overlay",
-        "config.skycubed.overlays.npc.enabled.desc": "If enabled the NPC messages will no longer go to chat but will instead go to an overlay.",
-
-        "config.skycubed.overlays.npc.durationPerMessage": "Duration per Message",
-        "config.skycubed.overlays.npc.durationPerMessage.desc": "The time in seconds of how long a message should be displayed for.",
-
-        "config.skycubed.overlays.npc.durationForActionMessage": "Duration per Action Message",
-        "config.skycubed.overlays.npc.durationForActionMessage.desc": "The time in seconds of how long an action message should be displayed for. ie. a message that you have to choose an option from.",
-
-        "config.skycubed.overlays.npc.hideChatMessage": "Hide Chat Messages",
-        "config.skycubed.overlays.npc.hideChatMessage.desc": "If enabled the chat messages will be hidden when an NPC message is displayed.",
-
-
-    "config.skycubed.overlays.coldOverlay": "Cold Overlay Start",
-    "config.skycubed.overlays.coldOverlay.desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay",
-
-    "config.skycubed.overlays.movableHotbar": "Movable Hotbar",
-    "config.skycubed.overlays.movableHotbar.desc": "Allows you to move the hotbar around the screen.",
-
-    "config.skycubed.overlays.windOverlay": "Wind Overlay",
-    "config.skycubed.overlays.windOverlay.desc": "Displays the wind indicator from the gone with the Wind event on your cursor.",
-
-    "//Chat": "",
-
-    "config.skycubed.chat.title": "Chat",
-
-    "config.skycubed.chat.chatColors": "Chat Tab Colors",
-    "config.skycubed.chat.chatColors.desc": "Changes the color of the line next to a chat message to a color based on the message type",
-
-    "config.skycubed.chat.compactChat": "Compact Chat",
-    "config.skycubed.chat.compactChat.desc": "Makes the chat more compact by removing old messages of similar type. ie. cooldowns or lists or other spammy messages but important messages",
-
-    "config.skycubed.chat.messagesToClean": "Messages to Clean",
-    "config.skycubed.chat.messagesToClean.desc": "A list of message you would like to be removed from chat, these are written as regex patterns",
-
-    "//Screens": "",
-
-    "config.skycubed.screens.title": "Screens",
-
-    "config.skycubed.screens.equipment": "Show Equipment",
-    "config.skycubed.screens.equipment.desc": "Shows your equipment in your inventory next to your player like armor.",
-
-    "config.skycubed.screens.wardrobe": "Custom Wardrobe",
-    "config.skycubed.screens.wardrobe.desc": "Changes the wardrobe to be a custom wardrobe with more options.",
-
-        "config.skycubed.screens.wardrobe.enabled": "Enabled",
-        "config.skycubed.screens.wardrobe.enabled.desc": "Enables the custom wardrobe.",
-
-        "config.skycubed.screens.wardrobe.textures": "Textures",
-        "config.skycubed.screens.wardrobe.textures.desc": "Changes it from transparent squares to actual textures.",
-
-    "//Items": "",
-
-    "config.skycubed.items.title": "Items",
-
-    "config.skycubed.items.itembars": "Item Bars",
-    "config.skycubed.items.itembars.desc": "Adds a bar to various items such as drills with their current count.",
-
-    "config.skycubed.items.cooldowns": "Item Cooldowns",
-    "config.skycubed.items.cooldowns.desc": "Adds vanilla cooldowns to SkyBlock items.",
-
-    "//Rendering": "",
-
-    "config.skycubed.render.title": "Rendering",
-
-    "config.skycubed.render.showOwnTag": "Render own name tag",
-    "config.skycubed.render.showOwnTag.desc": "Renders your own name tag in third person.",
-
-    "//Notifications": "",
-    "config.skycubed.notification.hideChatMessage": "Hide Chat Messages",
-    "config.skycubed.notification.hideChatMessage.desc": "If enabled the chat messages will be hidden when a notification is displayed.",
-    "config.skycubed.notification.showAsToast": "Show as Toast",
-    "config.skycubed.notification.showAsToast.desc": "If enabled the notifications will show as a toast message.",
-    "config.skycubed.notification.toastDuration": "Toast Duration",
-    "config.skycubed.notification.toastDuration.desc": "The time in seconds of how long a toast notification should be displayed for.",
-
-    "config.skycubed.notifications.title": "Notifications",
-
-    "config.skycubed.notifications.friendJoinLeave": "Friend Join/Leave",
-    "config.skycubed.notifications.friendJoinLeave.desc": "Checks the following messages:\n§aFriend > §7Your Friend §eleft.",
-
-    "config.skycubed.notifications.guildJoinLeave": "Guild Join/Leave",
-    "config.skycubed.notifications.guildJoinLeave.desc": "Checks the following messages:\n§2Guild > §7Your Guild Member §eleft.",
-
-    "config.skycubed.notifications.hoppityYouFound": "Hoppity You Found",
-    "config.skycubed.notifications.hoppityYouFound.desc": "Checks the following messages:\n§d§lHOPPITY'S HUNT §7You found §aAmazon §7(§a§lUNCOMMON§7)!",
-
-    "config.skycubed.notifications.hoppityEggAppeared": "Hoppity Egg Appeared",
-    "config.skycubed.notifications.hoppityEggAppeared.desc": "Checks the following messages:\n§d§lHOPPITY'S HUNT §r§dA §6Chocolate Breakfast Egg §dhas appeared!",
-
-    "config.skycubed.notifications.skymall": "SkyMall",
-    "config.skycubed.notifications.skymall.desc": "Checks the following messages:\n",
-
-    "config.skycubed.notifications.monolith": "Monolith",
-    "config.skycubed.notifications.monolith.desc": "Checks the following messages:\n§5§lMONOLITH! §r§aYou found a mysterious §5Dark Monolith §aand were rewarded §650,000 Coins§a!",
-
-    "config.skycubed.notifications.riftOrb": "Rift Orb",
-    "config.skycubed.notifications.riftOrb.desc": "Checks the following messages:\n",
-
-    "config.skycubed.notifications.blocksInTheWay": "Blocks In The Way",
-    "config.skycubed.notifications.blocksInTheWay.desc": "Checks the following messages:\n§cThere are blocks in the way!",
-
-    "config.skycubed.notifications.warping": "Warping",
-    "config.skycubed.notifications.warping.desc": "Checks the following messages:\n§7Warping...",
-
-    "config.skycubed.notifications.combo": "Combos",
-    "config.skycubed.notifications.combo.desc": "Checks the following messages:\n§6§l+30 Kill Combo §r§8+§610 §7coins per kill",
-
-    "config.skycubed.notifications.fishing": "Fishing",
-    "config.skycubed.notifications.fishing.desc": "Checks the following messages:\n",
-
-    "config.skycubed.notifications.gifts": "Gifts",
-    "config.skycubed.notifications.gifts.desc": "Checks the following messages:\n§2§lGIFT!§r§aYou found a §fWhite Gift§a! §7(§f1§7/§a20§7)",
-
-    "__notifications__": "",
-
-    "skycubed.notifications": "Notifications",
-    "skycubed.notification.type.all": "All",
-    "skycubed.notification.type.friendJoinLeave": "Friend Join/Leave",
-    "skycubed.notification.type.guildJoinLeave": "Guild Join/Leave",
-    "skycubed.notification.type.hoppityYouFound": "Hoppity You Found",
-    "skycubed.notification.type.hoppityEggAppeared": "Hoppity Egg Appeared",
-    "skycubed.notification.type.skymall1": "SkyMall",
-    "skycubed.notification.type.monolith": "Monolith",
-    "skycubed.notification.type.riftOrb": "Rift Orb",
-    "skycubed.notification.type.blocksInTheWay": "Blocks In The Way",
-    "skycubed.notification.type.warping": "Warping",
-    "skycubed.notification.type.combo": "Combos",
-
-    "__map__": "",
-
-    "maps.skycubed.main": "Main Islands",
-    "maps.skycubed.rift": "The Rift",
-    "maps.skycubed.crystal_hollows": "Crystal Hollows",
-    "maps.skycubed.dwarves": "Dwarven Mines",
-    "maps.skycubed.dungeon_hub": "Dungeon Hub",
-    "maps.skycubed.jerrys_workshop": "Jerry's Workshop",
-
-    "__keybinds__": "",
-
-    "key.skycubed.category": "SkyCubed",
-    "key.skycubed.map": "Open Map",
-
+    "@meowdding:metadata": {
+        "allowMultiline": true,
+        "allowReferences": true,
+        "allowTags": true,
+        "objectAsKeys": true,
+        "@references": {}
+    },
+    "skycubed": {
+        "ui.overlay.edit": {
+            "@value": "<gold>Click to edit overlay.</gold>",
+            "options": "<gold>Right Click to configure</gold>"
+        },
+        "config": {
+            "info": {
+                "modrinth": "Modrinth",
+                "github": "GitHub"
+            },
+            "general": {
+                "keybinds": {
+                    "@value": "Keybinds",
+                    "desc": "SkyCubed uses the vanilla keybinds",
+                    "text": "Open"
+                },
+                "notifications": {
+                    "@value": "Notifications",
+                    "desc": "SkyCubed has a notification system, you can click the button below to view past notifications, you can also find a notification button in the pause menu.",
+                    "text": "Open"
+                },
+                "hidden_hud_elements": {
+                    "@value": "Hidden Hud Elements",
+                    "desc": "Allows you to hide certain elements of the Vanilla hud on your screen."
+                },
+                "hidden_action_bar_widgets": {
+                    "@value": "Hidden Action Bar Elements",
+                    "desc": "Allows you to hide certain action bar elements that hypixel send but are replaced by mod displays."
+                }
+            },
+            "overlays": {
+                "@value": "Overlays",
+                "info": {
+                    "@value": "Info Hud Overlay",
+                    "desc": "Settings for the info hud overlay.",
+                    "enabled": {
+                        "@value": "Enable Info Hud Overlay",
+                        "desc": "Enables the Info Hud overlay, show location, currency, time, and location specific info."
+                    }
+                },
+                "rpg": {
+                    "@value": "Rpg Overlay",
+                    "desc": "Settings for the rpg overlay.",
+                    "enabled": {
+                        "@value": "Enable RPG Overlay",
+                        "desc": "Enables the RPG overlay, showing mana, health, and xp bars."
+                    },
+                    "skyblock_level": {
+                        "@value": "SkyBlock Level in XP",
+                        "desc": "If enabled the XP bar will show your SkyBlock level instead of your normal XP."
+                    }
+                },
+                "text": {
+                    "@value": "Text Overlays",
+                    "desc": "Settings for the the various text overlays."
+                },
+                "health": {
+                    "enabled": {
+                        "@value": "Enable Health Text Overlay",
+                        "desc": "Enables the health text overlay"
+                    },
+                    "disabled": "Disabled",
+                    "normal": "Enabled",
+                    "effective": "Effective HP"
+                },
+                "mana": {
+                    "@value": "Enable Mana Text Overlay",
+                    "desc": "Enables the mana text overlay"
+                },
+                "defense": {
+                    "@value": "Enable Defense Text Overlay",
+                    "desc": "Enables the defense text overlay"
+                },
+                "sacks": {
+                    "@value": "Sack Overlay",
+                    "desc": "Settings for the sack overlay.",
+                    "enabled": {
+                        "@value": "Enable Sack Overlay",
+                        "desc": [
+                            "Enables the sack overlay, showing specified items in your sack.",
+                            "You can edit these items with <light_gray>/skycubed</light_gray> sackhud."
+                        ]
+                    },
+                    "background": {
+                        "@value": "Background",
+                        "desc": "Use the SkyCubed background texture instead of a color."
+                    }
+                },
+                "tablist": {
+                    "@value": "Custom Tab List Overlay",
+                    "desc": "Settings for the custom tab list overlay.",
+                    "enabled": {
+                        "@value": "Enable the custom tab list",
+                        "desc": "Enables the custom tab list, this tab list is a compact customizable version of the vanilla one for skyblock."
+                    },
+                    "sorting": {
+                        "@value": "Player Sorting",
+                        "desc": "The way the players should be sorted in the tab list."
+                    }
+                },
+                "map": {
+                    "@value": "SkyBlock Mini-Map Overlay",
+                    "desc": "Settings for the minimap overlay.",
+                    "enabled": {
+                        "@value": "Enable minimap Overlay",
+                        "desc": "Enables the minimap overlay, showing where you are on SkyBlock."
+                    }
+                },
+                "dungeonmap": {
+                    "@value": "Dungeon Map Overlay",
+                    "desc": "Settings for the minimap overlay for dungeons.",
+                    "enabled": {
+                        "@value": "Enable Dungeon Map Overlay",
+                        "desc": "Enables the dungeon map overlay, showing where you are in dungeons."
+                    },
+                    "room_colors": {
+                        "@value": "Dungeon Room Colors",
+                        "desc": "The colors of the rooms in dungeons.",
+                        "normal": "Normal",
+                        "spawn": "Spawn",
+                        "puzzle": "Puzzle",
+                        "fairy": "Fairy",
+                        "blood": "Blood",
+                        "trap": "Trap",
+                        "miniboss": "Miniboss",
+                        "unknown": "Unknown"
+                    },
+                    "door_colors": {
+                        "@value": "Dungeon Door Colors",
+                        "desc": "The colors of the doors in dungeons.",
+                        "normal": "Normal",
+                        "wither": "Wither",
+                        "puzzle": "Puzzle",
+                        "fairy": "Fairy",
+                        "blood": "Blood",
+                        "trap": "trap",
+                        "miniboss": "Miniboss",
+                        "unknown": "Unknown"
+                    }
+                },
+                "pickuplog": {
+                    "@value": "Item Pickup Log Overlay",
+                    "desc": "Settings the Item Pickup Log overlay.",
+                    "enabled": {
+                        "@value": "Enable item pickup log Overlay",
+                        "desc": "Enables the pickup log overlay, showing which items that have been added or removed from your inventory."
+                    },
+                    "compact": {
+                        "@value": "Compact pickup log lines",
+                        "desc": "With this enabled it will compact them into the differences ie. if you had 3 of an item added and then 1 of the item removed itd only show as +2."
+                    },
+                    "time": {
+                        "@value": "Log Time",
+                        "desc": "How long an individual entry should be shown for after it has happened, this is in seconds."
+                    },
+                    "sack_items": {
+                        "@value": "Allow Sack Items",
+                        "desc": "If enabled the items in your sack will also be shown in the pickup log."
+                    },
+                    "appearance": {
+                        "@value": "Appearance",
+                        "desc": "The order of how a display should be shown on screen. ie. if you want the items after the text or before."
+                    }
+                },
+                "trophy_fish": {
+                    "@value": "Trophy Fish Overlay",
+                    "desc": "Settings for the trophy fish overlay.",
+                    "enabled": {
+                        "@value": "Enable Trophy Fish Overlay",
+                        "desc": "Enables the trophy fish overlay, showing the trophy fish you have caught."
+                    },
+                    "background": {
+                        "@value": "Background",
+                        "desc": "Use the SkyCubed background texture instead of a color."
+                    },
+                    "show_numbers": {
+                        "@value": "Show Numbers",
+                        "desc": "If enabled, will show the amount of trophy fishes you caught instead of a cross or checkmark."
+                    },
+                    "show_total": {
+                        "@value": "Show Total Caught",
+                        "desc": "If enabled, will show the total amount of each type you caught."
+                    },
+                    "hide_unlocked": {
+                        "@value": "Hide Unlocked",
+                        "desc": "If enabled, will hide the trophy fish you have already unlocked."
+                    }
+                },
+                "commissions": {
+                    "@value": "Commissions Overlay",
+                    "desc": "Settings for the mining commissions overlay.",
+                    "enabled": {
+                        "@value": "Enable Commissions Overlay",
+                        "desc": "Enables the commissions overlay, showing which commissions you have on mining islands."
+                    },
+                    "format": {
+                        "@value": "Format Commission Displays",
+                        "desc": "If enabled the commissions will display as a number out of another number or a check mark instead of just a percentage."
+                    },
+                    "background": {
+                        "@value": "Textured Background",
+                        "desc": "If enabled the overlay will have a textured background instead of a transparent black background."
+                    }
+                },
+                "npc": {
+                    "@value": "Npc Dialogue Overlay",
+                    "desc": "Settings the npc dialogue overlay.",
+                    "enabled": {
+                        "@value": "Enable NPC dialogue Overlay",
+                        "desc": "If enabled the NPC messages will no longer go to chat but will instead go to an overlay."
+                    },
+                    "duration_per_message": {
+                        "@value": "Duration per Message",
+                        "desc": "The time in seconds of how long a message should be displayed for."
+                    },
+                    "duration_for_action_message": {
+                        "@value": "Duration per Action Message",
+                        "desc": "The time in seconds of how long an action message should be displayed for. ie. a message that you have to choose an option from."
+                    },
+                    "hide_chat_message": {
+                        "@value": "Hide Chat Messages",
+                        "desc": "If enabled the chat messages will be hidden when an NPC message is displayed."
+                    }
+                },
+                "cold_overlay": {
+                    "@value": "Cold Overlay Start",
+                    "desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay"
+                },
+                "movable_hotbar": {
+                    "@value": "Movable Hotbar",
+                    "desc": "Allows you to move the hotbar around the screen."
+                },
+                "wind_overlay": {
+                    "@value": "Wind Overlay",
+                    "desc": "Displays the wind indicator from the gone with the Wind event on your cursor."
+                }
+            },
+            "screens": {
+                "@value": "Screens",
+                "equipment": {
+                    "@value": "Show Equipment",
+                    "desc": "Shows your equipment in your inventory next to your player like armor."
+                },
+                "wardrobe": {
+                    "@value": "Custom Wardrobe",
+                    "desc": "Changes the wardrobe to be a custom wardrobe with more options.",
+                    "enabled": {
+                        "@value": "Enabled",
+                        "desc": "Enables the custom wardrobe."
+                    },
+                    "textures": {
+                        "@value": "Textures",
+                        "desc": "Changes it from transparent squares to actual textures."
+                    }
+                }
+            },
+            "chat": {
+                "@value": "Chat",
+                "chat_colors": {
+                    "@value": "Chat Tab Colors",
+                    "desc": "Changes the color of the line next to a chat message to a color based on the message type"
+                },
+                "compact_chat": {
+                    "@value": "Compact Chat",
+                    "desc": "Makes the chat more compact by removing old messages of similar type. ie. cooldowns or lists or other spammy messages but important messages"
+                },
+                "messages_to_clean": {
+                    "@value": "Messages to Clean",
+                    "desc": "A list of message you would like to be removed from chat, these are written as regex patterns"
+                }
+            },
+            "items": {
+                "@value": "Items",
+                "itembars": {
+                    "@value": "Item Bars",
+                    "desc": "Adds a bar to various items such as drills with their current count."
+                },
+                "cooldowns": {
+                    "@value": "Item Cooldowns",
+                    "desc": "Adds vanilla cooldowns to SkyBlock items."
+                }
+            },
+            "rendering": {
+                "@value": "Rendering",
+                "show_own_tag": {
+                    "@value": "Render own name tag",
+                    "desc": "Renders your own name tag in third person."
+                }
+            },
+            "notifications": {
+                "@value": "Notifications",
+                "hide_chat_messages": {
+                    "@value": "Hide Chat Messages",
+                    "desc": "If enabled the chat messages will be hidden when a notification is displayed."
+                },
+                "show_as_toast": {
+                    "@value": "Show as Toast",
+                    "desc": "If enabled the notifications will show as a toast message."
+                },
+                "toast_duration": {
+                    "@value": "Toast Duration",
+                    "desc": "The time in seconds of how long a toast notification should be displayed for."
+                },
+                "friend_join_leave": {
+                    "@value": "Friend Join/Leave",
+                    "desc": [
+                        "Checks the following messages:",
+                        "<green>Friend > </green><gray>Your Friend <red>left<gray>."
+                    ]
+                },
+                "guild_join_leave": {
+                    "@value": "Guild Join/Leave",
+                    "desc": [
+                        "Checks the following messages:",
+                        "<dark_green>Guild > <gray>Your Guild Member <red>left<gray>."
+                    ]
+                },
+                "hoppity": {
+                    "you_found": {
+                        "@value": "Hoppity You Found",
+                        "desc": [
+                            "Checks the following messages:",
+                            "§d§lHOPPITY'S HUNT §7You found §aAmazon §7(§a§lUNCOMMON§7)!"
+                        ]
+                    },
+                    "egg_appeared": {
+                        "@value": "Hoppity Egg Appeared",
+                        "desc": [
+                            "Checks the following messages:",
+                            "§d§lHOPPITY'S HUNT §r§dA §6Chocolate Breakfast Egg §dhas appeared!"
+                        ]
+                    }
+                },
+                "skymall": {
+                    "@value": "SkyMall",
+                    "desc": "Checks the following messages:\n"
+                },
+                "monolith": {
+                    "@value": "Monolith",
+                    "desc": [
+                        "Checks the following messages:",
+                        "§5§lMONOLITH! §r§aYou found a mysterious §5Dark Monolith §aand were rewarded §650,000 Coins§a!"
+                    ]
+                },
+                "rift_orb": {
+                    "@value": "Rift Orb",
+                    "desc": "Checks the following messages:\n"
+                },
+                "blocks_in_the_way": {
+                    "@value": "Blocks In The Way",
+                    "desc": [
+                        "Checks the following messages:",
+                        "§cThere are blocks in the way!"
+                    ]
+                },
+                "warping": {
+                    "@value": "Warping",
+                    "desc": [
+                        "Checks the following messages:",
+                        "§7Warping..."
+                    ]
+                },
+                "combo": {
+                    "@value": "Combos",
+                    "desc": [
+                        "Checks the following messages:",
+                        "§6§l+30 Kill Combo §r§8+§610 §7coins per kill"
+                    ]
+                },
+                "fishing": {
+                    "@value": "Fishing",
+                    "desc": "Checks the following messages:\n"
+                },
+                "gifts": {
+                    "@value": "Gifts",
+                    "desc": [
+                        "Checks the following messages:",
+                        "§2§lGIFT!§r§aYou found a §fWhite Gift§a! §7(§f1§7/§a20§7)"
+                    ]
+                }
+            }
+        },
+        "notification": {
+            "type": {
+                "all": "All",
+                "friend_join_leave": "Friend Join/Leave",
+                "guild_join_leave": "Guild Join/Leave",
+                "hoppity_you_found": "Hoppity You Found",
+                "hoppity_egg_appeared": "Hoppity Egg Appeared",
+                "skymall1": "SkyMall",
+                "skymall2": "SkyMall",
+                "skymall3": "SkyMall",
+                "monolith": "Monolith",
+                "rift_orb": "Rift Orb",
+                "blocks_in_the_way": "Blocks In The Way",
+                "warping": "Warping",
+                "combo": "Combos"
+            }
+        },
+        "map": {
+            "main": "Main Islands",
+            "rift": "The Rift",
+            "crystal_hollows": "Crystal Hollows",
+            "dwarves": "Dwarven Mines",
+            "dungeon_hub": "Dungeon Hub",
+            "jerrys_workshop": "Jerry's Workshop"
+        },
+        "key": {
+            "category": "SkyCubed",
+            "map": "Open Map"
+        }
+    },
     "theme.jade.skycubed": "SkyCubed"
-
 }

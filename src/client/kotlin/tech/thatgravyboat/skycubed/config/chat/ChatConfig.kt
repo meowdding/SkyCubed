@@ -5,14 +5,14 @@ import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
 object ChatConfig : CategoryKt("chat") {
 
-    override val name: TranslatableValue = Translated("config.skycubed.chat.title")
+    override val name: TranslatableValue = Translated("skycubed.config.chat")
 
     var chatColors by boolean(true) {
-        this.translation = "config.skycubed.chat.chatColors"
+        this.translation = "skycubed.config.chat.chat_colors"
     }
 
     var compactChat by boolean(true) {
-        this.translation = "config.skycubed.chat.compactChat"
+        this.translation = "skycubed.config.chat.compact_chat"
     }
 
     val messagesToClean by transform(
@@ -26,7 +26,7 @@ object ChatConfig : CategoryKt("chat") {
             "^Couldn't warp you! Try again later.",
             "^ *A FIRE SALE.*to grab yours!$",
         ) {
-            this.translation = "config.skycubed.chat.messagesToClean"
+            this.translation = "skycubed.config.chat.messages_to_clean"
         },
         { it.map { it.pattern }.toTypedArray() },
         { it.mapNotNull { runCatching { Regex(it) }.getOrNull() } },

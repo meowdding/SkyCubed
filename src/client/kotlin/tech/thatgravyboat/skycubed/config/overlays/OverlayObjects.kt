@@ -20,7 +20,7 @@ open class OverlayConfig(private val title: String) : ObjectKt(), Translatable {
 object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
 
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.info.enabled"
+        this.translation = "skycubed.config.overlays.info.enabled"
     }
 
 }
@@ -28,36 +28,36 @@ object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
 object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.rpg.enabled"
+        this.translation = "skycubed.config.overlays.rpg.enabled"
     }
 
     var skyblockLevel by boolean(false) {
-        this.translation = "config.skycubed.overlays.rpg.skyblockLevel"
+        this.translation = "skycubed.config.overlays.rpg.skyblock_level"
     }
 }
 
 object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
 
     var healthDisplay by enum<HealthDisplay>(HealthDisplay.NORMAL) {
-        this.translation = "config.skycubed.overlays.healthDisplay"
+        this.translation = "skycubed.config.overlays.health_display"
     }
 
     var manaEnabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.manaEnabled"
+        this.translation = "skycubed.config.overlays.mana_enabled"
     }
 
     var defenseEnabled by boolean(false) {
-        this.translation = "config.skycubed.overlays.defenseEnabled"
+        this.translation = "skycubed.config.overlays.defense_enabled"
     }
 }
 
 object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.sacks.enabled"
+        this.translation = "skycubed.config.overlays.sacks.enabled"
     }
 
     var background by boolean(false) {
-        this.translation = "config.skycubed.overlays.sacks.background"
+        this.translation = "skycubed.config.overlays.sacks.background"
     }
 
     var sackItems by strings {
@@ -68,23 +68,23 @@ object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
 object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
 
     var enabled by boolean(false) {
-        this.translation = "config.skycubed.overlays.trophyFish.enabled"
+        this.translation = "skycubed.config.overlays.trophy_fish.enabled"
     }
 
     var background by boolean(false) {
-        this.translation = "config.skycubed.overlays.trophyFish.background"
+        this.translation = "skycubed.config.overlays.trophy_fish.background"
     }
 
     var showNumbers by boolean(true) {
-        this.translation = "config.skycubed.overlays.trophyFish.showNumbers"
+        this.translation = "skycubed.config.overlays.trophy_fish.showNumbers"
     }
 
     var showTotal by boolean(true) {
-        this.translation = "config.skycubed.overlays.trophyFish.showTotal"
+        this.translation = "skycubed.config.overlays.trophy_fish.showTotal"
     }
 
     var hideUnlocked by boolean(false) {
-        this.translation = "config.skycubed.overlays.trophyFish.hideUnlocked"
+        this.translation = "skycubed.config.overlays.trophy_fish.hideUnlocked"
     }
 
 }
@@ -93,7 +93,7 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
 
     var enabled by observable(
         boolean(true) {
-            this.translation = "config.skycubed.overlays.tablist.enabled"
+            this.translation = "skycubed.config.overlays.tablist.enabled"
         },
     ) { _, new ->
         CompactTablist.onToggle(new)
@@ -101,7 +101,7 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
 
     var sorting by observable(
         enum<CompactTablistSorting>(CompactTablistSorting.NORMAL) {
-            this.translation = "config.skycubed.overlays.tablist.sorting"
+            this.translation = "skycubed.config.overlays.tablist.sorting"
         },
     ) { _, _ ->
         CompactTablist.onSortingUpdate()
@@ -111,43 +111,47 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
 object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
 
     var enabled by boolean(false) {
-        this.translation = "config.skycubed.overlays.map.enabled"
+        this.translation = "skycubed.config.overlays.map.enabled"
     }
 }
 
 object DungeonMapOverlayConfig : OverlayConfig("Edit Dungeon Map Overlay") {
 
     var enabled by boolean(false) {
-        this.translation = "config.skycubed.overlays.dungeonmap.enabled"
+        this.translation = "skycubed.config.overlays.dungeonmap.enabled"
     }
 
     init {
         separator {
-            this.title = "config.skycubed.overlays.dungeonmap.roomColors"
-            this.description = "config.skycubed.overlays.dungeonmap.roomColors.desc"
+            this.title = "skycubed.config.overlays.dungeonmap.room_colors"
+            this.description = "skycubed.config.overlays.dungeonmap.room_colors.desc"
         }
 
         for (type in DungeonRoomType.entries) {
             val id = type.name.lowercase()
-            observable(color("${id}_room", ARGB.opaque(type.defaultDisplayColor)) {
-                this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
-                this.translation = "config.skycubed.overlays.dungeonmap.roomColors.$id"
-            }) { _, new ->
+            observable(
+                color("${id}_room", ARGB.opaque(type.defaultDisplayColor)) {
+                    this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
+                    this.name = Translated("skycubed.config.overlays.dungeonmap.room_colors.$id")
+                },
+            ) { _, new ->
                 type.displayColor = new
             }.provideDelegate(this, ::EMPTY_PROPERTY)
         }
 
         separator {
-            this.title = "config.skycubed.overlays.dungeonmap.doorColors"
-            this.description = "config.skycubed.overlays.dungeonmap.doorColors.desc"
+            this.title = "skycubed.config.overlays.dungeonmap.door_colors"
+            this.description = "skycubed.config.overlays.dungeonmap.door_colors.desc"
         }
 
         for (type in DungeonDoorType.entries) {
             val id = type.name.lowercase()
-            observable(color("${id}_door", ARGB.opaque(type.defaultDisplayColor)) {
-                this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
-                this.translation = "config.skycubed.overlays.dungeonmap.doorColors.$id"
-            }) { _, new ->
+            observable(
+                color("${id}_door", ARGB.opaque(type.defaultDisplayColor)) {
+                    this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
+                    this.name = Translated("skycubed.config.overlays.dungeonmap.door_colors.$id")
+                },
+            ) { _, new ->
                 type.displayColor = new
             }.provideDelegate(this, ::EMPTY_PROPERTY)
         }
@@ -157,58 +161,58 @@ object DungeonMapOverlayConfig : OverlayConfig("Edit Dungeon Map Overlay") {
 object PickupLogOverlayConfig : OverlayConfig("Edit Pickup Log Overlay") {
 
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.pickuplog.enabled"
+        this.translation = "skycubed.config.overlays.pickuplog.enabled"
     }
 
     var compact by boolean(true) {
-        this.translation = "config.skycubed.overlays.pickuplog.compact"
+        this.translation = "skycubed.config.overlays.pickuplog.compact"
     }
 
     var time by int(5) {
-        this.translation = "config.skycubed.overlays.pickuplog.time"
+        this.translation = "skycubed.config.overlays.pickuplog.time"
         this.range = 1..60
         this.slider = true
     }
 
     var sackItems by boolean(false) {
-        this.translation = "config.skycubed.overlays.pickuplog.sackItems"
+        this.translation = "skycubed.config.overlays.pickuplog.sack_items"
     }
 
     var appearance by draggable<PickUpLogComponents>(*PickUpLogComponents.entries.toTypedArray()) {
-        this.translation = "config.skycubed.overlays.pickuplog.appearance"
+        this.translation = "skycubed.config.overlays.pickuplog.appearance"
     }
 }
 
 object CommissionOverlayConfig : OverlayConfig("Edit Commissions Overlay") {
 
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.commissions.enabled"
+        this.translation = "skycubed.config.overlays.commissions.enabled"
     }
 
     var format by boolean(true) {
-        this.translation = "config.skycubed.overlays.commissions.format"
+        this.translation = "skycubed.config.overlays.commissions.format"
     }
 
     var background by boolean(false) {
-        this.translation = "config.skycubed.overlays.commissions.background"
+        this.translation = "skycubed.config.overlays.commissions.background"
     }
 }
 
 object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
 
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.overlays.npc.enabled"
+        this.translation = "skycubed.config.overlays.npc.enabled"
     }
 
     var durationPerMessage by float(2.5f) {
-        this.translation = "config.skycubed.overlays.npc.durationPerMessage"
+        this.translation = "skycubed.config.overlays.npc.duration_per_message"
     }
 
     var durationForActionMessage by float(10f) {
-        this.translation = "config.skycubed.overlays.npc.durationForActionMessage"
+        this.translation = "skycubed.config.overlays.npc.duration_for_action_message"
     }
 
     var hideChatMessage by boolean(true) {
-        this.translation = "config.skycubed.overlays.npc.hideChatMessage"
+        this.translation = "skycubed.config.overlays.npc.hide_chat_message"
     }
 }

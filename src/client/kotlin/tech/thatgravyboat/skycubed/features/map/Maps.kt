@@ -32,7 +32,7 @@ object Maps {
         "dungeon_hub",
         "jerrys_workshop",
     )
-    private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("key.skycubed.map", InputConstants.KEY_M, "key.skycubed.category"))
+    private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 
     private val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
