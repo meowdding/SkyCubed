@@ -53,7 +53,7 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
                 Text.multiline(
                     overlay.name,
                     CommonText.EMPTY,
-                    Component.translatable("ui.skycubed.overlay.edit.options"),
+                    Component.translatable("skycubed.ui.overlay.edit.options"),
                 ),
             )
         }

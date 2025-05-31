@@ -5,10 +5,10 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayConfig
 object WardrobeConfig : OverlayConfig("Edit Wardrobe Config") {
 
     var enabled by boolean(true) {
-        this.translation = "config.skycubed.screens.wardrobe.enabled"
+        this.translation = "skycubed.config.screens.wardrobe.enabled"
     }
 
     var textured by boolean("textures", false) {
-        this.translation = "config.skycubed.screens.wardrobe.textures"
+        this.translation = "skycubed.config.screens.wardrobe.textures"
     }
 }

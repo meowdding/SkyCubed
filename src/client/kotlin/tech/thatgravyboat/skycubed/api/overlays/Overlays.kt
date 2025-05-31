@@ -81,7 +81,7 @@ object Overlays {
                         Text.multiline(
                             it.name,
                             CommonText.EMPTY,
-                            Text.translatable("ui.skycubed.overlay.edit"),
+                            Text.translatable("skycubed.ui.overlay.edit"),
                             Text.of("SkyCubed") {
                                 this.color = TextColor.BLUE
                                 this.withStyle(ChatFormatting.ITALIC)

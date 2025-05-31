@@ -25,13 +25,13 @@ object Config : ConfigKt("skycubed/config") {
         ResourcefulConfigLink.create(
             "https://modrinth.com/project/skycubed",
             "modrinth",
-            TranslatableValue("Modrinth", "config.info.skycubed.modrinth")
+            TranslatableValue("Modrinth", "skycubed.config.info.modrinth"),
         ),
         ResourcefulConfigLink.create(
             "https://github.com/ThatGravyBoat/SkyCubed",
             "code",
-            TranslatableValue("GitHub", "config.info.skycubed.github")
-        )
+            TranslatableValue("GitHub", "skycubed.config.info.github"),
+        ),
     )
 
     init {
@@ -51,12 +51,12 @@ object Config : ConfigKt("skycubed/config") {
     }
 
     val hiddenActionBarWidgets by select<ActionBarWidget> {
-        this.translation = "config.skycubed.general.hiddenActionBarWidgets"
+        this.translation = "skycubed.config.general.hidden_action_bar_widgets"
     }
 
     val hiddenHudElements by transform(
         select<HudElement> {
-            this.translation = "config.skycubed.general.hiddenHudElements"
+            this.translation = "skycubed.config.general.hidden_hud_elements"
         },
         { it.toTypedArray() },
         { it.toSet() },
@@ -69,7 +69,7 @@ object Config : ConfigKt("skycubed/config") {
         }
 
         button {
-            this.title = "config.skycubed.general.keybinds"
+            this.title = "skycubed.config.general.keybinds"
             this.text = "Open"
             this.onClick {
                 McClient.setScreen(KeyBindsScreen(McScreen.self, McClient.options))
@@ -77,7 +77,7 @@ object Config : ConfigKt("skycubed/config") {
         }
 
         button {
-            this.title = "config.skycubed.general.notifications"
+            this.title = "skycubed.config.general.notifications"
             this.text = "Open"
             this.onClick {
                 McClient.setScreen(NotificationsScreen())
