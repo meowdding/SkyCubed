@@ -47,7 +47,7 @@
                     }
                 },
                 "rpg": {
-                    "@value": "Rpg Overlay",
+                    "@value": "RPG Overlay",
                     "desc": "Settings for the RPG overlay.",
                     "enabled": {
                         "@value": "Enable RPG Overlay",
