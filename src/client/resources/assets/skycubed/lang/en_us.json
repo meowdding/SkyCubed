@@ -48,7 +48,7 @@
                 },
                 "rpg": {
                     "@value": "Rpg Overlay",
-                    "desc": "Settings for the rpg overlay.",
+                    "desc": "Settings for the RPG overlay.",
                     "enabled": {
                         "@value": "Enable RPG Overlay",
                         "desc": "Enables the RPG overlay, showing mana, health, and xp bars."
