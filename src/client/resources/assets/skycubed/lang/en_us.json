@@ -212,7 +212,7 @@
                 },
                 "npc": {
                     "@value": "NPC Dialogue Overlay",
-                    "desc": "Settings the NPC dialogue overlay.",
+                    "desc": "Settings for the NPC dialogue overlay.",
                     "enabled": {
                         "@value": "Enable NPC dialogue Overlay",
                         "desc": "If enabled the NPC messages will no longer go to chat but will instead go to an overlay."
