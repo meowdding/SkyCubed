@@ -19,7 +19,7 @@
             "general": {
                 "keybinds": {
                     "@value": "Keybinds",
-                    "desc": "SkyCubed uses the vanilla keybinds",
+                    "desc": "SkyCubed uses the vanilla keybinds.",
                     "text": "Open"
                 },
                 "notifications": {
@@ -28,8 +28,8 @@
                     "text": "Open"
                 },
                 "hidden_hud_elements": {
-                    "@value": "Hidden Hud Elements",
-                    "desc": "Allows you to hide certain elements of the Vanilla hud on your screen."
+                    "@value": "Hidden HUD Elements",
+                    "desc": "Allows you to hide certain elements of the Vanilla HUD on your screen."
                 },
                 "hidden_action_bar_widgets": {
                     "@value": "Hidden Action Bar Elements",
@@ -39,11 +39,11 @@
             "overlays": {
                 "@value": "Overlays",
                 "info": {
-                    "@value": "Info Hud Overlay",
-                    "desc": "Settings for the info hud overlay.",
+                    "@value": "Info HUD Overlay",
+                    "desc": "Settings for the info HUD overlay.",
                     "enabled": {
-                        "@value": "Enable Info Hud Overlay",
-                        "desc": "Enables the Info Hud overlay, show location, currency, time, and location specific info."
+                        "@value": "Enable Info HUD Overlay",
+                        "desc": "Enables the Info HUD overlay, show location, currency, time, and location specific info."
                     }
                 },
                 "rpg": {
@@ -65,7 +65,7 @@
                 "health": {
                     "enabled": {
                         "@value": "Enable Health Text Overlay",
-                        "desc": "Enables the health text overlay"
+                        "desc": "Enables the health text overlay."
                     },
                     "disabled": "Disabled",
                     "normal": "Enabled",
@@ -73,11 +73,11 @@
                 },
                 "mana": {
                     "@value": "Enable Mana Text Overlay",
-                    "desc": "Enables the mana text overlay"
+                    "desc": "Enables the mana text overlay."
                 },
                 "defense": {
                     "@value": "Enable Defense Text Overlay",
-                    "desc": "Enables the defense text overlay"
+                    "desc": "Enables the defense text overlay."
                 },
                 "sacks": {
                     "@value": "Sack Overlay",
@@ -211,8 +211,8 @@
                     }
                 },
                 "npc": {
-                    "@value": "Npc Dialogue Overlay",
-                    "desc": "Settings the npc dialogue overlay.",
+                    "@value": "NPC Dialogue Overlay",
+                    "desc": "Settings the NPC dialogue overlay.",
                     "enabled": {
                         "@value": "Enable NPC dialogue Overlay",
                         "desc": "If enabled the NPC messages will no longer go to chat but will instead go to an overlay."
@@ -232,7 +232,7 @@
                 },
                 "cold_overlay": {
                     "@value": "Cold Overlay Start",
-                    "desc": "The temperature at which the cold overlay starts appearing.\n§lNote: setting this to 0 will disable the cold overlay"
+                    "desc": "The temperature at which the cold overlay starts appearing.\n§lNote: Setting this to 0 will disable the cold overlay."
                 },
                 "movable_hotbar": {
                     "@value": "Movable Hotbar",
@@ -266,15 +266,15 @@
                 "@value": "Chat",
                 "chat_colors": {
                     "@value": "Chat Tab Colors",
-                    "desc": "Changes the color of the line next to a chat message to a color based on the message type"
+                    "desc": "Changes the color of the line next to a chat message to a color based on the message type."
                 },
                 "compact_chat": {
                     "@value": "Compact Chat",
-                    "desc": "Makes the chat more compact by removing old messages of similar type. ie. cooldowns or lists or other spammy messages but important messages"
+                    "desc": "Makes the chat more compact by removing old messages of similar type. ie. cooldowns or lists or other spammy messages but important messages."
                 },
                 "messages_to_clean": {
                     "@value": "Messages to Clean",
-                    "desc": "A list of message you would like to be removed from chat, these are written as regex patterns"
+                    "desc": "A list of message you would like to be removed from chat, these are written as regex patterns."
                 }
             },
             "items": {
