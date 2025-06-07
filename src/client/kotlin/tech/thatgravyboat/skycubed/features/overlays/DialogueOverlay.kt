@@ -176,7 +176,7 @@ object DialogueOverlay : Overlay {
                 backgroundBox,
                 Displays.padding(5, Displays.component(name, maxWidth))
             )
-        ) { translate(60f, -8f, 0f) }
+        ) { translate(60f.takeIf { entityDisplay != null } ?: 8f, -8f, 0f) }
 
         val npcTextDisplay = Displays.component(message, maxWidth)
 
