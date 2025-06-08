@@ -33,7 +33,7 @@ object HypixelCommands {
     }
 
     fun removeServerCommands(root: RootCommandNode<SharedSuggestionProvider>) {
-        if (!ChatConfig.modifyHxpielCommands) return
+        if (!ChatConfig.modifyHypixelCommands) return
         commands.forEach { command ->
             if (command.values.none { root.getChild(it) != null }) return@forEach
 
@@ -49,7 +49,7 @@ object HypixelCommands {
 
     @Subscription
     fun onCommandRegistration(event: RegisterCommandsEvent) {
-        if (!ChatConfig.modifyHxpielCommands) return
+        if (!ChatConfig.modifyHypixelCommands) return
         commands.forEach { command ->
             command.toCommand().forEach {
                 event.register(it)
