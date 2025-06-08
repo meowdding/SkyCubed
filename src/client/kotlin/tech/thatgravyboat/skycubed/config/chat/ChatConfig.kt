@@ -7,6 +7,10 @@ object ChatConfig : CategoryKt("chat") {
 
     override val name: TranslatableValue = Translated("skycubed.config.chat")
 
+    var modifyHxpielCommands by boolean(true) {
+        this.translation = "skycubed.config.chat.modify_commands"
+    }
+
     var chatColors by boolean(true) {
         this.translation = "skycubed.config.chat.chat_colors"
     }

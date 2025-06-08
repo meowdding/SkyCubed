@@ -264,6 +264,13 @@
             },
             "chat": {
                 "@value": "Chat",
+                "modify_commands": {
+                    "@value": "Modify hypixel commands",
+                    "desc": [
+                        "Modifies some hypixel commands to add tab completion.",
+                        "<yellow>Toggling will require a server swap to apply changes!</yellow>"
+                    ]
+                },
                 "chat_colors": {
                     "@value": "Chat Tab Colors",
                     "desc": "Changes the color of the line next to a chat message to a color based on the message type."
