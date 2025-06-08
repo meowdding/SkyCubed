@@ -63,38 +63,97 @@
     {
         "values": [ "g", "guild" ],
         "children": [
-            "top",
-            "toggle",
-            "tagcolor",
-            "tag",
-            "slow",
-            "settings",
-            "rename",
-            "quest",
-            "permissions",
-            "party",
-            "onlinemode",
-            "online",
-            "officerchat",
-            "notifications",
-            "mypermissions",
-            "motd",
-            "menu",
-            "members",
-            "log",
-            "leave",
-            "list",
-            "info",
-            "history",
-            "help",
-            "discord",
-            "disband",
-            "create",
-            "chat",
-            "accept",
-            "confirm",
             {
-                "values": [ "invite" ],
+                "name": "arg",
+                "greedy": true,
+                "suggestions": [
+                    "toggle",
+                    "slow",
+                    "settings",
+                    "quest",
+                    "permissions",
+                    "party",
+                    "onlinemode",
+                    "online",
+                    "notifications",
+                    "mypermissions",
+                    "menu",
+                    "members",
+                    "log",
+                    "leave",
+                    "list",
+                    "info",
+                    "history",
+                    "help",
+                    "discord",
+                    "disband",
+                    "confirm"
+                ]
+            },
+            {
+                "values": [
+                    "motd",
+                    "tag",
+                    "tagcolor"
+                ],
+                "children": [
+                    {
+                        "name": "args",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "top"
+                ],
+                "children": [
+                    {
+                        "name": "page",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "rename",
+                    "create"
+                ],
+                "children": [
+                    {
+                        "name": "name",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "chat",
+                    "officerchat"
+                ],
+                "children": [
+                    {
+                        "name": "message",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "join"
+                ],
+                "children": [
+                    {
+                        "name": "guild",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "invite",
+                    "accept"
+                ],
                 "children": [
                     {
                         "name": "player"
@@ -162,7 +221,10 @@
                     "scarleton",
                     "garden",
                     "jerry", "winter", "workshop",
-                    "backwater", "bayou"
+                    "backwater",
+                    "bayou",
+                    "galatea",
+                    "murkwater"
                 ]
             }
         ]
