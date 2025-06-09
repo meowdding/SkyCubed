@@ -117,6 +117,10 @@ class DungeonMap(val instance: DungeonInstance) {
         var index = 0
         mapData.decorations.forEach { decoration ->
             index = this.instance.applyOffset(index)
+            if (index >= instance.players.size) {
+                SkyCubed.error("Requested index $index is out of bounds for player list length ${this.instance.players.size}")
+                return@forEach
+            }
             val player = instance.players[index] ?: return@forEach
             index++
             with(decoration) {
@@ -351,7 +355,7 @@ class DungeonMap(val instance: DungeonInstance) {
             ) as MapPosition // new vector may not be needed since convertTo creates a new instance anyway (most times)?
 
             doorPositions.entries.forEach doors@{ (orientation, position) ->
-                val doorType = DungeonDoorType.getByColor(mapData.colorAt(mapPosition.copy().add(position), true)) ?: return@doors
+                val doorType = DungeonDoorType.getByColor(mapData.colorAt(mapPosition.copy().add(position))) ?: return@doors
 
                 doors.find { it.isAt(orientation, mapPosition) }?.let { door ->
                     door.type = doorType
