@@ -74,6 +74,7 @@ dependencies {
     ksp(libs.meowdding.ktcodecs)
 
     minecraft(libs.minecraft)
+    @Suppress("UnstableApiUsage")
     mappings(loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-1.21.3:2024.12.07@zip")
@@ -89,7 +90,7 @@ dependencies {
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
     modImplementation(libs.meowdding.patches)
-    modImplementation(libs.meowdding.lib) { isTransitive = false }
+    modImplementation(libs.meowdding.lib)
 
     modImplementation(libs.rei) { isTransitive = false }
 
@@ -100,7 +101,7 @@ dependencies {
     include(libs.rlib)
     include(libs.olympus)
     include(libs.meowdding.patches)
-    include(libs.meowdding.lib) { isTransitive = false }
+    include(libs.meowdding.lib)
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
