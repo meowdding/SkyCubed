@@ -27,6 +27,11 @@
                     "desc": "SkyCubed has a notification system, you can click the button below to view past notifications, you can also find a notification button in the pause menu.",
                     "text": "Open"
                 },
+                "sack_hud": {
+                    "@value": "Sack HUD",
+                    "desc": "SkyCubed has a sack HUD, you can click the button below to view the sack HUD settings.",
+                    "text": "Open"
+                },
                 "hidden_hud_elements": {
                     "@value": "Hidden HUD Elements",
                     "desc": "Allows you to hide certain elements of the Vanilla HUD on your screen."

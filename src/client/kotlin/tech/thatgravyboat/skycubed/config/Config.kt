@@ -16,6 +16,7 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
+import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
 
 object Config : ConfigKt("skycubed/config") {
 
@@ -81,6 +82,14 @@ object Config : ConfigKt("skycubed/config") {
             this.text = "Open"
             this.onClick {
                 McClient.setScreen(NotificationsScreen())
+            }
+        }
+
+        button {
+            this.title = "skycubed.config.general.sack_hud"
+            this.text = "Open"
+            this.onClick {
+                McClient.setScreen(SackHudEditScreen())
             }
         }
     }
