@@ -95,7 +95,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 <summary>Items Config</summary>
 
 - Item Bars
-    - Adds durability bars to items like drill fuel and snowballs in snow launchers.
+    - Adds durability bars to items like drill to show fuel percentage and for snowballs in snow launchers.
 - Cooldowns
     - Applies the vanilla cooldown effect to items with cooldowns, like the Grappling Hook.
 </details>
