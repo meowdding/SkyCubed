@@ -106,7 +106,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 - Modify Hypixel Commands
   - Adds Tab completion to various Hypixel commands.
 - Chat Colors
-  - Changes the color of chat messages based on their type, such as private messages, guild messages, system messages, and public messages.
+  - Changes the color of the tab next to chat messages based on their type, such as private messages, guild messages, system messages, and public messages.
 - Compact Chat
   - Compacts certain chat messages to reduce clutter, such as Hypixel experience gains, cooldowns, and pickaxe abilities.
 - Messages to clean
