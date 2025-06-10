@@ -119,7 +119,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 - Notifications
   - Customizable notifications for various events, actions, and general time sensitive messages.
   - Will show up as a toast notification in the top right corner of the screen.
-  - You can view all notifications in the SkyCubed Notifications screen.
+  - You can view all notifications in the SkyCubed Notifications screen, which can be found on the top right of the escape menu.
 </details>
 
 <details>
