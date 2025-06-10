@@ -88,7 +88,8 @@ dependencies {
     modImplementation(libs.rconfigkt) { isTransitive = false }
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
-    modImplementation(libs.meowdding.lib)
+    modImplementation(libs.meowdding.patches)
+    modImplementation(libs.meowdding.lib) { isTransitive = false }
 
     modImplementation(libs.rei) { isTransitive = false }
 
@@ -98,7 +99,8 @@ dependencies {
     include(libs.rconfigkt) { isTransitive = false }
     include(libs.rlib)
     include(libs.olympus)
-    include(libs.meowdding.lib)
+    include(libs.meowdding.patches)
+    include(libs.meowdding.lib) { isTransitive = false }
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)

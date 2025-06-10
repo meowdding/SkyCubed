@@ -44,6 +44,7 @@ object Maps {
             runCatching {
                 TYPES.forEach { type ->
                     val file = this.javaClass.getResourceAsStream("/repo/maps/$type.jsonc")?.readJsonc<JsonElement>() ?: return@runCatching
+                    SkyCubed.repoPatcher?.patch(file, "maps/$type")
                     val result = Codec.either(IslandData.CODEC, IslandData.CODEC.listOf())
                         .xmap({ it.map(::listOf, Function.identity()) }, { Either.right(it) })
                         .parse(JsonOps.INSTANCE, file)
