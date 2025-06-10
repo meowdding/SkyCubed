@@ -35,6 +35,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>General Config</summary>
+
 - Hidden Actionbar Widgets
 - Hidden Hud Elements
 - Quick Access to other SkyCubed configs
@@ -45,6 +46,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>Overlay Config</summary>
+
 - Info Overlay
   - Shows generalised information about your current location centered at the top of the screen.
 - RPG Overlay
@@ -81,6 +83,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>Screens Config</summary>
+
 - Show Equipment
   - Like armor, equipment will show up next to your player in the inventory.
 - Wardrobe Overlay
@@ -89,6 +92,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>Items Config</summary>
+
 - Item Bars
     - Adds durability bars to items like drill fuel and snowballs in snow launchers.
 - Cooldowns
@@ -97,6 +101,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>Chat Config</summary>
+
 - Modify Hypixel Commands
   - Adds Tab completion to various Hypixel commands.
 - Chat Colors
@@ -109,6 +114,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>Notifications Config</summary>
+
 - Notifications
   - Customizable notifications for various events, such as item pickups, achievements, and more.
   - Will show up as a toast notification in the top right corner of the screen.
@@ -117,6 +123,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 
 <details>
 <summary>Rendering Config</summary>
+
 - Show own Nametag
   - While in f3, displays your own nametag above your player.
 </details>
