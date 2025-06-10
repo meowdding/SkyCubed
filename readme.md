@@ -61,7 +61,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 - Trophy Fish Overlay
   - Displays the amount of each trophy fish you have caught.
   - Has different toggles to show not unlocked ones, a checkmark or cross for caught/not caught, and more.
-  - Best used with the [SkyBlock Profile Viewer](https://modrinth.com/mod/skyblock-profile-viewer) mod to update your Trophy Fish.
+  - Best used with the [SkyBlock Profile Viewer](https://modrinth.com/mod/skyblock-profile-viewer) mod to update your data when out of sync.
 - Map Overlay
   - Displays a map of the current area you are in.
   - Highlights NPCs and other important locations.
