@@ -55,39 +55,43 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
             lastMap = map.get()
         }
 
-        Layouts.column()
-            .withChild(Widgets.frame {
+        Layouts.column().withChild(
+            Widgets.frame {
                 it.withTexture(UIConstants.MODAL_HEADER)
                 it.withSize(this.width, 30)
                 it.withContentMargin(5)
                 it.withEqualSpacing(Orientation.HORIZONTAL)
 
                 it.withContents { contents ->
+                    contents.addChild(
+                        Widgets.textInput(search) { input ->
+                            input.withPlaceholder("Search POIs...")
+                            input.withSize(150, 20)
+                        },
+                    )
 
-                    contents.addChild(Widgets.textInput(search) { input ->
-                        input.withPlaceholder("Search POIs...")
-                        input.withSize(150, 20)
-                    })
-
-                    contents.addChild(Widgets.dropdown(
-                        map,
-                        Maps.getMaps(),
-                        { map -> Text.translatable("maps.skycubed.$map") },
-                        { button -> button.withSize(150, 20) },
-                        { }
-                    ))
+                    contents.addChild(
+                        Widgets.dropdown(
+                            map,
+                            Maps.getMaps(),
+                            { map -> Text.translatable("skycubed.map.$map") },
+                            { button -> button.withSize(150, 20) },
+                            { },
+                        ),
+                    )
                 }
-            })
-            .withChild(MapsWidget(
+            },
+        ).withChild(
+            MapsWidget(
                 map = map.get(),
                 xOffset = xOffset,
                 zOffset = zOffset,
                 scale = scale,
                 filter = { it.enabled && it.filter(search.get()) && (search.get().isNotEmpty() || it.significant) },
                 width = this.width,
-                height = this.height - 30
-            ))
-            .build(this::addRenderableWidget)
+                height = this.height - 30,
+            ),
+        ).build(this::addRenderableWidget)
     }
 
     override fun renderBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
