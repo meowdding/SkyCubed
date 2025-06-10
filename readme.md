@@ -37,7 +37,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 <summary>General Config</summary>
 
 - Hidden Actionbar Widgets
-- Hidden Hud Elements
+- Hidden HUD Elements
 - Quick Access to other SkyCubed configs
   - Minecraft Keybinds Screen
   - SkyCubed Notifications
@@ -73,6 +73,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
   - Displays the items you have picked up or dropped on screen.
   - Has an option for a compact view, sack items, and more.
 - Commissions Overlay
+    - Displays your current commissions and their progress on screen.
 - NPC Overlay
   - Displays NPC messages on screen like in other games.
 - Cold Overlay
