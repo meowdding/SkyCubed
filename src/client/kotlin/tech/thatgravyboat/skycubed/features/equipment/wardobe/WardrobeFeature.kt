@@ -15,9 +15,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 
 @Module
-
-
-
 object WardrobeFeature {
 
     private val regex = Regex("Wardrobe \\((?<currentPage>\\d+)/\\d+\\)")
