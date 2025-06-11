@@ -130,11 +130,20 @@ class DungeonInstance(val serverId: String) {
         return (McPlayer.self?.position() ?: Vec3.ZERO).let { WorldPosition(it.x.toInt(), it.z.toInt(), this) }
     }
 
-    inline fun <T> runCatching(runnable: () -> T) {
+    inline fun runCatching(runnable: () -> Unit) {
         try {
             runnable()
         } catch (throwable: Throwable) {
             SkyCubed.warn("Uncaught exception!", throwable)
         }
+    }
+
+    inline fun <T> runCatching(runnable: () -> T): T? {
+        try {
+            return runnable()
+        } catch (throwable: Throwable) {
+            SkyCubed.warn("Uncaught exception!", throwable)
+        }
+        return null
     }
 }

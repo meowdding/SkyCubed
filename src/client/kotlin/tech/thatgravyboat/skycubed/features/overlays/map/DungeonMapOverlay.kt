@@ -28,17 +28,20 @@ object DungeonMapOverlay {
     fun render(graphics: GuiGraphics) {
         val instance = DungeonFeatures.currentInstance ?: return
         val map = instance.map ?: return
-        instance.runCatching {
-            graphics.blitSprite(
-                RenderType::guiTextured, backgroundBox,
-                0, 0,
-                90, 90,
-            )
 
-            graphics.pushPop {
-                translate(6f, 6f, 0f)
-                scale(0.6f, 0.6f, 1.0f)
+        graphics.enableScissor(0, 0, 90, 90)
 
+        graphics.blitSprite(
+            RenderType::guiTextured, backgroundBox,
+            0, 0,
+            90, 90,
+        )
+
+        graphics.pushPop {
+            translate(6f, 6f, 0f)
+            scale(0.6f, 0.6f, 1.0f)
+
+            instance.runCatching {
                 map.doors.forEach { door ->
                     map.renderDoor(graphics, door)
                 }
@@ -46,21 +49,23 @@ object DungeonMapOverlay {
                     map.renderRoom(graphics, room)
                 }
             }
+        }
 
-            instance.players.filterNotNull().forEach { player ->
-                val skin = player.getPlayer()?.skin ?: return@forEach
-                val pos = player.position.convertTo<RenderPosition>()
+        instance.players.filterNotNull().forEach { player ->
+            val skin = player.getPlayer()?.skin ?: return@forEach
+            val pos = instance.runCatching<RenderPosition> { player.position.convertTo<RenderPosition>() } ?: return@forEach
 
-                graphics.pushPop {
-                    translate(6f, 6f, 0f)
-                    translate((pos.x + 8f) * 0.6f, (pos.y + 8f) * 0.6f, 100f)
-                    scale(0.8f, 0.8f, 1f)
-                    rotateAround(Axis.ZP.rotationDegrees(180f + player.rotation.toFloat()), 0f, 0f, 0f)
-                    translate(-4f, -4f, 100f)
-                    PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
-                }
+            graphics.pushPop {
+                translate(6f, 6f, 0f)
+                translate((pos.x + 8f) * 0.6f, (pos.y + 8f) * 0.6f, 100f)
+                scale(0.8f, 0.8f, 1f)
+                rotateAround(Axis.ZP.rotationDegrees(180f + player.rotation.toFloat()), 0f, 0f, 0f)
+                translate(-4f, -4f, 100f)
+                PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
             }
         }
+
+        graphics.disableScissor()
     }
 
     private fun DungeonMap.renderDoor(graphics: GuiGraphics, door: DungeonDoor) {
@@ -118,6 +123,6 @@ object DungeonMapOverlay {
     }
 
     private fun GuiGraphics.color(x: Int, y: Int, width: Int, height: Int, color: Int) {
-        this.fill(x, y, x + width, y + height, color)
+        this.fill(x, y, x + width, y + height, color.or(0xFF000000.toInt()))
     }
 }
