@@ -65,7 +65,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
     @Subscription
     @TimePassed("5t")
-    fun onTick(event: TickEvent) {
+    fun onTick(event: TickEvent) = instance.runCatching {
         if (McPlayer.self == null) return
         val stack = McPlayer.inventory[8]
         val isMap = stack.`is`(Items.FILLED_MAP)

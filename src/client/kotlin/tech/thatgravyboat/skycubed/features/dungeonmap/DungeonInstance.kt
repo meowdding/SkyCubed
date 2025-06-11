@@ -57,7 +57,7 @@ class DungeonInstance(val serverId: String) {
     }
 
     @Subscription(Subscription.LOWEST)
-    fun onTabWidgetChange(event: TabListChangeEvent) {
+    fun onTabWidgetChange(event: TabListChangeEvent) = runCatching {
         var index = 0
         DungeonAPI.teammates.filterNot { it === DungeonAPI.ownPlayer }.forEach { player ->
             if (index >= players.size) {
@@ -89,10 +89,10 @@ class DungeonInstance(val serverId: String) {
 
     @Subscription
     @OnlyWidget(TabWidget.PUZZLES)
-    fun onPuzzleWidgetChange(event: TabWidgetChangeEvent) {
+    fun onPuzzleWidgetChange(event: TabWidgetChangeEvent) = runCatching {
         puzzles = puzzles ?: createPuzzlesArray(event)
 
-        val localPuzzles = puzzles ?: return
+        val localPuzzles = puzzles ?: return@runCatching
 
         event.new.drop(1).forEachIndexed { index, puzzle ->
             if (puzzle.equals(localPuzzles[index], ignoreCase = true)) {
@@ -130,4 +130,11 @@ class DungeonInstance(val serverId: String) {
         return (McPlayer.self?.position() ?: Vec3.ZERO).let { WorldPosition(it.x.toInt(), it.z.toInt(), this) }
     }
 
+    inline fun <T> runCatching(runnable: () -> T) {
+        try {
+            runnable()
+        } catch (throwable: Throwable) {
+            SkyCubed.warn("Uncaught exception!", throwable)
+        }
+    }
 }

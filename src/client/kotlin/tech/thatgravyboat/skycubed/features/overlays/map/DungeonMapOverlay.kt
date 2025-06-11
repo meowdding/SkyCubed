@@ -28,36 +28,37 @@ object DungeonMapOverlay {
     fun render(graphics: GuiGraphics) {
         val instance = DungeonFeatures.currentInstance ?: return
         val map = instance.map ?: return
-
-        graphics.blitSprite(
-            RenderType::guiTextured, backgroundBox,
-            0, 0,
-            90, 90
-        )
-
-        graphics.pushPop {
-            translate(6f, 6f, 0f)
-            scale(0.6f, 0.6f, 1.0f)
-
-            map.doors.forEach { door ->
-                map.renderDoor(graphics, door)
-            }
-            map.roomMap.flatten().distinct().filterNotNull().forEach { room ->
-                map.renderRoom(graphics, room)
-            }
-        }
-
-        instance.players.filterNotNull().forEach { player ->
-            val skin = player.getPlayer()?.skin ?: return@forEach
-            val pos = player.position.convertTo<RenderPosition>()
+        instance.runCatching {
+            graphics.blitSprite(
+                RenderType::guiTextured, backgroundBox,
+                0, 0,
+                90, 90,
+            )
 
             graphics.pushPop {
                 translate(6f, 6f, 0f)
-                translate((pos.x + 8f) * 0.6f, (pos.y + 8f) * 0.6f, 100f)
-                scale(0.8f, 0.8f, 1f)
-                rotateAround(Axis.ZP.rotationDegrees(180f + player.rotation.toFloat()), 0f, 0f, 0f)
-                translate(-4f, -4f, 100f)
-                PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
+                scale(0.6f, 0.6f, 1.0f)
+
+                map.doors.forEach { door ->
+                    map.renderDoor(graphics, door)
+                }
+                map.roomMap.flatten().distinct().filterNotNull().forEach { room ->
+                    map.renderRoom(graphics, room)
+                }
+            }
+
+            instance.players.filterNotNull().forEach { player ->
+                val skin = player.getPlayer()?.skin ?: return@forEach
+                val pos = player.position.convertTo<RenderPosition>()
+
+                graphics.pushPop {
+                    translate(6f, 6f, 0f)
+                    translate((pos.x + 8f) * 0.6f, (pos.y + 8f) * 0.6f, 100f)
+                    scale(0.8f, 0.8f, 1f)
+                    rotateAround(Axis.ZP.rotationDegrees(180f + player.rotation.toFloat()), 0f, 0f, 0f)
+                    translate(-4f, -4f, 100f)
+                    PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
+                }
             }
         }
     }
@@ -91,7 +92,7 @@ object DungeonMapOverlay {
 
             iconed = true
 
-            val icon = when(room.checkmark) {
+            val icon = when (room.checkmark) {
                 Checkmark.OPENED -> null
                 Checkmark.CLEARED -> whiteCheckmark
                 Checkmark.FAILED -> cross
@@ -109,7 +110,7 @@ object DungeonMapOverlay {
                     graphics.blitSprite(
                         RenderType::guiTextured, location,
                         0, 0,
-                        16, 16
+                        16, 16,
                     )
                 }
             }
