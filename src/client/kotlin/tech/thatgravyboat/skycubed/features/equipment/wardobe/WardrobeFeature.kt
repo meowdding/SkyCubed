@@ -15,6 +15,9 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 
 @Module
+
+
+
 object WardrobeFeature {
 
     private val regex = Regex("Wardrobe \\((?<currentPage>\\d+)/\\d+\\)")
@@ -83,6 +86,5 @@ object WardrobeFeature {
         isEditing = false
     }
 
-    private fun Screen.isEnabled() =
-        this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
+    private fun Screen.isEnabled() = this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
 }
