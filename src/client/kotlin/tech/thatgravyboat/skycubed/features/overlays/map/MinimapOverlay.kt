@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
+import earth.terrarium.olympus.client.ui.context.ContextMenu
 import earth.terrarium.olympus.client.utils.State
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
@@ -40,6 +41,16 @@ object MinimapOverlay : Overlay {
         }
     }
 
+    override fun onRightClick() = ContextMenu.open {
+        it.button(Text.of("${if (MapOverlayConfig.rotateAroundPlayer) "Disable" else "Enable"} Rotation")) {
+            MapOverlayConfig.rotateAroundPlayer = !MapOverlayConfig.rotateAroundPlayer
+        }
+        it.divider()
+        it.dangerButton(Text.of("Reset Position")) {
+            position.reset()
+        }
+    }
+
     @Subscription
     fun onChange(event: IslandChangeEvent) {
         display = getMapsForLocationOrNull()?.let {
@@ -47,12 +58,13 @@ object MinimapOverlay : Overlay {
                 backgroundBox,
                 Displays.center(90, 90, Displays.renderable(MapsWidget(
                     it,
-                    GettingState.of { McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x },
-                    GettingState.of { McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z },
+                    GettingState.of { McPlayer.self!!.position().x + Maps.getCurrentOffset().x },
+                    GettingState.of { McPlayer.self!!.position().z + Maps.getCurrentOffset().z },
                     State.of(1f),
                     { false },
                     86,
-                    86
+                    86,
+                    GettingState.of { MapOverlayConfig.rotateAroundPlayer }
                 )))
             )
         }
