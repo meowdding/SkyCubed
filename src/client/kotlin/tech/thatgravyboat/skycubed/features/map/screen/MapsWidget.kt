@@ -22,16 +22,18 @@ import tech.thatgravyboat.skycubed.utils.setValue
 
 class MapsWidget(
     map: String?,
-    xOffset: State<Int> = State.of(McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x),
-    zOffset: State<Int> = State.of(McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z),
+    xOffset: State<Float> = State.of((McPlayer.self!!.position().x + Maps.getCurrentOffset().x.toDouble()).toFloat()),
+    zOffset: State<Float> = State.of((McPlayer.self!!.position().z + Maps.getCurrentOffset().z.toDouble()).toFloat()),
     scale: State<Float> = State.of(1f),
 
     private val filter: (Poi) -> Boolean = Poi::enabled,
     width: Int,
     height: Int,
+
+    val rotate: State<Boolean> = State.of(false)
 ) : BaseWidget(width, height) {
 
-    private var xOffset: Int by xOffset
+    private var xOffset: Float by xOffset
     private var zOffset by zOffset
     private var scale by scale
 
@@ -47,7 +49,9 @@ class MapsWidget(
             graphics.pushPop {
                 translate(x.toFloat(), y.toFloat(), 0f)
                 scale(scale, scale, 1f)
-                translate(-xOffset.toFloat(), -zOffset.toFloat(), 0f)
+                translate(-xOffset, -zOffset, 0f)
+
+                if (rotate.get()) rotateAround(Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot), xOffset + width / 2, zOffset + height / 2, 0.0F)
 
                 maps.forEach { map ->
                     graphics.pushPop {
@@ -57,7 +61,9 @@ class MapsWidget(
 
                         val default = map.getDefaultTexture()
                         val texture = map.getTexture()
+
                         if (default != texture) {
+
                             graphics.blit(
                                 RenderType::guiTextured,
                                 default.getId(),
@@ -94,9 +100,9 @@ class MapsWidget(
                 if (showPlayer) {
                     graphics.pushPop {
                         val offset = Maps.getCurrentPlayerOffset()
-                        val x = McPlayer.self!!.blockX + offset.x
-                        val z = McPlayer.self!!.blockZ + offset.z
-                        translate(x + width / 2f, z + height / 2f, 0f)
+                        val x = McPlayer.self!!.x + offset.x
+                        val z = McPlayer.self!!.z + offset.z
+                        translate(x + width / 2.0, z + height / 2.0, 0.0)
                         val profile = McPlayer.skin ?: return
                         scale(1f / scale, 1f / scale, 1f)
 
@@ -111,8 +117,8 @@ class MapsWidget(
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, dragX: Double, dragY: Double): Boolean {
         if (button == InputConstants.MOUSE_BUTTON_LEFT) {
-            xOffset -= (dragX.toInt() / scale).toInt()
-            zOffset -= (dragY.toInt() / scale).toInt()
+            xOffset -= (dragX / scale).toFloat()
+            zOffset -= (dragY / scale).toFloat()
             return true
         }
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY)
@@ -123,8 +129,8 @@ class MapsWidget(
         scale += scrollY.toFloat() / 5
         scale = scale.coerceAtLeast(0.5f).coerceAtMost(5f)
 
-        xOffset -= (mouseX / scale - mouseX / oScale).toInt()
-        zOffset -= (mouseY / scale - mouseY / oScale).toInt()
+        xOffset -= (mouseX / scale - mouseX / oScale).toFloat()
+        zOffset -= (mouseY / scale - mouseY / oScale).toFloat()
         return true
     }
 

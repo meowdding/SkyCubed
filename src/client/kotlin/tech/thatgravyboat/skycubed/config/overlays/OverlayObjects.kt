@@ -113,6 +113,11 @@ object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
     var enabled by boolean(false) {
         this.translation = "skycubed.config.overlays.map.enabled"
     }
+
+    var rotateAroundPlayer by boolean(false) {
+        this.translation = "skycubed.config.overlays.map.rotate"
+    }
+
 }
 
 object DungeonMapOverlayConfig : OverlayConfig("Edit Dungeon Map Overlay") {

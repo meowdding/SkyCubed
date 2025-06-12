@@ -117,6 +117,10 @@
                     "enabled": {
                         "@value": "Enable minimap Overlay",
                         "desc": "Enables the minimap overlay, showing where you are on SkyBlock."
+                    },
+                    "rotate": {
+                        "@value": "Rotate Map",
+                        "desc": "Rotate the map around the player."
                     }
                 },
                 "dungeonmap": {

@@ -47,12 +47,13 @@ object MinimapOverlay : Overlay {
                 backgroundBox,
                 Displays.center(90, 90, Displays.renderable(MapsWidget(
                     it,
-                    GettingState.of { McPlayer.self!!.blockPosition().x + Maps.getCurrentOffset().x },
-                    GettingState.of { McPlayer.self!!.blockPosition().z + Maps.getCurrentOffset().z },
+                    GettingState.of { (McPlayer.self!!.position().x + Maps.getCurrentOffset().x.toDouble()).toFloat() },
+                    GettingState.of { (McPlayer.self!!.position().z + Maps.getCurrentOffset().z.toDouble()).toFloat() },
                     State.of(1f),
                     { false },
                     86,
-                    86
+                    86,
+                    GettingState.of { MapOverlayConfig.rotateAroundPlayer }
                 )))
             )
         }
