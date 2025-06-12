@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.overlays.map
 
+import earth.terrarium.olympus.client.ui.context.ContextMenu
 import earth.terrarium.olympus.client.utils.State
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
@@ -37,6 +38,16 @@ object MinimapOverlay : Overlay {
             display!!.render(graphics)
         } else if (DungeonMapOverlay.canRender) {
             DungeonMapOverlay.render(graphics)
+        }
+    }
+
+    override fun onRightClick() = ContextMenu.open {
+        it.button(Text.of("${if (MapOverlayConfig.rotateAroundPlayer) "Disable" else "Enable"} Rotation")) {
+            MapOverlayConfig.rotateAroundPlayer = !MapOverlayConfig.rotateAroundPlayer
+        }
+        it.divider()
+        it.dangerButton(Text.of("Reset Position")) {
+            position.reset()
         }
     }
 

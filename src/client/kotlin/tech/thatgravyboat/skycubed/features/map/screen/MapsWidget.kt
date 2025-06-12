@@ -49,7 +49,7 @@ class MapsWidget(
             graphics.pushPop {
                 translate(x.toFloat(), y.toFloat(), 0f)
                 scale(scale, scale, 1f)
-                translate(-xOffset, -zOffset, 0.0)
+                translate(-xOffset.toFloat(), -zOffset.toFloat(), 0.0f)
 
                 if (rotate.get()) rotateAround(
                     Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
