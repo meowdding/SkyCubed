@@ -22,8 +22,8 @@ import tech.thatgravyboat.skycubed.utils.setValue
 
 class MapsWidget(
     map: String?,
-    xOffset: State<Float> = State.of((McPlayer.self!!.position().x + Maps.getCurrentOffset().x.toDouble()).toFloat()),
-    zOffset: State<Float> = State.of((McPlayer.self!!.position().z + Maps.getCurrentOffset().z.toDouble()).toFloat()),
+    xOffset: State<Double> = State.of(McPlayer.self!!.position().x + Maps.getCurrentOffset().x),
+    zOffset: State<Double> = State.of(McPlayer.self!!.position().z + Maps.getCurrentOffset().z),
     scale: State<Float> = State.of(1f),
 
     private val filter: (Poi) -> Boolean = Poi::enabled,
@@ -33,7 +33,7 @@ class MapsWidget(
     val rotate: State<Boolean> = State.of(false)
 ) : BaseWidget(width, height) {
 
-    private var xOffset: Float by xOffset
+    private var xOffset by xOffset
     private var zOffset by zOffset
     private var scale by scale
 
@@ -49,15 +49,20 @@ class MapsWidget(
             graphics.pushPop {
                 translate(x.toFloat(), y.toFloat(), 0f)
                 scale(scale, scale, 1f)
-                translate(-xOffset, -zOffset, 0f)
+                translate(-xOffset, -zOffset, 0.0)
 
-                if (rotate.get()) rotateAround(Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot), xOffset + width / 2, zOffset + height / 2, 0.0F)
+                if (rotate.get()) rotateAround(
+                    Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
+                    (xOffset + width / 2).toFloat(),
+                    (zOffset + height / 2).toFloat(),
+                    0.0f
+                )
 
                 maps.forEach { map ->
                     graphics.pushPop {
-                        val mapX = map.topX + width / 2f + map.offsetX
-                        val mapY = map.topY + height / 2f + map.offsetY
-                        translate(mapX, mapY, 0f)
+                        val mapX = map.topX + width / 2.0 + map.offsetX
+                        val mapY = map.topY + height / 2.0 + map.offsetY
+                        translate(mapX, mapY, 0.0)
 
                         val default = map.getDefaultTexture()
                         val texture = map.getTexture()
@@ -117,8 +122,8 @@ class MapsWidget(
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, dragX: Double, dragY: Double): Boolean {
         if (button == InputConstants.MOUSE_BUTTON_LEFT) {
-            xOffset -= (dragX / scale).toFloat()
-            zOffset -= (dragY / scale).toFloat()
+            xOffset -= dragX / scale
+            zOffset -= dragY / scale
             return true
         }
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY)
@@ -126,11 +131,11 @@ class MapsWidget(
 
     override fun mouseScrolled(mouseX: Double, mouseY: Double, scrollX: Double, scrollY: Double): Boolean {
         val oScale = scale
-        scale += scrollY.toFloat() / 5
+        scale += (scrollY / 5).toFloat()
         scale = scale.coerceAtLeast(0.5f).coerceAtMost(5f)
 
-        xOffset -= (mouseX / scale - mouseX / oScale).toFloat()
-        zOffset -= (mouseY / scale - mouseY / oScale).toFloat()
+        xOffset -= mouseX / scale - mouseX / oScale
+        zOffset -= mouseY / scale - mouseY / oScale
         return true
     }
 

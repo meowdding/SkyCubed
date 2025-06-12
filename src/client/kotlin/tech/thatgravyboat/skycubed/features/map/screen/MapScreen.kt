@@ -25,22 +25,22 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val xOffset = ResettingState.of {
         if (map.get() == Maps.getMapsForLocationOrNull()) {
-            (McPlayer.self!!.position().x + Maps.getCurrentOffset().x.toDouble()).toFloat()
+            McPlayer.self!!.position().x + Maps.getCurrentOffset().x
         } else {
             val maps = Maps.getMaps(map.get())
             val min = maps.minOfOrNull { it.topX } ?: 0
             val max = maps.maxOfOrNull { it.bottomX } ?: 0
-            (min + (max - min) / 2).toFloat()
+            min + (max - min) / 2.0
         }
     }
     private val zOffset = ResettingState.of {
         if (map.get() == Maps.getMapsForLocationOrNull()) {
-            (McPlayer.self!!.position().z + Maps.getCurrentOffset().z.toDouble()).toFloat()
+            McPlayer.self!!.position().z + Maps.getCurrentOffset().z
         } else {
             val maps = Maps.getMaps(map.get())
             val min = maps.minOfOrNull { it.topY } ?: 0
             val max = maps.maxOfOrNull { it.bottomY } ?: 0
-            (min + (max - min) / 2).toFloat()
+            min + (max - min) / 2.0
         }
     }
     private val scale = ResettingState.of {
