@@ -6,33 +6,35 @@ import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
 object OverlaysConfig : CategoryKt("overlays") {
 
-    override val name: TranslatableValue = Translated("config.skycubed.overlays.title")
+    override val name: TranslatableValue = Translated("skycubed.config.overlays")
 
     init {
         category(OverlayPositions)
 
-        obj("info", InfoHudOverlay) { this.translation = "config.skycubed.overlays.info" }
-        obj("rpg", RpgOverlay) { this.translation = "config.skycubed.overlays.rpg" }
-        obj("text", TextOverlays) { this.translation = "config.skycubed.overlays.text" }
-        obj("tablist", TabListOverlay) { this.translation = "config.skycubed.overlays.tablist" }
-        obj("sack", SackOverlayConfig) { this.translation = "config.skycubed.overlays.sacks" }
-        obj("map", MapOverlay) { this.translation = "config.skycubed.overlays.map" }
-        obj("pickupLog", PickupLogOverlay) { this.translation = "config.skycubed.overlays.pickuplog" }
-        obj("commissions", CommissionOverlay) { this.translation = "config.skycubed.overlays.commissions" }
-        obj("npc", NpcOverlay) { this.translation = "config.skycubed.overlays.npc" }
+        obj("info", InfoHudOverlayConfig) { this.translation = "skycubed.config.overlays.info" }
+        obj("rpg", RpgOverlayConfig) { this.translation = "skycubed.config.overlays.rpg" }
+        obj("text", TextOverlaysConfig) { this.translation = "skycubed.config.overlays.text" }
+        obj("tablist", TabListOverlayConfig) { this.translation = "skycubed.config.overlays.tablist" }
+        obj("sack", SackOverlayConfig) { this.translation = "skycubed.config.overlays.sacks" }
+        obj("trophyFish", TrophyFishOverlayConfig) { this.translation = "skycubed.config.overlays.trophy_fish" }
+        obj("map", MapOverlayConfig) { this.translation = "skycubed.config.overlays.map" }
+        obj("dungeonmap", DungeonMapOverlayConfig) { this.translation = "skycubed.config.overlays.dungeonmap" }
+        obj("pickupLog", PickupLogOverlayConfig) { this.translation = "skycubed.config.overlays.pickuplog" }
+        obj("commissions", CommissionOverlayConfig) { this.translation = "skycubed.config.overlays.commissions" }
+        obj("npc", NpcOverlayConfig) { this.translation = "skycubed.config.overlays.npc" }
     }
 
-    var coldOverlay by int("coldOverlay", 80) {
-        this.translation = "config.skycubed.overlays.coldOverlay"
+    var coldOverlay by int(80) {
+        this.translation = "skycubed.config.overlays.cold_overlay"
         this.range = 0..99
     }
 
-    var movableHotbar by boolean("movableHotbar", false) {
-        this.translation = "config.skycubed.overlays.movableHotbar"
+    var movableHotbar by boolean(false) {
+        this.translation = "skycubed.config.overlays.movable_hotbar"
     }
 
-    var windOverlay by boolean("windOverlay", false) {
-        this.translation = "config.skycubed.overlays.windOverlay"
+    var windOverlay by boolean(false) {
+        this.translation = "skycubed.config.overlays.wind_overlay"
     }
 }
 
@@ -41,5 +43,5 @@ enum class HealthDisplay : Translatable {
     NORMAL,
     EFFECTIVE;
 
-    override fun getTranslationKey(): String = "config.skycubed.overlays.healthDisplay.${name.lowercase()}"
+    override fun getTranslationKey(): String = "skycubed.config.overlays.health.${name.lowercase()}"
 }

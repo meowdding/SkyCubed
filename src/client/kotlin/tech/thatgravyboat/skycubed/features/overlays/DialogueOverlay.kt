@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import com.mojang.blaze3d.platform.InputConstants
+import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.*
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
@@ -30,12 +31,16 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skycubed.api.overlays.EditableProperty
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.config.overlays.NpcOverlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
+import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.math.max
 
+@Module
+@RegisterOverlay
 object DialogueOverlay : Overlay {
 
     private val regex = ComponentRegex("\\[NPC] (?<name>[\\w.\\s]+): (?<message>.+)")
@@ -55,10 +60,10 @@ object DialogueOverlay : Overlay {
     override val name: Component = Text.of("Dialogue")
     override val position: Position = Position()
     override val bounds: Pair<Int, Int> = 0 to 0
-    override val moveable: Boolean = false
+    override val properties: Collection<EditableProperty> = setOf()
     override val enabled: Boolean get() = config.enabled
 
-    private val config get() = NpcOverlay
+    private val config get() = NpcOverlayConfig
     private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 
@@ -171,7 +176,7 @@ object DialogueOverlay : Overlay {
                 backgroundBox,
                 Displays.padding(5, Displays.component(name, maxWidth))
             )
-        ) { translate(60f, -8f, 0f) }
+        ) { translate(60f.takeIf { entityDisplay != null } ?: 8f, -8f, 0f) }
 
         val npcTextDisplay = Displays.component(message, maxWidth)
 

@@ -22,6 +22,12 @@
                 "adapter": "kotlin",
                 "value": "tech.thatgravyboat.skycubed.SkyCubed"
             }
+        ],
+        "rei_client": [
+            {
+                "adapter": "kotlin",
+                "value": "tech.thatgravyboat.skycubed.compatibility.REICompatability"
+            }
         ]
     },
     "mixins": [
@@ -35,6 +41,6 @@
         "fabric-language-kotlin": ">=1.12.2",
         "fabric": "*",
         "minecraft": "1.21.5",
-        "resourcefulconfigkt": ">=3.5.4"
+        "resourcefulconfigkt": ">=3.5.9"
     }
 }

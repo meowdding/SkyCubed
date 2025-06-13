@@ -63,11 +63,18 @@ repositories {
     maven(url = "https://api.modrinth.com/maven")
     maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
     maven(url = "https://maven.nucleoid.xyz")
+    maven(url = "https://maven.shedaniel.me/")
     mavenLocal()
 }
 
 dependencies {
+    compileOnly(libs.meowdding.ktmodules)
+    ksp(libs.meowdding.ktmodules)
+    compileOnly(libs.meowdding.ktcodecs)
+    ksp(libs.meowdding.ktcodecs)
+
     minecraft(libs.minecraft)
+    @Suppress("UnstableApiUsage")
     mappings(loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-1.21.3:2024.12.07@zip")
@@ -82,7 +89,10 @@ dependencies {
     modImplementation(libs.rconfigkt) { isTransitive = false }
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
+    modImplementation(libs.meowdding.patches)
     modImplementation(libs.meowdding.lib)
+
+    modImplementation(libs.rei) { isTransitive = false }
 
     include(libs.hypixelapi)
     include(libs.skyblockapi)
@@ -90,15 +100,11 @@ dependencies {
     include(libs.rconfigkt) { isTransitive = false }
     include(libs.rlib)
     include(libs.olympus)
+    include(libs.meowdding.patches)
     include(libs.meowdding.lib)
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
-
-    compileOnly(libs.meowdding.ktmodules) { isTransitive = false }
-    ksp(libs.meowdding.ktmodules) { isTransitive = false }
-    compileOnly(libs.meowdding.ktcodecs)
-    ksp(libs.meowdding.ktcodecs)
 }
 
 compactingResources {

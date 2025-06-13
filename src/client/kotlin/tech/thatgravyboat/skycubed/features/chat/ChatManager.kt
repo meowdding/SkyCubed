@@ -1,9 +1,11 @@
 package tech.thatgravyboat.skycubed.features.chat
 
+import me.owdding.ktmodules.Module
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
 import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 
+@Module
 object ChatManager {
 
     private val compactMessage = mapOf(
@@ -13,26 +15,15 @@ object ChatManager {
         "friends_list" to Regex("^-*\\n *(?:<<)? Friends \\("),
         "pickaxe_ability" to Regex("^You used your .* Ability!"),
         "gifts" to Regex("Can't place gifts this close to spawn!|You cannot place a gift so close to an NPC!|This gift is for \\w+, sorry!"),
+        "implosion" to Regex("^Your Implosion hit \\d+ enem(y|ies) for [\\d,.]+ damage\\.$"),
     )
-
-    private var cleanMessages = ChatConfig.messagesToClean.get().map(::Regex)
-
-    init {
-        ChatConfig.messagesToClean.addListener { _, new ->
-            cleanMessages = new.mapNotNull {
-                runCatching { Regex(it) }.getOrNull()
-            }
-        }
-    }
 
     @Subscription
     fun onChatReceivedPre(event: ChatReceivedEvent.Pre) {
-        if (cleanMessages.isNotEmpty()) {
-            for (regex in cleanMessages) {
-                if (regex.find(event.text) != null) {
-                    event.cancel()
-                    return
-                }
+        for (regex in ChatConfig.messagesToClean) {
+            if (regex.find(event.text) != null) {
+                event.cancel()
+                return
             }
         }
     }

@@ -1,8 +1,11 @@
 package tech.thatgravyboat.skycubed.config.notifications
 
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
 import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
 object NotificationsConfig : CategoryKt("notifications") {
+
+    override val name: TranslatableValue = Translated("skycubed.config.notifications")
 
     init {
         separator {
@@ -12,11 +15,11 @@ object NotificationsConfig : CategoryKt("notifications") {
     }
 
     val friendJoinLeave = obj("friendJoinLeave", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.friendJoinLeave"
+        this.translation = "skycubed.config.notifications.friend_join_leave"
     }
 
     val guildJoinLeave = obj("guildJoinLeave", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.guildJoinLeave"
+        this.translation = "skycubed.config.notifications.guild_join_leave"
     }
 
     init {
@@ -27,11 +30,11 @@ object NotificationsConfig : CategoryKt("notifications") {
     }
 
     val hoppityYouFound = obj("hoppityYouFound", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.hoppityYouFound"
+        this.translation = "skycubed.config.notifications.hoppity.you_found"
     }
 
     val hoppityEggAppeared = obj("hoppityEggAppeared", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.hoppityEggAppeared"
+        this.translation = "skycubed.config.notifications.hoppity.egg_appeared"
     }
 
     init {
@@ -42,11 +45,11 @@ object NotificationsConfig : CategoryKt("notifications") {
     }
 
     val skymall = obj("skymall", NotificationObject(hideMessage = true, showAsToast = true, toastDuration = 10000)) {
-        this.translation = "config.skycubed.notifications.skymall"
+        this.translation = "skycubed.config.notifications.skymall"
     }
 
     val monolith = obj("monolith", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.monolith"
+        this.translation = "skycubed.config.notifications.monolith"
     }
 
     init {
@@ -57,7 +60,7 @@ object NotificationsConfig : CategoryKt("notifications") {
     }
 
     val riftOrb = obj("riftOrb", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.riftOrb"
+        this.translation = "skycubed.config.notifications.rift_orb"
     }
 
     init {
@@ -68,23 +71,23 @@ object NotificationsConfig : CategoryKt("notifications") {
     }
 
     val blocksInTheWay = obj("blocksInTheWay", NotificationObject(hideMessage = true)) {
-        this.translation = "config.skycubed.notifications.blocksInTheWay"
+        this.translation = "skycubed.config.notifications.blocks_in_the_way"
     }
 
     val warping = obj("warping", NotificationObject(hideMessage = true)) {
-        this.translation = "config.skycubed.notifications.warping"
+        this.translation = "skycubed.config.notifications.warping"
     }
 
     val combo = obj("combo", NotificationObject(hideMessage = true, showAsToast = true, toastDuration = 1500)) {
-        this.translation = "config.skycubed.notifications.combo"
+        this.translation = "skycubed.config.notifications.combo"
     }
 
     val fishing = obj("fishing", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.fishing"
+        this.translation = "skycubed.config.notifications.fishing"
     }
 
     val gifts = obj("gifts", NotificationObject(hideMessage = true, showAsToast = true)) {
-        this.translation = "config.skycubed.notifications.gifts"
+        this.translation = "skycubed.config.notifications.gifts"
     }
 
 }

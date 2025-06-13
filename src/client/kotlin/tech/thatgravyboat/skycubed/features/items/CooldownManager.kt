@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.items
 
+import me.owdding.ktmodules.Module
 import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.data.SkyBlockRarity
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
@@ -11,6 +12,7 @@ import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 
+@Module
 object CooldownManager {
 
     private val cooldowns: MutableMap<String, Pair<Long, Long>> = mutableMapOf()

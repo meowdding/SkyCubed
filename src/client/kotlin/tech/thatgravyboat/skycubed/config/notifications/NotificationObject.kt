@@ -9,15 +9,15 @@ class NotificationObject(
 ) : ObjectKt() {
 
     var hideMessage by boolean("hideChatMessage", hideMessage) {
-        this.translation = "config.skycubed.notification.hideChatMessage"
+        this.translation = "skycubed.config.notification.hide_chat_message"
     }
 
-    var showAsToast by boolean("showAsToast", showAsToast) {
-        this.translation = "config.skycubed.notification.showAsToast"
+    var showAsToast by boolean(showAsToast) {
+        this.translation = "skycubed.config.notification.show_as_toast"
     }
 
-    var toastDuration by int("toastDuration", toastDuration) {
-        this.translation = "config.skycubed.notification.toastDuration"
+    var toastDuration by int(toastDuration) {
+        this.translation = "skycubed.config.notification.toast_duration"
         this.range = 0..30000
         this.slider = true
     }

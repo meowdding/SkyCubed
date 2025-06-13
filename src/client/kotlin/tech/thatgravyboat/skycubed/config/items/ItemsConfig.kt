@@ -5,13 +5,13 @@ import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
 object ItemsConfig : CategoryKt("items") {
 
-    override val name: TranslatableValue = Translated("config.skycubed.items.title")
+    override val name: TranslatableValue = Translated("skycubed.config.items")
 
-    var itembars by boolean("itembars", true) {
-        this.translation = "config.skycubed.items.itembars"
+    var itembars by boolean(true) {
+        this.translation = "skycubed.config.items.itembars"
     }
 
-    var cooldowns by boolean("cooldowns", true) {
-        this.translation = "config.skycubed.items.cooldowns"
+    var cooldowns by boolean(true) {
+        this.translation = "skycubed.config.items.cooldowns"
     }
 }
