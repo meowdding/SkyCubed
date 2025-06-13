@@ -17,4 +17,5 @@ object OverlayPositions : CategoryKt("positions") {
     val map = obj("map", Position(x = -90, y = 0))
     val hotbar = obj("hotbar", Position(x = 0, y = -22))
     val info = obj("info", Position(x = 0, y = 0))
+    val pity = obj("pity", Position(x = 200, y = 5))
 }
