@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
+import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
@@ -118,6 +119,31 @@ object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
         this.translation = "skycubed.config.overlays.map.rotate"
     }
 
+    var mapShape by observable (
+        enum<MapShape>(MapShape.CIRCLE) {
+            this.translation = "skycubed.config.overlays.map.shape"
+        }
+    ) { _, _ ->
+        MinimapOverlay.updateDisplay()
+    }
+
+}
+
+enum class MapShape (
+    val displayName: String
+) {
+    CIRCLE("Circle"),
+    SQUARE("Square");
+
+    override fun toString() = displayName
+
+    private val index by lazy {
+        entries.indexOf(this)
+    }
+
+    val next by lazy {
+        entries[(index + 1) % entries.size]
+    }
 }
 
 object DungeonMapOverlayConfig : OverlayConfig("Edit Dungeon Map Overlay") {

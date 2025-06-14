@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
+import tech.thatgravyboat.skycubed.config.overlays.MapShape
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.map.Maps
@@ -45,6 +46,9 @@ object MinimapOverlay : Overlay {
         it.button(Text.of("${if (MapOverlayConfig.rotateAroundPlayer) "Disable" else "Enable"} Rotation")) {
             MapOverlayConfig.rotateAroundPlayer = !MapOverlayConfig.rotateAroundPlayer
         }
+        it.button(Text.of(MapOverlayConfig.mapShape.next.displayName)) {
+            MapOverlayConfig.mapShape = MapOverlayConfig.mapShape.next
+        }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
             position.reset()
@@ -53,20 +57,32 @@ object MinimapOverlay : Overlay {
 
     @Subscription
     fun onChange(event: IslandChangeEvent) {
+        updateDisplay()
+    }
+
+    fun updateDisplay() {
         display = getMapsForLocationOrNull()?.let {
-            Displays.background(
-                backgroundBox,
-                Displays.center(90, 90, Displays.renderable(MapsWidget(
-                    it,
-                    GettingState.of { McPlayer.self!!.position().x + Maps.getCurrentOffset().x },
-                    GettingState.of { McPlayer.self!!.position().z + Maps.getCurrentOffset().z },
-                    State.of(1f),
-                    { false },
-                    86,
-                    86,
-                    GettingState.of { MapOverlayConfig.rotateAroundPlayer }
-                )))
-            )
+            val minimapWidget =  Displays.center(90, 90, Displays.renderable(MapsWidget(
+                it,
+                GettingState.of { McPlayer.self!!.position().x + Maps.getCurrentOffset().x },
+                GettingState.of { McPlayer.self!!.position().z + Maps.getCurrentOffset().z },
+                State.of(1f),
+                { false },
+                86,
+                86,
+                GettingState.of { MapOverlayConfig.rotateAroundPlayer },
+                MapOverlayConfig.mapShape
+            )))
+
+            if (MapOverlayConfig.mapShape == MapShape.SQUARE) {
+                Displays.background(
+                    backgroundBox,
+                    minimapWidget
+                )
+            } else {
+                minimapWidget
+            }
         }
     }
 }
+

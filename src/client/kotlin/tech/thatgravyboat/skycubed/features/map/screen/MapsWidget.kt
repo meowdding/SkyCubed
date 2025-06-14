@@ -9,16 +9,19 @@ import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.renderer.RenderType
+import org.joml.Vector3f
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.config.overlays.MapShape
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.setValue
+import kotlin.math.min
 
 class MapsWidget(
     map: String?,
@@ -30,7 +33,8 @@ class MapsWidget(
     width: Int,
     height: Int,
 
-    val rotate: State<Boolean> = State.of(false)
+    val rotate: State<Boolean> = State.of(false),
+    val shape: MapShape = MapShape.SQUARE
 ) : BaseWidget(width, height) {
 
     private var xOffset by xOffset
@@ -44,6 +48,12 @@ class MapsWidget(
 
     override fun renderWidget(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         this.cursor = Cursor.DEFAULT
+
+        val translation = graphics.pose().last().pose().getTranslation(Vector3f())
+        val posX = translation.x
+        val posY = translation.y
+        val scaleX = graphics.pose().last().pose().getScale(Vector3f()).x
+        val scaleY = graphics.pose().last().pose().getScale(Vector3f()).y
 
         graphics.scissor(x, y, width, height) {
             graphics.pushPop {
@@ -69,15 +79,51 @@ class MapsWidget(
 
                         if (default != texture) {
 
+                            if (shape == MapShape.CIRCLE) {
+                                MinimapRenderer.draw(
+                                    graphics,
+                                    default.getId(),
+                                    posX + width * scaleX / 2.0f + 1,
+                                    posY + height * scaleY / 2.0f + 1,
+                                    width * min(scaleX, scaleY) / 2.0f,
+                                    0, 0,
+                                    0f, 0f,
+                                    map.width, map.height,
+                                    map.width, map.height,
+                                    0xFF3F3F3F.toInt(),
+                                )
+                            } else {
+                                graphics.blit(
+                                    RenderType::guiTextured,
+                                    default.getId(),
+                                    0, 0,
+                                    0f, 0f,
+                                    map.width, map.height,
+                                    map.width, map.height,
+                                    0xFF3F3F3F.toInt(),
+                                )
+                            }
+                        }
+
+                        if (shape == MapShape.CIRCLE) {
+                            MinimapRenderer.draw(
+                                graphics,
+                                texture.getId(),
+                                posX + width * scaleX / 2.0f + 1,
+                                posY + height * scaleY / 2.0f + 1,
+                                width * min(scaleX, scaleY) / 2.0f,
+                                0, 0,
+                                0f, 0f,
+                                map.width, map.height,
+                                map.width, map.height
+                            )
+                        } else {
                             graphics.blit(
                                 RenderType::guiTextured,
-                                default.getId(),
-                                0, 0, 0f, 0f,
-                                map.width, map.height, map.width, map.height,
-                                0xFF3F3F3F.toInt()
-                            )
+                                texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
                         }
-                        graphics.blit(RenderType::guiTextured, texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
+
+
                     }
 
                     map.pois.forEachIndexed { index, poi ->
