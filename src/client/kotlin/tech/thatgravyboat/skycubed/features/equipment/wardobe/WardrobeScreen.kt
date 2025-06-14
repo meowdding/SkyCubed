@@ -67,7 +67,10 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
     var currentPage = 0
 
     override fun init() {
-        val displayWidth = ((this.width - 90) / 9.0).toInt()
+        val uiHeight = (this.height * 0.9).toInt()
+        val uiWidth = ((uiHeight * (16.0 / 9.0)).toInt()).coerceAtMost(this.width) - 90
+
+        val displayWidth = (uiWidth / 9.0).toInt()
 
         val footer = LinearLayout.horizontal().spacing(BUTTON_SPACING)
 

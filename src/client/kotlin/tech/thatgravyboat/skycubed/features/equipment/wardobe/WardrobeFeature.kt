@@ -83,6 +83,5 @@ object WardrobeFeature {
         isEditing = false
     }
 
-    private fun Screen.isEnabled() =
-        this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
+    private fun Screen.isEnabled() = this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
 }
