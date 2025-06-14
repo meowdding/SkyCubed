@@ -292,7 +292,7 @@
         ]
     },
     {
-        "values": [ "visit" ],
+        "values": [ "visit", "guest" ],
         "children": [
             {
                 "name": "player",
@@ -328,6 +328,152 @@
                     "KUUDRA_BURNING",
                     "KUUDRA_FIERY",
                     "KUUDRA_INFERNAL"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "status" ],
+        "children": [
+            {
+                "name": "status",
+                "suggestions": [
+                    "online",
+                    "offline",
+                    "away",
+                    "busy"
+                ],
+                "greedy": true
+            }
+        ]
+    },
+    {
+        "values": [ "show" ],
+        "children": [
+            {
+                "name": "item",
+                "suggestions": [
+                    "item",
+                    "helmet",
+                    "chestplate",
+                    "leggings",
+                    "boots",
+                    "necklace",
+                    "cloak",
+                    "belt",
+                    "bracelet",
+                    "pet",
+                    "1","2","3","4","5","6","7","8"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "viewstash" ],
+        "children": [
+            {
+                "values": [
+                    "material",
+                    "item"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "chat" ],
+        "children": [
+            {
+                "values": [
+                    "all",
+                    "party",
+                    "guild",
+                    "officer",
+                    "coop"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "myfilter" ],
+        "children": [
+            {
+                "values": [
+                    "list",
+                    "clear"
+                ]
+            },
+            {
+                "values": [
+                    "add",
+                    "remove"
+                ],
+                "children": [
+                    {
+                        "name": "word",
+                        "greedy": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "rng", "rngmeter" ],
+        "children": [
+            {
+                "values": [ "catacombs", "cata" ],
+                "children": [
+                    {
+                        "values": [
+                            "1", "2", "3", "4", "5", "6", "7",
+                            "m1", "m2", "m3", "m4", "m5", "m6", "m7"
+                        ]
+                    }
+                ]
+            },
+            {
+                "values": [ "slayer" ],
+                "children": [
+                    {
+                        "name": "slayer_type",
+                        "suggestions": [
+                            "zombie",
+                            "spider",
+                            "blaze",
+                            "enderman",
+                            "vampire"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "viewdungeonclass" ],
+        "children": [
+            {
+                "values": [
+                    "mage",
+                    "archer",
+                    "tank",
+                    "healer",
+                    "berserk"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "viewbosscollection" ],
+        "children": [
+            {
+                "values": [
+                    "catacombs_1",
+                    "catacombs_2",
+                    "catacombs_3",
+                    "catacombs_4",
+                    "catacombs_5",
+                    "catacombs_6",
+                    "catacombs_7",
+                    "kuudra"
                 ]
             }
         ]
