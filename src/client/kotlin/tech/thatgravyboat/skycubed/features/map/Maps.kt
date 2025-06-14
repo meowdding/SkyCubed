@@ -32,7 +32,7 @@ object Maps {
         "dungeon_hub",
         "jerrys_workshop",
     )
-    private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("key.skycubed.map", InputConstants.KEY_M, "key.skycubed.category"))
+    private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 
     private val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
@@ -44,6 +44,11 @@ object Maps {
             runCatching {
                 TYPES.forEach { type ->
                     val file = this.javaClass.getResourceAsStream("/repo/maps/$type.jsonc")?.readJsonc<JsonElement>() ?: return@runCatching
+                    try {
+                        SkyCubed.repoPatcher?.patch(file, "maps/$type")
+                    } catch (_: Exception) {
+                        SkyCubed.warn("Failed to patch map $type.")
+                    }
                     val result = Codec.either(IslandData.CODEC, IslandData.CODEC.listOf())
                         .xmap({ it.map(::listOf, Function.identity()) }, { Either.right(it) })
                         .parse(JsonOps.INSTANCE, file)

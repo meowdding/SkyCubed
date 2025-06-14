@@ -24,18 +24,18 @@ import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
 object NotificationManager {
 
     private val notifications = listOf(
-        NotificationType.single("friendJoinLeave", "Friend > (?<name>\\w{3,16}) (?<reason>joined|left)\\.", NotificationsConfig.friendJoinLeave) { _, match ->
+        NotificationType.single("friend_join_leave", "Friend > (?<name>\\w{3,16}) (?<reason>joined|left)\\.", NotificationsConfig.friendJoinLeave) { _, match ->
             joinLeaveMessage(match, "Friends", TextColor.GREEN)
         },
-        NotificationType.single("guildJoinLeave", "Guild > (?<name>\\w{3,16}) (?<reason>joined|left)\\.", NotificationsConfig.guildJoinLeave) { _, match ->
+        NotificationType.single("guild_join_leave", "Guild > (?<name>\\w{3,16}) (?<reason>joined|left)\\.", NotificationsConfig.guildJoinLeave) { _, match ->
             joinLeaveMessage(match, "Guild", TextColor.DARK_GREEN)
         },
 
         NotificationType.single("warping", "(?:Warping|Sending to server mini76K|Evacuating to Your Island)\\.{3}|Warped to .*") { NotificationsConfig.warping },
-        NotificationType.single("blocksInTheWay", "There are blocks in the way!") { NotificationsConfig.blocksInTheWay },
+        NotificationType.single("blocks_in_the_way", "There are blocks in the way!") { NotificationsConfig.blocksInTheWay },
 
-        NotificationType.unique("hoppityYouFound", "HOPPITY'S HUNT You found .*") { NotificationsConfig.hoppityYouFound },
-        NotificationType.unique("hoppityEggAppeared", "HOPPITY'S HUNT A [\\w ]+ Egg has appeared!") { NotificationsConfig.hoppityEggAppeared },
+        NotificationType.unique("hoppity_you_found", "HOPPITY'S HUNT You found .*") { NotificationsConfig.hoppityYouFound },
+        NotificationType.unique("hoppity_egg_appeared", "HOPPITY'S HUNT A [\\w ]+ Egg has appeared!") { NotificationsConfig.hoppityEggAppeared },
 
         NotificationType.single("skymall1", "New buff: .*") { NotificationsConfig.skymall },
         NotificationType.unique("skymall2", "You can disable this messaging by toggling Sky Mall in your /hotm!") { NotificationsConfig.skymall.copy(showAsToast = false) },

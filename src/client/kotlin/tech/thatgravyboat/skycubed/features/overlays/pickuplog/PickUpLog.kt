@@ -12,19 +12,22 @@ import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
-import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
+import tech.thatgravyboat.skyblockapi.api.events.hypixel.SacksChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
+import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlay
+import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlayConfig
 import tech.thatgravyboat.skycubed.utils.Rect
 
 @Module
+@RegisterOverlay
 object PickUpLog : Overlay {
 
     private val exampleDisplay by lazy {
@@ -77,7 +80,6 @@ object PickUpLog : Overlay {
     }
 
     @Subscription
-    @TimePassed("2t")
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
         val flattenedInventory = McPlayer.inventory
@@ -117,10 +119,24 @@ object PickUpLog : Overlay {
         removedItems.compactAndCombineTimeAndApply()
 
         val currentTime = System.currentTimeMillis()
-        val timealive = PickupLogOverlay.time * 1000
+        val timealive = PickupLogOverlayConfig.time * 1000
         addedItems.removeIf { it.time + timealive < currentTime }
         removedItems.removeIf { it.time + timealive < currentTime }
         updateDisplay()
+    }
+
+    @Subscription
+    fun onSack(event: SacksChangeEvent) {
+        if (!PickupLogOverlayConfig.sackItems) return
+
+        event.changedItems.forEach { (item, diff) ->
+            val stack = RepoItemsAPI.getItem(item)
+            if (diff < 0) {
+                removedItems.add(PickUpLogItem(stack, diff, System.currentTimeMillis()))
+            } else if (diff > 0) {
+                addedItems.add(PickUpLogItem(stack, diff, System.currentTimeMillis()))
+            }
+        }
     }
 
     @Subscription
@@ -136,8 +152,7 @@ object PickUpLog : Overlay {
             display = null
             return
         }
-        display = items.compact()
-            .map { PickupLogOverlay.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
+        display = items.compact().map { PickupLogOverlayConfig.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
     private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {
@@ -156,7 +171,7 @@ object PickUpLog : Overlay {
         }
 
     private fun List<PickUpLogItem>.compact() =
-        takeUnless { PickupLogOverlay.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
+        takeUnless { PickupLogOverlayConfig.compact } ?: groupBy { it.stack.getUniqueId() }.map { (_, items) ->
             items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
         }.filter(PickUpLogItem::isNotEmpty)
 

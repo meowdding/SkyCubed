@@ -15,8 +15,8 @@ public class PlayerRendererMixin {
 
     @Inject(method = "extractRenderState(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/client/renderer/entity/state/PlayerRenderState;F)V", at = @At("TAIL"))
     private void onExtractRenderState(AbstractClientPlayer player, PlayerRenderState state, float partialTick, CallbackInfo ci) {
-        if (state instanceof DisplayEntityPlayerRenderStateExtension extension && player instanceof DisplayEntityPlayer) {
-            extension.skycubed$setIsDisplayEntityPlayer(true);
+        if (state instanceof DisplayEntityPlayerRenderStateExtension extension) {
+            extension.skycubed$setIsDisplayEntityPlayer(player instanceof DisplayEntityPlayer);
         }
     }
 }

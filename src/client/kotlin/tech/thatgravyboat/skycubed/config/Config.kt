@@ -16,6 +16,7 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
+import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
 
 object Config : ConfigKt("skycubed/config") {
 
@@ -25,13 +26,13 @@ object Config : ConfigKt("skycubed/config") {
         ResourcefulConfigLink.create(
             "https://modrinth.com/project/skycubed",
             "modrinth",
-            TranslatableValue("Modrinth", "config.info.skycubed.modrinth")
+            TranslatableValue("Modrinth", "skycubed.config.info.modrinth"),
         ),
         ResourcefulConfigLink.create(
             "https://github.com/ThatGravyBoat/SkyCubed",
             "code",
-            TranslatableValue("GitHub", "config.info.skycubed.github")
-        )
+            TranslatableValue("GitHub", "skycubed.config.info.github"),
+        ),
     )
 
     init {
@@ -50,13 +51,17 @@ object Config : ConfigKt("skycubed/config") {
         }
     }
 
-    val hiddenActionBarWidgets by select<ActionBarWidget>("hiddenActionBarWidgets") {
-        this.translation = "config.skycubed.general.hiddenActionBarWidgets"
+    val hiddenActionBarWidgets by select<ActionBarWidget> {
+        this.translation = "skycubed.config.general.hidden_action_bar_widgets"
     }
 
-    val hiddenHudElements by select<HudElement>("hiddenHudElements") {
-        this.translation = "config.skycubed.general.hiddenHudElements"
-    }
+    val hiddenHudElements by transform(
+        select<HudElement> {
+            this.translation = "skycubed.config.general.hidden_hud_elements"
+        },
+        { it.toTypedArray() },
+        { it.toSet() },
+    )
 
     init {
         separator {
@@ -65,7 +70,7 @@ object Config : ConfigKt("skycubed/config") {
         }
 
         button {
-            this.title = "config.skycubed.general.keybinds"
+            this.title = "skycubed.config.general.keybinds"
             this.text = "Open"
             this.onClick {
                 McClient.setScreen(KeyBindsScreen(McScreen.self, McClient.options))
@@ -73,10 +78,18 @@ object Config : ConfigKt("skycubed/config") {
         }
 
         button {
-            this.title = "config.skycubed.general.notifications"
+            this.title = "skycubed.config.general.notifications"
             this.text = "Open"
             this.onClick {
                 McClient.setScreen(NotificationsScreen())
+            }
+        }
+
+        button {
+            this.title = "skycubed.config.general.sack_hud"
+            this.text = "Open"
+            this.onClick {
+                McClient.setScreen(SackHudEditScreen())
             }
         }
     }

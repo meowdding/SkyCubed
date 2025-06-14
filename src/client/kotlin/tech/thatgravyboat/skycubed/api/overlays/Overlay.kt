@@ -12,7 +12,7 @@ interface Overlay {
 
     val name: Component
 
-    val moveable: Boolean get() = true
+    val properties: Collection<EditableProperty> get() = EditableProperty.entries
     val enabled: Boolean get() = true
 
     val position: Position
@@ -42,8 +42,16 @@ interface Overlay {
         position.y = if (y < height / 2) y.coerceAtLeast(0) else (y - height).coerceAtMost(-bounds.second)
     }
 
+    fun setScale(scale: Float) {
+        position.scale = (scale * 10f).toInt() / 10f
+    }
+
     companion object {
 
         fun isEditing() = EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()
     }
+}
+
+enum class EditableProperty {
+    X, Y, SCALE, MISC;
 }
