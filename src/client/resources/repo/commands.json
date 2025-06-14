@@ -372,7 +372,7 @@
         "values": [ "viewstash" ],
         "children": [
             {
-				"name": "type",
+                "name": "type",
                 "suggestions": [
                     "material",
                     "item"
@@ -384,7 +384,8 @@
         "values": [ "chat" ],
         "children": [
             {
-                "values": [
+                "name": "type",
+                "suggestions": [
                     "all",
                     "party",
                     "guild",
@@ -398,7 +399,9 @@
         "values": [ "myfilter" ],
         "children": [
             {
-                "values": [
+                "name": "operation",
+                "greedy": true,
+                "suggestions": [
                     "list",
                     "clear"
                 ]
@@ -424,7 +427,8 @@
                 "values": [ "catacombs", "cata" ],
                 "children": [
                     {
-                        "values": [
+                        "name": "floor",
+                        "suggestions": [
                             "1", "2", "3", "4", "5", "6", "7",
                             "m1", "m2", "m3", "m4", "m5", "m6", "m7"
                         ]
@@ -452,7 +456,8 @@
         "values": [ "viewdungeonclass" ],
         "children": [
             {
-                "values": [
+                "name": "class",
+                "suggestions": [
                     "mage",
                     "archer",
                     "tank",
@@ -466,7 +471,8 @@
         "values": [ "viewbosscollection" ],
         "children": [
             {
-                "values": [
+                "name": "floor",
+                "suggestions": [
                     "catacombs_1",
                     "catacombs_2",
                     "catacombs_3",
