@@ -57,6 +57,10 @@ object OverlaysConfig {
     @ConfigEntry(id = "windOverlay", translation = "config.skycubed.overlays.windOverlay")
     @Comment("", translation = "config.skycubed.overlays.windOverlay.desc")
     var windOverlay = false
+
+    @ConfigEntry(id = "vanillaBossbar", translation = "config.skycubed.overlays.vanillaBossbar")
+    @Comment("", translation = "config.skycubed.overlays.vanillaBossbar.desc")
+    val vanillaBossbar = VanillaBossbar()
 }
 
 enum class HealthDisplay : Translatable {

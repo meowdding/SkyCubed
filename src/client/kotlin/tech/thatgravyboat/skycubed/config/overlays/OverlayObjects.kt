@@ -144,3 +144,16 @@ class NpcOverlay : Translatable {
 
     override fun getTranslationKey(): String = "Edit NPC Overlay"
 }
+
+@ConfigObject
+class VanillaBossbar : Translatable {
+    @ConfigEntry(id = "removeBarWhenFull", translation = "config.skycubed.overlays.bossbar.removeBarWhenFull")
+    @Comment("", translation = "config.skycubed.overlays.bossbar.removeBarWhenFull.desc")
+    var removeBarWhenFull: Boolean = false
+
+    @ConfigEntry(id = "removeWhenObjective", translation = "config.skycubed.overlays.bossbar.removeWhenObjective")
+    @Comment("", translation = "config.skycubed.overlays.bossbar.removeWhenObjective.desc")
+    var removeWhenObjective: Boolean = false
+
+    override fun getTranslationKey(): String = "Edit Vanilla Bossbar"
+}
