@@ -15,8 +15,8 @@ import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 
-object MinimapRenderer {
-    fun draw(
+object CircularMinimapRenderer {
+    fun drawMapPart(
         graphics: GuiGraphics,
         texture: ResourceLocation,
         circleCenterX: Float,
@@ -58,7 +58,7 @@ object MinimapRenderer {
             .setUv(maxU, minV)
             .setColor(color)
 
-        val gpuTexture: GpuTexture = mc.getTextureManager().getTexture(texture).getTexture()
+        val gpuTexture: GpuTexture = mc.textureManager.getTexture(texture).texture
 
         RenderSystem.setShaderTexture(0, gpuTexture)
 
@@ -78,11 +78,11 @@ object MinimapRenderer {
         RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
             .withLocation("pipeline/minimap")
             .withFragmentShader(ResourceLocation.fromNamespaceAndPath("skycubed", "minimap_position_tex_color"))
-            .withVertexShader(ResourceLocation.fromNamespaceAndPath("skycubed", "minimap_position_tex_color"))
             .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
             .withUniform("circlePosition", UniformType.VEC2)
-            .withUniform("scale", UniformType.FLOAT)
+            .withUniform("ScreenSize", UniformType.VEC2)
             .withUniform("radius", UniformType.FLOAT)
+            .withUniform("scale", UniformType.FLOAT)
             .withDepthWrite(false)
             .build(),
     )

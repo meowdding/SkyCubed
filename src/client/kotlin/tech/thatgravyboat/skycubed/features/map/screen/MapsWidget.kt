@@ -80,7 +80,7 @@ class MapsWidget(
                         if (default != texture) {
 
                             if (shape == MapShape.CIRCLE) {
-                                MinimapRenderer.draw(
+                                CircularMinimapRenderer.drawMapPart(
                                     graphics,
                                     default.getId(),
                                     posX + width * scaleX / 2.0f + 1,
@@ -106,7 +106,7 @@ class MapsWidget(
                         }
 
                         if (shape == MapShape.CIRCLE) {
-                            MinimapRenderer.draw(
+                            CircularMinimapRenderer.drawMapPart(
                                 graphics,
                                 texture.getId(),
                                 posX + width * scaleX / 2.0f + 1,

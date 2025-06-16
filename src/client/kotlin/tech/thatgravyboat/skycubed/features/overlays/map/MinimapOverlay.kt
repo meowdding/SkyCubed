@@ -11,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.SkyCubed.id
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
@@ -22,10 +23,12 @@ import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import tech.thatgravyboat.skycubed.utils.TexturedCircleDisplay
 
 @Module
 @RegisterOverlay
 object MinimapOverlay : Overlay {
+    private val CIRCLE_BACKGROUND = id("map_circle_background")
 
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
@@ -62,27 +65,34 @@ object MinimapOverlay : Overlay {
 
     fun updateDisplay() {
         display = getMapsForLocationOrNull()?.let {
-            val minimapWidget =  Displays.center(90, 90, Displays.renderable(MapsWidget(
-                it,
-                GettingState.of { McPlayer.self!!.position().x + Maps.getCurrentOffset().x },
-                GettingState.of { McPlayer.self!!.position().z + Maps.getCurrentOffset().z },
-                State.of(1f),
-                { false },
-                86,
-                86,
-                GettingState.of { MapOverlayConfig.rotateAroundPlayer },
-                MapOverlayConfig.mapShape
-            )))
+            val minimapWidget =  Displays.center(
+                90, 90,
+                Displays.renderable(
+                    MapsWidget(
+                        it,
+                        GettingState.of { McPlayer.self!!.position().x + Maps.getCurrentOffset().x },
+                        GettingState.of { McPlayer.self!!.position().z + Maps.getCurrentOffset().z },
+                        State.of(1f),
+                        { false },
+                        86,
+                        86,
+                        GettingState.of { MapOverlayConfig.rotateAroundPlayer },
+                        MapOverlayConfig.mapShape,
+                    ),
+                ),
+            )
 
             if (MapOverlayConfig.mapShape == MapShape.SQUARE) {
                 Displays.background(
                     backgroundBox,
-                    minimapWidget
+                    minimapWidget,
                 )
             } else {
-                minimapWidget
+                Displays.layered(
+                    TexturedCircleDisplay(90, 90, CIRCLE_BACKGROUND),
+                    minimapWidget,
+                )
             }
         }
     }
 }
-
