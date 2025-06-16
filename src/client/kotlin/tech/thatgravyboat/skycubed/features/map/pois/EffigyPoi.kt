@@ -19,7 +19,9 @@ data class EffigyPoi(
 ) : Poi {
 
     override val id: String = "effigy"
-    override val position: Vector2i get() = RiftAPI.effieges.getOrNull(index)?.pos?.let { Vector2i(it.x, it.z) } ?: Vector2i(0, 0)
+    override var position: Vector2i
+        get() = RiftAPI.effieges.getOrNull(index)?.pos?.let { Vector2i(it.x, it.z) } ?: Vector2i(0, 0)
+        set(_) = throw UnsupportedOperationException()
     override val bounds: Vector2i = Vector2i(6, 6)
     override val display: Display = Displays.sprite(
         SkyCubed.id("map/icons/effigy"),
@@ -27,14 +29,14 @@ data class EffigyPoi(
         6
     )
     override val enabled: Boolean get() = RiftAPI.effieges.getOrNull(index)?.enabled?.not() ?: false
-    override val tooltip: List<Component> = listOf(
+    override val tooltip: MutableList<Component> = listOf(
         Text.of("Effigy") { color = TextColor.RED },
         CommonText.EMPTY,
 //        Text.of("Click to navigate to") {
 //            bold = true
 //            color = TextColor.YELLOW
 //        }
-    )
+    ).toMutableList()
 
     override fun click() {
         println(RiftAPI.effieges.getOrNull(index))

@@ -29,22 +29,25 @@ object DownloadedAsset {
         .build()
 
     fun runDownload(uri: String?, file: File, callback: () -> Unit): CompletableFuture<Void> {
-        return CompletableFuture.runAsync({
-            createUrl(uri)?.runCatching {
-                val request = HttpRequest.newBuilder(this)
-                    .GET()
-                    .build()
+        return CompletableFuture.runAsync(
+            {
+                createUrl(uri)?.runCatching {
+                    val request = HttpRequest.newBuilder(this)
+                        .GET()
+                        .build()
 
-                val response = CLIENT.send(request, HttpResponse.BodyHandlers.ofInputStream())
-                if (response.statusCode() / 100 == 2) {
-                    FileUtils.copyInputStreamToFile(response.body(), file)
+                    val response = CLIENT.send(request, HttpResponse.BodyHandlers.ofInputStream())
+                    if (response.statusCode() in 200..299) {
+                        FileUtils.copyInputStreamToFile(response.body(), file)
 
-                    McClient.tell { callback() }
+                        McClient.tell { callback() }
+                    }
+                }?.onFailure { exception ->
+                    SkyCubed.error("Failed to download asset from URI: $uri", exception)
                 }
-            }?.onFailure { exception ->
-                SkyCubed.error("Failed to download asset from URI: $uri", exception)
-            }
-        }, Util.backgroundExecutor())
+            },
+            Util.backgroundExecutor(),
+        )
     }
 
     @Suppress("DEPRECATION")

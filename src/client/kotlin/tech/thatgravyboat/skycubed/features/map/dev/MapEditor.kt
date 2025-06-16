@@ -1,0 +1,159 @@
+package tech.thatgravyboat.skycubed.features.map.dev
+
+import com.google.gson.JsonParser
+import com.mojang.serialization.JsonOps
+import me.owdding.ktmodules.Module
+import me.owdding.patches.utils.getPath
+import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.network.chat.CommonComponents
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityAttachment
+import net.minecraft.world.entity.player.Player
+import org.joml.Vector2i
+import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
+import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
+import tech.thatgravyboat.skyblockapi.api.events.render.LivingEntityRenderEvent
+import tech.thatgravyboat.skyblockapi.api.events.render.PlayerRenderEvent
+import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.extentions.asString
+import tech.thatgravyboat.skyblockapi.utils.json.Json.toPrettyString
+import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.Text.send
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skycubed.SkyCubed
+import tech.thatgravyboat.skycubed.api.accessors.glow
+import tech.thatgravyboat.skycubed.api.accessors.glowColor
+import tech.thatgravyboat.skycubed.features.map.IslandData
+import tech.thatgravyboat.skycubed.features.map.Maps
+import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
+import tech.thatgravyboat.skycubed.utils.CachedValue
+import java.nio.file.StandardOpenOption
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+import kotlin.io.path.createParentDirectories
+import kotlin.io.path.writeText
+import kotlin.math.roundToInt
+import kotlin.time.Duration.Companion.seconds
+
+@Module
+object MapEditor {
+
+    var enabled = false
+    val pois by CachedValue(1.seconds) {
+        Maps.currentIsland?.pois?.associateBy { it.position } ?: emptyMap()
+    }
+
+
+    private fun Entity.posAsVec2i(): Vector2i {
+        val pos = this.position()
+        return Vector2i(pos.x.roundToInt(), pos.z.roundToInt())
+    }
+
+    private operator fun <T> Map<Vector2i, T>.get(entity: Entity?): T? {
+        entity ?: return null
+        return this[entity.posAsVec2i()]
+    }
+
+    @Subscription
+    private fun RegisterCommandsEvent.onRegister() {
+        registerWithCallback("skycubed dev mapEditMode") {
+            enabled = !enabled
+            if (enabled) {
+                Text.of("Toggled map edit mode on!") { this.color = TextColor.GREEN }.send()
+            } else {
+                Text.of("Toggled map edit mode off!") { this.color = TextColor.RED }.send()
+            }
+        }
+        registerWithCallback("skycubed dev saveMap") {
+            Maps.groups.forEach { (key, values) ->
+                Text.of("Saving ${values.size} for $key to .minecraft/config/skycubed/maps/$key.json").send()
+                val json = if (values.size == 1) {
+                    IslandData.CODEC.encodeStart(JsonOps.INSTANCE, values[0])
+                } else {
+                    IslandData.CODEC.listOf().encodeStart(JsonOps.INSTANCE, values)
+                }
+
+                json.ifError {
+                    Text.of("Failed to save $key, see logs for more details!").send()
+                    SkyCubed.error(it.message())
+                }
+                json.ifSuccess { it ->
+
+                    FabricLoader.getInstance().configDir.resolve("skycubed/maps/$key.json").createParentDirectories()
+                        .writeText(
+                            it.toPrettyString(),
+                            Charsets.UTF_8,
+                            StandardOpenOption.TRUNCATE_EXISTING,
+                            StandardOpenOption.CREATE
+                        )
+                }
+            }
+        }
+    }
+
+    @Subscription
+    private fun PlayerRenderEvent.onRender() {
+        this.entity?.glow = true
+        this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF0000
+
+        val pos = entity?.position() ?: return
+        val meow = Vector2i(pos.x.roundToInt(), pos.z.roundToInt())
+        this.state?.nameTagAttachment =
+            entity?.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity?.getYRot(0f) ?: 0f)
+        this.state?.scoreText = Text.of(meow.toString())
+        this.state?.nameTag = CommonComponents.EMPTY
+    }
+
+    @Subscription
+    private fun LivingEntityRenderEvent.onRender() {
+        this.entity?.glow = true
+        this.entity?.glowColor = 0xFF00
+        this.state?.isUpsideDown = true
+    }
+
+    @Subscription
+    private fun LeftClickEntityEvent.modifyOrCreateNpc() {
+        if (!enabled) return
+        this.cancel()
+        val poi = pois[this.entity]
+        if (poi != null) {
+            McClient.setScreenAsync { MapPoiEditScreen(poi) }
+            return
+        }
+
+        NpcPoi(
+            entity.texture,
+            "https://wiki.hypixel.net/\$name",
+            "unknown",
+            mutableListOf(
+                "\$name",
+                "",
+                "§7§lClick to view wiki!"
+            ),
+            entity.posAsVec2i()
+        ).also {
+            Text.of("Created new poi").send()
+            Maps.currentIsland?.pois?.add(it)
+            McClient.setScreenAsync { MapPoiEditScreen(it) }
+        }
+    }
+
+    @OptIn(ExperimentalEncodingApi::class)
+    private val Entity.texture: String
+        get() = runCatching {
+            when (this) {
+                is Player -> this.gameProfile.properties.get("textures").first().value().let {
+                    JsonParser.parseString(Base64.decode(it).decodeToString()).getPath("textures.SKIN.url")
+                        .asString("Unable to find skin :(((")
+                }
+
+                else -> ":("
+            }
+        }.getOrElse {
+            it.printStackTrace()
+            "Failure :("
+        }
+
+}

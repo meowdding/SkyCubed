@@ -15,8 +15,12 @@ class ConditionalPoi(
 ) : Poi {
 
     override val id: String = "conditional"
-    override val tooltip: List<Component> get() = poi.tooltip
-    override val position: Vector2i get() = poi.position
+    override val tooltip: MutableList<Component> get() = poi.tooltip
+    override var position: Vector2i
+        get() = poi.position
+        set(value) {
+            poi.position = value
+        }
     override val bounds: Vector2i get() = poi.bounds
     override val display: Display get() = poi.display
     override val enabled: Boolean get() = enabledCondition.test() && poi.enabled

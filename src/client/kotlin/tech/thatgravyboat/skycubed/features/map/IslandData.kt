@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.codecs.CodecUtils
 import tech.thatgravyboat.skyblockapi.utils.codecs.EnumCodec
 import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
@@ -25,7 +26,7 @@ data class IslandData(
     val offsetY: Int,
     val playerOffsetX: Int,
     val playerOffsetY: Int,
-    val pois: List<Poi>
+    val pois: MutableList<Poi>,
 ) {
 
     private val cache: Cache<BlockPos, MapImage> = CacheBuilder.newBuilder()
@@ -68,7 +69,7 @@ data class IslandData(
             Codec.INT.optionalFieldOf("offsetY", 0).forGetter(IslandData::offsetY),
             Codec.INT.optionalFieldOf("playerOffsetX", 0).forGetter(IslandData::playerOffsetX),
             Codec.INT.optionalFieldOf("playerOffsetY", 0).forGetter(IslandData::playerOffsetY),
-            Poi.CODEC.listOf().optionalFieldOf("pois", listOf()).forGetter(IslandData::pois)
+            CodecUtils.list(Poi.CODEC).optionalFieldOf("pois", mutableListOf()).forGetter(IslandData::pois),
         ).apply(it, ::IslandData) }
     }
 }
