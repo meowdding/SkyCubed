@@ -17,6 +17,7 @@ import tech.thatgravyboat.skyblockapi.api.events.location.mineshaft.MineshaftFou
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
+import tech.thatgravyboat.skyblockapi.api.profile.hotm.HotmAPI
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
@@ -49,6 +50,13 @@ object PityOverlay : Overlay {
         )
 
     private val display = CachedValue(1.seconds) {
+        fun level(name: String) = HotmAPI.activePerks.entries.find { it.key == name }?.value?.level ?: 0
+
+        val core9 = 10f.takeIf { level("Core of the Mountain") >= 9 } ?: 0f
+        val anomalousDesire = (level("Anomalous Desire").times(10).plus(20)).toFloat()
+        val surveyor = level("Surveyor").times(0.75).toFloat()
+        val odds = (100 + core9 + anomalousDesire + surveyor) / (currentPity)
+
         DisplayFactory.vertical {
             string("Current Pity: $currentPity")
             PityBlock.entries.reversed().forEach { entry ->
@@ -58,6 +66,8 @@ object PityOverlay : Overlay {
                     string(": ${leftToMine.toFormattedString()}")
                 }
             }
+
+            string("Odds: ${odds.toFormattedString()}% (1 in ${ceil(100 / odds).toInt()})")
         }
     }
 
