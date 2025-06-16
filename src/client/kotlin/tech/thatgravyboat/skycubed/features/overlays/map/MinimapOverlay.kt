@@ -15,11 +15,11 @@ import tech.thatgravyboat.skycubed.SkyCubed.id
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
-import tech.thatgravyboat.skycubed.config.overlays.MapShape
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
+import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
@@ -82,15 +82,14 @@ object MinimapOverlay : Overlay {
                 ),
             )
 
-            if (MapOverlayConfig.mapShape == MapShape.SQUARE) {
-                Displays.background(
+            when (MapOverlayConfig.mapShape) {
+                MapShape.SQUARE -> Displays.background(
                     backgroundBox,
-                    minimapWidget,
+                    minimapWidget
                 )
-            } else {
-                Displays.layered(
+                MapShape.CIRCLE -> Displays.layered(
                     TexturedCircleDisplay(90, 90, CIRCLE_BACKGROUND),
-                    minimapWidget,
+                    minimapWidget
                 )
             }
         }

@@ -8,7 +8,7 @@ import earth.terrarium.olympus.client.components.base.BaseWidget
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.resources.ResourceLocation
 import org.joml.Vector3f
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -16,12 +16,11 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.config.overlays.MapShape
+import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.setValue
-import kotlin.math.min
 
 class MapsWidget(
     map: String?,
@@ -78,52 +77,31 @@ class MapsWidget(
                         val texture = map.getTexture()
 
                         if (default != texture) {
-
-                            if (shape == MapShape.CIRCLE) {
-                                CircularMinimapRenderer.drawMapPart(
-                                    graphics,
-                                    default.getId(),
-                                    posX + width * scaleX / 2.0f + 1,
-                                    posY + height * scaleY / 2.0f + 1,
-                                    width * min(scaleX, scaleY) / 2.0f,
-                                    0, 0,
-                                    0f, 0f,
-                                    map.width, map.height,
-                                    map.width, map.height,
-                                    0xFF3F3F3F.toInt(),
-                                )
-                            } else {
-                                graphics.blit(
-                                    RenderType::guiTextured,
-                                    default.getId(),
-                                    0, 0,
-                                    0f, 0f,
-                                    map.width, map.height,
-                                    map.width, map.height,
-                                    0xFF3F3F3F.toInt(),
-                                )
-                            }
-                        }
-
-                        if (shape == MapShape.CIRCLE) {
-                            CircularMinimapRenderer.drawMapPart(
+                            shape.drawMapPart(
                                 graphics,
-                                texture.getId(),
-                                posX + width * scaleX / 2.0f + 1,
-                                posY + height * scaleY / 2.0f + 1,
-                                width * min(scaleX, scaleY) / 2.0f,
-                                0, 0,
-                                0f, 0f,
-                                map.width, map.height,
-                                map.width, map.height
+                                default.getId(),
+                                map,
+                                posX,
+                                posY,
+                                width,
+                                height,
+                                scaleX,
+                                scaleY,
+                                0xFF3F3F3F.toInt()
                             )
-                        } else {
-                            graphics.blit(
-                                RenderType::guiTextured,
-                                texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
                         }
 
-
+                        shape.drawMapPart(
+                            graphics,
+                            texture.getId(),
+                            map,
+                            posX,
+                            posY,
+                            width,
+                            height,
+                            scaleX,
+                            scaleY
+                        )
                     }
 
                     map.pois.forEachIndexed { index, poi ->
@@ -208,5 +186,59 @@ class MapsWidget(
         val locZ = (-zOffset + poi.position.y + this.height / 2f + poi.bounds.y / 2) * scale
 
         return locX in mouseX.toFloat()..mouseX + poi.bounds.x * scale && locZ in mouseY.toFloat()..mouseY + poi.bounds.y * scale
+    }
+}
+
+enum class MapShape(
+    val displayName: String,
+    private val draw: (
+        GuiGraphics,
+        ResourceLocation,
+        IslandData,
+        Float,
+        Float,
+        Int,
+        Int,
+        Float,
+        Float,
+        Int
+    ) -> Unit
+) {
+    CIRCLE("Circle", { graphics, texture, map, posX, posY, width, height, scaleX, scaleY, color ->
+        CircularMinimapRenderer.drawMapPart(
+            graphics,
+            texture,
+            posX + width * scaleX / 2.0f + 1,
+            posY + height * scaleY / 2.0f + 1,
+            width * kotlin.math.min(scaleX, scaleY) / 2.0f,
+            0, 0,
+            0f, 0f,
+            map.width, map.height,
+            map.width, map.height,
+            color
+        )
+    }),
+    SQUARE("Square",  { graphics, texture, map, _, _, _, _, _, _, color ->
+        graphics.blit(
+            net.minecraft.client.renderer.RenderType::guiTextured,
+            texture,
+            0, 0, 0f, 0f,
+            map.width, map.height, map.width, map.height,
+            color
+        )
+    });
+
+    override fun toString() = displayName
+
+    private val index by lazy {
+        entries.indexOf(this)
+    }
+
+    val next by lazy {
+        entries[(index + 1) % entries.size]
+    }
+
+    fun drawMapPart(graphics: GuiGraphics, texture: ResourceLocation, map: IslandData, posX: Float = 0f, posY: Float = 0f, width: Int = 0, height: Int = 0, scaleX: Float = 0f, scaleY: Float = 0f, color: Int = -1) {
+        draw(graphics, texture, map, posX, posY, width, height, scaleX, scaleY, color)
     }
 }
