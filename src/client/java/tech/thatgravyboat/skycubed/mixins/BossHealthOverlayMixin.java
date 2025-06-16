@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tech.thatgravyboat.skycubed.features.overlays.BossEventExtension;
 import tech.thatgravyboat.skycubed.features.overlays.VanillaBossbarOverlay;
 
 @Mixin(BossHealthOverlay.class)
@@ -24,7 +25,10 @@ public class BossHealthOverlayMixin {
     )
     private void onRenderFull(GuiGraphics guiGraphics, CallbackInfo ci, @Local LerpingBossEvent event) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderFull(event)) {
+            ((BossEventExtension) event).setDisabled(true);
             ci.cancel();
+        } else {
+            ((BossEventExtension) event).setDisabled(false);
         }
     }
 
@@ -36,6 +40,12 @@ public class BossHealthOverlayMixin {
             )
     )
     private boolean onRenderBar(BossHealthOverlay instance, GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent) {
-        return VanillaBossbarOverlay.INSTANCE.onRenderTitle(bossEvent);
+        if (VanillaBossbarOverlay.INSTANCE.onRenderTitle(bossEvent)) {
+            ((BossEventExtension) bossEvent).setBarDisabled(false);
+            return true;
+        } else {
+            ((BossEventExtension) bossEvent).setBarDisabled(true);
+            return false;
+        }
     }
 }

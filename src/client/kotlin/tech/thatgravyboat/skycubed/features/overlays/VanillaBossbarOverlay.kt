@@ -22,3 +22,14 @@ object VanillaBossbarOverlay {
         return true
     }
 }
+
+interface BossEventExtension {
+    var disabled: Boolean
+    var barDisabled: Boolean
+}
+
+val LerpingBossEvent.disabled : Boolean
+    get() = (this as BossEventExtension).disabled
+
+val LerpingBossEvent.barDisabled : Boolean
+    get() = (this as BossEventExtension).barDisabled
