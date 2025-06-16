@@ -55,7 +55,7 @@ object PityOverlay : Overlay {
         val core9 = 10f.takeIf { level("Core of the Mountain") >= 9 } ?: 0f
         val anomalousDesire = (level("Anomalous Desire").times(10).plus(20)).toFloat()
         val surveyor = level("Surveyor").times(0.75).toFloat()
-        val odds = (100 + core9 + anomalousDesire + surveyor) / (currentPity)
+        val odds = 100f.takeUnless { currentPity == 0 } ?: ((100 + core9 + anomalousDesire + surveyor) / (currentPity))
 
         DisplayFactory.vertical {
             string("Current Pity: $currentPity")
