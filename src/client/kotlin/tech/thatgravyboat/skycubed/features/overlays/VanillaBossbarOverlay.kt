@@ -24,12 +24,12 @@ object VanillaBossbarOverlay {
 }
 
 interface BossEventExtension {
-    var disabled: Boolean
-    var barDisabled: Boolean
+    var `skycubed$disabled`: Boolean
+    var `skycubed$barDisabled`: Boolean
 }
 
 val LerpingBossEvent.disabled : Boolean
-    get() = (this as BossEventExtension).disabled
+    get() = (this as BossEventExtension).`skycubed$disabled`
 
 val LerpingBossEvent.barDisabled : Boolean
-    get() = (this as BossEventExtension).barDisabled
+    get() = (this as BossEventExtension).`skycubed$barDisabled`

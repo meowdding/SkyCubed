@@ -25,10 +25,10 @@ public class BossHealthOverlayMixin {
     )
     private void onRenderFull(GuiGraphics guiGraphics, CallbackInfo ci, @Local LerpingBossEvent event) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderFull(event)) {
-            ((BossEventExtension) event).setDisabled(true);
+            ((BossEventExtension) event).setSkycubed$disabled(true);
             ci.cancel();
         } else {
-            ((BossEventExtension) event).setDisabled(false);
+            ((BossEventExtension) event).setSkycubed$disabled(false);
         }
     }
 
@@ -41,10 +41,10 @@ public class BossHealthOverlayMixin {
     )
     private boolean onRenderBar(BossHealthOverlay instance, GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderTitle(bossEvent)) {
-            ((BossEventExtension) bossEvent).setBarDisabled(false);
+            ((BossEventExtension) bossEvent).setSkycubed$barDisabled(false);
             return true;
         } else {
-            ((BossEventExtension) bossEvent).setBarDisabled(true);
+            ((BossEventExtension) bossEvent).setSkycubed$barDisabled(true);
             return false;
         }
     }

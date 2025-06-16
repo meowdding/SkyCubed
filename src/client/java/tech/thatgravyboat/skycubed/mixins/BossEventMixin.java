@@ -11,22 +11,22 @@ public class BossEventMixin implements BossEventExtension {
     @Unique private boolean disabledBar = false;
 
     @Override
-    public boolean getDisabled() {
+    public boolean getSkycubed$disabled() {
         return disabled;
     }
 
     @Override
-    public void setDisabled(boolean disabled) {
+    public void setSkycubed$disabled(boolean disabled) {
         this.disabled = disabled;
     }
 
     @Override
-    public boolean getBarDisabled() {
+    public boolean getSkycubed$barDisabled() {
         return disabledBar;
     }
 
     @Override
-    public void setBarDisabled(boolean disabled) {
+    public void setSkycubed$barDisabled(boolean disabled) {
         this.disabledBar = disabled;
     }
 }
