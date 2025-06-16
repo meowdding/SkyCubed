@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tech.thatgravyboat.skyblockapi.utils.text.TextProperties;
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig;
+import tech.thatgravyboat.skycubed.features.overlays.VanillaBossbarOverlay;
 
 @Mixin(BossHealthOverlay.class)
 public class BossHealthOverlayMixin {
@@ -23,8 +22,8 @@ public class BossHealthOverlayMixin {
             ),
             cancellable = true
     )
-    private void updateTitle(GuiGraphics guiGraphics, CallbackInfo ci, @Local LerpingBossEvent event) {
-        if (OverlaysConfig.INSTANCE.getVanillaBossbar().getRemoveWhenObjective() && TextProperties.INSTANCE.getStripped(event.getName()).contains("Objective: ")) {
+    private void onRenderFull(GuiGraphics guiGraphics, CallbackInfo ci, @Local LerpingBossEvent event) {
+        if (VanillaBossbarOverlay.INSTANCE.onRenderFull(event)) {
             ci.cancel();
         }
     }
@@ -36,10 +35,7 @@ public class BossHealthOverlayMixin {
                     target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;drawBar(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V"
             )
     )
-    private boolean renderBossBar(BossHealthOverlay instance, GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent) {
-        if (OverlaysConfig.INSTANCE.getVanillaBossbar().getRemoveBarWhenFull()) {
-            return bossEvent.getProgress() < 1.0F;
-        }
-        return true;
+    private boolean onRenderBar(BossHealthOverlay instance, GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent) {
+        return VanillaBossbarOverlay.INSTANCE.onRenderTitle(bossEvent);
     }
 }
