@@ -230,12 +230,8 @@ enum class MapShape(
 
     override fun toString() = displayName
 
-    private val index by lazy {
-        entries.indexOf(this)
-    }
-
     val next by lazy {
-        entries[(index + 1) % entries.size]
+        entries[(ordinal + 1) % entries.size]
     }
 
     fun drawMapPart(graphics: GuiGraphics, texture: ResourceLocation, map: IslandData, posX: Float = 0f, posY: Float = 0f, width: Int = 0, height: Int = 0, scaleX: Float = 0f, scaleY: Float = 0f, color: Int = -1) {

@@ -5,6 +5,7 @@ import earth.terrarium.olympus.client.utils.State
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.TexturedCircleDisplay
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -23,7 +24,6 @@ import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
-import tech.thatgravyboat.skycubed.utils.TexturedCircleDisplay
 
 @Module
 @RegisterOverlay
@@ -49,7 +49,7 @@ object MinimapOverlay : Overlay {
         it.button(Text.of("${if (MapOverlayConfig.rotateAroundPlayer) "Disable" else "Enable"} Rotation")) {
             MapOverlayConfig.rotateAroundPlayer = !MapOverlayConfig.rotateAroundPlayer
         }
-        it.button(Text.of(MapOverlayConfig.mapShape.next.displayName)) {
+        it.button(Text.of("Change to ${MapOverlayConfig.mapShape.next.displayName}")) {
             MapOverlayConfig.mapShape = MapOverlayConfig.mapShape.next
         }
         it.divider()
