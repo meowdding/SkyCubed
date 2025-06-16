@@ -12,6 +12,8 @@ import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.ui.modals.Modals
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import net.minecraft.Util
 import net.minecraft.client.resources.DefaultPlayerSkin
 import net.minecraft.network.chat.Component
@@ -20,8 +22,6 @@ import org.joml.Vector2i
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 import tech.thatgravyboat.skycubed.mixins.SkinManagerInvoker
 import tech.thatgravyboat.skycubed.utils.Codecs
 

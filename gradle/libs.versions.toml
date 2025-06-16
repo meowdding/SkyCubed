@@ -6,18 +6,28 @@ loom = "1.10-SNAPSHOT"
 loader = "0.16.10"
 
 # Dependencies
-fabric = "0.119.5+1.21.5"
-fabrickotlin = "1.13.0+kotlin.2.1.0"
-skyblockapi = "1.0.0-beta.85"
+ksp = "2.1.20-2.0.0"
+fabric = "0.119.9+1.21.5"
+fabrickotlin = "1.13.3+kotlin.2.1.21"
+skyblockapi = "1.0.0-beta.116"
 hypixelapi = "1.0.1+build.1+mc1.21"
-rconfig = "3.5.0"
-rconfigkt = "3.3.2"
-olympus = "1.3.0"
+rconfig = "3.5.6"
+rconfigkt = "3.5.10"
+olympus = "1.3.3"
 rlib = "3.5.0"
+meowdding-lib = "1.0.32"
+meowdding-patches = "1.0.2"
+meowdding-repo = "1.0.7"
+meowdding-resources = "1.0.7"
+meowdding-ktmodules = "1.0.3"
+meowdding-ktcodecs = "1.0.11"
 
 # Dev Dependencies
 devauth = "1.2.1"
 modmenu = "14.0.0-rc.2"
+
+# Compatibility
+rei = "19.0.806"
 
 [libraries]
 
@@ -28,13 +38,22 @@ fabrickotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "
 skyblockapi = { module = "tech.thatgravyboat:skyblock-api-1.21.5", version.ref = "skyblockapi" }
 hypixelapi = { module = "maven.modrinth:hypixel-mod-api", version.ref = "hypixelapi" }
 rconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.21.5", version.ref = "rconfig" }
-rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21.3", version.ref = "rconfigkt" }
+rconfigkt = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21.5", version.ref = "rconfigkt" }
 olympus = { module = "earth.terrarium.olympus:olympus-fabric-1.21.5", version.ref = "olympus" }
 rlib = { module = "com.teamresourceful.resourcefullib:resourcefullib-fabric-1.21.5", version.ref = "rlib" }
+meowdding-lib = { module = "me.owdding.meowdding-lib:meowdding-lib-1.21.5", version.ref = "meowdding-lib" }
+meowdding-patches = { module = "me.owdding.patches:patches", version.ref = "meowdding-patches" }
+meowdding-ktmodules = { module = "me.owdding.ktmodules:KtModules", version.ref = "meowdding-ktmodules" }
+meowdding-ktcodecs = { module = "me.owdding.ktcodecs:KtCodecs", version.ref = "meowdding-ktcodecs" }
 
 devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 
+rei = { module = "me.shedaniel:RoughlyEnoughItems-api-fabric", version.ref = "rei" }
+
 [plugins]
 
 loom = { id = "fabric-loom", version.ref = "loom" }
+meowdding-resources = { id = "me.owdding.resources", version.ref="meowdding-resources" }
+meowdding-repo = { id = "me.owdding.repo", version.ref = "meowdding-repo" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

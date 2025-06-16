@@ -1,15 +1,16 @@
 package tech.thatgravyboat.skycubed.features.overlays.pickuplog
 
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 
 enum class PickUpLogComponents(val display: (PickUpLogItem) -> Display) {
     ITEM_STACK({ Displays.item(it.stack, 10, 10) }),
     DIFFERENCE({
-        if (it.difference < 0) Displays.text(Text.of(it.difference.toString()).withColor(TextColor.RED))
-        else Displays.text(Text.of("+${it.difference}").withColor(TextColor.GREEN))
+        if (it.difference < 0) Displays.text(Text.of(it.difference.toFormattedString()).withColor(TextColor.RED))
+        else Displays.text(Text.of("+${it.difference.toFormattedString()}").withColor(TextColor.GREEN))
     }),
     NAME({ Displays.text(it.stack.hoverName) }),
     ;

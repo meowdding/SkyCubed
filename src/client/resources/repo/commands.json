@@ -63,37 +63,97 @@
     {
         "values": [ "g", "guild" ],
         "children": [
-            "top",
-            "toggle",
-            "tagcolor",
-            "tag",
-            "slow",
-            "settings",
-            "rename",
-            "quest",
-            "permissions",
-            "party",
-            "onlinemode",
-            "online",
-            "officerchat",
-            "notifications",
-            "mypermissions",
-            "motd",
-            "menu",
-            "members",
-            "log",
-            "leave",
-            "list",
-            "info",
-            "history",
-            "help",
-            "discord",
-            "disband",
-            "create",
-            "chat",
-            "accept",
             {
-                "values": [ "invite" ],
+                "name": "arg",
+                "greedy": true,
+                "suggestions": [
+                    "toggle",
+                    "slow",
+                    "settings",
+                    "quest",
+                    "permissions",
+                    "party",
+                    "onlinemode",
+                    "online",
+                    "notifications",
+                    "mypermissions",
+                    "menu",
+                    "members",
+                    "log",
+                    "leave",
+                    "list",
+                    "info",
+                    "history",
+                    "help",
+                    "discord",
+                    "disband",
+                    "confirm"
+                ]
+            },
+            {
+                "values": [
+                    "motd",
+                    "tag",
+                    "tagcolor"
+                ],
+                "children": [
+                    {
+                        "name": "args",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "top"
+                ],
+                "children": [
+                    {
+                        "name": "page",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "rename",
+                    "create"
+                ],
+                "children": [
+                    {
+                        "name": "name",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "chat",
+                    "officerchat"
+                ],
+                "children": [
+                    {
+                        "name": "message",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "join"
+                ],
+                "children": [
+                    {
+                        "name": "guild",
+                        "greedy": true
+                    }
+                ]
+            },
+            {
+                "values": [
+                    "invite",
+                    "accept"
+                ],
                 "children": [
                     {
                         "name": "player"
@@ -161,7 +221,10 @@
                     "scarleton",
                     "garden",
                     "jerry", "winter", "workshop",
-                    "backwater", "bayou"
+                    "backwater",
+                    "bayou",
+                    "galatea",
+                    "murkwater"
                 ]
             }
         ]
@@ -229,7 +292,7 @@
         ]
     },
     {
-        "values": [ "visit" ],
+        "values": [ "visit", "guest" ],
         "children": [
             {
                 "name": "player",
@@ -265,6 +328,163 @@
                     "KUUDRA_BURNING",
                     "KUUDRA_FIERY",
                     "KUUDRA_INFERNAL"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "status" ],
+        "children": [
+            {
+                "name": "status",
+                "suggestions": [
+                    "online",
+                    "offline",
+                    "away",
+                    "busy"
+                ],
+                "greedy": true
+            }
+        ]
+    },
+    {
+        "values": [ "show" ],
+        "children": [
+            {
+                "name": "item",
+                "suggestions": [
+                    "item",
+                    "helmet",
+                    "chestplate",
+                    "leggings",
+                    "boots",
+                    "necklace",
+                    "cloak",
+                    "belt",
+                    "bracelet",
+                    "pet",
+                    "1","2","3","4","5","6","7","8"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "viewstash" ],
+        "children": [
+            {
+                "name": "type",
+                "suggestions": [
+                    "material",
+                    "item"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "chat" ],
+        "children": [
+            {
+                "name": "type",
+                "suggestions": [
+                    "all",
+                    "party",
+                    "guild",
+                    "officer",
+                    "coop"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "myfilter" ],
+        "children": [
+            {
+                "name": "operation",
+                "greedy": true,
+                "suggestions": [
+                    "list",
+                    "clear"
+                ]
+            },
+            {
+                "values": [
+                    "add",
+                    "remove"
+                ],
+                "children": [
+                    {
+                        "name": "word",
+                        "greedy": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "rng", "rngmeter" ],
+        "children": [
+            {
+                "values": [ "catacombs", "cata" ],
+                "children": [
+                    {
+                        "name": "floor",
+                        "suggestions": [
+                            "1", "2", "3", "4", "5", "6", "7",
+                            "m1", "m2", "m3", "m4", "m5", "m6", "m7"
+                        ]
+                    }
+                ]
+            },
+            {
+                "values": [ "slayer" ],
+                "children": [
+                    {
+                        "name": "slayer_type",
+                        "suggestions": [
+                            "zombie",
+                            "spider",
+                            "blaze",
+                            "enderman",
+                            "vampire"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "args",
+                "greedy": true
+            }
+        ]
+    },
+    {
+        "values": [ "viewdungeonclass" ],
+        "children": [
+            {
+                "name": "class",
+                "suggestions": [
+                    "mage",
+                    "archer",
+                    "tank",
+                    "healer",
+                    "berserk"
+                ]
+            }
+        ]
+    },
+    {
+        "values": [ "viewbosscollection" ],
+        "children": [
+            {
+                "name": "floor",
+                "suggestions": [
+                    "catacombs_1",
+                    "catacombs_2",
+                    "catacombs_3",
+                    "catacombs_4",
+                    "catacombs_5",
+                    "catacombs_6",
+                    "catacombs_7",
+                    "kuudra"
                 ]
             }
         ]

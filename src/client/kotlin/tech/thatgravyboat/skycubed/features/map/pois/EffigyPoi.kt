@@ -3,6 +3,8 @@ package tech.thatgravyboat.skycubed.features.map.pois
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
@@ -11,8 +13,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Display
-import tech.thatgravyboat.skycubed.api.displays.Displays
 
 data class EffigyPoi(
     private val index: Int

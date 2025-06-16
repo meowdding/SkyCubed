@@ -1,31 +1,41 @@
 package tech.thatgravyboat.skycubed.config.notifications
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
+import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 
-@ConfigObject
-data class NotificationObject(
+class NotificationObject(
+    hideMessage: Boolean = true,
+    showAsToast: Boolean = true,
+    toastDuration: Int = 5000
+) : ObjectKt() {
 
-    @ConfigEntry(id = "hideChatMessage", translation = "config.skycubed.notification.hideChatMessage")
-    @Comment("", translation = "config.skycubed.notification.hideChatMessage.desc")
-    var hideMessage: Boolean = false,
+    var hideMessage by boolean("hideChatMessage", hideMessage) {
+        this.translation = "skycubed.config.notification.hide_chat_message"
+    }
 
-    @ConfigOption.Separator(value = "Toast Options", description = "Options for toast notifications.")
+    var showAsToast by boolean(showAsToast) {
+        this.translation = "skycubed.config.notification.show_as_toast"
+    }
 
-    @ConfigEntry(id = "showAsToast", translation = "config.skycubed.notification.showAsToast")
-    @Comment("", translation = "config.skycubed.notification.showAsToast.desc")
-    var showAsToast: Boolean = false,
-
-    @ConfigEntry(id = "toastDuration", translation = "config.skycubed.notification.toastDuration")
-    @Comment("", translation = "config.skycubed.notification.toastDuration.desc")
-    @ConfigOption.Range(min = 0.0, max = 30000.0)
-    @ConfigOption.Slider
-    var toastDuration: Int = 5000,
-) {
+    var toastDuration by int(toastDuration) {
+        this.translation = "skycubed.config.notification.toast_duration"
+        this.range = 0..30000
+        this.slider = true
+    }
 
     fun shouldCheck(): Boolean {
         return hideMessage || showAsToast
     }
+
+    fun copy(
+        hideMessage: Boolean? = null,
+        showAsToast: Boolean? = null,
+        toastDuration: Int? = null
+    ) : NotificationObject {
+        return NotificationObject(
+            hideMessage = hideMessage ?: this.hideMessage,
+            showAsToast = showAsToast ?: this.showAsToast,
+            toastDuration = toastDuration ?: this.toastDuration
+        )
+    }
+
 }

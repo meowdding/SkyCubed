@@ -1,20 +1,17 @@
 package tech.thatgravyboat.skycubed.config.items
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Category
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
+import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
+import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
-@ConfigInfo(titleTranslation = "config.skycubed.items.title")
-@Category("items")
-object ItemsConfig {
+object ItemsConfig : CategoryKt("items") {
 
-    @ConfigEntry(id = "itembars", translation = "config.skycubed.items.itembars")
-    @Comment("", translation = "config.skycubed.items.itembars.desc")
-    var itembars = true
+    override val name: TranslatableValue = Translated("skycubed.config.items")
 
-    @ConfigEntry(id = "cooldowns", translation = "config.skycubed.items.cooldowns")
-    @Comment("", translation = "config.skycubed.items.cooldowns.desc")
-    var cooldowns = true
+    var itembars by boolean(true) {
+        this.translation = "skycubed.config.items.itembars"
+    }
 
+    var cooldowns by boolean(true) {
+        this.translation = "skycubed.config.items.cooldowns"
+    }
 }

@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.utils
 
 import com.mojang.blaze3d.platform.InputConstants
-import earth.terrarium.olympus.client.pipelines.RoundedRectanage
+import earth.terrarium.olympus.client.pipelines.RoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.Slot
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.json.Json
 import java.io.InputStream
 import kotlin.reflect.jvm.javaType
@@ -46,19 +47,11 @@ internal fun GuiGraphics.fillRect(
     backgroundColor: Int, borderColor: Int = 0x0,
     borderSize: Int = 0, radius: Int = 0
 ) {
-    val xOffset = this.pose().last().pose().m30()
-    val yOffset = this.pose().last().pose().m31()
-    pushPop {
-        translate(-xOffset, -yOffset, 0f)
-        RoundedRectanage.draw(
-            this@fillRect, (x + xOffset).toInt(), (y + yOffset).toInt(), width, height,
-            backgroundColor, borderColor, width.coerceAtMost(height) * (radius / 100f), borderSize
-        )
-    }
+    RoundedRectangle.drawRelative(
+        this, x, y, width, height,
+        backgroundColor, borderColor, width.coerceAtMost(height) * (radius / 100f), borderSize
+    )
 }
-
-internal fun String.capitalize() =
-    replace("_", " ").lowercase().split(" ").joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
 
 internal fun Int.toOrdinal(): String {
     val suffixes = arrayOf("th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th")

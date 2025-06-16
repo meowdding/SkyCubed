@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component
 import org.apache.commons.lang3.function.Consumers
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
-import tech.thatgravyboat.skycubed.utils.pushPop
+import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 
 private const val PADDING = 10
 private const val WIDTH = 170
@@ -30,7 +30,14 @@ class NotificationsScreen : Overlay(McScreen.self) {
     override fun renderBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
         super.renderBackground(graphics, mouseX, mouseY, partialTicks)
         this.renderTransparentBackground(graphics)
-        graphics.blitSprite(RenderType::guiTextured, UIConstants.MODAL, this.width - WIDTH - PADDING * 2, 0, WIDTH + PADDING * 2, this.height)
+        graphics.blitSprite(
+            RenderType::guiTextured,
+            UIConstants.MODAL,
+            this.width - WIDTH - PADDING * 2,
+            0,
+            WIDTH + PADDING * 2,
+            this.height
+        )
     }
 
     override fun init() {
@@ -46,11 +53,13 @@ class NotificationsScreen : Overlay(McScreen.self) {
             .withChild(
                 Layouts.row()
                     .withPosition(x + PADDING, y + PADDING)
-                    .withChild(StringWidget(
-                        WIDTH - 24, 24,
-                        Component.translatable("skycubed.notifications"),
-                        McFont.self
-                    ).alignLeft())
+                    .withChild(
+                        StringWidget(
+                            WIDTH - 24, 24,
+                            Component.translatable("skycubed.notifications"),
+                            McFont.self
+                        ).alignLeft()
+                    )
                     .withChild(Widgets.button {
                         it.withSize(24, 24)
                         it.withRenderer(WidgetRenderers.icon<Button?>(UIIcons.CROSS).withCentered(12, 12))

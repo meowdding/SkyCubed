@@ -1,159 +1,223 @@
 package tech.thatgravyboat.skycubed.config.overlays
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigObject
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption.Range
-import com.teamresourceful.resourcefulconfig.api.types.entries.Observable
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
+import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
+import net.minecraft.util.ARGB
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
+import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
+import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
 
-@ConfigObject
-class InfoHudOverlay : Translatable {
+// This is because we need to use the property delegate in the init block
+private val EMPTY_PROPERTY = object {}
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.info.enabled")
-    @Comment("", translation = "config.skycubed.overlays.info.enabled.desc")
-    var enabled: Boolean = true
+open class OverlayConfig(private val title: String) : ObjectKt(), Translatable {
 
-    override fun getTranslationKey(): String = "Edit Info Hud Overlay"
+    override fun getTranslationKey(): String = this.title
 }
 
-@ConfigObject
-class RpgOverlay : Translatable {
+object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.rpg.enabled")
-    @Comment("", translation = "config.skycubed.overlays.rpg.enabled.desc")
-    var enabled: Boolean = true
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.info.enabled"
+    }
 
-    @ConfigEntry(id = "skyblockLevel", translation = "config.skycubed.overlays.rpg.skyblockLevel")
-    @Comment("", translation = "config.skycubed.overlays.rpg.skyblockLevel.desc")
-    var skyblockLevel: Boolean = false
-
-    override fun getTranslationKey(): String = "Edit RPG Overlay"
 }
 
-@ConfigObject
-class TextOverlays : Translatable {
+object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
-    @ConfigEntry(id = "healthEnabled", translation = "config.skycubed.overlays.healthEnabled")
-    @Comment("", translation = "config.skycubed.overlays.healthEnabled.desc")
-    var healthDisplay: HealthDisplay = HealthDisplay.NORMAL
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.rpg.enabled"
+    }
 
-    @ConfigEntry(id = "manaEnabled", translation = "config.skycubed.overlays.manaEnabled")
-    @Comment("", translation = "config.skycubed.overlays.manaEnabled.desc")
-    var manaEnabled: Boolean = true
-
-    @ConfigEntry(id = "defenseEnabled", translation = "config.skycubed.overlays.defenseEnabled")
-    @Comment("", translation = "config.skycubed.overlays.defenseEnabled.desc")
-    var defenseEnabled: Boolean = false
-
-    override fun getTranslationKey(): String = "Edit Text Overlays"
+    var skyblockLevel by boolean(false) {
+        this.translation = "skycubed.config.overlays.rpg.skyblock_level"
+    }
 }
 
-@ConfigObject
-class TabListOverlay : Translatable {
+object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.tablist.enabled")
-    @Comment("", translation = "config.skycubed.overlays.tablist.enabled.desc")
-    val enabled: Observable<Boolean> = Observable.of(true)
+    var healthDisplay by enum<HealthDisplay>(HealthDisplay.NORMAL) {
+        this.translation = "skycubed.config.overlays.health_display"
+    }
 
-    @ConfigEntry(id = "sorting", translation = "config.skycubed.overlays.tablist.sorting")
-    @Comment("", translation = "config.skycubed.overlays.tablist.sorting.desc")
-    val sorting: Observable<CompactTablistSorting> = Observable.of(CompactTablistSorting.NORMAL)
+    var manaEnabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.mana_enabled"
+    }
 
-    override fun getTranslationKey(): String = "Edit Tab List Overlay"
+    var defenseEnabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.defense_enabled"
+    }
 }
 
+object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.sacks.enabled"
+    }
 
-@ConfigObject
-class MapOverlay : Translatable {
+    var background by boolean(false) {
+        this.translation = "skycubed.config.overlays.sacks.background"
+    }
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.map.enabled")
-    @Comment("", translation = "config.skycubed.overlays.map.enabled.desc")
-    var enabled: Boolean = false
-
-    @ConfigEntry(id = "dungeonMap", translation = "config.skycubed.overlays.map.dungeonMap")
-    @Comment("", translation = "config.skycubed.overlays.map.dungeonMap.desc")
-    var dungeonMap: Boolean = true
-
-    override fun getTranslationKey(): String = "Edit Map Overlay"
+    var sackItems by strings {
+        this.condition = { false }
+    }
 }
 
-@ConfigObject
-class PickupLogOverlay : Translatable {
+object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.pickuplog.enabled")
-    @Comment("", translation = "config.skycubed.overlays.pickuplog.enabled.desc")
-    var enabled: Boolean = true
+    var enabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.trophy_fish.enabled"
+    }
 
-    @ConfigEntry(id = "compact", translation = "config.skycubed.overlays.pickuplog.compact")
-    @Comment("", translation = "config.skycubed.overlays.pickuplog.compact.desc")
-    var compact: Boolean = true
+    var background by boolean(false) {
+        this.translation = "skycubed.config.overlays.trophy_fish.background"
+    }
 
-    @ConfigEntry(id = "time", translation = "config.skycubed.overlays.pickuplog.time")
-    @Comment("", translation = "config.skycubed.overlays.pickuplog.time.desc")
-    @Range(min = 1.0, max = 30.0)
-    var time: Int = 5
+    var showNumbers by boolean(true) {
+        this.translation = "skycubed.config.overlays.trophy_fish.showNumbers"
+    }
 
-    @ConfigEntry(id = "appearance", translation = "config.skycubed.overlays.pickuplog.appearance")
-    @Comment("", translation = "config.skycubed.overlays.pickuplog.appearance.desc")
-    @ConfigOption.Draggable
-    var appearance: Array<PickUpLogComponents> = PickUpLogComponents.entries.toTypedArray()
+    var showTotal by boolean(true) {
+        this.translation = "skycubed.config.overlays.trophy_fish.showTotal"
+    }
 
-    override fun getTranslationKey(): String = "Edit Pickup Log Overlay"
+    var hideUnlocked by boolean(false) {
+        this.translation = "skycubed.config.overlays.trophy_fish.hideUnlocked"
+    }
+
 }
 
-@ConfigObject
-class CommissionOverlay : Translatable {
+object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.commissions.enabled")
-    @Comment("", translation = "config.skycubed.overlays.commissions.enabled.desc")
-    var enabled: Boolean = true
+    var enabled by observable(
+        boolean(true) {
+            this.translation = "skycubed.config.overlays.tablist.enabled"
+        },
+    ) { _, new ->
+        CompactTablist.onToggle(new)
+    }
 
-    @ConfigEntry(id = "format", translation = "config.skycubed.overlays.commissions.format")
-    @Comment("", translation = "config.skycubed.overlays.commissions.format.desc")
-    var format: Boolean = true
-
-    @ConfigEntry(id = "background", translation = "config.skycubed.overlays.commissions.background")
-    @Comment("", translation = "config.skycubed.overlays.commissions.background.desc")
-    var background: Boolean = false
-
-    override fun getTranslationKey(): String = "Edit Commissions Overlay"
+    var sorting by observable(
+        enum<CompactTablistSorting>(CompactTablistSorting.NORMAL) {
+            this.translation = "skycubed.config.overlays.tablist.sorting"
+        },
+    ) { _, _ ->
+        CompactTablist.onSortingUpdate()
+    }
 }
 
-@ConfigObject
-class NpcOverlay : Translatable {
+object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
 
-    @ConfigEntry(id = "enabled", translation = "config.skycubed.overlays.npc.enabled")
-    @Comment("", translation = "config.skycubed.overlays.npc.enabled.desc")
-    var enabled: Boolean = false
+    var enabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.map.enabled"
+    }
 
-    @ConfigEntry(id = "durationPerMessage", translation = "config.skycubed.overlays.npc.durationPerMessage")
-    @Comment("", translation = "config.skycubed.overlays.npc.durationPerMessage.desc")
-    var durationPerMessage: Float = 2.5f
+    var rotateAroundPlayer by boolean(false) {
+        this.translation = "skycubed.config.overlays.map.rotate"
+    }
 
-    @ConfigEntry(id = "durationForActionMessage", translation = "config.skycubed.overlays.npc.durationForActionMessage")
-    @Comment("", translation = "config.skycubed.overlays.npc.durationForActionMessage.desc")
-    var durationForActionMessage: Float = 10f
-
-    @ConfigEntry(id = "hideChatMessage", translation = "config.skycubed.overlays.npc.hideChatMessage")
-    @Comment("", translation = "config.skycubed.overlays.npc.hideChatMessage.desc")
-    var hideChatMessage: Boolean = true
-
-    override fun getTranslationKey(): String = "Edit NPC Overlay"
 }
 
-@ConfigObject
-class VanillaBossbar : Translatable {
-    @ConfigEntry(id = "removeBarWhenFull", translation = "config.skycubed.overlays.bossbar.removeBarWhenFull")
-    @Comment("", translation = "config.skycubed.overlays.bossbar.removeBarWhenFull.desc")
-    var removeBarWhenFull: Boolean = false
+object DungeonMapOverlayConfig : OverlayConfig("Edit Dungeon Map Overlay") {
 
-    @ConfigEntry(id = "removeWhenObjective", translation = "config.skycubed.overlays.bossbar.removeWhenObjective")
-    @Comment("", translation = "config.skycubed.overlays.bossbar.removeWhenObjective.desc")
-    var removeWhenObjective: Boolean = false
+    var enabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.dungeonmap.enabled"
+    }
 
-    override fun getTranslationKey(): String = "Edit Vanilla Bossbar"
+    init {
+        separator {
+            this.title = "skycubed.config.overlays.dungeonmap.room_colors"
+            this.description = "skycubed.config.overlays.dungeonmap.room_colors.desc"
+        }
+
+        for (type in DungeonRoomType.entries) {
+            val id = type.name.lowercase()
+            observable(
+                color("${id}_room", ARGB.opaque(type.defaultDisplayColor)) {
+                    this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
+                    this.name = Translated("skycubed.config.overlays.dungeonmap.room_colors.$id")
+                },
+            ) { _, new ->
+                type.displayColor = new
+            }.provideDelegate(this, ::EMPTY_PROPERTY)
+        }
+
+        separator {
+            this.title = "skycubed.config.overlays.dungeonmap.door_colors"
+            this.description = "skycubed.config.overlays.dungeonmap.door_colors.desc"
+        }
+
+        for (type in DungeonDoorType.entries) {
+            val id = type.name.lowercase()
+            observable(
+                color("${id}_door", ARGB.opaque(type.defaultDisplayColor)) {
+                    this.presets = DungeonRoomType.DEFAULT_ROOM_COLORS
+                    this.name = Translated("skycubed.config.overlays.dungeonmap.door_colors.$id")
+                },
+            ) { _, new ->
+                type.displayColor = new
+            }.provideDelegate(this, ::EMPTY_PROPERTY)
+        }
+    }
+}
+
+object PickupLogOverlayConfig : OverlayConfig("Edit Pickup Log Overlay") {
+
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.pickuplog.enabled"
+    }
+
+    var compact by boolean(true) {
+        this.translation = "skycubed.config.overlays.pickuplog.compact"
+    }
+
+    var time by int(5) {
+        this.translation = "skycubed.config.overlays.pickuplog.time"
+        this.range = 1..60
+        this.slider = true
+    }
+
+    var sackItems by boolean(false) {
+        this.translation = "skycubed.config.overlays.pickuplog.sack_items"
+    }
+
+    var appearance by draggable<PickUpLogComponents>(*PickUpLogComponents.entries.toTypedArray()) {
+        this.translation = "skycubed.config.overlays.pickuplog.appearance"
+    }
+}
+
+object CommissionOverlayConfig : OverlayConfig("Edit Commissions Overlay") {
+
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.commissions.enabled"
+    }
+
+    var format by boolean(true) {
+        this.translation = "skycubed.config.overlays.commissions.format"
+    }
+
+    var background by boolean(false) {
+        this.translation = "skycubed.config.overlays.commissions.background"
+    }
+}
+
+object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
+
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.npc.enabled"
+    }
+
+    var durationPerMessage by float(2.5f) {
+        this.translation = "skycubed.config.overlays.npc.duration_per_message"
+    }
+
+    var durationForActionMessage by float(10f) {
+        this.translation = "skycubed.config.overlays.npc.duration_for_action_message"
+    }
+
+    var hideChatMessage by boolean(true) {
+        this.translation = "skycubed.config.overlays.npc.hide_chat_message"
+    }
 }

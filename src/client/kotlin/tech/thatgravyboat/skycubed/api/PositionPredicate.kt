@@ -33,7 +33,7 @@ object PositionPredicates {
             .map(regex::matchEntire)
 
         if (parsedConditions.any { it == null }) {
-            SkyCubed.logger.warn("Invalid location condition: $condition")
+            SkyCubed.warn("Invalid location condition: $condition")
             return null
         }
 
@@ -46,7 +46,7 @@ object PositionPredicates {
                     "y" -> { pos: BlockPos -> pos.y }
                     "z" -> { pos: BlockPos -> pos.z }
                     else -> {
-                        SkyCubed.logger.warn("Invalid variable: $variable")
+                        SkyCubed.warn("Invalid variable: $variable")
                         null
                     }
                 } ?: return null
@@ -55,14 +55,14 @@ object PositionPredicates {
                     "<" -> { pos -> variableGetter(pos) < valueInt }
                     ">" -> { pos -> variableGetter(pos) > valueInt }
                     else -> {
-                        SkyCubed.logger.warn("Invalid operator: $operator")
+                        SkyCubed.warn("Invalid operator: $operator")
                         null
                     }
                 }
             }
 
         if (conditions.isEmpty()) {
-            SkyCubed.logger.warn("Invalid location condition: $condition")
+            SkyCubed.warn("Invalid location condition: $condition")
             return null
         } else if (conditions.size == 1) {
             return conditions.first()

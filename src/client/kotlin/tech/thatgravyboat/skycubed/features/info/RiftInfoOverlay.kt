@@ -1,16 +1,15 @@
 package tech.thatgravyboat.skycubed.features.info
 
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import tech.thatgravyboat.skyblockapi.api.area.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
+import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.profile.CurrencyAPI
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.displays.Displays
 
 object RiftInfoOverlay {
 
@@ -82,16 +81,12 @@ object RiftInfoOverlay {
     private fun isTimePaused(): Boolean = LocationAPI.area in pausedAreas
 
     fun render(graphics: GuiGraphics) {
-        val width = McClient.window.guiScaledWidth
-        val x = (width - 34) / 2
+        graphics.blitSprite(RenderType::guiTextured, CommonInfoDisplays.BASE, 0, 0, 34, 34)
 
-        graphics.blitSprite(RenderType::guiTextured, CommonInfoDisplays.BASE, x, 0, 34, 34)
-        baseDisplay.render(graphics, x, 0)
-
-        CommonInfoDisplays.locationDisplay.render(graphics, x, 2, 1f)
-        if (SlayerAPI.type != null) CommonInfoDisplays.slayerDisplay.render(graphics, x, 18, 1f)
-
-        infoDisplay.render(graphics, x + 34, 2)
-        currencyDisplay.render(graphics, x + 34, 18)
+        baseDisplay.render(graphics, 0, 0)
+        CommonInfoDisplays.locationDisplay.render(graphics, 0, 2, 1f)
+        if (SlayerAPI.type != null) CommonInfoDisplays.slayerDisplay.render(graphics, 0, 18, 1f)
+        infoDisplay.render(graphics, 34, 2)
+        currencyDisplay.render(graphics, 34, 18)
     }
 }

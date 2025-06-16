@@ -6,6 +6,16 @@ plugins {
     kotlin("jvm") version "2.0.20"
     alias(libs.plugins.loom)
     id("maven-publish")
+    alias(libs.plugins.meowdding.resources)
+    alias(libs.plugins.meowdding.repo)
+    alias(libs.plugins.ksp)
+}
+
+ksp {
+    arg("meowdding.modules.project_name", project.name)
+    arg("meowdding.modules.package", "me.owdding.skycubed.generated")
+    arg("meowdding.codecs.project_name", project.name)
+    arg("meowdding.codecs.package", "me.owdding.skycubed.generated")
 }
 
 base {
@@ -52,11 +62,19 @@ repositories {
     maven(url = "https://repo.hypixel.net/repository/Hypixel/")
     maven(url = "https://api.modrinth.com/maven")
     maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+    maven(url = "https://maven.nucleoid.xyz")
+    maven(url = "https://maven.shedaniel.me/")
     mavenLocal()
 }
 
 dependencies {
+    compileOnly(libs.meowdding.ktmodules)
+    ksp(libs.meowdding.ktmodules)
+    compileOnly(libs.meowdding.ktcodecs)
+    ksp(libs.meowdding.ktcodecs)
+
     minecraft(libs.minecraft)
+    @Suppress("UnstableApiUsage")
     mappings(loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-1.21.3:2024.12.07@zip")
@@ -71,6 +89,10 @@ dependencies {
     modImplementation(libs.rconfigkt) { isTransitive = false }
     modImplementation(libs.rlib)
     modImplementation(libs.olympus)
+    modImplementation(libs.meowdding.patches)
+    modImplementation(libs.meowdding.lib)
+
+    modImplementation(libs.rei) { isTransitive = false }
 
     include(libs.hypixelapi)
     include(libs.skyblockapi)
@@ -78,9 +100,19 @@ dependencies {
     include(libs.rconfigkt) { isTransitive = false }
     include(libs.rlib)
     include(libs.olympus)
+    include(libs.meowdding.patches)
+    include(libs.meowdding.lib)
 
     modRuntimeOnly(libs.devauth)
     modRuntimeOnly(libs.modmenu)
+}
+
+compactingResources {
+    basePath = "repo"
+}
+
+repo {
+    sacks { includeAll() }
 }
 
 tasks.processResources {
@@ -89,7 +121,12 @@ tasks.processResources {
     filesMatching(listOf("fabric.mod.json")) {
         expand("version" to project.version)
     }
+    with(copySpec {
+        from("src/client/lang").include("*.json").into("assets/skycubed/lang")
+    })
 }
+
+tasks.withType<ProcessResources>().configureEach { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
 
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"

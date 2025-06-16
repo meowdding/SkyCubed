@@ -1,9 +1,11 @@
 package tech.thatgravyboat.skycubed.utils
 
 import kotlinx.coroutines.runBlocking
-import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
+import me.owdding.ktmodules.Module
+import tech.thatgravyboat.skycubed.SkyCubed
 import java.util.*
 
+@Module
 object ContributorHandler {
     var contributors: Map<UUID, ContributorData> = emptyMap()
         private set
@@ -11,9 +13,7 @@ object ContributorHandler {
     init {
         runBlocking {
             try {
-                val data = this.javaClass.getResourceAsStream("/repo/contributors.json")
-                    ?.readJson<Map<UUID, ContributorData>>() ?: return@runBlocking
-                contributors = data
+                contributors = SkyCubed.loadFromRepo<Map<UUID, ContributorData>>("contributors") ?: emptyMap()
             } catch (e: Exception) {
                 println(e)
             }
