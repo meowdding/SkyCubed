@@ -9,11 +9,11 @@ import com.mojang.blaze3d.vertex.Tesselator
 import com.mojang.blaze3d.vertex.VertexFormat
 import earth.terrarium.olympus.client.pipelines.PipelineRenderer
 import me.owdding.lib.displays.Display
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.texture.AbstractTexture
 import net.minecraft.resources.ResourceLocation
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 
 class TexturedCircleDisplay(@JvmField val width: Int, @JvmField val height: Int, val texture: ResourceLocation) : Display {
     override fun getHeight(): Int = height
@@ -21,27 +21,21 @@ class TexturedCircleDisplay(@JvmField val width: Int, @JvmField val height: Int,
     override fun getWidth(): Int = width
 
     override fun render(graphics: GuiGraphics) {
-        val mc = Minecraft.getInstance()
-
         val matrix = graphics.pose().last().pose()
-        val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR)
+        val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX)
 
         buffer.addVertex(matrix, 0f, 0f, 0f)
             .setUv(-1f, -1f)
-            .setColor((0xFFFFFFFF).toInt())
         buffer.addVertex(matrix, 0f, height.toFloat(), 0f)
             .setUv(-1f, 1f)
-            .setColor((0xFFFFFFFF).toInt())
         buffer.addVertex(matrix, width.toFloat(), height.toFloat(), 0f)
             .setUv(1f, 1f)
-            .setColor((0xFFFFFFFF).toInt())
         buffer.addVertex(matrix, width.toFloat(), 0f, 0f)
             .setUv(1f, -1f)
-            .setColor((0xFFFFFFFF).toInt())
 
-        val sprite = mc.guiSprites.getSprite(texture)
+        val sprite = McClient.self.guiSprites.getSprite(texture)
 
-        val abstractTexture: AbstractTexture = mc.textureManager.getTexture(
+        val abstractTexture: AbstractTexture = McClient.self.textureManager.getTexture(
             sprite.atlasLocation()
         )
 

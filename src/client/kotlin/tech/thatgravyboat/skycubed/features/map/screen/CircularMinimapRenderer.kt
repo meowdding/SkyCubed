@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.Tesselator
 import com.mojang.blaze3d.vertex.VertexFormat
 import earth.terrarium.olympus.client.pipelines.PipelineRenderer
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.resources.ResourceLocation
@@ -32,8 +31,6 @@ object CircularMinimapRenderer {
         textureHeight: Int,
         color: Int = -1,
     ) {
-        val mc = Minecraft.getInstance()
-
         val x2 = x1 + uWidth
         val y2 = y1 + vHeight
 
@@ -58,7 +55,7 @@ object CircularMinimapRenderer {
             .setUv(maxU, minV)
             .setColor(color)
 
-        val gpuTexture: GpuTexture = mc.textureManager.getTexture(texture).texture
+        val gpuTexture: GpuTexture = McClient.self.textureManager.getTexture(texture).texture
 
         RenderSystem.setShaderTexture(0, gpuTexture)
 
