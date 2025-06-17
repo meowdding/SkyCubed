@@ -18,8 +18,8 @@ import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
-import tech.thatgravyboat.skycubed.config.overlays.RpgOverlay
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
+import tech.thatgravyboat.skycubed.utils.NGonDisplay
 import tech.thatgravyboat.skycubed.utils.blitSpritePercentX
 import tech.thatgravyboat.skycubed.utils.drawScaledString
 
@@ -66,12 +66,11 @@ object PlayerRpgOverlay : Overlay {
 
         graphics.blitSprite(RenderType::guiTextured, MAIN_BACKGROUND, 6, 3, 38, 41)
 
-        if (RpgOverlay.actualPlayer) {
+        if (RpgOverlayConfig.actualPlayer) {
             graphics.blitSprite(RenderType::guiTextured, MAIN_BACKGROUND, 6, 3, 38, 41)
 
             val emptyArmor = listOf(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)
-            val entity = DisplayEntityPlayer(McPlayer.skin, emptyArmor)
-            Displays.entity(entity, 28, 31, 30, 20f, 20f).render(graphics, 11, 30)
+            NGonDisplay(38, 41, 6, Displays.entity(DisplayEntityPlayer(McPlayer.skin, emptyArmor), 28, 31, 30, 20f, 20f)).render(graphics, 11, 30)
         } else {
             graphics.blitSprite(RenderType::guiTextured, PERSON, 11, 13, 28, 31)
         }
