@@ -76,15 +76,15 @@ object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
     }
 
     var showNumbers by boolean(true) {
-        this.translation = "skycubed.config.overlays.trophy_fish.showNumbers"
+        this.translation = "skycubed.config.overlays.trophy_fish.show_numbers"
     }
 
     var showTotal by boolean(true) {
-        this.translation = "skycubed.config.overlays.trophy_fish.showTotal"
+        this.translation = "skycubed.config.overlays.trophy_fish.show_total"
     }
 
     var hideUnlocked by boolean(false) {
-        this.translation = "skycubed.config.overlays.trophy_fish.hideUnlocked"
+        this.translation = "skycubed.config.overlays.trophy_fish.hide_unlocked"
     }
 
 }
