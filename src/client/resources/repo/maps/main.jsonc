@@ -1727,43 +1727,148 @@
         "bottomY": -106,
         "pois": [
             {
-                "type": "portal",
+                "tooltip": [
+                    "§aSpider\u0027s Den",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
                 "pos": {
                     "x": -196,
                     "z": -227
                 },
                 "destination": "spider",
-                "tooltip": [
-                    "§aSpider's Den",
-                    "",
-                    "§l§eClick to Warp!"
-                ]
+                "type": "portal"
             },
             {
-                "type": "portal",
+                "tooltip": [
+                    "§aTop of Nest",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
                 "pos": {
                     "x": -189,
                     "z": -310
                 },
                 "destination": "nest",
-                "tooltip": [
-                    "§aTop of Nest",
-                    "",
-                    "§l§eClick to Warp!"
-                ]
+                "type": "portal"
             },
             {
-                "type": "portal",
+                "tooltip": [
+                    "§aArachne\u0027s Sanctuary",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
                 "pos": {
                     "x": -282,
                     "z": -178
                 },
                 "destination": "arachne",
+                "type": "portal"
+            },
+            {
+                "name": "Haymitch",
                 "tooltip": [
-                    "§aArachne's Sanctuary",
+                    "$name",
                     "",
-                    "§l§eClick to Warp!"
-                ]
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -202,
+                    "z": -236
+                },
+                "texture": "http://textures.minecraft.net/texture/86b9f56b817676d513556584b32bb9c6aa0ddd512d1d1aadfe6a58a29052fef8",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§cBramass Beastslayer",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -271,
+                    "z": -196
+                },
+                "texture": "http://textures.minecraft.net/texture/aaef517998b9d93f62d00567cf6bc68851a34bd99f370698f8b6d62d9de4c3e4",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§cShaggy",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -278,
+                    "z": -182
+                },
+                "texture": "http://textures.minecraft.net/texture/258f88dcbd2af110c77cffaa00eab7a499c00133e61575599d9e06e61b8a24a6",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§cGrandma Wolf",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -281,
+                    "z": -190
+                },
+                "texture": "http://textures.minecraft.net/texture/839193c09bcad9d1f901afef4e2c0cad83aae1a570335c3ecbc7d05fde198795",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Rick",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -250,
+                    "z": -324
+                },
+                "texture": "http://textures.minecraft.net/texture/92396b0ad352b2531139c9dc4cef9a32350c7cc14ed7bcfc5185ce15a7a7d5eb",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§cSpider Tamer",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -298,
+                    "z": -194
+                },
+                "texture": "http://textures.minecraft.net/texture/8ef40a38742d18d33041fae0e43bb3405c21e576f6321bbee0636e7214d6eff2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bArchaeologist",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -360,
+                    "z": -290
+                },
+                "texture": "http://textures.minecraft.net/texture/685e83a09951a2c2db78360bc9546bb0d454975b5e5a344ca1daff408a67e9f1",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             }
         ]
     },
