@@ -73,7 +73,7 @@ object CircularMinimapRenderer {
 
     private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
         RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
-            .withLocation(id( "pipeline/minimap"))
+            .withLocation(id("pipeline/minimap"))
             .withFragmentShader(id("minimap_position_tex_color"))
             .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
             .withUniform("circlePosition", UniformType.VEC2)
