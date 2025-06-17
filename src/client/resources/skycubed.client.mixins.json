@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_21",
     "client": [
         "BossHealthOverlayAccessor",
+        "BossHealthOverlayMixin",
         "ChatComponentMixin",
         "EffectsInInventoryMixin",
         "GuiGraphicsMixin",
@@ -17,7 +18,8 @@
         "displayplayer.EquipmentLayerRendererMixin",
         "displayplayer.HumanoidArmorLayerMixin",
         "displayplayer.PlayerRendererMixin",
-        "displayplayer.SkullBlockRendererMixin"
+        "displayplayer.SkullBlockRendererMixin",
+        "BossEventMixin"
     ],
     "injectors": {
         "defaultRequire": 1
@@ -28,5 +30,5 @@
         "LivingEntityRendererMixin",
         "PlayerTabOverlayMixin",
         "displayplayer.PlayerRenderStateMixin"
-  ]
+    ]
 }

@@ -79,15 +79,15 @@ object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
     }
 
     var showNumbers by boolean(true) {
-        this.translation = "skycubed.config.overlays.trophy_fish.showNumbers"
+        this.translation = "skycubed.config.overlays.trophy_fish.show_numbers"
     }
 
     var showTotal by boolean(true) {
-        this.translation = "skycubed.config.overlays.trophy_fish.showTotal"
+        this.translation = "skycubed.config.overlays.trophy_fish.show_total"
     }
 
     var hideUnlocked by boolean(false) {
-        this.translation = "skycubed.config.overlays.trophy_fish.hideUnlocked"
+        this.translation = "skycubed.config.overlays.trophy_fish.hide_unlocked"
     }
 
 }
@@ -222,5 +222,15 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
 
     var hideChatMessage by boolean(true) {
         this.translation = "skycubed.config.overlays.npc.hide_chat_message"
+    }
+}
+
+object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
+    var removeWhenFull by boolean(false) {
+        this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_full"
+    }
+
+    var removeBarWhenObjective  by boolean(false) {
+        this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_objective"
     }
 }

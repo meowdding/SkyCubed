@@ -22,6 +22,7 @@ object OverlaysConfig : CategoryKt("overlays") {
         obj("pickupLog", PickupLogOverlayConfig) { this.translation = "skycubed.config.overlays.pickuplog" }
         obj("commissions", CommissionOverlayConfig) { this.translation = "skycubed.config.overlays.commissions" }
         obj("npc", NpcOverlayConfig) { this.translation = "skycubed.config.overlays.npc" }
+        obj("bossbar", BossbarOverlayConfig) { this.translation = "skycubed.config.overlays.bossbar" }
     }
 
     var coldOverlay by int(80) {

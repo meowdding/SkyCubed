@@ -21,6 +21,8 @@ import tech.thatgravyboat.skycubed.features.info.foraging.ParkInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.GlaciteInfoOverlay
+import tech.thatgravyboat.skycubed.features.overlays.barDisabled
+import tech.thatgravyboat.skycubed.features.overlays.disabled
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
 
 @RegisterOverlay
@@ -29,11 +31,22 @@ object InfoOverlay : Overlay {
     override val name: Component = Component.literal("Info Overlay")
     override val position: Position = Position()
         get() {
-            val bossOverlayY = (McClient.gui.bossOverlay as? BossHealthOverlayAccessor)
-                ?.events
+            val bossEvents = (McClient.gui.bossOverlay as? BossHealthOverlayAccessor)?.events
+            val modifier: Int = bossEvents.let { events ->
+                var modifier = 0
+                events?.forEach { event ->
+                    if (event.value.disabled) {
+                        modifier -= 19
+                    } else if (event.value.barDisabled) {
+                        modifier -= 5
+                    }
+                }
+                modifier
+            }
+            val bossOverlayY = bossEvents
                 ?.size
                 ?.takeIf { it > 0 }
-                ?.let { 17 + (it - 1) * 19 } ?: 0
+                ?.let { 17 + (it - 1) * 19 + modifier } ?: 0
 
             val (_, y) = OverlayPositions.info
 

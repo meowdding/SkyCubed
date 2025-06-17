@@ -121,6 +121,9 @@ tasks.processResources {
     filesMatching(listOf("fabric.mod.json")) {
         expand("version" to project.version)
     }
+    with(copySpec {
+        from("src/client/lang").include("*.json").into("assets/skycubed/lang")
+    })
 }
 
 tasks.withType<ProcessResources>().configureEach { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
