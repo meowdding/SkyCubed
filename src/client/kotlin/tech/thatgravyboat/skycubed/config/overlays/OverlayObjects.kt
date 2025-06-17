@@ -221,3 +221,13 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
         this.translation = "skycubed.config.overlays.npc.hide_chat_message"
     }
 }
+
+object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
+    var removeWhenFull by boolean(false) {
+        this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_full"
+    }
+
+    var removeBarWhenObjective  by boolean(false) {
+        this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_objective"
+    }
+}

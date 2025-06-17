@@ -239,6 +239,18 @@
                         "desc": "If enabled the chat messages will be hidden when an NPC message is displayed."
                     }
                 },
+                "bossbar": {
+                    "@value": "Vanilla Bossbar Overlay",
+                    "desc": "Settings for the Vanilla Bossbar Overlay.",
+                    "remove_bar_when_full": {
+                        "@value": "Remove Bar when Full",
+                        "desc": "Remove the Bar (Not Title) When full (great for static title Bossbar)."
+                    },
+                    "remove_bar_when_objective": {
+                        "@value": "Remove Bossbar with Objective",
+                        "desc": "Remove Full Bossbar including title when it has an objective (Objectives are also shown in the scoreboard)."
+                    }
+                },
                 "cold_overlay": {
                     "@value": "Cold Overlay Start",
                     "desc": "The temperature at which the cold overlay starts appearing.\n§lNote: Setting this to 0 will disable the cold overlay."
