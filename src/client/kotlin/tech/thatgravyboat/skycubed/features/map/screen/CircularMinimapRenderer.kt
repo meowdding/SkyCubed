@@ -61,7 +61,6 @@ object CircularMinimapRenderer {
         RenderSystem.setShaderTexture(0, gpuTexture)
 
         PipelineRenderer.draw(MAP_RENDER_PIPELINE, buffer.buildOrThrow()) {
-            it.bindSampler("Sampler0", gpuTexture)
             it.setUniform("scale", McClient.window.guiScale.toFloat())
             it.setUniform(
                 "circlePosition",
