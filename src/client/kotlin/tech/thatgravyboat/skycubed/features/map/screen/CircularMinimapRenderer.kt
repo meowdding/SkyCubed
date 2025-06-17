@@ -61,13 +61,13 @@ object CircularMinimapRenderer {
         RenderSystem.setShaderTexture(0, gpuTexture)
 
         PipelineRenderer.draw(MAP_RENDER_PIPELINE, buffer.buildOrThrow()) {
-            it.setUniform("scale", McClient.window.guiScale.toFloat())
+            it.setUniform("Scale", McClient.window.guiScale.toFloat())
             it.setUniform(
-                "circlePosition",
+                "CirclePosition",
                 circleCenterX,
                 circleCenterY,
             )
-            it.setUniform("radius", circleRadius)
+            it.setUniform("Radius", circleRadius)
         }
     }
 
@@ -76,10 +76,10 @@ object CircularMinimapRenderer {
             .withLocation(id( "pipeline/minimap"))
             .withFragmentShader(id("minimap_position_tex_color"))
             .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-            .withUniform("circlePosition", UniformType.VEC2)
+            .withUniform("CirclePosition", UniformType.VEC2)
             .withUniform("ScreenSize", UniformType.VEC2)
-            .withUniform("radius", UniformType.FLOAT)
-            .withUniform("scale", UniformType.FLOAT)
+            .withUniform("Radius", UniformType.FLOAT)
+            .withUniform("Scale", UniformType.FLOAT)
             .withDepthWrite(false)
             .build(),
     )
