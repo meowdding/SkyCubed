@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skycubed.SkyCubed.id
 
 object CircularMinimapRenderer {
     fun drawMapPart(
@@ -73,8 +74,8 @@ object CircularMinimapRenderer {
 
     private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
         RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
-            .withLocation("pipeline/minimap")
-            .withFragmentShader(ResourceLocation.fromNamespaceAndPath("skycubed", "minimap_position_tex_color"))
+            .withLocation(id( "pipeline/minimap"))
+            .withFragmentShader(id("minimap_position_tex_color"))
             .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
             .withUniform("circlePosition", UniformType.VEC2)
             .withUniform("ScreenSize", UniformType.VEC2)

@@ -12,7 +12,6 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.SkyCubed.id
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
@@ -24,12 +23,11 @@ import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundCircle
 
 @Module
 @RegisterOverlay
 object MinimapOverlay : Overlay {
-    private val CIRCLE_BACKGROUND = id("map_circle_background")
-
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
@@ -88,7 +86,7 @@ object MinimapOverlay : Overlay {
                     minimapWidget
                 )
                 MapShape.CIRCLE -> Displays.layered(
-                    TexturedCircleDisplay(90, 90, CIRCLE_BACKGROUND),
+                    TexturedCircleDisplay(90, 90, backgroundCircle),
                     minimapWidget
                 )
             }

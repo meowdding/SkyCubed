@@ -6,4 +6,5 @@ object SkyCubedTextures {
 
     val backgroundBox get() = id("background")
 
+    val backgroundCircle = id("map_circle_background")
 }
