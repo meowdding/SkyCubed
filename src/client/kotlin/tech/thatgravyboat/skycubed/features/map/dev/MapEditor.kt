@@ -1,14 +1,12 @@
 package tech.thatgravyboat.skycubed.features.map.dev
 
-import com.google.gson.JsonParser
 import com.mojang.serialization.JsonOps
 import me.owdding.ktmodules.Module
-import me.owdding.patches.utils.getPath
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.chat.CommonComponents
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityAttachment
-import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.decoration.ArmorStand
 import org.joml.Vector2i
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
@@ -16,7 +14,6 @@ import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.LivingEntityRenderEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.PlayerRenderEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.utils.extentions.asString
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toPrettyString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
@@ -27,10 +24,10 @@ import tech.thatgravyboat.skycubed.api.accessors.glow
 import tech.thatgravyboat.skycubed.api.accessors.glowColor
 import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
+import tech.thatgravyboat.skycubed.features.map.dev.skins.SkinSelector
 import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import java.nio.file.StandardOpenOption
-import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.writeText
@@ -86,7 +83,7 @@ object MapEditor {
                             it.toPrettyString(),
                             Charsets.UTF_8,
                             StandardOpenOption.TRUNCATE_EXISTING,
-                            StandardOpenOption.CREATE
+                            StandardOpenOption.CREATE,
                         )
                 }
             }
@@ -95,6 +92,7 @@ object MapEditor {
 
     @Subscription
     private fun PlayerRenderEvent.onRender() {
+        if (!enabled) return
         this.entity?.glow = true
         this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF0000
 
@@ -108,9 +106,10 @@ object MapEditor {
 
     @Subscription
     private fun LivingEntityRenderEvent.onRender() {
+        if (!enabled) return
+        if (this.entity is ArmorStand) return
         this.entity?.glow = true
-        this.entity?.glowColor = 0xFF00
-        this.state?.isUpsideDown = true
+        this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF
     }
 
     @Subscription
@@ -130,9 +129,9 @@ object MapEditor {
             mutableListOf(
                 "\$name",
                 "",
-                "§7§lClick to view wiki!"
+                "§7§lClick to view wiki!",
             ),
-            entity.posAsVec2i()
+            entity.posAsVec2i(),
         ).also {
             Text.of("Created new poi").send()
             Maps.currentIsland?.pois?.add(it)
@@ -142,16 +141,7 @@ object MapEditor {
 
     @OptIn(ExperimentalEncodingApi::class)
     private val Entity.texture: String
-        get() = runCatching {
-            when (this) {
-                is Player -> this.gameProfile.properties.get("textures").first().value().let {
-                    JsonParser.parseString(Base64.decode(it).decodeToString()).getPath("textures.SKIN.url")
-                        .asString("Unable to find skin :(((")
-                }
-
-                else -> ":("
-            }
-        }.getOrElse {
+        get() = runCatching { SkinSelector.getSkin(this) }.getOrElse {
             it.printStackTrace()
             "Failure :("
         }
