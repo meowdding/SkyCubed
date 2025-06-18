@@ -17,7 +17,7 @@ out vec4 fragColor;
 void main() {
     vec4 color = texture(Sampler0, texCoord0) * vertexColor;
 
-    vec2 minimapPosition = CirclePosition * vec2(scale);
+    vec2 minimapPosition = CirclePosition * vec2(Scale);
 
     vec2 fragmentPosition = vec2(gl_FragCoord.x, ScreenSize.y - gl_FragCoord.y);
 

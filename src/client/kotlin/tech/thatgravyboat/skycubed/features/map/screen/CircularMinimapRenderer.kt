@@ -35,9 +35,9 @@ object CircularMinimapRenderer {
         val x2 = x1 + uWidth
         val y2 = y1 + vHeight
 
-        val minU = (uOffset + 0.0f) / textureWidth
+        val minU = uOffset / textureWidth
         val maxU = (uOffset + uWidth) / textureWidth
-        val minV = (vOffset + 0.0f) / textureHeight
+        val minV = vOffset / textureHeight
         val maxV = (vOffset + vHeight) / textureHeight
 
         val matrix = graphics.pose().last().pose()
@@ -73,8 +73,8 @@ object CircularMinimapRenderer {
 
     private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
         RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
-            .withLocation(id("pipeline/minimap"))
-            .withFragmentShader(id("minimap_position_tex_color"))
+            .withLocation(id("pipeline/circular_map_background"))
+            .withFragmentShader(id("map/circular_map_background"))
             .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
             .withUniform("CirclePosition", UniformType.VEC2)
             .withUniform("ScreenSize", UniformType.VEC2)
