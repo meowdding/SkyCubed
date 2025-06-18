@@ -108,9 +108,6 @@ object PityOverlay : Overlay {
         ),
         ;
 
-        operator fun component1() = blocks
-        operator fun component2() = score
-
         companion object {
             fun fromBlock(block: MiningBlock) = PityBlock.entries.firstOrNull { block in it.blocks }
         }
