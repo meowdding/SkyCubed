@@ -10,7 +10,6 @@ import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
-import tech.thatgravyboat.skycubed.utils.observable2
 
 // This is because we need to use the property delegate in the init block
 private val EMPTY_PROPERTY = object {}
@@ -121,9 +120,13 @@ object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
         this.translation = "skycubed.config.overlays.map.rotate"
     }
 
-    var mapShape by observable2(enum(MapShape.SQUARE) {
-        this.translation = "skycubed.config.overlays.map.shape"
-    }) { MinimapOverlay.updateDisplay() }
+    var mapShape by observable(
+        enum(MapShape.SQUARE) {
+            this.translation = "skycubed.config.overlays.map.shape"
+        }
+    ) { _, _ ->
+        MinimapOverlay.updateDisplay()
+    }
 
 }
 
