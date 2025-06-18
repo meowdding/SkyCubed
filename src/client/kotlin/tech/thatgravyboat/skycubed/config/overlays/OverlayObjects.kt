@@ -49,6 +49,10 @@ object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
     var defenseEnabled by boolean(false) {
         this.translation = "skycubed.config.overlays.defense_enabled"
     }
+
+    var speedEnabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.speed_enabled"
+    }
 }
 
 object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
