@@ -22,8 +22,8 @@ object CircularMinimapRenderer {
         circleCenterX: Float,
         circleCenterY: Float,
         circleRadius: Float,
-        x1: Int,
-        y1: Int,
+        x: Int,
+        y: Int,
         uOffset: Float,
         vOffset: Float,
         uWidth: Int,
@@ -32,8 +32,8 @@ object CircularMinimapRenderer {
         textureHeight: Int,
         color: Int = -1,
     ) {
-        val x2 = x1 + uWidth
-        val y2 = y1 + vHeight
+        val x2 = x + uWidth
+        val y2 = y + vHeight
 
         val minU = uOffset / textureWidth
         val maxU = (uOffset + uWidth) / textureWidth
@@ -43,16 +43,16 @@ object CircularMinimapRenderer {
         val matrix = graphics.pose().last().pose()
         val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR)
 
-        buffer.addVertex(matrix, x1.toFloat(), x1.toFloat(), 0f)
+        buffer.addVertex(matrix, x.toFloat(), x.toFloat(), 0f)
             .setUv(minU, minV)
             .setColor(color)
-        buffer.addVertex(matrix, x1.toFloat(), y2.toFloat(), 0f)
+        buffer.addVertex(matrix, x.toFloat(), y2.toFloat(), 0f)
             .setUv(minU, maxV)
             .setColor(color)
         buffer.addVertex(matrix, x2.toFloat(), y2.toFloat(), 0f)
             .setUv(maxU, maxV)
             .setColor(color)
-        buffer.addVertex(matrix, x2.toFloat(), x1.toFloat(), 0f)
+        buffer.addVertex(matrix, x2.toFloat(), x.toFloat(), 0f)
             .setUv(maxU, minV)
             .setColor(color)
 
