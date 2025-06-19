@@ -3408,43 +3408,118 @@
         "bottomY": -123,
         "pois": [
             {
-                "type": "portal",
+                "tooltip": [
+                    "§aThe End",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
                 "pos": {
                     "x": -495,
                     "z": -275
                 },
                 "destination": "end",
-                "tooltip": [
-                    "§aThe End",
-                    "",
-                    "§l§eClick to Warp!"
-                ]
+                "type": "portal"
             },
             {
-                "type": "portal",
+                "tooltip": [
+                    "§aThe Dragon\u0027s Nest",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
                 "pos": {
                     "x": -606,
                     "z": -275
                 },
                 "destination": "drag",
-                "tooltip": [
-                    "§aThe Dragon's Nest",
-                    "",
-                    "§l§eClick to Warp!"
-                ]
+                "type": "portal"
             },
             {
-                "type": "portal",
+                "tooltip": [
+                    "§aThe Void Sepulture",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
                 "pos": {
                     "x": -567,
                     "z": -318
                 },
                 "destination": "void",
+                "type": "portal"
+            },
+            {
+                "name": "§5Pearl Dealer",
                 "tooltip": [
-                    "§aThe Void Sepulture",
+                    "$name",
                     "",
-                    "§l§eClick to Warp!"
-                ]
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -504,
+                    "z": -284
+                },
+                "texture": "http://textures.minecraft.net/texture/77f7b51ca6966be2decfeb3d585d2d654193b03cb8c13658a4369b5914dfe86c",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§dGuber",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -494,
+                    "z": -241
+                },
+                "texture": "http://textures.minecraft.net/texture/8fcc53a860c4d621bb75fc86b97b12cb3d6d977f8eb983e7458f5e261b3d1279",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Lone Adventurer",
+                "tooltip": [
+                    "$name (Step 1 \u0026 2)",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -524,
+                    "z": -275
+                },
+                "texture": "http://textures.minecraft.net/texture/8d34f38c1bb106e11908ad3cc90162c18b863d678265c84a84a358903f8f7a1c",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§5Tyzzo",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -597,
+                    "z": -272
+                },
+                "texture": "http://textures.minecraft.net/texture/63c4edd1c27db3162e92f870810fce3646dcbf8ef5ebb46f2ddad5d88425e2ee",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Lone Adventurer",
+                "tooltip": [
+                    "$name (After Step 2)",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -588,
+                    "z": -270
+                },
+                "texture": "http://textures.minecraft.net/texture/8d34f38c1bb106e11908ad3cc90162c18b863d678265c84a84a358903f8f7a1c",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             }
         ]
     },
