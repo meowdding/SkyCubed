@@ -3728,5 +3728,482 @@
                 "type": "npc"
             }
         ]
+    },
+    {
+        "island": "GALATEA",
+        "default": "https://femboy-hooters.net/u/5cYfbe.png",
+        "images": [
+            {
+                "condition": {
+                    "position": "z < 22 && z > -22 && y < 112 && x < -700",
+                    "condition": "position"
+                },
+                "image": "https://femboy-hooters.net/u/fExC7x.png"
+            },
+            {
+                "condition": {
+                    "position": "y < 86",
+                    "condition": "position"
+                },
+                "image": "https://femboy-hooters.net/u/tGv2V7.png"
+            },
+            {
+                "condition": {
+                    "conditions": [
+                        {
+                            "position": "y < 97 && x > -605 && z < 12",
+                            "condition": "position"
+                        },
+                        {
+                            "position": "y < 105 && x > -595 && z > 11",
+                            "condition": "position"
+                        }
+                    ],
+                    "condition": "or"
+                },
+                "image": "https://femboy-hooters.net/u/aMSJaT.png"
+            }
+        ],
+        "bottomY": 110,
+        "topX": -770,
+        "topY": -97,
+        "bottomX": -527,
+        "pois": [
+            {
+                "name": "§bHina",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -553,
+                    "z": -16
+                },
+                "texture": "http://textures.minecraft.net/texture/513be4d37a35840024b26f8d623ff14119e761784592f1a2cc4b01fca8fb7b2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bSwoop",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -579,
+                    "z": -23
+                },
+                "texture": "http://textures.minecraft.net/texture/375c57dcc85a4c6037f52af00fdcef404f746276c0d31a22b2a550c6aed932ee",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bDavid Hunterborough",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -593,
+                    "z": -13
+                },
+                "texture": "http://textures.minecraft.net/texture/62c1a365dbabf9098962d27bda8919a94253c91ccb6c353da4f6406f4316ffab",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bKysha",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -601,
+                    "z": -12
+                },
+                "texture": "http://textures.minecraft.net/texture/613328c0a46f97f1e7af86c45934aca87008612721b51b3efeae75a5f40c80fd",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bAmaury",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -578,
+                    "z": 2
+                },
+                "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bAlbert",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -592,
+                    "z": 9
+                },
+                "texture": "http://textures.minecraft.net/texture/86e7bcfc056908ce267062140c5343503fb08bde81da9962a1b6649aa9591098",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bLoras",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -593,
+                    "z": 15
+                },
+                "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bAuryon",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -557,
+                    "z": 49
+                },
+                "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bPounce",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -598,
+                    "z": -20
+                },
+                "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bOden",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -584,
+                    "z": -40
+                },
+                "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Banker Bonsai",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -599,
+                    "z": -37
+                },
+                "texture": "http://textures.minecraft.net/texture/9c78b9459f8c64c9d62cc227224c6db7fa31cb31cbe144907e10bb70eb17b60f",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bAlan",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -625,
+                    "z": -36
+                },
+                "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§aTeddy",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -656,
+                    "z": -39
+                },
+                "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bKiara",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -654,
+                    "z": -70
+                },
+                "texture": "http://textures.minecraft.net/texture/8af610d5c4aa82943cfbb47b437adb84e0f4e3781dbfed70a7f18e60d778c56f",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§dCoral",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -626,
+                    "z": -87
+                },
+                "texture": "http://textures.minecraft.net/texture/fce6604157fc4ab5591e4bcf507a749918ee9c41e357d47376e0ee7342074c90",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bJaeger",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -651,
+                    "z": -24
+                },
+                "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bAgatha",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -648,
+                    "z": -3
+                },
+                "texture": "http://textures.minecraft.net/texture/dd2180e4bd153cb49ba4906098604c17858ea4516ffbf04cfe50feae4be476f2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bNemo",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -619,
+                    "z": -6
+                },
+                "texture": "http://textures.minecraft.net/texture/a495258d8d7da5a3894a0c4f127517a86f3ba1c063fdeb0d8bcee0faf7413a10",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bMartin",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -579,
+                    "z": 32
+                },
+                "texture": "http://textures.minecraft.net/texture/c228d11c94322aa26aafc8f46b54cf7eea7387e77ebd19f4f20dfe877bffa655",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bTalia",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -615,
+                    "z": 3
+                },
+                "texture": "http://textures.minecraft.net/texture/abdb6f57df6e84518f67b4235412774c4f61c72b91a2b740b06a50a0f7347e21",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bVaeri",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -688,
+                    "z": -35
+                },
+                "texture": "http://textures.minecraft.net/texture/8af610d5c4aa82943cfbb47b437adb84e0f4e3781dbfed70a7f18e60d778c56f",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bBoris",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -684,
+                    "z": 65
+                },
+                "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bSawyer",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -691,
+                    "z": 82
+                },
+                "texture": "http://textures.minecraft.net/texture/d50ae3482d83898e0e55c1516b1ead1a7d1cd54ccf4c24343869a28bd5621f04",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§3Brian",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -628,
+                    "z": 48
+                },
+                "texture": "http://textures.minecraft.net/texture/2ce524d14f6fbe764f87fb3a25109335e494606f9ddd1193eb04b01be9d91f17",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Soul Campfire Initiate",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -624,
+                    "z": 48
+                },
+                "texture": "http://textures.minecraft.net/texture/a8856eaafad96d76fa3b5edd0e3b5f45ee49a3067306ad94df9ab3bd5b2d142d",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Soul Campfire Adept",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -624,
+                    "z": 52
+                },
+                "texture": "http://textures.minecraft.net/texture/a8856eaafad96d76fa3b5edd0e3b5f45ee49a3067306ad94df9ab3bd5b2d142d",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Soul Campfire Initiate",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -628,
+                    "z": 52
+                },
+                "texture": "http://textures.minecraft.net/texture/a8856eaafad96d76fa3b5edd0e3b5f45ee49a3067306ad94df9ab3bd5b2d142d",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bDax",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -705,
+                    "z": 34
+                },
+                "texture": "http://textures.minecraft.net/texture/8d5c739358283ddb0ed30df07f7438e18424b0186b595df2266e0dbde34655f2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§aRosemary",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -703,
+                    "z": 4
+                },
+                "texture": "http://textures.minecraft.net/texture/19043d3d31c5e76fda79493fd13e6f8f3161a1a3d8ec74c65792f03406a3a1a3",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            }
+        ]
     }
 ]

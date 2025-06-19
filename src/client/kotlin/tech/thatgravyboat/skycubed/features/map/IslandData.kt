@@ -13,6 +13,7 @@ import tech.thatgravyboat.skyblockapi.utils.codecs.EnumCodec
 import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.features.map.texture.MapImage
+import kotlin.math.abs
 
 data class IslandData(
     val island: SkyBlockIsland,
@@ -33,8 +34,8 @@ data class IslandData(
         .maximumSize(25)
         .build()
 
-    val width = bottomX - topX
-    val height = bottomY - topY
+    val width = abs(bottomX - topX)
+    val height = abs(bottomY - topY)
 
     init {
         pois.forEach {
