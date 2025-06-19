@@ -3610,17 +3610,47 @@
         "offsetY": -579,
         "pois": [
             {
-                "type": "portal",
-                "pos": {
-                    "x": 3,
-                    "z": 87
-                },
-                "destination": "deep",
                 "tooltip": [
                     "§aThe Deep Caverns",
                     "",
                     "§l§eClick to Warp!"
-                ]
+                ],
+                "pos": {
+                    "x": -9,
+                    "z": -492
+                },
+                "destination": "deep",
+                "type": "portal"
+            },
+            {
+                "name": "§bLift Operator",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 34,
+                    "z": -563
+                },
+                "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§dRhys",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 20,
+                    "z": -564
+                },
+                "texture": "http://textures.minecraft.net/texture/6b20b23c1aa2be0270f016b4c90d6ee6b8330a17cfef87869d6ad60b2ffbf3b5",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             }
         ]
     }
