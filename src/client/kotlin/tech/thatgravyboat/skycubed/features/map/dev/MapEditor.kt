@@ -93,6 +93,7 @@ object MapEditor {
     @Subscription
     private fun PlayerRenderEvent.onRender() {
         if (!enabled) return
+        if (entity?.uuid?.version() == 4) return
         this.entity?.glow = true
         this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF0000
 
@@ -107,6 +108,7 @@ object MapEditor {
     @Subscription
     private fun LivingEntityRenderEvent.onRender() {
         if (!enabled) return
+        if (entity?.uuid?.version() == 4) return
         if (this.entity is ArmorStand) return
         this.entity?.glow = true
         this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF
