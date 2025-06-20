@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays.commissions
+package tech.thatgravyboat.skycubed.features.overlays.mining.commissions
 
 import com.google.gson.JsonObject
 import com.mojang.serialization.Codec
