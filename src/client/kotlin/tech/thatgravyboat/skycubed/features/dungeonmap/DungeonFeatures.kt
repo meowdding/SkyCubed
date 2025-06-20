@@ -12,7 +12,7 @@ object DungeonFeatures {
 
     var currentInstance: DungeonInstance? = null
 
-    @Subscription(Subscription.LOWEST)
+    @Subscription(priority = Subscription.LOWEST)
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
     fun onEnterDungeon(event: ServerChangeEvent) {
         currentInstance = DungeonInstance(event.name)
