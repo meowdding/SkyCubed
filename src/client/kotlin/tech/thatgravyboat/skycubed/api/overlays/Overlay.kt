@@ -32,14 +32,14 @@ interface Overlay {
 
     fun setX(x: Int) {
         val width = McClient.window.guiScaledWidth
-        if (bounds.first == 0 || bounds.first >= width) return
-        position.x = if (x < width / 2) x.coerceAtLeast(0) else (x - width).coerceAtMost(-bounds.first)
+        if (bounds.first == 0 || bounds.first * position.scale >= width) return
+        position.x = if (x < width / 2) x.coerceAtLeast(0) else (x - width).coerceAtMost((-bounds.first * position.scale).toInt())
     }
 
     fun setY(y: Int) {
         val height = McClient.window.guiScaledHeight
-        if (bounds.second == 0 || bounds.second >= height) return
-        position.y = if (y < height / 2) y.coerceAtLeast(0) else (y - height).coerceAtMost(-bounds.second)
+        if (bounds.second == 0 || bounds.second * position.scale >= height) return
+        position.y = if (y < height / 2) y.coerceAtLeast(0) else (y - height).coerceAtMost((-bounds.second * position.scale).toInt())
     }
 
     fun setScale(scale: Float) {

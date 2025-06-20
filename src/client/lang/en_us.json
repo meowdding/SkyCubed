@@ -121,6 +121,10 @@
                     "rotate": {
                         "@value": "Rotate Map",
                         "desc": "Rotate the map around the player."
+                    },
+                    "shape": {
+                        "@value": "Map Shape",
+                        "desc": "The shape that the map should be."
                     }
                 },
                 "dungeonmap": {
