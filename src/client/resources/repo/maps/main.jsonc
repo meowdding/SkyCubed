@@ -3691,8 +3691,8 @@
                     "§l§eClick to Warp!"
                 ],
                 "pos": {
-                    "x": -3,
-                    "z": -87
+                    "x": 3,
+                    "z": 87
                 },
                 "destination": "deep",
                 "type": "portal"
