@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import me.owdding.ktcodecs.IncludedCodec
 import org.joml.Vector2i
 import java.util.function.Function
 
@@ -22,4 +23,7 @@ object Codecs {
             this.fieldOf(key).forGetter(Function.identity())
         ).apply(it, Function.identity()) }
     }
+
+    @IncludedCodec
+    val VEC2I: Codec<Vector2i> = vec2i("x", "z")
 }

@@ -56,7 +56,7 @@ class DungeonInstance(val serverId: String) {
         floor = DungeonAPI.dungeonFloor?.floorNumber ?: -1
     }
 
-    @Subscription(Subscription.LOWEST)
+    @Subscription(priority = Subscription.LOWEST)
     fun onTabWidgetChange(event: TabListChangeEvent) = runCatching {
         var index = 0
         DungeonAPI.teammates.filterNot { it === DungeonAPI.ownPlayer }.forEach { player ->

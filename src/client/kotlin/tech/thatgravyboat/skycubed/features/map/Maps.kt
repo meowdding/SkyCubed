@@ -34,10 +34,10 @@ object Maps {
     )
     private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 
-    private val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
+    val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
 
-    private var currentIsland: IslandData? = null
+    var currentIsland: IslandData? = null
 
     init {
         runBlocking {

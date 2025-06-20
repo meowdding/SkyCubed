@@ -16,8 +16,8 @@ interface Poi {
     val significant: Boolean
         get() = true
 
-    val tooltip: List<Component>
-    val position: Vector2i
+    val tooltip: MutableList<Component>
+    var position: Vector2i
     val bounds: Vector2i
     val display: Display
 
