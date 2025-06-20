@@ -56,14 +56,10 @@ object MinimapOverlay : Overlay {
         }
     }
 
-    @Subscription
-    fun onChange(event: IslandChangeEvent) {
-        updateDisplay()
-    }
-
+	@Subscription(IslandChangeEvent::class)
     fun updateDisplay() {
         display = getMapsForLocationOrNull()?.let {
-            val minimapWidget =  Displays.center(
+            val minimapWidget = Displays.center(
                 90, 90,
                 Displays.renderable(
                     MapsWidget(

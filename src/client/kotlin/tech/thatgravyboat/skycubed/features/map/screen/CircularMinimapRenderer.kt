@@ -62,11 +62,7 @@ object CircularMinimapRenderer {
 
         PipelineRenderer.draw(MAP_RENDER_PIPELINE, buffer.buildOrThrow()) {
             it.setUniform("Scale", McClient.window.guiScale.toFloat())
-            it.setUniform(
-                "CirclePosition",
-                circleCenterX,
-                circleCenterY,
-            )
+            it.setUniform("CirclePosition", circleCenterX, circleCenterY)
             it.setUniform("Radius", circleRadius)
         }
     }
