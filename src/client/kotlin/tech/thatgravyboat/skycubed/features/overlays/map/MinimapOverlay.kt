@@ -64,8 +64,8 @@ object MinimapOverlay : Overlay {
                 Displays.renderable(
                     MapsWidget(
                         it,
-                        GettingState.of { McPlayer.self!!.position().x + Maps.getCurrentOffset().x },
-                        GettingState.of { McPlayer.self!!.position().z + Maps.getCurrentOffset().z },
+                        GettingState.of { McPlayer.position!!.x + Maps.getCurrentOffset().x },
+                        GettingState.of { McPlayer.position!!.z + Maps.getCurrentOffset().z },
                         State.of(1f),
                         { false },
                         86,
