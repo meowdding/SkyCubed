@@ -5,6 +5,8 @@ import com.mojang.serialization.DataResult
 import me.owdding.lib.displays.Display
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
+import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 
 interface Poi {
 
@@ -31,6 +33,18 @@ interface Poi {
             "effigy" to EffigyPoi.CODEC,
             "conditional" to ConditionalPoi.CODEC,
         )
+
+        val poiTypes get() = types.keys
+
+        fun createByType(type: String, vector2i: Vector2i): Poi? = when (type) {
+            "portal" -> PortalPoi(mutableListOf(), vector2i, "")
+            "npc" -> NpcPoi("", "https://wiki.hypixel.net/\$name", "", mutableListOf(), vector2i)
+            "effigy" -> EffigyPoi(0)
+            else -> {
+                Text.of("Can't created type $type").send()
+                null
+            }
+        }
 
         val CODEC: Codec<Poi> = Codec.STRING.partialDispatch(
             "type",

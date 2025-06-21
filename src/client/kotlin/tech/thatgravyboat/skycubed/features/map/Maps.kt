@@ -31,6 +31,7 @@ object Maps {
         "dwarves",
         "dungeon_hub",
         "jerrys_workshop",
+        "backwater",
     )
     private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 

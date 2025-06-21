@@ -33,7 +33,7 @@ class MapsWidget(
     width: Int,
     height: Int,
 
-    val rotate: State<Boolean> = State.of(false)
+    val rotate: State<Boolean> = State.of(false),
 ) : BaseWidget(width, height) {
 
     private var xOffset by xOffset
@@ -58,7 +58,7 @@ class MapsWidget(
                     Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
                     (xOffset + width / 2).toFloat(),
                     (zOffset + height / 2).toFloat(),
-                    0.0f
+                    0.0f,
                 )
 
                 maps.forEach { map ->
@@ -77,7 +77,7 @@ class MapsWidget(
                                 default.getId(),
                                 0, 0, 0f, 0f,
                                 map.width, map.height, map.width, map.height,
-                                0xFF3F3F3F.toInt()
+                                0xFF3F3F3F.toInt(),
                             )
                         }
                         graphics.blit(RenderType::guiTextured, texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
@@ -169,5 +169,22 @@ class MapsWidget(
         val locZ = (-zOffset + poi.position.y + this.height / 2f + poi.bounds.y / 2) * scale
 
         return locX in mouseX.toFloat()..mouseX + poi.bounds.x * scale && locZ in mouseY.toFloat()..mouseY + poi.bounds.y * scale
+    }
+
+    fun getElementUnder(x: Number, y: Number): Poi? {
+        maps.forEach { map ->
+            map.pois.forEach { poi ->
+                if (isMouseOver(poi, x.toInt() - this.x, y.toInt() - this.y) && filter(poi)) {
+                    return poi
+                }
+            }
+        }
+        return null
+    }
+
+    fun removePoi(poi: Poi) {
+        maps.forEach { map ->
+            map.pois.remove(poi)
+        }
     }
 }
