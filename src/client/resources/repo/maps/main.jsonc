@@ -2120,7 +2120,7 @@
                 "image": "https://femboy-hooters.net/u/yG9nus.png",
                 "condition": {
                     "condition": "position",
-                    "position": "y < 114 && x > -484 && x < 440 && z > -98 && z < -32"
+                    "position": "y < 114 && x > -484 && x < -440 && z > -98 && z < -32"
                 }
             }
         ]
