@@ -43,6 +43,18 @@
             },
             "overlays": {
                 "@value": "Overlays",
+                "health_display": {
+                    "@value": "Enable Health Text Overlay",
+                    "desc": "Enables the health text overlay."
+                },
+                "mana_enabled": {
+                    "@value": "Enable Mana Text Overlay",
+                    "desc": "Enables the mana text overlay."
+                },
+                "defense_enabled": {
+                    "@value": "Enable Defense Text Overlay",
+                    "desc": "Enables the defense text overlay."
+                },
                 "info": {
                     "@value": "Info HUD Overlay",
                     "desc": "Settings for the info HUD overlay.",
@@ -68,21 +80,9 @@
                     "desc": "Settings for the the various text overlays."
                 },
                 "health": {
-                    "enabled": {
-                        "@value": "Enable Health Text Overlay",
-                        "desc": "Enables the health text overlay."
-                    },
                     "disabled": "Disabled",
                     "normal": "Enabled",
                     "effective": "Effective HP"
-                },
-                "mana": {
-                    "@value": "Enable Mana Text Overlay",
-                    "desc": "Enables the mana text overlay."
-                },
-                "defense": {
-                    "@value": "Enable Defense Text Overlay",
-                    "desc": "Enables the defense text overlay."
                 },
                 "sacks": {
                     "@value": "Sack Overlay",
@@ -121,6 +121,10 @@
                     "rotate": {
                         "@value": "Rotate Map",
                         "desc": "Rotate the map around the player."
+                    },
+                    "shape": {
+                        "@value": "Map Shape",
+                        "desc": "The shape that the map should be."
                     }
                 },
                 "dungeonmap": {
@@ -237,6 +241,18 @@
                     "hide_chat_message": {
                         "@value": "Hide Chat Messages",
                         "desc": "If enabled the chat messages will be hidden when an NPC message is displayed."
+                    }
+                },
+                "bossbar": {
+                    "@value": "Vanilla Bossbar Overlay",
+                    "desc": "Settings for the Vanilla Bossbar Overlay.",
+                    "remove_bar_when_full": {
+                        "@value": "Remove Bar when Full",
+                        "desc": "Remove the Bar (Not Title) When full (great for static title Bossbar)."
+                    },
+                    "remove_bar_when_objective": {
+                        "@value": "Remove Bossbar with Objective",
+                        "desc": "Remove Full Bossbar including title when it has an objective (Objectives are also shown in the scoreboard)."
                     }
                 },
                 "cold_overlay": {

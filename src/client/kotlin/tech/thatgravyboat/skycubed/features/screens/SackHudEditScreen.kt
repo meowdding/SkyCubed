@@ -5,9 +5,9 @@ import earth.terrarium.olympus.client.utils.ListenableState
 import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.builder.LayoutBuilder
-import me.owdding.lib.builder.LayoutBuilder.Companion.setPos
 import me.owdding.lib.builder.LayoutFactory
 import me.owdding.lib.displays.*
+import me.owdding.lib.layouts.setPos
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription

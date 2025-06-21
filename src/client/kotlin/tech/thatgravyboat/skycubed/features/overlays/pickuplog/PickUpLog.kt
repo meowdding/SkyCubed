@@ -72,7 +72,7 @@ object PickUpLog : Overlay {
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         if (Overlay.isEditing()) {
             exampleDisplay.render(graphics)
-        } else if (display != null) {
+        } else if (display != null && PickupLogOverlayConfig.enabled) {
             val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
             val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
             display!!.render(graphics, relativeX, relativeY)

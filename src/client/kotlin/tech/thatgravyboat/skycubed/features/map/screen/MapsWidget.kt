@@ -9,13 +9,17 @@ import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.resources.ResourceLocation
+import org.joml.Vector3f
+import org.joml.component1
+import org.joml.component2
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.dev.MapPoiEditScreen
@@ -33,7 +37,8 @@ class MapsWidget(
     width: Int,
     height: Int,
 
-    val rotate: State<Boolean> = State.of(false)
+    val rotate: State<Boolean> = State.of(false),
+    val shape: MapShape = MapShape.SQUARE
 ) : BaseWidget(width, height) {
 
     private var xOffset by xOffset
@@ -47,6 +52,9 @@ class MapsWidget(
 
     override fun renderWidget(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         this.cursor = Cursor.DEFAULT
+
+        val (posX, posY) = graphics.pose().last().pose().getTranslation(Vector3f())
+        val (scaleX, scaleY) = graphics.pose().last().pose().getScale(Vector3f())
 
         graphics.scissor(x, y, width, height) {
             graphics.pushPop {
@@ -71,16 +79,31 @@ class MapsWidget(
                         val texture = map.getTexture()
 
                         if (default != texture) {
-
-                            graphics.blit(
-                                RenderType::guiTextured,
+                            shape.drawMapPart(
+                                graphics,
                                 default.getId(),
-                                0, 0, 0f, 0f,
-                                map.width, map.height, map.width, map.height,
+                                map,
+                                posX,
+                                posY,
+                                width,
+                                height,
+                                scaleX,
+                                scaleY,
                                 0xFF3F3F3F.toInt()
                             )
                         }
-                        graphics.blit(RenderType::guiTextured, texture.getId(), 0, 0, 0f, 0f, map.width, map.height, map.width, map.height)
+
+                        shape.drawMapPart(
+                            graphics,
+                            texture.getId(),
+                            map,
+                            posX,
+                            posY,
+                            width,
+                            height,
+                            scaleX,
+                            scaleY
+                        )
                     }
 
                     map.pois.forEachIndexed { index, poi ->
@@ -169,5 +192,78 @@ class MapsWidget(
         val locZ = (-zOffset + poi.position.y + this.height / 2f + poi.bounds.y / 2) * scale
 
         return locX in mouseX.toFloat()..mouseX + poi.bounds.x * scale && locZ in mouseY.toFloat()..mouseY + poi.bounds.y * scale
+    }
+}
+
+enum class MapShape(
+    val displayName: String
+) {
+    CIRCLE("Circle") {
+        override fun drawMapPart(
+            graphics: GuiGraphics,
+            texture: ResourceLocation,
+            map: IslandData,
+            posX: Float,
+            posY: Float,
+            width: Int,
+            height: Int,
+            scaleX: Float,
+            scaleY: Float,
+            color: Int,
+        ) {
+            CircularMinimapRenderer.drawMapPart(
+                graphics,
+                texture,
+                posX + width * scaleX / 2.0f + 1,
+                posY + height * scaleY / 2.0f + 1,
+                width * kotlin.math.min(scaleX, scaleY) / 2.0f,
+                0, 0,
+                0f, 0f,
+                map.width, map.height,
+                map.width, map.height,
+                color
+            )
+        }
+    },
+    SQUARE("Square") {
+        override fun drawMapPart(
+            graphics: GuiGraphics,
+            texture: ResourceLocation,
+            map: IslandData,
+            posX: Float,
+            posY: Float,
+            width: Int,
+            height: Int,
+            scaleX: Float,
+            scaleY: Float,
+            color: Int,
+        ) {
+            graphics.blit(
+                net.minecraft.client.renderer.RenderType::guiTextured,
+                texture,
+                0, 0, 0f, 0f,
+                map.width, map.height, map.width, map.height,
+                color
+            )
+        }
+    };
+
+    abstract fun drawMapPart (
+        graphics: GuiGraphics,
+        texture: ResourceLocation,
+        map: IslandData,
+        posX: Float,
+        posY: Float,
+        width: Int,
+        height: Int,
+        scaleX: Float,
+        scaleY: Float,
+        color: Int = -1
+    )
+
+    override fun toString() = displayName
+
+    val next by lazy {
+        entries[(ordinal + 1) % entries.size]
     }
 }

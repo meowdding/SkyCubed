@@ -5,6 +5,8 @@ import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
+import tech.thatgravyboat.skycubed.features.map.screen.MapShape
+import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
@@ -49,6 +51,10 @@ object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
     var defenseEnabled by boolean(false) {
         this.translation = "skycubed.config.overlays.defense_enabled"
     }
+
+    var speedEnabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.speed_enabled"
+    }
 }
 
 object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
@@ -76,15 +82,15 @@ object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
     }
 
     var showNumbers by boolean(true) {
-        this.translation = "skycubed.config.overlays.trophy_fish.showNumbers"
+        this.translation = "skycubed.config.overlays.trophy_fish.show_numbers"
     }
 
     var showTotal by boolean(true) {
-        this.translation = "skycubed.config.overlays.trophy_fish.showTotal"
+        this.translation = "skycubed.config.overlays.trophy_fish.show_total"
     }
 
     var hideUnlocked by boolean(false) {
-        this.translation = "skycubed.config.overlays.trophy_fish.hideUnlocked"
+        this.translation = "skycubed.config.overlays.trophy_fish.hide_unlocked"
     }
 
 }
@@ -116,6 +122,14 @@ object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
 
     var rotateAroundPlayer by boolean(false) {
         this.translation = "skycubed.config.overlays.map.rotate"
+    }
+
+    var mapShape by observable(
+        enum(MapShape.SQUARE) {
+            this.translation = "skycubed.config.overlays.map.shape"
+        }
+    ) { _, _ ->
+        MinimapOverlay.updateDisplay()
     }
 
 }
@@ -219,5 +233,15 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
 
     var hideChatMessage by boolean(true) {
         this.translation = "skycubed.config.overlays.npc.hide_chat_message"
+    }
+}
+
+object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
+    var removeWhenFull by boolean(false) {
+        this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_full"
+    }
+
+    var removeBarWhenObjective  by boolean(false) {
+        this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_objective"
     }
 }
