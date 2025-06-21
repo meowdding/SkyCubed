@@ -66,7 +66,7 @@ class MapsWidget(
                     Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
                     (xOffset + width / 2).toFloat(),
                     (zOffset + height / 2).toFloat(),
-                    0.0f
+                    0.0f,
                 )
 
                 maps.forEach { map ->
@@ -89,7 +89,7 @@ class MapsWidget(
                                 height,
                                 scaleX,
                                 scaleY,
-                                0xFF3F3F3F.toInt()
+                                0xFF3F3F3F.toInt(),
                             )
                         }
 
@@ -192,6 +192,23 @@ class MapsWidget(
         val locZ = (-zOffset + poi.position.y + this.height / 2f + poi.bounds.y / 2) * scale
 
         return locX in mouseX.toFloat()..mouseX + poi.bounds.x * scale && locZ in mouseY.toFloat()..mouseY + poi.bounds.y * scale
+    }
+
+    fun getElementUnder(x: Number, y: Number): Poi? {
+        maps.forEach { map ->
+            map.pois.forEach { poi ->
+                if (isMouseOver(poi, x.toInt() - this.x, y.toInt() - this.y) && filter(poi)) {
+                    return poi
+                }
+            }
+        }
+        return null
+    }
+
+    fun removePoi(poi: Poi) {
+        maps.forEach { map ->
+            map.pois.remove(poi)
+        }
     }
 }
 

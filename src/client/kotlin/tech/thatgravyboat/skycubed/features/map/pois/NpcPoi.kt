@@ -35,7 +35,6 @@ data class NpcPoi(
     @FieldName("tooltip") var stringTooltip: MutableList<String>,
     override var position: Vector2i,
 ) : Poi {
-
     private val skin by lazy {
         val manager = McClient.self.skinManager as SkinManagerInvoker
         manager.callRegisterTextures(
@@ -55,14 +54,28 @@ data class NpcPoi(
     }
     override val id: String = "npc"
     override val bounds: Vector2i = Vector2i(10, 10)
-    override val display: Display = Displays.outline(
-        { 0xFFFFFFFFu },
-        Displays.face(
-            {
-                if (skin.isDone) skin.get().texture else DefaultPlayerSkin.getDefaultTexture()
-            },
-        ),
-    )
+    override val display: Display
+        get() {
+            try {
+                return Displays.outline(
+                    { 0xFFFFFFFFu },
+                    Displays.face(
+                        {
+                            if (skin.isDone) skin.get().texture else DefaultPlayerSkin.getDefaultTexture()
+                        },
+                    ),
+                )
+            } catch (_: Exception) {
+                fun filledDisplay(color: UInt) = Displays.background(color, Displays.empty(4, 4))
+                return Displays.outline(
+                    { 0xFFFFFFFFu },
+                    Displays.column(
+                        Displays.row(filledDisplay(0xFFFF00FFu), filledDisplay(0xFF000000u)),
+                        Displays.row(filledDisplay(0xFF000000u), filledDisplay(0xFFFF00FFu)),
+                    ),
+                )
+            }
+        }
 
     override fun click() {
         Modals.action()

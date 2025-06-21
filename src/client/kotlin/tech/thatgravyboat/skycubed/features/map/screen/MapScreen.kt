@@ -1,18 +1,26 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
+import com.mojang.blaze3d.platform.InputConstants
 import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
 import earth.terrarium.olympus.client.layouts.Layouts
 import earth.terrarium.olympus.client.ui.UIConstants
+import earth.terrarium.olympus.client.ui.context.ContextMenu
+import earth.terrarium.olympus.client.ui.modals.ActionModal
+import earth.terrarium.olympus.client.ui.modals.Modals
 import earth.terrarium.olympus.client.utils.Orientation
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
+import org.joml.Vector2i
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.features.map.Maps
+import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
+import tech.thatgravyboat.skycubed.features.map.dev.MapPoiEditScreen
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.ResettingState
 
@@ -103,5 +111,46 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
         private fun Poi.filter(search: String): Boolean {
             return search.isEmpty() || this.tooltip.any { it.stripped.contains(search, ignoreCase = true) }
         }
+    }
+
+    override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
+        if (button == InputConstants.MOUSE_BUTTON_RIGHT && MapEditor.enabled) {
+            ContextMenu.open(mouseX, mouseY) {
+                val map = this.children().filterIsInstance<MapsWidget>().firstOrNull()
+                val poi = map?.getElementUnder(mouseX, mouseY)
+                if (poi != null) {
+                    it.dangerButton(Text.of("Delete Poi")) {
+                        map.removePoi(poi)
+                    }
+                }
+
+                it.withAutoCloseOff()
+                it.button(Text.of("New Poi")) {
+                    val state = DropdownState.empty<String>()
+                    Modals.action()
+                        .withTitle(Text.of("Select Poi Type"))
+                        .withContent { width ->
+                            Widgets.dropdown(
+                                state,
+                                Poi.poiTypes.toList(),
+                                { Text.of(it.toString()) },
+                                {},
+                            ) {
+                                it.withCallback { poi ->
+                                    if (McClient.self.screen is ActionModal) {
+                                        McClient.self.screen?.onClose()
+                                    }
+
+                                    val newPoi = Poi.createByType(poi, Vector2i()) ?: return@withCallback
+                                    Maps.currentIsland?.pois?.add(newPoi)
+                                    McClient.setScreenAsync { MapPoiEditScreen(newPoi, this) }
+                                }
+                            }.withSize(width, 20)
+                        }.open()
+                }
+            }
+            return true
+        }
+        return super.mouseClicked(mouseX, mouseY, button)
     }
 }
