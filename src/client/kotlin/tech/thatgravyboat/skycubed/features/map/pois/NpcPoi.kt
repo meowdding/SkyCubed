@@ -23,6 +23,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.mixins.SkinManagerInvoker
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import kotlin.time.Duration.Companion.seconds
@@ -36,16 +37,18 @@ data class NpcPoi(
     override var position: Vector2i,
 ) : Poi {
     private val skin by lazy {
-        val manager = McClient.self.skinManager as SkinManagerInvoker
-        manager.callRegisterTextures(
-            Util.NIL_UUID,
-            MinecraftProfileTextures(
-                MinecraftProfileTexture(this.texture, emptyMap()),
-                null,
-                null,
-                SignatureState.SIGNED,
-            ),
-        )
+        runCatching {
+            val manager = McClient.self.skinManager as SkinManagerInvoker
+            manager.callRegisterTextures(
+                Util.NIL_UUID,
+                MinecraftProfileTextures(
+                    MinecraftProfileTexture(this.texture, emptyMap()),
+                    null,
+                    null,
+                    SignatureState.SIGNED,
+                ),
+            )
+        }.getOrNull()
     }
 
     val link get() = actualLink.applyReplacements().stripColor().replace(" ", "_")
@@ -55,27 +58,14 @@ data class NpcPoi(
     override val id: String = "npc"
     override val bounds: Vector2i = Vector2i(10, 10)
     override val display: Display
-        get() {
-            try {
-                return Displays.outline(
+        get() = runCatching {
+            skin?.let {
+                Displays.outline(
                     { 0xFFFFFFFFu },
-                    Displays.face(
-                        {
-                            if (skin.isDone) skin.get().texture else DefaultPlayerSkin.getDefaultTexture()
-                        },
-                    ),
-                )
-            } catch (_: Exception) {
-                fun filledDisplay(color: UInt) = Displays.background(color, Displays.empty(4, 4))
-                return Displays.outline(
-                    { 0xFFFFFFFFu },
-                    Displays.column(
-                        Displays.row(filledDisplay(0xFFFF00FFu), filledDisplay(0xFF000000u)),
-                        Displays.row(filledDisplay(0xFF000000u), filledDisplay(0xFFFF00FFu)),
-                    ),
+                    Displays.face({ if (it.isDone) it.get().texture else DefaultPlayerSkin.getDefaultTexture() }),
                 )
             }
-        }
+        }.getOrNull() ?: ExtraDisplays.missingTextureDisplay()
 
     override fun click() {
         Modals.action()

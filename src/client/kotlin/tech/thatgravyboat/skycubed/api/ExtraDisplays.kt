@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.api
 
 import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
 import net.minecraft.client.gui.GuiGraphics
 import tech.thatgravyboat.skycubed.utils.fillRect
 
@@ -16,7 +17,7 @@ object ExtraDisplays {
                     color.toInt(),
                     border.toInt(),
                     2,
-                    radius.toInt()
+                    radius.toInt(),
                 )
                 display.render(graphics)
             }
@@ -25,5 +26,16 @@ object ExtraDisplays {
 
     fun background(color: UInt, radius: Float, display: Display): Display {
         return background(color, radius, color, display)
+    }
+
+    fun missingTextureDisplay(width: Int = 8, height: Int = 8): Display {
+        fun filledDisplay(color: UInt) = Displays.background(color, Displays.empty(width / 2, height / 2))
+        return Displays.outline(
+            { 0xFFFFFFFFu },
+            Displays.column(
+                Displays.row(filledDisplay(0xFFFF00FFu), filledDisplay(0xFF000000u)),
+                Displays.row(filledDisplay(0xFF000000u), filledDisplay(0xFFFF00FFu)),
+            ),
+        )
     }
 }
