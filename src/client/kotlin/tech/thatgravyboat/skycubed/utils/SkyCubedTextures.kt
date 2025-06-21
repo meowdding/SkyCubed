@@ -4,6 +4,7 @@ import tech.thatgravyboat.skycubed.SkyCubed.id
 
 object SkyCubedTextures {
 
-    val backgroundBox get() = id("background")
+    inline val backgroundBox get() = id("background")
 
+    inline val backgroundCircle get() = id("map_circle_background")
 }
