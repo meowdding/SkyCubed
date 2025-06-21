@@ -88,8 +88,10 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
                     horizontal(alignment = MIDDLE) {
                         string("Name")
                         Widgets.multilineTextInput(
-                            ListenableState.of(poi.name).also { it.registerListener { poi.name = it } }) { widget ->
+                            ListenableState.of(poi.name).also { it.registerListener { poi.name = it.trim() } }) { widget ->
                             widget.withSize(100, 20)
+                        }.apply {
+                            setInitialFocus(this)
                         }.add()
                     }
                 }
