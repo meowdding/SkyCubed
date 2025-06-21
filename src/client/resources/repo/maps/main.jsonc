@@ -1874,68 +1874,254 @@
     },
     {
         "island": "THE_PARK",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/park.png",
-        "images": [
-            {
-                "image": "https://api.dediamondpro.dev/skyguide/medium/park_howling_cave.png",
-                "condition": {
-                    "condition": "or",
-                    "conditions": [
-                        {
-                            "condition": "position",
-                            "position": "x < -336 && x > -402 && y < 80"
-                        },
-                        {
-                            "condition": "position",
-                            "position": "x < -320 && x > -351 && y < 92 && z < -50 && z > -65"
-                        }
-                    ]
-                }
-            }
-        ],
-        "topX": -500,
-        "topY": -148,
-        "bottomX": -253,
-        "bottomY": 99,
+        "default": "https://femboy-hooters.net/u/HmYF3y.png",
+        "topX": -499,
+        "topY": -127,
+        "bottomX": -259,
+        "bottomY": 92,
         "pois": [
             {
-                "type": "portal",
-                "pos": {
-                    "x": -273,
-                    "z": -13
-                },
-                "destination": "park",
                 "tooltip": [
                     "§aThe Park",
                     "",
                     "§l§eClick to Warp!"
-                ]
+                ],
+                "pos": {
+                    "x": -265,
+                    "z": -17
+                },
+                "destination": "park",
+                "type": "portal"
             },
             {
-                "type": "portal",
-                "pos": {
-                    "x": -462,
-                    "z": -128
-                },
-                "destination": "jungle",
                 "tooltip": [
                     "§aThe Jungle",
                     "",
                     "§l§eClick to Warp!"
-                ]
+                ],
+                "pos": {
+                    "x": -466,
+                    "z": -33
+                },
+                "destination": "jungle",
+                "type": "portal"
             },
             {
-                "type": "portal",
-                "pos": {
-                    "x": -332,
-                    "z": -55
-                },
-                "destination": "howl",
                 "tooltip": [
                     "§aThe Howling Cave",
                     "",
                     "§l§eClick to Warp!"
-                ]
+                ],
+                "pos": {
+                    "x": -395,
+                    "z": -62
+                },
+                "destination": "howl",
+                "type": "portal"
+            },
+            {
+                "name": "Charlie",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -277,
+                    "z": -17
+                },
+                "texture": "http://textures.minecraft.net/texture/5766eb097bb486b3ea707ac1313a1bfff8846a2f55460082cef212f189130f1c",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Vanessa",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -304,
+                    "z": -79
+                },
+                "texture": "http://textures.minecraft.net/texture/49e2979c8e2c58898c2774b3669ea4a1b29767fcdc2dd5937ec0cf0da3a8fb67",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Kelly",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -350,
+                    "z": 34
+                },
+                "texture": "http://textures.minecraft.net/texture/6eb3f9e2ac0dd5f974e0ae710ee74f1d8e96e866a530b0f4b4177b9e635f34d7",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§aGustave",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -363,
+                    "z": 45
+                },
+                "texture": "http://textures.minecraft.net/texture/cfafe6f5014c52c0e973592984906ae1d19e8105e2dcfd7eacbe01ef87ce320c",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bMelancholic Viking",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -335,
+                    "z": 74
+                },
+                "texture": "http://textures.minecraft.net/texture/cd51043d6a18fc014f264b1e7d7fc1833afa8cf6ca29f2b8f691fdf54dafefda",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§cRyan",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -364,
+                    "z": -90
+                },
+                "texture": "http://textures.minecraft.net/texture/5176cb13a4436318ae4c2bc31df09d556192daebb70a3b28020f7ab9ca1709bb",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Old Shaman Nyko",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -370,
+                    "z": -64
+                },
+                "texture": "http://textures.minecraft.net/texture/57a517865b820a4451cd3cc6765f370fd0522b6489c9c94fb345fdee2689451a",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Master Tactician Funk",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -452,
+                    "z": 30
+                },
+                "texture": "http://textures.minecraft.net/texture/92b7acbfa9308a22e7506a36bccafd0160afa0d500818efee9fa9835214c14fa",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Worker Xavier",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -424,
+                    "z": -15
+                },
+                "texture": "http://textures.minecraft.net/texture/d20913d84bbf14c7c6c70204ff684980178f59859d5dbe6804e5c90de64c7642",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Melody §d♫",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -411,
+                    "z": 72
+                },
+                "texture": "http://textures.minecraft.net/texture/4d238ccc818ab0c0fdebd07d4a56c353ff5eb541c85d386362161781d1dd74cc",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Molbert",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -465,
+                    "z": -42
+                },
+                "texture": "http://textures.minecraft.net/texture/f20783e2743b8976b00f827ee283675d7911140c98284239f6bc1c8dd1d27c81",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Juliette",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -415,
+                    "z": -121
+                },
+                "texture": "http://textures.minecraft.net/texture/621aabed3ba8b88b8de343b267bc49b2df0468c0ba4f20feb9852b74c22f3020",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "Romero",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -417,
+                    "z": -121
+                },
+                "texture": "http://textures.minecraft.net/texture/b3351f22f63b43f40fa8e28def66b73b17ba265773fe9980971da2f1515032d9",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            }
+        ],
+        "images": [
+            {
+                "image": "https://femboy-hooters.net/u/yG9nus.png",
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 114 && x > -484 && x < 440 && z > -98 && z < -32"
+                }
             }
         ]
     },
@@ -1956,6 +2142,21 @@
         "bottomX": 400,
         "bottomY": -194,
         "pois": [
+            {
+                "name": "Hungry Hiker",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 270,
+                    "z": -480
+                },
+                "texture": "http://textures.minecraft.net/texture/d6f9b9b62404c5cf94c385c7f1c86adde0d9aef9a9cd29e2ab583fa1de63f426",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
             {
                 "tooltip": [
                     "§aThe Barn",
@@ -4201,6 +4402,49 @@
                     "z": 4
                 },
                 "texture": "http://textures.minecraft.net/texture/19043d3d31c5e76fda79493fd13e6f8f3161a1a3d8ec74c65792f03406a3a1a3",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "tooltip": [
+                    "§bGalatea",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
+                "pos": {
+                    "x": -542,
+                    "z": -26
+                },
+                "destination": "galatea",
+                "type": "portal"
+            },
+            {
+                "name": "§bSalvage Old Attributes",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -594,
+                    "z": -17
+                },
+                "texture": "http://textures.minecraft.net/texture/aac66af77e58ba9b89175831f96d100f0562c2326bb2dd43184942adafbf825a",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§bTilus",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -642,
+                    "z": 48
+                },
+                "texture": "http://textures.minecraft.net/texture/8de120debcc6c5873bf73232cb6bf9677240aa3718412b12929313211e7e42f9",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
             }
