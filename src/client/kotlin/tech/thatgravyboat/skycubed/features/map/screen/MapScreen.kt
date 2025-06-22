@@ -18,9 +18,11 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.dev.MapPoiEditScreen
+import tech.thatgravyboat.skycubed.features.map.pois.ConditionalPoi
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.ResettingState
 
@@ -131,7 +133,9 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                         .withContent { width ->
                             Widgets.dropdown(
                                 state,
-                                Poi.poiTypes.toList(),
+                                Poi.poiTypes.toList().let {
+                                    it.toMutableList().apply { this.add("insignificant_npc") }
+                                },
                                 { Text.of(it.toString()) },
                                 {},
                             ) {
@@ -140,7 +144,13 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                                         McClient.self.screen?.onClose()
                                     }
 
-                                    val newPoi = Poi.createByType(poi, Vector2i()) ?: return@withCallback
+                                    val newPoi = if (poi == "insignificant_npc") {
+                                        val npc = Poi.createByType("npc", Vector2i()) ?: return@withCallback
+                                        ConditionalPoi(Condition.TRUE, Condition.FALSE, npc)
+                                    } else {
+                                        Poi.createByType(poi, Vector2i()) ?: return@withCallback
+                                    }
+
                                     Maps.currentIsland?.pois?.add(newPoi)
                                     McClient.setScreenAsync { MapPoiEditScreen(newPoi, this) }
                                 }

@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.map.dev
 import com.mojang.serialization.JsonOps
 import me.owdding.ktmodules.Module
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.CommonComponents
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityAttachment
@@ -22,9 +23,11 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.accessors.glow
 import tech.thatgravyboat.skycubed.api.accessors.glowColor
+import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.skins.SkinSelector
+import tech.thatgravyboat.skycubed.features.map.pois.ConditionalPoi
 import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import java.nio.file.StandardOpenOption
@@ -120,11 +123,15 @@ object MapEditor {
         this.cancel()
         val poi = pois[this.entity]
         if (poi != null) {
+            var poi = poi
+            while (poi is ConditionalPoi) {
+                poi = poi.poi
+            }
             McClient.setScreenAsync { MapPoiEditScreen(poi) }
             return
         }
 
-        NpcPoi(
+        val npc = NpcPoi(
             entity.texture,
             "https://wiki.hypixel.net/\$name",
             "unknown",
@@ -134,7 +141,18 @@ object MapEditor {
                 "§7§lClick to view wiki!",
             ),
             entity.posAsVec2i(),
-        ).also {
+        )
+
+        if (Screen.hasShiftDown()) {
+            ConditionalPoi(Condition.TRUE, Condition.FALSE, npc).also {
+                Text.of("Created conditional new poi").send()
+                Maps.currentIsland?.pois?.add(it)
+                McClient.setScreenAsync { MapPoiEditScreen(npc) }
+            }
+            return
+        }
+
+        npc.also {
             Text.of("Created new poi").send()
             Maps.currentIsland?.pois?.add(it)
             McClient.setScreenAsync { MapPoiEditScreen(it) }
