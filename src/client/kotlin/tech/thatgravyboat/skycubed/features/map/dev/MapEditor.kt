@@ -47,7 +47,7 @@ object MapEditor {
     }
 
 
-    private fun Entity.posAsVec3i(): Vector3i {
+    fun Entity.posAsVec3i(): Vector3i {
         val pos = this.position()
         return Vector3i(pos.x.roundToInt(), pos.y.roundToInt(), pos.z.roundToInt())
     }
@@ -128,7 +128,7 @@ object MapEditor {
             while (poi is ConditionalPoi) {
                 poi = poi.poi
             }
-            McClient.setScreenAsync { MapPoiEditScreen(poi) }
+            McClient.setScreenAsync { MapPoiEditScreen(poi, entity = entity) }
             return
         }
 
@@ -148,7 +148,7 @@ object MapEditor {
             ConditionalPoi(Condition.TRUE, Condition.FALSE, npc).also {
                 Text.of("Created conditional new poi").send()
                 Maps.currentIsland?.pois?.add(it)
-                McClient.setScreenAsync { MapPoiEditScreen(npc) }
+                McClient.setScreenAsync { MapPoiEditScreen(npc, entity = entity) }
             }
             return
         }
@@ -156,7 +156,7 @@ object MapEditor {
         npc.also {
             Text.of("Created new poi").send()
             Maps.currentIsland?.pois?.add(it)
-            McClient.setScreenAsync { MapPoiEditScreen(it) }
+            McClient.setScreenAsync { MapPoiEditScreen(it, entity = entity) }
         }
     }
 

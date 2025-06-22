@@ -111,7 +111,7 @@ class MapsWidget(
 
                         graphics.pushPop {
                             val mapX = poi.position.x + width / 2f
-                            val mapY = poi.position.y + height / 2f
+                            val mapY = poi.position.z + height / 2f
                             translate(mapX, mapY, 0f)
                             translate(-poi.bounds.x / 2f, -poi.bounds.y / 2f, 0f)
                             poi.display.render(graphics)

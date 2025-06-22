@@ -1,6 +1,8 @@
 package tech.thatgravyboat.skycubed.features.map.dev
 
 import earth.terrarium.olympus.client.components.Widgets
+import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
+import earth.terrarium.olympus.client.ui.UIIcons
 import earth.terrarium.olympus.client.utils.ListenableState
 import me.owdding.lib.builder.LayoutFactory
 import me.owdding.lib.builder.MIDDLE
@@ -8,15 +10,21 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.world.entity.Entity
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.features.map.dev.MapEditor.posAsVec3i
 import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.features.map.pois.PortalPoi
 import tech.thatgravyboat.skycubed.utils.SkyCubedScreen
 
-class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScreen("map_poi") {
+class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null, val entity: Entity? = null) : SkyCubedScreen("map_poi") {
+    private val xState = ListenableState.of(poi.position.x.toString())
+    private val yState = ListenableState.of(poi.position.y.toString())
+    private val zState = ListenableState.of(poi.position.z.toString())
+
     override fun init() {
         LayoutFactory.vertical(5) {
             horizontal(2, alignment = MIDDLE) {
@@ -55,7 +63,7 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
                     horizontal(alignment = MIDDLE) {
                         string("x")
                         this.textInput(
-                            ListenableState.of(poi.position.x.toString()), width = 100,
+                            xState, width = 100,
                             onChange = {
                                 poi.position.x = it.toIntValue()
                             },
@@ -64,7 +72,7 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
                     horizontal(alignment = MIDDLE) {
                         string("y")
                         this.textInput(
-                            ListenableState.of(poi.position.y.toString()), width = 100,
+                            yState, width = 100,
                             onChange = {
                                 poi.position.y = it.toIntValue()
                             },
@@ -73,12 +81,25 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
                     horizontal(alignment = MIDDLE) {
                         string("z")
                         this.textInput(
-                            ListenableState.of(poi.position.z.toString()), width = 100,
+                            zState, width = 100,
                             onChange = {
                                 poi.position.z = it.toIntValue()
                             },
                         )
                     }
+
+                    val entity = entity ?: return@horizontal
+                    val resyncButton = Widgets.button().apply {
+                        withSize(20)
+                        withRenderer(WidgetRenderers.icon(UIIcons.LINK))
+                        withCallback {
+                            poi.position = entity.posAsVec3i()
+                            xState.set(poi.position.x.toString())
+                            yState.set(poi.position.y.toString())
+                            zState.set(poi.position.z.toString())
+                        }
+                    }
+                    widget(resyncButton)
                 }
             }
             when (poi) {
