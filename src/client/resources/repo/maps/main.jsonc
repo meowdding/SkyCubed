@@ -2122,6 +2122,20 @@
                     "condition": "position",
                     "position": "y < 114 && x > -484 && x < -440 && z > -98 && z < -32"
                 }
+            },
+            {
+                "image": "https://femboy-hooters.net/u/OKVjpD.png",
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 103 && x > -452 && x < -405 && z > -9 && z < 56"
+                }
+            },
+            {
+                "image": "https://femboy-hooters.net/u/yeOmx0.png",
+                "condition": {
+                    "condition": "position",
+                    "position": "y < 89 && x > -406 && x < -364 && z > -89 && z < -41"
+                }
             }
         ]
     },
