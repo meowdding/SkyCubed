@@ -14,13 +14,27 @@ import net.minecraft.world.entity.Entity
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor.posAsVec3i
+import tech.thatgravyboat.skycubed.features.map.pois.ConditionalPoi
 import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.features.map.pois.PortalPoi
 import tech.thatgravyboat.skycubed.utils.SkyCubedScreen
 
-class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null, val entity: Entity? = null) : SkyCubedScreen("map_poi") {
+class MapPoiEditScreen(poi: Poi, val list: MutableList<Poi>, val parent: Screen? = null, val entity: Entity? = null) : SkyCubedScreen("map_poi") {
+
+    val poi: Poi
+    val actualPoi: Poi
+
+    init {
+        var tempPoi = poi
+        while (tempPoi is ConditionalPoi) tempPoi = tempPoi.poi
+
+        this.poi = tempPoi
+        this.actualPoi = poi
+    }
+
     private val xState = ListenableState.of(poi.position.x.toString())
     private val yState = ListenableState.of(poi.position.y.toString())
     private val zState = ListenableState.of(poi.position.z.toString())
@@ -131,6 +145,36 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null, val entity: Ent
                     }
                 }
             }
+            when (actualPoi) {
+                is NpcPoi -> {
+                    widget(
+                        Widgets.button()
+                            .withSize(100, 20)
+                            .withRenderer(WidgetRenderers.text(Text.of("Convert to conditional")))
+                            .withCallback {
+                                list.remove(actualPoi)
+
+                                val newPoi = ConditionalPoi(Condition.TRUE, Condition.FALSE, actualPoi)
+                                list.add(newPoi)
+                                McClient.setScreenAsync { MapPoiEditScreen(newPoi, list, parent, entity) }
+                            },
+                    )
+                }
+
+                is ConditionalPoi -> {
+                    widget(
+                        Widgets.button()
+                            .withSize(100, 20)
+                            .withRenderer(WidgetRenderers.text(Text.of("Convert to unconditional")))
+                            .withCallback {
+                                list.remove(actualPoi)
+
+                                list.add(poi)
+                                McClient.setScreenAsync { MapPoiEditScreen(poi, list, parent, entity) }
+                            },
+                    )
+                }
+            }
         }.also {
             Displays.sprite(olympus("buttons/normal"), it.width + 20, (it.height + 20).coerceAtMost(height)).asWidget()
                 .center().applyAsRenderable()
@@ -143,6 +187,8 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null, val entity: Ent
         parent?.render(graphics, -1, -1, f)
         super.render(graphics, mouseX, mouseY, f)
     }
+
+    override fun renderBlurredBackground() {}
 
     override fun onClose() {
         parent?.let { McClient.setScreenAsync { it } }

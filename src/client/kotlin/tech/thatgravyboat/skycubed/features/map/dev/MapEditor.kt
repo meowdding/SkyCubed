@@ -29,7 +29,9 @@ import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.skins.SkinSelector
 import tech.thatgravyboat.skycubed.features.map.pois.ConditionalPoi
+import tech.thatgravyboat.skycubed.features.map.pois.EffigyPoi
 import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
+import tech.thatgravyboat.skycubed.features.map.pois.PortalPoi
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import java.nio.file.StandardOpenOption
 import kotlin.io.encoding.ExperimentalEncodingApi
@@ -99,7 +101,13 @@ object MapEditor {
         if (!enabled) return
         if (entity?.uuid?.version() == 4) return
         this.entity?.glow = true
-        this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF0000
+        val poi = pois[this.entity]
+        if (poi is PortalPoi || poi is EffigyPoi) return
+
+        this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF0000
+        if (poi != null && poi.position.y == -1) {
+            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
+        }
 
         val pos = entity?.position() ?: return
         val meow = Vector2i(pos.x.roundToInt(), pos.z.roundToInt())
@@ -115,7 +123,15 @@ object MapEditor {
         if (entity?.uuid?.version() == 4) return
         if (this.entity is ArmorStand) return
         this.entity?.glow = true
-        this.entity?.glowColor = if (pois[this.entity] != null) 0xFF00 else 0xFF
+
+        val poi = pois[this.entity]
+
+        if (poi is PortalPoi || poi is EffigyPoi) return
+        this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF
+        if (poi != null && poi.position.y == -1) {
+            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
+        }
+
     }
 
     @Subscription
@@ -123,12 +139,9 @@ object MapEditor {
         if (!enabled) return
         this.cancel()
         val poi = pois[this.entity]
-        if (poi != null) {
-            var poi = poi
-            while (poi is ConditionalPoi) {
-                poi = poi.poi
-            }
-            McClient.setScreenAsync { MapPoiEditScreen(poi, entity = entity) }
+        val mapPois = Maps.currentIsland?.pois
+        if (poi != null && mapPois != null) {
+            McClient.setScreenAsync { MapPoiEditScreen(poi, mapPois, entity = entity) }
             return
         }
 
@@ -146,17 +159,27 @@ object MapEditor {
 
         if (Screen.hasShiftDown()) {
             ConditionalPoi(Condition.TRUE, Condition.FALSE, npc).also {
-                Text.of("Created conditional new poi").send()
-                Maps.currentIsland?.pois?.add(it)
-                McClient.setScreenAsync { MapPoiEditScreen(npc, entity = entity) }
+
+                val pois = Maps.currentIsland?.pois ?: run {
+                    Text.of("Unknown island").send()
+                    return
+                }
+                Text.of("Created new conditional poi").send()
+                pois.add(it)
+                McClient.setScreenAsync { MapPoiEditScreen(npc, pois, entity = entity) }
             }
             return
         }
 
         npc.also {
+
+            val pois = Maps.currentIsland?.pois ?: run {
+                Text.of("Unknown island").send()
+                return
+            }
             Text.of("Created new poi").send()
-            Maps.currentIsland?.pois?.add(it)
-            McClient.setScreenAsync { MapPoiEditScreen(it, entity = entity) }
+            pois.add(it)
+            McClient.setScreenAsync { MapPoiEditScreen(it, pois, entity = entity) }
         }
     }
 

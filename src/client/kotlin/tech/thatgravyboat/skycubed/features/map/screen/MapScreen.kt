@@ -17,6 +17,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.Maps
@@ -151,8 +152,11 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                                         Poi.createByType(poi, Vector3i()) ?: return@withCallback
                                     }
 
-                                    Maps.currentIsland?.pois?.add(newPoi)
-                                    McClient.setScreenAsync { MapPoiEditScreen(newPoi, this) }
+                                    val pois = Maps.currentIsland?.pois ?: run {
+                                        Text.of("Unknown island").send()
+                                        return@withCallback
+                                    }
+                                    McClient.setScreenAsync { MapPoiEditScreen(newPoi, pois, this) }
                                 }
                             }.withSize(width, 20)
                         }.apply {

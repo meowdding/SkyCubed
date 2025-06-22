@@ -171,7 +171,7 @@ class MapsWidget(
                 map.pois.forEach { poi ->
                     if (isMouseOver(poi, mouseX.toInt() - x, mouseY.toInt() - y) && filter(poi)) {
                         if (MapEditor.enabled && !Screen.hasShiftDown()) {
-                            McClient.setScreenAsync { MapPoiEditScreen(poi, McClient.self.screen) }
+                            McClient.setScreenAsync { MapPoiEditScreen(poi, map.pois, McClient.self.screen) }
                             return true
                         }
                         poi.click()
