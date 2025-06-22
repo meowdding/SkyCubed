@@ -99,20 +99,22 @@ object MapEditor {
     @Subscription
     private fun PlayerRenderEvent.onRender() {
         if (!enabled) return
-        if (entity?.uuid?.version() == 4) return
+        val entity = entity ?: return
+        if (entity.uuid?.version() == 4) return
         this.entity?.glow = true
         val poi = pois[this.entity]
         if (poi is PortalPoi || poi is EffigyPoi) return
 
         this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF0000
         if (poi != null && poi.position.y == -1) {
-            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
+            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}").send()
+            poi.position.y = entity.y.roundToInt()
         }
 
-        val pos = entity?.position() ?: return
+        val pos = entity.position() ?: return
         val meow = Vector2i(pos.x.roundToInt(), pos.z.roundToInt())
         this.state?.nameTagAttachment =
-            entity?.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity?.getYRot(0f) ?: 0f)
+            entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
         this.state?.scoreText = Text.of(meow.toString())
         this.state?.nameTag = CommonComponents.EMPTY
     }
@@ -120,7 +122,8 @@ object MapEditor {
     @Subscription
     private fun LivingEntityRenderEvent.onRender() {
         if (!enabled) return
-        if (entity?.uuid?.version() == 4) return
+        val entity = entity ?: return
+        if (entity.uuid?.version() == 4) return
         if (this.entity is ArmorStand) return
         this.entity?.glow = true
 
@@ -129,7 +132,8 @@ object MapEditor {
         if (poi is PortalPoi || poi is EffigyPoi) return
         this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF
         if (poi != null && poi.position.y == -1) {
-            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
+            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}").send()
+            poi.position.y = entity.y.roundToInt()
         }
 
     }
