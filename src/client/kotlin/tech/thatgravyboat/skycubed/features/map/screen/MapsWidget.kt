@@ -189,7 +189,7 @@ class MapsWidget(
         if (!isMouseOver(mouseX.toDouble(), mouseY.toDouble())) return false
 
         val locX = (-xOffset + poi.position.x + this.width / 2f + poi.bounds.x / 2) * scale
-        val locZ = (-zOffset + poi.position.y + this.height / 2f + poi.bounds.y / 2) * scale
+        val locZ = (-zOffset + poi.position.z + this.height / 2f + poi.bounds.y / 2) * scale
 
         return locX in mouseX.toFloat()..mouseX + poi.bounds.x * scale && locZ in mouseY.toFloat()..mouseY + poi.bounds.y * scale
     }
