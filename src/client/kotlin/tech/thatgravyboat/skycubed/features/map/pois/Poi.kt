@@ -5,6 +5,7 @@ import com.mojang.serialization.DataResult
 import me.owdding.lib.displays.Display
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
+import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 
@@ -19,7 +20,7 @@ interface Poi {
         get() = true
 
     val tooltip: MutableList<Component>
-    var position: Vector2i
+    var position: Vector3i
     val bounds: Vector2i
     val display: Display
 
@@ -36,9 +37,9 @@ interface Poi {
 
         val poiTypes get() = types.keys
 
-        fun createByType(type: String, vector2i: Vector2i): Poi? = when (type) {
-            "portal" -> PortalPoi(mutableListOf(), vector2i, "")
-            "npc" -> NpcPoi("", "https://wiki.hypixel.net/\$name", "", mutableListOf(), vector2i)
+        fun createByType(type: String, vector3i: Vector3i): Poi? = when (type) {
+            "portal" -> PortalPoi(mutableListOf(), vector3i, "")
+            "npc" -> NpcPoi("", "https://wiki.hypixel.net/\$name", "", mutableListOf(), vector3i)
             "effigy" -> EffigyPoi(0)
             else -> {
                 Text.of("Can't created type $type").send()

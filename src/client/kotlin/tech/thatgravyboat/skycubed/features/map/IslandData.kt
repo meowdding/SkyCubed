@@ -39,7 +39,7 @@ data class IslandData(
 
     init {
         pois.forEach {
-            it.position.add(offsetX, offsetY)
+            it.position.add(offsetX, 0, offsetY)
         }
     }
 

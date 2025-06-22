@@ -19,6 +19,7 @@ import net.minecraft.Util
 import net.minecraft.client.resources.DefaultPlayerSkin
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
+import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
@@ -34,7 +35,7 @@ data class NpcPoi(
     @FieldName("link") var actualLink: String,
     var name: String = "",
     @FieldName("tooltip") var stringTooltip: MutableList<String>,
-    override var position: Vector2i,
+    override var position: Vector3i,
 ) : Poi {
     private val skin by lazy {
         runCatching {

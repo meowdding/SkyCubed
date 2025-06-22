@@ -24,6 +24,7 @@
                 ],
                 "pos": {
                     "x": 513,
+                    "y": -1,
                     "z": 526
                 },
                 "destination": "nucleus",
@@ -38,6 +39,7 @@
                 ],
                 "position": {
                     "x": 476,
+                    "y": -1,
                     "z": 514
                 },
                 "texture": "http://textures.minecraft.net/texture/c86ad4ddb40e9128ae0b5a3126efe73f4149c757bac148fcfbea6f7aba8f8569",
@@ -53,6 +55,7 @@
                 ],
                 "position": {
                     "x": 496,
+                    "y": -1,
                     "z": 557
                 },
                 "texture": "http://textures.minecraft.net/texture/8ebf9cac5ab47903e1d2d4c24f685a667f205f9a6177f6a7621f84719e487465",
@@ -68,6 +71,7 @@
                 ],
                 "position": {
                     "x": 531,
+                    "y": -1,
                     "z": 557
                 },
                 "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",

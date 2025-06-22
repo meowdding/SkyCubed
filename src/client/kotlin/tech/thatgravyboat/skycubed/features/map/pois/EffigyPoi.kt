@@ -7,6 +7,7 @@ import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
+import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -19,8 +20,8 @@ data class EffigyPoi(
 ) : Poi {
 
     override val id: String = "effigy"
-    override var position: Vector2i
-        get() = RiftAPI.effieges.getOrNull(index)?.pos?.let { Vector2i(it.x, it.z) } ?: Vector2i(0, 0)
+    override var position: Vector3i
+        get() = RiftAPI.effieges.getOrNull(index)?.pos?.let { Vector3i(it.x, it.y, it.z) } ?: Vector3i()
         set(_) = throw UnsupportedOperationException()
     override val bounds: Vector2i = Vector2i(6, 6)
     override val display: Display = Displays.sprite(

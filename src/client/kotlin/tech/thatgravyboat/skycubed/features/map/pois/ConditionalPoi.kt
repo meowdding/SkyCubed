@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import me.owdding.lib.displays.Display
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
+import org.joml.Vector3i
 import tech.thatgravyboat.skycubed.api.conditions.Condition
 
 class ConditionalPoi(
@@ -16,7 +17,7 @@ class ConditionalPoi(
 
     override val id: String = "conditional"
     override val tooltip: MutableList<Component> get() = poi.tooltip
-    override var position: Vector2i
+    override var position: Vector3i
         get() = poi.position
         set(value) {
             poi.position = value

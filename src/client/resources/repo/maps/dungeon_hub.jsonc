@@ -24,6 +24,7 @@
                 ],
                 "pos": {
                     "x": -30,
+                    "y": -1,
                     "z": 0
                 },
                 "destination": "dungeon_hub",
@@ -37,6 +38,7 @@
                 ],
                 "pos": {
                     "x": 20,
+                    "y": -1,
                     "z": 0
                 },
                 "destination": "hub",
@@ -51,6 +53,7 @@
                 ],
                 "position": {
                     "x": -36,
+                    "y": -1,
                     "z": 11
                 },
                 "texture": "http://textures.minecraft.net/texture/a39a04a2e16d09bc83665f76c78008c3d74cbda1818e801e13be6e7c4bc2f824",
@@ -66,6 +69,7 @@
                 ],
                 "position": {
                     "x": -63,
+                    "y": -1,
                     "z": -6
                 },
                 "texture": "http://textures.minecraft.net/texture/fc57e3398daeb32d8d82a3394f9381de2a57f643896ede0db9a656a7068c789",
@@ -81,6 +85,7 @@
                 ],
                 "position": {
                     "x": -68,
+                    "y": -1,
                     "z": 1
                 },
                 "texture": "http://textures.minecraft.net/texture/9b56895b9659896ad647f58599238af532d46db9c1b0389b8bbeb70999dab33d",
@@ -96,6 +101,7 @@
                 ],
                 "position": {
                     "x": -63,
+                    "y": -1,
                     "z": 6
                 },
                 "texture": "http://textures.minecraft.net/texture/ad265b004b410052ff15bc09ac8c48e8ef0ca9aa66f37b44644175667f14f606",
@@ -111,6 +117,7 @@
                 ],
                 "position": {
                     "x": -52,
+                    "y": -1,
                     "z": -9
                 },
                 "texture": "http://textures.minecraft.net/texture/98bc2c53ff2d4066dddb1cfb746d5d56e15606e4424bd1e7bc8155f99b3ce06f",
@@ -126,6 +133,7 @@
                 ],
                 "position": {
                     "x": -21,
+                    "y": -1,
                     "z": -13
                 },
                 "texture": "http://textures.minecraft.net/texture/ab8e63abc0ec2d028900287ac7e71dbf447ee7091c9ff0785fa19e880b30815",
@@ -141,6 +149,7 @@
                 ],
                 "position": {
                     "x": -18,
+                    "y": -1,
                     "z": 5
                 },
                 "texture": "http://textures.minecraft.net/texture/7ef45e1c70517c1147a09b63e4dea7ecbe2dc78e9a62ee7783f7d91a5caec2ce",

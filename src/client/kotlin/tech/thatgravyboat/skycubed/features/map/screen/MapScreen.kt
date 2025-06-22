@@ -12,7 +12,7 @@ import earth.terrarium.olympus.client.ui.modals.Modals
 import earth.terrarium.olympus.client.utils.Orientation
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
-import org.joml.Vector2i
+import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -145,10 +145,10 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                                     }
 
                                     val newPoi = if (poi == "insignificant_npc") {
-                                        val npc = Poi.createByType("npc", Vector2i()) ?: return@withCallback
+                                        val npc = Poi.createByType("npc", Vector3i()) ?: return@withCallback
                                         ConditionalPoi(Condition.TRUE, Condition.FALSE, npc)
                                     } else {
-                                        Poi.createByType(poi, Vector2i()) ?: return@withCallback
+                                        Poi.createByType(poi, Vector3i()) ?: return@withCallback
                                     }
 
                                     Maps.currentIsland?.pois?.add(newPoi)

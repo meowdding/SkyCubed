@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityAttachment
 import net.minecraft.world.entity.decoration.ArmorStand
 import org.joml.Vector2i
+import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
@@ -46,14 +47,14 @@ object MapEditor {
     }
 
 
-    private fun Entity.posAsVec2i(): Vector2i {
+    private fun Entity.posAsVec3i(): Vector3i {
         val pos = this.position()
-        return Vector2i(pos.x.roundToInt(), pos.z.roundToInt())
+        return Vector3i(pos.x.roundToInt(), pos.y.roundToInt(), pos.z.roundToInt())
     }
 
-    private operator fun <T> Map<Vector2i, T>.get(entity: Entity?): T? {
+    private operator fun <T> Map<Vector3i, T>.get(entity: Entity?): T? {
         entity ?: return null
-        return this[entity.posAsVec2i()]
+        return this[entity.posAsVec3i()] ?: this[entity.posAsVec3i().apply { y = -1 }]
     }
 
     @Subscription
@@ -140,7 +141,7 @@ object MapEditor {
                 "",
                 "§7§lClick to view wiki!",
             ),
-            entity.posAsVec2i(),
+            entity.posAsVec3i(),
         )
 
         if (Screen.hasShiftDown()) {

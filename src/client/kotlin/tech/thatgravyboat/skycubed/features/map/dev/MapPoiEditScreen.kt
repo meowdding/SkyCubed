@@ -44,7 +44,7 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
                 }
 
                 Widgets.multilineTextInput(
-                    ListenableState.of(tooltip).also { it.registerListener(tooltipSetter) }
+                    ListenableState.of(tooltip).also { it.registerListener(tooltipSetter) },
                 ) { widget ->
                     widget.withSize(200, 100)
                 }.add()
@@ -52,26 +52,32 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
             vertical {
                 string("Position: ")
                 horizontal(5) {
-                    spacer()
-                    vertical(2) {
-                        horizontal(alignment = MIDDLE) {
-                            string("x")
-                            this.textInput(
-                                ListenableState.of(poi.position.x.toString()), width = 100,
-                                onChange = {
-                                    poi.position.x = it.toIntValue()
-                                },
-                            )
-                        }
-                        horizontal(alignment = MIDDLE) {
-                            string("y")
-                            this.textInput(
-                                ListenableState.of(poi.position.y.toString()), width = 100,
-                                onChange = {
-                                    poi.position.y = it.toIntValue()
-                                },
-                            )
-                        }
+                    horizontal(alignment = MIDDLE) {
+                        string("x")
+                        this.textInput(
+                            ListenableState.of(poi.position.x.toString()), width = 100,
+                            onChange = {
+                                poi.position.x = it.toIntValue()
+                            },
+                        )
+                    }
+                    horizontal(alignment = MIDDLE) {
+                        string("y")
+                        this.textInput(
+                            ListenableState.of(poi.position.y.toString()), width = 100,
+                            onChange = {
+                                poi.position.y = it.toIntValue()
+                            },
+                        )
+                    }
+                    horizontal(alignment = MIDDLE) {
+                        string("z")
+                        this.textInput(
+                            ListenableState.of(poi.position.z.toString()), width = 100,
+                            onChange = {
+                                poi.position.z = it.toIntValue()
+                            },
+                        )
                     }
                 }
             }
@@ -88,7 +94,8 @@ class MapPoiEditScreen(val poi: Poi, val parent: Screen? = null) : SkyCubedScree
                     horizontal(alignment = MIDDLE) {
                         string("Name")
                         Widgets.multilineTextInput(
-                            ListenableState.of(poi.name).also { it.registerListener { poi.name = it.trim() } }) { widget ->
+                            ListenableState.of(poi.name).also { it.registerListener { poi.name = it.trim() } },
+                        ) { widget ->
                             widget.withSize(100, 20)
                         }.apply {
                             setInitialFocus(this)
