@@ -124,7 +124,6 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                     }
                 }
 
-                it.withAutoCloseOff()
                 it.button(Text.of("New Poi")) {
                     val state = DropdownState.empty<String>()
                     Modals.action()
@@ -146,7 +145,9 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                                     McClient.setScreenAsync { MapPoiEditScreen(newPoi, this) }
                                 }
                             }.withSize(width, 20)
-                        }.open()
+                        }.apply {
+                            McClient.runNextTick { open() }
+                        }
                 }
             }
             return true
