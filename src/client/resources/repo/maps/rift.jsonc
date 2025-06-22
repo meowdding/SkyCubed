@@ -1,9 +1,8 @@
 {
-    "island": "THE_RIFT",
-    "default": "https://api.dediamondpro.dev/skyguide/medium/rift.png",
-    "topX": -368,
-    "topY": -400,
-    "bottomX": 302,
-    "bottomY": 320,
-    "pois": []
+  "bottomY": 320,
+  "topX": -368,
+  "topY": -400,
+  "bottomX": 302,
+  "island": "THE_RIFT",
+  "default": "https://api.dediamondpro.dev/skyguide/medium/rift.png"
 }

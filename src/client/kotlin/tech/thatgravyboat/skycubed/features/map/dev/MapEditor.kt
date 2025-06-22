@@ -8,7 +8,6 @@ import net.minecraft.network.chat.CommonComponents
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityAttachment
 import net.minecraft.world.entity.decoration.ArmorStand
-import org.joml.Vector2i
 import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
@@ -18,6 +17,7 @@ import tech.thatgravyboat.skyblockapi.api.events.render.PlayerRenderEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toPrettyString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
@@ -111,11 +111,8 @@ object MapEditor {
             poi.position.y = entity.y.roundToInt()
         }
 
-        val pos = entity.position() ?: return
-        val meow = Vector2i(pos.x.roundToInt(), pos.z.roundToInt())
-        this.state?.nameTagAttachment =
-            entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
-        this.state?.scoreText = Text.of(meow.toString())
+        this.state?.nameTagAttachment = entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
+        this.state?.scoreText = entity.posAsVec3i().toString().asComponent()
         this.state?.nameTag = CommonComponents.EMPTY
     }
 
