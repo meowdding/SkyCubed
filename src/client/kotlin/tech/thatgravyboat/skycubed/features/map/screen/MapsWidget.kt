@@ -38,7 +38,7 @@ class MapsWidget(
     height: Int,
 
     val rotate: State<Boolean> = State.of(false),
-    val shape: MapShape = MapShape.SQUARE
+    val shape: MapShape = MapShape.SQUARE,
 ) : BaseWidget(width, height) {
 
     private var xOffset by xOffset
@@ -102,7 +102,7 @@ class MapsWidget(
                             width,
                             height,
                             scaleX,
-                            scaleY
+                            scaleY,
                         )
                     }
 
@@ -213,59 +213,13 @@ class MapsWidget(
 }
 
 enum class MapShape(
-    val displayName: String
+    val displayName: String,
 ) {
-    CIRCLE("Circle") {
-        override fun drawMapPart(
-            graphics: GuiGraphics,
-            texture: ResourceLocation,
-            map: IslandData,
-            posX: Float,
-            posY: Float,
-            width: Int,
-            height: Int,
-            scaleX: Float,
-            scaleY: Float,
-            color: Int,
-        ) {
-            CircularMinimapRenderer.drawMapPart(
-                graphics,
-                texture,
-                posX + width * scaleX / 2.0f + 1,
-                posY + height * scaleY / 2.0f + 1,
-                width * kotlin.math.min(scaleX, scaleY) / 2.0f,
-                0, 0,
-                0f, 0f,
-                map.width, map.height,
-                map.width, map.height,
-                color
-            )
-        }
-    },
-    SQUARE("Square") {
-        override fun drawMapPart(
-            graphics: GuiGraphics,
-            texture: ResourceLocation,
-            map: IslandData,
-            posX: Float,
-            posY: Float,
-            width: Int,
-            height: Int,
-            scaleX: Float,
-            scaleY: Float,
-            color: Int,
-        ) {
-            graphics.blit(
-                net.minecraft.client.renderer.RenderType::guiTextured,
-                texture,
-                0, 0, 0f, 0f,
-                map.width, map.height, map.width, map.height,
-                color
-            )
-        }
-    };
+    CIRCLE("Circle"),
+    SQUARE("Square"),
+    ;
 
-    abstract fun drawMapPart (
+    fun drawMapPart(
         graphics: GuiGraphics,
         texture: ResourceLocation,
         map: IslandData,
@@ -275,8 +229,29 @@ enum class MapShape(
         height: Int,
         scaleX: Float,
         scaleY: Float,
-        color: Int = -1
-    )
+        color: Int = -1,
+    ) = when (this) {
+        SQUARE -> graphics.blit(
+            net.minecraft.client.renderer.RenderType::guiTextured,
+            texture,
+            0, 0, 0f, 0f,
+            map.width, map.height, map.width, map.height,
+            color,
+        )
+
+        CIRCLE -> CircularMinimapRenderer.drawMapPart(
+            graphics,
+            texture,
+            posX + width * scaleX / 2.0f + 1,
+            posY + height * scaleY / 2.0f + 1,
+            width * kotlin.math.min(scaleX, scaleY) / 2.0f,
+            0, 0,
+            0f, 0f,
+            map.width, map.height,
+            map.width, map.height,
+            color,
+        )
+    }
 
     override fun toString() = displayName
 

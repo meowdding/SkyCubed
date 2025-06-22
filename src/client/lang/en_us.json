@@ -55,6 +55,10 @@
                     "@value": "Enable Defense Text Overlay",
                     "desc": "Enables the defense text overlay."
                 },
+                "speed_enabled": {
+                    "@value": "Speed Defense Text Overlay",
+                    "desc": "Enables the speed text overlay."
+                },
                 "info": {
                     "@value": "Info HUD Overlay",
                     "desc": "Settings for the info HUD overlay.",
