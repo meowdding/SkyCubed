@@ -7,7 +7,7 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skycubed.utils.Codecs.asMapCodec
 
 data class AreaCondition(private val area: SkyBlockArea) : Condition {
-    override val id: String = "location"
+    override val id: String = "area"
     override fun test(): Boolean = LocationAPI.area == area
 
     companion object {

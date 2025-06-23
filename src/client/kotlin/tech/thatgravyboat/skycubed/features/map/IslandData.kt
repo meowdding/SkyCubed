@@ -8,10 +8,14 @@ import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.codecs.CodecUtils
 import tech.thatgravyboat.skyblockapi.utils.codecs.EnumCodec
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.conditions.Condition
+import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.features.map.texture.MapImage
+import kotlin.math.abs
 
 data class IslandData(
     val island: SkyBlockIsland,
@@ -25,19 +29,22 @@ data class IslandData(
     val offsetY: Int,
     val playerOffsetX: Int,
     val playerOffsetY: Int,
-    val pois: List<Poi>
+    val pois: MutableList<Poi>,
 ) {
 
     private val cache: Cache<BlockPos, MapImage> = CacheBuilder.newBuilder()
         .maximumSize(25)
         .build()
 
-    val width = bottomX - topX
-    val height = bottomY - topY
+    val width = abs(bottomX - topX)
+    val height = abs(bottomY - topY)
 
     init {
         pois.forEach {
-            it.position.add(offsetX, offsetY)
+            if (it.position.y == -1) {
+                SkyCubed.warn("Poi at -1 ${it.position} $island ${if (it is NpcPoi) it.name else it.javaClass.simpleName}")
+            }
+            it.position.add(offsetX, 0, offsetY)
         }
     }
 
@@ -68,7 +75,7 @@ data class IslandData(
             Codec.INT.optionalFieldOf("offsetY", 0).forGetter(IslandData::offsetY),
             Codec.INT.optionalFieldOf("playerOffsetX", 0).forGetter(IslandData::playerOffsetX),
             Codec.INT.optionalFieldOf("playerOffsetY", 0).forGetter(IslandData::playerOffsetY),
-            Poi.CODEC.listOf().optionalFieldOf("pois", listOf()).forGetter(IslandData::pois)
+            CodecUtils.list(Poi.CODEC).optionalFieldOf("pois", mutableListOf()).forGetter(IslandData::pois),
         ).apply(it, ::IslandData) }
     }
 }
