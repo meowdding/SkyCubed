@@ -46,6 +46,8 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
         return ResourceLocation.fromNamespaceAndPath("skycubed", path)
     }
 
+    fun olympus(path: String): ResourceLocation = ResourceLocation.fromNamespaceAndPath("olympus", path)
+
     inline fun <reified T : Any> loadFromRepo(file: String): T? = runBlocking {
         try {
             val json = mod.findPath("repo/$file.json").orElseThrow()?.let(Files::readString)?.readJson<JsonElement>() ?: return@runBlocking null

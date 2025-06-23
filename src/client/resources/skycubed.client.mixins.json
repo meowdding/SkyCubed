@@ -27,6 +27,7 @@
     "mixins": [
         "ClientboundCommandsPacketMixin",
         "CommandDispatcherMixin",
+        "EntityMixin",
         "LivingEntityRendererMixin",
         "PlayerTabOverlayMixin",
         "displayplayer.PlayerRenderStateMixin"

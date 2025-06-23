@@ -127,7 +127,7 @@ object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
     var mapShape by observable(
         enum(MapShape.SQUARE) {
             this.translation = "skycubed.config.overlays.map.shape"
-        }
+        },
     ) { _, _ ->
         MinimapOverlay.updateDisplay()
     }
