@@ -13,7 +13,7 @@ object SlayerIcons : Display {
     private val tarantula = Displays.sprite(SkyCubed.id("info/icons/slayers/tarantula"), 8, 8)
     private val sven = Displays.sprite(SkyCubed.id("info/icons/slayers/sven"), 8, 8)
     private val voidgloom = Displays.sprite(SkyCubed.id("info/icons/slayers/voidgloom"), 8, 8)
-    private val riftstalker = Displays.sprite(SkyCubed.id("info/icons/slayers/vampire"), 8, 8)
+    private val riftstalker = Displays.sprite(SkyCubed.id("info/icons/slayers/riftstalker"), 8, 8)
     private val inferno = Displays.sprite(SkyCubed.id("info/icons/slayers/inferno"), 8, 8)
 
     override fun getWidth(): Int = 8

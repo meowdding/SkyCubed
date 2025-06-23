@@ -56,7 +56,7 @@
                     "desc": "Enables the defense text overlay."
                 },
                 "speed_enabled": {
-                    "@value": "Speed Defense Text Overlay",
+                    "@value": "Enable Speed Text Overlay",
                     "desc": "Enables the speed text overlay."
                 },
                 "info": {
