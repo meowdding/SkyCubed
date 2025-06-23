@@ -63,6 +63,7 @@ object NotificationManager {
 
     @Subscription
     fun onScreenInit(event: ScreenInitializedEvent) {
+        if (!NotificationsConfig.enableNotificationsWidget) return
         if (event.screen is PauseScreen) {
             event.widgets.add(
                 Widgets.button {

@@ -421,6 +421,10 @@
                         "Checks the following messages:",
                         "§2§lGIFT!§r§aYou found a §fWhite Gift§a! §7(§f1§7/§a20§7)"
                     ]
+                },
+                "enable_notifications_widget": {
+                    "@value": "Enable notifications widget",
+                    "desc": "Adds a small widget in the top right of the pause screen to view recent notifications."
                 }
             }
         },
