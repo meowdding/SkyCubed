@@ -2,7 +2,6 @@ package tech.thatgravyboat.skycubed.features.map.dev
 
 import com.mojang.serialization.JsonOps
 import me.owdding.ktmodules.Module
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.CommonComponents
 import net.minecraft.world.entity.Entity
@@ -44,6 +43,7 @@ import kotlin.time.Duration.Companion.seconds
 object MapEditor {
 
     var enabled = false
+        private set
     val pois by CachedValue(1.seconds) {
         Maps.currentIsland?.pois?.associateBy { it.position } ?: emptyMap()
     }
@@ -84,7 +84,7 @@ object MapEditor {
                 }
                 json.ifSuccess { it ->
 
-                    FabricLoader.getInstance().configDir.resolve("skycubed/maps/$key.json").createParentDirectories()
+                    McClient.config.resolve("skycubed/maps/$key.json").createParentDirectories()
                         .writeText(
                             it.toPrettyString(),
                             Charsets.UTF_8,
@@ -107,11 +107,13 @@ object MapEditor {
 
         this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF0000
         if (poi != null && poi.position.y == -1) {
-            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}").send()
+            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
+                .send()
             poi.position.y = entity.y.roundToInt()
         }
 
-        this.state?.nameTagAttachment = entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
+        this.state?.nameTagAttachment =
+            entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
         this.state?.scoreText = entity.posAsVec3i().toString().asComponent()
         this.state?.nameTag = CommonComponents.EMPTY
     }
@@ -129,7 +131,8 @@ object MapEditor {
         if (poi is PortalPoi || poi is EffigyPoi) return
         this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF
         if (poi != null && poi.position.y == -1) {
-            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}").send()
+            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
+                .send()
             poi.position.y = entity.y.roundToInt()
         }
 

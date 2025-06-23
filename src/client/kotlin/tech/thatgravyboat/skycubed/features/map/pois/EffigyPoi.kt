@@ -30,14 +30,14 @@ data class EffigyPoi(
         6
     )
     override val enabled: Boolean get() = RiftAPI.effieges.getOrNull(index)?.enabled?.not() ?: false
-    override val tooltip: MutableList<Component> = listOf(
+    override val tooltip: MutableList<Component> = mutableListOf(
         Text.of("Effigy") { color = TextColor.RED },
         CommonText.EMPTY,
 //        Text.of("Click to navigate to") {
 //            bold = true
 //            color = TextColor.YELLOW
 //        }
-    ).toMutableList()
+    )
 
     override fun click() {
         println(RiftAPI.effieges.getOrNull(index))

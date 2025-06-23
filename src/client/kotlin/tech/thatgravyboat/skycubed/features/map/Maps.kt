@@ -39,6 +39,7 @@ object Maps {
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
 
     var currentIsland: IslandData? = null
+        private set
 
     init {
         runBlocking {
