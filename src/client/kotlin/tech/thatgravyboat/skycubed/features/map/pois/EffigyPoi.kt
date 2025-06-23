@@ -22,7 +22,7 @@ data class EffigyPoi(
     override val id: String = "effigy"
     override var position: Vector3i
         get() = RiftAPI.effieges.getOrNull(index)?.pos?.let { Vector3i(it.x, it.y, it.z) } ?: Vector3i()
-        set(_) = throw UnsupportedOperationException()
+        set(_) {}
     override val bounds: Vector2i = Vector2i(6, 6)
     override val display: Display = Displays.sprite(
         SkyCubed.id("map/icons/effigy"),
