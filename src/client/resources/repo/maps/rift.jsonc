@@ -1964,28 +1964,5 @@
             "link": "https://wiki.hypixel.net/$name",
             "type": "npc"
         }
-    ],
-    "images": [
-        {
-            "image": "https://femboy-hooters.net/u/L9GaLS.png",
-            "condition": {
-                "position": "y > 73 && y < 78 && x > -76 && x < 67 && z > -10 && z < 7",
-                "condition": "position"
-            }
-        },
-        {
-            "image": "https://femboy-hooters.net/u/TKTp6x.png",
-            "condition": {
-                "position": "y > 55 && y < 75 && x > -32 && x < 74 && z > -73 && z < 11",
-                "condition": "position"
-            }
-        },
-        {
-            "image": "https://femboy-hooters.net/u/21jSRA.png",
-            "condition": {
-                "position": "y > 53 && y < 84 && x > 32 && x < 106 && z > 16 && z < 113",
-                "condition": "position"
-            }
-        }
     ]
 }
