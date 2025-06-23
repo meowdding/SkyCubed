@@ -10,7 +10,9 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.codecs.CodecUtils
 import tech.thatgravyboat.skyblockapi.utils.codecs.EnumCodec
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.conditions.Condition
+import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.features.map.texture.MapImage
 import kotlin.math.abs
@@ -39,6 +41,9 @@ data class IslandData(
 
     init {
         pois.forEach {
+            if (it.position.y == -1) {
+                SkyCubed.warn("Poi at -1 ${it.position} $island ${if (it is NpcPoi) it.name else it.javaClass.simpleName}")
+            }
             it.position.add(offsetX, 0, offsetY)
         }
     }

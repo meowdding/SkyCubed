@@ -4,11 +4,6 @@ import com.mojang.authlib.SignatureState
 import com.mojang.authlib.minecraft.MinecraftProfileTexture
 import com.mojang.authlib.minecraft.MinecraftProfileTextures
 import com.mojang.serialization.MapCodec
-import earth.terrarium.olympus.client.components.Widgets
-import earth.terrarium.olympus.client.components.buttons.Button
-import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
-import earth.terrarium.olympus.client.constants.MinecraftColors
-import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.ui.modals.Modals
 import me.owdding.ktcodecs.FieldName
 import me.owdding.ktcodecs.GenerateCodec
@@ -21,7 +16,6 @@ import net.minecraft.network.chat.Component
 import org.joml.Vector2i
 import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
@@ -69,35 +63,7 @@ data class NpcPoi(
         }.getOrNull() ?: ExtraDisplays.missingTextureDisplay()
 
     override fun click() {
-        Modals.action()
-            .withTitle(Text.of("Open Link"))
-            .withContent(
-                Text.multiline(
-                    "Are you sure you want to open this link?",
-                    "",
-                    "§9${link.removePrefix("https://").removePrefix("http://")}",
-                ),
-            )
-            .withAction(
-                Widgets.button {
-                    it.withSize(70, 20)
-                    it.withRenderer(WidgetRenderers.text(Text.of("Close")))
-                    it.withCallback {
-                        McScreen.self?.onClose()
-                    }
-                },
-            )
-            .withAction(
-                Widgets.button {
-                    it.withSize(70, 20)
-                    it.withTexture(UIConstants.PRIMARY_BUTTON)
-                    it.withRenderer(WidgetRenderers.text<Button?>(Text.of("Open")).withColor(MinecraftColors.WHITE))
-                    it.withCallback {
-                        Util.getPlatform().openUri(link)
-                    }
-                },
-            )
-            .open()
+        Modals.link(link).open()
     }
 
     fun String.applyReplacements(): String {

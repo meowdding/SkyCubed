@@ -134,9 +134,7 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                         .withContent { width ->
                             Widgets.dropdown(
                                 state,
-                                Poi.poiTypes.toList().let {
-                                    it.toMutableList().apply { this.add("insignificant_npc") }
-                                },
+                                Poi.poiTypes.toMutableList().apply { this.add("insignificant_npc") },
                                 { Text.of(it.toString()) },
                                 {},
                             ) {

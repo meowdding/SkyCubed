@@ -101,19 +101,18 @@ object MapEditor {
         if (!enabled) return
         val entity = entity ?: return
         if (entity.uuid?.version() == 4) return
-        this.entity?.glow = true
-        val poi = pois[this.entity]
+        entity.glow = true
+        val poi = pois[entity]
         if (poi is PortalPoi || poi is EffigyPoi) return
 
-        this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF0000
+        entity.glowColor = if (poi != null) 0xFF00 else 0xFF0000
         if (poi != null && poi.position.y == -1) {
             Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
                 .send()
             poi.position.y = entity.y.roundToInt()
         }
 
-        this.state?.nameTagAttachment =
-            entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
+        this.state?.nameTagAttachment = entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
         this.state?.scoreText = entity.posAsVec3i().toString().asComponent()
         this.state?.nameTag = CommonComponents.EMPTY
     }
@@ -124,12 +123,12 @@ object MapEditor {
         val entity = entity ?: return
         if (entity.uuid?.version() == 4) return
         if (this.entity is ArmorStand) return
-        this.entity?.glow = true
+        entity.glow = true
 
-        val poi = pois[this.entity]
+        val poi = pois[entity]
 
         if (poi is PortalPoi || poi is EffigyPoi) return
-        this.entity?.glowColor = if (poi != null) 0xFF00 else 0xFF
+        entity.glowColor = if (poi != null) 0xFF00 else 0xFF
         if (poi != null && poi.position.y == -1) {
             Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
                 .send()
@@ -142,7 +141,7 @@ object MapEditor {
     private fun LeftClickEntityEvent.modifyOrCreateNpc() {
         if (!enabled) return
         this.cancel()
-        val poi = pois[this.entity]
+        val poi = pois[entity]
         val mapPois = Maps.currentIsland?.pois
         if (poi != null && mapPois != null) {
             McClient.setScreenAsync { MapPoiEditScreen(poi, mapPois, entity = entity) }
