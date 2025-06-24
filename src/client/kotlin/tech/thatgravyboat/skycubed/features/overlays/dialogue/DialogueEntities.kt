@@ -26,7 +26,7 @@ object DialogueEntities {
         Maps.groups.values
             .flatten()
             .flatMap(IslandData::pois)
-            .mapNotNull { it as? NpcPoi }
+            .filterIsInstance<NpcPoi>()
             .associateBy { it.name.lowercase().stripColor() }
     }
 
