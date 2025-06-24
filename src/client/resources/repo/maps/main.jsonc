@@ -4138,9 +4138,9 @@
                     "§l§eClick to Warp!"
                 ],
                 "pos": {
-                    "x": -45,
-                    "y": -1,
-                    "z": -2229
+                    "x": 4,
+                    "y": 157,
+                    "z": 86
                 },
                 "destination": "deep",
                 "type": "portal"
@@ -4153,25 +4153,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": -2,
-                    "y": -1,
-                    "z": -2300
-                },
-                "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
-                "name": "§bLift Operator",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 10,
+                    "x": 46,
                     "y": 150,
-                    "z": -1721
+                    "z": 16
                 },
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4185,9 +4169,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": 10,
+                    "x": 46,
                     "y": 121,
-                    "z": -1721
+                    "z": 16
                 },
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4201,9 +4185,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": 10,
+                    "x": 46,
                     "y": 101,
-                    "z": -1719
+                    "z": 18
                 },
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4217,9 +4201,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": 10,
+                    "x": 46,
                     "y": 66,
-                    "z": -1721
+                    "z": 16
                 },
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4233,9 +4217,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": 10,
+                    "x": 46,
                     "y": 38,
-                    "z": -1721
+                    "z": 16
                 },
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4249,25 +4233,41 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": 10,
+                    "x": 46,
                     "y": 13,
-                    "z": -1721
+                    "z": 16
                 },
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
             },
             {
-                "name": "§bRhys",
+                "name": "Walter",
                 "tooltip": [
                     "$name",
                     "",
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": -4,
+                    "x": 19,
+                    "y": 156,
+                    "z": -36
+                },
+                "texture": "http://textures.minecraft.net/texture/43ac21b653a27632dbc8373c6e6fba5b8c97b7ecbfef2d793630d149b116ba81",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§dRhys",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 32,
                     "y": 12,
-                    "z": -1722
+                    "z": 15
                 },
                 "texture": "http://textures.minecraft.net/texture/6b20b23c1aa2be0270f016b4c90d6ee6b8330a17cfef87869d6ad60b2ffbf3b5",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4281,9 +4281,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": -11,
+                    "x": 25,
                     "y": 104,
-                    "z": -1720
+                    "z": 17
                 },
                 "texture": "http://textures.minecraft.net/texture/9503c00890326605067ff16fffbc2d0502251b3680c1acc1d68cd3d064d0577",
                 "link": "https://wiki.hypixel.net/$name",
@@ -4297,9 +4297,9 @@
                     "§7§lClick to view wiki!"
                 ],
                 "position": {
-                    "x": -46,
+                    "x": -10,
                     "y": 120,
-                    "z": -1701
+                    "z": 36
                 },
                 "texture": "http://textures.minecraft.net/texture/bfaaf5de0d25ae26b287a2ba51961b968a3add8bbc2472e97a76fdc68ce41f78",
                 "link": "https://wiki.hypixel.net/$name",

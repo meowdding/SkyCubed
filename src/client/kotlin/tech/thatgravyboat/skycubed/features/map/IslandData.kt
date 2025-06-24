@@ -44,7 +44,6 @@ data class IslandData(
             if (it.position.y == -1) {
                 SkyCubed.warn("Poi at -1 ${it.position} $island ${if (it is NpcPoi) it.name else it.javaClass.simpleName}")
             }
-            it.position.add(offsetX, 0, offsetY)
         }
     }
 
