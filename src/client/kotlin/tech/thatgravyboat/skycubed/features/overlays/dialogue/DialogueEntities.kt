@@ -58,12 +58,8 @@ object DialogueEntities {
     }
 
     fun updateCache(cacheTime: Long) {
-        var iterator = lastClickedEntities.iterator()
-        while (iterator.hasNext()) {
-            val entry = iterator.next()
-            if (entry.value + cacheTime < System.currentTimeMillis()) {
-                iterator.remove()
-            }
+        lastClickedEntities.entries.removeIf {
+            it.value + cacheTime < System.currentTimeMillis()
         }
     }
 }
