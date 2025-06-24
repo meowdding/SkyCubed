@@ -8,19 +8,13 @@ import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.decoration.ArmorStand
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
-import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
-import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
@@ -36,6 +30,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.features.overlays.dialogue.DialogueEntities
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import kotlin.math.max
 
@@ -55,7 +50,6 @@ object DialogueOverlay : Overlay {
     private var displayedYesNo = false
     private var hudOverlayDisplay: Display = Displays.empty()
     private var inventoryOverlayDisplay: Display = Displays.empty()
-    private var lastClickedEntities: MutableMap<LivingEntity, Long> = mutableMapOf()
 
     override val name: Component = Text.of("Dialogue")
     override val position: Position = Position()
@@ -95,25 +89,6 @@ object DialogueOverlay : Overlay {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onEntityClick(event: RightClickEntityEvent) {
-        handleEntityClick(event.entity)
-    }
-
-    @Subscription
-    @OnlyOnSkyBlock
-    fun onEntityLeftClick(event: LeftClickEntityEvent) {
-        handleEntityClick(event.entity)
-    }
-
-    private fun handleEntityClick(event: Entity) {
-        if (!enabled) return
-
-        val entity = event as? LivingEntity ?: return
-        lastClickedEntities[entity] = System.currentTimeMillis()
-    }
-
-    @Subscription
-    @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
         if (!enabled) return
 
@@ -145,12 +120,7 @@ object DialogueOverlay : Overlay {
     }
 
     private fun createMainDisplay(name: Component, message: Component, maxWidth: Int): Display? {
-        val entity = lastClickedEntities.keys.find { npc ->
-            McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
-                .any { it.customName?.stripped == name.stripped }
-        } ?: lastClickedEntities.keys.firstOrNull()
-
-        entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
+        val entity = DialogueEntities.get(name.stripped)
 
         val entityDisplay = entity?.let {
             val display = Displays.entity(it, 60, 60, 35, 80f, 40f)
@@ -228,9 +198,7 @@ object DialogueOverlay : Overlay {
     }
 
     private fun reset() {
-        lastClickedEntities = lastClickedEntities.filterValues {
-            it + max(displayDuration, displayActionDuration) + 5000 > System.currentTimeMillis()
-        }.toMutableMap()
+        DialogueEntities.updateCache(max(displayDuration, displayActionDuration) + 5000)
         yesNo = null
         displayedYesNo = false
         hudOverlayDisplay = Displays.empty()
