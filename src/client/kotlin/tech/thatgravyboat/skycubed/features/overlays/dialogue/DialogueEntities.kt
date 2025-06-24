@@ -14,7 +14,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.pois.NpcPoi
-import tech.thatgravyboat.skycubed.features.overlays.DialogueOverlay.enabled
+import tech.thatgravyboat.skycubed.features.overlays.dialogue.DialogueOverlay.enabled
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import java.util.*
 import kotlin.io.encoding.ExperimentalEncodingApi

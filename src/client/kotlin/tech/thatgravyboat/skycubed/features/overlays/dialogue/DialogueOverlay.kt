@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.dialogue
 
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
@@ -30,8 +30,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.features.overlays.dialogue.DialogueEntities
-import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.math.max
 
 @Module
@@ -111,8 +110,8 @@ object DialogueOverlay : Overlay {
         }
 
         val (yesCommand, noCommand) = yesNo ?: return
-        val isYes = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_Y)
-        val isNo = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_N)
+        val isYes = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_1)
+        val isNo = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_2)
 
         val command = if (isYes) yesCommand else if (isNo) noCommand else return
         McClient.sendCommand(command.removePrefix("/"))
@@ -143,7 +142,7 @@ object DialogueOverlay : Overlay {
 
         val npcNameDisplay = Displays.pushPop(
             Displays.background(
-                backgroundBox,
+                SkyCubedTextures.backgroundBox,
                 Displays.padding(5, Displays.component(name, maxWidth))
             )
         ) { translate(60f.takeIf { entityDisplay != null } ?: 8f, -8f, 0f) }
@@ -154,7 +153,7 @@ object DialogueOverlay : Overlay {
             entityDisplay,
             Displays.pushPop(
                 Displays.background(
-                    backgroundBox,
+                    SkyCubedTextures.backgroundBox,
                     listOf(
                         npcNameDisplay,
                         Displays.padding(
@@ -176,12 +175,12 @@ object DialogueOverlay : Overlay {
         nextCheck = System.currentTimeMillis() + displayActionDuration
 
         val options = listOf(
-            Text.of("[Y]es") { this.color = TextColor.GREEN },
-            Text.of("[N]o") { this.color = TextColor.RED }
+            Text.of("[1] Yes") { this.color = TextColor.GREEN },
+            Text.of("[2] No") { this.color = TextColor.RED }
         )
 
         val yesNoDisplay = options.map {
-            Displays.background(backgroundBox, Displays.padding(5, Displays.text(it)))
+            Displays.background(SkyCubedTextures.backgroundBox, Displays.padding(5, Displays.text(it)))
         }.toColumn(10, Alignment.START)
 
         return listOf(
