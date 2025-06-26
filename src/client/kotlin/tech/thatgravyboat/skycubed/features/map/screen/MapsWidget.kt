@@ -119,9 +119,10 @@ class MapsWidget(
                                 ScreenUtils.setTooltip(
                                     listOf(
                                         waypoint.text,
-                                        Text.of("ᴡᴀʏᴘᴏɪɴᴛ"),
+                                        Text.translatable("skycubed.map.waypoints.tooltip.subtitle"),
                                         CommonText.EMPTY,
-                                        Text.of("Position: ${waypoint.pos.x}, ${waypoint.pos.y}, ${waypoint.pos.z}"),
+                                        Text.translatable("skycubed.map.waypoints.tooltip.position"),
+                                        Text.of(" ${waypoint.pos.x}, ${waypoint.pos.y}, ${waypoint.pos.z}"),
                                     )
                                 )
                                 cursor = Cursor.POINTER

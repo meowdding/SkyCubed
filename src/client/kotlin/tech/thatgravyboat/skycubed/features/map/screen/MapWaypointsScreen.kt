@@ -14,32 +14,38 @@ import net.minecraft.world.item.DyeColor
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.features.map.waypoints.Waypoints
 import kotlin.math.roundToInt
 
 object MapWaypointsScreen {
 
+    private val CREATE_TITLE = Text.translatable("skycubed.map.waypoints.create.title")
+    private val CREATE_PLACEHOLDER = Text.translatable("skycubed.map.waypoints.create.placeholder")
+    private val CREATE_BUTTON = Text.translatable("skycubed.map.waypoints.create.button")
+
+    private val CONTEXT_DELETE = Text.translatable("skycubed.map.waypoints.context.delete")
+    private val CONTEXT_CREATE = Text.translatable("skycubed.map.waypoints.context.create")
+
     private fun openModal(x: Int, z: Int) {
         McClient.tell {
             val state = State.of("")
             Modals.action()
-                .withTitle(Text.of("Create Waypoint"))
-                .withContent(Text.of("Name:"))
-                .withContent { width -> Widgets.textInput(state)
-                    .withPlaceholder("Waypoint Name")
-                    .withSize(width, 20)
-                }
+                .withTitle(CREATE_TITLE)
+                .withContent(CREATE_PLACEHOLDER)
+                .withContent { width -> Widgets.textInput(state).withPlaceholder("Waypoint Name").withSize(width, 20) }
                 .withAction(Widgets.button()
                     .withRenderer(WidgetRenderers.text(UITexts.CANCEL))
                     .withSize(80, 24)
                     .withCallback { McScreen.self?.onClose() }
                 )
                 .withAction(Widgets.button()
-                    .withRenderer(WidgetRenderers.text<AbstractWidget>(UITexts.OPEN).withColor(MinecraftColors.WHITE))
+                    .withRenderer(WidgetRenderers.text<AbstractWidget>(CREATE_BUTTON).withColor(MinecraftColors.WHITE))
                     .withSize(80, 24)
                     .withTexture(UIConstants.PRIMARY_BUTTON)
                     .withCallback {
-                        Waypoints.addWaypoint(Text.of(state.get()), x + 0.5f, 0, z + 0.5f, DyeColor.WHITE, true)
+                        Waypoints.addWaypoint(Text.of(state.get()).withColor(TextColor.BLUE), x + 0.5f, 0, z + 0.5f, DyeColor.WHITE, true)
+                        McScreen.self?.onClose()
                     }
                 )
                 .open()
@@ -52,10 +58,10 @@ object MapWaypointsScreen {
             val waypoint = widget.getWaypointAt(mouseX, mouseY)
             when {
                 waypoint != null -> ContextMenu.open { menu ->
-                    menu.button(Text.of("Remove Waypoint")) { Waypoints.removeWaypoint(waypoint) }
+                    menu.button(CONTEXT_DELETE) { Waypoints.removeWaypoint(waypoint) }
                 }
                 poi != null -> ContextMenu.open { menu ->
-                    menu.button(Text.of("Create Waypoint")) {
+                    menu.button(CONTEXT_CREATE) {
                         Waypoints.addWaypoint(
                             poi.first.tooltip.firstOrNull() ?: Text.of("Waypoint"),
                             poi.first.position.x - 1f, poi.first.position.y, poi.first.position.z - 1f,
@@ -64,7 +70,7 @@ object MapWaypointsScreen {
                     }
                 }
                 else -> ContextMenu.open { menu ->
-                    menu.button(Text.of("Create Waypoint")) {
+                    menu.button(CONTEXT_CREATE) {
                         val (x, z) = widget.getWorldPosition(mouseX, mouseY)
                         openModal(x.roundToInt(), z.roundToInt())
                     }
