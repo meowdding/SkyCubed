@@ -7,6 +7,10 @@ import net.fabricmc.loader.api.FabricLoader
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skycubed.SkyCubed.VERSION
+import tech.thatgravyboat.skycubed.SkyCubed.sendWithPrefix
 import java.nio.file.Files
 
 @Module
@@ -21,8 +25,14 @@ object ConfigManager {
 
     @Subscription
     fun onRegisterCommands(event: RegisterCommandsEvent) {
-        event.registerWithCallback("skycubed") {
-            McClient.setScreen(ResourcefulConfigScreen.get(null, config))
+        event.register("skycubed") {
+            thenCallback("version") {
+                Text.of("Version: $VERSION").withColor(TextColor.GRAY).sendWithPrefix()
+            }
+
+            callback {
+                McClient.setScreen(ResourcefulConfigScreen.get(null, config))
+            }
         }
     }
 
