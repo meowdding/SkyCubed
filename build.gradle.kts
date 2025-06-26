@@ -84,7 +84,7 @@ dependencies {
     modImplementation(libs.fabric)
 
     modImplementation(libs.hypixelapi)
-    modImplementation(variantOf(libs.skyblockapi) { classifier("1.21.5") })
+    modImplementation(libs.skyblockapi)
     modImplementation(libs.rconfig)
     modImplementation(libs.rconfigkt) { isTransitive = false }
     modImplementation(libs.rlib)
@@ -95,7 +95,7 @@ dependencies {
     modImplementation(libs.rei) { isTransitive = false }
 
     include(libs.hypixelapi)
-    include(variantOf(libs.skyblockapi) { classifier("1.21.5") })
+    include(libs.skyblockapi)
     include(libs.rconfig)
     include(libs.rconfigkt) { isTransitive = false }
     include(libs.rlib)
