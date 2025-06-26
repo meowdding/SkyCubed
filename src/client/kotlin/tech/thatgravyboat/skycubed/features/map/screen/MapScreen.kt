@@ -1,29 +1,19 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
-import com.mojang.blaze3d.platform.InputConstants
 import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
 import earth.terrarium.olympus.client.layouts.Layouts
 import earth.terrarium.olympus.client.ui.UIConstants
-import earth.terrarium.olympus.client.ui.context.ContextMenu
-import earth.terrarium.olympus.client.ui.modals.ActionModal
-import earth.terrarium.olympus.client.ui.modals.Modals
 import earth.terrarium.olympus.client.utils.Orientation
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
-import org.joml.Vector3i
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skycubed.api.conditions.Condition
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
-import tech.thatgravyboat.skycubed.features.map.dev.MapPoiEditScreen
-import tech.thatgravyboat.skycubed.features.map.pois.ConditionalPoi
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.ResettingState
 
@@ -117,51 +107,10 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        if (button == InputConstants.MOUSE_BUTTON_RIGHT && MapEditor.enabled) {
-            ContextMenu.open(mouseX, mouseY) {
-                val map = this.children().filterIsInstance<MapsWidget>().firstOrNull()
-                val poi = map?.getElementUnder(mouseX, mouseY)
-                if (poi != null) {
-                    it.dangerButton(Text.of("Delete Poi")) {
-                        map.removePoi(poi)
-                    }
-                }
-
-                it.button(Text.of("New Poi")) {
-                    val state = DropdownState.empty<String>()
-                    Modals.action()
-                        .withTitle(Text.of("Select Poi Type"))
-                        .withContent { width ->
-                            Widgets.dropdown(
-                                state,
-                                Poi.poiTypes.toMutableList().apply { this.add("insignificant_npc") },
-                                { Text.of(it.toString()) },
-                                {},
-                            ) {
-                                it.withCallback { poi ->
-                                    if (McClient.self.screen is ActionModal) {
-                                        McClient.self.screen?.onClose()
-                                    }
-
-                                    val newPoi = if (poi == "insignificant_npc") {
-                                        val npc = Poi.createByType("npc", Vector3i()) ?: return@withCallback
-                                        ConditionalPoi(Condition.TRUE, Condition.FALSE, npc)
-                                    } else {
-                                        Poi.createByType(poi, Vector3i()) ?: return@withCallback
-                                    }
-
-                                    val pois = Maps.currentIsland?.pois ?: run {
-                                        Text.of("Unknown island").send()
-                                        return@withCallback
-                                    }
-                                    McClient.setScreenAsync { MapPoiEditScreen(newPoi, pois, this) }
-                                }
-                            }.withSize(width, 20)
-                        }.apply {
-                            McClient.runNextTick { open() }
-                        }
-                }
-            }
+        val widget = this.children().filterIsInstance<MapsWidget>().firstOrNull()
+        if (MapEditor.enabled && MapEditorScreen.mouseClicked(widget, mouseX, mouseY, button)) {
+            return true
+        } else if (MapWaypointsScreen.mouseClicked(widget, mouseX, mouseY, button)) {
             return true
         }
         return super.mouseClicked(mouseX, mouseY, button)

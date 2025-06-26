@@ -8,6 +8,7 @@ import org.joml.Vector2i
 import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
+import tech.thatgravyboat.skycubed.utils.Rect
 
 interface Poi {
 
@@ -23,6 +24,8 @@ interface Poi {
     var position: Vector3i
     val bounds: Vector2i
     val display: Display
+
+    val rect: Rect get() = Rect(position.x, position.z, bounds.x, bounds.y)
 
     fun click()
 
