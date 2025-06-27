@@ -154,6 +154,7 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                                         Text.of("Unknown island").send()
                                         return@withCallback
                                     }
+                                    pois.add(newPoi)
                                     McClient.setScreenAsync { MapPoiEditScreen(newPoi, pois, this) }
                                 }
                             }.withSize(width, 20)

@@ -9,7 +9,7 @@
                 ],
                 "pos": {
                     "x": -3,
-                    "y": -1,
+                    "y": 70,
                     "z": -63
                 },
                 "destination": "hub",
@@ -23,7 +23,7 @@
                 ],
                 "pos": {
                     "x": -250,
-                    "y": -1,
+                    "y": 130,
                     "z": 45
                 },
                 "destination": "castle",
@@ -37,7 +37,7 @@
                 ],
                 "pos": {
                     "x": -161,
-                    "y": -1,
+                    "y": 61,
                     "z": -99
                 },
                 "destination": "crypt",
@@ -51,7 +51,7 @@
                 ],
                 "pos": {
                     "x": -75,
-                    "y": -1,
+                    "y": 76,
                     "z": 80
                 },
                 "destination": "museum",
@@ -65,7 +65,7 @@
                 ],
                 "pos": {
                     "x": 91,
-                    "y": -1,
+                    "y": 75,
                     "z": 173
                 },
                 "destination": "da",
@@ -1098,86 +1098,6 @@
                 "type": "npc"
             },
             {
-                "name": "§dWizard",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 47,
-                    "y": 122,
-                    "z": 76
-                },
-                "texture": "http://textures.minecraft.net/texture/2f69ab2f4e7341ac262597083ca38ad01bfbbf8730fbfbdd10ca90aee337a2dd",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
-                "name": "Grumblefoot",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 42,
-                    "y": 115,
-                    "z": 76
-                },
-                "texture": "http://textures.minecraft.net/texture/320673a7a552fac094661b838b75fb7ab1200e691de7beec0a846a9e9781058d",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
-                "name": "§bUdium",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 45,
-                    "y": 104,
-                    "z": 76
-                },
-                "texture": "http://textures.minecraft.net/texture/5eaee7e51a87693a8fb7fe430a887ffb27eeb9749cea816d65245e2df655cf32",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
-                "name": "§9Erihann",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 40,
-                    "y": 100,
-                    "z": 70
-                },
-                "texture": "http://textures.minecraft.net/texture/91f07c6336e43659c517374639bf6c96d84eb8240802ecdfba4a5f5449987471",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
-                "name": "Nicole",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 40,
-                    "y": 90,
-                    "z": 73
-                },
-                "texture": "http://textures.minecraft.net/texture/48a3d43283f12ab1fa4d1b901df897589140f4cc1f6748222e574cdc70ce83a4",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
                 "name": "§dElise",
                 "tooltip": [
                     "$name",
@@ -1784,6 +1704,124 @@
                 "texture": "http://textures.minecraft.net/texture/4d4e9d2a8c88d0efd750e852732ba05fa3f302e204e2bdc88dad605e2557e2a6",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
+            },
+            {
+                "significant": {
+                    "condition": "false"
+                },
+                "poi": {
+                    "name": "Grumblefoot",
+                    "tooltip": [
+                        "$name",
+                        "",
+                        "§7§lClick to view wiki!"
+                    ],
+                    "position": {
+                        "x": 42,
+                        "y": 115,
+                        "z": 76
+                    },
+                    "texture": "http://textures.minecraft.net/texture/320673a7a552fac094661b838b75fb7ab1200e691de7beec0a846a9e9781058d",
+                    "link": "https://wiki.hypixel.net/$name",
+                    "type": "npc"
+                },
+                "type": "conditional"
+            },
+            {
+                "significant": {
+                    "condition": "false"
+                },
+                "poi": {
+                    "name": "§bUdium",
+                    "tooltip": [
+                        "$name",
+                        "",
+                        "§7§lClick to view wiki!"
+                    ],
+                    "position": {
+                        "x": 45,
+                        "y": 104,
+                        "z": 76
+                    },
+                    "texture": "http://textures.minecraft.net/texture/5eaee7e51a87693a8fb7fe430a887ffb27eeb9749cea816d65245e2df655cf32",
+                    "link": "https://wiki.hypixel.net/$name",
+                    "type": "npc"
+                },
+                "type": "conditional"
+            },
+            {
+                "significant": {
+                    "condition": "false"
+                },
+                "poi": {
+                    "name": "Nicole",
+                    "tooltip": [
+                        "$name",
+                        "",
+                        "§7§lClick to view wiki!"
+                    ],
+                    "position": {
+                        "x": 40,
+                        "y": 90,
+                        "z": 73
+                    },
+                    "texture": "http://textures.minecraft.net/texture/48a3d43283f12ab1fa4d1b901df897589140f4cc1f6748222e574cdc70ce83a4",
+                    "link": "https://wiki.hypixel.net/$name",
+                    "type": "npc"
+                },
+                "type": "conditional"
+            },
+            {
+                "significant": {
+                    "condition": "false"
+                },
+                "poi": {
+                    "name": "§9Erihann",
+                    "tooltip": [
+                        "$name",
+                        "",
+                        "§7§lClick to view wiki!"
+                    ],
+                    "position": {
+                        "x": 40,
+                        "y": 100,
+                        "z": 70
+                    },
+                    "texture": "http://textures.minecraft.net/texture/91f07c6336e43659c517374639bf6c96d84eb8240802ecdfba4a5f5449987471",
+                    "link": "https://wiki.hypixel.net/$name",
+                    "type": "npc"
+                },
+                "type": "conditional"
+            },
+            {
+                "name": "§dWizard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 47,
+                    "y": 122,
+                    "z": 76
+                },
+                "texture": "http://textures.minecraft.net/texture/2f69ab2f4e7341ac262597083ca38ad01bfbbf8730fbfbdd10ca90aee337a2dd",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "tooltip": [
+                    "§bWizard",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
+                "pos": {
+                    "x": 43,
+                    "y": 122,
+                    "z": 69
+                },
+                "destination": "wizard",
+                "type": "portal"
             }
         ],
         "bottomY": 241,
@@ -1845,7 +1883,7 @@
                 ],
                 "pos": {
                     "x": -196,
-                    "y": -1,
+                    "y": 83,
                     "z": -227
                 },
                 "destination": "spider",
@@ -1859,7 +1897,7 @@
                 ],
                 "pos": {
                     "x": -189,
-                    "y": -1,
+                    "y": 176,
                     "z": -310
                 },
                 "destination": "nest",
@@ -2018,7 +2056,7 @@
                 ],
                 "pos": {
                     "x": -265,
-                    "y": -1,
+                    "y": 79,
                     "z": -17
                 },
                 "destination": "park",
@@ -2032,7 +2070,7 @@
                 ],
                 "pos": {
                     "x": -466,
-                    "y": -1,
+                    "y": 121,
                     "z": -33
                 },
                 "destination": "jungle",
@@ -2046,7 +2084,7 @@
                 ],
                 "pos": {
                     "x": -395,
-                    "y": -1,
+                    "y": 96,
                     "z": -62
                 },
                 "destination": "howl",
@@ -2316,8 +2354,8 @@
                     "§l§eClick to Warp!"
                 ],
                 "pos": {
-                    "x": 112,
-                    "y": -1,
+                    "x": 113,
+                    "y": 71,
                     "z": -203
                 },
                 "destination": "barn",
@@ -2331,7 +2369,7 @@
                 ],
                 "pos": {
                     "x": 160,
-                    "y": -1,
+                    "y": 77,
                     "z": -370
                 },
                 "destination": "desert",
@@ -2345,10 +2383,10 @@
                 ],
                 "pos": {
                     "x": 281,
-                    "y": -1,
+                    "y": 104,
                     "z": -542
                 },
-                "destination": "trap",
+                "destination": "trapper",
                 "type": "portal"
             },
             {
@@ -2608,7 +2646,7 @@
                 ],
                 "pos": {
                     "x": -360,
-                    "y": -1,
+                    "y": 80,
                     "z": -420
                 },
                 "destination": "nether",
@@ -2622,7 +2660,7 @@
                 ],
                 "pos": {
                     "x": -372,
-                    "y": -1,
+                    "y": 114,
                     "z": -1033
                 },
                 "destination": "kuudra",
@@ -3878,7 +3916,7 @@
                 ],
                 "pos": {
                     "x": -495,
-                    "y": -1,
+                    "y": 101,
                     "z": -275
                 },
                 "destination": "end",
@@ -3892,7 +3930,7 @@
                 ],
                 "pos": {
                     "x": -606,
-                    "y": -1,
+                    "y": 22,
                     "z": -275
                 },
                 "destination": "drag",
@@ -3906,7 +3944,7 @@
                 ],
                 "pos": {
                     "x": -567,
-                    "y": -1,
+                    "y": 7,
                     "z": -318
                 },
                 "destination": "void",
@@ -4026,7 +4064,7 @@
                 ],
                 "pos": {
                     "x": -4,
-                    "y": -1,
+                    "y": 74,
                     "z": -269
                 },
                 "destination": "gold",
@@ -4618,22 +4656,6 @@
                 "type": "npc"
             },
             {
-                "name": "§bAgatha",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": -648,
-                    "y": 89,
-                    "z": -3
-                },
-                "texture": "http://textures.minecraft.net/texture/dd2180e4bd153cb49ba4906098604c17858ea4516ffbf04cfe50feae4be476f2",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
                 "name": "§bNemo",
                 "tooltip": [
                     "$name",
@@ -4833,7 +4855,7 @@
                 ],
                 "pos": {
                     "x": -542,
-                    "y": -1,
+                    "y": 109,
                     "z": -26
                 },
                 "destination": "galatea",
@@ -4868,6 +4890,36 @@
                     "z": 48
                 },
                 "texture": "http://textures.minecraft.net/texture/8de120debcc6c5873bf73232cb6bf9677240aa3718412b12929313211e7e42f9",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "tooltip": [
+                    "§bMurkwater",
+                    "",
+                    "§l§eClick to Warp!"
+                ],
+                "pos": {
+                    "x": -645,
+                    "y": 90,
+                    "z": 3
+                },
+                "destination": "murkwater",
+                "type": "portal"
+            },
+            {
+                "name": "§bAgatha",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -648,
+                    "y": 89,
+                    "z": -3
+                },
+                "texture": "http://textures.minecraft.net/texture/dd2180e4bd153cb49ba4906098604c17858ea4516ffbf04cfe50feae4be476f2",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
             }
