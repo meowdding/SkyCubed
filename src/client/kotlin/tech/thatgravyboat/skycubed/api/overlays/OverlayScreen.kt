@@ -58,8 +58,10 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
             )
         }
 
-        graphics.drawCenteredString(font, "X: ${overlay.position.x}, Y: ${overlay.position.y}", (this.width / 2f).toInt(), this.height - 30, -1)
-        graphics.drawCenteredString(font, "Scale: ${overlay.position.scale}", (this.width / 2f).toInt(), this.height - 20, -1)
+        val center = (this.width / 2f).toInt()
+        graphics.drawCenteredString(font, "X: ${overlay.position.x}, Y: ${overlay.position.y}", center, this.height - 40, -1)
+        graphics.drawCenteredString(font, "Scale: ${overlay.position.scale}", center, this.height - 30, -1)
+        graphics.drawCenteredString(font, "Use +/- to scale, arrow keys to move around.", center, this.height - 20, -1)
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, i: Int, f: Double, g: Double): Boolean {
