@@ -10,6 +10,7 @@ import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.ModContainer
 import net.minecraft.SharedConstants
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -17,6 +18,11 @@ import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skyblockapi.utils.json.Json
 import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
+import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.Text.send
+import tech.thatgravyboat.skyblockapi.utils.text.TextBuilder.append
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import java.net.URI
 import java.nio.file.Files
 import kotlin.reflect.jvm.javaType
@@ -25,7 +31,14 @@ import kotlin.reflect.typeOf
 object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") {
 
     val mod: ModContainer = FabricLoader.getInstance().getModContainer("skycubed").orElseThrow()
+    val VERSION: String = mod.metadata.version.friendlyString
     val repoPatcher: DataPatcher?
+
+    val prefix = Text.of {
+        append("[") { color = TextColor.GRAY }
+        append("SkyCubed") { color = TextColor.YELLOW }
+        append("] ") { color = TextColor.GRAY }
+    }
 
     init {
         var patch: DataPatcher?
@@ -37,6 +50,8 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
         }
         repoPatcher = patch
     }
+
+    fun Component.sendWithPrefix() = Text.join(prefix, this).send()
 
     override fun onInitialize() {
         SkyCubedModules.init { SkyBlockAPI.eventBus.register(it) }
