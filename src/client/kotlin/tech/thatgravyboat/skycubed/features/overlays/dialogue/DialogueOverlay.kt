@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.dialogue
 
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
@@ -8,19 +8,14 @@ import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.decoration.ArmorStand
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
-import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
-import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEntityEvent
+import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
@@ -36,7 +31,7 @@ import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.math.max
 
 @Module
@@ -55,7 +50,6 @@ object DialogueOverlay : Overlay {
     private var displayedYesNo = false
     private var hudOverlayDisplay: Display = Displays.empty()
     private var inventoryOverlayDisplay: Display = Displays.empty()
-    private var lastClickedEntities: MutableMap<LivingEntity, Long> = mutableMapOf()
 
     override val name: Component = Text.of("Dialogue")
     override val position: Position = Position()
@@ -89,27 +83,15 @@ object DialogueOverlay : Overlay {
 
     @Subscription
     @OnlyOnSkyBlock
+    fun onServerChange(event: ServerChangeEvent) {
+        queue.clear()
+        reset()
+    }
+
+    @Subscription
+    @OnlyOnSkyBlock
     fun onInventoryInit(event: ContainerInitializedEvent) {
         containerLeftPos = event.screen.left
-    }
-
-    @Subscription
-    @OnlyOnSkyBlock
-    fun onEntityClick(event: RightClickEntityEvent) {
-        handleEntityClick(event.entity)
-    }
-
-    @Subscription
-    @OnlyOnSkyBlock
-    fun onEntityLeftClick(event: LeftClickEntityEvent) {
-        handleEntityClick(event.entity)
-    }
-
-    private fun handleEntityClick(event: Entity) {
-        if (!enabled) return
-
-        val entity = event as? LivingEntity ?: return
-        lastClickedEntities[entity] = System.currentTimeMillis()
     }
 
     @Subscription
@@ -118,9 +100,8 @@ object DialogueOverlay : Overlay {
         if (!enabled) return
 
         if (System.currentTimeMillis() > nextCheck) {
-            nextCheck = System.currentTimeMillis() + displayDuration
-
             if (queue.isEmpty()) {
+                nextCheck = System.currentTimeMillis() + displayDuration
                 if (yesNo != null && !displayedYesNo) {
                     hudOverlayDisplay = createYesNoDisplay()
                 } else {
@@ -128,29 +109,27 @@ object DialogueOverlay : Overlay {
                 }
             } else {
                 val (name, message) = queue.removeFirstOrNull() ?: return
-                createMainDisplay(name, message, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
-                val inventoryOverlayWidth =
-                    containerLeftPos.takeIf { it != null } ?: (McClient.window.guiScaledWidth / 4)
-                createMainDisplay(name, message, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
+                val npc = DialogueNpcs.get(name.stripped)
+                val inventoryOverlayWidth = containerLeftPos.takeIf { it != null } ?: (McClient.window.guiScaledWidth / 4)
+
+                nextCheck = System.currentTimeMillis() + (displayDuration * npc.durationModifier).toLong()
+
+                createMainDisplay(name, message, npc, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
+                createMainDisplay(name, message, npc, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
             }
         }
 
         val (yesCommand, noCommand) = yesNo ?: return
-        val isYes = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_Y)
-        val isNo = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_N)
+        val isYes = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_1)
+        val isNo = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_2)
 
         val command = if (isYes) yesCommand else if (isNo) noCommand else return
         McClient.sendCommand(command.removePrefix("/"))
         reset()
     }
 
-    private fun createMainDisplay(name: Component, message: Component, maxWidth: Int): Display? {
-        val entity = lastClickedEntities.keys.find { npc ->
-            McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox)
-                .any { it.customName?.stripped == name.stripped }
-        } ?: lastClickedEntities.keys.firstOrNull()
-
-        entity?.let { lastClickedEntities[it] = System.currentTimeMillis() }
+    private fun createMainDisplay(name: Component, message: Component, npc: DialogueNpc, maxWidth: Int): Display? {
+        val entity = DialogueEntities.get(name.stripped, npc)
 
         val entityDisplay = entity?.let {
             val display = Displays.entity(it, 60, 60, 35, 80f, 40f)
@@ -173,7 +152,7 @@ object DialogueOverlay : Overlay {
 
         val npcNameDisplay = Displays.pushPop(
             Displays.background(
-                backgroundBox,
+                SkyCubedTextures.backgroundBox,
                 Displays.padding(5, Displays.component(name, maxWidth))
             )
         ) { translate(60f.takeIf { entityDisplay != null } ?: 8f, -8f, 0f) }
@@ -184,7 +163,7 @@ object DialogueOverlay : Overlay {
             entityDisplay,
             Displays.pushPop(
                 Displays.background(
-                    backgroundBox,
+                    SkyCubedTextures.backgroundBox,
                     listOf(
                         npcNameDisplay,
                         Displays.padding(
@@ -206,12 +185,12 @@ object DialogueOverlay : Overlay {
         nextCheck = System.currentTimeMillis() + displayActionDuration
 
         val options = listOf(
-            Text.of("[Y]es") { this.color = TextColor.GREEN },
-            Text.of("[N]o") { this.color = TextColor.RED }
+            Text.of("[1] Yes") { this.color = TextColor.GREEN },
+            Text.of("[2] No") { this.color = TextColor.RED }
         )
 
         val yesNoDisplay = options.map {
-            Displays.background(backgroundBox, Displays.padding(5, Displays.text(it)))
+            Displays.background(SkyCubedTextures.backgroundBox, Displays.padding(5, Displays.text(it)))
         }.toColumn(10, Alignment.START)
 
         return listOf(
@@ -228,9 +207,7 @@ object DialogueOverlay : Overlay {
     }
 
     private fun reset() {
-        lastClickedEntities = lastClickedEntities.filterValues {
-            it + max(displayDuration, displayActionDuration) + 5000 > System.currentTimeMillis()
-        }.toMutableMap()
+        DialogueEntities.updateCache(max(displayDuration, displayActionDuration) + 5000)
         yesNo = null
         displayedYesNo = false
         hudOverlayDisplay = Displays.empty()

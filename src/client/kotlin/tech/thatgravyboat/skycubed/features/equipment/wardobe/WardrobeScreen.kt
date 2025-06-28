@@ -23,6 +23,7 @@ import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import tech.thatgravyboat.skycubed.utils.click
+import java.util.concurrent.CompletableFuture
 
 private const val BUTTON_SPACING = 3
 private const val CARD_SPACING = 6
@@ -107,7 +108,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                                 context.mouseY in context.y until context.y + context.height
 
                         val entityDisplay = Displays.entity(
-                            DisplayEntityPlayer(McPlayer.skin, slot.armor, pageNumber != currentPage),
+                            DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), slot.armor, pageNumber != currentPage),
                             displayWidth, (displayWidth * ASPECT_RATIO).toInt(),
                             (displayWidth / 2.0).toInt(),
                             context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y

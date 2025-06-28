@@ -1,9 +1,15 @@
 package tech.thatgravyboat.skycubed.utils
 
+import com.mojang.authlib.SignatureState
+import com.mojang.authlib.minecraft.MinecraftProfileTexture
+import com.mojang.authlib.minecraft.MinecraftProfileTextures
 import com.mojang.blaze3d.platform.InputConstants
 import earth.terrarium.olympus.client.pipelines.RoundedRectangle
+import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.resources.PlayerSkin
+import net.minecraft.client.resources.SkinManager
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ClickType
@@ -13,7 +19,9 @@ import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.json.Json
+import tech.thatgravyboat.skycubed.mixins.SkinManagerInvoker
 import java.io.InputStream
+import java.util.concurrent.CompletableFuture
 import kotlin.reflect.jvm.javaType
 import kotlin.reflect.typeOf
 import kotlin.time.Duration
@@ -97,4 +105,25 @@ fun AbstractContainerMenu.click(slot: Slot) {
         ClickType.PICKUP,
         player
     )
+}
+
+val CompletableFuture<*>.isActuallyDone: Boolean get() {
+    return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
+}
+
+fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin> {
+    val result = runCatching {
+        val manager = McClient.self.skinManager as SkinManagerInvoker
+        manager.callRegisterTextures(
+            Util.NIL_UUID,
+            MinecraftProfileTextures(
+                MinecraftProfileTexture(texture, emptyMap()),
+                null,
+                null,
+                SignatureState.SIGNED,
+            ),
+        )
+    }
+
+    return result.getOrNull() ?: CompletableFuture.failedFuture(result.exceptionOrNull()!!)
 }
