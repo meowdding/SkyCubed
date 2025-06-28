@@ -429,6 +429,7 @@
             }
         },
         "notification": {
+            "@value": "Notification",
             "type": {
                 "all": "All",
                 "friend_join_leave": "Friend Join/Leave",
