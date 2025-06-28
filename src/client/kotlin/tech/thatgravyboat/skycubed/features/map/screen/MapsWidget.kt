@@ -9,22 +9,27 @@ import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.renderer.RenderType
 import org.joml.Vector3f
 import org.joml.component1
 import org.joml.component2
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
+import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.map.IslandData
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.dev.MapPoiEditScreen
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
-import tech.thatgravyboat.skycubed.features.map.screen.MapShape.entries
+import tech.thatgravyboat.skycubed.features.map.waypoints.Waypoint
+import tech.thatgravyboat.skycubed.features.map.waypoints.Waypoints
+import tech.thatgravyboat.skycubed.utils.Rect
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.setValue
 
@@ -63,66 +68,61 @@ class MapsWidget(
                 scale(scale, scale, 1f)
                 translate(-xOffset.toFloat(), -zOffset.toFloat(), 0.0f)
 
-                if (rotate.get()) rotateAround(
-                    Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
-                    (xOffset + width / 2).toFloat(),
-                    (zOffset + height / 2).toFloat(),
-                    0.0f,
-                )
+                if (rotate.get()) {
+                    rotateAround(
+                        Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
+                        (xOffset + width / 2).toFloat(),
+                        (zOffset + height / 2).toFloat(),
+                        0.0f,
+                    )
+                }
 
                 maps.forEach { map ->
-                    graphics.pushPop {
-                        val mapX = map.topX + width / 2.0 + map.offsetX
-                        val mapY = map.topY + height / 2.0 + map.offsetY
-                        translate(mapX, mapY, 0.0)
-
+                    graphics.translated(map.topX + width / 2.0 + map.offsetX, map.topY + height / 2.0 + map.offsetY, 0f) {
                         val default = map.getDefaultTexture()
                         val texture = map.getTexture()
 
                         if (default != texture) {
-                            shape.drawMapPart(
-                                graphics,
-                                default.getId(),
-                                map,
-                                posX,
-                                posY,
-                                width,
-                                height,
-                                scaleX,
-                                scaleY,
-                                0xFF3F3F3F.toInt(),
-                            )
+                            shape.drawMapPart(graphics, default.getId(), map, posX, posY, width, height, scaleX, scaleY, 0xFF3F3F3F.toInt())
                         }
 
-                        shape.drawMapPart(
-                            graphics,
-                            texture.getId(),
-                            map,
-                            posX,
-                            posY,
-                            width,
-                            height,
-                            scaleX,
-                            scaleY,
-                        )
+                        shape.drawMapPart(graphics, texture.getId(), map, posX, posY, width, height, scaleX, scaleY)
                     }
 
-                    map.pois.forEachIndexed { index, poi ->
-                        if (!filter(poi)) return@forEachIndexed
+                    map.pois.forEach { poi ->
+                        if (!filter(poi)) return@forEach
 
                         graphics.pushPop {
-                            val mapX = poi.position.x + map.offsetX + width / 2f
-                            val mapY = poi.position.z + map.offsetY + height / 2f
-                            translate(mapX, mapY, 0f)
+                            translate(poi.position.x + map.offsetX + width / 2f, poi.position.z + map.offsetY + height / 2f, 0f)
                             translate(-poi.bounds.x / 2f, -poi.bounds.y / 2f, 0f)
                             poi.display.render(graphics)
 
-                            if (isMouseOver(map, poi, mouseX - x, mouseY - y)) {
-                                if (McClient.isDev) {
-                                    ScreenUtils.setTooltip(poi.tooltip + listOf(CommonText.EMPTY, Text.of("Id: $index")))
-                                } else {
-                                    ScreenUtils.setTooltip(poi.tooltip)
-                                }
+                            if (isMouseOver(map, poi.rect, mouseX - x, mouseY - y)) {
+                                ScreenUtils.setTooltip(poi.tooltip)
+                                cursor = Cursor.POINTER
+                            }
+                        }
+                    }
+
+                    if (map.island == LocationAPI.island) {
+                        Waypoints.waypoints().forEach { waypoint ->
+                            val mapX = waypoint.pos.x - 3 + map.offsetX + width / 2f
+                            val mapY = waypoint.pos.z - 3 + map.offsetY + height / 2f
+
+                            graphics.translated(mapX - 3f, mapY - 3f, 0f) {
+                                graphics.blitSprite(RenderType::guiTextured, SkyCubed.id("map/icons/waypoint"), 0, 0, 6, 6, waypoint.color)
+                            }
+
+                            if (isMouseOver(map, waypoint.toMapRect(), mouseX - x, mouseY - y)) {
+                                ScreenUtils.setTooltip(
+                                    listOf(
+                                        waypoint.text,
+                                        Text.translatable("skycubed.map.waypoints.tooltip.subtitle"),
+                                        CommonText.EMPTY,
+                                        Text.translatable("skycubed.map.waypoints.tooltip.position"),
+                                        Text.of(" ${waypoint.pos.x}, ${waypoint.pos.y}, ${waypoint.pos.z}"),
+                                    )
+                                )
                                 cursor = Cursor.POINTER
                             }
                         }
@@ -130,11 +130,10 @@ class MapsWidget(
                 }
 
                 if (showPlayer) {
-                    graphics.pushPop {
-                        val offset = Maps.getCurrentPlayerOffset()
-                        val x = McPlayer.self!!.x + offset.x
-                        val z = McPlayer.self!!.z + offset.z
-                        translate(x + width / 2.0, z + height / 2.0, 0.0)
+                    val offset = Maps.getCurrentPlayerOffset()
+                    val x = McPlayer.self!!.x + offset.x
+                    val z = McPlayer.self!!.z + offset.z
+                    graphics.translated(x + width / 2.0f, z + height / 2.0f, 0f) {
                         val profile = McPlayer.skin ?: return
                         scale(1f / scale, 1f / scale, 1f)
 
@@ -167,96 +166,49 @@ class MapsWidget(
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        if (button == InputConstants.MOUSE_BUTTON_LEFT) {
-            maps.forEach { map ->
-                map.pois.forEach { poi ->
-                    if (isMouseOver(map, poi, mouseX.toInt() - x, mouseY.toInt() - y) && filter(poi)) {
-                        if (MapEditor.enabled && !Screen.hasShiftDown()) {
-                            McClient.setScreenAsync { MapPoiEditScreen(poi, map.pois, McClient.self.screen) }
-                            return true
-                        }
-                        poi.click()
-                        return true
-                    }
-                }
+        val poi = getPoiAt(mouseX, mouseY)
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
+            if (MapEditor.enabled && !Screen.hasShiftDown()) {
+                McClient.setScreenAsync { MapPoiEditScreen(poi.first, poi.second.pois, McClient.self.screen) }
+                return true
             }
+            poi.first.click()
+            return true
         }
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
     override fun getCursor() = this.cursor
 
-    private fun isMouseOver(map: IslandData, poi: Poi, mouseX: Int, mouseY: Int): Boolean {
+    private fun isMouseOver(map: IslandData, rect: Rect, mouseX: Int, mouseY: Int): Boolean {
         if (!isMouseOver(mouseX.toDouble(), mouseY.toDouble())) return false
 
-        val locX = (-xOffset + poi.position.x + map.offsetX + this.width / 2f + poi.bounds.x / 2) * scale
-        val locZ = (-zOffset + poi.position.z + map.offsetY + this.height / 2f + poi.bounds.y / 2) * scale
+        val locX = (-xOffset + rect.x + map.offsetX + this.width / 2f + rect.width / 2) * scale
+        val locZ = (-zOffset + rect.y + map.offsetY + this.height / 2f + rect.height / 2) * scale
 
-        return locX in mouseX.toFloat()..mouseX + poi.bounds.x * scale && locZ in mouseY.toFloat()..mouseY + poi.bounds.y * scale
+        return locX in mouseX.toFloat()..mouseX + rect.width * scale && locZ in mouseY.toFloat()..mouseY + rect.height * scale
     }
 
-    fun getElementUnder(x: Number, y: Number): Poi? {
+    fun getWaypointAt(x: Number, y: Number): Waypoint? = Maps.currentIsland?.let { Waypoints.waypoints().find { waypoint ->
+        isMouseOver(it, waypoint.toMapRect(), x.toInt() - this.x, y.toInt() - this.y)
+    } }
+
+    fun getPoiAt(x: Number, y: Number): Pair<Poi, IslandData>? {
         maps.forEach { map ->
             map.pois.forEach { poi ->
-                if (isMouseOver(map, poi, x.toInt() - this.x, y.toInt() - this.y) && filter(poi)) {
-                    return poi
+                if (isMouseOver(map, poi.rect, x.toInt() - this.x, y.toInt() - this.y) && filter(poi)) {
+                    return poi to map
                 }
             }
         }
         return null
     }
 
-    fun removePoi(poi: Poi) {
-        maps.forEach { map ->
-            map.pois.remove(poi)
-        }
-    }
-}
+    fun removePoi(poi: Poi) = maps.forEach { map -> map.pois.remove(poi) }
 
-enum class MapShape(
-    val displayName: String,
-) {
-    CIRCLE("Circle"),
-    SQUARE("Square"),
-    ;
-
-    fun drawMapPart(
-        graphics: GuiGraphics,
-        texture: ResourceLocation,
-        map: IslandData,
-        posX: Float,
-        posY: Float,
-        width: Int,
-        height: Int,
-        scaleX: Float,
-        scaleY: Float,
-        color: Int = -1,
-    ) = when (this) {
-        SQUARE -> graphics.blit(
-            net.minecraft.client.renderer.RenderType::guiTextured,
-            texture,
-            0, 0, 0f, 0f,
-            map.width, map.height, map.width, map.height,
-            color,
-        )
-
-        CIRCLE -> CircularMinimapRenderer.drawMapPart(
-            graphics,
-            texture,
-            posX + width * scaleX / 2.0f + 1,
-            posY + height * scaleY / 2.0f + 1,
-            width * kotlin.math.min(scaleX, scaleY) / 2.0f,
-            0, 0,
-            0f, 0f,
-            map.width, map.height,
-            map.width, map.height,
-            color,
-        )
-    }
-
-    override fun toString() = displayName
-
-    val next by lazy {
-        entries[(ordinal + 1) % entries.size]
+    fun getWorldPosition(mouseX: Double, mouseY: Double): Pair<Double, Double> {
+        val x = (mouseX - this.x) / scale + xOffset - this.width / 2.0
+        val z = (mouseY - this.y) / scale + zOffset - this.height / 2.0
+        return x to z
     }
 }

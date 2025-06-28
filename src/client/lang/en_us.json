@@ -452,7 +452,22 @@
             "dwarves": "Dwarven Mines",
             "dungeon_hub": "Dungeon Hub",
             "jerrys_workshop": "Jerry's Workshop",
-            "backwater": "Backwater Bayou"
+            "backwater": "Backwater Bayou",
+            "waypoints": {
+                "create": {
+                    "title": "Create Waypoint",
+                    "placeholder": "Waypoint Name:",
+                    "button": "Create"
+                },
+                "context": {
+                    "delete": "Remove Waypoint",
+                    "create": "Create Waypoint"
+                },
+                "tooltip": {
+                    "subtitle": "ᴡᴀʏᴘᴏɪɴᴛ",
+                    "position": "Position:"
+                }
+            }
         },
         "key": {
             "category": "SkyCubed",
