@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
+import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
@@ -82,6 +83,13 @@ object DialogueOverlay : Overlay {
 
     @Subscription
     @OnlyOnSkyBlock
+    fun onServerChange(event: ServerChangeEvent) {
+        queue.clear()
+        reset()
+    }
+
+    @Subscription
+    @OnlyOnSkyBlock
     fun onInventoryInit(event: ContainerInitializedEvent) {
         containerLeftPos = event.screen.left
     }
@@ -92,9 +100,8 @@ object DialogueOverlay : Overlay {
         if (!enabled) return
 
         if (System.currentTimeMillis() > nextCheck) {
-            nextCheck = System.currentTimeMillis() + displayDuration
-
             if (queue.isEmpty()) {
+                nextCheck = System.currentTimeMillis() + displayDuration
                 if (yesNo != null && !displayedYesNo) {
                     hudOverlayDisplay = createYesNoDisplay()
                 } else {
@@ -102,10 +109,13 @@ object DialogueOverlay : Overlay {
                 }
             } else {
                 val (name, message) = queue.removeFirstOrNull() ?: return
-                createMainDisplay(name, message, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
-                val inventoryOverlayWidth =
-                    containerLeftPos.takeIf { it != null } ?: (McClient.window.guiScaledWidth / 4)
-                createMainDisplay(name, message, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
+                val npc = DialogueNpcs.get(name.stripped)
+                val inventoryOverlayWidth = containerLeftPos.takeIf { it != null } ?: (McClient.window.guiScaledWidth / 4)
+
+                nextCheck = System.currentTimeMillis() + (displayDuration * npc.durationModifier).toLong()
+
+                createMainDisplay(name, message, npc, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
+                createMainDisplay(name, message, npc, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
             }
         }
 
@@ -118,8 +128,8 @@ object DialogueOverlay : Overlay {
         reset()
     }
 
-    private fun createMainDisplay(name: Component, message: Component, maxWidth: Int): Display? {
-        val entity = DialogueEntities.get(name.stripped)
+    private fun createMainDisplay(name: Component, message: Component, npc: DialogueNpc, maxWidth: Int): Display? {
+        val entity = DialogueEntities.get(name.stripped, npc)
 
         val entityDisplay = entity?.let {
             val display = Displays.entity(it, 60, 60, 35, 80f, 40f)

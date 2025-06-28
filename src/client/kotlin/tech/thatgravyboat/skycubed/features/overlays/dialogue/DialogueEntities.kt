@@ -2,6 +2,8 @@ package tech.thatgravyboat.skycubed.features.overlays.dialogue
 
 import me.owdding.ktmodules.Module
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntitySpawnReason
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.decoration.ArmorStand
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -18,6 +20,7 @@ import tech.thatgravyboat.skycubed.features.overlays.dialogue.DialogueOverlay.en
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import java.util.*
 import kotlin.io.encoding.ExperimentalEncodingApi
+import kotlin.jvm.optionals.getOrNull
 
 @Module
 object DialogueEntities {
@@ -48,11 +51,15 @@ object DialogueEntities {
     }
 
     @OptIn(ExperimentalEncodingApi::class)
-    fun get(name: String): LivingEntity? {
+    fun get(name: String, npc: DialogueNpc): LivingEntity? {
         val entity = lastClickedEntities.keys.find { npc -> McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox).any { it.customName?.stripped == name } }
         if (entity != null && entity.isAlive) {
             lastClickedEntities[entity] = System.currentTimeMillis()
             return entity
+        }
+        val customEntity = EntityType.byString(npc.type).getOrNull()?.runCatching { this.create(McLevel.self, EntitySpawnReason.EVENT) }?.getOrNull()
+        if (customEntity is LivingEntity) {
+            return customEntity
         }
         return npcCache[name.trim().lowercase()]?.let(NpcPoi::skin)?.let { DisplayEntityPlayer(it, listOf(), false) }
     }
