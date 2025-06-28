@@ -108,7 +108,7 @@ object Waypoints {
                     }
                 }
 
-                distance < 2.5f
+                distance < 5f
             }
         }
     }
