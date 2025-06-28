@@ -40,7 +40,7 @@ object DownloadedAsset {
                     if (response.statusCode() in 200..299) {
                         FileUtils.copyInputStreamToFile(response.body(), file)
 
-                        McClient.tell { callback() }
+                        McClient.runNextTick { callback() }
                     }
                 }?.onFailure { exception ->
                     SkyCubed.error("Failed to download asset from URI: $uri", exception)

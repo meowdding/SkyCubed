@@ -14,7 +14,7 @@ import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.layouts.LinearLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import tech.thatgravyboat.skyblockapi.api.profile.wardrobe.WardrobeAPI
+import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text

@@ -7,7 +7,7 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.skyblockapi.api.profile.sacks.SacksAPI
+import tech.thatgravyboat.skyblockapi.api.profile.items.sacks.SacksAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -60,7 +60,7 @@ object SackOverlay : Overlay {
 
     override fun onRightClick() = ContextMenu.open {
         it.button(Text.of("Open Sack Edit Screen")) {
-            McClient.tell { McClient.setScreen(SackHudEditScreen()) }
+            McClient.setScreenAsync { SackHudEditScreen() }
         }
         it.button(Text.of("${if (SackOverlayConfig.background) "Disable" else "Enable"} Custom Background")) {
             SackOverlayConfig.background = !SackOverlayConfig.background
