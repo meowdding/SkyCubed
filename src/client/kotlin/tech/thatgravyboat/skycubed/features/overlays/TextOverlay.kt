@@ -1,10 +1,12 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
+import me.owdding.lib.extensions.round
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
@@ -53,6 +55,12 @@ class TextOverlay(
                 Text.of("Defense"), OverlayPositions.defense, { TextOverlaysConfig.defenseEnabled },
                 {
                     Text.of("❈ ${StatsAPI.defense}").withStyle(ChatFormatting.GREEN)
+                },
+            ),
+            TextOverlay(
+                Text.of("Speed"), OverlayPositions.speed, { TextOverlaysConfig.speedEnabled },
+                {
+                    Text.of("✦ ${McPlayer.self?.speed?.times(1000)?.round() ?: "0"}").withStyle(ChatFormatting.WHITE)
                 },
             ),
         )

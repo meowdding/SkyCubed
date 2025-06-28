@@ -3,17 +3,19 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import org.joml.Vector2i
+import me.owdding.ktcodecs.IncludedCodec
+import org.joml.Vector3i
 import java.util.function.Function
 
 object Codecs {
 
-    fun vec2i(first: String, second: String): Codec<Vector2i> {
-        return RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<Vector2i> ->
+    fun vec3i(first: String, second: String, third: String): Codec<Vector3i> {
+        return RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<Vector3i> ->
             instance.group(
-                Codec.INT.fieldOf(first).forGetter { obj: Vector2i -> obj.x },
-                Codec.INT.fieldOf(second).forGetter { obj: Vector2i -> obj.y }
-            ).apply(instance, ::Vector2i)
+                Codec.INT.fieldOf(first).forGetter { obj: Vector3i -> obj.x },
+                Codec.INT.fieldOf(second).forGetter { obj: Vector3i -> obj.y },
+                Codec.INT.fieldOf(third).forGetter { obj: Vector3i -> obj.z }
+            ).apply(instance, ::Vector3i)
         }
     }
 
@@ -22,4 +24,7 @@ object Codecs {
             this.fieldOf(key).forGetter(Function.identity())
         ).apply(it, Function.identity()) }
     }
+
+    @IncludedCodec
+    val VEC3I: Codec<Vector3i> = vec3i("x", "y", "z")
 }

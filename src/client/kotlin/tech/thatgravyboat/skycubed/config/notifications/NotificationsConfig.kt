@@ -90,4 +90,8 @@ object NotificationsConfig : CategoryKt("notifications") {
         this.translation = "skycubed.config.notifications.gifts"
     }
 
+    var enableNotificationsWidget by boolean(true) {
+        this.translation = "skycubed.config.notifications.enable_notifications_widget"
+    }
+
 }

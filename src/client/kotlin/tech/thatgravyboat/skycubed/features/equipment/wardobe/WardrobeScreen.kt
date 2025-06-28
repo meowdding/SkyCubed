@@ -14,7 +14,7 @@ import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.layouts.LinearLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import tech.thatgravyboat.skyblockapi.api.profile.wardrobe.WardrobeAPI
+import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -29,6 +29,7 @@ private const val CARD_SPACING = 6
 private const val ASPECT_RATIO = 3.0 / 2.0
 
 private const val BACKGROUND_COLOR = 0xA0000000u
+private const val BACKGROUND_COLOR_HOVERED = 0xD0444444u
 private const val HOVER_COLOR = 0xFFAAAAAAu
 private const val SELECTED_COLOR = 0xFFFFFFFFu
 private const val BACKGROUND_RADIUS = 10f
@@ -116,7 +117,10 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                             entityDisplay.render(graphics, context.x, context.y)
                         } else {
                             ExtraDisplays.background(
-                                BACKGROUND_COLOR,
+                                when {
+                                    hovered -> BACKGROUND_COLOR_HOVERED
+                                    else -> BACKGROUND_COLOR
+                                },
                                 BACKGROUND_RADIUS,
                                 when {
                                     hovered -> HOVER_COLOR

@@ -1,1003 +1,1377 @@
-[
-    {
-        "island": "DWARVEN_MINES",
-        "default": "https://femboy-hooters.net/u/lyJy27.png",
-        "images": [
-            {
-                "image": "https://femboy-hooters.net/u/N8c6qU.png",
-                "condition": {
-                    "condition": "or",
-                    "conditions": [
-                        {
-                            "condition": "area",
-                            "area": "Dwarven Base Camp"
-                        },
-                        {
-                            "condition": "area",
-                            "area": "Glacite Tunnels"
-                        },
-                        {
-                            "condition": "area",
-                            "area": "Great Glacite Lake"
-                        },
-                        {
-                            "condition": "area",
-                            "area": "Fossil Research Center"
-                        }
-                    ]
-                }
+{
+    "playerOffsetX": 1,
+    "playerOffsetY": 1,
+    "pois": [
+        {
+            "significant": {
+                "condition": "false"
             },
-            {
-                "image": "https://femboy-hooters.net/u/BNB07U.png",
-                "condition": {
-                    "condition": "position",
-                    "position": "y < 165"
-                }
-            }
-        ],
-        "topX": -224,
-        "topY": -192,
-        "bottomX": 320,
-        "bottomY": 496,
-        "playerOffsetX": 1,
-        "playerOffsetY": 1,
-        "pois": [
-            // The Lift
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/Lift_Operator",
-                "position": {
-                    "x": -80,
-                    "z": -124
-                },
+            "poi": {
+                "name": "§6Royal Guard",
                 "tooltip": [
-                    "§9Lift Operator",
+                    "$name",
                     "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "portal",
-                "pos": {
-                    "x": -48,
-                    "z": -121
-                },
-                "destination": "mines",
-                "tooltip": [
-                    "§aDwarven Mines",
-                    "",
-                    "§l§eClick to Warp!"
-                ]
-            },
-
-            // The Royal Guards
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/8e7a46c258268f42c859dd5c8008a97c72b8d370e981ce2dcc0c3fd451638ed7",
-                    "link": "https://wiki.hypixel.net/Royal_Guard",
-                    "position": {
-                        "x": -46,
-                        "z": -125
-                    },
-                    "tooltip": [
-                        "§9Royal Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/7941c9c6a38b2549c295b3419b91c03f310358f99e1eb9ed8b9b594beedef108",
-                    "link": "https://wiki.hypixel.net/Royal_Guard",
-                    "position": {
-                        "x": -46,
-                        "z": -119
-                    },
-                    "tooltip": [
-                        "§9Royal Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/3af613e4d8110ae3df61e1dee0c08c35d7b902fa5df2aae02779c912d31e3914",
-                "link": "https://wiki.hypixel.net/Emissary_Eliza",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": -38,
-                    "z": -132
-                },
-                "tooltip": [
-                    "§9Emissary Eliza",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/6b20b23c1aa2be0270f016b4c90d6ee6b8330a17cfef87869d6ad60b2ffbf3b5",
-                "link": "https://wiki.hypixel.net/Rhys",
-                "position": {
-                    "x": -38,
-                    "z": -119
-                },
-                "tooltip": [
-                    "§9Rhys",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/85362b61f298dec2df765457d6b417e917d2309ebc8f691f0855489682ddec59",
-                "link": "https://wiki.hypixel.net/Jotraeline_Greatforge",
-                "position": {
-                    "x": -7,
-                    "z": -19
-                },
-                "tooltip": [
-                    "§9Jotraeline Greatforge",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/38dfab2a93e5b5030003cdb1e3ab82c115ae1fca75b45d756e274e0af2af5f50",
-                "link": "https://wiki.hypixel.net/Emissary_Lilith",
-                "position": {
-                    "x": 58,
-                    "z": -9
-                },
-                "tooltip": [
-                    "§9Emissary Lilith",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/3b6bb052fd743449b56454e44c191a60e1d9afe2ffce0c714e1a5b7b8bc33fe9",
-                "link": "https://wiki.hypixel.net/Emissary_Braum",
-                "position": {
-                    "x": 89,
-                    "z": -93
-                },
-                "tooltip": [
-                    "§9Emissary Braum",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/cda308cae1770f6b709b1f08004ca2e9c20af6ff8ec5381d114c4406df6b80bc",
-                "link": "https://wiki.hypixel.net/Lumina",
-                "position": {
-                    "x": 77,
-                    "z": -111
-                },
-                "tooltip": [
-                    "§9Lumina",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/30722c000aee0bba3058b425fe5eeac766e0a0c3c3a7edf429ad14e15297dd33",
-                "link": "https://wiki.hypixel.net/Fragilis",
-                "position": {
-                    "x": 88,
-                    "z": -108
-                },
-                "tooltip": [
-                    "§9Fragilis",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/5c34351606a99f62cab9e7c51283864753d2e67948b1f126baf70c12917233f0",
-                "link": "https://wiki.hypixel.net/Gwendolyn",
-                "position": {
-                    "x": 88,
-                    "z": -99
-                },
-                "tooltip": [
-                    "§9Gwendolyn",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/4fc93eeb258b47cb7cb499b681e3d66035a443c076284ff3ff50b196a466a58c",
-                "link": "https://wiki.hypixel.net/Geo",
-                "position": {
-                    "x": 87,
-                    "z": -116
-                },
-                "tooltip": [
-                    "§9Geo",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
-                "link": "https://wiki.hypixel.net/Fetchur",
-                "position": {
-                    "x": 84,
+                    "x": -45,
+                    "y": 200,
                     "z": -118
                 },
-                "tooltip": [
-                    "§9Fetchur",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/7941c9c6a38b2549c295b3419b91c03f310358f99e1eb9ed8b9b594beedef108",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
-                "link": "https://wiki.hypixel.net/Station_Master",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Royal Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -45,
+                    "y": 200,
+                    "z": -124
+                },
+                "texture": "http://textures.minecraft.net/texture/8e7a46c258268f42c859dd5c8008a97c72b8d370e981ce2dcc0c3fd451638ed7",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "Rhys",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -38,
+                "y": 200,
+                "z": -119
+            },
+            "texture": "http://textures.minecraft.net/texture/6b20b23c1aa2be0270f016b4c90d6ee6b8330a17cfef87869d6ad60b2ffbf3b5",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Emissary Eliza",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -37,
+                    "y": 200,
+                    "z": -131
+                },
+                "texture": "http://textures.minecraft.net/texture/3af613e4d8110ae3df61e1dee0c08c35d7b902fa5df2aae02779c912d31e3914",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§5Bulvar",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -15,
+                "y": 201,
+                "z": -98
+            },
+            "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§5Bubu",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -10,
+                "y": 201,
+                "z": -103
+            },
+            "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "Blacksmith",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -6,
+                "y": 201,
+                "z": -154
+            },
+            "texture": "http://textures.minecraft.net/texture/7dfa07fd1244eb8945f4ededd00426750b77ef5dfbaf03ed775633459ece415a",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6Banker Broadjaw",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 14,
+                "y": 201,
+                "z": -148
+            },
+            "texture": "http://textures.minecraft.net/texture/e59f8c4dfd1c583a8a54fa5cc7f8eb6c24d269af27c99fd9f2b2bbf40e70fed2",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "Old Man Garry",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 5,
+                "y": 200,
+                "z": -109
+            },
+            "texture": "http://textures.minecraft.net/texture/921867f4ec7afff0892671eac399acdcc63105d0ae4462a48a43af5ecba1e4d5",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§5Station Master",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 39,
+                "y": 201,
+                "z": -85
+            },
+            "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6Brynmor",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 32,
+                "y": 202,
+                "z": -154
+            },
+            "texture": "http://textures.minecraft.net/texture/9772642ffccfc9e11b350c874f2c84678fc08044b51e7a8e3a0919f8f788ed9a",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "Gimely",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 30,
+                    "y": 202,
+                    "z": -151
+                },
+                "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "Hornnum",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 36,
+                    "y": 202,
+                    "z": -148
+                },
+                "texture": "http://textures.minecraft.net/texture/ebf8dd5cb923ad3cad54834066e8fa4659d3a189b1410515e4005a4ede0541eb",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "Sargwyn",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
                     "x": 38,
-                    "z": -87
+                    "y": 202,
+                    "z": -150
                 },
-                "tooltip": [
-                    "§9Station Master",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
                 "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
-                "link": "https://wiki.hypixel.net/Bubu",
-                "position": {
-                    "x": -11,
-                    "z": -104
-                },
-                "tooltip": [
-                    "§9Bubu",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "Tarwen",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 34,
+                    "y": 202,
+                    "z": -139
+                },
                 "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
-                "link": "https://wiki.hypixel.net/Bulvar",
-                "position": {
-                    "x": -16,
-                    "z": -99
-                },
-                "tooltip": [
-                    "§9Bulvar",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/e59f8c4dfd1c583a8a54fa5cc7f8eb6c24d269af27c99fd9f2b2bbf40e70fed2",
-                "link": "https://wiki.hypixel.net/Banker_Broadjaw",
-                "position": {
-                    "x": 13,
-                    "z": -149
-                },
-                "tooltip": [
-                    "§9Banker Broadjaw",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/ff51f46dd31afdc4e31c21b9ba2066e53a661aa8db3d0d365d0f19ae0667f7db",
-                "link": "https://wiki.hypixel.net/Tornora",
-                "position": {
-                    "x": 136,
-                    "z": 167
-                },
+            "poi": {
+                "name": "Bomin",
                 "tooltip": [
-                    "§9Tornora",
+                    "$name",
                     "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/a3c31bd60441020af2b1939bba49a96d47880b059db0e20d5d42cfaa41a1618b",
-                "link": "https://wiki.hypixel.net/Kings",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 129,
-                    "z": 196
+                    "x": 27,
+                    "y": 204,
+                    "z": -145
                 },
-                "tooltip": [
-                    "§9Emmor",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/f66f6f6af55299ce3b61bb0886fa589627f987346bd0aaac906fc89ae92f33c0",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/1d1f4161af6d4fdfbac17adcf9d0b6f1ffb517e7b936aad9c37b747ce64ec4c6",
-                "link": "https://wiki.hypixel.net/Kings",
+            "type": "conditional"
+        },
+        {
+            "name": "§eFetchur",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 84,
+                "y": 224,
+                "z": -118
+            },
+            "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§eLumina",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 78,
+                "y": 199,
+                "z": -110
+            },
+            "texture": "http://textures.minecraft.net/texture/cda308cae1770f6b709b1f08004ca2e9c20af6ff8ec5381d114c4406df6b80bc",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§aGeo",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 88,
+                    "y": 199,
+                    "z": -115
+                },
+                "texture": "http://textures.minecraft.net/texture/4fc93eeb258b47cb7cb499b681e3d66035a443c076284ff3ff50b196a466a58c",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§5Fragilis",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 88,
+                "y": 199,
+                "z": -108
+            },
+            "texture": "http://textures.minecraft.net/texture/30722c000aee0bba3058b425fe5eeac766e0a0c3c3a7edf429ad14e15297dd33",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§5Gewndolyn",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 89,
+                "y": 198,
+                "z": -98
+            },
+            "texture": "http://textures.minecraft.net/texture/5c34351606a99f62cab9e7c51283864753d2e67948b1f126baf70c12917233f0",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Emissary Braum",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 90,
+                    "y": 198,
+                    "z": -92
+                },
+                "texture": "http://textures.minecraft.net/texture/3b6bb052fd743449b56454e44c191a60e1d9afe2ffce0c714e1a5b7b8bc33fe9",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Emissary Lilith",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 59,
+                    "y": 198,
+                    "z": -8
+                },
+                "texture": "http://textures.minecraft.net/texture/38dfab2a93e5b5030003cdb1e3ab82c115ae1fca75b45d756e274e0af2af5f50",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Castle Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 125,
+                    "y": 187,
+                    "z": 106
+                },
+                "texture": "http://textures.minecraft.net/texture/2e54ef438f21d20d0f6c69e662f17538f57c1c12df4fe822c02e889a16142198",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Castle Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 134,
+                    "y": 187,
+                    "z": 106
+                },
+                "texture": "http://textures.minecraft.net/texture/8e7a46c258268f42c859dd5c8008a97c72b8d370e981ce2dcc0c3fd451638ed7",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Castle Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
                     "x": 122,
-                    "z": 191
+                    "y": 192,
+                    "z": 148
                 },
-                "tooltip": [
-                    "§9Grandan",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/a76596aa64eef0c135433751cd71230cfeb1a881ba3f110a02aa58c7160c0fc8",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/c83c21cb1b514d4d4e30e9eaf3bc27c8ca8ded19c0624c01f77dfd97f072c0d9",
-                "link": "https://wiki.hypixel.net/Kings",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Castle Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 122,
-                    "z": 184
+                    "x": 137,
+                    "y": 192,
+                    "z": 148
                 },
-                "tooltip": [
-                    "§9Brammor",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/7b0ad2e5e91c27db55d59191ccc76b5abfd886a3035b1a885b810c1df4877001",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/54c3268d4b475e8d5b22992357ae31689ffeb70c8fb631914dc643035f70c09f",
-                "link": "https://wiki.hypixel.net/Kings",
+            "type": "conditional"
+        },
+        {
+            "name": "§eTornora",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 136,
+                "y": 196,
+                "z": 167
+            },
+            "texture": "http://textures.minecraft.net/texture/ff51f46dd31afdc4e31c21b9ba2066e53a661aa8db3d0d365d0f19ae0667f7db",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6§lKing",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 130,
+                "y": 196,
+                "z": 197
+            },
+            "texture": "http://textures.minecraft.net/texture/1d1f4161af6d4fdfbac17adcf9d0b6f1ffb517e7b936aad9c37b747ce64ec4c6",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§eQueen Mismyla",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 127,
+                "y": 195,
+                "z": 196
+            },
+            "texture": "http://textures.minecraft.net/texture/6f70385f472c03825c0e894d94ac201e1b642d1032202d4bf33372fa3aa29fba",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Castle Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 126,
-                    "z": 180
+                    "x": 93,
+                    "y": 196,
+                    "z": 176
                 },
-                "tooltip": [
-                    "§9Emkam",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/8e7a46c258268f42c859dd5c8008a97c72b8d370e981ce2dcc0c3fd451638ed7",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/b43387146756e3fcf0291e10a94dd9b0d08b7e014c03f2600397bc8a78a8e133",
-                "link": "https://wiki.hypixel.net/Kings",
+            "type": "conditional"
+        },
+        {
+            "name": "No Name",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 66,
+                "y": 211,
+                "z": 199
+            },
+            "texture": "http://textures.minecraft.net/texture/84e5cdb0edb362cb454586d1fd0ebe971423f015b0b1bfc95f8d5af8afe7e810",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§eTal Ker",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 133,
-                    "z": 180
+                    "x": 194,
+                    "y": 196,
+                    "z": 206
                 },
-                "tooltip": [
-                    "§9Redros",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/aec7f1b83e5aa48f2a214d8d369c4702574b05bb897a1e21dd0a3437b87c041a",
-                "link": "https://wiki.hypixel.net/Kings",
+            "type": "conditional"
+        },
+        {
+            "name": "§dPuzzler",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 182,
+                "y": 196,
+                "z": 136
+            },
+            "texture": "http://textures.minecraft.net/texture/6f514d8014dc6aa4c804ffdf609093f7ff1a5289f13c7188142182db43c88b3d",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Castle Guard",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 136,
-                    "z": 184
+                    "x": 196,
+                    "y": 204,
+                    "z": 181
                 },
-                "tooltip": [
-                    "§9Erren",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/7941c9c6a38b2549c295b3419b91c03f310358f99e1eb9ed8b9b594beedef108",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/b61ede621293e1fe5f6cf72ff1267691ea61eacb6cce0fd9bb28434bd7ea777b",
-                "link": "https://wiki.hypixel.net/Kings",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "Dalbrek",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 136,
-                    "z": 191
+                    "x": 191,
+                    "y": 216,
+                    "z": 154
                 },
+                "texture": "http://textures.minecraft.net/texture/e66a53fc707ce1ff88a576ef40200ce8d49fae4acad1e3b3789c7d1cc1cc541a",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Emissary Ceanna",
                 "tooltip": [
-                    "§9Thormyr",
+                    "$name",
                     "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/6f514d8014dc6aa4c804ffdf609093f7ff1a5289f13c7188142182db43c88b3d",
-                "link": "https://wiki.hypixel.net/Puzzler",
-                "position": {
-                    "x": 181,
-                    "z": 135
-                },
-                "tooltip": [
-                    "§9Puzzler",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-
-            // The Tavern
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
-                    "link": "https://wiki.hypixel.net/Gimley",
-                    "position": {
-                        "x": 29,
-                        "z": -149
-                    },
-                    "tooltip": [
-                        "§9Gimley",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/ebf8dd5cb923ad3cad54834066e8fa4659d3a189b1410515e4005a4ede0541eb",
-                    "link": "https://wiki.hypixel.net/Hornum",
-                    "position": {
-                        "x": 35,
-                        "z": -146
-                    },
-                    "tooltip": [
-                        "§9Hornum",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
-                    "link": "https://wiki.hypixel.net/Sargwyn",
-                    "position": {
-                        "x": 35,
-                        "z": -150
-                    },
-                    "tooltip": [
-                        "§9Sargwyn",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
-                    "link": "https://wiki.hypixel.net/Tarwen",
-                    "position": {
-                        "x": 34,
-                        "z": -141
-                    },
-                    "tooltip": [
-                        "§9Tarwen",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-
-            // The Forge
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "not",
-                    "value": {
-                        "condition": "area",
-                        "area": "The Forge"
-                    }
-                },
-                "poi": {
-                    "type": "portal",
-                    "pos": {
-                        "x": 0,
-                        "z": -68
-                    },
-                    "destination": "forge",
-                    "tooltip": [
-                        "§aThe Forge",
-                        "",
-                        "§l§eClick to Warp!"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "area",
-                    "area": "The Forge"
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/2ddd89a6ae957f766d300011ff4471481c3bb61b676078a8c6c3c4083201b5c2",
-                    "link": "https://wiki.hypixel.net/Fred",
-                    "position": {
-                        "x": -3,
-                        "z": -69
-                    },
-                    "tooltip": [
-                        "§9Fred",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "area",
-                    "area": "The Forge"
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
-                    "link": "https://wiki.hypixel.net/Forger",
-                    "position": {
-                        "x": -23,
-                        "z": -50
-                    },
-                    "tooltip": [
-                        "§9Forger",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "area",
-                    "area": "The Forge"
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
-                    "link": "https://wiki.hypixel.net/Forger",
-                    "position": {
-                        "x": -23,
-                        "z": -80
-                    },
-                    "tooltip": [
-                        "§9Forger",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "area",
-                    "area": "The Forge"
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
-                    "link": "https://wiki.hypixel.net/Forger",
-                    "position": {
-                        "x": 23,
-                        "z": -88
-                    },
-                    "tooltip": [
-                        "§9Forger",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "area",
-                    "area": "The Forge"
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
-                    "link": "https://wiki.hypixel.net/Forger",
-                    "position": {
-                        "x": 23,
-                        "z": -58
-                    },
-                    "tooltip": [
-                        "§9Forger",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "area",
-                    "area": "The Forge"
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
-                    "link": "https://wiki.hypixel.net/Forger",
-                    "position": {
-                        "x": -4,
-                        "z": -109
-                    },
-                    "tooltip": [
-                        "§9Forger",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-
-            // Castle Guards
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/7941c9c6a38b2549c295b3419b91c03f310358f99e1eb9ed8b9b594beedef108",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 196,
-                        "z": 181
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/7941c9c6a38b2549c295b3419b91c03f310358f99e1eb9ed8b9b594beedef108",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 132,
-                        "z": 252
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/64529ed2fa5bbdf2cf62e065e04b88561700dab7bfe9ecd60f020882795aca33",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 108,
-                        "z": 253
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/a76596aa64eef0c135433751cd71230cfeb1a881ba3f110a02aa58c7160c0fc8",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 122,
-                        "z": 148
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/8e7a46c258268f42c859dd5c8008a97c72b8d370e981ce2dcc0c3fd451638ed7",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 93,
-                        "z": 176
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/7b0ad2e5e91c27db55d59191ccc76b5abfd886a3035b1a885b810c1df4877001",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 137,
-                        "z": 148
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/8e7a46c258268f42c859dd5c8008a97c72b8d370e981ce2dcc0c3fd451638ed7",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 134,
-                        "z": 106
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": false,
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/2e54ef438f21d20d0f6c69e662f17538f57c1c12df4fe822c02e889a16142198",
-                    "link": "https://wiki.hypixel.net/Castle_Guard",
-                    "position": {
-                        "x": 125,
-                        "z": 106
-                    },
-                    "tooltip": [
-                        "§9Castle Guard",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/6f70385f472c03825c0e894d94ac201e1b642d1032202d4bf33372fa3aa29fba",
-                "link": "https://wiki.hypixel.net/Queen_Mismyla",
-                "position": {
-                    "x": 126,
-                    "z": 195
-                },
-                "tooltip": [
-                    "§9Queen Mismyla",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/e1172b17eb3318b841fa94be0b8fbd0b7cddb5add1d2b35ad5e6adc8ab7d5206",
-                "link": "https://wiki.hypixel.net/Emissary_Wilson",
-                "position": {
-                    "x": 171,
-                    "z": 31
-                },
-                "tooltip": [
-                    "§9Emissary Wilson",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/921867f4ec7afff0892671eac399acdcc63105d0ae4462a48a43af5ecba1e4d5",
-                "link": "https://wiki.hypixel.net/Old_Man_Garry",
-                "position": {
-                    "x": 5,
-                    "z": -110
-                },
-                "tooltip": [
-                    "§9Old Man Garry",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/e67069df95c21a86d092c02abdbb8a19461f370f29c0d0034037a72096a6a19c",
-                "link": "https://wiki.hypixel.net/Dirt_Guy",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
                     "x": 43,
-                    "z": 175
+                    "y": 135,
+                    "z": 23
                 },
+                "texture": "http://textures.minecraft.net/texture/e78c25ac8d793a73af31e5da3e8bf2d63a6c0026fde9a9682fc9caf615540c79",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "Silnar",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 53,
+                "y": 142,
+                "z": 20
+            },
+            "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "Fred",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -2,
+                "y": 149,
+                "z": -68
+            },
+            "texture": "http://textures.minecraft.net/texture/2ddd89a6ae957f766d300011ff4471481c3bb61b676078a8c6c3c4083201b5c2",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bForger",
                 "tooltip": [
-                    "§9Dirt Guy",
+                    "$name",
                     "",
-                    "§7§lClick to view wiki"
-                ]
-            },
-
-            // Royal Residents
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "not",
-                    "value": {
-                        "condition": "and",
-                        "conditions": [
-                            {
-                                "condition": "area",
-                                "area": "Dwarven Base Camp"
-                            },
-                            {
-                                "condition": "area",
-                                "area": "Glacite Tunnels"
-                            },
-                            {
-                                "condition": "area",
-                                "area": "Great Glacite Lake"
-                            },
-                            {
-                                "condition": "area",
-                                "area": "Fossil Research Center"
-                            }
-                        ]
-                    }
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/27db154422c641537204a083a0340bbe5b3ab0eb8809883408d2a78de1e592a",
-                    "link": "https://wiki.hypixel.net/Royal_Resident",
-                    "position": {
-                        "x": 92,
-                        "z": 277
-                    },
-                    "tooltip": [
-                        "§9Royal Reseident",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-            {
-                "type": "conditional",
-                "significant": {
-                    "condition": "not",
-                    "value": {
-                        "condition": "and",
-                        "conditions": [
-                            {
-                                "condition": "area",
-                                "area": "Dwarven Base Camp"
-                            },
-                            {
-                                "condition": "area",
-                                "area": "Glacite Tunnels"
-                            },
-                            {
-                                "condition": "area",
-                                "area": "Great Glacite Lake"
-                            },
-                            {
-                                "condition": "area",
-                                "area": "Fossil Research Center"
-                            }
-                        ]
-                    }
-                },
-                "poi": {
-                    "type": "npc",
-                    "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
-                    "link": "https://wiki.hypixel.net/Royal_Resident",
-                    "position": {
-                        "x": 165,
-                        "z": 279
-                    },
-                    "tooltip": [
-                        "§9Royal Reseident",
-                        "",
-                        "§7§lClick to view wiki"
-                    ]
-                }
-            },
-
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/57b3552c5af2ab2dc4e1f84d78ca4c4d676dec068157225a3c2674e5574d2348",
-                "link": "https://wiki.hypixel.net/Tal_Ker",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": 193,
-                    "z": 205
+                    "x": -22,
+                    "y": 151,
+                    "z": -49
                 },
-                "tooltip": [
-                    "§9Tal Ker",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/27db154422c641537204a083a0340bbe5b3ab0eb8809883408d2a78de1e592a",
-                "link": "https://wiki.hypixel.net/Bylma",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bForger",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": -9,
-                    "z": 59
+                    "x": -22,
+                    "y": 151,
+                    "z": -79
                 },
-                "tooltip": [
-                    "§9Bylma",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
-                "texture": "http://textures.minecraft.net/texture/c765fee97bcfae7c136b6a6b8ca95381af964d6aebc08bfdd2350af78e2cf51a",
-                "link": "https://wiki.hypixel.net/Emissary_Carlton",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bForger",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
                 "position": {
-                    "x": -73,
-                    "z": -11
+                    "x": -3,
+                    "y": 149,
+                    "z": -108
                 },
-                "tooltip": [
-                    "§9Emissary Carlton",
-                    "",
-                    "§7§lClick to view wiki"
-                ]
+                "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             },
-            {
-                "type": "npc",
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bForger",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 24,
+                    "y": 151,
+                    "z": -87
+                },
+                "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bForger",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 24,
+                    "y": 151,
+                    "z": -57
+                },
+                "texture": "http://textures.minecraft.net/texture/a25266d69f6bb5329e4dfa9449e0d4c3a0060a44ed56b49ac64eeec570a07bc2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§2Jotraeline Greatforge",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -6,
+                    "y": 145,
+                    "z": -18
+                },
+                "texture": "http://textures.minecraft.net/texture/85362b61f298dec2df765457d6b417e917d2309ebc8f691f0855489682ddec59",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§eBylma",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -9,
+                "y": 128,
+                "z": 59
+            },
+            "texture": "http://textures.minecraft.net/texture/27db154422c641537204a083a0340bbe5b3ab0eb8809883408d2a78de1e592a",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Emissary Fraiser",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -132,
+                    "y": 174,
+                    "z": -50
+                },
                 "texture": "http://textures.minecraft.net/texture/9a43322511f4bba710bd78c98c90e83ac92a2da0f05a0a6951089bace0cf203a",
-                "link": "https://wiki.hypixel.net/Emissary_Fraiser",
-                "position": {
-                    "x": -133,
-                    "z": -51
-                },
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
                 "tooltip": [
-                    "§9Emissary Fraiser",
+                    "$name",
                     "",
-                    "§7§lClick to view wiki"
-                ]
-            }
-        ]
-    }
-]
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -134,
+                    "y": 173,
+                    "z": -62
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§6Marigold",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 182,
+                "y": 150,
+                "z": 61
+            },
+            "texture": "http://textures.minecraft.net/texture/ccb0597582f5a6c2f445d8da6971b3f3e8bbd9cc2968fd63075d34abb02c1cb3",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 47,
+                    "y": 131,
+                    "z": 174
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§6Emissary Carlton",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -72,
+                    "y": 153,
+                    "z": -10
+                },
+                "texture": "http://textures.minecraft.net/texture/c765fee97bcfae7c136b6a6b8ca95381af964d6aebc08bfdd2350af78e2cf51a",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 85,
+                    "y": 114,
+                    "z": 135
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§eDirt Guy",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 43,
+                "y": 108,
+                "z": 175
+            },
+            "texture": "http://textures.minecraft.net/texture/e67069df95c21a86d092c02abdbb8a19461f370f29c0d0034037a72096a6a19c",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -96,
+                    "y": 142,
+                    "z": 112
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "Guard Gornum",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -158,
+                "y": 149,
+                "z": -14
+            },
+            "texture": "http://textures.minecraft.net/texture/f97bbd2995682f106aea38c817bba606b09a62285ba485b35b43d85d78f7b7f6",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -146,
+                    "y": 149,
+                    "z": -30
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 1,
+                    "y": 145,
+                    "z": 24
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 87,
+                    "y": 187,
+                    "z": 115
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§eDulin",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 16,
+                "y": 128,
+                "z": 207
+            },
+            "texture": "http://textures.minecraft.net/texture/674c124a2d54359c2fdd0862988706608935e60ef7458867a90be012237f5df8",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "§bTicket Master",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 24,
+                    "y": 128,
+                    "z": 208
+                },
+                "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
+        },
+        {
+            "name": "§eCold Enjoyer",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -15,
+                "y": 137,
+                "z": 217
+            },
+            "texture": "http://textures.minecraft.net/texture/38a2fb06d4777606694487f5b6f29076ff6c09cf45191b9b16696cd9961a8876",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6Scout Scardius",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -16,
+                "y": 121,
+                "z": 233
+            },
+            "texture": "http://textures.minecraft.net/texture/4c15decd569e09900b00fdb1c32bdaa7c15c31e8b244938875b11da393aaa0fa",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6Scout Plinus",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 10,
+                "y": 121,
+                "z": 245
+            },
+            "texture": "http://textures.minecraft.net/texture/5109151401de933d793eb3db9c4f9d9f6c9e5287dfa6b680921cb4d13be49bc8",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "Dr. Stone",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 28,
+                "y": 120,
+                "z": 239
+            },
+            "texture": "http://textures.minecraft.net/texture/7ff12cc137f20184db7b0c29cee0d1be29bcaf2cbe50701bd1293bd502e63b0f",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "Emissary Lissandra",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 3,
+                "y": 121,
+                "z": 238
+            },
+            "texture": "http://textures.minecraft.net/texture/43894dca2c27975f316431bbb54a6ec51ff47bef239915113a4332b1a2ed947a",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "tooltip": [
+                "§aDwarven Mines",
+                "",
+                "§l§eClick to Warp!"
+            ],
+            "pos": {
+                "x": -48,
+                "y": -1,
+                "z": -121
+            },
+            "destination": "mines",
+            "type": "portal"
+        },
+        {
+            "name": "§bLift Operator",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -79,
+                "y": 200,
+                "z": -123
+            },
+            "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§dBednom",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -30,
+                "y": 214,
+                "z": -89
+            },
+            "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "tooltip": [
+                "§aThe Forge",
+                "",
+                "§l§eClick to Warp!"
+            ],
+            "pos": {
+                "x": 1,
+                "y": -1,
+                "z": -68
+            },
+            "destination": "forge",
+            "type": "portal"
+        },
+        {
+            "name": "§6Emmisary Wilson",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 172,
+                "y": 150,
+                "z": 32
+            },
+            "texture": "http://textures.minecraft.net/texture/e1172b17eb3318b841fa94be0b8fbd0b7cddb5add1d2b35ad5e6adc8ab7d5206",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        }
+    ],
+    "bottomY": 496,
+    "topX": -224,
+    "topY": -192,
+    "bottomX": 320,
+    "island": "DWARVEN_MINES",
+    "default": "https://femboy-hooters.net/u/lyJy27.png",
+    "images": [
+        {
+            "condition": {
+                "conditions": [
+                    {
+                        "area": "Dwarven Base Camp",
+                        "condition": "area"
+                    },
+                    {
+                        "area": "Glacite Tunnels",
+                        "condition": "area"
+                    },
+                    {
+                        "area": "Great Glacite Lake",
+                        "condition": "area"
+                    },
+                    {
+                        "area": "Fossil Research Center",
+                        "condition": "area"
+                    }
+                ],
+                "condition": "or"
+            },
+            "image": "https://femboy-hooters.net/u/N8c6qU.png"
+        },
+        {
+            "condition": {
+                "position": "y \u003c 165",
+                "condition": "position"
+            },
+            "image": "https://femboy-hooters.net/u/BNB07U.png"
+        }
+    ]
+}

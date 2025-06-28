@@ -55,6 +55,10 @@
                     "@value": "Enable Defense Text Overlay",
                     "desc": "Enables the defense text overlay."
                 },
+                "speed_enabled": {
+                    "@value": "Enable Speed Text Overlay",
+                    "desc": "Enables the speed text overlay."
+                },
                 "info": {
                     "@value": "Info HUD Overlay",
                     "desc": "Settings for the info HUD overlay.",
@@ -121,6 +125,10 @@
                     "rotate": {
                         "@value": "Rotate Map",
                         "desc": "Rotate the map around the player."
+                    },
+                    "shape": {
+                        "@value": "Map Shape",
+                        "desc": "The shape that the map should be."
                     }
                 },
                 "dungeonmap": {
@@ -413,6 +421,10 @@
                         "Checks the following messages:",
                         "§2§lGIFT!§r§aYou found a §fWhite Gift§a! §7(§f1§7/§a20§7)"
                     ]
+                },
+                "enable_notifications_widget": {
+                    "@value": "Enable notifications widget",
+                    "desc": "Adds a small widget in the top right of the pause screen to view recent notifications."
                 }
             }
         },
@@ -439,7 +451,8 @@
             "crystal_hollows": "Crystal Hollows",
             "dwarves": "Dwarven Mines",
             "dungeon_hub": "Dungeon Hub",
-            "jerrys_workshop": "Jerry's Workshop"
+            "jerrys_workshop": "Jerry's Workshop",
+            "backwater": "Backwater Bayou"
         },
         "key": {
             "category": "SkyCubed",

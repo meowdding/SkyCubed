@@ -65,7 +65,7 @@ object UpdateChecker {
 
     private fun sendMessage(link: String, current: String, new: String) {
         Scheduling.schedule(5.seconds) {
-            McClient.tell {
+            McClient.runNextTick {
                 Text.multiline(
                     "",
                     Text.of("[SkyCubed]: New version found!").withColor(TextColor.YELLOW),

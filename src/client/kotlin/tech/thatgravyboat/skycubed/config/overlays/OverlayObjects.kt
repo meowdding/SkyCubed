@@ -5,6 +5,8 @@ import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
+import tech.thatgravyboat.skycubed.features.map.screen.MapShape
+import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
@@ -51,6 +53,10 @@ object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
 
     var defenseEnabled by boolean(false) {
         this.translation = "skycubed.config.overlays.defense_enabled"
+    }
+
+    var speedEnabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.speed_enabled"
     }
 }
 
@@ -119,6 +125,14 @@ object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
 
     var rotateAroundPlayer by boolean(false) {
         this.translation = "skycubed.config.overlays.map.rotate"
+    }
+
+    var mapShape by observable(
+        enum(MapShape.SQUARE) {
+            this.translation = "skycubed.config.overlays.map.shape"
+        },
+    ) { _, _ ->
+        MinimapOverlay.updateDisplay()
     }
 
 }

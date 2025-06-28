@@ -31,13 +31,15 @@ object Maps {
         "dwarves",
         "dungeon_hub",
         "jerrys_workshop",
+        "backwater",
     )
     private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 
-    private val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
+    val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
 
-    private var currentIsland: IslandData? = null
+    var currentIsland: IslandData? = null
+        private set
 
     init {
         runBlocking {

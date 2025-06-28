@@ -43,7 +43,7 @@ import kotlin.math.max
 @RegisterOverlay
 object DialogueOverlay : Overlay {
 
-    private val regex = ComponentRegex("\\[NPC] (?<name>[\\w.\\s]+): (?<message>.+)")
+    private val regex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
     private val yesNoRegex = listOf(
         ComponentRegex("Select an option: (?<yes>\\[YES]) (?<no>\\[NO]) "),
         ComponentRegex("\\nAccept the trapper's task to hunt the animal\\?\\nClick an option: (?<yes>\\[YES]) - (?<no>\\[NO])"),
