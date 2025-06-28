@@ -12,11 +12,10 @@ import org.joml.*
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderWorldEvent
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
-import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
+import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import kotlin.math.atan2
 import kotlin.math.roundToInt
 
@@ -49,14 +48,11 @@ object Waypoints {
 
     @Subscription
     fun onRenderWorld(event: RenderWorldEvent.AfterTranslucent) {
-        val camera = McClient.self.gameRenderer.mainCamera
-        val cameraPos = camera.position.toVector3f()
+        val cameraPos = event.camera.position.toVector3f()
         val stack = event.poseStack
         val font = McFont.self
 
-        stack.pushPop {
-            stack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z)
-
+        event.atCamera {
             waypoints.removeIf { waypoint ->
                 val text = waypoint.text
                 val (x, y, z) = waypoint.pos
@@ -67,8 +63,7 @@ object Waypoints {
                     Mth.sqrt((cameraPos.x - x) * (cameraPos.x - x) + (cameraPos.y - y) * (cameraPos.y - y) + (cameraPos.z - z) * (cameraPos.z - z))
                 }
 
-                stack.pushPop {
-                    translate(x, y, z)
+                stack.translated(x, y, z) {
                     BeaconRenderer.renderBeaconBeam(
                         stack, event.buffer, BeaconRenderer.BEAM_LOCATION,
                         0f, Mth.PI, McLevel.self.gameTime, 0, McLevel.self.maxY * 2,

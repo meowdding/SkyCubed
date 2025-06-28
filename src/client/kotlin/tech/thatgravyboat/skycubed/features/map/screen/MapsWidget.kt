@@ -18,6 +18,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
+import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -77,9 +78,7 @@ class MapsWidget(
                 }
 
                 maps.forEach { map ->
-                    graphics.pushPop {
-                        translate(map.topX + width / 2.0 + map.offsetX, map.topY + height / 2.0 + map.offsetY, 0.0)
-
+                    graphics.translated(map.topX + width / 2.0 + map.offsetX, map.topY + height / 2.0 + map.offsetY, 0f) {
                         val default = map.getDefaultTexture()
                         val texture = map.getTexture()
 
@@ -107,11 +106,10 @@ class MapsWidget(
 
                     if (map.island == LocationAPI.island) {
                         Waypoints.waypoints().forEach { waypoint ->
-                            graphics.pushPop {
-                                val mapX = waypoint.pos.x - 3 + map.offsetX + width / 2f
-                                val mapY = waypoint.pos.z - 3 + map.offsetY + height / 2f
-                                translate(mapX, mapY, 0f)
-                                translate(-3f, -3f, 0f)
+                            val mapX = waypoint.pos.x - 3 + map.offsetX + width / 2f
+                            val mapY = waypoint.pos.z - 3 + map.offsetY + height / 2f
+
+                            graphics.translated(mapX - 3f, mapY - 3f, 0f) {
                                 graphics.blitSprite(RenderType::guiTextured, SkyCubed.id("map/icons/waypoint"), 0, 0, 6, 6, waypoint.color)
                             }
 
@@ -132,11 +130,10 @@ class MapsWidget(
                 }
 
                 if (showPlayer) {
-                    graphics.pushPop {
-                        val offset = Maps.getCurrentPlayerOffset()
-                        val x = McPlayer.self!!.x + offset.x
-                        val z = McPlayer.self!!.z + offset.z
-                        translate(x + width / 2.0, z + height / 2.0, 0.0)
+                    val offset = Maps.getCurrentPlayerOffset()
+                    val x = McPlayer.self!!.x + offset.x
+                    val z = McPlayer.self!!.z + offset.z
+                    graphics.translated(x + width / 2.0f, z + height / 2.0f, 0f) {
                         val profile = McPlayer.skin ?: return
                         scale(1f / scale, 1f / scale, 1f)
 
