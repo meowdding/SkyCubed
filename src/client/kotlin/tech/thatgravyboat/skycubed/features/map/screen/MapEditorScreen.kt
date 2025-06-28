@@ -56,6 +56,7 @@ object MapEditorScreen {
                                         Text.of("Unknown island").send()
                                         return@withCallback
                                     }
+                                    pois.add(newPoi)
                                     val current = McScreen.self
                                     McClient.setScreenAsync { MapPoiEditScreen(newPoi, pois, current) }
                                 }
