@@ -6,6 +6,7 @@ import me.owdding.lib.utils.keysOf
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -29,7 +30,7 @@ private val DOWN_KEY = keysOf(InputConstants.KEY_DOWN)
 private val LEFT_KEY = keysOf(InputConstants.KEY_LEFT)
 private val RIGHT_KEY = keysOf(InputConstants.KEY_RIGHT)
 
-class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
+class OverlayScreen(private val overlay: Overlay, private val parent: Screen?) : Screen(CommonText.EMPTY) {
 
     private var dragging = false
     private var relativeX = 0
@@ -64,6 +65,10 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
         graphics.drawCenteredString(font, "Use +/- to scale, arrow keys to move around.", center, this.height - 20, -1)
     }
 
+    override fun renderBackground(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
+        this.renderMenuBackground(guiGraphics)
+    }
+
     override fun mouseDragged(mouseX: Double, mouseY: Double, i: Int, f: Double, g: Double): Boolean {
         if (dragging) {
             if (EditableProperty.X in overlay.properties) overlay.setX(mouseX.toInt() - relativeX)
@@ -93,6 +98,8 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
                     overlay.onRightClick()
                 }
             }
+        } else if (this.parent != null) {
+            McClient.setScreen(this.parent)
         }
         return true
     }
@@ -125,8 +132,13 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
     }
 
     override fun onClose() {
-        super.onClose()
         ConfigManager.save()
+
+        if (parent != null) {
+            McClient.setScreen(parent)
+        } else {
+            super.onClose()
+        }
     }
 
     fun isMouseOverOverlay(mouseX: Double, mouseY: Double): Boolean {

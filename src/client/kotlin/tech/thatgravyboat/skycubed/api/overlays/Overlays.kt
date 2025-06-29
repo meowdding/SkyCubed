@@ -73,6 +73,8 @@ object Overlays {
             val rect = it.editBounds * it.position.scale
 
             if (isOverlayScreen(screen, mouseX.toInt(), mouseY.toInt()) && rect.contains(mouseX.toInt(), mouseY.toInt())) {
+                val screen = screen!!
+
                 graphics.fill(rect.x, rect.y, rect.right, rect.bottom, 0x50000000)
                 graphics.renderOutline(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2, 0xFFFFFFFF.toInt())
                 if (it.properties.isNotEmpty()) {
@@ -88,11 +90,11 @@ object Overlays {
                             },
                         ),
                     )
-                    screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
-                    screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
+                    screen.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
+                    screen.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
                 } else {
                     val text = Tooltip.splitTooltip(McClient.self, it.name)
-                    screen!!.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
+                    screen.setTooltipForNextRenderPass(text, DefaultTooltipPositioner.INSTANCE, false)
                 }
             }
         }
@@ -109,7 +111,8 @@ object Overlays {
             val rect = overlay.editBounds * overlay.position.scale
 
             if (rect.contains(event.x, event.y)) {
-                McClient.setScreen(OverlayScreen(overlay))
+                val screen = McScreen.self
+                McClient.setScreen(OverlayScreen(overlay, screen.takeIf { it !is ChatScreen }))
                 return
             }
         }
