@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.util.Mth
 import org.joml.Vector3f
 import org.joml.component1
 import org.joml.component2
@@ -68,9 +69,10 @@ class MapsWidget(
                 scale(scale, scale, 1f)
                 translate(-xOffset.toFloat(), -zOffset.toFloat(), 0.0f)
 
+                val headRot = Mth.rotLerp(partialTick, McPlayer.self!!.yHeadRotO, McPlayer.self!!.yHeadRot)
                 if (rotate.get()) {
                     rotateAround(
-                        Axis.ZP.rotationDegrees(180 - McPlayer.self!!.yHeadRot),
+                        Axis.ZP.rotationDegrees(180 - headRot),
                         (xOffset + width / 2).toFloat(),
                         (zOffset + height / 2).toFloat(),
                         0.0f,
@@ -137,7 +139,7 @@ class MapsWidget(
                         val profile = McPlayer.skin ?: return
                         scale(1f / scale, 1f / scale, 1f)
 
-                        rotateAround(Axis.ZP.rotationDegrees(180 + McPlayer.self!!.yHeadRot), 0f, 0f, 0f)
+                        rotateAround(Axis.ZP.rotationDegrees(180 + headRot), 0f, 0f, 0f)
 
                         PlayerFaceRenderer.draw(graphics, profile, -4, -4, 8)
                     }
