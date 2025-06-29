@@ -97,6 +97,16 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
         return true
     }
 
+    override fun mouseScrolled(mouseX: Double, mouseY: Double, scrollX: Double, scrollY: Double): Boolean {
+        if (isMouseOverOverlay(mouseX, mouseY) && EditableProperty.SCALE in overlay.properties) {
+            val scale = overlay.position.scale + scrollY * 0.1f
+            overlay.setScale(scale.toFloat())
+            return true
+        }
+
+        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY)
+    }
+
     override fun keyPressed(key: Int, scan: Int, modifiers: Int): Boolean {
         val multiplier = if (hasShiftDown()) 10 else 1
         val (x, y) = overlay.position
@@ -117,6 +127,12 @@ class OverlayScreen(private val overlay: Overlay) : Screen(CommonText.EMPTY) {
     override fun onClose() {
         super.onClose()
         ConfigManager.save()
+    }
+
+    fun isMouseOverOverlay(mouseX: Double, mouseY: Double): Boolean {
+        val (x, y) = overlay.position
+        val (width, height) = overlay.bounds * overlay.position.scale
+        return ((mouseX - x).toInt() in 0..width && (mouseY - y).toInt() in 0..height)
     }
 
     companion object {
