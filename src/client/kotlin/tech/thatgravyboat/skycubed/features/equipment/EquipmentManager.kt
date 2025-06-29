@@ -46,7 +46,7 @@ object EquipmentManager {
         EquipmentSlot.entries.forEachIndexed { index, slot ->
             val y = topPos + index * 18
             graphics.blitSprite(RenderType::guiTextured, slotTexture, leftPos, y, 18, 18)
-            val stack = EquipmentAPI.normalEquipment[slot] ?: ItemStack.EMPTY
+            val stack = EquipmentAPI.islandEquipment[slot] ?: ItemStack.EMPTY
             if (mouseX in leftPos + 1..leftPos + 16 && mouseY in y + 1..y + 16) {
                 graphics.fill(RenderType.guiOverlay(), leftPos + 1, y + 1, leftPos + 17, y + 17, -2130706433)
             }
@@ -68,7 +68,7 @@ object EquipmentManager {
         EquipmentSlot.entries.forEachIndexed { index, slot ->
             val slotY = y + index * 18
             if (mouseX.toInt() in x + 1..x + 16 && mouseY.toInt() in slotY + 1..slotY + 16) {
-                val stack = EquipmentAPI.normalEquipment[slot]?.takeIf { !it.isEmpty } ?: return
+                val stack = EquipmentAPI.islandEquipment[slot]?.takeIf { !it.isEmpty } ?: return
                 event.graphics.renderTooltip(McFont.self, stack, mouseX.toInt(), mouseY.toInt())
             }
         }
