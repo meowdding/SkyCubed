@@ -33,6 +33,6 @@ object ChatConfig : CategoryKt("chat") {
             this.translation = "skycubed.config.chat.messages_to_clean"
         },
         { it.map { it.pattern }.toTypedArray() },
-        { it.mapNotNull { runCatching { Regex(it) }.getOrNull() } },
+        { it.filter(String::isNotEmpty).mapNotNull { runCatching { Regex(it) }.getOrNull() } },
     )
 }
