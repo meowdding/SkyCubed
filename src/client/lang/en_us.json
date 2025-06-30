@@ -22,6 +22,11 @@
                     "desc": "SkyCubed uses the vanilla keybinds.",
                     "text": "Open"
                 },
+                "overlays": {
+                    "@value": "Overlays",
+                    "desc": "SkyCubed has a few overlays that can be moved, scaled, or edited. You can click the button to open the overlay editor.",
+                    "text": "Open"
+                },
                 "notifications": {
                     "@value": "Notifications",
                     "desc": "SkyCubed has a notification system, you can click the button below to view past notifications, you can also find a notification button in the pause menu.",
