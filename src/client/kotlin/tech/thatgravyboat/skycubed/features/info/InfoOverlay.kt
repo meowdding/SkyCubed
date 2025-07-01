@@ -21,8 +21,8 @@ import tech.thatgravyboat.skycubed.features.info.foraging.ParkInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.GlaciteInfoOverlay
-import tech.thatgravyboat.skycubed.features.overlays.barDisabled
-import tech.thatgravyboat.skycubed.features.overlays.disabled
+import tech.thatgravyboat.skycubed.features.overlays.vanilla.barDisabled
+import tech.thatgravyboat.skycubed.features.overlays.vanilla.disabled
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
 
 @RegisterOverlay

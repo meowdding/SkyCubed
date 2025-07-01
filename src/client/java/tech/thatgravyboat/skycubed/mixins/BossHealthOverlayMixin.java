@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tech.thatgravyboat.skycubed.features.overlays.BossEventExtension;
-import tech.thatgravyboat.skycubed.features.overlays.VanillaBossbarOverlay;
+import tech.thatgravyboat.skycubed.features.overlays.vanilla.BossEventExtension;
+import tech.thatgravyboat.skycubed.features.overlays.vanilla.VanillaBossbarOverlay;
 
 @Mixin(BossHealthOverlay.class)
 public class BossHealthOverlayMixin {

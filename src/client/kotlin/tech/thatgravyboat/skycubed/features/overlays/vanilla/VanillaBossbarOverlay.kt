@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.vanilla
 
 import net.minecraft.client.gui.components.LerpingBossEvent
 import net.minecraft.world.BossEvent
