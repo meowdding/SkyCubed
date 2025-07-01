@@ -264,6 +264,30 @@
                         "desc": "Remove Full Bossbar including title when it has an objective (Objectives are also shown in the scoreboard)."
                     }
                 },
+                "itemtext": {
+                    "@value": "Item Text Overlay",
+                    "desc": "Settings for the vanilla item text overlay.",
+                    "moveable": {
+                        "@value": "Moveable Item Text Overlay",
+                        "desc": "If enabled the item text overlay can be moved around the screen."
+                    },
+                    "hidden": {
+                        "@value": "Hidden Item Text Overlay",
+                        "desc": "If enabled the item text overlay will not be shown."
+                    },
+                    "alignment": {
+                        "@value": "Item Text Alignment",
+                        "desc": "The alignment of the item text overlay.\n§lNote: This will only work if the item text overlay is moveable."
+                    },
+                    "color": {
+                        "@value": "Background Color",
+                        "desc": "The color of the background of the item text overlay."
+                    },
+                    "radius": {
+                        "@value": "Background Radius",
+                        "desc": "The radius of the background of the item text overlay."
+                    }
+                },
                 "cold_overlay": {
                     "@value": "Cold Overlay Start",
                     "desc": "The temperature at which the cold overlay starts appearing.\n§lNote: Setting this to 0 will disable the cold overlay."

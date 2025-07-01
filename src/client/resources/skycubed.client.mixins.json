@@ -4,10 +4,12 @@
     "package": "tech.thatgravyboat.skycubed.mixins",
     "compatibilityLevel": "JAVA_21",
     "client": [
+        "BossEventMixin",
         "BossHealthOverlayAccessor",
         "BossHealthOverlayMixin",
         "ChatComponentMixin",
         "EffectsInInventoryMixin",
+        "GuiAccessor",
         "GuiGraphicsMixin",
         "GuiMessageLineMixin",
         "GuiMixin",
@@ -19,7 +21,7 @@
         "displayplayer.HumanoidArmorLayerMixin",
         "displayplayer.PlayerRendererMixin",
         "displayplayer.SkullBlockRendererMixin",
-        "BossEventMixin"
+        "features.MoveableItemTextMixin"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -15,7 +15,7 @@ import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI;
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions;
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig;
 import tech.thatgravyboat.skycubed.config.overlays.Position;
-import tech.thatgravyboat.skycubed.features.overlays.MovableHotbar;
+import tech.thatgravyboat.skycubed.features.overlays.vanilla.MovableHotbar;
 
 @Mixin(Gui.class)
 public class GuiMixin {

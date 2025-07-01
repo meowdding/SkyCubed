@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.config.overlays
 
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
+import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
@@ -243,5 +244,31 @@ object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
 
     var removeBarWhenObjective  by boolean(false) {
         this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_objective"
+    }
+}
+
+object ItemTextOverlayConfig : OverlayConfig("Vanilla Item Text Overlay") {
+
+    var moveable by boolean(false) {
+        this.translation = "skycubed.config.overlays.itemtext.moveable"
+    }
+
+    var hidden by boolean(false) {
+        this.translation = "skycubed.config.overlays.itemtext.hidden"
+    }
+
+    var alignment by enum(Alignment.CENTER) {
+        this.translation = "skycubed.config.overlays.itemtext.alignment"
+    }
+
+    var color by color(0) {
+        this.translation = "skycubed.config.overlays.itemtext.background_color"
+        this.allowAlpha = true
+    }
+
+    var radius by int(0) {
+        this.translation = "skycubed.config.overlays.itemtext.radius"
+        this.range = 0..100
+        this.slider = true
     }
 }
