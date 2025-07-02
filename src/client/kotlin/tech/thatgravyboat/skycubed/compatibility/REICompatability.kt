@@ -10,6 +10,7 @@ import tech.thatgravyboat.skycubed.features.equipment.wardobe.WardrobeFeature
 import tech.thatgravyboat.skycubed.features.equipment.wardobe.WardrobeScreen
 import kotlin.reflect.full.isSuperclassOf
 
+@Deprecated("should use mlib")
 private object REIScreenHider : OverlayDecider {
 
     override fun <R : Screen> isHandingScreen(screen: Class<R>): Boolean = ContainerScreen::class.isSuperclassOf(screen.kotlin)
