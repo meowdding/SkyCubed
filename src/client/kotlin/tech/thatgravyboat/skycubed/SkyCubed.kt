@@ -4,6 +4,7 @@ import com.google.gson.JsonElement
 import com.mojang.serialization.Codec
 import kotlinx.coroutines.runBlocking
 import me.owdding.lib.utils.DataPatcher
+import me.owdding.lib.utils.MeowddingUpdateChecker
 import me.owdding.skycubed.generated.SkyCubedCodecs
 import me.owdding.skycubed.generated.SkyCubedModules
 import net.fabricmc.api.ModInitializer
@@ -11,10 +12,12 @@ import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.ModContainer
 import net.minecraft.SharedConstants
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.json.Json
 import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
@@ -23,6 +26,8 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextBuilder.append
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.hover
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.url
 import java.net.URI
 import java.nio.file.Files
 import kotlin.reflect.jvm.javaType
@@ -55,6 +60,27 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
 
     override fun onInitialize() {
         SkyCubedModules.init { SkyBlockAPI.eventBus.register(it) }
+        MeowddingUpdateChecker("znwUKvZc", mod, ::updateMessage)
+    }
+
+    fun updateMessage(link: String, current: String, new: String) {
+        fun MutableComponent.withLink() = this.apply {
+            this.url = link
+            this.hover = Text.of(link).withColor(TextColor.GRAY)
+        }
+
+        McClient.runNextTick {
+            Text.of().send()
+            Text.join(
+                "New version found! (",
+                Text.of(current).withColor(TextColor.RED),
+                Text.of(" -> ").withColor(TextColor.GRAY),
+                Text.of(new).withColor(TextColor.GREEN),
+                ")",
+            ).withLink().sendWithPrefix()
+            Text.of("Click to download.").withLink().sendWithPrefix()
+            Text.of().send()
+        }
     }
 
     fun id(path: String): ResourceLocation {
