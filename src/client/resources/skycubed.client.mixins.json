@@ -14,6 +14,7 @@
         "GuiMessageLineMixin",
         "GuiMixin",
         "InventoryScreenMixin",
+        "OverlayAccessor",
         "PlayerMixin",
         "SkinManagerInvoker",
         "displayplayer.CustomHeadLayerMixin",

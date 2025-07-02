@@ -112,7 +112,7 @@ object Overlays {
 
             if (rect.contains(event.x, event.y)) {
                 val screen = McScreen.self
-                McClient.setScreen(OverlayScreen(overlay, screen.takeIf { it !is ChatScreen }))
+                McClient.setScreen(OverlayScreen(overlay, screen))
                 return
             }
         }

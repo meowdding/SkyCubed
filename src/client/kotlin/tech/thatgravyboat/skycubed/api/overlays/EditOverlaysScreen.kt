@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.api.overlays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 
 class EditOverlaysScreen(val parent: Screen? = null) : Screen(CommonText.EMPTY) {
@@ -16,9 +15,5 @@ class EditOverlaysScreen(val parent: Screen? = null) : Screen(CommonText.EMPTY) 
     override fun onClose() {
         val parent = this.parent ?: return super.onClose()
         McClient.setScreen(parent)
-    }
-
-    companion object {
-        fun inScreen() = McScreen.self is EditOverlaysScreen
     }
 }

@@ -4,10 +4,10 @@ import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.utils.keys
 import me.owdding.lib.utils.keysOf
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -134,7 +134,7 @@ class OverlayScreen(private val overlay: Overlay, private val parent: Screen?) :
     override fun onClose() {
         ConfigManager.save()
 
-        if (parent != null) {
+        if (parent != null && parent !is ChatScreen) {
             McClient.setScreen(parent)
         } else {
             super.onClose()
@@ -145,10 +145,6 @@ class OverlayScreen(private val overlay: Overlay, private val parent: Screen?) :
         val (x, y) = overlay.position
         val (width, height) = overlay.bounds * overlay.position.scale
         return ((mouseX - x).toInt() in 0..width && (mouseY - y).toInt() in 0..height)
-    }
-
-    companion object {
-        fun inScreen() = McScreen.self is OverlayScreen
     }
 }
 

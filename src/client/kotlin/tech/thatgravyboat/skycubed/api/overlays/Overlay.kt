@@ -4,8 +4,10 @@ import earth.terrarium.olympus.client.ui.context.ContextMenu
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.mixins.OverlayAccessor
 import tech.thatgravyboat.skycubed.utils.Rect
 
 interface Overlay {
@@ -48,7 +50,13 @@ interface Overlay {
 
     companion object {
 
-        fun isEditing() = EditOverlaysScreen.inScreen() || OverlayScreen.inScreen()
+        fun isEditing(): Boolean {
+            var effectiveScreen = McScreen.self
+            if (effectiveScreen is OverlayAccessor) {
+                effectiveScreen = effectiveScreen.`skycubed$getBackgroundScreen`()
+            }
+            return effectiveScreen is EditOverlaysScreen || effectiveScreen is OverlayScreen
+        }
     }
 }
 
