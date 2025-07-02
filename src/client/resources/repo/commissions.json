@@ -50,6 +50,10 @@
             "max": 10
         },
 
+        "Mines Slayer": {
+            "type": "decimal",
+            "max": 50
+        },
         "Goblin Slayer": {
             "type": "decimal",
             "max": 100
