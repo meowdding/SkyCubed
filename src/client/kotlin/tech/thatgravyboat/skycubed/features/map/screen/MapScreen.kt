@@ -8,6 +8,7 @@ import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.utils.Orientation
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.GuiGraphics
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -97,6 +98,15 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     override fun renderBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         renderTransparentBackground(graphics)
+    }
+
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        if (Maps.MAP_KEYBIND.matches(keyCode, scanCode) || McClient.options.keyInventory.matches(keyCode, scanCode)) {
+            onClose()
+            return true
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers)
     }
 
     companion object {

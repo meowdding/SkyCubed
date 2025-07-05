@@ -33,7 +33,7 @@ object Maps {
         "jerrys_workshop",
         "backwater",
     )
-    private val KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
+    val MAP_KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 
     val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
@@ -76,7 +76,7 @@ object Maps {
 
     @Subscription
     fun onTick(event: TickEvent) {
-        if (KEYBIND.consumeClick()) {
+        if (MAP_KEYBIND.consumeClick()) {
             McClient.setScreen(MapScreen())
         }
     }
