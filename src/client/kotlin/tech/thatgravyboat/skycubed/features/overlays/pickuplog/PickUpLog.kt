@@ -6,6 +6,7 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
 import me.owdding.lib.displays.toRow
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
@@ -17,6 +18,7 @@ import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
@@ -82,6 +84,12 @@ object PickUpLog : Overlay {
     @Subscription
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
+        if (!PickupLogOverlayConfig.enabled) {
+            display = null
+            return
+        }
+        if (McScreen.self != null && McScreen.self !is ChatScreen) return
+
         val flattenedInventory = McPlayer.inventory
             .filterIndexed { index, _ -> index != 8 }
             .filter { !it.isEmpty }
