@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays.commissions
+package tech.thatgravyboat.skycubed.features.overlays.mining.commissions
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.displays.Displays
