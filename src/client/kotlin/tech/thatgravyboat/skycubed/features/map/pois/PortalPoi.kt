@@ -28,7 +28,10 @@ data class PortalPoi(
         16
     )
 
-    override fun click() = McClient.sendCommand("warp $destination")
+    override fun click() {
+        McClient.sendCommand("warp $destination")
+        McClient.setScreen(null)
+    }
 
     companion object {
 
