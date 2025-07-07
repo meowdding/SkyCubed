@@ -457,6 +457,7 @@
                 }
             }
         },
+        "notifications": "Notifications",
         "notification": {
             "@value": "Notification",
             "type": {
