@@ -4,6 +4,7 @@ import com.mojang.blaze3d.pipeline.RenderPipeline
 import com.mojang.blaze3d.platform.DepthTestFunction
 import com.mojang.blaze3d.shaders.UniformType
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.textures.FilterMode
 import com.mojang.blaze3d.textures.GpuTexture
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.Tesselator
@@ -57,6 +58,8 @@ object CircularMinimapRenderer {
             .setColor(color)
 
         val gpuTexture: GpuTexture = McClient.self.textureManager.getTexture(texture).texture
+
+        gpuTexture.setTextureFilter(FilterMode.NEAREST, false)
 
         RenderSystem.setShaderTexture(0, gpuTexture)
 
