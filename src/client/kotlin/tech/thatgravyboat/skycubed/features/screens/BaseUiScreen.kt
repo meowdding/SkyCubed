@@ -9,12 +9,12 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.layouts.FrameLayout
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 
-private const val ASPECT_RATIO = 9.0 / 16.0
+private const val ASPECT_RATIO = 16.0 / 9.0
 
 abstract class BaseUiScreen() : BaseCursorScreen(CommonText.EMPTY) {
 
-    val uiWidth get() = (this.width * 0.65).toInt()
-    val uiHeight get() = (uiWidth * ASPECT_RATIO).toInt()
+    val uiWidth get() = (uiHeight * ASPECT_RATIO).toInt()
+    val uiHeight get() = (this.height * 0.7).toInt()
 
     abstract fun create(bg: DisplayWidget)
 
