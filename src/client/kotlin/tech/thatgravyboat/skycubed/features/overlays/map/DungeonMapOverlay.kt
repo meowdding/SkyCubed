@@ -37,9 +37,11 @@ object DungeonMapOverlay {
             90, 90,
         )
 
+        val width = instance.getRoomAmount() * (combinedSize + 2)
+        val scaleFactor = 78 / width.toFloat()
         graphics.pushPop {
             translate(6f, 6f, 0f)
-            scale(0.6f, 0.6f, 1.0f)
+            scale(scaleFactor, scaleFactor, 1.0f)
 
             instance.runCatching {
                 map.doors.forEach { door ->
@@ -57,8 +59,8 @@ object DungeonMapOverlay {
 
             graphics.pushPop {
                 translate(6f, 6f, 0f)
-                translate((pos.x + 8f) * 0.6f, (pos.y + 8f) * 0.6f, 100f)
-                scale(0.8f, 0.8f, 1f)
+                translate((pos.x + 8f) * scaleFactor, (pos.y + 8f) * scaleFactor, 100f)
+                //scale(0.8f, 0.8f, 1f)
                 rotateAround(Axis.ZP.rotationDegrees(180f + player.rotation.toFloat()), 0f, 0f, 0f)
                 translate(-4f, -4f, 100f)
                 PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
