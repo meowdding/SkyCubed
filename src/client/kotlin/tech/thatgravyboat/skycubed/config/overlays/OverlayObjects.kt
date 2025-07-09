@@ -113,6 +113,11 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
     ) { _, _ ->
         CompactTablist.onSortingUpdate()
     }
+
+    var backgroundColor by color(0xC0000000u.toInt()) {
+        this.translation = "skycubed.config.overlays.tablist.background_color"
+        this.allowAlpha = true
+    }
 }
 
 object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {

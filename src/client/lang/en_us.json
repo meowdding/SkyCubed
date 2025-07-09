@@ -118,6 +118,10 @@
                     "sorting": {
                         "@value": "Player Sorting",
                         "desc": "The way the players should be sorted in the tab list."
+                    },
+                    "background_color": {
+                        "@value": "Background Color",
+                        "desc": "The color of the background of the tab list."
                     }
                 },
                 "map": {

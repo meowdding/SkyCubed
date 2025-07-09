@@ -137,7 +137,7 @@ object CompactTablist {
             filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
 
         display = ExtraDisplays.background(
-            0xA0000000u, 2f,
+            TabListOverlayConfig.backgroundColor.toUInt(), 2f,
             Displays.padding(5, listOf(mainElement, footerElement).toColumn()),
         )
     }
