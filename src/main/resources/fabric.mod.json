@@ -37,10 +37,15 @@
         }
     ],
     "depends": {
+        "fabric": "*",
         "fabricloader": ">=0.16.10",
         "fabric-language-kotlin": ">=1.12.2",
-        "fabric": "*",
-        "minecraft": "1.21.5",
-        "resourcefulconfigkt": ">=3.5.9"
+        "minecraft": "${minecraft}",
+        "resourcefulconfigkt": ">=${resourcefulconfigkt}",
+        "resourcefulconfig": ">=${resourcefulconfig}",
+        "meowdding-lib": ">=${meowddingLib}",
+        "skyblock-api": ">=${skyblockApi}",
+        "resourcefullib": ">=${resourcefullib}",
+        "olympus": ">=${olympus}"
     }
 }

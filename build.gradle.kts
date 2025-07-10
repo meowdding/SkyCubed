@@ -119,7 +119,16 @@ tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
     filesMatching(listOf("fabric.mod.json")) {
-        expand("version" to project.version)
+        expand(
+            "version" to project.version,
+            "minecraft" to libs.versions.minecraft.get(),
+            "meowddingLib" to libs.versions.meowdding.lib.get(),
+            "resourcefullib" to libs.versions.rlib.get(),
+            "skyblockApi" to libs.versions.skyblockapi.get(),
+            "olympus" to libs.versions.olympus.get(),
+            "resourcefulconfigkt" to libs.versions.rconfigkt.get(),
+            "resourcefulconfig" to libs.versions.rconfig.get(),
+        )
     }
     with(copySpec {
         from("src/client/lang").include("*.json").into("assets/skycubed/lang")
