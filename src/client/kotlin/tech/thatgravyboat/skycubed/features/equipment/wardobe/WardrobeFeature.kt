@@ -1,7 +1,9 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
 import com.mojang.blaze3d.platform.InputConstants
+import com.teamresourceful.resourcefullib.client.utils.CursorUtils
 import me.owdding.ktmodules.Module
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenBackgroundEvent
@@ -65,7 +67,7 @@ object WardrobeFeature {
 
         if (isEditing) {
             when (event.key) {
-                InputConstants.KEY_ESCAPE -> isEditing = false
+                InputConstants.KEY_ESCAPE, InputConstants.KEY_E -> isEditing = false
             }
         } else {
             when (event.key) {
@@ -79,8 +81,13 @@ object WardrobeFeature {
 
     @Subscription
     fun onScreenInit(event: ScreenInitializedEvent) {
-        if (event.screen.isEnabled()) return
-        isEditing = false
+        if (event.screen.isEnabled()) {
+            ScreenEvents.remove(event.screen).register {
+                CursorUtils.setDefault()
+            }
+        } else {
+            isEditing = false
+        }
     }
 
     private fun Screen.isEnabled() = this.title.stripped.lowercase().startsWith("wardrobe") && WardrobeConfig.enabled
