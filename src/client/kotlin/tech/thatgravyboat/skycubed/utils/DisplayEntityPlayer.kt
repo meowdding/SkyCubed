@@ -14,8 +14,8 @@ import java.util.concurrent.CompletableFuture
 
 class DisplayEntityPlayer(
     skin: CompletableFuture<PlayerSkin>,
-    armor: List<ItemStack>,
-    private val invisible: Boolean = false,
+    var armor: List<ItemStack>,
+    var isTransparent: Boolean = false,
 ) : RemotePlayer(
     McClient.self.level,
     GameProfile(Util.NIL_UUID, "Display")
@@ -23,12 +23,12 @@ class DisplayEntityPlayer(
 
     private val skin: CompletableFuture<PlayerSkin> = skin.thenApply { PlayerSkin(it.texture, it.textureUrl, null, null, it.model, it.secure) }
     private val hasNoArmor: Boolean = armor.all(ItemStack::isEmpty)
-
-    init {
-        equipment.set(EquipmentSlot.HEAD, armor.getOrNull(0) ?: ItemStack.EMPTY)
-        equipment.set(EquipmentSlot.CHEST, armor.getOrNull(1) ?: ItemStack.EMPTY)
-        equipment.set(EquipmentSlot.LEGS, armor.getOrNull(2) ?: ItemStack.EMPTY)
-        equipment.set(EquipmentSlot.FEET, armor.getOrNull(3) ?: ItemStack.EMPTY)
+    override fun getItemBySlot(slot: EquipmentSlot): ItemStack = when (slot) {
+        EquipmentSlot.HEAD -> armor.getOrNull(0) ?: ItemStack.EMPTY
+        EquipmentSlot.CHEST -> armor.getOrNull(1) ?: ItemStack.EMPTY
+        EquipmentSlot.LEGS -> armor.getOrNull(2) ?: ItemStack.EMPTY
+        EquipmentSlot.FEET -> armor.getOrNull(3) ?: ItemStack.EMPTY
+        else -> ItemStack.EMPTY
     }
 
     override fun getSkin(): PlayerSkin = if (skin.isActuallyDone) skin.get() else super.getSkin()
@@ -36,8 +36,8 @@ class DisplayEntityPlayer(
     override fun isSpectator() = false
     override fun isCreative() = false
 
-    override fun isInvisible() = this.invisible
-    override fun isInvisibleTo(player: Player) = this.invisible && !hasNoArmor
+    override fun isInvisible() = this.isTransparent
+    override fun isInvisibleTo(player: Player) = this.isTransparent && !hasNoArmor
 
     override fun getTeam() = object : PlayerTeam(null, "display") {
         override fun getNameTagVisibility() = Visibility.NEVER
