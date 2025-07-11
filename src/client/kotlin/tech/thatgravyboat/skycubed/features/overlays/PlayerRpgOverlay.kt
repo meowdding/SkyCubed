@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.overlays
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.network.chat.Component
+import net.minecraft.world.effect.MobEffects
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
@@ -25,7 +26,9 @@ private const val HEIGHT = 48
 object PlayerRpgOverlay : Overlay {
 
     private val BASE = SkyCubed.id("rpg/base")
-    private val HEALTH = SkyCubed.id("rpg/health/normal")
+    private val HEALTH_NORMAL = SkyCubed.id("rpg/health/normal")
+    private val HEALTH_POISON = SkyCubed.id("rpg/health/poison")
+    private val HEALTH_WITHER = SkyCubed.id("rpg/health/wither")
     private val ABSORPTION = SkyCubed.id("rpg/health/absorption")
     private val MANA = SkyCubed.id("rpg/mana/normal")
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
@@ -50,8 +53,14 @@ object PlayerRpgOverlay : Overlay {
         val airPercent = McPlayer.air.toFloat() / McPlayer.maxAir.toFloat()
         val manaUsePercent = (McPlayer.heldItem.getData(DataTypes.RIGHT_CLICK_MANA_ABILITY)?.second?.toFloat() ?: 0f) / StatsAPI.maxMana.toFloat()
 
+        val healthSprite = when {
+            McPlayer.self?.hasEffect(MobEffects.POISON) == true -> HEALTH_POISON
+            McPlayer.self?.hasEffect(MobEffects.WITHER) == true -> HEALTH_WITHER
+            else -> HEALTH_NORMAL
+        }
+
         graphics.blitSprite(RenderType::guiTextured, BASE, 0, 0, WIDTH, HEIGHT)
-        graphics.blitSpritePercentX(HEALTH, 47, 23, 70, 5, healthPercent.coerceIn(0f, 1f))
+        graphics.blitSpritePercentX(healthSprite, 47, 23, 70, 5, healthPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(ABSORPTION, 47, 23, 70, 5, absorptionPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA_DEPLETED, 47, 18, 57, 4, manaUsePercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA, 47, 18, 57, 4, manaPercent.coerceIn(0f, 1f))
