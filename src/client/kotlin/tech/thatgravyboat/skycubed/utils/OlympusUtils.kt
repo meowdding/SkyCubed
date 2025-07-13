@@ -4,6 +4,8 @@ import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.utils.State
 import net.minecraft.client.gui.components.AbstractWidget
+import net.minecraft.client.gui.components.events.ContainerEventHandler
+import net.minecraft.client.gui.components.events.GuiEventListener
 import net.minecraft.client.gui.layouts.Layout
 import net.minecraft.client.gui.layouts.LayoutElement
 import kotlin.math.absoluteValue
@@ -27,4 +29,10 @@ fun LayoutElement.asDebugWidget(): AbstractWidget {
         }
         .withSize(this.width, this.height)
         .withPosition(this.x, this.y)
+}
+
+fun ContainerEventHandler.findFocused(): GuiEventListener? {
+    if (this.focused == null) return this
+    if (this.focused is ContainerEventHandler) return (this.focused as ContainerEventHandler).findFocused()
+    return this.focused
 }

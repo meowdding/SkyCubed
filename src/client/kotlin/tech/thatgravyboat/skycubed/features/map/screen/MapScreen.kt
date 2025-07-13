@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.map.screen
 import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
+import earth.terrarium.olympus.client.components.textbox.TextBox
 import earth.terrarium.olympus.client.layouts.Layouts
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.utils.Orientation
@@ -17,6 +18,7 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.ResettingState
+import tech.thatgravyboat.skycubed.utils.findFocused
 
 class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
 
@@ -101,9 +103,11 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
     }
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
-        if (Maps.MAP_KEYBIND.matches(keyCode, scanCode) || McClient.options.keyInventory.matches(keyCode, scanCode)) {
-            onClose()
-            return true
+        if ((this.findFocused() as? TextBox)?.isFocused != true) {
+            if (Maps.MAP_KEYBIND.matches(keyCode, scanCode) || McClient.options.keyInventory.matches(keyCode, scanCode)) {
+                onClose()
+                return true
+            }
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers)
