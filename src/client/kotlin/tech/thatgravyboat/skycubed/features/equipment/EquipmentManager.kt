@@ -5,7 +5,9 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
@@ -17,6 +19,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
+import tech.thatgravyboat.skycubed.mixins.AbstractContainerScreenAccessor
 import tech.thatgravyboat.skycubed.utils.HiddenSlot
 
 @Module
@@ -32,6 +35,8 @@ object EquipmentManager {
     private var lastY: Int = 0
 
     private val isEnabled: Boolean get() = ScreensConfig.equipment && LocationAPI.isOnSkyBlock
+
+    private val fakeContainer = SimpleContainer(ItemStack.EMPTY)
 
     fun onRenderScreen(screen: InventoryScreen, graphics: GuiGraphics, left: Int, top: Int, mouseX: Int, mouseY: Int) {
         if (!this.isEnabled) return
@@ -53,7 +58,8 @@ object EquipmentManager {
             if (stack.isEmpty) {
                 graphics.blitSprite(RenderType::guiTextured, getEmptySlotTexture(slot), leftPos + 1, y + 1, 16, 16)
             } else {
-                graphics.renderFakeItem(stack, leftPos + 1, y + 1)
+                val accessor = screen as AbstractContainerScreenAccessor
+                stack.useSlot(leftPos + 1, y + 1) { accessor.`skycubed$renderSlot`(graphics, it) }
             }
         }
     }
@@ -99,6 +105,12 @@ object EquipmentManager {
         if (menu.slots.size < 46) return
         if (menu.slots[45] is HiddenSlot) return
         menu.slots[45] = HiddenSlot(menu.slots[45]) { !isEnabled }
+    }
+
+    private fun ItemStack.useSlot(x: Int, y: Int, block: (Slot) -> Unit) {
+        fakeContainer.setItem(0, this)
+        block(Slot(fakeContainer, 0, x, y))
+        fakeContainer.setItem(0, ItemStack.EMPTY)
     }
 
 }
