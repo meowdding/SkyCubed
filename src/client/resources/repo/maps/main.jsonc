@@ -1835,11 +1835,11 @@
                 "condition": {
                     "conditions": [
                         {
-                            "position": "x > -72 && x < 4 && y < 80 && z > 55 && z < 105",
+                            "position": "x \u003e -72 \u0026\u0026 x \u003c 4 \u0026\u0026 y \u003c 80 \u0026\u0026 z \u003e 55 \u0026\u0026 z \u003c 105",
                             "condition": "position"
                         },
                         {
-                            "position": "y < 64 && x > -39 && x < 53 && z > 10 && z < 142",
+                            "position": "y \u003c 64 \u0026\u0026 x \u003e -39 \u0026\u0026 x \u003c 53 \u0026\u0026 z \u003e 10 \u0026\u0026 z \u003c 142",
                             "condition": "position"
                         }
                     ],
@@ -1911,8 +1911,8 @@
                 ],
                 "pos": {
                     "x": -282,
-                    "y": -1,
-                    "z": -178
+                    "y": 47,
+                    "z": -198
                 },
                 "destination": "arachne",
                 "type": "portal"

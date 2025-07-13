@@ -731,22 +731,6 @@
             "type": "npc"
         },
         {
-            "name": "Fred",
-            "tooltip": [
-                "$name",
-                "",
-                "§7§lClick to view wiki!"
-            ],
-            "position": {
-                "x": -2,
-                "y": 149,
-                "z": -68
-            },
-            "texture": "http://textures.minecraft.net/texture/2ddd89a6ae957f766d300011ff4471481c3bb61b676078a8c6c3c4083201b5c2",
-            "link": "https://wiki.hypixel.net/$name",
-            "type": "npc"
-        },
-        {
             "significant": {
                 "condition": "false"
             },
@@ -1266,7 +1250,7 @@
             ],
             "pos": {
                 "x": -48,
-                "y": -1,
+                "y": 200,
                 "z": -121
             },
             "destination": "mines",
@@ -1312,7 +1296,7 @@
             ],
             "pos": {
                 "x": 1,
-                "y": -1,
+                "y": 149,
                 "z": -68
             },
             "destination": "forge",
@@ -1333,6 +1317,28 @@
             "texture": "http://textures.minecraft.net/texture/e1172b17eb3318b841fa94be0b8fbd0b7cddb5add1d2b35ad5e6adc8ab7d5206",
             "link": "https://wiki.hypixel.net/$name",
             "type": "npc"
+        },
+        {
+            "significant": {
+                "condition": "false"
+            },
+            "poi": {
+                "name": "Fred",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -2,
+                    "y": 149,
+                    "z": -68
+                },
+                "texture": "http://textures.minecraft.net/texture/2ddd89a6ae957f766d300011ff4471481c3bb61b676078a8c6c3c4083201b5c2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            "type": "conditional"
         }
     ],
     "bottomY": 496,

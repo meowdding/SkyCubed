@@ -1,88 +1,88 @@
 {
-  "pois": [
-    {
-      "tooltip": [
-        "§aBackwater Bayou",
-        "",
-        "§l§eClick to Warp!"
-      ],
-      "pos": {
-        "x": -20,
-        "y": -1,
-        "z": -9
-      },
-      "destination": "backwater",
-      "type": "portal"
-    },
-    {
-      "name": "§2Junker Joel",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 7,
-        "y": 72,
-        "z": 5
-      },
-      "texture": "http://textures.minecraft.net/texture/aa4503e7f161985d02731a306735ae94e407c790f5eb47b63119077dd883476b",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    },
-    {
-      "name": "§6Captain Baha",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": -22,
-        "y": 75,
-        "z": -8
-      },
-      "texture": "http://textures.minecraft.net/texture/371c44ad407c021737ad78907b5068d7bcc0c658b2a2fbabf01706563bd9447d",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    },
-    {
-      "name": "§dHattie",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 18,
-        "y": 71,
-        "z": 15
-      },
-      "texture": "http://textures.minecraft.net/texture/a8741e1be7ccee7a7b66d19ac0f6f436fae68d4adf3e75d20f595221c229301",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    },
-    {
-      "name": "§2Roddy",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 22,
-        "y": 78,
-        "z": -23
-      },
-      "texture": "http://textures.minecraft.net/texture/17cad9f27d74de3e59f2a517d04a282e2cf86e4c5e40639daeca7b1aae7f5a71",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    }
-  ],
-  "bottomY": 47,
-  "topX": -26,
-  "topY": -49,
-  "bottomX": 77,
-  "island": "BACKWATER_BAYOU",
-  "default": "https://femboy-hooters.net/u/esrERw.png"
+    "pois": [
+        {
+            "tooltip": [
+                "§aBackwater Bayou",
+                "",
+                "§l§eClick to Warp!"
+            ],
+            "pos": {
+                "x": -20,
+                "y": 74,
+                "z": -9
+            },
+            "destination": "backwater",
+            "type": "portal"
+        },
+        {
+            "name": "§2Junker Joel",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 7,
+                "y": 72,
+                "z": 5
+            },
+            "texture": "http://textures.minecraft.net/texture/aa4503e7f161985d02731a306735ae94e407c790f5eb47b63119077dd883476b",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6Captain Baha",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -22,
+                "y": 75,
+                "z": -8
+            },
+            "texture": "http://textures.minecraft.net/texture/371c44ad407c021737ad78907b5068d7bcc0c658b2a2fbabf01706563bd9447d",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§dHattie",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 18,
+                "y": 71,
+                "z": 15
+            },
+            "texture": "http://textures.minecraft.net/texture/a8741e1be7ccee7a7b66d19ac0f6f436fae68d4adf3e75d20f595221c229301",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§2Roddy",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 22,
+                "y": 78,
+                "z": -23
+            },
+            "texture": "http://textures.minecraft.net/texture/17cad9f27d74de3e59f2a517d04a282e2cf86e4c5e40639daeca7b1aae7f5a71",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        }
+    ],
+    "bottomY": 47,
+    "topX": -26,
+    "topY": -49,
+    "bottomX": 77,
+    "island": "BACKWATER_BAYOU",
+    "default": "https://femboy-hooters.net/u/esrERw.png"
 }

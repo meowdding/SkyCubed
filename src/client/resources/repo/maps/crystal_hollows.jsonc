@@ -1,97 +1,111 @@
 {
-  "pois": [
-    {
-      "tooltip": [
-        "§aCrystal Nucleus",
-        "",
-        "§l§eClick to Warp!"
-      ],
-      "pos": {
-        "x": 513,
-        "y": -1,
-        "z": 526
-      },
-      "destination": "nucleus",
-      "type": "portal"
-    },
-    {
-      "name": "§bGemma",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 476,
-        "y": 106,
-        "z": 514
-      },
-      "texture": "http://textures.minecraft.net/texture/c86ad4ddb40e9128ae0b5a3126efe73f4149c757bac148fcfbea6f7aba8f8569",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    },
-    {
-      "name": "§6Emissary Sisko",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 496,
-        "y": 106,
-        "z": 557
-      },
-      "texture": "http://textures.minecraft.net/texture/8ebf9cac5ab47903e1d2d4c24f685a667f205f9a6177f6a7621f84719e487465",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    },
-    {
-      "name": "§2Geonathan Greatforge",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 531,
-        "y": 106,
-        "z": 557
-      },
-      "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    },
-    {
-      "name": "Chunk",
-      "tooltip": [
-        "$name",
-        "",
-        "§7§lClick to view wiki!"
-      ],
-      "position": {
-        "x": 798,
-        "y": 129,
-        "z": 709
-      },
-      "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
-      "link": "https://wiki.hypixel.net/$name",
-      "type": "npc"
-    }
-  ],
-  "bottomY": 824,
-  "topX": 200,
-  "topY": 200,
-  "bottomX": 824,
-  "island": "CRYSTAL_HOLLOWS",
-  "default": "https://api.dediamondpro.dev/skyguide/medium/crystal_hollows.png",
-  "images": [
-    {
-      "condition": {
-        "position": "y \u003c 64",
-        "condition": "position"
-      },
-      "image": "https://api.dediamondpro.dev/skyguide/medium/crystal_hollows_magma_fields.png"
-    }
-  ]
+    "pois": [
+        {
+            "tooltip": [
+                "§aCrystal Nucleus",
+                "",
+                "§l§eClick to Warp!"
+            ],
+            "pos": {
+                "x": 513,
+                "y": 106,
+                "z": 513
+            },
+            "destination": "nucleus",
+            "type": "portal"
+        },
+        {
+            "name": "§bGemma",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 476,
+                "y": 106,
+                "z": 514
+            },
+            "texture": "http://textures.minecraft.net/texture/c86ad4ddb40e9128ae0b5a3126efe73f4149c757bac148fcfbea6f7aba8f8569",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§6Emissary Sisko",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 496,
+                "y": 106,
+                "z": 557
+            },
+            "texture": "http://textures.minecraft.net/texture/8ebf9cac5ab47903e1d2d4c24f685a667f205f9a6177f6a7621f84719e487465",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "§2Geonathan Greatforge",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 531,
+                "y": 106,
+                "z": 557
+            },
+            "texture": "http://textures.minecraft.net/texture/213cf0ca79a3611b8e05fe9e264fb2bf8d27e464dc12dc6e95dd0ae0c335a561",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "name": "Chunk",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": 798,
+                "y": 129,
+                "z": 709
+            },
+            "texture": "http://textures.minecraft.net/texture/65f31c1c215a57e937fd75ab35782f85ec242a1b1f950a26a42bb5e0aa5cbeda",
+            "link": "https://wiki.hypixel.net/$name",
+            "type": "npc"
+        },
+        {
+            "tooltip": [
+                "§aCrystal Hollows",
+                "",
+                "§l§eClick to Warp!"
+            ],
+            "pos": {
+                "x": 513,
+                "y": 106,
+                "z": 550
+            },
+            "destination": "warp hollows",
+            "type": "portal"
+        }
+    ],
+    "bottomY": 824,
+    "topX": 200,
+    "topY": 200,
+    "bottomX": 824,
+    "island": "CRYSTAL_HOLLOWS",
+    "default": "https://api.dediamondpro.dev/skyguide/medium/crystal_hollows.png",
+    "images": [
+        {
+            "condition": {
+                "position": "y \u003c 64",
+                "condition": "position"
+            },
+            "image": "https://api.dediamondpro.dev/skyguide/medium/crystal_hollows_magma_fields.png"
+        }
+    ]
 }
