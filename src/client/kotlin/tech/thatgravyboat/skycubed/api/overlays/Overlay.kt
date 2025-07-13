@@ -24,7 +24,8 @@ interface Overlay {
         return Rect(x, y, bounds.first, bounds.second)
     }
 
-    fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int)
+    fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {}
+    fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) = render(graphics, mouseX, mouseY)
 
     fun onRightClick() = ContextMenu.open {
         it.dangerButton(Text.of("Reset Position")) {
