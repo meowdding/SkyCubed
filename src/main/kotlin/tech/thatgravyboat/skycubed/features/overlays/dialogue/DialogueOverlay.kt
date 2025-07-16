@@ -17,9 +17,9 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEven
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
-import tech.thatgravyboat.skyblockapi.platform.pushPop
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
+import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -37,8 +37,6 @@ import kotlin.math.max
 @Module
 @RegisterOverlay
 object DialogueOverlay : Overlay {
-
-    // TODO all broken
 
     private val regex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
     private val yesNoRegex = listOf(
@@ -132,53 +130,35 @@ object DialogueOverlay : Overlay {
 
     private fun createMainDisplay(name: Component, message: Component, npc: DialogueNpc, maxWidth: Int): Display? {
         val entity = DialogueEntities.get(name.stripped, npc)
+        val npcNameDisplay = Displays.background(
+            SkyCubedTextures.backgroundBox,
+            Displays.padding(5, Displays.component(name, maxWidth))
+        )
+        val npcTextDisplay = Displays.component(message, maxWidth).let { display ->
+            Displays.background(
+                SkyCubedTextures.backgroundBox,
+                Displays.padding(15, ((maxWidth * 0.8f).toInt() - display.getWidth()).coerceAtLeast(0) + 15, 15, 15, display)
+            )
+        }
 
-        val entityDisplay = entity?.let {
-            val display = Displays.entity(it, 60, 60, 35, 80f, 40f)
-            object : Display {
-                override fun getWidth(): Int = display.getWidth()
-                override fun getHeight(): Int = display.getHeight()
-                override fun render(graphics: GuiGraphics) {
-                    val width = getWidth()
-                    val height = getHeight()
-                    val half = width / 2
-                    graphics.pushPop {
-                        graphics.scissor(-half, -height, width * 2, height * 2) {
+        return object : Display {
+            override fun getWidth(): Int = npcTextDisplay.getWidth()
+            override fun getHeight(): Int = npcTextDisplay.getHeight()
+
+            override fun render(graphics: GuiGraphics) {
+                npcTextDisplay.render(graphics)
+                npcNameDisplay.render(graphics, 60.takeIf { entity != null } ?: 5, - npcNameDisplay.getHeight() / 2)
+
+                if (entity != null) {
+                    val display = Displays.entity(entity, 60, 80, 35, 80f, 40f)
+                    graphics.translated(0, -45) {
+                        graphics.scissor(0..60, 0..45) {
                             display.render(graphics)
                         }
                     }
                 }
             }
         }
-
-        val npcNameDisplay = Displays.pushPop(
-            Displays.background(
-                SkyCubedTextures.backgroundBox,
-                Displays.padding(5, Displays.component(name, maxWidth))
-            )
-        ) { translate(60f.takeIf { entityDisplay != null } ?: 8f, -8f, 0f) }
-
-        val npcTextDisplay = Displays.component(message, maxWidth)
-
-        return listOfNotNull(
-            entityDisplay,
-            Displays.pushPop(
-                Displays.background(
-                    SkyCubedTextures.backgroundBox,
-                    listOf(
-                        npcNameDisplay,
-                        Displays.padding(
-                            15,
-                            ((maxWidth * 0.8f).toInt() - npcTextDisplay.getWidth()).coerceAtLeast(0) + 15,
-                            15,
-                            15,
-                            npcTextDisplay
-                        )
-                    ).asLayer(),
-                )
-            )
-            { translate(0f, 40f, 0f) },
-        ).asLayer()
     }
 
     private fun createYesNoDisplay(): Display {

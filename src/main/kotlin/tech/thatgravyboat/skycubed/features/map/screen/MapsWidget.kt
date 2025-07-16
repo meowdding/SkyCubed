@@ -76,25 +76,16 @@ class MapsWidget(
                 }
 
                 maps.forEach { map ->
-//                     graphics.translated(map.topX + width / 2.0 + map.offsetX, map.topY + height / 2.0 + map.offsetY) {
-//                         val default = map.getDefaultTexture()
-//                         val texture = map.getTexture()
-//
-//                         if (default != texture) {
-//                             shape.drawMapPart(graphics, default.getId(), map, posX, posY, width, height, scaleX, scaleY, 0xFF3F3F3F.toInt())
-//                         }
-//
-//                         shape.drawMapPart(graphics, texture.getId(), map, posX, posY, width, height, scaleX, scaleY)
-//                     }
+                    graphics.translated(map.topX + width / 2.0 + map.offsetX, map.topY + height / 2.0 + map.offsetY) {
+                        val default = map.getDefaultTexture()
+                        val texture = map.getTexture()
 
-                    val default = map.getDefaultTexture()
-                    val texture = map.getTexture()
+                        if (default != texture) {
+                            shape.drawMapPart(graphics, default.getId(), map, posX, posY, width, height, scaleX, scaleY, 0xFF3F3F3F.toInt())
+                        }
 
-                    if (default != texture) {
-                        shape.drawMapPart(graphics, default.getId(), map, posX, posY, width, height, scaleX, scaleY, 0xFF3F3F3F.toInt())
+                        shape.drawMapPart(graphics, texture.getId(), map, posX, posY, width, height, scaleX, scaleY)
                     }
-
-                    shape.drawMapPart(graphics, texture.getId(), map, posX, posY, width, height, scaleX, scaleY)
 
                     map.pois.forEach { poi ->
                         if (!filter(poi)) return@forEach

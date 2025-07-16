@@ -59,6 +59,7 @@ internal fun GuiGraphics.fillRect(
     backgroundColor: Int, borderColor: Int = 0x0,
     borderSize: Int = 0, radius: Int = 0
 ) {
+    // TODO needs to be fixed for 1.21.5
     RoundedRectangle.draw(
         this, x, y, width, height,
         backgroundColor, borderColor, width.coerceAtMost(height) * (radius / 100f), borderSize
