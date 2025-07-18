@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.map.waypoints
 
 import me.owdding.ktmodules.Module
+import net.minecraft.client.gui.Font
 import net.minecraft.client.renderer.blockentity.BeaconRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.util.ARGB
@@ -13,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.api.events.render.RenderWorldEvent
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.platform.drawString
 import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import kotlin.math.atan2
 import kotlin.math.roundToInt
@@ -81,24 +83,23 @@ object Waypoints {
                         val scale = (distance * 0.0025f).coerceAtMost(0.4f)
                         scale(0.05f + scale, -0.05f - scale, 0.05f + scale)
 
-                        // TODO
-//                         font.drawInBatch(
-//                             text, -font.width(text) / 2f, -4f, -1, false,
-//                             this.last().pose(), event.buffer,
-//                             Font.DisplayMode.SEE_THROUGH,
-//                             0,
-//                             LightTexture.FULL_BRIGHT
-//                         )
+                        event.drawString(
+                            text = text,
+                            x = -font.width(text) / 2f,
+                            y = -4f,
+                            color = 0xFFFFFFFFu,
+                            displayMode = Font.DisplayMode.SEE_THROUGH,
+                        )
 
                         val distanceText = "${distance.toInt()}m"
 
-//                         font.drawInBatch(
-//                             distanceText, -font.width(distanceText) / 2f, 6f, -1, false,
-//                             this.last().pose(), event.buffer,
-//                             Font.DisplayMode.SEE_THROUGH,
-//                             0,
-//                             LightTexture.FULL_BRIGHT
-//                         )
+                        event.drawString(
+                            text = distanceText,
+                            x = -font.width(distanceText) / 2f,
+                            y = 6f,
+                            color = 0xFFFFFFFFu,
+                            displayMode = Font.DisplayMode.SEE_THROUGH,
+                        )
                     }
                 }
 

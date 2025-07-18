@@ -67,12 +67,7 @@ class MapsWidget(
 
                 val headRot = Mth.rotLerp(partialTick, McPlayer.self!!.yHeadRotO, McPlayer.self!!.yHeadRot)
                 if (rotate.get()) {
-//                     rotateAround(
-//                         Axis.ZP.rotationDegrees(180 - headRot),
-//                         (xOffset + width / 2).toFloat(),
-//                         (zOffset + height / 2).toFloat(),
-//                         0.0f,
-//                     )
+                    graphics.rotate(180 - headRot, xOffset + width / 2, zOffset + height / 2)
                 }
 
                 maps.forEach { map ->

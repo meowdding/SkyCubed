@@ -133,10 +133,10 @@ cloche {
         this["resourcefulconfig"] = libs.resourceful.config1215
         this["olympus"] = libs.olympus.lib1215
     }
-    createVersion("1.21.7") {
-        this["resourcefullib"] = libs.resourceful.lib1217
-        this["resourcefulconfig"] = libs.resourceful.config1217
-        this["olympus"] = libs.olympus.lib1217
+    createVersion("1.21.8") {
+        this["resourcefullib"] = libs.resourceful.lib1218
+        this["resourcefulconfig"] = libs.resourceful.config1218
+        this["olympus"] = libs.olympus.lib1218
     }
 
     mappings { official() }
@@ -152,6 +152,10 @@ repo {
 
 tasks.withType<ProcessResources>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    filesMatching(listOf("**/*.fsh", "**/*.vsh")) {
+        filter { if (it.startsWith("//!moj_import")) "#${it.substring(3)}" else it }
+    }
 
     with(copySpec {
         from("src/lang").include("*.json").into("assets/skycubed/lang")
@@ -177,7 +181,7 @@ tasks.withType<KotlinCompile>().configureEach {
 
 ksp {
     this@ksp.excludedSources.from(sourceSets.getByName("1215").kotlin.srcDirs)
-    this@ksp.excludedSources.from(sourceSets.getByName("1217").kotlin.srcDirs)
+    this@ksp.excludedSources.from(sourceSets.getByName("1218").kotlin.srcDirs)
     arg("meowdding.modules.project_name", project.name)
     arg("meowdding.modules.package", "me.owdding.skycubed.generated")
     arg("meowdding.codecs.project_name", project.name)

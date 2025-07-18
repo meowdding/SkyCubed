@@ -27,16 +27,24 @@ import java.util.function.Function
 
 class CircularMinimapUniform(
     val resolution: Vector2f,
+    val offset: Vector2f,
+    val center: Vector2f,
+    val screen: Vector2f,
     val radius: Float,
 ) : RenderPipelineUniforms {
 
     companion object {
 
-        const val UNIFORM_NAME = "CircularMinimapUniform"
+        const val UNIFORM_NAME = "SkyCubedCircularMinimapUniform"
         val STORAGE = RenderPipelineUniformsStorage.register<CircularMinimapUniform>(
             "SkyCubed Circular Minimap UBO",
             1,
-            Std140SizeCalculator().putVec2().putFloat()
+            Std140SizeCalculator()
+                .putVec2()
+                .putVec2()
+                .putVec2()
+                .putVec2()
+                .putFloat(),
         )
     }
 
@@ -45,10 +53,12 @@ class CircularMinimapUniform(
     override fun write(byteBuffer: ByteBuffer) {
         Std140Builder.intoBuffer(byteBuffer)
             .putVec2(resolution)
+            .putVec2(offset)
+            .putVec2(center)
+            .putVec2(screen)
             .putFloat(radius)
             .get()
     }
-
 }
 
 data class CircularMinimapPipState(
@@ -56,27 +66,29 @@ data class CircularMinimapPipState(
     val circleCenterX: Float,
     val circleCenterY: Float,
     val circleRadius: Float,
-    val x: Int,
-    val y: Int,
-    val uOffset: Float,
-    val vOffset: Float,
-    val uWidth: Int,
-    val vHeight: Int,
+    val x0: Int,
+    val y0: Int,
+    val x1: Int,
+    val y1: Int,
+    val u0: Float,
+    val v0: Float,
+    val u1: Float,
+    val v1: Float,
     val textureWidth: Int,
     val textureHeight: Int,
     val color: Int = -1,
 
-    val bounds: ScreenRectangle?,
+    val bounds: ScreenRectangle,
     val scissor: ScreenRectangle?,
 ) : OlympusPictureInPictureRenderState<CircularMinimapPipState> {
 
-    override fun x0(): Int = x
-    override fun x1(): Int = x + uWidth
-    override fun y0(): Int = y
-    override fun y1(): Int = y + vHeight
+    override fun x0(): Int = x0
+    override fun x1(): Int = x1
+    override fun y0(): Int = y0
+    override fun y1(): Int = y1
     override fun scale(): Float = 1f
     override fun scissorArea(): ScreenRectangle? = null
-    override fun bounds(): ScreenRectangle? = bounds
+    override fun bounds(): ScreenRectangle = bounds
 
     override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<CircularMinimapPipState>> = Function { buffer ->
         CircularMinimapPipRenderer(buffer)
@@ -96,28 +108,29 @@ private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
 )
 
 class CircularMinimapPipRenderer(
-    buffer: MultiBufferSource.BufferSource
+    buffer: MultiBufferSource.BufferSource,
 ) : PictureInPictureRenderer<CircularMinimapPipState>(buffer) {
 
     override fun getRenderStateClass(): Class<CircularMinimapPipState> = CircularMinimapPipState::class.java
 
     override fun renderToTexture(state: CircularMinimapPipState, stack: PoseStack) {
-        val bounds = state.bounds ?: return
-
-        val minU = state.uOffset / state.textureWidth
-        val maxU = (state.uOffset + state.uWidth) / state.textureWidth
-        val minV = state.vOffset / state.textureHeight
-        val maxV = (state.vOffset + state.vHeight) / state.textureHeight
+        val bounds = state.bounds
 
         val scale = McClient.window.guiScale.toFloat()
-        val scaledWidth = bounds.width() * scale
-        val scaledHeight = bounds.height() * scale
 
-        var buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-        buffer.addVertex(0f, 0f, 0f).setUv(minU, minV).setColor(-1)
-        buffer.addVertex(0f, scaledHeight, 0f).setUv(minU, maxV).setColor(-1)
-        buffer.addVertex(scaledWidth, scaledHeight, 0f).setUv(maxU, maxV).setColor(-1)
-        buffer.addVertex(scaledWidth, 0f, 0f).setUv(maxU, minV).setColor(-1)
+        val u0 = state.u0
+        val u1 = state.u1
+        val v0 = state.v0
+        val v1 = state.v1
+
+        val x1 = bounds.width * scale
+        val y1 = bounds.height * scale
+
+        val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        buffer.addVertex(0f, 0f, 0f).setUv(u0, v0).setColor(-1)
+        buffer.addVertex(0f, y1, 0f).setUv(u0, v1).setColor(-1)
+        buffer.addVertex(x1, y1, 0f).setUv(u1, v1).setColor(-1)
+        buffer.addVertex(x1, 0f, 0f).setUv(u1, v0).setColor(-1)
 
         val texture = McClient.self.textureManager.getTexture(state.texture)
         texture.setFilter(false, false)
@@ -125,10 +138,16 @@ class CircularMinimapPipRenderer(
         RenderSystem.setShaderTexture(0, texture.textureView)
 
         PipelineRenderer.builder(MAP_RENDER_PIPELINE, buffer.buildOrThrow())
-            .uniform(CircularMinimapUniform.STORAGE, CircularMinimapUniform(
-                Vector2f(scaledWidth, scaledHeight),
-                state.circleRadius,
-            ))
+            .uniform(
+                CircularMinimapUniform.STORAGE,
+                CircularMinimapUniform(
+                    Vector2f(bounds.width.toFloat(), bounds.height.toFloat()),
+                    Vector2f(bounds.position.x.toFloat(), bounds.position.y.toFloat()),
+                    Vector2f(state.circleCenterX, state.circleCenterY),
+                    Vector2f(McClient.window.width.toFloat(), McClient.window.height.toFloat()),
+                    state.circleRadius,
+                ),
+            )
             .draw()
     }
 
