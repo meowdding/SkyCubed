@@ -8,7 +8,6 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData
 import org.joml.Vector2i
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
-import tech.thatgravyboat.skyblockapi.api.events.base.predicates.TimePassed
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -64,7 +63,6 @@ class DungeonMap(val instance: DungeonInstance) {
     private fun getMapData(mapId: MapId) = McLevel.self.getMapData(mapId)
 
     @Subscription
-    @TimePassed("5t")
     fun onTick(event: TickEvent) = instance.runCatching {
         if (McPlayer.self == null) return
         val stack = McPlayer.inventory[8]

@@ -4,12 +4,14 @@ import earth.terrarium.olympus.client.utils.Orientation
 import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
+import net.minecraft.util.Mth
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.DungeonMapOverlayConfig
 import tech.thatgravyboat.skycubed.features.dungeonmap.*
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RenderPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
+import tech.thatgravyboat.skycubed.features.dungeonmap.position.WorldPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.combinedSize
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 
@@ -23,7 +25,7 @@ object DungeonMapOverlay {
 
     val canRender: Boolean get() = DungeonMapOverlayConfig.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
 
-    fun render(graphics: GuiGraphics) {
+    fun render(graphics: GuiGraphics, partialTicks: Float) {
         val instance = DungeonFeatures.currentInstance ?: return
         val map = instance.map ?: return
 
@@ -48,13 +50,30 @@ object DungeonMapOverlay {
         }
 
         instance.players.filterNotNull().forEach { player ->
-            val skin = player.getPlayer()?.skin ?: return@forEach
-            val pos = instance.runCatching<RenderPosition> { player.position.convertTo<RenderPosition>() } ?: return@forEach
+            val actualPlayer = player.getPlayer() ?: return@forEach
+            val skin = actualPlayer.skin ?: return@forEach
+
+            val playerOldPos = actualPlayer.oldPosition()
+            val playerPos = actualPlayer.position()
+
+            val oldPos = WorldPosition(playerOldPos.x.toInt(), playerOldPos.z.toInt(), instance).convertTo<RenderPosition>()
+            val pos = WorldPosition(playerPos.x.toInt(), playerPos.z.toInt(), instance).convertTo<RenderPosition>()
 
             graphics.pushPop {
+                val lerpX = Mth.lerp(
+                    partialTicks,
+                    oldPos.x.toFloat(),
+                    pos.x.toFloat(),
+                )
+                val lerpY = Mth.lerp(
+                    partialTicks,
+                    oldPos.y.toFloat(),
+                    pos.y.toFloat(),
+                )
+
                 graphics.translate(6f, 6f)
-                graphics.translate((pos.x + 8f) * scaleFactor, (pos.y + 8f) * scaleFactor)
-                graphics.rotate(180f + player.rotation.toFloat())
+                graphics.translate((lerpX + 8f) * scaleFactor, (lerpY + 8f) * scaleFactor)
+                graphics.rotate(180f + actualPlayer.yRot)
                 graphics.translate(-4f, -4f)
                 PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
             }

@@ -34,11 +34,11 @@ object MinimapOverlay : Overlay {
 
     private var display: Display? = null
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
         if (display != null && MapOverlayConfig.enabled) {
             display!!.render(graphics)
         } else if (DungeonMapOverlay.canRender) {
-            DungeonMapOverlay.render(graphics)
+            DungeonMapOverlay.render(graphics, partialTicks)
         }
     }
 

@@ -48,7 +48,7 @@ class OverlayScreen(private val overlay: Overlay, private val parent: Screen?) :
         graphics.pushPop {
             graphics.translate(x.toFloat(), y.toFloat())
             graphics.scale(overlay.position.scale, overlay.position.scale)
-            overlay.render(graphics, mouseX, mouseY)
+            overlay.render(graphics, mouseX, mouseY, partialTicks)
         }
         if (hovered) {
             graphics.fill(x, y, x + width, y + height, 0x50000000)
