@@ -4,7 +4,7 @@ import com.mojang.authlib.SignatureState
 import com.mojang.authlib.minecraft.MinecraftProfileTexture
 import com.mojang.authlib.minecraft.MinecraftProfileTextures
 import com.mojang.blaze3d.platform.InputConstants
-import earth.terrarium.olympus.client.pipelines.RoundedRectangle
+import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
@@ -59,10 +59,10 @@ internal fun GuiGraphics.fillRect(
     backgroundColor: Int, borderColor: Int = 0x0,
     borderSize: Int = 0, radius: Int = 0
 ) {
-    // TODO needs to be fixed for 1.21.5
-    RoundedRectangle.draw(
-        this, x, y, width, height,
-        backgroundColor, borderColor, width.coerceAtMost(height) * (radius / 100f), borderSize
+    this.drawRoundedRectangle(
+        x, y, width, height,
+        backgroundColor.toUInt(), borderColor.toUInt(),
+        width.coerceAtMost(height) * (radius / 100f), borderSize
     )
 }
 

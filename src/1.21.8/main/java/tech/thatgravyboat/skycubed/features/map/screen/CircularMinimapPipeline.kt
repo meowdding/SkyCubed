@@ -126,7 +126,7 @@ class CircularMinimapPipRenderer(
         val x1 = bounds.width * scale
         val y1 = bounds.height * scale
 
-        val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR)
         buffer.addVertex(0f, 0f, 0f).setUv(u0, v0).setColor(-1)
         buffer.addVertex(0f, y1, 0f).setUv(u0, v1).setColor(-1)
         buffer.addVertex(x1, y1, 0f).setUv(u1, v1).setColor(-1)

@@ -35,9 +35,9 @@ enum class MapShape(
         CIRCLE -> CircularMinimapRenderer.drawMapPart(
             graphics,
             texture,
-            posX + width * scaleX / 2.0f + 1,
-            posY + height * scaleY / 2.0f + 1,
-            width * min(scaleX, scaleY) / 2.0f,
+            posX + width * scaleX / 2.0f,
+            posY + height * scaleY / 2.0f,
+            (width - 4) * min(scaleX, scaleY) / 2.0f,
             0, 0,
             0f, 0f,
             map.width, map.height,

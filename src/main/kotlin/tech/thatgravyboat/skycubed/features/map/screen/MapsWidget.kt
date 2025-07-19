@@ -66,7 +66,8 @@ class MapsWidget(
                 graphics.translate(-xOffset.toFloat(), -zOffset.toFloat())
 
                 val headRot = Mth.rotLerp(partialTick, McPlayer.self!!.yHeadRotO, McPlayer.self!!.yHeadRot)
-                if (rotate.get()) {
+                // TODO: fix, in 1.21.8 the code for this seems to be broken if rotating the texture, needs to be fixed.
+                if (rotate.get() && (!SkyCubed.is1218 || shape == MapShape.SQUARE)) {
                     graphics.rotate(180 - headRot, xOffset + width / 2, zOffset + height / 2)
                 }
 

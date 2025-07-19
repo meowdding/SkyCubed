@@ -20,10 +20,10 @@ out vec4 fragColor;
 
 void main() {
     vec2 pos = Offset + Resolution * texCoord0;
-    vec4 color = texture(Sampler0, texCoord0) * vertexColor;;
+    vec4 color = texture(Sampler0, texCoord0) * vertexColor;
     float distance = length(Center - pos) - Radius;
 
-    if (distance >= 1 || color.a <= 0.1) {
+    if (distance >= 1.0 || color.a <= 0.1) {
         discard;
     }
 

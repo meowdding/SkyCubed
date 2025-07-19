@@ -37,6 +37,9 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
 
     val mod: ModContainer = FabricLoader.getInstance().getModContainer("skycubed").orElseThrow()
     val VERSION: String = mod.metadata.version.friendlyString
+
+    val is1218 = McClient.version == "1.21.8"
+
     val repoPatcher: DataPatcher?
 
     val prefix = Text.of {

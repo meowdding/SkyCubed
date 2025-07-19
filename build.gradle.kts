@@ -98,22 +98,32 @@ cloche {
                     value = "tech.thatgravyboat.skycubed.SkyCubed"
                 }
 
-                fun dependency(modId: String, version: Provider<String>) {
+                fun dependency(modId: String, version: Provider<String>, exact: Boolean = false) {
                     dependency {
                         this.modId = modId
                         this.required = true
                         version {
                             this.start = version
+                            if (exact) {
+                                this.endExclusive = false
+                                this.end = version
+                            }
                         }
                     }
                 }
 
-//                 dependency("fabricloader", libs.versions.fabric.loader)
-//                 dependency("fabric-language-kotlin", libs.versions.fabric.language.kotlin)
-//                 dependency("resourcefullib", rlib.map { it.version!! })
-//                 dependency("skyblock-api", libs.versions.skyblockapi)
-//                 dependency("olympus", olympus.map { it.version!! })
-//                 dependency("placeholder-api", libs.versions.placeholders)
+                dependency { modId = "fabric"; required = true; }
+                dependency("minecraft", minecraftVersion, exact = true)
+                dependency("fabricloader", libs.versions.fabric.loader)
+                dependency("fabric-language-kotlin", libs.versions.fabric.language.kotlin)
+
+                dependency("resourcefullib", rlib.map { it.version!! })
+                dependency("olympus", olympus.map { it.version!! })
+                dependency("resourcefulconfig", rconfig.map { it.version!! })
+
+                dependency("skyblock-api", libs.versions.skyblockapi)
+                dependency("meowdding-lib", libs.versions.meowdding.lib)
+                dependency("resourcefulconfigkt", libs.versions.resourceful.config.kotlin)
             }
 
             dependencies {
