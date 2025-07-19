@@ -22,6 +22,7 @@ import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
+import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundCircle
 
 @Module
 @RegisterOverlay
@@ -80,8 +81,8 @@ object MinimapOverlay : Overlay {
                     minimapWidget
                 )
                 MapShape.CIRCLE -> Displays.layered(
-//                     TexturedCircleDisplay(90, 90, backgroundCircle),
-                    minimapWidget
+                    Displays.circleTexture(90, 90, backgroundCircle),
+                    minimapWidget,
                 )
             }
         }
