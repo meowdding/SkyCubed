@@ -27,7 +27,7 @@ class TextOverlay(
     override val enabled: Boolean get() = this.isEnabled()
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        graphics.drawString(text(), 0, 1)
+        graphics.drawString(text(), 0, 1, shadow = true)
     }
 
     companion object {
