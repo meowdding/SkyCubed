@@ -1,6 +1,10 @@
+import net.msrandom.minecraftcodev.core.utils.toPath
+import net.msrandom.minecraftcodev.runs.task.WriteClasspathFile
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kotlin.io.path.readText
+import kotlin.io.path.writeText
 
 plugins {
     idea
@@ -204,5 +208,15 @@ idea {
         isDownloadSources = true
 
         excludeDirs.add(file("run"))
+    }
+}
+
+// TODO temporary workaround for a cloche issue on certain systems, remove once fixed
+tasks.withType<WriteClasspathFile>().configureEach {
+    actions.clear()
+    actions.add {
+        generate()
+        val file = output.get().toPath()
+        file.writeText(file.readText().lines().joinToString(File.pathSeparator))
     }
 }
