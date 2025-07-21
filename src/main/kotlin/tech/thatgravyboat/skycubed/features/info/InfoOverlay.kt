@@ -1,12 +1,12 @@
 package tech.thatgravyboat.skycubed.features.info
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
+import me.owdding.ktmodules.AutoCollect
+import me.owdding.skycubed.generated.SkyCubedRegisteredInfos
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
-import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
-import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.overlays.EditableProperty
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
@@ -14,17 +14,25 @@ import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.features.info.farming.GardenInfoOverlay
-import tech.thatgravyboat.skycubed.features.info.foraging.ParkInfoOverlay
-import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
-import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
-import tech.thatgravyboat.skycubed.features.info.mining.GlaciteInfoOverlay
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.barDisabled
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.disabled
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
 
+@AutoCollect("RegisteredInfos")
+@Retention(AnnotationRetention.SOURCE)
+@Target(AnnotationTarget.CLASS)
+annotation class RegisterInfoOverlay
+
 @RegisterOverlay
 object InfoOverlay : Overlay {
+
+    private val infoOverlays = mutableListOf<InfoProvider>()
+
+    init {
+        SkyCubedRegisteredInfos.collected.forEach { overlay ->
+            infoOverlays.add(overlay)
+        }
+    }
 
     override val name: Component = Component.literal("Info Overlay")
     override val position: Position = Position()
@@ -59,28 +67,21 @@ object InfoOverlay : Overlay {
     override val bounds: Pair<Int, Int> = 34 to 34
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        when (LocationAPI.island) {
-            SkyBlockIsland.THE_RIFT -> RiftInfoOverlay.render(graphics)
-            SkyBlockIsland.DWARVEN_MINES -> when (LocationAPI.area) {
-                SkyBlockAreas.GREAT_LAKE,
-                SkyBlockAreas.GLACITE_TUNNELS,
-                SkyBlockAreas.BASECAMP,
-                SkyBlockAreas.FOSSIL_RESEARCH,
-                    -> GlaciteInfoOverlay.render(graphics)
+        graphics.drawSprite(CommonInfoDisplays.BASE, 0, 0, 34, 34)
+        CommonInfoDisplays.baseDisplay.render(graphics, 0, 0)
 
-                else -> DwarvesInfoOverlay.render(graphics)
+        infoOverlays.groupBy { it.location }.forEach { (location, overlays) ->
+            val (xOffset, horizontalAlignment) = when (location) {
+                InfoLocation.TOP_LEFT, InfoLocation.BOTTOM_LEFT -> 0 to 1f
+                InfoLocation.TOP_RIGHT, InfoLocation.BOTTOM_RIGHT -> 34 to 0f
             }
-
-            SkyBlockIsland.CRYSTAL_HOLLOWS -> CrystalHollowsInfoOverlay.render(graphics)
-            SkyBlockIsland.THE_BARN -> TrapperInfoOverlay.render(graphics)
-            SkyBlockIsland.HUB -> when (LocationAPI.area) {
-                SkyBlockAreas.FARMHOUSE -> FarmhouseInfoOverlay.render(graphics)
-                else -> MainInfoOverlay.render(graphics)
+            val yOffset = when (location) {
+                InfoLocation.TOP_LEFT, InfoLocation.TOP_RIGHT -> 2
+                InfoLocation.BOTTOM_LEFT, InfoLocation.BOTTOM_RIGHT -> 18
             }
-
-            SkyBlockIsland.GARDEN -> GardenInfoOverlay.render(graphics)
-            SkyBlockIsland.THE_PARK -> ParkInfoOverlay.render(graphics)
-            else -> MainInfoOverlay.render(graphics)
+            overlays.filter { it.shouldDisplay() }.forEachIndexed { index, overlay ->
+                location.withBackground(overlay.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
+            }
         }
     }
 

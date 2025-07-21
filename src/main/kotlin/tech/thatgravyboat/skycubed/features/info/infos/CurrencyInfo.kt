@@ -10,9 +10,10 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
+import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
 
+@RegisterInfoOverlay
 object CurrencyInfo : InfoProvider {
-    // TODO: empty should be all, not none
     override val location: InfoLocation = InfoLocation.BOTTOM_RIGHT
 
     override fun getDisplay() = DisplayFactory.horizontal {

@@ -9,7 +9,9 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
+import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
 
+@RegisterInfoOverlay
 object TrapperInfo : InfoProvider {
     override val location = InfoLocation.BOTTOM_LEFT
 

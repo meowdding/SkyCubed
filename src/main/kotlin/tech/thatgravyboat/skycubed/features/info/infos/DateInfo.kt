@@ -7,8 +7,10 @@ import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.utils.extentions.toTitleCase
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
+import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
 import tech.thatgravyboat.skycubed.utils.toOrdinal
 
+@RegisterInfoOverlay
 object DateInfo : InfoProvider {
     private val springIcon = getIconDisplay("info/icons/seasons/spring")
     private val autumnIcon = getIconDisplay("info/icons/seasons/autumn")
@@ -23,9 +25,9 @@ object DateInfo : InfoProvider {
             SkyBlockSeason.EARLY_SUMMER, SkyBlockSeason.SUMMER, SkyBlockSeason.LATE_SUMMER -> summerIcon
             SkyBlockSeason.EARLY_AUTUMN, SkyBlockSeason.AUTUMN, SkyBlockSeason.LATE_AUTUMN -> autumnIcon
             SkyBlockSeason.EARLY_WINTER, SkyBlockSeason.WINTER, SkyBlockSeason.LATE_WINTER -> winterIcon
-            else -> Displays.empty(8, 8)
+            else -> Displays.empty(10, 10)
         }
-        display(Displays.padding(1, seasonIcon))
+        display(seasonIcon)
         string("${DateTimeAPI.season?.name?.toTitleCase().orEmpty()} ${DateTimeAPI.day.toOrdinal()}")
     }
 }

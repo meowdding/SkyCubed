@@ -17,8 +17,10 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
+import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
 
 @Module
+@RegisterInfoOverlay
 object ParkInfo : InfoProvider {
     private var rainTime: Component? = null
     private val rainTimeRegex = ComponentRegex(" Rain: (?<time>.*)")

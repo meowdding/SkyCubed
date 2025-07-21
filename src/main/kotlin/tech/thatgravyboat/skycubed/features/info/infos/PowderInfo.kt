@@ -12,7 +12,9 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
+import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
 
+@RegisterInfoOverlay
 object PowderInfo : InfoProvider {
     private val glaciteAreas = listOf(
         SkyBlockAreas.GREAT_LAKE,
