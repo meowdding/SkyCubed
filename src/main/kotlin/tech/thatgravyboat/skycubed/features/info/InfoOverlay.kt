@@ -26,11 +26,11 @@ annotation class RegisterInfoOverlay
 @RegisterOverlay
 object InfoOverlay : Overlay {
 
-    private val infoOverlays = mutableListOf<InfoProvider>()
+    private val infoOverlays = mutableMapOf<InfoLocation, List<InfoProvider>>()
 
     init {
-        SkyCubedRegisteredInfos.collected.forEach { overlay ->
-            infoOverlays.add(overlay)
+        SkyCubedRegisteredInfos.collected.groupBy { it.location }.forEach { (location, overlay) ->
+            infoOverlays.put(location, overlay.sortedByDescending { it.priority })
         }
     }
 
@@ -70,7 +70,7 @@ object InfoOverlay : Overlay {
         graphics.drawSprite(BaseInfoDisplay.BASE, 0, 0, 34, 34)
         BaseInfoDisplay.baseDisplay.render(graphics, 0, 0)
 
-        infoOverlays.groupBy { it.location }.forEach { (location, overlays) ->
+        infoOverlays.forEach { (location, overlays) ->
             val (xOffset, horizontalAlignment) = when (location) {
                 InfoLocation.TOP_LEFT, InfoLocation.BOTTOM_LEFT -> 0 to 1f
                 InfoLocation.TOP_RIGHT, InfoLocation.BOTTOM_RIGHT -> 34 to 0f
@@ -79,7 +79,7 @@ object InfoOverlay : Overlay {
                 InfoLocation.TOP_LEFT, InfoLocation.TOP_RIGHT -> 2
                 InfoLocation.BOTTOM_LEFT, InfoLocation.BOTTOM_RIGHT -> 18
             }
-            val display = overlays.sortedByDescending { it.priority }.firstOrNull { it.shouldDisplay() } ?: return@forEach
+            val display = overlays.firstOrNull { it.shouldDisplay() } ?: return@forEach
             location.withBackground(display.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
         }
     }

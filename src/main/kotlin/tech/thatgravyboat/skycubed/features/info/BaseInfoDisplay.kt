@@ -23,36 +23,25 @@ object BaseInfoDisplay {
 
     val baseDisplay = DisplayFactory.vertical {
         spacer(34, 5)
-
-        display(
-            Displays.center(
-                34, 12,
-                Displays.supplied {
-                    if (SkyBlockIsland.THE_RIFT.inIsland()) {
-                        if (isTimePaused()) pausedIcon else clockIcon
-                    } else {
-                        if (DateTimeAPI.isDay) sunIcon else moonIcon
-                    }
-                },
-            ),
-        )
+        display(Displays.center(34, 12, Displays.supplied { getIcon() }))
         spacer(34, 3)
-        display(
-            Displays.center(
-                34, 10,
-                Displays.supplied {
-                    if (SkyBlockIsland.THE_RIFT.inIsland()) {
-                        Displays.text(::getRiftTime, { if (isTimePaused()) 0xAAAAAAu else 0x55FF55u })
-                    } else {
-                        Displays.text(
-                            "${DateTimeAPI.hour.toString().padStart(2, '0')}:${DateTimeAPI.minute.toString().padStart(2, '0')}",
-                            { if (DateTimeAPI.isDay) 0xFFFF55u else 0xAAAAAAu },
-                        )
-                    }
-                },
-            ),
-        )
+        display(Displays.center(34, 10, Displays.supplied { Displays.text(getText(), ::getTextColor) }))
         spacer(34, 1)
+    }
+
+    private fun getIcon() = when (LocationAPI.island) {
+        SkyBlockIsland.THE_RIFT -> if (isTimePaused()) pausedIcon else clockIcon
+        else -> if (DateTimeAPI.isDay) sunIcon else moonIcon
+    }
+
+    private fun getText() = when (LocationAPI.island) {
+        SkyBlockIsland.THE_RIFT -> getRiftTime()
+        else -> "${DateTimeAPI.hour.toString().padStart(2, '0')}:${DateTimeAPI.minute.toString().padStart(2, '0')}"
+    }
+
+    private fun getTextColor() = when (LocationAPI.island) {
+        SkyBlockIsland.THE_RIFT -> if (isTimePaused()) 0xAAAAAAu else 0x55FF55u
+        else -> if (DateTimeAPI.isDay) 0xFFFF55u else 0xAAAAAAu
     }
 
 
