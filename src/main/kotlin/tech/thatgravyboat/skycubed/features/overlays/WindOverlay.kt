@@ -42,7 +42,7 @@ object WindOverlay {
                 event.graphics.scale(1.2F, 1.2F)
 
                 val width = McFont.width(it)
-                event.graphics.drawString(it, -width / 2, -10, width)
+                event.graphics.drawString(it, -width / 2, -10, 0xffffff, true)
             }
         }
     }
