@@ -21,12 +21,12 @@ object FarmHouseInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/gold")))
-        textDisplay(FarmhouseAPI.goldMedals.toFormattedString()) { color = TextColor.GOLD }
+        textDisplay(FarmhouseAPI.goldMedals.toFormattedString(), shadow = true) { color = TextColor.GOLD }
 
         display(getIconDisplay(SkyCubed.id("info/icons/silver")))
-        textDisplay(FarmhouseAPI.silverMedals.toFormattedString()) { color = TextColor.WHITE }
+        textDisplay(FarmhouseAPI.silverMedals.toFormattedString(), shadow = true) { color = TextColor.WHITE }
 
         display(getIconDisplay(SkyCubed.id("info/icons/bronze")))
-        textDisplay(FarmhouseAPI.bronzeMedals.toFormattedString()) { color = TextColor.RED }
+        textDisplay(FarmhouseAPI.bronzeMedals.toFormattedString(), shadow = true) { color = TextColor.RED }
     }
 }

@@ -42,7 +42,7 @@ object PowderInfo : InfoProvider {
             else -> return@horizontal
         }
         display(getIconDisplay(icon))
-        textDisplay(powder.first.toFormattedString()) { color = powder.second }
+        textDisplay(powder.first.toFormattedString(), shadow = true) { color = powder.second }
     }
 
 }

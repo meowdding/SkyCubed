@@ -19,7 +19,7 @@ object LocationIcons : Display {
     private val mines = Displays.sprite(SkyCubed.id("info/icons/locations/mines"), 8, 8)
 
     override fun getWidth(): Int = 10
-    override fun getHeight(): Int = 10
+    override fun getHeight(): Int = 8
 
     override fun render(graphics: GuiGraphics) {
         when (LocationAPI.island) {
@@ -31,6 +31,6 @@ object LocationIcons : Display {
             SkyBlockIsland.GARDEN -> garden
             SkyBlockIsland.KUUDRA -> kuudra
             else -> hub
-        }.withPadding(1).render(graphics)
+        }.withPadding(left = 1, right = 1).render(graphics)
     }
 }

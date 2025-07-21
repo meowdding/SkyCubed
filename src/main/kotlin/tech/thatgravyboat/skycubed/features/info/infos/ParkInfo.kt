@@ -2,7 +2,6 @@ package tech.thatgravyboat.skycubed.features.info.infos
 
 import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
-import me.owdding.lib.displays.Displays
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
@@ -40,6 +39,6 @@ object ParkInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/bucket")))
-        Displays.component({ rainTime ?: Text.of("N/A").withColor(TextColor.RED) })
+        string(rainTime ?: Text.of("N/A").withColor(TextColor.RED))
     }
 }

@@ -19,7 +19,6 @@ object SlayerInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(SlayerIcons)
-        spacer(2, 10)
 
         val suffix = when {
             SlayerAPI.max == 0 || SlayerAPI.current == 0 -> "§cInactive!"

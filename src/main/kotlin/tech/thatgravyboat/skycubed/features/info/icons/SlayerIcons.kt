@@ -18,7 +18,7 @@ object SlayerIcons : Display {
     private val inferno = Displays.sprite(SkyCubed.id("info/icons/slayers/inferno"), 8, 8)
 
     override fun getWidth(): Int = 10
-    override fun getHeight(): Int = 10
+    override fun getHeight(): Int = 8
 
     override fun render(graphics: GuiGraphics) {
         when (SlayerAPI.type) {
@@ -29,6 +29,6 @@ object SlayerIcons : Display {
             SlayerType.RIFTSTALKER_BLOODFIEND -> riftstalker
             SlayerType.INFERNO_DEMONLORD -> inferno
             else -> Displays.empty(8, 8)
-        }.withPadding(1).render(graphics)
+        }.withPadding(left = 1, right = 1).render(graphics)
     }
 }

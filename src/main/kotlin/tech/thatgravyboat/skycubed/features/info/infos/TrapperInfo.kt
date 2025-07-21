@@ -19,7 +19,6 @@ object TrapperInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/pelts")))
-
-        textDisplay(TrapperAPI.pelts.toFormattedString()) { color = TextColor.DARK_PURPLE }
+        textDisplay(TrapperAPI.pelts.toFormattedString(), shadow = true) { color = TextColor.DARK_PURPLE }
     }
 }

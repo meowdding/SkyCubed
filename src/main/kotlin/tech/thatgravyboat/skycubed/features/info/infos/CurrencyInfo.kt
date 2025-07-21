@@ -19,13 +19,13 @@ object CurrencyInfo : InfoProvider {
     override fun getDisplay() = DisplayFactory.horizontal {
         if (SkyBlockIsland.GARDEN.inIsland() or SkyBlockAreas.FARMHOUSE.inArea()) {
             display(getIconDisplay(SkyCubed.id("info/icons/bronze")))
-            textDisplay(CurrencyAPI.copper.toFormattedString()) { color = TextColor.RED }
+            textDisplay(CurrencyAPI.copper.toFormattedString(), shadow = true) { color = TextColor.RED }
         }
 
         display(getIconDisplay(SkyCubed.id("info/icons/purse")))
-        textDisplay(CurrencyAPI.purse.toFormattedString()) { color = TextColor.GOLD }
+        textDisplay(CurrencyAPI.purse.toFormattedString(), shadow = true) { color = TextColor.GOLD }
 
         display(getIconDisplay(SkyCubed.id("info/icons/bits")))
-        textDisplay(CurrencyAPI.bits.toFormattedString()) { color = TextColor.AQUA }
+        textDisplay(CurrencyAPI.bits.toFormattedString(), shadow = true) { color = TextColor.AQUA }
     }
 }
