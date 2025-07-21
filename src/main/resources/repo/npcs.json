@@ -1,0 +1,56 @@
+{
+    "sirius": {
+        "durationModifier": 0.3
+    },
+    "vex": {
+        "type": "minecraft:villager"
+    },
+    "leo": {
+        "type": "minecraft:villager"
+    },
+    "duke": {
+        "type": "minecraft:villager"
+    },
+    "stella": {
+        "type": "minecraft:villager"
+    },
+    "ryu": {
+        "type": "minecraft:villager"
+    },
+    "felix": {
+        "type": "minecraft:villager"
+    },
+    "lynn": {
+        "type": "minecraft:villager"
+    },
+    "maths enjoyer": {
+        "type": "minecraft:villager"
+    },
+    "andrew": {
+        "type": "minecraft:villager"
+    },
+    "tom": {
+        "type": "minecraft:villager"
+    },
+    "jack": {
+        "type": "minecraft:villager"
+    },
+    "liam": {
+        "type": "minecraft:villager"
+    },
+    "jamie": {
+        "type": "minecraft:villager"
+    },
+    "shania": {
+        "type": "minecraft:cow"
+    },
+    "coral": {
+        "type": "minecraft:witch"
+    },
+    "aranya": {
+        "type": "minecraft:spider"
+    },
+    "no name": {
+        "type": "minecraft:sheep"
+    }
+}
