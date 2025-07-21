@@ -246,6 +246,12 @@ tasks.register("release") {
         }
 }
 
+tasks.getByName("build") {
+    actions.clear()
+    dependsOn.clear()
+    dependsOn(tasks.named("release"))
+}
+
 tasks.register("cleanRelease") {
     group = "meowdding"
     listOf("clean", "release").forEach {
