@@ -17,6 +17,11 @@ object CurrencyInfo : InfoProvider {
     override val location: InfoLocation = InfoLocation.BOTTOM_RIGHT
 
     override fun getDisplay() = DisplayFactory.horizontal {
+        if (SkyBlockIsland.THE_RIFT.inIsland()) {
+            display(getIconDisplay(SkyCubed.id("info/icons/rift/motes")))
+            textDisplay(CurrencyAPI.motes.toFormattedString(), shadow = true) { color = 0xFF55FF }
+            return@horizontal
+        }
         if (SkyBlockIsland.GARDEN.inIsland() or SkyBlockAreas.FARMHOUSE.inArea()) {
             display(getIconDisplay(SkyCubed.id("info/icons/bronze")))
             textDisplay(CurrencyAPI.copper.toFormattedString(), shadow = true) { color = TextColor.RED }

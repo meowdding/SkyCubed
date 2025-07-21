@@ -67,8 +67,8 @@ object InfoOverlay : Overlay {
     override val bounds: Pair<Int, Int> = 34 to 34
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        graphics.drawSprite(CommonInfoDisplays.BASE, 0, 0, 34, 34)
-        CommonInfoDisplays.baseDisplay.render(graphics, 0, 0)
+        graphics.drawSprite(BaseInfoDisplay.BASE, 0, 0, 34, 34)
+        BaseInfoDisplay.baseDisplay.render(graphics, 0, 0)
 
         infoOverlays.groupBy { it.location }.forEach { (location, overlays) ->
             val (xOffset, horizontalAlignment) = when (location) {

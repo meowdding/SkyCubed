@@ -7,8 +7,8 @@ import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.features.info.CommonInfoDisplays.LEFT_LINE
-import tech.thatgravyboat.skycubed.features.info.CommonInfoDisplays.RIGHT_LINE
+import tech.thatgravyboat.skycubed.features.info.BaseInfoDisplay.LEFT_LINE
+import tech.thatgravyboat.skycubed.features.info.BaseInfoDisplay.RIGHT_LINE
 
 interface InfoProvider {
 
