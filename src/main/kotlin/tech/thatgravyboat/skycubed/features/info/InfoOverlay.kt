@@ -79,9 +79,8 @@ object InfoOverlay : Overlay {
                 InfoLocation.TOP_LEFT, InfoLocation.TOP_RIGHT -> 2
                 InfoLocation.BOTTOM_LEFT, InfoLocation.BOTTOM_RIGHT -> 18
             }
-            overlays.filter { it.shouldDisplay() }.forEachIndexed { index, overlay -> // TODO FIRST
-                location.withBackground(overlay.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
-            }
+            val display = overlays.sortedByDescending { it.priority }.firstOrNull { it.shouldDisplay() } ?: return@forEach
+            location.withBackground(display.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
         }
     }
 

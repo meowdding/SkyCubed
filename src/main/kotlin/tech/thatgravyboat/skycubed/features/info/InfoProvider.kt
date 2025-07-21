@@ -14,6 +14,7 @@ interface InfoProvider {
 
     val islands: List<SkyBlockIsland> get() = emptyList()
     val areas: List<SkyBlockArea> get() = emptyList()
+    val priority: Int get() = 0
 
     val location: InfoLocation
 
