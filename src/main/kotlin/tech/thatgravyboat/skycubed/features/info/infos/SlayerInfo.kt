@@ -14,15 +14,6 @@ object SlayerInfo : InfoProvider {
     override val location = InfoLocation.BOTTOM_LEFT
     override val priority: Int = 1
 
-    /*override val islands = listOf(
-        SkyBlockIsland.HUB,
-        SkyBlockIsland.SPIDERS_DEN,
-        SkyBlockIsland.CRIMSON_ISLE,
-        SkyBlockIsland.THE_END,
-        SkyBlockIsland.THE_PARK,
-        SkyBlockIsland.THE_RIFT,
-    )*/
-
     override fun shouldDisplay() = SlayerAPI.type != null && super.shouldDisplay()
 
     override fun getDisplay() = DisplayFactory.horizontal {

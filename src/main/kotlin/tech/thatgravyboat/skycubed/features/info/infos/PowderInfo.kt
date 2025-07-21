@@ -30,7 +30,7 @@ object PowderInfo : InfoProvider {
     override fun getDisplay() = DisplayFactory.horizontal {
         val (icon, powder) = when (LocationAPI.island) {
             SkyBlockIsland.DWARVEN_MINES -> {
-                if (SkyBlockArea.Companion.inAnyArea(*glaciteAreas.toTypedArray())) {
+                if (SkyBlockArea.inAnyArea(*glaciteAreas.toTypedArray())) {
                     SkyCubed.id("info/icons/glacite") to (PowderAPI.glacite to TextColor.AQUA)
                 } else {
                     SkyCubed.id("info/icons/mithril") to (PowderAPI.mithril to 0x55FFFF)
