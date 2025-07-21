@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack
 data class PickUpLogItem(
     val stack: ItemStack,
     val difference: Int,
-    val time: Long,
+    var time: Long,
 ) {
 
     fun isEmpty(): Boolean = this.difference == 0

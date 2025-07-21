@@ -125,6 +125,7 @@ object PickUpLog : Overlay {
 
         addedItems.compactAndCombineTimeAndApply()
         removedItems.compactAndCombineTimeAndApply()
+        syncTime()
 
         val currentTime = System.currentTimeMillis()
         val timealive = PickupLogOverlayConfig.time * 1000
@@ -163,6 +164,17 @@ object PickUpLog : Overlay {
         display = items.compact().map { PickupLogOverlayConfig.appearance.map { component -> component.display(it) }.toRow(5) }.toColumn()
     }
 
+    /**
+     * Syncs the time of the same item ids in added and removed lists.
+     */
+    private fun syncTime() {
+        (addedItems + removedItems).groupBy { it.stack.getUniqueId() }.forEach { (_, items) ->
+            if (items.size < 2) return@forEach
+            val maxTime = items.maxOf { it.time }
+            items.forEach { it.time = maxTime }
+        }
+    }
+
     private fun MutableList<PickUpLogItem>.compactAndCombineTimeAndApply() {
         val compacted = compactAndCombineTime()
         clear()
@@ -175,7 +187,8 @@ object PickUpLog : Overlay {
     private fun MutableList<PickUpLogItem>.compactAndCombineTime() =
         groupBy { it.stack.getUniqueId() }.map { (_, items) ->
             val item = items.reduce { acc, item -> acc.copy(difference = acc.difference + item.difference) }
-            item.copy(time = items.maxOf { it.time })
+            item.time = items.maxOf { it.time }
+            item
         }
 
     private fun List<PickUpLogItem>.compact() =
