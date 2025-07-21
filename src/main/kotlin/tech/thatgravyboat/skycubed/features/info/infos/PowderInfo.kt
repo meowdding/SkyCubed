@@ -33,7 +33,7 @@ object PowderInfo : InfoProvider {
                 if (SkyBlockArea.inAnyArea(*glaciteAreas.toTypedArray())) {
                     SkyCubed.id("info/icons/glacite") to (PowderAPI.glacite to TextColor.AQUA)
                 } else {
-                    SkyCubed.id("info/icons/mithril") to (PowderAPI.mithril to 0x55FFFF)
+                    SkyCubed.id("info/icons/mithril") to (PowderAPI.mithril to TextColor.AQUA)
                 }
             }
 
