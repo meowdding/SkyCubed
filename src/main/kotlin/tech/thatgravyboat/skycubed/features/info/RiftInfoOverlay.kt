@@ -1,16 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info
 
-import me.owdding.lib.displays.Displays
-import net.minecraft.client.gui.GuiGraphics
-import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
-import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
-import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
-import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
-import tech.thatgravyboat.skyblockapi.api.profile.CurrencyAPI
-import tech.thatgravyboat.skyblockapi.platform.drawSprite
-import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
-import tech.thatgravyboat.skycubed.SkyCubed
-
+/*
 object RiftInfoOverlay {
 
     private val clockIcon = Displays.sprite(SkyCubed.id("info/icons/rift/clock"), 8, 8)
@@ -90,3 +80,4 @@ object RiftInfoOverlay {
         currencyDisplay.render(graphics, 34, 18)
     }
 }
+*/

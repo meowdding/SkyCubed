@@ -14,9 +14,7 @@ import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
-import tech.thatgravyboat.skycubed.features.info.farming.FarmhouseInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.farming.GardenInfoOverlay
-import tech.thatgravyboat.skycubed.features.info.farming.TrapperInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.foraging.ParkInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.CrystalHollowsInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.mining.DwarvesInfoOverlay
