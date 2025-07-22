@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.info.icons
 
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.withPadding
 import net.minecraft.client.gui.GuiGraphics
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
@@ -17,7 +18,7 @@ object LocationIcons : Display {
     private val kuudra = Displays.sprite(SkyCubed.id("info/icons/locations/kuudra"), 8, 8)
     private val mines = Displays.sprite(SkyCubed.id("info/icons/locations/mines"), 8, 8)
 
-    override fun getWidth(): Int = 8
+    override fun getWidth(): Int = 10
     override fun getHeight(): Int = 8
 
     override fun render(graphics: GuiGraphics) {
@@ -30,6 +31,6 @@ object LocationIcons : Display {
             SkyBlockIsland.GARDEN -> garden
             SkyBlockIsland.KUUDRA -> kuudra
             else -> hub
-        }.render(graphics)
+        }.withPadding(left = 1, right = 1).render(graphics)
     }
 }
