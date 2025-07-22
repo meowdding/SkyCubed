@@ -77,24 +77,35 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
                     contents.addChild(
                         Widgets.dropdown(
                             map,
-                            Maps.getMaps(),
+                            Maps.getMaps() + Maps.getDynamicMaps(),
                             { map -> Text.translatable("skycubed.map.$map") },
                             { button -> button.withSize(150, 20) },
-                            { },
+                            { dropdown -> dropdown.withSize(-1, 200) },
                         ),
                     )
                 }
             },
         ).withChild(
-            MapsWidget(
-                map = map.get(),
-                xOffset = xOffset,
-                zOffset = zOffset,
-                scale = scale,
-                filter = { it.enabled && it.filter(search.get()) && (search.get().isNotEmpty() || it.significant) },
-                width = this.width,
-                height = this.height - 30,
-            ),
+            if (map.get() in Maps.getDynamicMaps()) {
+                DynamicMapRenderer(
+                    map = map.get(),
+                    xOffset = xOffset,
+                    yOffset = zOffset,
+                    scale = scale,
+                    width = this.width,
+                    height = this.height,
+                )
+            } else {
+                MapsWidget(
+                    map = map.get(),
+                    xOffset = xOffset,
+                    zOffset = zOffset,
+                    scale = scale,
+                    filter = { it.enabled && it.filter(search.get()) && (search.get().isNotEmpty() || it.significant) },
+                    width = this.width,
+                    height = this.height - 30,
+                )
+            },
         ).build(this::addRenderableWidget)
     }
 

@@ -30,12 +30,14 @@ object MinimapOverlay : Overlay {
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
-    override val enabled: Boolean get() = (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender
+    override val enabled: Boolean get() = (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender || GardenMapOverlay.canRender
 
     private var display: Display? = null
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        if (display != null && MapOverlayConfig.enabled) {
+        if (GardenMapOverlay.canRender) {
+            GardenMapOverlay.render(graphics, mouseX, mouseY, partialTicks)
+        } else if (display != null && MapOverlayConfig.enabled) {
             display!!.render(graphics)
         } else if (DungeonMapOverlay.canRender) {
             DungeonMapOverlay.render(graphics, partialTicks)
@@ -55,7 +57,7 @@ object MinimapOverlay : Overlay {
         }
     }
 
-	@Subscription(IslandChangeEvent::class)
+    @Subscription(IslandChangeEvent::class)
     fun updateDisplay() {
         display = getMapsForLocationOrNull()?.let {
             val minimapWidget = Displays.center(
@@ -78,8 +80,9 @@ object MinimapOverlay : Overlay {
             when (MapOverlayConfig.mapShape) {
                 MapShape.SQUARE -> Displays.background(
                     backgroundBox,
-                    minimapWidget
+                    minimapWidget,
                 )
+
                 MapShape.CIRCLE -> Displays.layered(
                     Displays.circleTexture(90, 90, backgroundCircle),
                     minimapWidget,

@@ -488,6 +488,7 @@
             "dungeon_hub": "Dungeon Hub",
             "jerrys_workshop": "Jerry's Workshop",
             "backwater": "Backwater Bayou",
+            "garden": "Garden",
             "waypoints": {
                 "create": {
                     "title": "Create Waypoint",

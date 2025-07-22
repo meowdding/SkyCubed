@@ -1,8 +1,9 @@
 package tech.thatgravyboat.skycubed.utils
 
+import earth.terrarium.olympus.client.utils.ListenableState
 import earth.terrarium.olympus.client.utils.State
 
-class ResettingState<T>(private val initializer: () -> T) : State<T> {
+class ResettingState<T>(private val initializer: () -> T) : ListenableState<T>(initializer()) {
 
     private var value: T = initializer()
 

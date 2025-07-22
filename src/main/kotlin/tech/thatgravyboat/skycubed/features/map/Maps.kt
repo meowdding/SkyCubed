@@ -9,6 +9,7 @@ import kotlinx.coroutines.runBlocking
 import me.owdding.ktmodules.Module
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.KeyMapping
+import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
@@ -18,6 +19,7 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.map.screen.MapScreen
+import tech.thatgravyboat.skycubed.features.overlays.map.GardenMapOverlay
 import tech.thatgravyboat.skycubed.utils.readJsonc
 import java.util.function.Function
 
@@ -32,6 +34,10 @@ object Maps {
         "dungeon_hub",
         "jerrys_workshop",
         "backwater",
+    )
+
+    private val DYNAMIC_MAPS = mapOf<String, () -> AbstractWidget>(
+        "garden" to { GardenMapOverlay.widget(false) },
     )
     val MAP_KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
 
@@ -67,6 +73,7 @@ object Maps {
                 it.printStackTrace()
             }
         }
+        islands[SkyBlockIsland.GARDEN] = "garden"
     }
 
     @Subscription
@@ -96,5 +103,9 @@ object Maps {
     fun getMaps(map: String?): List<IslandData> = groups[map] ?: emptyList()
 
     fun getMaps(): List<String> = groups.keys.toList()
+
+    fun getDynamicMaps(): List<String> = DYNAMIC_MAPS.keys.toList()
+
+    fun getDynamicWidget(map: String) = DYNAMIC_MAPS[map]?.invoke()
 
 }
