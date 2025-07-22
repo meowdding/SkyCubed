@@ -31,4 +31,14 @@ object ExtraDisplays {
             ),
         )
     }
+
+    fun custom(width: Int, height: Int, graphics: GuiGraphics.() -> Unit): Display {
+        return object : Display {
+            override fun getWidth() = width
+            override fun getHeight() = height
+
+            override fun render(graphics: GuiGraphics) = graphics.graphics()
+
+        }
+    }
 }
