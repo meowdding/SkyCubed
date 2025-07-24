@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
@@ -36,6 +37,11 @@ object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
     var skyblockLevel by boolean(false) {
         this.translation = "skycubed.config.overlays.rpg.skyblock_level"
+    }
+
+    var playerDisplay by enum(PlayerDisplay.DISABLED) {
+        this.translation = "skycubed.config.overlays.rpg.player_display"
+        this.condition = { SkyCubed.is1218 }
     }
 }
 

@@ -82,6 +82,13 @@
                     "skyblock_level": {
                         "@value": "SkyBlock Level in XP",
                         "desc": "If enabled the XP bar will show your SkyBlock level instead of your normal XP."
+                    },
+                    "player_display": {
+                        "@value": "Player Display",
+                        "desc": "Shows your current player model in the RPG overlay instead of the yellow pixel art.",
+                        "disabled": "Disabled",
+                        "armored": "Armored",
+                        "unarmored": "Unarmored"
                     }
                 },
                 "text": {
