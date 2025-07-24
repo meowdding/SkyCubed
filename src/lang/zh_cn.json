@@ -261,7 +261,7 @@
                     "desc": "原版Boss血条叠加层的设置。",
                     "remove_bar_when_full": {
                         "@value": "隐藏满的血条",
-                        "desc": "血条满时只显示标题（适合The Wither King这样的Boss）。"
+                        "desc": "血条满时只显示标题（比如矮人矿洞的活动只会显示标题）。"
                     },
                     "remove_bar_when_objective": {
                         "@value": "移除显示任务目标的Boss血条",
