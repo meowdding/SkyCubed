@@ -105,7 +105,7 @@
                     },
                     "background": {
                         "@value": "背景",
-                        "desc": "使用SkyCubed的纹理作为背景"
+                        "desc": "把纯色背景替换为SkyCubed的纹理"
                     }
                 },
                 "tablist": {
@@ -205,7 +205,7 @@
                     },
                     "background": {
                         "@value": "背景",
-                        "desc": "使用SkyCubed的纹理作为背景"
+                        "desc": "把纯色背景替换为SkyCubed的纹理"
                     },
                     "show_numbers": {
                         "@value": "显示数字",
