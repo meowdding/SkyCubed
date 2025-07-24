@@ -6,6 +6,7 @@ import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
+import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
@@ -24,6 +25,10 @@ object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
 
     var enabled by boolean(true) {
         this.translation = "skycubed.config.overlays.info.enabled"
+    }
+
+    var enabledLocations by select(*InfoLocation.entries.toTypedArray()) {
+        this.translation = "skycubed.config.overlays.info.enabled_positions"
     }
 
 }

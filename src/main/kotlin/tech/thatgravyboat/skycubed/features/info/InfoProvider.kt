@@ -6,6 +6,7 @@ import me.owdding.lib.displays.withPadding
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
+import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.BaseInfoDisplay.LEFT_LINE
 import tech.thatgravyboat.skycubed.features.info.BaseInfoDisplay.RIGHT_LINE
@@ -31,4 +32,7 @@ enum class InfoLocation(val withBackground: (Display) -> Display) {
     TOP_RIGHT({ Displays.background(RIGHT_LINE, Displays.padding(0, 3, 3, 2, it)) }),
     BOTTOM_LEFT({ Displays.background(LEFT_LINE, Displays.padding(3, 1, 3, 2, it)) }),
     BOTTOM_RIGHT({ Displays.background(RIGHT_LINE, Displays.padding(0, 3, 3, 2, it)) }),
+    ;
+
+    override fun toString() = toFormattedName()
 }

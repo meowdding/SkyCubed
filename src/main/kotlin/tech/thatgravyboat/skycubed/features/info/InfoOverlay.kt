@@ -71,6 +71,7 @@ object InfoOverlay : Overlay {
         BaseInfoDisplay.baseDisplay.render(graphics, 0, 0)
 
         infoOverlays.forEach { (location, overlays) ->
+            if (location !in InfoHudOverlayConfig.enabledLocations) return@forEach
             val (xOffset, horizontalAlignment) = when (location) {
                 InfoLocation.TOP_LEFT, InfoLocation.BOTTOM_LEFT -> 0 to 1f
                 InfoLocation.TOP_RIGHT, InfoLocation.BOTTOM_RIGHT -> 34 to 0f
