@@ -1,0 +1,513 @@
+{
+    "@meowdding:metadata": {
+        "allowMultiline": true,
+        "allowReferences": true,
+        "allowTags": true,
+        "objectAsKeys": true,
+        "@references": {}
+    },
+    "skycubed": {
+        "ui.overlay.edit": {
+            "@value": "<gold>点击编辑叠加层</gold>",
+            "options": "<gold>按下右键配置</gold>"
+        },
+        "config": {
+            "info": {
+                "modrinth": "Modrinth",
+                "github": "GitHub"
+            },
+            "general": {
+                "keybinds": {
+                    "@value": "按键绑定",
+                    "desc": "SkyCubed使用原版的按键绑定。",
+                    "text": "打开"
+                },
+                "overlays": {
+                    "@value": "叠加层",
+                    "desc": "SkyCubed有一些可以移动、缩放或编辑的叠加层。您可以点击按钮打开叠加层编辑器。",
+                    "text": "打开"
+                },
+                "notifications": {
+                    "@value": "通知",
+                    "desc": "SkyCubed有一个通知系统，您可以点击下面的按钮查看过去的通知，也可以在暂停菜单中找到一个通知按钮。",
+                    "text": "打开"
+                },
+                "sack_hud": {
+                    "@value": "袋子HUD",
+                    "desc": "SkyCubed有一个袋子HUD，您可以点击下面的按钮查看袋子HUD设置。",
+                    "text": "打开"
+                },
+                "hidden_hud_elements": {
+                    "@value": "隐藏HUD元素",
+                    "desc": "允许您隐藏屏幕上原版HUD的某些元素。"
+                },
+                "hidden_action_bar_widgets": {
+                    "@value": "隐藏的动作栏元素",
+                    "desc": "允许您隐藏某些由Hypixel发送但被模组显示替换的动作栏元素。"
+                }
+            },
+            "overlays": {
+                "@value": "叠加层",
+                "health_display": {
+                    "@value": "启用生命值文本叠加层",
+                    "desc": "启用生命值文本叠加层。"
+                },
+                "mana_enabled": {
+                    "@value": "启用法力文本叠加层",
+                    "desc": "启用法力文本叠加层。"
+                },
+                "defense_enabled": {
+                    "@value": "启用防御文本叠加层",
+                    "desc": "启用防御文本叠加层。"
+                },
+                "speed_enabled": {
+                    "@value": "启用速度文本叠加层",
+                    "desc": "启用速度文本叠加层。"
+                },
+                "info": {
+                    "@value": "信息HUD叠加层",
+                    "desc": "信息HUD叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用信息HUD叠加层",
+                        "desc": "启用信息HUD叠加层，显示位置、货币、时间以及特定位置的信息。"
+                    }
+                },
+                "rpg": {
+                    "@value": "RPG叠加层",
+                    "desc": "RPG叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用RPG叠加层",
+                        "desc": "启用RPG叠加层，显示法力、生命值和经验条。"
+                    },
+                    "skyblock_level": {
+                        "@value": "在经验中显示空岛等级",
+                        "desc": "启用后经验条将显示您的空岛等级而不是您的经验。"
+                    }
+                },
+                "text": {
+                    "@value": "文本叠加层",
+                    "desc": "各种文本叠加层的设置。"
+                },
+                "health": {
+                    "disabled": "禁用",
+                    "normal": "启用",
+                    "effective": "有效生命值"
+                },
+                "sacks": {
+                    "@value": "袋子叠加层",
+                    "desc": "袋子叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用袋子叠加层",
+                        "desc": [
+                            "启用袋子叠加层，显示您袋子中指定的物品。",
+                            "您可以使用<light_gray>/skycubed</light_gray>袋子hud编辑这些物品。"
+                        ]
+                    },
+                    "background": {
+                        "@value": "背景",
+                        "desc": "使用SkyCubed的纹理作为背景"
+                    }
+                },
+                "tablist": {
+                    "@value": "自定义Tab列表叠加层",
+                    "desc": "自定义Tab列表叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用自定义Tab列表",
+                        "desc": "启用自定义Tab列表，此Tab列表是用于空岛的原版Tab列表的紧凑型可自定义版本。"
+                    },
+                    "sorting": {
+                        "@value": "玩家排序",
+                        "desc": "玩家在Tab列表中应如何排序。"
+                    },
+                    "background_color": {
+                        "@value": "背景颜色",
+                        "desc": "Tab列表的背景颜色。"
+                    }
+                },
+                "map": {
+                    "@value": "空岛小地图叠加层",
+                    "desc": "小地图叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用小地图叠加层",
+                        "desc": "启用小地图叠加层，显示您在空岛上的位置。"
+                    },
+                    "rotate": {
+                        "@value": "旋转模式",
+                        "desc": "围绕玩家旋转地图。"
+                    },
+                    "shape": {
+                        "@value": "地图形状",
+                        "desc": "地图应有的形状。"
+                    }
+                },
+                "dungeonmap": {
+                    "@value": "地牢地图叠加层",
+                    "desc": "地牢小地图叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用地牢地图叠加层",
+                        "desc": "启用地牢地图叠加层，显示您在地牢中的位置。"
+                    },
+                    "room_colors": {
+                        "@value": "地牢房间颜色",
+                        "desc": "地牢中房间的颜色。",
+                        "normal": "普通房",
+                        "spawn": "出生房",
+                        "puzzle": "谜题房",
+                        "fairy": "仙女房",
+                        "blood": "血房",
+                        "trap": "陷阱房",
+                        "miniboss": "小Boss房",
+                        "unknown": "未知"
+                    },
+                    "door_colors": {
+                        "@value": "地牢门颜色",
+                        "desc": "地牢中门的颜色。",
+                        "normal": "普通门",
+                        "wither": "凋零门",
+                        "puzzle": "谜题门",
+                        "fairy": "仙女门",
+                        "blood": "血房门",
+                        "trap": "陷阱门",
+                        "miniboss": "小Boss门",
+                        "unknown": "未知"
+                    }
+                },
+                "pickuplog": {
+                    "@value": "物品拾取日志叠加层",
+                    "desc": "物品拾取日志叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用物品拾取日志叠加层",
+                        "desc": "显示已从您的物品栏中添加或移除的物品。"
+                    },
+                    "compact": {
+                        "@value": "精简拾取日志",
+                        "desc": "将显示物品的数量差异，例如，如果您添加了3个物品，然后移除了1个物品，将显示为+2。"
+                    },
+                    "time": {
+                        "@value": "日志时间",
+                        "desc": "发生后单个条目应显示多长时间，以秒为单位。"
+                    },
+                    "sack_items": {
+                        "@value": "允许袋子中的物品",
+                        "desc": "启用后您袋子中的物品也将显示在拾取日志中。"
+                    },
+                    "appearance": {
+                        "@value": "外观",
+                        "desc": "显示在屏幕上的顺序。例如，如果您希望物品在文本之后或之前。"
+                    }
+                },
+                "trophy_fish": {
+                    "@value": "奖杯鱼叠加层",
+                    "desc": "奖杯鱼叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用奖杯鱼叠加层",
+                        "desc": "启用奖杯鱼叠加层，显示您捕获的奖杯鱼。"
+                    },
+                    "background": {
+                        "@value": "背景",
+                        "desc": "使用SkyCubed的纹理作为背景"
+                    },
+                    "show_numbers": {
+                        "@value": "显示数字",
+                        "desc": "启用后将显示您捕获的奖杯鱼数量代替×和✔。"
+                    },
+                    "show_total": {
+                        "@value": "显示总捕获量",
+                        "desc": "启用后将显示每种类型捕获的总量。"
+                    },
+                    "hide_unlocked": {
+                        "@value": "隐藏已解锁",
+                        "desc": "启用后将隐藏您已解锁的奖杯鱼。"
+                    }
+                },
+                "commissions": {
+                    "@value": "任务叠加层",
+                    "desc": "挖矿任务叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用任务叠加层",
+                        "desc": "启用任务叠加层，显示您在挖矿岛屿上的任务。"
+                    },
+                    "format": {
+                        "@value": "格式化任务显示",
+                        "desc": "启用后任务的完成程度将使用数字/总数或✔代替百分比。"
+                    },
+                    "background": {
+                        "@value": "纹理背景",
+                        "desc": "启用后叠加层将具有纹理背景而不是透明黑色背景。"
+                    }
+                },
+                "npc": {
+                    "@value": "NPC对话叠加层",
+                    "desc": "NPC对话叠加层的设置。",
+                    "enabled": {
+                        "@value": "启用NPC对话叠加层",
+                        "desc": "启用后NPC消息将不再发送到聊天，而是发送到叠加层。"
+                    },
+                    "duration_per_message": {
+                        "@value": "每条消息持续时间",
+                        "desc": "每条消息应显示多长时间，以秒为单位。"
+                    },
+                    "duration_for_action_message": {
+                        "@value": "每个动作消息持续时间",
+                        "desc": "动作消息（例如，您必须选择一个选项的消息）应显示多长时间，以秒为单位。"
+                    },
+                    "hide_chat_message": {
+                        "@value": "隐藏聊天消息",
+                        "desc": "启用后当显示NPC消息时，聊天消息将被隐藏。"
+                    }
+                },
+                "bossbar": {
+                    "@value": "原版Boss血条叠加层",
+                    "desc": "原版Boss血条叠加层的设置。",
+                    "remove_bar_when_full": {
+                        "@value": "血条满时移除",
+                        "desc": "血条满时移除血条（不是标题）（非常适合静态标题 Boss 血条）。"
+                    },
+                    "remove_bar_when_objective": {
+                        "@value": "有目标时移除Boss血条",
+                        "desc": "有目标时移除完整的Boss血条，包括标题（目标也显示在计分板中）。"
+                    }
+                },
+                "itemtext": {
+                    "@value": "物品文本叠加层",
+                    "desc": "原版物品文本叠加层的设置。",
+                    "moveable": {
+                        "@value": "可移动物品文本叠加层",
+                        "desc": "启用后物品文本叠加层可以在屏幕上移动。"
+                    },
+                    "hidden": {
+                        "@value": "隐藏物品文本叠加层",
+                        "desc": "启用后物品文本叠加层将不显示。"
+                    },
+                    "alignment": {
+                        "@value": "物品文本对齐",
+                        "desc": "物品文本叠加层的对齐方式。\n§l注意：这仅在“可移动物品文本叠加层”启用时有效。"
+                    },
+                    "color": {
+                        "@value": "背景颜色",
+                        "desc": "物品文本叠加层的背景颜色。"
+                    },
+                    "radius": {
+                        "@value": "背景半径",
+                        "desc": "物品文本叠加层背景的半径。"
+                    }
+                },
+                "cold_overlay": {
+                    "@value": "显示寒冷叠加层",
+                    "desc": "当温度出现时显示寒冷叠加层。\n§l注意：将此设置为0将禁用寒冷叠加层。"
+                },
+                "movable_hotbar": {
+                    "@value": "可移动快捷栏",
+                    "desc": "允许您在屏幕上移动快捷栏。"
+                },
+                "wind_overlay": {
+                    "@value": "风叠加层",
+                    "desc": "在您的光标上显示“风的踪迹”事件中的风向指示器。"
+                }
+            },
+            "screens": {
+                "@value": "屏幕",
+                "equipment": {
+                    "@value": "显示装备",
+                    "desc": "在您的物品栏中的玩家旁边显示您的装备。"
+                },
+                "wardrobe": {
+                    "@value": "自定义衣柜",
+                    "desc": "将衣柜更改为具有更多选项的自定义衣柜。",
+                    "enabled": {
+                        "@value": "已启用",
+                        "desc": "启用自定义衣柜。"
+                    },
+                    "textures": {
+                        "@value": "纹理",
+                        "desc": "将其从透明方块更改为实际纹理。"
+                    }
+                }
+            },
+            "chat": {
+                "@value": "聊天",
+                "modify_commands": {
+                    "@value": "修改Hypixel命令",
+                    "desc": [
+                        "修改一些Hypixel命令以添加Tab补全。",
+                        "<yellow>切换需要服务器切换才能应用更改！</yellow>"
+                    ]
+                },
+                "chat_colors": {
+                    "@value": "聊天线条的颜色",
+                    "desc": "根据消息类型更改聊天消息旁边的线条颜色。"
+                },
+                "compact_chat": {
+                    "@value": "紧凑聊天",
+                    "desc": "通过删除旧的类似类型的消息来使聊天更紧凑。例如，冷却时间或列表或其他垃圾消息，但重要的消息。"
+                },
+                "messages_to_clean": {
+                    "@value": "要清理的消息",
+                    "desc": "从聊天中删除的消息列表将以正则表达式模式编写。"
+                }
+            },
+            "items": {
+                "@value": "物品",
+                "itembars": {
+                    "@value": "物品条",
+                    "desc": "为各种物品添加一个条，例如带有计数的钻头。"
+                },
+                "cooldowns": {
+                    "@value": "物品冷却",
+                    "desc": "为空岛物品添加原版的冷却。"
+                }
+            },
+            "rendering": {
+                "@value": "渲染",
+                "show_own_tag": {
+                    "@value": "渲染自己的姓名标签",
+                    "desc": "在第三人称视角中渲染您自己的姓名标签。"
+                }
+            },
+            "notifications": {
+                "@value": "通知",
+                "hide_chat_messages": {
+                    "@value": "隐藏聊天消息",
+                    "desc": "当显示通知时聊天消息将被隐藏。"
+                },
+                "show_as_toast": {
+                    "@value": "显示为土司通知",
+                    "desc": "启用后通知将显示为土司通知。"
+                },
+                "toast_duration": {
+                    "@value": "土司通知持续时间",
+                    "desc": "土司通知应显示多长时间，以秒为单位。"
+                },
+                "friend_join_leave": {
+                    "@value": "好友加入/离开",
+                    "desc": [
+                        "检查以下消息：",
+                        "<green>Friend > </green><gray>Your Friend <red>left<gray>."
+                    ]
+                },
+                "guild_join_leave": {
+                    "@value": "公会加入/离开",
+                    "desc": [
+                        "检查以下消息：",
+                        "<dark_green>Guild > <gray>Your Guild Member <red>left<gray>."
+                    ]
+                },
+                "hoppity": {
+                    "you_found": {
+                        "@value": "你找到了巧克力兔",
+                        "desc": [
+                            "检查以下消息：",
+                            "§d§lHOPPITY'S HUNT §7You found §aAmazon §7(§a§lUNCOMMON§7)!"
+                        ]
+                    },
+                    "egg_appeared": {
+                        "@value": "巧克力兔蛋出现了",
+                        "desc": [
+                            "检查以下消息：",
+                            "§d§lHOPPITY'S HUNT §r§dA §6Chocolate Breakfast Egg §dhas appeared!"
+                        ]
+                    }
+                },
+                "skymall": {
+                    "@value": "SkyMall",
+                    "desc": "检查以下消息：\n"
+                },
+                "monolith": {
+                    "@value": "Monolith",
+                    "desc": [
+                        "检查以下消息：",
+                        "§5§lMONOLITH! §r§aYou found a mysterious §5Dark Monolith §aand were rewarded §650,000 Coins§a!"
+                    ]
+                },
+                "rift_orb": {
+                    "@value": "裂隙宝珠",
+                    "desc": "检查以下消息：\n"
+                },
+                "blocks_in_the_way": {
+                    "@value": "有方块阻挡",
+                    "desc": [
+                        "检查以下消息：",
+                        "§cThere are blocks in the way!"
+                    ]
+                },
+                "warping": {
+                    "@value": "传送中",
+                    "desc": [
+                        "检查以下消息：",
+                        "§7Warping..."
+                    ]
+                },
+                "combo": {
+                    "@value": "连击",
+                    "desc": [
+                        "检查以下消息：",
+                        "§6§l+30 Kill Combo §r§8+§610 §7coins per kill"
+                    ]
+                },
+                "fishing": {
+                    "@value": "钓鱼",
+                    "desc": "检查以下消息：\n"
+                },
+                "gifts": {
+                    "@value": "礼物",
+                    "desc": [
+                        "检查以下消息：",
+                        "§2§lGIFT!§r§aYou found a §fWhite Gift§a! §7(§f1§7/§a20§7)"
+                    ]
+                },
+                "enable_notifications_widget": {
+                    "@value": "启用通知小部件",
+                    "desc": "在暂停屏幕的右上角添加一个小部件，用于查看最近的通知。"
+                }
+            }
+        },
+        "notifications": "通知",
+        "notification": {
+            "@value": "通知",
+            "type": {
+                "all": "全部",
+                "friend_join_leave": "好友加入/离开",
+                "guild_join_leave": "公会加入/离开",
+                "hoppity_you_found": "你找到了巧克力兔",
+                "hoppity_egg_appeared": "巧克力兔蛋出现了",
+                "skymall1": "SkyMall",
+                "skymall2": "SkyMall",
+                "skymall3": "SkyMall",
+                "monolith": "Monolith",
+                "rift_orb": "裂隙宝珠",
+                "blocks_in_the_way": "有方块阻挡",
+                "warping": "传送中",
+                "combo": "连击"
+            }
+        },
+        "map": {
+            "main": "主岛",
+            "rift": "裂隙",
+            "crystal_hollows": "水晶洞",
+            "dwarves": "矮人矿井",
+            "dungeon_hub": "地牢大厅",
+            "jerrys_workshop": "Jerry的工作室",
+            "backwater": "backwater",
+            "waypoints": {
+                "create": {
+                    "title": "创建路径点",
+                    "placeholder": "路径点名称：",
+                    "button": "创建"
+                },
+                "context": {
+                    "delete": "移除路径点",
+                    "create": "创建路径点"
+                },
+                "tooltip": {
+                    "subtitle": "路径点",
+                    "position": "位置："
+                }
+            }
+        },
+        "key": {
+            "category": "SkyCubed",
+            "map": "打开地图"
+        }
+    },
+    "jade.theme.jade.skycubed": "SkyCubed"
+}
