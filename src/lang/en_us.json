@@ -70,6 +70,13 @@
                     "enabled": {
                         "@value": "Enable Info HUD Overlay",
                         "desc": "Enables the Info HUD overlay, show location, currency, time, and location specific info."
+                    },
+                    "enabled_positions": {
+                        "@value": "Enabled Info Positions",
+                        "desc": [
+                            "Select which four info positions should be enabled and be shown on the screen.",
+                            "Elements in the disabled positions will not be shown on the screen."
+                        ]
                     }
                 },
                 "rpg": {
