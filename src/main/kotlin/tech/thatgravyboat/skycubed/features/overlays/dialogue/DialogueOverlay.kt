@@ -38,11 +38,12 @@ import kotlin.math.max
 @RegisterOverlay
 object DialogueOverlay : Overlay {
 
-    private val regex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
+    private val messageRegex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
     private val yesNoRegex = listOf(
         ComponentRegex("Select an option: (?<yes>\\[YES]) (?<no>\\[NO]) "),
         ComponentRegex("\\nAccept the trapper's task to hunt the animal\\?\\nClick an option: (?<yes>\\[YES]) - (?<no>\\[NO])"),
     )
+    private val wordRegex = Regex("\\s+")
 
     private val queue = mutableListOf<Pair<Component, Component>>()
     private var nextCheck = 0L
@@ -58,7 +59,8 @@ object DialogueOverlay : Overlay {
     override val enabled: Boolean get() = config.enabled
 
     private val config get() = NpcOverlayConfig
-    private val displayDuration get() = (config.durationPerMessage * 1000f).toLong()
+    private val messageWordsPerMinute get() = config.messageWordsPerMinute
+    private val minimumDurationPerMessage get() = (config.minimumDurationPerMessage * 1000).toLong()
     private val displayActionDuration get() = (config.durationForActionMessage * 1000f).toLong()
 
     private var containerLeftPos: Int? = null
@@ -68,7 +70,7 @@ object DialogueOverlay : Overlay {
     fun onChatReceived(event: ChatReceivedEvent.Pre) {
         if (!enabled) return
 
-        regex.match(event.component, "name", "message") { (name, message) ->
+        messageRegex.match(event.component, "name", "message") { (name, message) ->
             queue.add(name to message)
             if (config.hideChatMessage) event.cancel()
         }
@@ -101,7 +103,7 @@ object DialogueOverlay : Overlay {
 
         if (System.currentTimeMillis() > nextCheck) {
             if (queue.isEmpty()) {
-                nextCheck = System.currentTimeMillis() + displayDuration
+                nextCheck = System.currentTimeMillis() + minimumDurationPerMessage
                 if (yesNo != null && !displayedYesNo) {
                     hudOverlayDisplay = createYesNoDisplay()
                 } else {
@@ -112,7 +114,7 @@ object DialogueOverlay : Overlay {
                 val npc = DialogueNpcs.get(name.stripped)
                 val inventoryOverlayWidth = containerLeftPos.takeIf { it != null } ?: (McClient.window.guiScaledWidth / 4)
 
-                nextCheck = System.currentTimeMillis() + (displayDuration * npc.durationModifier).toLong()
+                nextCheck = System.currentTimeMillis() + calculateDisplayDuration(message)
 
                 createMainDisplay(name, message, npc, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
                 createMainDisplay(name, message, npc, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
@@ -188,7 +190,7 @@ object DialogueOverlay : Overlay {
     }
 
     private fun reset() {
-        DialogueEntities.updateCache(max(displayDuration, displayActionDuration) + 5000)
+        DialogueEntities.updateCache(max(minimumDurationPerMessage, displayActionDuration) + 5000)
         yesNo = null
         displayedYesNo = false
         hudOverlayDisplay = Displays.empty()
@@ -218,4 +220,9 @@ object DialogueOverlay : Overlay {
         }
     }
 
+    private fun calculateDisplayDuration(message: Component): Long {
+        val wpmDuration = ((message.stripped.split(wordRegex).count().toLong() * 60000) / messageWordsPerMinute)
+        return wpmDuration.coerceAtLeast(minimumDurationPerMessage)
+
+    }
 }

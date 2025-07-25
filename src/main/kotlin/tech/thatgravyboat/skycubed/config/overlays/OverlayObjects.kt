@@ -234,8 +234,12 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
         this.translation = "skycubed.config.overlays.npc.enabled"
     }
 
-    var durationPerMessage by float(2.5f) {
-        this.translation = "skycubed.config.overlays.npc.duration_per_message"
+    var messageWordsPerMinute by int(180) {
+        this.translation = "skycubed.config.overlays.npc.message_words_per_minute"
+    }
+
+    var minimumDurationPerMessage by float(0.75f) {
+        this.translation = "skycubed.config.overlays.npc.message_minimum_duration"
     }
 
     var durationForActionMessage by float(10f) {
