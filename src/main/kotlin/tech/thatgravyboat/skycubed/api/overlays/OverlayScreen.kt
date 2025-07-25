@@ -53,11 +53,13 @@ class OverlayScreen(private val overlay: Overlay, private val parent: Screen?) :
         if (hovered) {
             graphics.fill(x, y, x + width, y + height, 0x50000000)
             graphics.renderOutline(x - 1, y - 1, width + 2, height + 2, 0xFFFFFFFF.toInt())
-            graphics.showTooltip(Text.multiline(
-                overlay.name,
-                CommonText.EMPTY,
-                Component.translatable("skycubed.ui.overlay.edit.options"),
-            ))
+            graphics.showTooltip(
+                Text.multiline(
+                    overlay.name,
+                    CommonText.EMPTY,
+                    Component.translatable("skycubed.ui.overlay.edit.options"),
+                ),
+            )
         }
 
         val center = (this.width / 2f).toInt()

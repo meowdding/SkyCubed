@@ -14,7 +14,7 @@ object Codecs {
             instance.group(
                 Codec.INT.fieldOf(first).forGetter { obj: Vector3i -> obj.x },
                 Codec.INT.fieldOf(second).forGetter { obj: Vector3i -> obj.y },
-                Codec.INT.fieldOf(third).forGetter { obj: Vector3i -> obj.z }
+                Codec.INT.fieldOf(third).forGetter { obj: Vector3i -> obj.z },
             ).apply(instance, ::Vector3i)
         }
     }

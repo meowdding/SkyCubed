@@ -28,8 +28,8 @@ interface BossEventExtension {
     var `skycubed$barDisabled`: Boolean
 }
 
-val LerpingBossEvent.disabled : Boolean
+val LerpingBossEvent.disabled: Boolean
     get() = (this as BossEventExtension).`skycubed$disabled`
 
-val LerpingBossEvent.barDisabled : Boolean
+val LerpingBossEvent.barDisabled: Boolean
     get() = (this as BossEventExtension).`skycubed$barDisabled`

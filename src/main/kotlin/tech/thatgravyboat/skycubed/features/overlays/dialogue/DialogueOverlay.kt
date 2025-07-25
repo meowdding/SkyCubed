@@ -134,12 +134,12 @@ object DialogueOverlay : Overlay {
         val entity = DialogueEntities.get(name.stripped, npc)
         val npcNameDisplay = Displays.background(
             SkyCubedTextures.backgroundBox,
-            Displays.padding(5, Displays.component(name, maxWidth))
+            Displays.padding(5, Displays.component(name, maxWidth)),
         )
         val npcTextDisplay = Displays.component(message, maxWidth).let { display ->
             Displays.background(
                 SkyCubedTextures.backgroundBox,
-                Displays.padding(15, ((maxWidth * 0.8f).toInt() - display.getWidth()).coerceAtLeast(0) + 15, 15, 15, display)
+                Displays.padding(15, ((maxWidth * 0.8f).toInt() - display.getWidth()).coerceAtLeast(0) + 15, 15, 15, display),
             )
         }
 
@@ -149,7 +149,7 @@ object DialogueOverlay : Overlay {
 
             override fun render(graphics: GuiGraphics) {
                 npcTextDisplay.render(graphics)
-                npcNameDisplay.render(graphics, 60.takeIf { entity != null } ?: 5, - npcNameDisplay.getHeight() / 2)
+                npcNameDisplay.render(graphics, 60.takeIf { entity != null } ?: 5, -npcNameDisplay.getHeight() / 2)
 
                 if (entity != null) {
                     val display = Displays.entity(entity, 60, 80, 35, 80f, 40f)
@@ -169,7 +169,7 @@ object DialogueOverlay : Overlay {
 
         val options = listOf(
             Text.of("[1] Yes") { this.color = TextColor.GREEN },
-            Text.of("[2] No") { this.color = TextColor.RED }
+            Text.of("[2] No") { this.color = TextColor.RED },
         )
 
         val yesNoDisplay = options.map {
