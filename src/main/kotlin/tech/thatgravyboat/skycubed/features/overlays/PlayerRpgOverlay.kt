@@ -1,6 +1,8 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
+import earth.terrarium.olympus.client.ui.context.ContextMenu
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
 import net.minecraft.world.effect.MobEffects
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
@@ -14,10 +16,13 @@ import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.overlays.Overlay
 import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
+import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
+import tech.thatgravyboat.skycubed.utils.Utils
 import tech.thatgravyboat.skycubed.utils.blitSpritePercentX
 import tech.thatgravyboat.skycubed.utils.drawScaledString
+import tech.thatgravyboat.skycubed.utils.next
 
 private const val WIDTH = 119
 private const val HEIGHT = 48
@@ -60,6 +65,12 @@ object PlayerRpgOverlay : Overlay {
         }
 
         graphics.drawSprite(BASE, 0, 0, WIDTH, HEIGHT)
+
+        val player = McPlayer.self as? AbstractClientPlayer
+        if (RpgOverlayConfig.playerDisplay != PlayerDisplay.DISABLED && player != null) {
+            Utils.drawRpgPlayer(graphics, player, HEIGHT, HEIGHT, 30f)
+        }
+
         graphics.blitSpritePercentX(healthSprite, 47, 23, 70, 5, healthPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(ABSORPTION, 47, 23, 70, 5, absorptionPercent.coerceIn(0f, 1f))
         graphics.blitSpritePercentX(MANA_DEPLETED, 47, 18, 57, 4, manaUsePercent.coerceIn(0f, 1f))
@@ -80,4 +91,20 @@ object PlayerRpgOverlay : Overlay {
         }
     }
 
+    override fun onRightClick() = ContextMenu.open {
+        if (SkyCubed.is1218) {
+            val text = when (RpgOverlayConfig.playerDisplay) {
+                PlayerDisplay.DISABLED -> "Show Armored Player"
+                PlayerDisplay.ARMORED -> "Show Unarmored Player"
+                PlayerDisplay.UNARMORED -> "Hide Player"
+            }
+            it.button(Text.of(text)) {
+                RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.next()
+            }
+            it.divider()
+        }
+        it.dangerButton(Text.of("Reset Position")) {
+            position.reset()
+        }
+    }
 }
