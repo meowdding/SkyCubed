@@ -25,12 +25,14 @@ object Waypoints {
     private val waypoints = mutableListOf<Waypoint>()
 
     fun addWaypoint(text: Component, x: Number, y: Number, z: Number, color: DyeColor = DyeColor.WHITE, ignoreY: Boolean = false) {
-        waypoints.add(Waypoint(
-            text = text,
-            pos = Vector3f(x.toFloat(), y.toFloat(), z.toFloat()),
-            color = color.textureDiffuseColor,
-            ignoreY = ignoreY
-        ))
+        waypoints.add(
+            Waypoint(
+                text = text,
+                pos = Vector3f(x.toFloat(), y.toFloat(), z.toFloat()),
+                color = color.textureDiffuseColor,
+                ignoreY = ignoreY,
+            ),
+        )
     }
 
     fun removeWaypoint(waypoint: Waypoint) {
@@ -67,7 +69,7 @@ object Waypoints {
                     BeaconRenderer.renderBeaconBeam(
                         stack, event.buffer, BeaconRenderer.BEAM_LOCATION,
                         0f, Mth.PI, McLevel.self.gameTime, 0, McLevel.self.maxY * 2,
-                        ARGB.opaque(color), 0.2f, 0.25f
+                        ARGB.opaque(color), 0.2f, 0.25f,
                     )
 
                     if (distance > 5) {

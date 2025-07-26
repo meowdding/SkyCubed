@@ -103,58 +103,60 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
             for (slot in slots) {
                 val empty = slot.armor.all { it.isEmpty }
 
-                row.addChild(Widgets.button {
-                    it.withRenderer { graphics, context, _ ->
-                        val hovered = context.mouseX in context.x until context.x + context.width &&
+                row.addChild(
+                    Widgets.button {
+                        it.withRenderer { graphics, context, _ ->
+                            val hovered = context.mouseX in context.x until context.x + context.width &&
                                 context.mouseY in context.y until context.y + context.height
 
-                        val entityDisplay = Displays.entity(
-                            DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), slot.armor, pageNumber != currentPage),
-                            displayWidth, (displayWidth * ASPECT_RATIO).toInt(),
-                            (displayWidth / 2.0).toInt(),
-                            context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y
-                        )
+                            val entityDisplay = Displays.entity(
+                                DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), slot.armor, pageNumber != currentPage),
+                                displayWidth, (displayWidth * ASPECT_RATIO).toInt(),
+                                (displayWidth / 2.0).toInt(),
+                                context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y,
+                            )
 
-                        if (WardrobeConfig.textured) {
-                            entityDisplay.render(graphics, context.x, context.y)
-                        } else {
-                            ExtraDisplays.background(
-                                when {
-                                    hovered -> BACKGROUND_COLOR_HOVERED
-                                    else -> BACKGROUND_COLOR
-                                },
-                                BACKGROUND_RADIUS,
-                                when {
-                                    hovered -> HOVER_COLOR
-                                    slot.id == WardrobeAPI.currentSlot -> SELECTED_COLOR
-                                    else -> 0x0u
-                                },
-                                entityDisplay
-                            ).render(graphics, context.x, context.y)
-                        }
-                    }
-                    it.withTexture(
-                        when {
-                            WardrobeConfig.textured && slot.id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
-                            WardrobeConfig.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
-                            WardrobeConfig.textured -> UIConstants.BUTTON
-                            else -> null
-                        }
-                    )
-                    it.withSize(displayWidth, (displayWidth * ASPECT_RATIO).toInt())
-                    it.withCallback {
-                        (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
-                            if (pageNumber > currentPage) {
-                                menu.click(menu.slots[NEXT_PAGE_SLOT])
-                            } else if (pageNumber < currentPage) {
-                                menu.click(menu.slots[PREV_PAGE_SLOT])
-                            } else if (!empty) {
-                                val index = (slot.id - 1) % 9
-                                menu.click(menu.slots[index + 36])
+                            if (WardrobeConfig.textured) {
+                                entityDisplay.render(graphics, context.x, context.y)
+                            } else {
+                                ExtraDisplays.background(
+                                    when {
+                                        hovered -> BACKGROUND_COLOR_HOVERED
+                                        else -> BACKGROUND_COLOR
+                                    },
+                                    BACKGROUND_RADIUS,
+                                    when {
+                                        hovered -> HOVER_COLOR
+                                        slot.id == WardrobeAPI.currentSlot -> SELECTED_COLOR
+                                        else -> 0x0u
+                                    },
+                                    entityDisplay,
+                                ).render(graphics, context.x, context.y)
                             }
                         }
-                    }
-                })
+                        it.withTexture(
+                            when {
+                                WardrobeConfig.textured && slot.id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
+                                WardrobeConfig.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
+                                WardrobeConfig.textured -> UIConstants.BUTTON
+                                else -> null
+                            }
+                        )
+                        it.withSize(displayWidth, (displayWidth * ASPECT_RATIO).toInt())
+                        it.withCallback {
+                            (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
+                                if (pageNumber > currentPage) {
+                                    menu.click(menu.slots[NEXT_PAGE_SLOT])
+                                } else if (pageNumber < currentPage) {
+                                    menu.click(menu.slots[PREV_PAGE_SLOT])
+                                } else if (!empty) {
+                                    val index = (slot.id - 1) % 9
+                                    menu.click(menu.slots[index + 36])
+                                }
+                            }
+                        }
+                    },
+                )
             }
 
             rows.addChild(row)

@@ -52,7 +52,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 - RPG Overlay
   - RPG style display with health, mana, (skyblock) xp, and air (if in water).
 - Text Overlay
-  - Movable text overlays for health, mana, defense and speed.
+    - Movable text overlays for health, mana, defense and speed.
 - Tablist Overlay
   - A compact tablist with player sorting options.
 - Sack Overlay
@@ -80,7 +80,7 @@ SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI i
 - Cold Overlay
   - When freezing in the Glacite Tunnels or Mineshafts, the vanilla freezing overlay appears on your screen.
 - Bossbar Hider
-  - Hides the vanilla bossbar with or without the bossbar title.
+    - Hides the vanilla bossbar with or without the bossbar title.
 - Movable Hotbar
 - Wind Overlay
 </details>

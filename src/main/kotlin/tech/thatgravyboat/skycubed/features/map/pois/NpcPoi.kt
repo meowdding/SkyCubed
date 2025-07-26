@@ -36,11 +36,12 @@ data class NpcPoi(
     }
     override val id: String = "npc"
     override val bounds: Vector2i = Vector2i(10, 10)
-    override val display: Display get() = when {
-        skin.isActuallyDone -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ skin.get().texture() }))
-        skin.isCompletedExceptionally -> ExtraDisplays.missingTextureDisplay()
-        else -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ DefaultPlayerSkin.getDefaultTexture() }))
-    }
+    override val display: Display
+        get() = when {
+            skin.isActuallyDone -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ skin.get().texture() }))
+            skin.isCompletedExceptionally -> ExtraDisplays.missingTextureDisplay()
+            else -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ DefaultPlayerSkin.getDefaultTexture() }))
+        }
 
     override fun click() {
         Modals.link(link).open()
