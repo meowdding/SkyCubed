@@ -1,10 +1,13 @@
+@file:Suppress("UnstableApiUsage")
+
+import earth.terrarium.cloche.api.metadata.ModMetadata
 import net.msrandom.minecraftcodev.core.utils.toPath
+import net.msrandom.minecraftcodev.fabric.task.JarInJar
 import net.msrandom.minecraftcodev.runs.task.WriteClasspathFile
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import kotlin.io.path.readText
-import kotlin.io.path.writeText
+import kotlin.io.path.*
 
 plugins {
     idea
@@ -50,6 +53,11 @@ cloche {
         modId = "skycubed"
         name = "SkyCubed"
         license = "MIT"
+        icon = "assets/skycubed/icon.png"
+        description =
+            "SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI in-game to be more inline into it looking like its own game."
+        author("ThatGravyBoat")
+        author("j10a1n15")
         clientOnly = true
     }
 
@@ -74,6 +82,11 @@ cloche {
         version: String = name,
         loaderVersion: Provider<String> = libs.versions.fabric.loader,
         fabricApiVersion: Provider<String> = libs.versions.fabric.api,
+        minecraftVersionRange: ModMetadata.VersionRange.() -> Unit = {
+            start = version
+            end = version
+            endExclusive = false
+        },
         dependencies: MutableMap<String, Provider<MinimalExternalModuleDependency>>.() -> Unit = { },
     ) {
         val dependencies = mutableMapOf<String, Provider<MinimalExternalModuleDependency>>().apply(dependencies)
@@ -86,15 +99,13 @@ cloche {
             minecraftVersion = version
             this.loaderVersion = loaderVersion.get()
 
-            include(libs.hypixelapi)
+            //include(libs.hypixelapi) - included in sbapi
             include(libs.skyblockapi)
             include(libs.resourceful.config.kotlin)
             include(libs.meowdding.lib)
             include(rlib)
             include(olympus)
             include(rconfig)
-//             include(libs.placeholders)
-//             include(libs.meowdding.patches)
 
             metadata {
                 entrypoint("main") {
@@ -102,22 +113,22 @@ cloche {
                     value = "tech.thatgravyboat.skycubed.SkyCubed"
                 }
 
-                fun dependency(modId: String, version: Provider<String>, exact: Boolean = false) {
+                fun dependency(modId: String, version: Provider<String>? = null) {
                     dependency {
                         this.modId = modId
                         this.required = true
-                        version {
+                        if (version != null) version {
                             this.start = version
-                            if (exact) {
-                                this.endExclusive = false
-                                this.end = version
-                            }
                         }
                     }
                 }
 
-                dependency { modId = "fabric"; required = true; }
-                dependency("minecraft", minecraftVersion, exact = true)
+                dependency {
+                    modId = "minecraft"
+                    required = true
+                    version(minecraftVersionRange)
+                }
+                dependency("fabric")
                 dependency("fabricloader", libs.versions.fabric.loader)
                 dependency("fabric-language-kotlin", libs.versions.fabric.language.kotlin)
 
@@ -147,7 +158,9 @@ cloche {
         this["resourcefulconfig"] = libs.resourceful.config1215
         this["olympus"] = libs.olympus.lib1215
     }
-    createVersion("1.21.8") {
+    createVersion("1.21.8", minecraftVersionRange = {
+        start = "1.21.6"
+    }) {
         this["resourcefullib"] = libs.resourceful.lib1218
         this["resourcefulconfig"] = libs.resourceful.config1218
         this["olympus"] = libs.olympus.lib1218
@@ -215,8 +228,41 @@ idea {
 tasks.withType<WriteClasspathFile>().configureEach {
     actions.clear()
     actions.add {
+        output.get().toPath().also { it.parent.createDirectories() }.takeUnless { it.exists() }?.createFile()
         generate()
         val file = output.get().toPath()
         file.writeText(file.readText().lines().joinToString(File.pathSeparator))
     }
 }
+
+tasks.register("release") {
+    group = "meowdding"
+    sourceSets.filterNot { it.name == SourceSet.MAIN_SOURCE_SET_NAME || it.name == SourceSet.TEST_SOURCE_SET_NAME }
+        .forEach {
+            tasks.findByName("${it.name}JarInJar")?.let { task ->
+                dependsOn(task)
+                mustRunAfter(task)
+            }
+        }
+}
+
+tasks.getByName("build") {
+    actions.clear()
+    dependsOn.clear()
+    dependsOn(tasks.named("release"))
+}
+
+tasks.register("cleanRelease") {
+    group = "meowdding"
+    listOf("clean", "release").forEach {
+        tasks.getByName(it).let { task ->
+            dependsOn(task)
+            mustRunAfter(task)
+        }
+    }
+}
+
+tasks.withType<JarInJar>().configureEach {
+    include { !it.name.endsWith("-dev.jar") }
+}
+

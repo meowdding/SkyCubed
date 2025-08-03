@@ -70,6 +70,13 @@
                     "enabled": {
                         "@value": "Enable Info HUD Overlay",
                         "desc": "Enables the Info HUD overlay, show location, currency, time, and location specific info."
+                    },
+                    "enabled_positions": {
+                        "@value": "Enabled Info Positions",
+                        "desc": [
+                            "Select which four info positions should be enabled and be shown on the screen.",
+                            "Elements in the disabled positions will not be shown on the screen."
+                        ]
                     }
                 },
                 "rpg": {
@@ -82,6 +89,13 @@
                     "skyblock_level": {
                         "@value": "SkyBlock Level in XP",
                         "desc": "If enabled the XP bar will show your SkyBlock level instead of your normal XP."
+                    },
+                    "player_display": {
+                        "@value": "Player Display",
+                        "desc": "Shows your current player model in the RPG overlay instead of the yellow pixel art.",
+                        "disabled": "Disabled",
+                        "armored": "Armored",
+                        "unarmored": "Unarmored"
                     }
                 },
                 "text": {
@@ -243,9 +257,13 @@
                         "@value": "Enable NPC dialogue Overlay",
                         "desc": "If enabled the NPC messages will no longer go to chat but will instead go to an overlay."
                     },
-                    "duration_per_message": {
-                        "@value": "Duration per Message",
-                        "desc": "The time in seconds of how long a message should be displayed for."
+                    "message_words_per_minute": {
+                        "@value": "Words per Minute per Message",
+                        "desc": "The time in words per minute of how long a message should be displayed for. Hypixel uses a value around 180"
+                    },
+                    "message_minimum_duration": {
+                        "@value": "Minimum duration per Message",
+                        "desc": "The minimum time in seconds of how long a message should be displayed for, irrespective of its word count."
                     },
                     "duration_for_action_message": {
                         "@value": "Duration per Action Message",

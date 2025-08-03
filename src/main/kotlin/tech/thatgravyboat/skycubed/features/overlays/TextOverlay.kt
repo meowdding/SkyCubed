@@ -4,6 +4,7 @@ import me.owdding.lib.extensions.round
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import net.minecraft.world.entity.ai.attributes.Attributes
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawString
@@ -60,7 +61,8 @@ class TextOverlay(
             TextOverlay(
                 Text.of("Speed"), OverlayPositions.speed, { TextOverlaysConfig.speedEnabled },
                 {
-                    Text.of("✦ ${McPlayer.self?.speed?.times(1000)?.round() ?: "0"}").withStyle(ChatFormatting.WHITE)
+                    val speed = McPlayer.self?.getAttribute(Attributes.MOVEMENT_SPEED)?.baseValue ?: 0.0
+                    Text.of("✦ ${speed.times(1000).round()}").withStyle(ChatFormatting.WHITE)
                 },
             ),
         )

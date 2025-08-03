@@ -102,6 +102,7 @@ class OverlayScreen(private val overlay: Overlay, private val parent: Screen?) :
                 }
             }
         } else if (this.parent != null) {
+            ConfigManager.save()
             McClient.setScreen(this.parent)
         }
         return true

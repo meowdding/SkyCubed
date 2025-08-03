@@ -47,3 +47,12 @@ enum class HealthDisplay : Translatable {
 
     override fun getTranslationKey(): String = "skycubed.config.overlays.health.${name.lowercase()}"
 }
+
+enum class PlayerDisplay : Translatable {
+    DISABLED,
+    ARMORED,
+    UNARMORED,
+    ;
+
+    override fun getTranslationKey(): String = "skycubed.config.overlays.rpg.player_display.${name.lowercase()}"
+}

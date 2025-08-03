@@ -4,8 +4,10 @@ import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
+import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
@@ -26,6 +28,10 @@ object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
         this.translation = "skycubed.config.overlays.info.enabled"
     }
 
+    var enabledLocations by select(*InfoLocation.entries.toTypedArray()) {
+        this.translation = "skycubed.config.overlays.info.enabled_positions"
+    }
+
 }
 
 object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
@@ -36,6 +42,11 @@ object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
     var skyblockLevel by boolean(false) {
         this.translation = "skycubed.config.overlays.rpg.skyblock_level"
+    }
+
+    var playerDisplay by enum(PlayerDisplay.DISABLED) {
+        this.translation = "skycubed.config.overlays.rpg.player_display"
+        this.condition = { SkyCubed.is1218 }
     }
 }
 
@@ -229,8 +240,12 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
         this.translation = "skycubed.config.overlays.npc.enabled"
     }
 
-    var durationPerMessage by float(2.5f) {
-        this.translation = "skycubed.config.overlays.npc.duration_per_message"
+    var messageWordsPerMinute by int(180) {
+        this.translation = "skycubed.config.overlays.npc.message_words_per_minute"
+    }
+
+    var minimumDurationPerMessage by float(0.75f) {
+        this.translation = "skycubed.config.overlays.npc.message_minimum_duration"
     }
 
     var durationForActionMessage by float(10f) {

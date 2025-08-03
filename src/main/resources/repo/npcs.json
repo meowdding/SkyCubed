@@ -1,7 +1,4 @@
 {
-    "sirius": {
-        "durationModifier": 0.3
-    },
     "vex": {
         "type": "minecraft:villager"
     },

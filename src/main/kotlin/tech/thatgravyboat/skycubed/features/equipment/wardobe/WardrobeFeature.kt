@@ -66,16 +66,16 @@ object WardrobeFeature {
 
         event.cancel()
 
+        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(event.key, event.scanCode)
+
         if (isEditing) {
-            when (event.key) {
-                InputConstants.KEY_ESCAPE, InputConstants.KEY_E -> isEditing = false
+            if (shouldClose) {
+                isEditing = false
             }
         } else {
-            when (event.key) {
-                InputConstants.KEY_ESCAPE, InputConstants.KEY_E -> {
-                    event.screen.onClose()
-                    WardrobeScreen.screen = null
-                }
+            if (shouldClose) {
+                event.screen.onClose()
+                WardrobeScreen.screen = null
             }
         }
     }

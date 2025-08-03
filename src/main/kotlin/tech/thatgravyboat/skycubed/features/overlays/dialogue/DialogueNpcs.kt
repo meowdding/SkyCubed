@@ -6,7 +6,6 @@ import tech.thatgravyboat.skycubed.SkyCubed
 
 data class DialogueNpc(
     val type: String = "",
-    val durationModifier: Float = 1f,
 )
 
 @Module
