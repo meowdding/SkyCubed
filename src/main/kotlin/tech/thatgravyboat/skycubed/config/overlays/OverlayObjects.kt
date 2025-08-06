@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
 import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
@@ -41,6 +42,11 @@ object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
     var skyblockLevel by boolean(false) {
         this.translation = "skycubed.config.overlays.rpg.skyblock_level"
+    }
+
+    var playerDisplay by enum(PlayerDisplay.DISABLED) {
+        this.translation = "skycubed.config.overlays.rpg.player_display"
+        this.condition = { SkyCubed.is1218 }
     }
 }
 
@@ -234,8 +240,12 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
         this.translation = "skycubed.config.overlays.npc.enabled"
     }
 
-    var durationPerMessage by float(2.5f) {
-        this.translation = "skycubed.config.overlays.npc.duration_per_message"
+    var messageWordsPerMinute by int(180) {
+        this.translation = "skycubed.config.overlays.npc.message_words_per_minute"
+    }
+
+    var minimumDurationPerMessage by float(0.75f) {
+        this.translation = "skycubed.config.overlays.npc.message_minimum_duration"
     }
 
     var durationForActionMessage by float(10f) {
