@@ -97,7 +97,7 @@
                     ],
                     "pos": {
                         "x": -2,
-                        "y": 70,
+                        "y": -1,
                         "z": -46
                     },
                     "destination": "workshop",
@@ -2026,6 +2026,38 @@
                     "z": -290
                 },
                 "texture": "http://textures.minecraft.net/texture/685e83a09951a2c2db78360bc9546bb0d454975b5e5a344ca1daff408a67e9f1",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Ike",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -260,
+                    "y": 94,
+                    "z": -284
+                },
+                "texture": "http://textures.minecraft.net/texture/e0130271c816e36ab17f8ef5ef06304c8cbda95230788285412bf53466b07034",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Michael",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -264,
+                    "y": 94,
+                    "z": -284
+                },
+                "texture": "http://textures.minecraft.net/texture/394776dc5c46307b1f1b730d3596cc33838ae90634f8100da598bccfe37466fa",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
             }
