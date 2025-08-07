@@ -52,7 +52,9 @@ object DialogueEntities {
 
     @OptIn(ExperimentalEncodingApi::class)
     fun get(name: String, npc: DialogueNpc): LivingEntity? {
-        val entity = lastClickedEntities.keys.find { npc -> McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox).any { it.customName?.stripped == name } }
+        val entity = lastClickedEntities.keys.find { npc ->
+            McLevel.self.getEntitiesOfClass(ArmorStand::class.java, npc.boundingBox).any { it.customName?.stripped == name }
+        }
         if (entity != null && entity.isAlive) {
             lastClickedEntities[entity] = System.currentTimeMillis()
             return entity

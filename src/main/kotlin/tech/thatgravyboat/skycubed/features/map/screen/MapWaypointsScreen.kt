@@ -34,19 +34,21 @@ object MapWaypointsScreen {
                 .withTitle(CREATE_TITLE)
                 .withContent(CREATE_PLACEHOLDER)
                 .withContent { width -> Widgets.textInput(state).withPlaceholder("Waypoint Name").withSize(width, 20) }
-                .withAction(Widgets.button()
-                    .withRenderer(WidgetRenderers.text(UITexts.CANCEL))
-                    .withSize(80, 24)
-                    .withCallback { McScreen.self?.onClose() }
+                .withAction(
+                    Widgets.button()
+                        .withRenderer(WidgetRenderers.text(UITexts.CANCEL))
+                        .withSize(80, 24)
+                        .withCallback { McScreen.self?.onClose() },
                 )
-                .withAction(Widgets.button()
-                    .withRenderer(WidgetRenderers.text<AbstractWidget>(CREATE_BUTTON).withColor(MinecraftColors.WHITE))
-                    .withSize(80, 24)
-                    .withTexture(UIConstants.PRIMARY_BUTTON)
-                    .withCallback {
-                        Waypoints.addWaypoint(Text.of(state.get()).withColor(TextColor.BLUE), x + 0.5f, 0, z + 0.5f, DyeColor.WHITE, true)
-                        McScreen.self?.onClose()
-                    }
+                .withAction(
+                    Widgets.button()
+                        .withRenderer(WidgetRenderers.text<AbstractWidget>(CREATE_BUTTON).withColor(MinecraftColors.WHITE))
+                        .withSize(80, 24)
+                        .withTexture(UIConstants.PRIMARY_BUTTON)
+                        .withCallback {
+                            Waypoints.addWaypoint(Text.of(state.get()).withColor(TextColor.BLUE), x + 0.5f, 0, z + 0.5f, DyeColor.WHITE, true)
+                            McScreen.self?.onClose()
+                        },
                 )
                 .open()
         }
@@ -60,15 +62,17 @@ object MapWaypointsScreen {
                 waypoint != null -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_DELETE) { Waypoints.removeWaypoint(waypoint) }
                 }
+
                 poi != null -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_CREATE) {
                         Waypoints.addWaypoint(
                             poi.first.tooltip.firstOrNull() ?: Text.of("Waypoint"),
                             poi.first.position.x - 1f, poi.first.position.y, poi.first.position.z - 1f,
-                            DyeColor.PURPLE
+                            DyeColor.PURPLE,
                         )
                     }
                 }
+
                 else -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_CREATE) {
                         val (x, z) = widget.getWorldPosition(mouseX, mouseY)
