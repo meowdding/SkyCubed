@@ -264,5 +264,6 @@ tasks.register("cleanRelease") {
 
 tasks.withType<JarInJar>().configureEach {
     include { !it.name.endsWith("-dev.jar") }
+    archiveBaseName = "SkyCubed"
 }
 
