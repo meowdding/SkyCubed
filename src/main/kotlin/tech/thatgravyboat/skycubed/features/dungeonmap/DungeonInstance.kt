@@ -10,7 +10,6 @@ import tech.thatgravyboat.skyblockapi.api.events.info.TabWidget
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidgetChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.AreaChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.WorldPosition
 
@@ -61,7 +60,7 @@ class DungeonInstance(val serverId: String) {
         var index = 0
         DungeonAPI.teammates.filterNot { it === DungeonAPI.ownPlayer }.forEach { player ->
             if (index >= players.size) {
-                SkyCubed.error("Requested index $index is out of bounds for player list length ${this.players.size}")
+                //SkyCubed.error("Requested index $index is out of bounds for player list length ${this.players.size}")
                 return@forEach
             }
             if (players[index] == null) {
@@ -72,7 +71,7 @@ class DungeonInstance(val serverId: String) {
         }
         DungeonAPI.ownPlayer?.let { player ->
             if (index >= players.size) {
-                SkyCubed.error("Requested own player index $index is out of bounds for player list length ${this.players.size}")
+                //SkyCubed.error("Requested own player index $index is out of bounds for player list length ${this.players.size}")
                 return@let
             }
             if (players[index] == null) {
@@ -134,7 +133,7 @@ class DungeonInstance(val serverId: String) {
         try {
             runnable()
         } catch (throwable: Throwable) {
-            SkyCubed.warn("Uncaught exception!", throwable)
+            //SkyCubed.warn("Uncaught exception!", throwable)
         }
     }
 
@@ -142,7 +141,7 @@ class DungeonInstance(val serverId: String) {
         try {
             return runnable()
         } catch (throwable: Throwable) {
-            SkyCubed.warn("Uncaught exception!", throwable)
+            //SkyCubed.warn("Uncaught exception!", throwable)
         }
         return null
     }

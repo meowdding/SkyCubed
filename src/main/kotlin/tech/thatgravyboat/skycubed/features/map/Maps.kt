@@ -49,14 +49,14 @@ object Maps {
                     try {
                         SkyCubed.repoPatcher?.patch(file, "maps/$type")
                     } catch (_: Exception) {
-                        SkyCubed.warn("Failed to patch map $type.")
+                        //SkyCubed.warn("Failed to patch map $type.")
                     }
                     val result = Codec.either(IslandData.CODEC, IslandData.CODEC.listOf())
                         .xmap({ it.map(::listOf, Function.identity()) }, { Either.right(it) })
                         .parse(JsonOps.INSTANCE, file)
 
                     result.ifError {
-                        SkyCubed.error("Error parsing maps/$type.json, error: {}", it)
+                        //SkyCubed.error("Error parsing maps/$type.json, error: {}", it)
                     }
                     result.ifSuccess { islands ->
                         groups[type] = islands

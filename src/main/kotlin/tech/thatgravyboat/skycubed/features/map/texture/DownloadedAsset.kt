@@ -5,7 +5,6 @@ import net.minecraft.Util
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skycubed.SkyCubed
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
@@ -43,7 +42,7 @@ object DownloadedAsset {
                         McClient.runNextTick { callback() }
                     }
                 }?.onFailure { exception ->
-                    SkyCubed.error("Failed to download asset from URI: $uri", exception)
+                    //SkyCubed.error("Failed to download asset from URI: $uri", exception)
                 }
             },
             Util.backgroundExecutor(),
@@ -62,6 +61,6 @@ object DownloadedAsset {
         if (url.scheme != "https") error("Invalid scheme")
         url
     }?.onFailure { exception ->
-        SkyCubed.error("Failed to create URI from string: $string", exception)
+        //SkyCubed.error("Failed to create URI from string: $string", exception)
     }?.getOrNull()
 }

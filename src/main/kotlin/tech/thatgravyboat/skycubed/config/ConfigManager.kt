@@ -9,8 +9,8 @@ import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skycubed.SkyCubed.VERSION
-import tech.thatgravyboat.skycubed.SkyCubed.sendWithPrefix
+import tech.thatgravyboat.skycubed.SkyCubed.Companion.VERSION
+import tech.thatgravyboat.skycubed.SkyCubed.Companion.sendWithPrefix
 import java.nio.file.Files
 
 @Module

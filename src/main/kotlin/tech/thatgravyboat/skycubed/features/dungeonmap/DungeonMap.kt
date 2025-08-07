@@ -11,7 +11,6 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.MapPosition
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.Rectangle2D
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.RoomPosition
@@ -116,7 +115,7 @@ class DungeonMap(val instance: DungeonInstance) {
         mapData.decorations.forEach { decoration ->
             index = this.instance.applyOffset(index)
             if (index >= instance.players.size) {
-                SkyCubed.error("Requested index $index is out of bounds for player list length ${this.instance.players.size}")
+                //SkyCubed.error("Requested index $index is out of bounds for player list length ${this.instance.players.size}")
                 return@forEach
             }
             val player = instance.players[index] ?: return@forEach
@@ -365,7 +364,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
     private operator fun <T> Array<Array<T?>>.get(roomPos: RoomPosition): T? {
         if (roomPos.x < 0 || roomPos.y < 0 || roomPos.x >= this.size || roomPos.y >= this[0].size) {
-            SkyCubed.warn("Tried to access room out of bounds at ({},{})", roomPos.x, roomPos.y)
+            //SkyCubed.warn("Tried to access room out of bounds at ({},{})", roomPos.x, roomPos.y)
             return null
         }
         return this[roomPos.x][roomPos.y]
@@ -373,7 +372,7 @@ class DungeonMap(val instance: DungeonInstance) {
 
     private operator fun <T> Array<Array<T?>>.set(roomPos: RoomPosition, value: T?) {
         if (roomPos.x < 0 || roomPos.y < 0 || roomPos.x >= this.size || roomPos.y >= this[0].size) {
-            SkyCubed.warn("Tried to set room out of bounds at ({},{})", roomPos.x, roomPos.y)
+            //SkyCubed.warn("Tried to set room out of bounds at ({},{})", roomPos.x, roomPos.y)
             return
         }
         this[roomPos.x][roomPos.y] = value

@@ -109,7 +109,6 @@ cloche {
 
             metadata {
                 entrypoint("main") {
-                    adapter = "kotlin"
                     value = "tech.thatgravyboat.skycubed.SkyCubed"
                 }
 

@@ -20,7 +20,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.accessors.glow
 import tech.thatgravyboat.skycubed.api.accessors.glowColor
 import tech.thatgravyboat.skycubed.api.conditions.Condition
@@ -80,7 +79,7 @@ object MapEditor {
 
                 json.ifError {
                     Text.of("Failed to save $key, see logs for more details!").send()
-                    SkyCubed.error(it.message())
+                    //SkyCubed.error(it.message())
                 }
                 json.ifSuccess { it ->
 

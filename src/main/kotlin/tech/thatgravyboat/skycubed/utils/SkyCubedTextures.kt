@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skycubed.utils
 
-import tech.thatgravyboat.skycubed.SkyCubed.id
+import tech.thatgravyboat.skycubed.SkyCubed.Companion.id
 
 object SkyCubedTextures {
 
