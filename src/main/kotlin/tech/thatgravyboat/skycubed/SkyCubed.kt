@@ -17,6 +17,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.McVersionGroup
 import tech.thatgravyboat.skyblockapi.utils.json.Json
 import tech.thatgravyboat.skyblockapi.utils.json.Json.readJson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
@@ -38,7 +39,7 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
     val mod: ModContainer = FabricLoader.getInstance().getModContainer("skycubed").orElseThrow()
     val VERSION: String = mod.metadata.version.friendlyString
 
-    val is1218 = McClient.version == "1.21.8"
+    val is1218 = !McVersionGroup.MC_1_21_5.isActive
 
     val repoPatcher: DataPatcher?
 
