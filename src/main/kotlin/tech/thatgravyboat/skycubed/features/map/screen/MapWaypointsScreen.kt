@@ -29,6 +29,8 @@ object MapWaypointsScreen {
     private val CONTEXT_DELETE = Text.translatable("skycubed.map.waypoints.context.delete")
     private val CONTEXT_CREATE = Text.translatable("skycubed.map.waypoints.context.create")
 
+    val waypoints: MutableList<MeowddingWaypoint> = mutableListOf()
+
     private fun openModal(x: Int, z: Int) {
         McClient.runNextTick {
             val state = State.of("")
@@ -53,6 +55,8 @@ object MapWaypointsScreen {
                                 withNormalRenderTypes()
                                 withRemovalDistance()
                                 withIgnoreY()
+                            }.also {
+                                waypoints.add(it)
                             }
                             McScreen.self?.onClose()
                         },
@@ -67,7 +71,10 @@ object MapWaypointsScreen {
             val waypoint = widget.getWaypointAt(mouseX, mouseY)
             when {
                 waypoint != null -> ContextMenu.open { menu ->
-                    menu.button(CONTEXT_DELETE) { MeowddingWaypointHandler.removeWaypoint(waypoint) }
+                    menu.button(CONTEXT_DELETE) {
+                        MeowddingWaypointHandler.removeWaypoint(waypoint)
+                        waypoints.remove(waypoint)
+                    }
                 }
                 poi != null -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_CREATE) {
@@ -77,6 +84,8 @@ object MapWaypointsScreen {
                             withColor(DyeColor.PURPLE.textureDiffuseColor)
                             withNormalRenderTypes()
                             withRemovalDistance()
+                        }.also {
+                            waypoints.add(it)
                         }
                     }
                 }
