@@ -51,7 +51,7 @@ object MapWaypointsScreen {
                                 withName(Text.of(state.get()).withColor(TextColor.BLUE))
                                 withColor(DyeColor.WHITE.textureDiffuseColor)
                                 withNormalRenderTypes()
-                                withRemovalDistance(2f)
+                                withRemovalDistance()
                                 withIgnoreY()
                             }
                             McScreen.self?.onClose()
@@ -76,7 +76,7 @@ object MapWaypointsScreen {
                             withName(poi.first.tooltip.firstOrNull() ?: Text.of("Waypoint"))
                             withColor(DyeColor.PURPLE.textureDiffuseColor)
                             withNormalRenderTypes()
-                            withRemovalDistance(2f)
+                            withRemovalDistance()
                         }
                     }
                 }
