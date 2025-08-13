@@ -85,7 +85,7 @@ object Maps {
     @Subscription
     fun onCommand(event: RegisterCommandsEvent) {
         event.registerWithCallback("skycubed map") {
-            McClient.setScreen(MapScreen())
+            McClient.setScreenAsync { MapScreen() }
         }
     }
 
