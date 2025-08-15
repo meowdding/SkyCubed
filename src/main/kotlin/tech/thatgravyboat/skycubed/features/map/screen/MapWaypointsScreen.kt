@@ -11,6 +11,7 @@ import earth.terrarium.olympus.client.ui.modals.Modals
 import earth.terrarium.olympus.client.utils.State
 import me.owdding.lib.waypoints.MeowddingWaypoint
 import me.owdding.lib.waypoints.MeowddingWaypointHandler
+import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.phys.Vec3
@@ -28,8 +29,6 @@ object MapWaypointsScreen {
 
     private val CONTEXT_DELETE = Text.translatable("skycubed.map.waypoints.context.delete")
     private val CONTEXT_CREATE = Text.translatable("skycubed.map.waypoints.context.create")
-
-    val waypoints: MutableList<MeowddingWaypoint> = mutableListOf()
 
     private fun openModal(x: Int, z: Int) {
         McClient.runNextTick {
@@ -55,8 +54,7 @@ object MapWaypointsScreen {
                                 withNormalRenderTypes()
                                 withRemovalDistance()
                                 withIgnoreY()
-                            }.also {
-                                waypoints.add(it)
+                                withTags(MeowddingWaypointTag.SHARABLE)
                             }
                             McScreen.self?.onClose()
                         },
@@ -73,7 +71,6 @@ object MapWaypointsScreen {
                 waypoint != null -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_DELETE) {
                         MeowddingWaypointHandler.removeWaypoint(waypoint)
-                        waypoints.remove(waypoint)
                     }
                 }
                 poi != null -> ContextMenu.open { menu ->
@@ -84,8 +81,7 @@ object MapWaypointsScreen {
                             withColor(DyeColor.PURPLE.textureDiffuseColor)
                             withNormalRenderTypes()
                             withRemovalDistance()
-                        }.also {
-                            waypoints.add(it)
+                            withTags(MeowddingWaypointTag.SHARABLE)
                         }
                     }
                 }

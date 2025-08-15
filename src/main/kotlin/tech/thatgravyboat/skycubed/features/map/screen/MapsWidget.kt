@@ -5,6 +5,8 @@ import com.teamresourceful.resourcefullib.client.screens.CursorScreen.Cursor
 import earth.terrarium.olympus.client.components.base.BaseWidget
 import earth.terrarium.olympus.client.utils.State
 import me.owdding.lib.waypoints.MeowddingWaypoint
+import me.owdding.lib.waypoints.MeowddingWaypointHandler
+import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.screens.Screen
@@ -98,7 +100,7 @@ class MapsWidget(
                     }
 
                     if (map.island == LocationAPI.island) {
-                        MapWaypointsScreen.waypoints.forEach { waypoint ->
+                        MeowddingWaypointHandler.getWaypointsWithAnyTags(MeowddingWaypointTag.SHARABLE).forEach { waypoint ->
                             val position = waypoint.getPosition()
                             val mapX = position.x - 3 + map.offsetX + width / 2f
                             val mapY = position.z - 3 + map.offsetY + height / 2f
@@ -182,7 +184,7 @@ class MapsWidget(
     }
 
     fun getWaypointAt(x: Number, y: Number): MeowddingWaypoint? = Maps.currentIsland?.let {
-        MapWaypointsScreen.waypoints.find { waypoint ->
+        MeowddingWaypointHandler.getWaypointsWithAnyTags(MeowddingWaypointTag.SHARABLE).find { waypoint ->
             isMouseOver(it, waypoint.toMapRect(), x.toInt() - this.x, y.toInt() - this.y)
         }
     }
