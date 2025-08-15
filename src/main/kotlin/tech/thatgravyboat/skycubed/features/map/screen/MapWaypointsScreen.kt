@@ -9,13 +9,16 @@ import earth.terrarium.olympus.client.ui.UITexts
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import earth.terrarium.olympus.client.ui.modals.Modals
 import earth.terrarium.olympus.client.utils.State
+import me.owdding.lib.waypoints.MeowddingWaypoint
+import me.owdding.lib.waypoints.MeowddingWaypointHandler
+import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.world.item.DyeColor
+import net.minecraft.world.phys.Vec3
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skycubed.features.map.waypoints.Waypoints
 import kotlin.math.roundToInt
 
 object MapWaypointsScreen {
@@ -39,14 +42,22 @@ object MapWaypointsScreen {
                     .withSize(80, 24)
                     .withCallback { McScreen.self?.onClose() }
                 )
-                .withAction(Widgets.button()
-                    .withRenderer(WidgetRenderers.text<AbstractWidget>(CREATE_BUTTON).withColor(MinecraftColors.WHITE))
-                    .withSize(80, 24)
-                    .withTexture(UIConstants.PRIMARY_BUTTON)
-                    .withCallback {
-                        Waypoints.addWaypoint(Text.of(state.get()).withColor(TextColor.BLUE), x + 0.5f, 0, z + 0.5f, DyeColor.WHITE, true)
-                        McScreen.self?.onClose()
-                    }
+                .withAction(
+                    Widgets.button()
+                        .withRenderer(WidgetRenderers.text<AbstractWidget>(CREATE_BUTTON).withColor(MinecraftColors.WHITE))
+                        .withSize(80, 24)
+                        .withTexture(UIConstants.PRIMARY_BUTTON)
+                        .withCallback {
+                            MeowddingWaypoint(Vec3(x + 0.5, 0.0, z + 0.5)) {
+                                withName(Text.of(state.get()).withColor(TextColor.BLUE))
+                                withColor(DyeColor.WHITE.textureDiffuseColor)
+                                withNormalRenderTypes()
+                                withRemovalDistance()
+                                withIgnoreY()
+                                withTags(MeowddingWaypointTag.SHARABLE)
+                            }
+                            McScreen.self?.onClose()
+                        },
                 )
                 .open()
         }
@@ -58,15 +69,20 @@ object MapWaypointsScreen {
             val waypoint = widget.getWaypointAt(mouseX, mouseY)
             when {
                 waypoint != null -> ContextMenu.open { menu ->
-                    menu.button(CONTEXT_DELETE) { Waypoints.removeWaypoint(waypoint) }
+                    menu.button(CONTEXT_DELETE) {
+                        MeowddingWaypointHandler.removeWaypoint(waypoint)
+                    }
                 }
                 poi != null -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_CREATE) {
-                        Waypoints.addWaypoint(
-                            poi.first.tooltip.firstOrNull() ?: Text.of("Waypoint"),
-                            poi.first.position.x - 1f, poi.first.position.y, poi.first.position.z - 1f,
-                            DyeColor.PURPLE
-                        )
+                        val pos = poi.first.position
+                        MeowddingWaypoint(Vec3(pos.x - 1.0, pos.y.toDouble(), pos.z - 1.0)) {
+                            withName(poi.first.tooltip.firstOrNull() ?: Text.of("Waypoint"))
+                            withColor(DyeColor.PURPLE.textureDiffuseColor)
+                            withNormalRenderTypes()
+                            withRemovalDistance()
+                            withTags(MeowddingWaypointTag.SHARABLE)
+                        }
                     }
                 }
                 else -> ContextMenu.open { menu ->
