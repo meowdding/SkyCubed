@@ -115,7 +115,7 @@ class MapsWidget(
                                         CommonText.EMPTY,
                                         Text.translatable("skycubed.map.waypoints.tooltip.position"),
                                         Text.of(" ${waypoint.pos.x}, ${waypoint.pos.y}, ${waypoint.pos.z}"),
-                                    )
+                                    ),
                                 )
                                 cursor = Cursor.POINTER
                             }
@@ -181,9 +181,11 @@ class MapsWidget(
         return locX in mouseX.toFloat()..mouseX + rect.width * scale && locZ in mouseY.toFloat()..mouseY + rect.height * scale
     }
 
-    fun getWaypointAt(x: Number, y: Number): Waypoint? = Maps.currentIsland?.let { Waypoints.waypoints().find { waypoint ->
-        isMouseOver(it, waypoint.toMapRect(), x.toInt() - this.x, y.toInt() - this.y)
-    } }
+    fun getWaypointAt(x: Number, y: Number): Waypoint? = Maps.currentIsland?.let {
+        Waypoints.waypoints().find { waypoint ->
+            isMouseOver(it, waypoint.toMapRect(), x.toInt() - this.x, y.toInt() - this.y)
+        }
+    }
 
     fun getPoiAt(x: Number, y: Number): Pair<Poi, IslandData>? {
         maps.forEach { map ->

@@ -262,7 +262,7 @@ object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
         this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_full"
     }
 
-    var removeBarWhenObjective  by boolean(false) {
+    var removeBarWhenObjective by boolean(false) {
         this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_objective"
     }
 }

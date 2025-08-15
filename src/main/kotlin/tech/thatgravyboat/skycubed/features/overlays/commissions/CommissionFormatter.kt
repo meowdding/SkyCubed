@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays.commissions
+package tech.thatgravyboat.skycubed.features.overlays.mining.commissions
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
