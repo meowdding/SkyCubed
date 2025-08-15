@@ -30,12 +30,14 @@ java {
 
 repositories {
     maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
+    maven(url = "https://maven.fabricmc.net/")
     maven(url = "https://repo.hypixel.net/repository/Hypixel/")
     maven(url = "https://api.modrinth.com/maven")
     maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
     maven(url = "https://maven.nucleoid.xyz")
     maven(url = "https://maven.shedaniel.me/")
     maven(url = "https://maven.msrandom.net/repository/root")
+    mavenCentral()
     mavenLocal()
 }
 
@@ -197,11 +199,12 @@ tasks.withType<JavaCompile>().configureEach {
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
     compilerOptions {
-        languageVersion = KotlinVersion.KOTLIN_2_0
+        languageVersion = KotlinVersion.KOTLIN_2_2
         freeCompilerArgs.addAll(
             "-Xmulti-platform",
             "-Xno-check-actual",
             "-Xexpect-actual-classes",
+            "-Xopt-in=kotlin.time.ExperimentalTime",
         )
     }
 }
