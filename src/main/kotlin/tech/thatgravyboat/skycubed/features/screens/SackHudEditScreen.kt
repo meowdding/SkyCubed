@@ -80,7 +80,7 @@ class SackHudEditScreen : BaseUiScreen() {
                     }
                 }
 
-                ExtraDisplays.background(color, 1f, display.withPadding(2)).asButton {
+                ExtraDisplays.background(color, 1f, display.withPadding(2)).asButtonLeft {
                     if (selectedItems.contains(k)) {
                         selectedItems = selectedItems.filter { it != k }
                         rebuildWidgets()
