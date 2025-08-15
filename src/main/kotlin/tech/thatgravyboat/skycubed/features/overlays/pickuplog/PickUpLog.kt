@@ -19,6 +19,7 @@ import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
+import tech.thatgravyboat.skyblockapi.utils.extentions.getArmor
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
@@ -90,7 +91,8 @@ object PickUpLog : Overlay {
         }
         if (McScreen.self != null && McScreen.self !is ChatScreen) return
 
-        val flattenedInventory = McPlayer.inventory
+        val flattenedInventory = listOfNotNull(McPlayer.inventory, McPlayer.self?.getArmor(), listOf(McPlayer.self?.offhandItem))
+            .flatten()
             .filterIndexed { index, _ -> index != 8 }
             .filter { !it.isEmpty }
             .groupBy { it.getUniqueId() }

@@ -12,6 +12,7 @@ import net.minecraft.client.KeyMapping
 import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
+import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
@@ -78,6 +79,13 @@ object Maps {
     fun onTick(event: TickEvent) {
         if (MAP_KEYBIND.consumeClick()) {
             McClient.setScreen(MapScreen())
+        }
+    }
+
+    @Subscription
+    fun onCommand(event: RegisterCommandsEvent) {
+        event.registerWithCallback("skycubed map") {
+            McClient.setScreenAsync { MapScreen() }
         }
     }
 
