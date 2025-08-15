@@ -11,7 +11,7 @@ import kotlin.io.path.*
 
 plugins {
     idea
-    kotlin("jvm") version "2.0.20"
+    kotlin("jvm") version "2.2.0"
     alias(libs.plugins.terrarium.cloche)
     id("maven-publish")
     alias(libs.plugins.meowdding.resources)
