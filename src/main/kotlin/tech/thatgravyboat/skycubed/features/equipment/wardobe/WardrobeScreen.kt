@@ -53,7 +53,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                 Displays.text(
                     Text.join(
                         Text.of("Wardrobe").withColor(TextColor.WHITE),
-                        Text.of(" ʙʏ sᴋʏᴄᴜʙᴇᴅ").withColor(TextColor.GRAY),
+                        Text.of(" ʙʏ ꜱᴋʏᴄᴜʙᴇᴅ").withColor(TextColor.GRAY),
                     ),
                 ),
             ),
