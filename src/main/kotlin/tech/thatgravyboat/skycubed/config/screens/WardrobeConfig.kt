@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.config.screens
 
 import tech.thatgravyboat.skycubed.config.overlays.OverlayConfig
+import tech.thatgravyboat.skycubed.features.equipment.wardobe.WardrobeScreen
 
 object WardrobeConfig : OverlayConfig("Edit Wardrobe Config") {
 
@@ -10,5 +11,9 @@ object WardrobeConfig : OverlayConfig("Edit Wardrobe Config") {
 
     var textured by boolean("textures", false) {
         this.translation = "skycubed.config.screens.wardrobe.textures"
+    }
+
+    var tooltipType by enum(WardrobeScreen.WardrobeTooltipType.MINIMAL) {
+        this.translation = "skycubed.config.screens.wardrobe.tooltip_type"
     }
 }
