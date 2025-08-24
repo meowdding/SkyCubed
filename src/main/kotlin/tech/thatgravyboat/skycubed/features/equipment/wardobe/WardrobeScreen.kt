@@ -19,9 +19,8 @@ import net.minecraft.client.gui.components.WidgetSprites
 import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.Items
+import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeSlot
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -29,7 +28,6 @@ import tech.thatgravyboat.skyblockapi.platform.applyBackgroundBlur
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
-import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
@@ -191,7 +189,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private fun getSmallTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
         fun icon(loc: ResourceLocation, i: Int) =
-            Displays.sprite(loc, 10, 10).withTooltip(slot.armor.getOrNull(i)?.takeUnless { it.`is`(Items.AIR) }?.getTooltipLines())
+            Displays.sprite(loc, 10, 10).withTooltip(slot.armor.getOrNull(i)?.takeUnless(ItemStack::isEmpty)?.getTooltipLines())
 
         display(icon(HELMET_SMALL, 0))
         display(icon(CHESTPLATE_SMALL, 1))
@@ -202,7 +200,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
     private fun getWholeTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
         val boxHeight = height / 4
         slot.armor.forEach {
-            display(Displays.empty(width, boxHeight).withTooltip(it.takeUnless { it.`is`(Items.AIR) }?.getTooltipLines()))
+            display(Displays.empty(width, boxHeight).withTooltip(it.takeUnless(ItemStack::isEmpty)?.getTooltipLines()))
         }
     }.withPadding(2)
 
@@ -238,6 +236,5 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
         ;
 
         override fun getTranslationKey(): String = "skycubed.config.screens.wardrobe.tooltip_type.${name.lowercase()}"
-        override fun toString() = Component.translatable(getTranslationKey()).stripped
     }
 }
