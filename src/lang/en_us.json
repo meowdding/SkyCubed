@@ -339,6 +339,13 @@
                     "textures": {
                         "@value": "Textures",
                         "desc": "Changes it from transparent squares to actual textures."
+                    },
+                    "tooltip_type": {
+                        "@value": "Tooltip Type",
+                        "desc": "How armor tooltips will be displayed in the wardrobe.",
+                        "none": "None",
+                        "minimal": "Minimal",
+                        "whole": "Whole"
                     }
                 }
             },
