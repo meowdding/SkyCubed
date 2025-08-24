@@ -342,7 +342,7 @@
                     },
                     "tooltip_type": {
                         "@value": "Tooltip Type",
-                        "desc": "Different modi on how armor tooltips will get displayed in the Wardrobe.",
+                        "desc": "How armor tooltips will be displayed in the wardrobe.",
                         "none": "None",
                         "minimal": "Minimal",
                         "whole": "Whole"
