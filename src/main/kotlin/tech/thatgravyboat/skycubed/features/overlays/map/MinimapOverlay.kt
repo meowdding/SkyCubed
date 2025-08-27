@@ -11,8 +11,6 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
@@ -21,12 +19,14 @@ import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
 import tech.thatgravyboat.skycubed.utils.GettingState
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundCircle
 
 @Module
 @RegisterOverlay
-object MinimapOverlay : Overlay {
+object MinimapOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Minimap")
     override val position: Position = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
@@ -51,7 +51,7 @@ object MinimapOverlay : Overlay {
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
-            position.reset()
+            position.resetPosition()
         }
     }
 
