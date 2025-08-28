@@ -3,13 +3,13 @@ package tech.thatgravyboat.skycubed.config
 import com.teamresourceful.resourcefulconfig.api.types.info.ResourcefulConfigLink
 import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
 import com.teamresourceful.resourcefulconfigkt.api.ConfigKt
+import me.owdding.lib.overlays.EditOverlaysScreen
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen
 import tech.thatgravyboat.skyblockapi.api.events.info.ActionBarWidget
 import tech.thatgravyboat.skyblockapi.api.events.render.HudElement
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.overlays.EditOverlaysScreen
 import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
@@ -82,7 +82,7 @@ object Config : ConfigKt("skycubed/config") {
             this.title = "skycubed.config.general.overlays"
             this.text = "Open"
             this.onClick {
-                McClient.setScreen(EditOverlaysScreen(McScreen.self))
+                McClient.setScreen(EditOverlaysScreen(SkyCubed.MOD_ID, McScreen.self))
             }
         }
 

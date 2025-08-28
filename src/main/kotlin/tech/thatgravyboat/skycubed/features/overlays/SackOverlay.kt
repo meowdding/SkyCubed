@@ -13,20 +13,16 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.SackOverlayConfig
 import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
-import tech.thatgravyboat.skycubed.utils.CachedValue
-import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
-import tech.thatgravyboat.skycubed.utils.invalidateCache
+import tech.thatgravyboat.skycubed.utils.*
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
-object SackOverlay : Overlay {
+object SackOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Sack Overlay")
     override val position: Position get() = OverlayPositions.sack
@@ -68,7 +64,7 @@ object SackOverlay : Overlay {
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
-            position.reset()
+            position.resetPosition()
         }
     }
 }

@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.owdding.lib.overlays.Position;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI;
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions;
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig;
-import tech.thatgravyboat.skycubed.config.overlays.Position;
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.MovableHotbar;
 
 @Mixin(Gui.class)

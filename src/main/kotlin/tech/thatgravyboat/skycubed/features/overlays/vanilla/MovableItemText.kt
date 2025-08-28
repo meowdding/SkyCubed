@@ -2,23 +2,23 @@ package tech.thatgravyboat.skycubed.features.overlays.vanilla
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.displays.Alignment
+import me.owdding.lib.overlays.EditableProperty
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.api.overlays.EditableProperty
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.ItemTextOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.mixins.GuiAccessor
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 
 @RegisterOverlay
-object MovableItemText : Overlay {
+object MovableItemText : SkyCubedOverlay {
 
     const val WIDTH = 182
 
@@ -32,7 +32,7 @@ object MovableItemText : Overlay {
      * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
      */
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (!Overlay.isEditing()) return
+        if (!this.isEditing()) return
         val gui = McClient.self.gui ?: return
         val accessor = gui as? GuiAccessor ?: return
         accessor.setToolHighlightTimer(20)
@@ -45,7 +45,7 @@ object MovableItemText : Overlay {
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {
-            MinimapOverlay.position.reset()
+            MinimapOverlay.position.resetPosition()
         }
     }
 }
