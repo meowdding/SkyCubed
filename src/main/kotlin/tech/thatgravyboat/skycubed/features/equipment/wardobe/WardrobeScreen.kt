@@ -156,7 +156,8 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                     entityDisplay,
                 ).render(graphics, context.x, context.y)
             }
-            getTooltips(this, displayWidth, displayHeight).render(graphics, context.x, context.y)
+            val yOffset = if (WardrobeConfig.textured) 0 else 5
+            getTooltips(this, displayWidth, displayHeight).render(graphics, context.x, context.y + yOffset)
         }
         it.withTexture(
             when {
@@ -173,7 +174,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                     menu.click(menu.slots[NEXT_PAGE_SLOT])
                 } else if (pageNumber < currentPage) {
                     menu.click(menu.slots[PREV_PAGE_SLOT])
-                } else if (armor.none { it.isEmpty }) {
+                } else if (!armor.all { it.isEmpty }) {
                     val index = (id - 1) % 9
                     menu.click(menu.slots[index + 36])
                 }
