@@ -14,7 +14,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-
 import tech.thatgravyboat.skycubed.config.overlays.TextOverlaysConfig
 import kotlin.math.roundToInt
 import me.owdding.lib.overlays.TextOverlay as MeowddingTextOverlay
