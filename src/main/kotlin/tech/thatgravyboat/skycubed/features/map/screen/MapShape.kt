@@ -4,7 +4,6 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.platform.drawTexture
 import tech.thatgravyboat.skycubed.features.map.IslandData
-import tech.thatgravyboat.skycubed.features.map.screen.MapShape.entries
 import kotlin.math.min
 
 enum class MapShape(

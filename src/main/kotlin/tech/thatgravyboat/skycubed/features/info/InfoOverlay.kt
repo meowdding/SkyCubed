@@ -12,7 +12,6 @@ import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.barDisabled
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.disabled
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
@@ -36,7 +35,7 @@ object InfoOverlay : SkyCubedOverlay {
     }
 
     override val name: Component = Component.literal("Info Overlay")
-    override val position: Position = ConfigPosition(0, 0)
+    override val position: ConfigPosition = ConfigPosition(0, 0)
         get() {
             val bossEvents = (McClient.gui.bossOverlay as? BossHealthOverlayAccessor)?.events
             val modifier: Int = bossEvents.let { events ->

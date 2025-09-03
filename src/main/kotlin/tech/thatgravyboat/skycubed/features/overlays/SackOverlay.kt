@@ -5,6 +5,7 @@ import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
+import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.profile.items.sacks.SacksAPI
@@ -15,7 +16,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.repo.SackCodecs
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
+
 import tech.thatgravyboat.skycubed.config.overlays.SackOverlayConfig
 import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
 import tech.thatgravyboat.skycubed.utils.*
@@ -25,7 +26,7 @@ import kotlin.time.Duration.Companion.seconds
 object SackOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Sack Overlay")
-    override val position: Position get() = OverlayPositions.sack
+    override val position: ConfigPosition get() = OverlayPositions.sack
     override val bounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
 

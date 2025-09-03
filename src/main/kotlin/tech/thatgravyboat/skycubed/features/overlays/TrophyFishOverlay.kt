@@ -4,6 +4,7 @@ import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.*
+import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.utils.KnownMods
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -26,7 +27,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.TrophyFishOverlayConfig
 import tech.thatgravyboat.skycubed.utils.*
 import kotlin.time.Duration.Companion.seconds
@@ -60,7 +60,7 @@ object TrophyFishOverlay : SkyCubedOverlay {
     }
 
     override val name: Component = Text.of("Trophy Fish Overlay")
-    override val position: Position get() = OverlayPositions.trophyFish
+    override val position: ConfigPosition get() = OverlayPositions.trophyFish
     override val bounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = config.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
 

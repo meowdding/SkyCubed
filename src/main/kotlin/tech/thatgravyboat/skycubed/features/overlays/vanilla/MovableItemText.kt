@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.overlays.vanilla
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.displays.Alignment
+import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -11,7 +12,7 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.ItemTextOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
+
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.mixins.GuiAccessor
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
@@ -25,7 +26,7 @@ object MovableItemText : SkyCubedOverlay {
     override val name: Component = Text.of("Moveable Item Text")
     override val enabled: Boolean get() = ItemTextOverlayConfig.moveable && LocationAPI.isOnSkyBlock
     override val properties: Collection<EditableProperty> = setOf(EditableProperty.X, EditableProperty.Y)
-    override val position: Position = OverlayPositions.itemtext
+    override val position: ConfigPosition = OverlayPositions.itemtext
     override val bounds: Pair<Int, Int> = WIDTH to 11
 
     /**

@@ -1,7 +1,6 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
 import earth.terrarium.olympus.client.utils.Orientation
-import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType.entries
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 
 /**

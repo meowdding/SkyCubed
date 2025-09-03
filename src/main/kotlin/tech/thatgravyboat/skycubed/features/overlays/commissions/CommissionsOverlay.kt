@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.overlays.commissions
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.displays.Displays
+import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
@@ -10,7 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
+
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
@@ -50,7 +51,7 @@ object CommissionsOverlay : SkyCubedOverlay {
     }
 
     override val name: Component = Text.of("Commissions")
-    override val position: Position get() = OverlayPositions.commissions
+    override val position: ConfigPosition get() = OverlayPositions.commissions
     override val bounds: Pair<Int, Int> get() = lines.getWidth() to lines.getHeight()
     override val enabled: Boolean get() = CommissionOverlayConfig.enabled && SkyBlockIsland.inAnyIsland(locations)
 

@@ -5,6 +5,7 @@ import earth.terrarium.olympus.client.utils.State
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
+import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -13,7 +14,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
+
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
@@ -28,7 +29,7 @@ import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundCircle
 @RegisterOverlay
 object MinimapOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Minimap")
-    override val position: Position = OverlayPositions.map
+    override val position: ConfigPosition = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
     override val enabled: Boolean get() = (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender
 

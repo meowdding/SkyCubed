@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.overlays.dialogue
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.*
+import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
@@ -28,7 +29,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
-import tech.thatgravyboat.skycubed.config.overlays.Position
+
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
@@ -53,7 +54,7 @@ object DialogueOverlay : SkyCubedOverlay {
     private var inventoryOverlayDisplay: Display = Displays.empty()
 
     override val name: Component = Text.of("Dialogue")
-    override val position: Position = Position(0, 0)
+    override val position: ConfigPosition = ConfigPosition(0, 0)
     override val bounds: Pair<Int, Int> = 0 to 0
     override val properties: Collection<EditableProperty> = setOf()
     override val enabled: Boolean get() = config.enabled
@@ -134,12 +135,12 @@ object DialogueOverlay : SkyCubedOverlay {
         val entity = DialogueEntities.get(name.stripped, npc)
         val npcNameDisplay = Displays.background(
             SkyCubedTextures.backgroundBox,
-            Displays.padding(5, Displays.component(name, maxWidth))
+            Displays.padding(5, Displays.component(name, maxWidth)),
         )
         val npcTextDisplay = Displays.component(message, maxWidth).let { display ->
             Displays.background(
                 SkyCubedTextures.backgroundBox,
-                Displays.padding(15, ((maxWidth * 0.8f).toInt() - display.getWidth()).coerceAtLeast(0) + 15, 15, 15, display)
+                Displays.padding(15, ((maxWidth * 0.8f).toInt() - display.getWidth()).coerceAtLeast(0) + 15, 15, 15, display),
             )
         }
 
@@ -149,7 +150,7 @@ object DialogueOverlay : SkyCubedOverlay {
 
             override fun render(graphics: GuiGraphics) {
                 npcTextDisplay.render(graphics)
-                npcNameDisplay.render(graphics, 60.takeIf { entity != null } ?: 5, - npcNameDisplay.getHeight() / 2)
+                npcNameDisplay.render(graphics, 60.takeIf { entity != null } ?: 5, -npcNameDisplay.getHeight() / 2)
 
                 if (entity != null) {
                     val display = Displays.entity(entity, 60, 80, 35, 80f, 40f)
@@ -169,7 +170,7 @@ object DialogueOverlay : SkyCubedOverlay {
 
         val options = listOf(
             Text.of("[1] Yes") { this.color = TextColor.GREEN },
-            Text.of("[2] No") { this.color = TextColor.RED }
+            Text.of("[2] No") { this.color = TextColor.RED },
         )
 
         val yesNoDisplay = options.map {
@@ -183,9 +184,9 @@ object DialogueOverlay : SkyCubedOverlay {
                 translate(
                     hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
                     -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                    -1000f
+                    -1000f,
                 )
-            }
+            },
         ).asLayer()
     }
 

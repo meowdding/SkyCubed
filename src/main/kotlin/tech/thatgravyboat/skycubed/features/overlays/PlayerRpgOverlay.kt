@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
+import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
@@ -15,7 +16,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.utils.*
 
@@ -41,7 +41,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Player RPG Hud")
     override val enabled: Boolean get() = RpgOverlayConfig.enabled
-    override val position: Position = OverlayPositions.rpg
+    override val position: ConfigPosition = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
