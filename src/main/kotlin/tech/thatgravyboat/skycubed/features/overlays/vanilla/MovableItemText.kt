@@ -12,7 +12,6 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.ItemTextOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.mixins.GuiAccessor
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay

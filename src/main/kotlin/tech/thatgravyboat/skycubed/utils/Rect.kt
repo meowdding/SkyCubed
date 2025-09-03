@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import me.owdding.lib.overlays.ConfigPosition
 
-
 data class Rect(
     var x: Int,
     var y: Int,

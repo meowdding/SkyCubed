@@ -14,7 +14,6 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
