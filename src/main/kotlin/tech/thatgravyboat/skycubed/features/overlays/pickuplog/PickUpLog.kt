@@ -5,6 +5,7 @@ import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
 import me.owdding.lib.displays.toRow
+import me.owdding.lib.overlays.Rect
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.world.item.ItemStack
@@ -23,15 +24,14 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.getArmor
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlayConfig
-import tech.thatgravyboat.skycubed.utils.Rect
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 
 @Module
 @RegisterOverlay
-object PickUpLog : Overlay {
+object PickUpLog : SkyCubedOverlay {
 
     private val exampleDisplay by lazy {
         Displays.column(
@@ -73,7 +73,7 @@ object PickUpLog : Overlay {
     private var lastWorldSwap = System.currentTimeMillis()
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        if (Overlay.isEditing()) {
+        if (this.isEditing()) {
             exampleDisplay.render(graphics)
         } else if (display != null && PickupLogOverlayConfig.enabled) {
             val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0

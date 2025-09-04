@@ -1,8 +1,6 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
 import net.minecraft.world.level.material.MapColor
-import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType.entries
-import tech.thatgravyboat.skycubed.features.dungeonmap.PuzzleType.entries
 import tech.thatgravyboat.skycubed.features.dungeonmap.position.DungeonPosition
 
 class DungeonRoom(val instance: DungeonInstance, var roomType: DungeonRoomType, val positions: MutableList<DungeonPosition<*>> = mutableListOf()) {

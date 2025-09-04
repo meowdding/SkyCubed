@@ -1,7 +1,5 @@
 package tech.thatgravyboat.skycubed.features.dungeonmap
 
-import tech.thatgravyboat.skycubed.features.dungeonmap.Checkmark.entries
-
 
 /**
  * A checkmark on the dungeon map, failed is only applied to puzzle room types.

@@ -3,10 +3,12 @@ package tech.thatgravyboat.skycubed
 import com.google.gson.JsonElement
 import com.mojang.serialization.Codec
 import kotlinx.coroutines.runBlocking
+import me.owdding.lib.overlays.Overlays
 import me.owdding.lib.utils.DataPatcher
 import me.owdding.lib.utils.MeowddingUpdateChecker
 import me.owdding.skycubed.generated.SkyCubedCodecs
 import me.owdding.skycubed.generated.SkyCubedModules
+import me.owdding.skycubed.generated.SkyCubedRegisteredOverlays
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.ModContainer
@@ -28,6 +30,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.hover
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.url
+import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.renderdoc.RenderDoc
 import java.net.URI
 import java.nio.file.Files
@@ -37,6 +40,7 @@ import kotlin.reflect.typeOf
 object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") {
 
     val mod: ModContainer = FabricLoader.getInstance().getModContainer("skycubed").orElseThrow()
+    val MOD_ID: String get() = mod.metadata.id
     val VERSION: String = mod.metadata.version.friendlyString
 
     val is1218 = !McVersionGroup.MC_1_21_5.isActive
@@ -66,6 +70,9 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
         RenderDoc.init()
         SkyCubedModules.init { SkyBlockAPI.eventBus.register(it) }
         MeowddingUpdateChecker("znwUKvZc", mod, ::updateMessage)
+
+        SkyCubedRegisteredOverlays.collected.forEach { Overlays.register(it) }
+        TextOverlay.overlays.forEach { Overlays.register(it) }
     }
 
     fun updateMessage(link: String, current: String, new: String) {

@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
+import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
@@ -13,22 +14,16 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
-import tech.thatgravyboat.skycubed.utils.Utils
-import tech.thatgravyboat.skycubed.utils.blitSpritePercentX
-import tech.thatgravyboat.skycubed.utils.drawScaledString
-import tech.thatgravyboat.skycubed.utils.next
+import tech.thatgravyboat.skycubed.utils.*
 
 private const val WIDTH = 119
 private const val HEIGHT = 48
 
 @RegisterOverlay
-object PlayerRpgOverlay : Overlay {
+object PlayerRpgOverlay : SkyCubedOverlay {
 
     private val BASE = SkyCubed.id("rpg/base")
     private val HEALTH_NORMAL = SkyCubed.id("rpg/health/normal")
@@ -46,7 +41,7 @@ object PlayerRpgOverlay : Overlay {
 
     override val name: Component = Text.of("Player RPG Hud")
     override val enabled: Boolean get() = RpgOverlayConfig.enabled
-    override val position: Position = OverlayPositions.rpg
+    override val position: ConfigPosition = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
@@ -104,7 +99,7 @@ object PlayerRpgOverlay : Overlay {
             it.divider()
         }
         it.dangerButton(Text.of("Reset Position")) {
-            position.reset()
+            position.resetPosition()
         }
     }
 }

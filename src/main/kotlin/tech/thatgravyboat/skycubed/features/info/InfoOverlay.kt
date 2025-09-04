@@ -2,21 +2,21 @@ package tech.thatgravyboat.skycubed.features.info
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.ktmodules.AutoCollect
+import me.owdding.lib.overlays.ConfigPosition
+import me.owdding.lib.overlays.EditableProperty
 import me.owdding.skycubed.generated.SkyCubedRegisteredInfos
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skycubed.api.overlays.EditableProperty
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.barDisabled
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.disabled
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 
 @AutoCollect("RegisteredInfos")
 @Retention(AnnotationRetention.SOURCE)
@@ -24,7 +24,7 @@ import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
 annotation class RegisterInfoOverlay
 
 @RegisterOverlay
-object InfoOverlay : Overlay {
+object InfoOverlay : SkyCubedOverlay {
 
     private val infoOverlays = mutableMapOf<InfoLocation, List<InfoProvider>>()
 
@@ -35,7 +35,7 @@ object InfoOverlay : Overlay {
     }
 
     override val name: Component = Component.literal("Info Overlay")
-    override val position: Position = Position()
+    override val position: ConfigPosition = ConfigPosition(0, 0)
         get() {
             val bossEvents = (McClient.gui.bossOverlay as? BossHealthOverlayAccessor)?.events
             val modifier: Int = bossEvents.let { events ->
@@ -87,7 +87,7 @@ object InfoOverlay : Overlay {
 
     override fun onRightClick() = ContextMenu.open {
         it.dangerButton(Text.of("Reset Position")) {
-            OverlayPositions.info.reset()
+            OverlayPositions.info.resetPosition()
         }
     }
 

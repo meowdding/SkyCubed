@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.utils
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import tech.thatgravyboat.skycubed.config.overlays.Position
+import me.owdding.lib.overlays.ConfigPosition
 
 data class Rect(
     var x: Int,
@@ -11,7 +11,7 @@ data class Rect(
     var height: Int
 ) {
 
-    constructor(pos: Position, width: Int, height: Int) : this(pos.component1(), pos.component2(), width, height)
+    constructor(pos: ConfigPosition, width: Int, height: Int) : this(pos.component1(), pos.component2(), width, height)
 
     val right: Int
         get() = x + width
