@@ -762,22 +762,6 @@
                 "type": "npc"
             },
             {
-                "name": "Jim Bob",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 66,
-                    "y": 71,
-                    "z": -61
-                },
-                "texture": "http://textures.minecraft.net/texture/6cd6f178e1023cd892b952e53a14bbe6dc837bf4c715d1504d61c4856bd07706",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
                 "name": "Fishing Merchant",
                 "tooltip": [
                     "$name",
@@ -1822,6 +1806,38 @@
                 },
                 "destination": "wizard",
                 "type": "portal"
+            },
+            {
+                "name": "Karis",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 67,
+                    "y": 72,
+                    "z": -64
+                },
+                "texture": "http://textures.minecraft.net/texture/94f9077b2657e4d8e799be1a0fbc1bbf76643212864f125af408fa294479ef5a",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Alda",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 66,
+                    "y": 71,
+                    "z": -59
+                },
+                "texture": "http://textures.minecraft.net/texture/db5647f93fd8e1da9cdb151dd9bdf4f48bb59a1d11748f1918c136c86804b2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             }
         ],
         "bottomY": 241,
