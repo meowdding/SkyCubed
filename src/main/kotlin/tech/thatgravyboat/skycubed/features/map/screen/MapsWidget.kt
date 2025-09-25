@@ -4,6 +4,9 @@ import com.mojang.blaze3d.platform.InputConstants
 import com.teamresourceful.resourcefullib.client.screens.CursorScreen.Cursor
 import earth.terrarium.olympus.client.components.base.BaseWidget
 import earth.terrarium.olympus.client.utils.State
+import me.owdding.lib.waypoints.MeowddingWaypoint
+import me.owdding.lib.waypoints.MeowddingWaypointHandler
+import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.client.gui.screens.Screen
@@ -24,8 +27,6 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.dev.MapPoiEditScreen
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
-import tech.thatgravyboat.skycubed.features.map.waypoints.Waypoint
-import tech.thatgravyboat.skycubed.features.map.waypoints.Waypoints
 import tech.thatgravyboat.skycubed.utils.Rect
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.setValue
@@ -99,9 +100,10 @@ class MapsWidget(
                     }
 
                     if (map.island == LocationAPI.island) {
-                        Waypoints.waypoints().forEach { waypoint ->
-                            val mapX = waypoint.pos.x - 3 + map.offsetX + width / 2f
-                            val mapY = waypoint.pos.z - 3 + map.offsetY + height / 2f
+                        MeowddingWaypointHandler.getWaypointsWithAnyTags(MeowddingWaypointTag.SHARABLE).forEach { waypoint ->
+                            val position = waypoint.getPosition()
+                            val mapX = position.x - 3 + map.offsetX + width / 2f
+                            val mapY = position.z - 3 + map.offsetY + height / 2f
 
                             graphics.translated(mapX - 3f, mapY - 3f) {
                                 graphics.drawSprite(SkyCubed.id("map/icons/waypoint"), 0, 0, 6, 6, waypoint.color)
@@ -110,11 +112,11 @@ class MapsWidget(
                             if (isMouseOver(map, waypoint.toMapRect(), mouseX - x, mouseY - y)) {
                                 graphics.showTooltip(
                                     Text.multiline(
-                                        waypoint.text,
+                                        waypoint.name,
                                         Text.translatable("skycubed.map.waypoints.tooltip.subtitle"),
                                         CommonText.EMPTY,
                                         Text.translatable("skycubed.map.waypoints.tooltip.position"),
-                                        Text.of(" ${waypoint.pos.x}, ${waypoint.pos.y}, ${waypoint.pos.z}"),
+                                        Text.of(" ${position.x}, ${position.y}, ${position.z}"),
                                     ),
                                 )
                                 cursor = Cursor.POINTER
@@ -181,8 +183,8 @@ class MapsWidget(
         return locX in mouseX.toFloat()..mouseX + rect.width * scale && locZ in mouseY.toFloat()..mouseY + rect.height * scale
     }
 
-    fun getWaypointAt(x: Number, y: Number): Waypoint? = Maps.currentIsland?.let {
-        Waypoints.waypoints().find { waypoint ->
+    fun getWaypointAt(x: Number, y: Number): MeowddingWaypoint? = Maps.currentIsland?.let {
+        MeowddingWaypointHandler.getWaypointsWithAnyTags(MeowddingWaypointTag.SHARABLE).find { waypoint ->
             isMouseOver(it, waypoint.toMapRect(), x.toInt() - this.x, y.toInt() - this.y)
         }
     }
@@ -206,3 +208,5 @@ class MapsWidget(
         return x to z
     }
 }
+
+fun MeowddingWaypoint.toMapRect(): Rect = Rect(getPosition().x.toInt() - 3, getPosition().z.toInt() - 3, 6, 6)

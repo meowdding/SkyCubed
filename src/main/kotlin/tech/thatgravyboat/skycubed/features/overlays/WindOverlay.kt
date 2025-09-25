@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.features.overlays.mining
 
-import kotlinx.datetime.Instant
 import me.owdding.ktmodules.Module
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -22,6 +21,7 @@ import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
 import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Instant
 
 @Module
 object WindOverlay {

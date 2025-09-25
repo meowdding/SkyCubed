@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays
 
 import me.owdding.lib.extensions.round
+import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -10,19 +11,19 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.Position
 import tech.thatgravyboat.skycubed.config.overlays.TextOverlaysConfig
 import kotlin.math.roundToInt
+import me.owdding.lib.overlays.TextOverlay as MeowddingTextOverlay
 
 class TextOverlay(
     override val name: Component,
-    override val position: Position,
+    override val position: ConfigPosition,
     private val isEnabled: () -> Boolean,
-    private val text: () -> Component
-) : Overlay {
+    private val text: () -> Component,
+) : MeowddingTextOverlay(SkyCubed.MOD_ID, name, position, isEnabled, text) {
 
     override val bounds: Pair<Int, Int> get() = text().width to 10
     override val enabled: Boolean get() = this.isEnabled()

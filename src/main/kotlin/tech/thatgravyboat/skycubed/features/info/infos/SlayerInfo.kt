@@ -18,12 +18,14 @@ object SlayerInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(SlayerIcons)
+        val current = SlayerAPI.progress?.current
+        val max = SlayerAPI.progress?.max
 
         val suffix = when {
-            SlayerAPI.max == 0 || SlayerAPI.current == 0 -> "§cInactive!"
-            SlayerAPI.current == SlayerAPI.max -> "§aComplete!"
+            max == 0 || current == 0 -> "§cInactive!"
+            current == max -> "§aComplete!"
             SlayerAPI.text != null -> SlayerAPI.text
-            else -> "§e${SlayerAPI.current}§7/§c${SlayerAPI.max}"
+            else -> "§e$current§7/§c$max"
         }
         string("§a${SlayerAPI.level.toRomanNumeral(true)} $suffix")
     }

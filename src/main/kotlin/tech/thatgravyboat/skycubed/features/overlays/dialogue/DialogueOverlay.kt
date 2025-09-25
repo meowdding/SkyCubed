@@ -3,6 +3,8 @@ package tech.thatgravyboat.skycubed.features.overlays.dialogue
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.*
+import me.owdding.lib.overlays.ConfigPosition
+import me.owdding.lib.overlays.EditableProperty
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -26,17 +28,15 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skycubed.api.overlays.EditableProperty
-import tech.thatgravyboat.skycubed.api.overlays.Overlay
-import tech.thatgravyboat.skycubed.api.overlays.RegisterOverlay
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
-import tech.thatgravyboat.skycubed.config.overlays.Position
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
 import kotlin.math.max
 
 @Module
 @RegisterOverlay
-object DialogueOverlay : Overlay {
+object DialogueOverlay : SkyCubedOverlay {
 
     private val messageRegex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
     private val yesNoRegex = listOf(
@@ -53,7 +53,7 @@ object DialogueOverlay : Overlay {
     private var inventoryOverlayDisplay: Display = Displays.empty()
 
     override val name: Component = Text.of("Dialogue")
-    override val position: Position = Position()
+    override val position: ConfigPosition = ConfigPosition(0, 0)
     override val bounds: Pair<Int, Int> = 0 to 0
     override val properties: Collection<EditableProperty> = setOf()
     override val enabled: Boolean get() = config.enabled
@@ -183,9 +183,9 @@ object DialogueOverlay : Overlay {
                 translate(
                     hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
                     -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                    -1000f
+                    -1000f,
                 )
-            }
+            },
         ).asLayer()
     }
 

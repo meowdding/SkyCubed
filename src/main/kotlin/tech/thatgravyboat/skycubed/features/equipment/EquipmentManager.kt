@@ -7,9 +7,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.TooltipFlag
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseClickEvent
@@ -17,14 +15,13 @@ import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.equipment.EquipmentAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.equipment.EquipmentSlot
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McLevel
-import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.platform.showTooltip
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.mixins.AbstractContainerScreenAccessor
+import tech.thatgravyboat.skycubed.utils.getTooltipLines
 
 @Module
 object EquipmentManager {
@@ -79,11 +76,7 @@ object EquipmentManager {
             val slotY = y + index * 18
             if (mouseX.toInt() in x + 1..x + 16 && mouseY.toInt() in slotY + 1..slotY + 16) {
                 val stack = EquipmentAPI.islandEquipment[slot]?.takeIf { !it.isEmpty } ?: return
-                val tooltip = stack.getTooltipLines(
-                    Item.TooltipContext.of(McLevel.self),
-                    McPlayer.self!!,
-                    if (McClient.options.advancedItemTooltips) TooltipFlag.ADVANCED else TooltipFlag.NORMAL,
-                )
+                val tooltip = stack.getTooltipLines()
                 event.graphics.showTooltip(Text.multiline(tooltip), mouseX.toInt(), mouseY.toInt())
             }
         }

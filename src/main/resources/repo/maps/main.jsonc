@@ -97,7 +97,7 @@
                     ],
                     "pos": {
                         "x": -2,
-                        "y": 70,
+                        "y": -1,
                         "z": -46
                     },
                     "destination": "workshop",
@@ -758,22 +758,6 @@
                     "z": -102
                 },
                 "texture": "http://textures.minecraft.net/texture/9ba3c4f582fc8749e3d8e35ef1e63280c4752e4ac83aab69f674dac24a375803",
-                "link": "https://wiki.hypixel.net/$name",
-                "type": "npc"
-            },
-            {
-                "name": "Jim Bob",
-                "tooltip": [
-                    "$name",
-                    "",
-                    "§7§lClick to view wiki!"
-                ],
-                "position": {
-                    "x": 66,
-                    "y": 71,
-                    "z": -61
-                },
-                "texture": "http://textures.minecraft.net/texture/6cd6f178e1023cd892b952e53a14bbe6dc837bf4c715d1504d61c4856bd07706",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
             },
@@ -1822,6 +1806,38 @@
                 },
                 "destination": "wizard",
                 "type": "portal"
+            },
+            {
+                "name": "Karis",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 67,
+                    "y": 72,
+                    "z": -64
+                },
+                "texture": "http://textures.minecraft.net/texture/94f9077b2657e4d8e799be1a0fbc1bbf76643212864f125af408fa294479ef5a",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Alda",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": 66,
+                    "y": 71,
+                    "z": -59
+                },
+                "texture": "http://textures.minecraft.net/texture/db5647f93fd8e1da9cdb151dd9bdf4f48bb59a1d11748f1918c136c86804b2",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
             }
         ],
         "bottomY": 241,
@@ -2026,6 +2042,38 @@
                     "z": -290
                 },
                 "texture": "http://textures.minecraft.net/texture/685e83a09951a2c2db78360bc9546bb0d454975b5e5a344ca1daff408a67e9f1",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Ike",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -260,
+                    "y": 94,
+                    "z": -284
+                },
+                "texture": "http://textures.minecraft.net/texture/e0130271c816e36ab17f8ef5ef06304c8cbda95230788285412bf53466b07034",
+                "link": "https://wiki.hypixel.net/$name",
+                "type": "npc"
+            },
+            {
+                "name": "§6Michael",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -264,
+                    "y": 94,
+                    "z": -284
+                },
+                "texture": "http://textures.minecraft.net/texture/394776dc5c46307b1f1b730d3596cc33838ae90634f8100da598bccfe37466fa",
                 "link": "https://wiki.hypixel.net/$name",
                 "type": "npc"
             }

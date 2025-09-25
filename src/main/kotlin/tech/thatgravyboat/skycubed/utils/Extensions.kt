@@ -9,12 +9,17 @@ import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.client.resources.SkinManager
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ClickType
 import net.minecraft.world.inventory.Slot
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
@@ -31,6 +36,12 @@ val commentRegex = Regex("(^\\s*//.*$)|(/\\*(\\*(?!/)|[^*])*\\*/)", RegexOption.
 
 inline fun <reified T : Any> InputStream.readJsonc(): T =
     Json.gson.fromJson(bufferedReader().readText().replace(commentRegex, ""), typeOf<T>().javaType)
+
+fun ItemStack.getTooltipLines(): List<Component> = getTooltipLines(
+    Item.TooltipContext.of(McLevel.self),
+    McPlayer.self!!,
+    if (McClient.options.advancedItemTooltips) TooltipFlag.ADVANCED else TooltipFlag.NORMAL,
+)
 
 internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
     this.scissor(x, y, (width * percent).toInt(), height) {

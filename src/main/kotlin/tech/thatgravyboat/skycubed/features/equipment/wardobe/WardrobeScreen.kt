@@ -1,20 +1,26 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
+import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
 import earth.terrarium.olympus.client.ui.UIConstants
+import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.builder.LayoutBuilder
 import me.owdding.lib.builder.LayoutFactory
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
+import me.owdding.lib.displays.withPadding
+import me.owdding.lib.displays.withTooltip
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.WidgetSprites
 import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeSlot
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -22,10 +28,12 @@ import tech.thatgravyboat.skyblockapi.platform.applyBackgroundBlur
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 import tech.thatgravyboat.skycubed.utils.DisplayEntityPlayer
 import tech.thatgravyboat.skycubed.utils.click
+import tech.thatgravyboat.skycubed.utils.getTooltipLines
 import java.util.concurrent.CompletableFuture
 
 private const val BUTTON_SPACING = 3
@@ -43,6 +51,11 @@ private const val CLOSE_SLOT = 49
 private const val NEXT_PAGE_SLOT = 53
 private const val PREV_PAGE_SLOT = 45
 
+private val HELMET_SMALL = SkyCubed.id("equipment/helmet_small")
+private val CHESTPLATE_SMALL = SkyCubed.id("equipment/chestplate_small")
+private val LEGGINGS_SMALL = SkyCubed.id("equipment/leggings_small")
+private val BOOTS_SMALL = SkyCubed.id("equipment/boots_small")
+
 object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
 
     private val TITLE by lazy {
@@ -53,7 +66,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                 Displays.text(
                     Text.join(
                         Text.of("Wardrobe").withColor(TextColor.WHITE),
-                        Text.of(" ʙʏ sᴋʏᴄᴜʙᴇᴅ").withColor(TextColor.GRAY),
+                        Text.of(" ʙʏ ꜱᴋʏᴄᴜʙᴇᴅ").withColor(TextColor.GRAY),
                     ),
                 ),
             ),
@@ -114,13 +127,14 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
     }
 
     private fun WardrobeSlot.getButton(displayWidth: Int, pageNumber: Int) = Widgets.button {
+        val displayHeight = (displayWidth * ASPECT_RATIO).toInt()
         it.withRenderer { graphics, context, _ ->
             val hovered = context.mouseX in context.x until context.x + context.width &&
                 context.mouseY in context.y until context.y + context.height
 
             val entityDisplay = Displays.entity(
                 DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), armor, pageNumber != currentPage),
-                displayWidth, (displayWidth * ASPECT_RATIO).toInt(),
+                displayWidth, displayHeight,
                 (displayWidth / 2.0).toInt(),
                 context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y,
             )
@@ -142,6 +156,8 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                     entityDisplay,
                 ).render(graphics, context.x, context.y)
             }
+            val yOffset = if (WardrobeConfig.textured) 0 else 5
+            getTooltips(this, displayWidth, displayHeight).render(graphics, context.x, context.y + yOffset)
         }
         it.withTexture(
             when {
@@ -151,20 +167,43 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                 else -> null
             },
         )
-        it.withSize(displayWidth, (displayWidth * ASPECT_RATIO).toInt())
+        it.withSize(displayWidth, displayHeight)
         it.withCallback {
             (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
                 if (pageNumber > currentPage) {
                     menu.click(menu.slots[NEXT_PAGE_SLOT])
                 } else if (pageNumber < currentPage) {
                     menu.click(menu.slots[PREV_PAGE_SLOT])
-                } else if (armor.none { it.isEmpty }) {
+                } else if (!armor.all { it.isEmpty }) {
                     val index = (id - 1) % 9
                     menu.click(menu.slots[index + 36])
                 }
             }
         }
     }
+
+    private fun getTooltips(slot: WardrobeSlot, width: Int, height: Int) = when (WardrobeConfig.tooltipType) {
+        WardrobeTooltipType.MINIMAL -> getSmallTooltip(slot, width, height)
+        WardrobeTooltipType.WHOLE -> getWholeTooltip(slot, width, height)
+        else -> Displays.empty()
+    }
+
+    private fun getSmallTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
+        fun icon(loc: ResourceLocation, i: Int) =
+            Displays.sprite(loc, 10, 10).withTooltip(slot.armor.getOrNull(i)?.takeUnless(ItemStack::isEmpty)?.getTooltipLines())
+
+        display(icon(HELMET_SMALL, 0))
+        display(icon(CHESTPLATE_SMALL, 1))
+        display(icon(LEGGINGS_SMALL, 2))
+        display(icon(BOOTS_SMALL, 3))
+    }.withPadding(2)
+
+    private fun getWholeTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
+        val boxHeight = height / 4
+        slot.armor.forEach {
+            display(Displays.empty(width, boxHeight).withTooltip(it.takeUnless(ItemStack::isEmpty)?.getTooltipLines()))
+        }
+    }.withPadding(2)
 
     override fun renderBackground(
         graphics: GuiGraphics,
@@ -190,4 +229,13 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
         )
         .withCallback(callback)
         .let(::widget)
+
+    enum class WardrobeTooltipType : Translatable {
+        NONE,
+        MINIMAL,
+        WHOLE,
+        ;
+
+        override fun getTranslationKey(): String = "skycubed.config.screens.wardrobe.tooltip_type.${name.lowercase()}"
+    }
 }
