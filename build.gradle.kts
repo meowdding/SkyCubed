@@ -4,6 +4,7 @@ import earth.terrarium.cloche.api.metadata.ModMetadata
 import net.msrandom.minecraftcodev.core.utils.toPath
 import net.msrandom.minecraftcodev.fabric.task.JarInJar
 import net.msrandom.minecraftcodev.runs.task.WriteClasspathFile
+import net.msrandom.stubs.GenerateStubApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -102,12 +103,6 @@ cloche {
             this.loaderVersion = loaderVersion.get()
 
             //include(libs.hypixelapi) - included in sbapi
-            include(libs.skyblockapi)
-            include(libs.resourceful.config.kotlin)
-            include(libs.meowdding.lib)
-            include(rlib)
-            include(olympus)
-            include(rconfig)
 
             metadata {
                 entrypoint("main") {
@@ -147,6 +142,13 @@ cloche {
                 fabricApi(fabricApiVersion, minecraftVersion)
                 modImplementation(olympus)
                 modImplementation(rconfig)
+
+                include(libs.skyblockapi)
+                include(libs.resourceful.config.kotlin)
+                include(libs.meowdding.lib)
+                include(rlib)
+                include(olympus)
+                include(rconfig)
             }
 
             runs {
@@ -162,10 +164,19 @@ cloche {
     }
     createVersion("1.21.8", minecraftVersionRange = {
         start = "1.21.6"
+        end = "1.21.8"
+        endExclusive = false
     }) {
         this["resourcefullib"] = libs.resourceful.lib1218
         this["resourcefulconfig"] = libs.resourceful.config1218
         this["olympus"] = libs.olympus.lib1218
+    }
+    createVersion("1.21.9", "1.21.9-rc1", fabricApiVersion = provider { "0.133.7" }, minecraftVersionRange = {
+        start = "1.21.0-rc.1"
+    }) {
+        this["resourcefullib"] = libs.resourceful.lib1219
+        this["resourcefulconfig"] = libs.resourceful.config1219
+        this["olympus"] = libs.olympus.lib1219
     }
 
     mappings { official() }
@@ -177,6 +188,30 @@ compactingResources {
 
 repo {
     sacks { includeAll() }
+}
+
+afterEvaluate {
+    tasks.withType<GenerateStubApi> {
+        excludes.addAll(
+            "org.jetbrains.kotlin",
+            "me.owdding",
+            "net.hypixel",
+            "maven.modrinth",
+            "com.fasterxml.jackson",
+            "com.google",
+            "com.ibm",
+            "io.netty",
+            "net.fabricmc:fabric-language-kotlin",
+            "com.mojang:datafixerupper",
+            "com.mojang:brigardier",
+            "io.github.llamalad7:mixinextras",
+            "net.minidev",
+            "com.nimbusds",
+            "tech.thatgravyboat",
+            "net.msrandom",
+            "eu.pb4"
+        )
+    }
 }
 
 tasks.withType<ProcessResources>().configureEach {
@@ -268,5 +303,11 @@ tasks.register("cleanRelease") {
 tasks.withType<JarInJar>().configureEach {
     include { !it.name.endsWith("-dev.jar") }
     archiveBaseName = "SkyCubed"
+
+    manifest {
+        attributes["Fabric-Loom-Mixin-Remap-Type"] = "static"
+        attributes["Fabric-Jar-Type"] = "classes"
+        attributes["Fabric-Mapping-Namespace"] = "intermediary"
+    }
 }
 

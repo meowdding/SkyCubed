@@ -3,13 +3,13 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.authlib.GameProfile
 import net.minecraft.Util
 import net.minecraft.client.player.RemotePlayer
-import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.HumanoidArm
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.entity.player.PlayerModelPart
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.scores.PlayerTeam
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
 import java.util.concurrent.CompletableFuture
 
 class DisplayEntityPlayer(
@@ -21,7 +21,7 @@ class DisplayEntityPlayer(
     GameProfile(Util.NIL_UUID, "Display")
 ) {
 
-    private val skin: CompletableFuture<PlayerSkin> = skin.thenApply { PlayerSkin(it.texture(), it.textureUrl(), null, null, it.model(), it.secure()) }
+    private val skin: CompletableFuture<PlayerSkin> = TODO()
     private val hasNoArmor: Boolean = armor.all(ItemStack::isEmpty)
     override fun getItemBySlot(slot: EquipmentSlot): ItemStack = when (slot) {
         EquipmentSlot.HEAD -> armor.getOrNull(0) ?: ItemStack.EMPTY
@@ -31,7 +31,7 @@ class DisplayEntityPlayer(
         else -> ItemStack.EMPTY
     }
 
-    override fun getSkin(): PlayerSkin = if (skin.isActuallyDone) skin.get() else super.getSkin()
+    override fun getMainArm(): HumanoidArm = HumanoidArm.RIGHT
 
     override fun isSpectator() = false
     override fun isCreative() = false
@@ -42,8 +42,6 @@ class DisplayEntityPlayer(
     override fun getTeam() = object : PlayerTeam(null, "display") {
         override fun getNameTagVisibility() = Visibility.NEVER
     }
-
-    override fun isModelPartShown(part: PlayerModelPart) = true
 }
 
 interface DisplayEntityPlayerRenderStateExtension {

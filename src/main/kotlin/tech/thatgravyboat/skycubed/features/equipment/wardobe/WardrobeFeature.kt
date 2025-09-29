@@ -1,9 +1,10 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
 import com.mojang.blaze3d.platform.InputConstants
-import com.teamresourceful.resourcefullib.client.utils.CursorUtils
 import me.owdding.ktmodules.Module
 import me.owdding.lib.compat.REIRenderOverlayEvent
+import me.owdding.lib.platform.screens.*
+import me.owdding.lib.utils.matches
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -49,7 +50,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseClicked(event.x, event.y, event.button)
+        WardrobeScreen.mouseClicked(MouseButtonEvent(event.x, event.y, MouseButtonInfo(event.button, 0)), false)
     }
 
     @Subscription
@@ -57,7 +58,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseReleased(event.x, event.y, event.button)
+        WardrobeScreen.mouseReleased(MouseButtonEvent(event.x, event.y, MouseButtonInfo(event.button, 0)))
     }
 
     @Subscription
@@ -66,7 +67,7 @@ object WardrobeFeature {
 
         event.cancel()
 
-        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(event.key, event.scanCode)
+        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(KeyEvent(event.key, event.scanCode, 0))
 
         if (isEditing) {
             if (shouldClose) {
@@ -84,7 +85,7 @@ object WardrobeFeature {
     fun onScreenInit(event: ScreenInitializedEvent) {
         if (event.screen.isEnabled()) {
             ScreenEvents.remove(event.screen).register {
-                CursorUtils.setDefault()
+                TODO()
             }
         } else {
             isEditing = false

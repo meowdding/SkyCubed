@@ -7,18 +7,16 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
 import kotlinx.coroutines.runBlocking
 import me.owdding.ktmodules.Module
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
-import net.minecraft.client.KeyMapping
 import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
-import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.map.screen.MapScreen
+import tech.thatgravyboat.skycubed.utils.SkyCubedKeybind
 import tech.thatgravyboat.skycubed.utils.readJsonc
 import java.util.function.Function
 
@@ -34,7 +32,9 @@ object Maps {
         "jerrys_workshop",
         "backwater",
     )
-    val MAP_KEYBIND = KeyBindingHelper.registerKeyBinding(KeyMapping("skycubed.key.map", InputConstants.KEY_M, "skycubed.key.category"))
+    val MAP_KEYBIND = SkyCubedKeybind("skycubed.key.map", InputConstants.KEY_M) {
+        McClient.setScreen(MapScreen())
+    }
 
     val groups: MutableMap<String, List<IslandData>> = mutableMapOf()
     private val islands: MutableMap<SkyBlockIsland, String> = mutableMapOf()
@@ -73,13 +73,6 @@ object Maps {
     @Subscription
     fun onIslandChange(event: IslandChangeEvent) {
         currentIsland = groups[islands[event.new]]?.find { it.island == event.new }
-    }
-
-    @Subscription
-    fun onTick(event: TickEvent) {
-        if (MAP_KEYBIND.consumeClick()) {
-            McClient.setScreen(MapScreen())
-        }
     }
 
     @Subscription

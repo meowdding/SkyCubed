@@ -3,9 +3,7 @@ package tech.thatgravyboat.skycubed.features.map.dev
 import com.mojang.serialization.JsonOps
 import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.network.chat.CommonComponents
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityAttachment
 import net.minecraft.world.entity.decoration.ArmorStand
 import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -16,7 +14,6 @@ import tech.thatgravyboat.skyblockapi.api.events.render.PlayerRenderEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toPrettyString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
@@ -111,10 +108,6 @@ object MapEditor {
                 .send()
             poi.position.y = entity.y.roundToInt()
         }
-
-        this.state?.nameTagAttachment = entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
-        this.state?.scoreText = entity.posAsVec3i().toString().asComponent()
-        this.state?.nameTag = CommonComponents.EMPTY
     }
 
     @Subscription
