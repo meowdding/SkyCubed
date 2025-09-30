@@ -1,8 +1,8 @@
 package tech.thatgravyboat.skycubed.mixins;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTextures;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.resources.SkinManager;
+import net.minecraft.world.entity.player.PlayerSkin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 

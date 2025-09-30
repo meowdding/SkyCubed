@@ -17,6 +17,8 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
+import tech.thatgravyboat.skycubed.utils.Utils
+import tech.thatgravyboat.skycubed.utils.Utils.fullyRender
 
 @Module
 object WardrobeFeature {
@@ -42,7 +44,7 @@ object WardrobeFeature {
 
         val (mouseX, mouseY) = McClient.mouse
         WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)
-        WardrobeScreen.renderWithTooltip(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
+        WardrobeScreen.fullyRender(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
     }
 
     @Subscription
@@ -85,7 +87,7 @@ object WardrobeFeature {
     fun onScreenInit(event: ScreenInitializedEvent) {
         if (event.screen.isEnabled()) {
             ScreenEvents.remove(event.screen).register {
-                TODO()
+                Utils.resetCursor()
             }
         } else {
             isEditing = false

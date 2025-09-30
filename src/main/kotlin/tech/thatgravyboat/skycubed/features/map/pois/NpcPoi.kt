@@ -6,6 +6,7 @@ import me.owdding.ktcodecs.FieldName
 import me.owdding.ktcodecs.GenerateCodec
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
+import me.owdding.skycubed.generated.SkyCubedCodecs
 import net.minecraft.client.resources.DefaultPlayerSkin
 import net.minecraft.network.chat.Component
 import org.joml.Vector2i
@@ -39,7 +40,7 @@ data class NpcPoi(
     override val id: String = "npc"
     override val bounds: Vector2i = Vector2i(10, 10)
     override val display: Display get() = when {
-        skin.isActuallyDone -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ skin.get().texture }))
+        skin.isActuallyDone -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ skin.get().texture!! }, 8))
         skin.isCompletedExceptionally -> ExtraDisplays.missingTextureDisplay()
         else -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ DefaultPlayerSkin.getDefaultTexture() }))
     }

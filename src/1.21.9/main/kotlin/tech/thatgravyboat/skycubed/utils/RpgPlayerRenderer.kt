@@ -15,13 +15,16 @@ import net.minecraft.client.gui.render.state.BlitRenderState
 import net.minecraft.client.gui.render.state.GuiRenderState
 import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState
 import net.minecraft.client.player.AbstractClientPlayer
+import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.entity.EntityRenderer
+import net.minecraft.client.renderer.entity.state.AvatarRenderState
 import net.minecraft.client.renderer.entity.state.EntityRenderState
+import net.minecraft.client.renderer.state.CameraRenderState
 import net.minecraft.util.Mth
+import net.minecraft.world.entity.Avatar
 import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.player.Player
 import org.joml.Matrix3x2f
 import org.joml.Quaternionf
 import org.joml.Vector3f
@@ -47,13 +50,15 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         renderer.lighting.setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
         stack.mulPose(state.rotation)
+        val cameraState = CameraRenderState()
+        val featureRenderer = McClient.self.gameRenderer.featureRenderDispatcher
         if (state.cameraAngle != null) {
-            dispatcher.overrideCameraOrientation(state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI))
+            cameraState.orientation = state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI)
         }
 
-        dispatcher.setRenderShadow(false)
-        dispatcher.render(state.state, 0.0, 0.0, 0.0, stack, this.bufferSource, 15728880)
-        dispatcher.setRenderShadow(true)
+        state.state.lightCoords = LightTexture.FULL_BRIGHT
+        dispatcher.submit(state.state, cameraState, 0.0, 0.0, 0.0, stack, featureRenderer.submitNodeStorage)
+        featureRenderer.renderAllFeatures()
     }
 
     override fun blitTexture(state: State, gui: GuiRenderState) {
@@ -128,16 +133,16 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             }
 
 
-            val fakeplayer = DisplayEntityPlayer(CompletableFuture.completedFuture(entity.skin), armor, false)
-            val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Player, PlayerRenderState>
+            val fakeplayer = DisplayEntityPlayer(CompletableFuture.completedFuture(entity.skin), false, armor)
+            val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Avatar, AvatarRenderState>
             val state = renderer.createRenderState()
-            renderer.extractRenderState(fakeplayer, state, 1f)
+            renderer.extractRenderState(fakeplayer as Avatar, state, 1f)
 
             state.hitboxesRenderState = null
             state.x = 0.0
             state.y = 0.0
             state.z = 0.0
-            state.swinging = false
+            state.isVisuallySwimming = false
             state.attackTime = 0f
             state.walkAnimationPos = 0f
             state.walkAnimationSpeed = 0f

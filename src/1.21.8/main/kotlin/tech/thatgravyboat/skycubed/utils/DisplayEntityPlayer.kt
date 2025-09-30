@@ -14,14 +14,14 @@ import java.util.concurrent.CompletableFuture
 
 class DisplayEntityPlayer(
     skin: CompletableFuture<PlayerSkin>,
-    var armor: List<ItemStack>,
     var isTransparent: Boolean = false,
+    var armor: List<ItemStack>,
 ) : RemotePlayer(
     McClient.self.level,
-    GameProfile(Util.NIL_UUID, "Display")
+    GameProfile(Util.NIL_UUID, "Display"),
 ) {
 
-    private val skin: CompletableFuture<PlayerSkin> = TODO()
+    private val skin: CompletableFuture<PlayerSkin> = skin.thenApply { PlayerSkin(it.texture(), it.textureUrl(), null, null, it.model(), it.secure()) }
     private val hasNoArmor: Boolean = armor.all(ItemStack::isEmpty)
     override fun getItemBySlot(slot: EquipmentSlot): ItemStack = when (slot) {
         EquipmentSlot.HEAD -> armor.getOrNull(0) ?: ItemStack.EMPTY

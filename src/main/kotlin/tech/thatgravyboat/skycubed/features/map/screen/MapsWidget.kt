@@ -9,6 +9,7 @@ import me.owdding.lib.waypoints.MeowddingWaypoint
 import me.owdding.lib.waypoints.MeowddingWaypointHandler
 import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.util.Mth
 import org.joml.component1
 import org.joml.component2
@@ -129,11 +130,10 @@ class MapsWidget(
                     val x = McPlayer.self!!.x + offset.x
                     val z = McPlayer.self!!.z + offset.z
                     graphics.translated(x + width / 2.0f, z + height / 2.0f) {
-                        TODO()
-                        //val profile = McPlayer.skin ?: return
-                        //graphics.scale(1f / scale, 1f / scale)
-                        //graphics.rotate((180 + headRot).toDouble())
-                        //PlayerFaceRenderer.draw(graphics, profile, -4, -4, 8)
+                        val profile = McPlayer.skin ?: return
+                        graphics.scale(1f / scale, 1f / scale)
+                        graphics.rotate((180 + headRot).toDouble())
+                        PlayerFaceRenderer.draw(graphics, profile.texture, -4, -4, -1, true, true, 8)
                     }
                 }
             }

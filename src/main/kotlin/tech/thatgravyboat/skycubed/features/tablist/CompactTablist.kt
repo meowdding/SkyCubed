@@ -6,7 +6,6 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
 import me.owdding.lib.displays.toRow
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
@@ -20,6 +19,10 @@ import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.party.PartyAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
+import tech.thatgravyboat.skyblockapi.platform.id
+import tech.thatgravyboat.skyblockapi.platform.name
+import tech.thatgravyboat.skyblockapi.platform.texture
 import tech.thatgravyboat.skyblockapi.utils.extentions.chunked
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
@@ -36,6 +39,7 @@ import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
+import tech.thatgravyboat.skycubed.utils.Utils.toSkin
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
@@ -125,7 +129,7 @@ object CompactTablist {
             segment.map { line ->
                 line.face?.let { face ->
                     listOfNotNull(
-                        Displays.face({ face.texture() }),
+                        Displays.face({ face.texture!! }),
                         Displays.text(line.component),
                         *line.extraEmblems.map { Displays.text(it) }.toTypedArray(),
                     ).toRow(3)
@@ -171,7 +175,7 @@ object CompactTablist {
             val contributor = ContributorHandler.contributors[player?.profile?.id]
 
             playerName = name
-            face = player?.skin
+            face = player?.toSkin()
             skyblockLevel = level.toInt()
             // party > coop > friends > guild
             // Todo add apis for this in sbapi

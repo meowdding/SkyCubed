@@ -131,7 +131,7 @@ cloche {
 
                 dependency("resourcefullib", rlib.map { it.version!! })
                 dependency("olympus", olympus.map { it.version!! })
-                dependency("resourcefulconfig", rconfig.map { it.version!! })
+                //dependency("resourcefulconfig", rconfig.map { it.version!! })
 
                 dependency("skyblock-api", libs.versions.skyblockapi)
                 dependency("meowdding-lib", libs.versions.meowdding.lib)
@@ -247,6 +247,7 @@ tasks.withType<KotlinCompile>().configureEach {
 ksp {
     this@ksp.excludedSources.from(sourceSets.getByName("1215").kotlin.srcDirs)
     this@ksp.excludedSources.from(sourceSets.getByName("1218").kotlin.srcDirs)
+    this@ksp.excludedSources.from(sourceSets.getByName("1219").kotlin.srcDirs)
     arg("meowdding.modules.project_name", project.name)
     arg("meowdding.modules.package", "me.owdding.skycubed.generated")
     arg("meowdding.codecs.project_name", project.name)
