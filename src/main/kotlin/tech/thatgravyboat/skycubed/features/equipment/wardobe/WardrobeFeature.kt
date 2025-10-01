@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
 import me.owdding.lib.compat.REIRenderOverlayEvent
 import me.owdding.lib.platform.screens.*
-import me.owdding.lib.utils.matches
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -52,7 +51,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseClicked(MouseButtonEvent(event.x, event.y, MouseButtonInfo(event.button, 0)), false)
+        WardrobeScreen.mouseClicked(MouseButtonEvent(event.x, event.y, event.button), false)
     }
 
     @Subscription
@@ -60,7 +59,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseReleased(MouseButtonEvent(event.x, event.y, MouseButtonInfo(event.button, 0)))
+        WardrobeScreen.mouseReleased(MouseButtonEvent(event.x, event.y, event.button))
     }
 
     @Subscription

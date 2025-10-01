@@ -140,8 +140,9 @@ cloche {
 
             dependencies {
                 fabricApi(fabricApiVersion, minecraftVersion)
-                modImplementation(olympus)
-                modImplementation(rconfig)
+                modImplementation(olympus) { isTransitive = false }
+                modImplementation(rconfig) { isTransitive = false }
+                modImplementation(rlib) { isTransitive = false }
 
                 include(libs.skyblockapi)
                 include(libs.resourceful.config.kotlin)
