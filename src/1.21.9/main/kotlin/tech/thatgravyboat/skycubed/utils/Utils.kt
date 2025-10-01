@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.authlib.SignatureState
 import com.mojang.authlib.minecraft.MinecraftProfileTexture
 import com.mojang.authlib.minecraft.MinecraftProfileTextures
-import com.teamresourceful.resourcefullib.client.utils.CursorUtils
 import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
@@ -29,14 +28,11 @@ actual object Utils {
     }
 
     actual fun Screen.fullyRender(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        this.renderWithTooltip(graphics, mouseX, mouseY, partialTicks)
+        this.renderWithTooltipAndSubtitles(graphics, mouseX, mouseY, partialTicks)
     }
 
     actual fun PlayerInfo.toSkin(): PlayerSkin = this.skin
-
-    actual fun resetCursor() {
-        CursorUtils.setDefault()
-    }
+    actual fun resetCursor() {}
 }
 
 actual fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin> {

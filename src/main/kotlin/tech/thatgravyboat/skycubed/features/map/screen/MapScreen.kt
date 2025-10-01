@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
-import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
 import earth.terrarium.olympus.client.components.textbox.TextBox
@@ -8,6 +7,10 @@ import earth.terrarium.olympus.client.layouts.Layouts
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.utils.Orientation
 import earth.terrarium.olympus.client.utils.State
+import me.owdding.lib.platform.screens.KeyEvent
+import me.owdding.lib.platform.screens.MeowddingScreen
+import me.owdding.lib.platform.screens.MouseButtonEvent
+import me.owdding.lib.utils.matches
 import net.minecraft.client.gui.GuiGraphics
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -20,7 +23,7 @@ import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.ResettingState
 import tech.thatgravyboat.skycubed.utils.findFocused
 
-class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
+class MapScreen : MeowddingScreen(CommonText.EMPTY) {
 
     private val search = State.of("")
 
@@ -102,15 +105,14 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
         renderTransparentBackground(graphics)
     }
 
-    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+    override fun keyPressed(keyEvent: KeyEvent): Boolean {
         if ((this.findFocused() as? TextBox)?.isFocused != true) {
-            if (Maps.MAP_KEYBIND.matches(keyCode, scanCode) || McClient.options.keyInventory.matches(keyCode, scanCode)) {
+            if (Maps.MAP_KEYBIND.matches(keyEvent) || McClient.options.keyInventory.matches(keyEvent)) {
                 onClose()
                 return true
             }
         }
-
-        return super.keyPressed(keyCode, scanCode, modifiers)
+        return super.keyPressed(keyEvent)
     }
 
     companion object {
@@ -120,13 +122,13 @@ class MapScreen : BaseCursorScreen(CommonText.EMPTY) {
         }
     }
 
-    override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
+    override fun mouseClicked(mouseEvent: MouseButtonEvent, doubleClicked: Boolean): Boolean {
         val widget = this.children().filterIsInstance<MapsWidget>().firstOrNull()
-        if (MapEditor.enabled && MapEditorScreen.mouseClicked(widget, mouseX, mouseY, button)) {
+        if (MapEditor.enabled && MapEditorScreen.mouseClicked(widget, mouseEvent.x, mouseEvent.y, mouseEvent.button)) {
             return true
-        } else if (MapWaypointsScreen.mouseClicked(widget, mouseX, mouseY, button)) {
+        } else if (MapWaypointsScreen.mouseClicked(widget, mouseEvent.x, mouseEvent.y, mouseEvent.button)) {
             return true
         }
-        return super.mouseClicked(mouseX, mouseY, button)
+        return super.mouseClicked(mouseEvent, doubleClicked)
     }
 }

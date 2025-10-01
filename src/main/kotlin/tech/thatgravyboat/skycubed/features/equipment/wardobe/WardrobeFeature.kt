@@ -1,9 +1,9 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
 import com.mojang.blaze3d.platform.InputConstants
-import com.teamresourceful.resourcefullib.client.utils.CursorUtils
 import me.owdding.ktmodules.Module
 import me.owdding.lib.compat.REIRenderOverlayEvent
+import me.owdding.lib.platform.screens.*
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -16,6 +16,8 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
+import tech.thatgravyboat.skycubed.utils.Utils
+import tech.thatgravyboat.skycubed.utils.Utils.fullyRender
 
 @Module
 object WardrobeFeature {
@@ -41,7 +43,7 @@ object WardrobeFeature {
 
         val (mouseX, mouseY) = McClient.mouse
         WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)
-        WardrobeScreen.renderWithTooltip(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
+        WardrobeScreen.fullyRender(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
     }
 
     @Subscription
@@ -49,7 +51,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseClicked(event.x, event.y, event.button)
+        WardrobeScreen.mouseClicked(MouseButtonEvent(event.x, event.y, event.button), false)
     }
 
     @Subscription
@@ -57,7 +59,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseReleased(event.x, event.y, event.button)
+        WardrobeScreen.mouseReleased(MouseButtonEvent(event.x, event.y, event.button))
     }
 
     @Subscription
@@ -66,7 +68,7 @@ object WardrobeFeature {
 
         event.cancel()
 
-        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(event.key, event.scanCode)
+        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(KeyEvent(event.key, event.scanCode, 0))
 
         if (isEditing) {
             if (shouldClose) {
@@ -84,7 +86,7 @@ object WardrobeFeature {
     fun onScreenInit(event: ScreenInitializedEvent) {
         if (event.screen.isEnabled()) {
             ScreenEvents.remove(event.screen).register {
-                CursorUtils.setDefault()
+                Utils.resetCursor()
             }
         } else {
             isEditing = false
