@@ -11,6 +11,7 @@ import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
 import net.minecraft.util.Mth
+import net.msrandom.stub.Stub
 import org.joml.component1
 import org.joml.component2
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -30,6 +31,9 @@ import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.Rect
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.setValue
+
+@Stub
+internal expect fun playerRotation(headRot: Float): Float
 
 class MapsWidget(
     map: String?,
@@ -132,8 +136,8 @@ class MapsWidget(
                     graphics.translated(x + width / 2.0f, z + height / 2.0f) {
                         val profile = McPlayer.skin ?: return
                         graphics.scale(1f / scale, 1f / scale)
-                        graphics.rotate((180 + headRot).toDouble())
-                        PlayerFaceRenderer.draw(graphics, profile.texture, -4, -4, -1, true, true, 8)
+                        graphics.rotate(playerRotation(headRot))
+                        PlayerFaceRenderer.draw(graphics, profile.texture, -4, -4, 8, true, true, -1)
                     }
                 }
             }
