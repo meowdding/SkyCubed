@@ -3,7 +3,11 @@ package tech.thatgravyboat.skycubed.features.equipment.wardobe
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
 import me.owdding.lib.compat.REIRenderOverlayEvent
-import me.owdding.lib.platform.screens.*
+import me.owdding.lib.platform.screens.KeyEvent
+import me.owdding.lib.platform.screens.MouseButtonEvent
+import me.owdding.lib.platform.screens.mouseClicked
+import me.owdding.lib.platform.screens.mouseReleased
+import me.owdding.lib.utils.matches
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription

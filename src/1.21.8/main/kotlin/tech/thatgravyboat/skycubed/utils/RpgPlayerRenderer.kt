@@ -130,7 +130,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             val fakeplayer = DisplayEntityPlayer(CompletableFuture.completedFuture(entity.skin), armor, false)
             val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Player, PlayerRenderState>
             val state = renderer.createRenderState()
-            renderer.extractRenderState(fakeplayer, state, 1f)
+            renderer.extractRenderState(fakeplayer as Player, state, 1f)
 
             state.hitboxesRenderState = null
             state.x = 0.0
