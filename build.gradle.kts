@@ -85,10 +85,13 @@ cloche {
         version: String = name,
         loaderVersion: Provider<String> = libs.versions.fabric.loader,
         fabricApiVersion: Provider<String> = libs.versions.fabric.api,
+        endAtSameVersion: Boolean = true,
         minecraftVersionRange: ModMetadata.VersionRange.() -> Unit = {
             start = version
-            end = version
-            endExclusive = false
+            if (endAtSameVersion) {
+                end = version
+                endExclusive = false
+            }
         },
         dependencies: MutableMap<String, Provider<MinimalExternalModuleDependency>>.() -> Unit = { },
     ) {
@@ -140,9 +143,9 @@ cloche {
 
             dependencies {
                 fabricApi(fabricApiVersion, minecraftVersion)
-                modImplementation(olympus) { isTransitive = false }
-                modImplementation(rconfig) { isTransitive = false }
-                modImplementation(rlib) { isTransitive = false }
+                modImplementation(olympus) { exclude(group = "net.fabricmc.fabric-api") }
+                modImplementation(rconfig) { exclude(group = "net.fabricmc.fabric-api") }
+                modImplementation(rlib) { exclude(group = "net.fabricmc.fabric-api") }
 
                 include(libs.skyblockapi)
                 include(libs.resourceful.config.kotlin)
@@ -172,7 +175,7 @@ cloche {
         this["resourcefulconfig"] = libs.resourceful.config1218
         this["olympus"] = libs.olympus.lib1218
     }
-    createVersion("1.21.9", fabricApiVersion = provider { "0.133.7" }) {
+    createVersion("1.21.9", endAtSameVersion = false, fabricApiVersion = provider { "0.133.7" }) {
         this["resourcefullib"] = libs.resourceful.lib1219
         this["resourcefulconfig"] = libs.resourceful.config1219
         this["olympus"] = libs.olympus.lib1219

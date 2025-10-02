@@ -33,7 +33,7 @@ object Maps {
         "backwater",
     )
     val MAP_KEYBIND = SkyCubedKeybind("skycubed.key.map", InputConstants.KEY_M) {
-        McClient.setScreen(MapScreen())
+        McClient.setScreenAsync { MapScreen() }
     }
 
     val groups: MutableMap<String, List<IslandData>> = mutableMapOf()

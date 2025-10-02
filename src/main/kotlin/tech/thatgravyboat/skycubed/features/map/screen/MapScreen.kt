@@ -17,16 +17,20 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
+import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.ResettingState
 import tech.thatgravyboat.skycubed.utils.findFocused
+import kotlin.time.Duration.Companion.milliseconds
 
 class MapScreen : MeowddingScreen(CommonText.EMPTY) {
 
     private val search = State.of("")
 
+    val openedAt = currentInstant()
     private val map = DropdownState.of(Maps.getMapsForLocation())
     private var lastMap = map.get()
 
@@ -107,7 +111,7 @@ class MapScreen : MeowddingScreen(CommonText.EMPTY) {
 
     override fun keyPressed(keyEvent: KeyEvent): Boolean {
         if ((this.findFocused() as? TextBox)?.isFocused != true) {
-            if (Maps.MAP_KEYBIND.matches(keyEvent) || McClient.options.keyInventory.matches(keyEvent)) {
+            if ((Maps.MAP_KEYBIND.matches(keyEvent) && openedAt.since() >= 250.milliseconds) || McClient.options.keyInventory.matches(keyEvent)) {
                 onClose()
                 return true
             }

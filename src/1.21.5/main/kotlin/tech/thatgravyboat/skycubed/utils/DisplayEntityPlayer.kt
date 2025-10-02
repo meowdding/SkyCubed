@@ -6,6 +6,7 @@ import net.minecraft.client.player.RemotePlayer
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.HumanoidArm
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.player.PlayerModelPart
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.scores.PlayerTeam
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -31,6 +32,7 @@ class DisplayEntityPlayer(
         else -> ItemStack.EMPTY
     }
 
+    override fun getSkin(): PlayerSkin = if (skin.isActuallyDone) skin.get() else super.getSkin()
     override fun getMainArm(): HumanoidArm = HumanoidArm.RIGHT
 
     override fun isSpectator() = false
@@ -38,6 +40,7 @@ class DisplayEntityPlayer(
 
     override fun isInvisible() = this.isTransparent
     override fun isInvisibleTo(player: Player) = this.isTransparent && !hasNoArmor
+    override fun isModelPartShown(part: PlayerModelPart): Boolean = true
 
     override fun getTeam() = object : PlayerTeam(null, "display") {
         override fun getNameTagVisibility() = Visibility.NEVER
