@@ -6,6 +6,7 @@
         "objectAsKeys": true,
         "@references": {}
     },
+    "key.category.skycubed.map": "Sky Cubed",
     "skycubed": {
         "ui.overlay.edit": {
             "@value": "<gold>Click to edit overlay.</gold>",
