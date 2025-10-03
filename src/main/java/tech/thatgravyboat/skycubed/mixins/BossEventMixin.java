@@ -7,8 +7,10 @@ import tech.thatgravyboat.skycubed.features.overlays.vanilla.BossEventExtension;
 
 @Mixin(BossEvent.class)
 public class BossEventMixin implements BossEventExtension {
-    @Unique private boolean disabled = false;
-    @Unique private boolean disabledBar = false;
+    @Unique
+    private boolean disabled = false;
+    @Unique
+    private boolean disabledBar = false;
 
     @Override
     public boolean getSkycubed$disabled() {

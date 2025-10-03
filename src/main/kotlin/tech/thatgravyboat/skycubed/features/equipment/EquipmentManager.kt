@@ -54,7 +54,7 @@ object EquipmentManager {
             graphics.drawSprite(slotTexture, leftPos, y, 18, 18)
             val stack = EquipmentAPI.islandEquipment[slot] ?: ItemStack.EMPTY
             if (mouseX in leftPos + 1..leftPos + 16 && mouseY in y + 1..y + 16) {
-                 graphics.fill(leftPos + 1, y + 1, leftPos + 17, y + 17, -2130706433)
+                graphics.fill(leftPos + 1, y + 1, leftPos + 17, y + 17, -2130706433)
             }
             if (stack.isEmpty) {
                 graphics.drawSprite(getEmptySlotTexture(slot), leftPos + 1, y + 1, 16, 16)
