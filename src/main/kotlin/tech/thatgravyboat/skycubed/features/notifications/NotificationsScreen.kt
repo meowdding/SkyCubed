@@ -10,11 +10,11 @@ import earth.terrarium.olympus.client.ui.Overlay
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.ui.UIIcons
 import earth.terrarium.olympus.client.ui.UITexts
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.gui.components.StringWidget
 import net.minecraft.network.chat.Component
 import org.apache.commons.lang3.function.Consumers
-import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.platform.pushPop
@@ -54,18 +54,20 @@ class NotificationsScreen : Overlay(McScreen.self) {
                 Layouts.row()
                     .withPosition(x + PADDING, y + PADDING)
                     .withChild(
-                        StringWidget(
-                            WIDTH - 24, 24,
+                        Displays.text(
                             Component.translatable("skycubed.notifications"),
-                            McFont.self
-                        ).alignLeft()
+                        ).asWidget().apply {
+                            withSize(WIDTH - 24, 24)
+                        },
                     )
-                    .withChild(Widgets.button {
-                        it.withSize(24, 24)
-                        it.withRenderer(WidgetRenderers.icon<Button?>(UIIcons.CROSS).withCentered(12, 12))
-                        it.withTooltip(UITexts.BACK)
-                        it.withCallback { this.onClose() }
-                    })
+                    .withChild(
+                        Widgets.button {
+                            it.withSize(24, 24)
+                            it.withRenderer(WidgetRenderers.icon<Button?>(UIIcons.CROSS).withCentered(12, 12))
+                            it.withTooltip(UITexts.BACK)
+                            it.withCallback { this.onClose() }
+                        }
+                    ),
             )
             .withChild(
                 Widgets.dropdown(

@@ -5,6 +5,7 @@ import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.*
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
+import me.owdding.lib.utils.keys
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -96,6 +97,14 @@ object DialogueOverlay : SkyCubedOverlay {
         containerLeftPos = event.screen.left
     }
 
+    val yesKeys = keys {
+        InputConstants.KEY_1
+    }
+
+    val noKeys = keys {
+        InputConstants.KEY_2
+    }
+
     @Subscription
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
@@ -122,8 +131,8 @@ object DialogueOverlay : SkyCubedOverlay {
         }
 
         val (yesCommand, noCommand) = yesNo ?: return
-        val isYes = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_1)
-        val isNo = InputConstants.isKeyDown(McClient.window.window, InputConstants.KEY_2)
+        val isYes = yesKeys.isDown()
+        val isNo = noKeys.isDown()
 
         val command = if (isYes) yesCommand else if (isNo) noCommand else return
         McClient.sendCommand(command.removePrefix("/"))

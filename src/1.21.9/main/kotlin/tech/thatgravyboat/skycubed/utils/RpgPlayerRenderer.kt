@@ -15,14 +15,16 @@ import net.minecraft.client.gui.render.state.BlitRenderState
 import net.minecraft.client.gui.render.state.GuiRenderState
 import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState
 import net.minecraft.client.player.AbstractClientPlayer
+import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.entity.EntityRenderer
+import net.minecraft.client.renderer.entity.state.AvatarRenderState
 import net.minecraft.client.renderer.entity.state.EntityRenderState
-import net.minecraft.client.renderer.entity.state.PlayerRenderState
+import net.minecraft.client.renderer.state.CameraRenderState
 import net.minecraft.util.Mth
+import net.minecraft.world.entity.Avatar
 import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.player.Player
 import org.joml.Matrix3x2f
 import org.joml.Quaternionf
 import org.joml.Vector3f
@@ -48,25 +50,29 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         renderer.lighting.setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
         stack.mulPose(state.rotation)
+        val cameraState = CameraRenderState()
+        val featureRenderer = McClient.self.gameRenderer.featureRenderDispatcher
         if (state.cameraAngle != null) {
-            dispatcher.overrideCameraOrientation(state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI))
+            cameraState.orientation = state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI)
         }
 
-        dispatcher.setRenderShadow(false)
-        dispatcher.render(state.state, 0.0, 0.0, 0.0, stack, this.bufferSource, 15728880)
-        dispatcher.setRenderShadow(true)
+        state.state.lightCoords = LightTexture.FULL_BRIGHT
+        dispatcher.submit(state.state, cameraState, 0.0, 0.0, 0.0, stack, featureRenderer.submitNodeStorage)
+        featureRenderer.renderAllFeatures()
     }
 
     override fun blitTexture(state: State, gui: GuiRenderState) {
         val mask = McClient.self.textureManager.getTexture(SkyCubed.id("textures/gui/sprites/rpg/mask.png")).textureView
 
-        gui.submitBlitToCurrentLayer(BlitRenderState(
-            pipeline,
-            TextureSetup.doubleTexture(this.textureView!!, mask),
-            state.pose(),
-            state.x0(), state.y0(), state.x1(), state.y1(),
-            0.0F, 1.0F, 1.0F, 0.0F,
-            -1, state.scissorArea(), null)
+        gui.submitBlitToCurrentLayer(
+            BlitRenderState(
+                pipeline,
+                TextureSetup.doubleTexture(this.textureView!!, mask),
+                state.pose(),
+                state.x0(), state.y0(), state.x1(), state.y1(),
+                0.0F, 1.0F, 1.0F, 0.0F,
+                -1, state.scissorArea(), null,
+            ),
         )
     }
 
@@ -78,7 +84,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         val x0: Int, val y0: Int, val x1: Int, val y1: Int,
         val scale: Float,
         val scissor: ScreenRectangle?, val bounds: ScreenRectangle?,
-        val pose: Matrix3x2f
+        val pose: Matrix3x2f,
     ) : OlympusPictureInPictureRenderState<State> {
 
         override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<State>> =
@@ -127,16 +133,16 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             }
 
 
-            val fakeplayer = DisplayEntityPlayer(CompletableFuture.completedFuture(entity.skin), armor, false)
-            val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Player, PlayerRenderState>
+            val fakeplayer = DisplayEntityPlayer(CompletableFuture.completedFuture(entity.skin), false, armor)
+            val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Avatar, AvatarRenderState>
             val state = renderer.createRenderState()
-            renderer.extractRenderState(fakeplayer as Player, state, 1f)
+            renderer.extractRenderState(fakeplayer as Avatar, state, 1f)
 
             state.hitboxesRenderState = null
             state.x = 0.0
             state.y = 0.0
             state.z = 0.0
-            state.swinging = false
+            state.isVisuallySwimming = false
             state.attackTime = 0f
             state.walkAnimationPos = 0f
             state.walkAnimationSpeed = 0f
@@ -152,7 +158,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         fun draw(
             graphics: GuiGraphics,
             entity: AbstractClientPlayer,
-            width: Int, height: Int, scale: Float
+            width: Int, height: Int, scale: Float,
         ) {
             graphics.nextStratum()
 
@@ -173,7 +179,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
                 scale,
                 graphics.scissorStack.peek(),
                 PictureInPictureRenderState.getBounds(0, 0, width, height, graphics.scissorStack.peek()),
-                Matrix3x2f(graphics.pose())
+                Matrix3x2f(graphics.pose()),
             )
             graphics.guiRenderState.submitPicturesInPictureState(state)
         }

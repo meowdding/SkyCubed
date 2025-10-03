@@ -1,13 +1,8 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.mojang.authlib.SignatureState
-import com.mojang.authlib.minecraft.MinecraftProfileTexture
-import com.mojang.authlib.minecraft.MinecraftProfileTextures
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
-import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.resources.PlayerSkin
 import net.minecraft.client.resources.SkinManager
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -24,7 +19,6 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.json.Json
-import tech.thatgravyboat.skycubed.mixins.SkinManagerInvoker
 import java.io.InputStream
 import java.util.concurrent.CompletableFuture
 import kotlin.reflect.jvm.javaType
@@ -128,22 +122,7 @@ val CompletableFuture<*>.isActuallyDone: Boolean
         return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
     }
 
-fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin> {
-    val result = runCatching {
-        val manager = McClient.self.skinManager as SkinManagerInvoker
-        manager.callRegisterTextures(
-            Util.NIL_UUID,
-            MinecraftProfileTextures(
-                MinecraftProfileTexture(texture, emptyMap()),
-                null,
-                null,
-                SignatureState.SIGNED,
-            ),
-        )
-    }
-
-    return result.getOrNull() ?: CompletableFuture.failedFuture(result.exceptionOrNull()!!)
-}
+expect fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin>
 
 fun <T : Enum<T>> T.next(): T {
     val constants = if (this.javaClass.isEnum) this.javaClass.enumConstants else this.javaClass.superclass.enumConstants

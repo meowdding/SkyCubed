@@ -12,12 +12,15 @@ import net.minecraft.network.chat.Component
 import org.joml.Vector2i
 import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
+import tech.thatgravyboat.skyblockapi.platform.texture
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.getSkin
 import tech.thatgravyboat.skycubed.utils.isActuallyDone
+import java.util.concurrent.CompletableFuture
 import kotlin.time.Duration.Companion.seconds
 
 @GenerateCodec
@@ -28,7 +31,7 @@ data class NpcPoi(
     @FieldName("tooltip") var stringTooltip: MutableList<String>,
     override var position: Vector3i,
 ) : Poi {
-    internal val skin by lazy { McClient.self.skinManager.getSkin(this.texture) }
+    internal val skin: CompletableFuture<PlayerSkin> by lazy { McClient.self.skinManager.getSkin(this.texture) }
 
     val link get() = actualLink.applyReplacements().stripColor().replace(" ", "_")
     override val tooltip: MutableList<Component> by CachedValue(5.seconds) {
@@ -36,12 +39,11 @@ data class NpcPoi(
     }
     override val id: String = "npc"
     override val bounds: Vector2i = Vector2i(10, 10)
-    override val display: Display
-        get() = when {
-            skin.isActuallyDone -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ skin.get().texture() }))
-            skin.isCompletedExceptionally -> ExtraDisplays.missingTextureDisplay()
-            else -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ DefaultPlayerSkin.getDefaultTexture() }))
-        }
+    override val display: Display get() = when {
+        skin.isActuallyDone -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ skin.get().texture!! }, 8))
+        skin.isCompletedExceptionally -> ExtraDisplays.missingTextureDisplay()
+        else -> Displays.outline({ 0xFFFFFFFFu }, Displays.face({ DefaultPlayerSkin.getDefaultTexture() }))
+    }
 
     override fun click() {
         Modals.link(link).open()
