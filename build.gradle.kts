@@ -12,13 +12,13 @@ import kotlin.io.path.*
 
 plugins {
     idea
-    id("me.owdding.gradle") version "1.1.1"
     kotlin("jvm") version "2.2.0"
     alias(libs.plugins.terrarium.cloche)
     id("maven-publish")
     alias(libs.plugins.meowdding.resources)
     alias(libs.plugins.meowdding.repo)
     alias(libs.plugins.kotlin.symbol.processor)
+    id("me.owdding.gradle") version "1.1.1"
 }
 
 base {
@@ -282,6 +282,7 @@ tasks.getByName("build") {
     dependsOn.clear()
     dependsOn(tasks.named("release"))
 }
+
 tasks.withType<JarInJar>().configureEach {
     include { !it.name.endsWith("-dev.jar") }
     archiveBaseName = "SkyCubed"
