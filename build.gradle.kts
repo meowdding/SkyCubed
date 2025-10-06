@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.meowdding.resources)
     alias(libs.plugins.meowdding.repo)
     alias(libs.plugins.kotlin.symbol.processor)
+    id("me.owdding.gradle") version "1.1.1"
 }
 
 base {
@@ -276,31 +277,10 @@ tasks.withType<WriteClasspathFile>().configureEach {
     }
 }
 
-tasks.register("release") {
-    group = "meowdding"
-    sourceSets.filterNot { it.name == SourceSet.MAIN_SOURCE_SET_NAME || it.name == SourceSet.TEST_SOURCE_SET_NAME }
-        .forEach {
-            tasks.findByName("${it.name}IncludeJar")?.let { task ->
-                dependsOn(task)
-                mustRunAfter(task)
-            }
-        }
-}
-
 tasks.getByName("build") {
     actions.clear()
     dependsOn.clear()
     dependsOn(tasks.named("release"))
-}
-
-tasks.register("cleanRelease") {
-    group = "meowdding"
-    listOf("clean", "release").forEach {
-        tasks.getByName(it).let { task ->
-            dependsOn(task)
-            mustRunAfter(task)
-        }
-    }
 }
 
 tasks.withType<JarInJar>().configureEach {

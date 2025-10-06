@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.MapOverlayConfig
@@ -30,7 +31,7 @@ object MinimapOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Minimap")
     override val position: ConfigPosition = OverlayPositions.map
     override val bounds: Pair<Int, Int> = 90 to 90
-    override val enabled: Boolean get() = (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender
+    override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender
 
     private var display: Display? = null
 

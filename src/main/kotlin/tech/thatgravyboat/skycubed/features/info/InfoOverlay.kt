@@ -7,6 +7,7 @@ import me.owdding.lib.overlays.EditableProperty
 import me.owdding.skycubed.generated.SkyCubedRegisteredInfos
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -62,7 +63,7 @@ object InfoOverlay : SkyCubedOverlay {
 
             return field
         }
-    override val enabled: Boolean get() = InfoHudOverlayConfig.enabled
+    override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && InfoHudOverlayConfig.enabled
     override val properties: Collection<EditableProperty> = setOf(EditableProperty.Y, EditableProperty.SCALE, EditableProperty.MISC)
     override val bounds: Pair<Int, Int> = 34 to 34
 

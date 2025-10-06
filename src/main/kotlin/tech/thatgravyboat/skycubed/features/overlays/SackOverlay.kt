@@ -8,6 +8,7 @@ import me.owdding.lib.displays.withPadding
 import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.sacks.SacksAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
@@ -27,7 +28,7 @@ object SackOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Sack Overlay")
     override val position: ConfigPosition get() = OverlayPositions.sack
     override val bounds get() = display.getWidth() to display.getHeight()
-    override val enabled: Boolean get() = SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
+    override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
 
     private val display by CachedValue(1.seconds) {
         if (SackOverlayConfig.sackItems.isEmpty()) return@CachedValue Displays.empty(0, 0)
