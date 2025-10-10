@@ -36,7 +36,7 @@ object ConfigManager {
             }
 
             callback {
-                McClient.setScreen(ResourcefulConfigScreen.get(null, config))
+                McClient.setScreen(ResourcefulConfigScreen.make(config).build())
             }
         }
     }

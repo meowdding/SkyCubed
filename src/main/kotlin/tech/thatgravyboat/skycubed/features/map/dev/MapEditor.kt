@@ -2,21 +2,18 @@ package tech.thatgravyboat.skycubed.features.map.dev
 
 import com.mojang.serialization.JsonOps
 import me.owdding.ktmodules.Module
-import net.minecraft.client.gui.screens.Screen
-import net.minecraft.network.chat.CommonComponents
+import net.minecraft.client.player.RemotePlayer
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityAttachment
 import net.minecraft.world.entity.decoration.ArmorStand
 import org.joml.Vector3i
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.level.LeftClickEntityEvent
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.LivingEntityRenderEvent
-import tech.thatgravyboat.skyblockapi.api.events.render.PlayerRenderEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toPrettyString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
-import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
@@ -97,38 +94,21 @@ object MapEditor {
     }
 
     @Subscription
-    private fun PlayerRenderEvent.onRender() {
-        if (!enabled) return
-        val entity = entity ?: return
-        if (entity.uuid?.version() == 4) return
-        entity.glow = true
-        val poi = pois[entity]
-        if (poi is PortalPoi || poi is EffigyPoi) return
-
-        entity.glowColor = if (poi != null) 0xFF00 else 0xFF0000
-        if (poi != null && poi.position.y == -1) {
-            Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
-                .send()
-            poi.position.y = entity.y.roundToInt()
-        }
-
-        this.state?.nameTagAttachment = entity.attachments?.getNullable(EntityAttachment.NAME_TAG, 0, entity.getYRot(0f))
-        this.state?.scoreText = entity.posAsVec3i().toString().asComponent()
-        this.state?.nameTag = CommonComponents.EMPTY
-    }
-
-    @Subscription
     private fun LivingEntityRenderEvent.onRender() {
         if (!enabled) return
         val entity = entity ?: return
-        if (entity.uuid?.version() == 4) return
+        if (entity.uuid.version() == 4) return
         if (this.entity is ArmorStand) return
         entity.glow = true
 
         val poi = pois[entity]
 
         if (poi is PortalPoi || poi is EffigyPoi) return
-        entity.glowColor = if (poi != null) 0xFF00 else 0xFF
+        entity.glowColor = if (entity is RemotePlayer) {
+            if (poi != null) 0xFF00 else 0xFF0000
+        } else {
+            if (poi != null) 0xFF00 else 0xFF
+        }
         if (poi != null && poi.position.y == -1) {
             Text.of("Syncing y for ${if (poi is NpcPoi) poi.name else poi.tooltip.firstOrNull()?.string ?: "<${poi.position}>"}")
                 .send()
@@ -160,7 +140,7 @@ object MapEditor {
             entity.posAsVec3i(),
         )
 
-        if (Screen.hasShiftDown()) {
+        if (McScreen.isShiftDown) {
             ConditionalPoi(Condition.TRUE, Condition.FALSE, npc).also {
 
                 val pois = Maps.currentIsland?.pois ?: run {

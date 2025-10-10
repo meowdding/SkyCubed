@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.ai.attributes.Attributes
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawString
@@ -26,7 +27,7 @@ class TextOverlay(
 ) : MeowddingTextOverlay(SkyCubed.MOD_ID, name, position, isEnabled, text) {
 
     override val bounds: Pair<Int, Int> get() = text().width to 10
-    override val enabled: Boolean get() = this.isEnabled()
+    override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && this.isEnabled()
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         graphics.drawString(text(), 0, 1, shadow = true)

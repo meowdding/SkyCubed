@@ -2,15 +2,16 @@ package tech.thatgravyboat.skycubed.features.map.screen
 
 import com.mojang.blaze3d.platform.InputConstants
 import com.teamresourceful.resourcefullib.client.screens.CursorScreen.Cursor
-import earth.terrarium.olympus.client.components.base.BaseWidget
 import earth.terrarium.olympus.client.utils.State
+import me.owdding.lib.platform.screens.BaseWidget
+import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.waypoints.MeowddingWaypoint
 import me.owdding.lib.waypoints.MeowddingWaypointHandler
 import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.components.PlayerFaceRenderer
-import net.minecraft.client.gui.screens.Screen
 import net.minecraft.util.Mth
+import net.msrandom.stub.Stub
 import org.joml.component1
 import org.joml.component2
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -30,6 +31,9 @@ import tech.thatgravyboat.skycubed.features.map.pois.Poi
 import tech.thatgravyboat.skycubed.utils.Rect
 import tech.thatgravyboat.skycubed.utils.getValue
 import tech.thatgravyboat.skycubed.utils.setValue
+
+@Stub
+internal expect fun playerRotation(headRot: Float): Float
 
 class MapsWidget(
     map: String?,
@@ -132,21 +136,21 @@ class MapsWidget(
                     graphics.translated(x + width / 2.0f, z + height / 2.0f) {
                         val profile = McPlayer.skin ?: return
                         graphics.scale(1f / scale, 1f / scale)
-                        graphics.rotate((180 + headRot).toDouble())
-                        PlayerFaceRenderer.draw(graphics, profile, -4, -4, 8)
+                        graphics.rotate(playerRotation(headRot))
+                        PlayerFaceRenderer.draw(graphics, profile.texture, -4, -4, 8, true, true, -1)
                     }
                 }
             }
         }
     }
 
-    override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, dragX: Double, dragY: Double): Boolean {
-        if (button == InputConstants.MOUSE_BUTTON_LEFT) {
-            xOffset -= dragX / scale
-            zOffset -= dragY / scale
+    override fun mouseDragged(event: MouseButtonEvent, deltaX: Double, deltaY: Double): Boolean {
+        if (event.button == InputConstants.MOUSE_BUTTON_LEFT) {
+            xOffset -= deltaX / scale
+            zOffset -= deltaY / scale
             return true
         }
-        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY)
+        return super.mouseDragged(event, deltaX, deltaY)
     }
 
     override fun mouseScrolled(mouseX: Double, mouseY: Double, scrollX: Double, scrollY: Double): Boolean {
@@ -159,17 +163,17 @@ class MapsWidget(
         return true
     }
 
-    override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        val poi = getPoiAt(mouseX, mouseY)
-        if (button == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
-            if (MapEditor.enabled && !Screen.hasShiftDown()) {
+    override fun mouseClicked(event: MouseButtonEvent, doubleClick: Boolean): Boolean {
+        val poi = getPoiAt(event.x, event.y)
+        if (event.button == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
+            if (MapEditor.enabled && !event.hasShiftDown()) {
                 McClient.setScreenAsync { MapPoiEditScreen(poi.first, poi.second.pois, McClient.self.screen) }
                 return true
             }
             poi.first.click()
             return true
         }
-        return super.mouseClicked(mouseX, mouseY, button)
+        return super.mouseClicked(event, doubleClick)
     }
 
     override fun getCursor() = this.cursor

@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.effect.MobEffects
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
+import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.profile.ProfileAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -40,7 +41,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
     private val AIR = SkyCubed.id("rpg/air/normal")
 
     override val name: Component = Text.of("Player RPG Hud")
-    override val enabled: Boolean get() = RpgOverlayConfig.enabled
+    override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && RpgOverlayConfig.enabled
     override val position: ConfigPosition = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 

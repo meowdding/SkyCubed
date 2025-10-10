@@ -38,6 +38,9 @@
     "jamie": {
         "type": "minecraft:villager"
     },
+    "librarian": {
+        "type": "minecraft:villager"
+    },
     "shania": {
         "type": "minecraft:cow"
     },
