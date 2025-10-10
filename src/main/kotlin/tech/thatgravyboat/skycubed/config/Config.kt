@@ -59,6 +59,7 @@ object Config : ConfigKt("skycubed/config") {
     val hiddenHudElements by transform(
         select<HudElement> {
             this.translation = "skycubed.config.general.hidden_hud_elements"
+            this.searchTerms = listOf("health", "armor", "food", "hunger", "effects")
         },
         { it.toTypedArray() },
         { it.toSet() },
