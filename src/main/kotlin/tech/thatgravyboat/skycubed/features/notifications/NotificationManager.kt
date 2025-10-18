@@ -35,7 +35,7 @@ object NotificationManager {
         NotificationType.single("blocks_in_the_way", "There are blocks in the way!") { NotificationsConfig.blocksInTheWay },
 
         NotificationType.unique("hoppity_you_found", "HOPPITY'S HUNT You found .*") { NotificationsConfig.hoppityYouFound },
-        NotificationType.unique("hoppity_egg_appeared", "HOPPITY'S HUNT A [\\w ]+ Egg has appeared!") { NotificationsConfig.hoppityEggAppeared },
+        NotificationType.unique("hoppity_egg_appeared", "HOPPITY'S HUNT A [\\pL ]+ Egg has appeared!") { NotificationsConfig.hoppityEggAppeared },
 
         NotificationType.single("skymall1", "New buff: .*") { NotificationsConfig.skymall },
         NotificationType.unique("skymall2", "You can disable this messaging by toggling Sky Mall in your /hotm!") { NotificationsConfig.skymall.copy(showAsToast = false) },
