@@ -151,6 +151,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             state.yRot = 0f
             state.bodyRot = 180f - 15f
             state.xRot = 0f
+            state.isCrouching = false
 
             return state
         }
