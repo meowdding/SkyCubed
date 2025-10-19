@@ -31,7 +31,7 @@ object InfoOverlay : SkyCubedOverlay {
 
     init {
         SkyCubedRegisteredInfos.collected.groupBy { it.location }.forEach { (location, overlay) ->
-            infoOverlays.put(location, overlay.sortedByDescending { it.priority })
+            infoOverlays[location] = overlay.sortedByDescending { it.priority }
         }
     }
 

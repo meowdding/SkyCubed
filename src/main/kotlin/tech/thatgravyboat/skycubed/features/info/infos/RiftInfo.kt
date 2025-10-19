@@ -12,8 +12,8 @@ import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
 @RegisterInfoOverlay
 object RiftInfo : InfoProvider {
     override val islands = listOf(SkyBlockIsland.THE_RIFT)
-    override val priority: Int = 1
-    override val location = InfoLocation.BOTTOM_RIGHT
+    override val priority: Int = 2
+    override val location = InfoLocation.TOP_RIGHT
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/rift/timecharm")))
