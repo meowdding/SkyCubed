@@ -36,7 +36,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
             this.width - WIDTH - PADDING * 2,
             0,
             WIDTH + PADDING * 2,
-            this.height
+            this.height,
         )
     }
 
@@ -83,30 +83,34 @@ class NotificationsScreen : Overlay(McScreen.self) {
                     Consumers.nop()
                 )
             )
-            .withChild(Widgets.list { list ->
-                list.setSize(WIDTH, this.height - PADDING * 4 - 24 * 2)
-                list.withScrollableY(TriState.TRUE)
+            .withChild(
+                Widgets.list { list ->
+                    list.setSize(WIDTH, this.height - PADDING * 4 - 24 * 2)
+                    list.withScrollableY(TriState.TRUE)
 
-                list.withContents { contents ->
-                    contents.withGap(1)
+                    list.withContents { contents ->
+                        contents.withGap(1)
 
-                    notifications
-                        .filter { category.get() == null || it.id == category.get() }
-                        .reversed()
-                        .forEach { toast ->
-                            contents.withChild(Widgets.button {
-                                it.withTexture(null)
-                                it.withSize(toast.width(), toast.height())
-                                it.withRenderer { graphics, context, _ ->
-                                    graphics.pushPop {
-                                        graphics.translate(context.x.toDouble(), context.y.toDouble())
-                                        toast.render(graphics)
-                                    }
-                                }
-                            })
-                        }
-                }
-            })
+                        notifications
+                            .filter { category.get() == null || it.id == category.get() }
+                            .reversed()
+                            .forEach { toast ->
+                                contents.withChild(
+                                    Widgets.button {
+                                        it.withTexture(null)
+                                        it.withSize(toast.width(), toast.height())
+                                        it.withRenderer { graphics, context, _ ->
+                                            graphics.pushPop {
+                                                graphics.translate(context.x.toDouble(), context.y.toDouble())
+                                                toast.render(graphics)
+                                            }
+                                        }
+                                    },
+                                )
+                            }
+                    }
+                },
+            )
             .build(::addRenderableWidget)
     }
 }

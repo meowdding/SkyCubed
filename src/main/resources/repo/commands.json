@@ -292,7 +292,10 @@
         ]
     },
     {
-        "values": [ "visit", "guest" ],
+        "values": [
+            "visit",
+            "guest"
+        ],
         "children": [
             {
                 "name": "player",
@@ -333,7 +336,9 @@
         ]
     },
     {
-        "values": [ "status" ],
+        "values": [
+            "status"
+        ],
         "children": [
             {
                 "name": "status",
@@ -348,7 +353,9 @@
         ]
     },
     {
-        "values": [ "show" ],
+        "values": [
+            "show"
+        ],
         "children": [
             {
                 "name": "item",
@@ -363,13 +370,22 @@
                     "belt",
                     "bracelet",
                     "pet",
-                    "1","2","3","4","5","6","7","8"
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
                 ]
             }
         ]
     },
     {
-        "values": [ "viewstash" ],
+        "values": [
+            "viewstash"
+        ],
         "children": [
             {
                 "name": "type",
@@ -381,7 +397,9 @@
         ]
     },
     {
-        "values": [ "chat" ],
+        "values": [
+            "chat"
+        ],
         "children": [
             {
                 "name": "type",
@@ -396,7 +414,9 @@
         ]
     },
     {
-        "values": [ "myfilter" ],
+        "values": [
+            "myfilter"
+        ],
         "children": [
             {
                 "name": "operation",
@@ -421,22 +441,42 @@
         ]
     },
     {
-        "values": [ "rng", "rngmeter" ],
+        "values": [
+            "rng",
+            "rngmeter"
+        ],
         "children": [
             {
-                "values": [ "catacombs", "cata" ],
+                "values": [
+                    "catacombs",
+                    "cata"
+                ],
                 "children": [
                     {
                         "name": "floor",
                         "suggestions": [
-                            "1", "2", "3", "4", "5", "6", "7",
-                            "m1", "m2", "m3", "m4", "m5", "m6", "m7"
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "m1",
+                            "m2",
+                            "m3",
+                            "m4",
+                            "m5",
+                            "m6",
+                            "m7"
                         ]
                     }
                 ]
             },
             {
-                "values": [ "slayer" ],
+                "values": [
+                    "slayer"
+                ],
                 "children": [
                     {
                         "name": "slayer_type",
@@ -457,7 +497,9 @@
         ]
     },
     {
-        "values": [ "viewdungeonclass" ],
+        "values": [
+            "viewdungeonclass"
+        ],
         "children": [
             {
                 "name": "class",
@@ -472,7 +514,9 @@
         ]
     },
     {
-        "values": [ "viewbosscollection" ],
+        "values": [
+            "viewbosscollection"
+        ],
         "children": [
             {
                 "name": "floor",

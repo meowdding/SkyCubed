@@ -25,7 +25,7 @@ data class PortalPoi(
     override val display: Display = Displays.sprite(
         SkyCubed.id("map/icons/portal"),
         16,
-        16
+        16,
     )
 
     override fun click() {
@@ -39,6 +39,7 @@ data class PortalPoi(
             CodecUtils.list(ComponentSerialization.CODEC).optionalFieldOf("tooltip", mutableListOf()).forGetter(PortalPoi::tooltip),
             Codecs.vec3i("x", "y", "z").fieldOf("pos").forGetter(PortalPoi::position),
             Codec.STRING.fieldOf("destination").forGetter(PortalPoi::destination),
-        ).apply(it) { t, p, d -> PortalPoi(t as MutableList<Component>, p, d) }}
+        ).apply(it) { t, p, d -> PortalPoi(t as MutableList<Component>, p, d) }
+        }
     }
 }

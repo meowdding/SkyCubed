@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.mining
 
 import me.owdding.ktmodules.Module
 import net.minecraft.network.chat.Component

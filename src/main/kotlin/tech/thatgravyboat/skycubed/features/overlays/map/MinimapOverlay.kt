@@ -56,7 +56,7 @@ object MinimapOverlay : SkyCubedOverlay {
         }
     }
 
-	@Subscription(IslandChangeEvent::class)
+    @Subscription(IslandChangeEvent::class)
     fun updateDisplay() {
         display = getMapsForLocationOrNull()?.let {
             val minimapWidget = Displays.center(
@@ -79,8 +79,9 @@ object MinimapOverlay : SkyCubedOverlay {
             when (MapOverlayConfig.mapShape) {
                 MapShape.SQUARE -> Displays.background(
                     backgroundBox,
-                    minimapWidget
+                    minimapWidget,
                 )
+
                 MapShape.CIRCLE -> Displays.layered(
                     Displays.circleTexture(90, 90, backgroundCircle),
                     minimapWidget,
