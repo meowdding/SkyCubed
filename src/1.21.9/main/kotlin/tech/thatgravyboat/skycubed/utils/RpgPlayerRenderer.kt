@@ -118,6 +118,9 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             .withSampler("Sampler1")
             .build()
 
+        // Height of the player, bc we cant use boundingbox (sneaking my beloved)
+        private const val PLAYER_HEIGHT = 1.8f
+
 
         @Suppress("UNCHECKED_CAST")
         fun createNewState(entity: AbstractClientPlayer): EntityRenderState {
@@ -171,7 +174,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             baseRotation.mul(tiltRotation)
             val entityScale = entity.scale
             val scaledSize = scale / entityScale
-            val positionOffset = Vector3f(0.1f, (-centerY / scaledSize) + entity.boundingBox.ysize.toFloat() * 0.8f, 0.0f)
+            val positionOffset = Vector3f(0.1f, (-centerY / scaledSize) + PLAYER_HEIGHT * entityScale * 0.8f, 0.0f)
 
             val state = State(
                 createNewState(entity),
