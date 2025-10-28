@@ -2,6 +2,7 @@ package tech.thatgravyboat.skycubed.features.info
 
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Displays
+import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonAPI
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -9,17 +10,18 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skycubed.SkyCubed
 
+// TODO: island specific base element overrides
 object BaseInfoDisplay {
 
     val BASE = SkyCubed.id("info/base")
     val RIGHT_LINE = SkyCubed.id("info/right")
     val LEFT_LINE = SkyCubed.id("info/left")
 
-    private val sunIcon = Displays.sprite(SkyCubed.id("info/icons/sun"), 8, 8)
-    private val moonIcon = Displays.sprite(SkyCubed.id("info/icons/moon"), 8, 8)
+    private val sunIcon = icon("sun")
+    private val moonIcon = icon("moon")
 
-    private val clockIcon = Displays.sprite(SkyCubed.id("info/icons/rift/clock"), 8, 8)
-    private val pausedIcon = Displays.sprite(SkyCubed.id("info/icons/rift/paused"), 8, 8)
+    private val clockIcon = icon("rift/clock")
+    private val pausedIcon = icon("rift/paused")
 
     val baseDisplay = DisplayFactory.vertical {
         spacer(34, 5)
@@ -29,18 +31,23 @@ object BaseInfoDisplay {
         spacer(34, 1)
     }
 
+    private fun icon(id: String) = Displays.sprite(SkyCubed.id("info/icons/$id"), 8, 8)
+
     private fun getIcon() = when (LocationAPI.island) {
         SkyBlockIsland.THE_RIFT -> if (isTimePaused()) pausedIcon else clockIcon
+        SkyBlockIsland.THE_CATACOMBS -> clockIcon
         else -> if (DateTimeAPI.isDay) sunIcon else moonIcon
     }
 
     private fun getText() = when (LocationAPI.island) {
         SkyBlockIsland.THE_RIFT -> getRiftTime()
-        else -> "${DateTimeAPI.hour.toString().padStart(2, '0')}:${DateTimeAPI.minute.toString().padStart(2, '0')}"
+        SkyBlockIsland.THE_CATACOMBS -> DungeonAPI.time.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds) }
+        else -> toBeautiful(DateTimeAPI.hour, DateTimeAPI.minute)
     }
 
     private fun getTextColor() = when (LocationAPI.island) {
         SkyBlockIsland.THE_RIFT -> if (isTimePaused()) 0xAAAAAAu else 0x55FF55u
+        SkyBlockIsland.THE_CATACOMBS -> 0x55FF55u
         else -> if (DateTimeAPI.isDay) 0xFFFF55u else 0xAAAAAAu
     }
 
@@ -52,12 +59,13 @@ object BaseInfoDisplay {
         SkyBlockAreas.MIRRORVERSE,
     )
 
-    private fun getRiftTime(): String = RiftAPI.time?.let {
-        val minutes = "${it.inWholeMinutes}".padStart(2, '0')
-        val seconds = "${it.inWholeSeconds % 60}".padStart(2, '0')
-        "$minutes:$seconds"
-    } ?: "0s"
+    private fun getRiftTime(): String = RiftAPI.time?.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds) } ?: "0s"
 
     private fun isTimePaused(): Boolean = LocationAPI.area in pausedRiftTimeAreas
 
+    private fun toBeautiful(first: Number, second: Number) = buildString {
+        append(first.toString().padStart(2, '0'))
+        append(":")
+        append(second.toString().padStart(2, '0'))
+    }
 }
