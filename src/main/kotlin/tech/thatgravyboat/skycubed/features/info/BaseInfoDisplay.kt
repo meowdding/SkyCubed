@@ -41,7 +41,7 @@ object BaseInfoDisplay {
 
     private fun getText() = when (LocationAPI.island) {
         SkyBlockIsland.THE_RIFT -> getRiftTime()
-        SkyBlockIsland.THE_CATACOMBS -> DungeonAPI.time.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds) }
+        SkyBlockIsland.THE_CATACOMBS -> DungeonAPI.time.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds % 60) }
         else -> toBeautiful(DateTimeAPI.hour, DateTimeAPI.minute)
     }
 
@@ -59,7 +59,7 @@ object BaseInfoDisplay {
         SkyBlockAreas.MIRRORVERSE,
     )
 
-    private fun getRiftTime(): String = RiftAPI.time?.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds) } ?: "0s"
+    private fun getRiftTime(): String = RiftAPI.time?.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds % 60) } ?: "0s"
 
     private fun isTimePaused(): Boolean = LocationAPI.area in pausedRiftTimeAreas
 
