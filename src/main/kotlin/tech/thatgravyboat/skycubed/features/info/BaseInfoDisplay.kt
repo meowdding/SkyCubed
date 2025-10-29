@@ -9,6 +9,7 @@ import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skycubed.SkyCubed
+import kotlin.time.Duration
 
 // TODO: island specific base element overrides
 object BaseInfoDisplay {
@@ -23,6 +24,17 @@ object BaseInfoDisplay {
     private val clockIcon = icon("rift/clock")
     private val pausedIcon = icon("rift/paused")
 
+    private val dungeonFloorIcon = listOf(
+        icon("dungeons/entrance"),
+        icon("dungeons/bonzo"),
+        icon("dungeons/scarf"),
+        icon("dungeons/professor"),
+        icon("dungeons/thorn"),
+        icon("dungeons/livid"),
+        icon("dungeons/sadan"),
+        icon("dungeons/wither"),
+    )
+
     val baseDisplay = DisplayFactory.vertical {
         spacer(34, 5)
         display(Displays.center(34, 12, Displays.supplied { getIcon() }))
@@ -35,13 +47,13 @@ object BaseInfoDisplay {
 
     private fun getIcon() = when (LocationAPI.island) {
         SkyBlockIsland.THE_RIFT -> if (isTimePaused()) pausedIcon else clockIcon
-        SkyBlockIsland.THE_CATACOMBS -> clockIcon
+        SkyBlockIsland.THE_CATACOMBS -> DungeonAPI.dungeonFloor?.floorNumber?.let { dungeonFloorIcon[it] } ?: clockIcon
         else -> if (DateTimeAPI.isDay) sunIcon else moonIcon
     }
 
     private fun getText() = when (LocationAPI.island) {
         SkyBlockIsland.THE_RIFT -> getRiftTime()
-        SkyBlockIsland.THE_CATACOMBS -> DungeonAPI.time.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds % 60) }
+        SkyBlockIsland.THE_CATACOMBS -> toBeautiful(DungeonAPI.time)
         else -> toBeautiful(DateTimeAPI.hour, DateTimeAPI.minute)
     }
 
@@ -59,10 +71,11 @@ object BaseInfoDisplay {
         SkyBlockAreas.MIRRORVERSE,
     )
 
-    private fun getRiftTime(): String = RiftAPI.time?.let { toBeautiful(it.inWholeMinutes, it.inWholeSeconds % 60) } ?: "0s"
+    private fun getRiftTime(): String = RiftAPI.time?.let { toBeautiful(it) } ?: "0s"
 
     private fun isTimePaused(): Boolean = LocationAPI.area in pausedRiftTimeAreas
 
+    private fun toBeautiful(duration: Duration) = toBeautiful(duration.inWholeMinutes, duration.inWholeSeconds % 60)
     private fun toBeautiful(first: Number, second: Number) = buildString {
         append(first.toString().padStart(2, '0'))
         append(":")
