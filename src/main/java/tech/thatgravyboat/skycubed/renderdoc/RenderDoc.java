@@ -54,7 +54,8 @@ public final class RenderDoc {
                     apiInstance.GetAPIVersion.call(major, minor, patch);
                     System.out.println("Connected to RenderDoc API v" + major.getValue() + "." + minor.getValue() + "." + patch.getValue());
                 }
-            } catch (UnsatisfiedLinkError ignored) {}
+            } catch (UnsatisfiedLinkError ignored) {
+            }
         }
     }
 

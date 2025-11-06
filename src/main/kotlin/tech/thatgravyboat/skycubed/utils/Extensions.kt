@@ -67,7 +67,7 @@ internal fun GuiGraphics.fillRect(
     this.drawRoundedRectangle(
         x, y, width, height,
         backgroundColor.toUInt(), borderColor.toUInt(),
-        width.coerceAtMost(height) * (radius / 100f), borderSize
+        width.coerceAtMost(height) * (radius / 100f), borderSize,
     )
 }
 
@@ -117,9 +117,10 @@ fun AbstractContainerMenu.click(slot: Slot) {
     )
 }
 
-val CompletableFuture<*>.isActuallyDone: Boolean get() {
-    return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
-}
+val CompletableFuture<*>.isActuallyDone: Boolean
+    get() {
+        return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
+    }
 
 expect fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin>
 

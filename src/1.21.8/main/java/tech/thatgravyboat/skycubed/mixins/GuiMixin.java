@@ -30,12 +30,12 @@ public class GuiMixin {
     }
 
     @WrapOperation(
-            method = "renderCameraOverlays",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;renderTextureOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;F)V",
-                    ordinal = 1
-            )
+        method = "renderCameraOverlays",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/gui/Gui;renderTextureOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;F)V",
+            ordinal = 1
+        )
     )
     private void wrapRenderCameraOverlays(Gui instance, GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f, Operation<Void> original) {
         var cold = GlaciteAPI.INSTANCE.getCold();

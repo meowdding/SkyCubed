@@ -16,12 +16,12 @@ import tech.thatgravyboat.skycubed.features.overlays.vanilla.VanillaBossbarOverl
 @Mixin(BossHealthOverlay.class)
 public class BossHealthOverlayMixin {
     @Inject(
-            method = "render",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;drawBar(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V"
-            ),
-            cancellable = true
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;drawBar(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V"
+        ),
+        cancellable = true
     )
     private void onRenderFull(GuiGraphics guiGraphics, CallbackInfo ci, @Local LerpingBossEvent event) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderFull(event)) {
@@ -33,11 +33,11 @@ public class BossHealthOverlayMixin {
     }
 
     @WrapWithCondition(
-            method = "render",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;drawBar(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V"
-            )
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;drawBar(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V"
+        )
     )
     private boolean onRenderBar(BossHealthOverlay instance, GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderTitle(bossEvent)) {

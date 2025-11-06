@@ -20,4 +20,5 @@ object OverlayPositions : CategoryKt("positions") {
     val hotbar = obj("hotbar", ConfigPosition(x = 0, y = -22))
     val itemtext = obj("itemtext", ConfigPosition(x = 0, y = -35))
     val info = obj("info", ConfigPosition(x = 0, y = 0))
+    val pity = obj("pity", ConfigPosition(x = 200, y = 5))
 }

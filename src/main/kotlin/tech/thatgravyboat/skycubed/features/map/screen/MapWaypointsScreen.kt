@@ -37,10 +37,11 @@ object MapWaypointsScreen {
                 .withTitle(CREATE_TITLE)
                 .withContent(CREATE_PLACEHOLDER)
                 .withContent { width -> Widgets.textInput(state).withPlaceholder("Waypoint Name").withSize(width, 20) }
-                .withAction(Widgets.button()
-                    .withRenderer(WidgetRenderers.text(UITexts.CANCEL))
-                    .withSize(80, 24)
-                    .withCallback { McScreen.self?.onClose() }
+                .withAction(
+                    Widgets.button()
+                        .withRenderer(WidgetRenderers.text(UITexts.CANCEL))
+                        .withSize(80, 24)
+                        .withCallback { McScreen.self?.onClose() },
                 )
                 .withAction(
                     Widgets.button()
@@ -73,6 +74,7 @@ object MapWaypointsScreen {
                         MeowddingWaypointHandler.removeWaypoint(waypoint)
                     }
                 }
+
                 poi != null -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_CREATE) {
                         val pos = poi.first.position
@@ -85,6 +87,7 @@ object MapWaypointsScreen {
                         }
                     }
                 }
+
                 else -> ContextMenu.open { menu ->
                     menu.button(CONTEXT_CREATE) {
                         val (x, z) = widget.getWorldPosition(mouseX, mouseY)
