@@ -199,7 +199,7 @@ object CompactTablist {
                 isGuild -> addExtraTag("ɢ", TextColor.DARK_GREEN)
                 else -> {}
             }
-            contributor?.symbol?.let { extraEmblems.add(Text.of(it)) }
+            contributor?.symbol?.let { extraEmblems.add(it) }
         }
         return this
     }

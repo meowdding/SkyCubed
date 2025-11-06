@@ -17,7 +17,6 @@
         "InventoryScreenMixin",
         "MoveableItemTextMixin",
         "OverlayAccessor",
-        "PlayerMixin",
         "SkinManagerInvoker",
         "displayplayer.CustomHeadLayerMixin",
         "displayplayer.EquipmentLayerRendererMixin",
