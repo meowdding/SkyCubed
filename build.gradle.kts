@@ -1,14 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
 import earth.terrarium.cloche.api.metadata.ModMetadata
-import net.msrandom.minecraftcodev.core.utils.toPath
 import net.msrandom.minecraftcodev.fabric.task.JarInJar
-import net.msrandom.minecraftcodev.runs.task.WriteClasspathFile
 import net.msrandom.stubs.GenerateStubApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import kotlin.io.path.*
 
 plugins {
     idea
@@ -16,7 +13,6 @@ plugins {
     alias(libs.plugins.terrarium.cloche)
     id("maven-publish")
     alias(libs.plugins.meowdding.resources)
-    alias(libs.plugins.meowdding.repo)
     alias(libs.plugins.kotlin.symbol.processor)
     id("me.owdding.gradle") version "1.1.1"
 }
@@ -76,6 +72,7 @@ cloche {
             modImplementation(libs.skyblockapi)
             modImplementation(libs.resourceful.config.kotlin) { isTransitive = false }
             modImplementation(libs.meowdding.patches) { isTransitive = false }
+            modImplementation(libs.meowdding.remote.repo) { isTransitive = false }
 
             modImplementation(libs.fabric.language.kotlin)
         }
@@ -189,10 +186,6 @@ compactingResources {
     basePath = "repo"
 }
 
-repo {
-    sacks { includeAll() }
-}
-
 afterEvaluate {
     tasks.withType<GenerateStubApi> {
         excludes.addAll(
@@ -263,17 +256,6 @@ idea {
         isDownloadSources = true
 
         excludeDirs.add(file("run"))
-    }
-}
-
-// TODO temporary workaround for a cloche issue on certain systems, remove once fixed
-tasks.withType<WriteClasspathFile>().configureEach {
-    actions.clear()
-    actions.add {
-        output.get().toPath().also { it.parent.createDirectories() }.takeUnless { it.exists() }?.createFile()
-        generate()
-        val file = output.get().toPath()
-        file.writeText(file.readText().lines().joinToString(File.pathSeparator))
     }
 }
 
