@@ -1,4 +1,4 @@
-package tech.thatgravyboat.skycubed.features.overlays
+package tech.thatgravyboat.skycubed.features.overlays.rpg
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.overlays.ConfigPosition
@@ -6,9 +6,10 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
 import net.minecraft.world.effect.MobEffects
+import org.joml.component1
+import org.joml.component2
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
-import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.profile.ProfileAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -41,7 +42,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
     private val AIR = SkyCubed.id("rpg/air/normal")
 
     override val name: Component = Text.of("Player RPG Hud")
-    override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && RpgOverlayConfig.enabled
+    override val enabled: Boolean get() = /*LocationAPI.isOnSkyBlock &&*/ RpgOverlayConfig.enabled
     override val position: ConfigPosition = OverlayPositions.rpg
     override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
@@ -67,23 +68,29 @@ object PlayerRpgOverlay : SkyCubedOverlay {
             Utils.drawRpgPlayer(graphics, player, HEIGHT, HEIGHT, 30f)
         }
 
-        graphics.blitSpritePercentX(healthSprite, 47, 23, 70, 5, healthPercent.coerceIn(0f, 1f))
-        graphics.blitSpritePercentX(ABSORPTION, 47, 23, 70, 5, absorptionPercent.coerceIn(0f, 1f))
-        graphics.blitSpritePercentX(MANA_DEPLETED, 47, 18, 57, 4, manaUsePercent.coerceIn(0f, 1f))
-        graphics.blitSpritePercentX(MANA, 47, 18, 57, 4, manaPercent.coerceIn(0f, 1f))
-        graphics.blitSpritePercentX(MANA_NEEDED, 47, 18, 57, 4, manaUsePercent.coerceAtMost(manaPercent).coerceIn(0f, 1f))
+        val positions = RpgOverlayPositionHandler.positions
+
+        positions.health.let { (x, y) ->
+            graphics.blitSpritePercentX(healthSprite, x, y, 70, 5, healthPercent.coerceIn(0f, 1f))
+            graphics.blitSpritePercentX(ABSORPTION, x, y, 70, 5, absorptionPercent.coerceIn(0f, 1f))
+        }
+        positions.mana.let { (x, y) ->
+            graphics.blitSpritePercentX(MANA_DEPLETED, x, y, 57, 4, manaUsePercent.coerceIn(0f, 1f))
+            graphics.blitSpritePercentX(MANA, x, y, 57, 4, manaPercent.coerceIn(0f, 1f))
+            graphics.blitSpritePercentX(MANA_NEEDED, x, y, 57, 4, manaUsePercent.coerceAtMost(manaPercent).coerceIn(0f, 1f))
+        }
 
         if (RpgOverlayConfig.skyblockLevel) {
-            graphics.blitSpritePercentX(SKYBLOCK_XP, 47, 29, 67, 4, skyblockLevelPercent.coerceIn(0f, 1f))
-            graphics.drawScaledString("${ProfileAPI.sbLevel}", 3, 33, 16, 0x55FFFF)
+            graphics.blitSpritePercentX(SKYBLOCK_XP, positions.xpBar.x, positions.xpBar.y, 67, 4, skyblockLevelPercent.coerceIn(0f, 1f))
+            graphics.drawScaledString("${ProfileAPI.sbLevel}", positions.xpText.x, positions.xpText.y, 16, 0x55FFFF)
         } else {
-            graphics.blitSpritePercentX(XP, 47, 29, 67, 4, xpPercent.coerceIn(0f, 1f))
-            graphics.drawScaledString("${McPlayer.xpLevel}", 3, 33, 16, 0x78EC20)
+            graphics.blitSpritePercentX(XP, positions.xpBar.x, positions.xpBar.y, 67, 4, xpPercent.coerceIn(0f, 1f))
+            graphics.drawScaledString("${McPlayer.xpLevel}", positions.xpText.x, positions.xpText.y, 16, 0x78EC20)
         }
 
         if (airPercent < 1f) {
-            graphics.drawSprite(AIR_BASE, 38, 34, 64, 6)
-            graphics.blitSpritePercentX(AIR, 40, 34, 60, 4, airPercent.coerceIn(0f, 1f))
+            graphics.drawSprite(AIR_BASE, positions.airBase.x, positions.airBase.y, 64, 6)
+            graphics.blitSpritePercentX(AIR, positions.airBar.x, positions.airBar.y, 60, 4, airPercent.coerceIn(0f, 1f))
         }
     }
 
