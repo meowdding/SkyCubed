@@ -18,7 +18,7 @@ object SackCodecs {
 
     @Subscription
     fun onRepo(event: FinishRepoLoadingEvent) {
-        val repoData = RemoteRepo.getFileContentAsJson("sacks").toData(SkyCubedCodecs.getCodec<Sack>().listOf()) ?: emptyList()
+        val repoData = RemoteRepo.getFileContentAsJson("sacks.json").toData(SkyCubedCodecs.getCodec<Sack>().listOf()) ?: emptyList()
         sackItems = repoData.flatMap { it.items }.map { it to RepoItemsAPI.getItem(it) }.sortedBy { (_, v) -> v.cleanName }.toMap()
     }
 
