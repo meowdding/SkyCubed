@@ -45,8 +45,6 @@ import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
-private typealias Segment = List<Line>
-
 private data class Line(
     val component: Component,
     var face: PlayerSkin? = null,
