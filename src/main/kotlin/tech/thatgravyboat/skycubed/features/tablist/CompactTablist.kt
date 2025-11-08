@@ -167,13 +167,14 @@ object CompactTablist {
         return this
     }
 
+    private val widgetRegexes = TabWidget.entries.map { it.regex }
+
 
     private fun createNewDisplay(tablist: List<List<Component>>) {
         if (tablist.isEmpty()) return
         val components: List<List<Line>> = tablist.map { it.toLines() }
 
         val blocks = mutableListOf<MutableList<Line>>()
-        val widgetRegexes = TabWidget.entries.map { it.regex }
 
         val currentBlock = mutableListOf<Line>()
 
@@ -243,10 +244,10 @@ object CompactTablist {
     private val playerComparator = Comparator<Line> { o1, o2 ->
         when (TabListOverlayConfig.sorting) {
             CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
-            CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
+            CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2.playerName ?: "", true) ?: 0
             CompactTablistSorting.FRIENDS -> {
-                val o1Friend = o1?.playerName?.let(FriendsAPI::getFriend)
-                val o2Friend = o2?.playerName?.let(FriendsAPI::getFriend)
+                val o1Friend = o1.playerName?.let(FriendsAPI::getFriend)
+                val o2Friend = o2.playerName?.let(FriendsAPI::getFriend)
                 return@Comparator when {
                     o1Friend == null && o2Friend == null -> 0 // Not Friends
                     o1Friend == null -> -1 // o2 is friends but o1 is not
@@ -329,7 +330,7 @@ object CompactTablist {
         val columns = Math.ceilDiv(totalSize, TabListOverlayConfig.targetColumnSize).let {
             if (range.isEmpty()) it
             else it.coerceIn(range)
-        }
+        }.coerceAtLeast(1)
         if (columns >= size) return this
         val blockSizes = IntArray(size) { this[it].size }
         val partitions = balanceBlocks(blockSizes, columns)
@@ -339,7 +340,7 @@ object CompactTablist {
         }
     }
 
-    private var lastBlocksData: BlockSizeData? = null
+    private var lastBlocksData: BlockSizeData = BlockSizeData(IntArray(0), -1, emptyList())
 
     private class BlockSizeData(
         val blockSizes: IntArray,
@@ -349,10 +350,8 @@ object CompactTablist {
 
     private fun balanceBlocks(blockSizes: IntArray, parts: Int): List<Int> {
         val cached = lastBlocksData
-        if (cached != null) {
-            if (cached.blockSizes.contentEquals(blockSizes) && cached.parts == parts) {
-                return cached.result
-            }
+        if (cached.blockSizes.contentEquals(blockSizes) && cached.parts == parts) {
+            return cached.result
         }
         val cumulativeSums = blockSizes.runningFold(0) { acc, size -> acc + size }
         val maxGroupSize = findMinMaxGroupSize(blockSizes, cumulativeSums, parts)
