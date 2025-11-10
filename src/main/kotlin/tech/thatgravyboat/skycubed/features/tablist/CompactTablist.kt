@@ -11,9 +11,11 @@ import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidget
+import tech.thatgravyboat.skyblockapi.api.events.profile.ProfileChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
@@ -84,7 +86,8 @@ object CompactTablist {
     private var godPotionInFooter = false
     private var filteredFooter: List<FormattedText> = emptyList()
 
-    fun onToggle() {
+    @Subscription(ProfileChangeEvent::class)
+    fun update() {
         if (isEnabled()) {
             createNewDisplay(lastTablist)
         } else {
@@ -93,20 +96,19 @@ object CompactTablist {
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onTablistUpdate(event: TabListChangeEvent) {
         lastTablist = event.new
-        if (!isEnabled()) return
-        createNewDisplay(lastTablist)
+        update()
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
         boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
         godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
         handleLeftOverFooterLines(event.newFooter)
-        if (!isEnabled()) return
-
-        createNewDisplay(lastTablist)
+        update()
     }
 
     val footerLinesToRemove = listOf(

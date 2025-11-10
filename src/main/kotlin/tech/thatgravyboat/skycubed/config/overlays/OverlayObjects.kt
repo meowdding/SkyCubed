@@ -140,7 +140,7 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
         this.range = 1..30
     }.update()
 
-    private fun <T> ConfigDelegateProvider<RConfigKtEntry<T>>.update() = ObservableEntry(this) { _, _ -> CompactTablist.onToggle() }
+    private fun <T> ConfigDelegateProvider<RConfigKtEntry<T>>.update() = ObservableEntry(this) { _, _ -> CompactTablist.update() }
 }
 
 object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
