@@ -16,9 +16,9 @@ import net.minecraft.resources.ResourceLocation
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
 
-actual object CircularMinimapRenderer {
+object CircularMinimapRenderer {
 
-    actual fun drawMapPart(
+    fun drawMapPart(
         graphics: GuiGraphics,
         texture: ResourceLocation,
         circleCenterX: Float,
