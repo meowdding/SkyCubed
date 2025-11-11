@@ -41,22 +41,31 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
 
     @GenerateCodec
     data class RpgOverlayPosition(
-        val mana: Vector2i,
-        val health: Vector2i,
-        val xpBar: Vector2i,
+        val mana: RpgOverlayElement,
+        val health: RpgOverlayElement,
+        val xpBar: RpgOverlayElement,
         val xpText: Vector2i,
-        val airBase: Vector2i,
-        var airBar: Vector2i,
+        val airBase: RpgOverlayElement,
+        var airBar: RpgOverlayElement,
     ) {
         companion object {
             val DEFAULT = RpgOverlayPosition(
-                mana = Vector2i(47, 18),
-                health = Vector2i(47, 23),
-                xpBar = Vector2i(47, 29),
+                mana = RpgOverlayElement(47, 18, 57, 4),
+                health = RpgOverlayElement(47, 23, 70, 5),
+                xpBar = RpgOverlayElement(47, 29, 67, 4),
                 xpText = Vector2i(3, 33),
-                airBase = Vector2i(38, 34),
-                airBar = Vector2i(40, 34),
+                airBase = RpgOverlayElement(38, 34, 64, 6),
+                airBar = RpgOverlayElement(40, 34, 60, 4),
             )
         }
     }
+
+    @GenerateCodec
+    data class RpgOverlayElement(
+        val x: Int,
+        val y: Int,
+        val width: Int,
+        val height: Int,
+        val direction: String = "horizontal",
+    )
 }

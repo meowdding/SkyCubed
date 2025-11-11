@@ -5,9 +5,9 @@ import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.effect.MobEffects
-import org.joml.component1
-import org.joml.component2
+import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -18,6 +18,7 @@ import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
+import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.utils.*
@@ -32,6 +33,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
     private val HEALTH_NORMAL = SkyCubed.id("rpg/health/normal")
     private val HEALTH_POISON = SkyCubed.id("rpg/health/poison")
     private val HEALTH_WITHER = SkyCubed.id("rpg/health/wither")
+    private val HEALTH_FREEZE = SkyCubed.id("rpg/health/freeze")
     private val ABSORPTION = SkyCubed.id("rpg/health/absorption")
     private val MANA = SkyCubed.id("rpg/mana/normal")
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
@@ -59,6 +61,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
         val healthSprite = when {
             McPlayer.self?.hasEffect(MobEffects.POISON) == true -> HEALTH_POISON
             McPlayer.self?.hasEffect(MobEffects.WITHER) == true -> HEALTH_WITHER
+            GlaciteAPI.inGlaciteTunnels() && GlaciteAPI.cold > OverlaysConfig.coldOverlay -> HEALTH_FREEZE
             else -> HEALTH_NORMAL
         }
 
@@ -71,27 +74,36 @@ object PlayerRpgOverlay : SkyCubedOverlay {
 
         val positions = RpgOverlayPositionHandler.positions
 
-        positions.health.let { (x, y) ->
-            graphics.blitSpritePercentX(healthSprite, x, y, 70, 5, healthPercent.coerceIn(0f, 1f))
-            graphics.blitSpritePercentX(ABSORPTION, x, y, 70, 5, absorptionPercent.coerceIn(0f, 1f))
-        }
-        positions.mana.let { (x, y) ->
-            graphics.blitSpritePercentX(MANA_DEPLETED, x, y, 57, 4, manaUsePercent.coerceIn(0f, 1f))
-            graphics.blitSpritePercentX(MANA, x, y, 57, 4, manaPercent.coerceIn(0f, 1f))
-            graphics.blitSpritePercentX(MANA_NEEDED, x, y, 57, 4, manaUsePercent.coerceAtMost(manaPercent).coerceIn(0f, 1f))
-        }
+        graphics.blitSpritePercentX(healthSprite, positions.health, healthPercent)
+        graphics.blitSpritePercentX(ABSORPTION, positions.health, absorptionPercent)
+
+        graphics.blitSpritePercentX(MANA_DEPLETED, positions.mana, manaUsePercent)
+        graphics.blitSpritePercentX(MANA, positions.mana, manaPercent)
+        graphics.blitSpritePercentX(MANA_NEEDED, positions.mana, manaUsePercent.coerceAtMost(manaPercent))
 
         if (RpgOverlayConfig.skyblockLevel) {
-            graphics.blitSpritePercentX(SKYBLOCK_XP, positions.xpBar.x, positions.xpBar.y, 67, 4, skyblockLevelPercent.coerceIn(0f, 1f))
+            graphics.blitSpritePercentX(SKYBLOCK_XP, positions.xpBar, skyblockLevelPercent)
             graphics.drawScaledString("${ProfileAPI.sbLevel}", positions.xpText.x, positions.xpText.y, 16, 0x55FFFF)
         } else {
-            graphics.blitSpritePercentX(XP, positions.xpBar.x, positions.xpBar.y, 67, 4, xpPercent.coerceIn(0f, 1f))
+            graphics.blitSpritePercentX(XP, positions.xpBar, xpPercent)
             graphics.drawScaledString("${McPlayer.xpLevel}", positions.xpText.x, positions.xpText.y, 16, 0x78EC20)
         }
 
         if (airPercent < 1f) {
-            graphics.drawSprite(AIR_BASE, positions.airBase.x, positions.airBase.y, 64, 6)
-            graphics.blitSpritePercentX(AIR, positions.airBar.x, positions.airBar.y, 60, 4, airPercent.coerceIn(0f, 1f))
+            graphics.drawSprite(AIR_BASE, positions.airBase)
+            graphics.blitSpritePercentX(AIR, positions.airBar, airPercent)
+        }
+    }
+
+    private fun GuiGraphics.drawSprite(rl: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement) {
+        drawSprite(rl, element.x, element.y, element.width, element.height)
+    }
+
+    private fun GuiGraphics.blitSpritePercentX(rl: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
+        if (element.direction == "vertical") {
+            blitSpritePercentY(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f))
+        } else {
+            blitSpritePercentX(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f))
         }
     }
 
