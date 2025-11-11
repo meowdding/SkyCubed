@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.resources.SkinManager
+import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -19,6 +20,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.json.Json
+import tech.thatgravyboat.skycubed.SkyCubed
 import java.io.InputStream
 import java.util.concurrent.CompletableFuture
 import kotlin.reflect.jvm.javaType
@@ -37,15 +39,63 @@ fun ItemStack.getTooltipLines(): List<Component> = getTooltipLines(
     if (McClient.options.advancedItemTooltips) TooltipFlag.ADVANCED else TooltipFlag.NORMAL,
 )
 
-internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
-    this.scissor(x, y, (width * percent).toInt(), height) {
-        this.drawSprite(id, x, y, width, height)
+internal fun GuiGraphics.blitSpritePercent(
+    id: ResourceLocation,
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+    percent: Float,
+    direction: Direction = Direction.EAST,
+) {
+    when (direction) {
+        Direction.WEST, Direction.EAST -> this.blitSpritePercentX(id, x, y, width, height, percent, direction)
+        Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH -> this.blitSpritePercentY(id, x, y, width, height, percent, direction)
+        else -> throw IllegalArgumentException("Direction must be WEST, EAST, UP or DOWN")
     }
 }
 
-internal fun GuiGraphics.blitSpritePercentY(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
-    this.scissor(x, y, width, (height * percent).toInt()) {
-        this.drawSprite(id, x, y, width, height)
+internal fun GuiGraphics.blitSpritePercentX(
+    id: ResourceLocation,
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+    percent: Float,
+    direction: Direction = Direction.EAST,
+) {
+    when (direction) {
+        Direction.WEST -> this.scissor(x + width - (width * percent).toInt(), y, (width * percent).toInt(), height) {
+            this.drawSprite(id, x, y, width, height)
+        }
+
+        Direction.EAST -> this.scissor(x, y, (width * percent).toInt(), height) {
+            this.drawSprite(id, x, y, width, height)
+        }
+
+        else -> SkyCubed.error("Direction must be WEST or EAST")
+    }
+}
+
+internal fun GuiGraphics.blitSpritePercentY(
+    id: ResourceLocation,
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+    percent: Float,
+    direction: Direction = Direction.DOWN,
+) {
+    when (direction) {
+        Direction.UP, Direction.NORTH -> this.scissor(x, y + height - (height * percent).toInt(), width, (height * percent).toInt()) {
+            this.drawSprite(id, x, y, width, height)
+        }
+
+        Direction.DOWN, Direction.SOUTH -> this.scissor(x, y, width, (height * percent).toInt()) {
+            this.drawSprite(id, x, y, width, height)
+        }
+
+        else -> SkyCubed.error("Direction must be UP, NORTH, DOWN or SOUTH")
     }
 }
 
@@ -62,12 +112,12 @@ internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: I
 internal fun GuiGraphics.fillRect(
     x: Int, y: Int, width: Int, height: Int,
     backgroundColor: Int, borderColor: Int = 0x0,
-    borderSize: Int = 0, radius: Int = 0
+    borderSize: Int = 0, radius: Int = 0,
 ) {
     this.drawRoundedRectangle(
         x, y, width, height,
         backgroundColor.toUInt(), borderColor.toUInt(),
-        width.coerceAtMost(height) * (radius / 100f), borderSize
+        width.coerceAtMost(height) * (radius / 100f), borderSize,
     )
 }
 
@@ -113,13 +163,14 @@ fun AbstractContainerMenu.click(slot: Slot) {
         slot.index,
         InputConstants.MOUSE_BUTTON_LEFT,
         ClickType.PICKUP,
-        player
+        player,
     )
 }
 
-val CompletableFuture<*>.isActuallyDone: Boolean get() {
-    return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
-}
+val CompletableFuture<*>.isActuallyDone: Boolean
+    get() {
+        return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
+    }
 
 expect fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin>
 

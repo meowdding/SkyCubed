@@ -4,6 +4,7 @@ import com.google.gson.JsonElement
 import me.owdding.ktcodecs.GenerateCodec
 import me.owdding.ktmodules.Module
 import me.owdding.skycubed.generated.SkyCubedCodecs
+import net.minecraft.core.Direction
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraft.util.profiling.ProfilerFiller
@@ -66,6 +67,6 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         val y: Int,
         val width: Int,
         val height: Int,
-        val direction: String = "horizontal",
+        val direction: Direction = Direction.EAST,
     )
 }

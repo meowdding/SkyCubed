@@ -100,11 +100,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
     }
 
     private fun GuiGraphics.blitSpritePercentX(rl: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
-        if (element.direction == "vertical") {
-            blitSpritePercentY(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f))
-        } else {
-            blitSpritePercentX(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f))
-        }
+        blitSpritePercent(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
     }
 
     override fun onRightClick() = ContextMenu.open {
