@@ -9,7 +9,7 @@ import tech.thatgravyboat.skyblockapi.api.events.render.RenderItemBarEvent
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
 
-private const val THREE_HUNDRED_HOURS = 1080000f
+private const val THREE_HUNDRED_HOURS = 60 * 60 * 300f
 
 @Module
 object ItemBarManager {
