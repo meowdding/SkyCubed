@@ -9,6 +9,7 @@ plugins {
     `versioned-catalogues`
     kotlin("jvm") version "2.2.20"
     alias(libs.plugins.meowdding.resources)
+    alias(libs.plugins.meowdding.auto.mixins)
     alias(libs.plugins.kotlin.symbol.processor)
 }
 
@@ -128,6 +129,11 @@ tasks.processResources {
             )
         )
     }
+}
+
+autoMixins {
+    mixinPackage = "tech.thatgravyboat.skycubed.mixins"
+    projectName = "skycubed"
 }
 
 idea {

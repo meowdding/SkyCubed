@@ -12,13 +12,14 @@ resourceful-config-kotlin = "3.5.15"
 skyblockapi = "3.0.4"
 
 meowdding-lib = "3.0.13"
-meowdding-patches = "1.0.5"
+meowdding-auto-mixins = "1.0.3"
 meowdding-remote-repo = "1.0.4"
 meowdding-resources = "1.0.17"
 meowdding-ktmodules = "1.0.5"
 meowdding-ktcodecs = "1.0.25"
 
 gson = "2.12.1"
+
 
 [libraries]
 fabric-language-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric-language-kotlin" }
@@ -29,7 +30,6 @@ skyblockapi = { module = "tech.thatgravyboat:skyblock-api", version.ref = "skybl
 resourceful-config-kotlin = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21.5", version.ref = "resourceful-config-kotlin" }
 
 meowdding-lib = { module = "me.owdding.meowdding-lib:meowdding-lib", version.ref = "meowdding-lib" }
-meowdding-patches = { module = "me.owdding.patches:patches", version.ref = "meowdding-patches" }
 meowdding-remote-repo = { module = "me.owdding.repo:remote-repo", version.ref = "meowdding-remote-repo" }
 meowdding-ktmodules = { module = "me.owdding.ktmodules:KtModules", version.ref = "meowdding-ktmodules" }
 meowdding-ktcodecs = { module = "me.owdding.ktcodecs:KtCodecs", version.ref = "meowdding-ktcodecs" }
@@ -41,4 +41,5 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.re
 [plugins]
 
 meowdding-resources = { id = "me.owdding.resources" }
+meowdding-auto-mixins = { id = "me.owdding.auto-mixins", version.ref = "meowdding-auto-mixins" }
 kotlin-symbol-processor = { id = "com.google.devtools.ksp", version.ref = "kotlin-symbol-processor" }
