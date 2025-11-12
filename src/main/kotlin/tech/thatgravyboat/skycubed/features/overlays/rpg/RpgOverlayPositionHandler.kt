@@ -24,7 +24,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         McClient.registerClientReloadListener(id, this)
     }
 
-    var positions: RpgOverlayPosition = RpgOverlayPosition.DEFAULT
+    var positions: RpgOverlayPosition = RpgOverlayPosition()
         private set
 
 
@@ -42,26 +42,14 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
 
     @GenerateCodec
     data class RpgOverlayPosition(
-        val base: RpgOverlayBase,
-        val mana: RpgOverlayElement,
-        val health: RpgOverlayElement,
-        val xpBar: RpgOverlayElement,
-        val xpText: Vector2i,
-        val airBase: RpgOverlayElement,
-        var airBar: RpgOverlayElement,
-    ) {
-        companion object {
-            val DEFAULT = RpgOverlayPosition(
-                base = RpgOverlayBase(119, 48),
-                mana = RpgOverlayElement(47, 18, 57, 4),
-                health = RpgOverlayElement(47, 23, 70, 5),
-                xpBar = RpgOverlayElement(47, 29, 67, 4),
-                xpText = Vector2i(3, 33),
-                airBase = RpgOverlayElement(38, 34, 64, 6),
-                airBar = RpgOverlayElement(40, 34, 60, 4),
-            )
-        }
-    }
+        val base: RpgOverlayBase = RpgOverlayBase(119, 48),
+        val mana: RpgOverlayElement = RpgOverlayElement(47, 18, 57, 4),
+        val health: RpgOverlayElement = RpgOverlayElement(47, 23, 70, 5),
+        val xpBar: RpgOverlayElement = RpgOverlayElement(47, 29, 67, 4),
+        val xpText: Vector2i = Vector2i(3, 33),
+        val airBase: RpgOverlayElement = RpgOverlayElement(38, 34, 64, 6),
+        var airBar: RpgOverlayElement = RpgOverlayElement(40, 34, 60, 4),
+    )
 
     @GenerateCodec
     data class RpgOverlayElement(
