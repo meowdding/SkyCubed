@@ -42,6 +42,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
 
     @GenerateCodec
     data class RpgOverlayPosition(
+        val base: RpgOverlayBase,
         val mana: RpgOverlayElement,
         val health: RpgOverlayElement,
         val xpBar: RpgOverlayElement,
@@ -51,6 +52,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
     ) {
         companion object {
             val DEFAULT = RpgOverlayPosition(
+                base = RpgOverlayBase(119, 48),
                 mana = RpgOverlayElement(47, 18, 57, 4),
                 health = RpgOverlayElement(47, 23, 70, 5),
                 xpBar = RpgOverlayElement(47, 29, 67, 4),
@@ -68,5 +70,11 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         val width: Int,
         val height: Int,
         val direction: Direction = Direction.EAST,
+    )
+
+    @GenerateCodec
+    data class RpgOverlayBase(
+        val width: Int,
+        val height: Int,
     )
 }

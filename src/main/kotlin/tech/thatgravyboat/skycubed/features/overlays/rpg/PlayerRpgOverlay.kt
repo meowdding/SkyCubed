@@ -23,9 +23,6 @@ import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.utils.*
 
-private const val WIDTH = 119
-private const val HEIGHT = 48
-
 @RegisterOverlay
 object PlayerRpgOverlay : SkyCubedOverlay {
 
@@ -47,9 +44,11 @@ object PlayerRpgOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Player RPG Hud")
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && RpgOverlayConfig.enabled
     override val position: ConfigPosition = OverlayPositions.rpg
-    override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
+    override val bounds: Pair<Int, Int> get() = RpgOverlayPositionHandler.positions.base.let { it.width to it.height }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        val (baseWidth, baseHeight) = RpgOverlayPositionHandler.positions.base.let { it.width to it.height }
+
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
         val absorptionPercent = healthPercent - 1f
         val manaPercent = StatsAPI.mana.toFloat() / StatsAPI.maxMana.toFloat()
@@ -65,11 +64,11 @@ object PlayerRpgOverlay : SkyCubedOverlay {
             else -> HEALTH_NORMAL
         }
 
-        graphics.drawSprite(BASE, 0, 0, WIDTH, HEIGHT)
+        graphics.drawSprite(BASE, 0, 0, baseWidth, baseHeight)
 
         val player = McPlayer.self as? AbstractClientPlayer
         if (RpgOverlayConfig.playerDisplay != PlayerDisplay.DISABLED && player != null) {
-            Utils.drawRpgPlayer(graphics, player, HEIGHT, HEIGHT, 30f)
+            Utils.drawRpgPlayer(graphics, player, baseHeight, baseHeight, 30f)
         }
 
         val positions = RpgOverlayPositionHandler.positions
