@@ -20,7 +20,6 @@ import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.json.Json
-import tech.thatgravyboat.skycubed.SkyCubed
 import java.io.InputStream
 import java.util.concurrent.CompletableFuture
 import kotlin.reflect.jvm.javaType
@@ -51,7 +50,6 @@ internal fun GuiGraphics.blitSpritePercent(
     when (direction) {
         ScreenDirection.LEFT, ScreenDirection.RIGHT -> this.blitSpritePercentX(id, x, y, width, height, percent, direction)
         ScreenDirection.UP, ScreenDirection.DOWN -> this.blitSpritePercentY(id, x, y, width, height, percent, direction)
-        else -> throw IllegalArgumentException("Direction must be WEST, EAST, UP or DOWN")
     }
 }
 
@@ -73,7 +71,7 @@ internal fun GuiGraphics.blitSpritePercentX(
             this.drawSprite(id, x, y, width, height)
         }
 
-        else -> SkyCubed.error("Direction must be LEFT or RIGHT")
+        else -> {}
     }
 }
 
@@ -95,7 +93,7 @@ internal fun GuiGraphics.blitSpritePercentY(
             this.drawSprite(id, x, y, width, height)
         }
 
-        else -> SkyCubed.error("Direction must be UP or DOWN")
+        else -> {}
     }
 }
 
