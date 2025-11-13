@@ -42,7 +42,7 @@ object CommissionsOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Commissions")
     override val position: ConfigPosition get() = OverlayPositions.commissions
     override val bounds: Pair<Int, Int> get() = lines.getWidth() to lines.getHeight()
-    override val enabled: Boolean get() = CommissionOverlayConfig.enabled //&& SkyBlockIsland.inAnyIsland(locations)
+    override val enabled: Boolean get() = CommissionOverlayConfig.enabled && SkyBlockIsland.inAnyIsland(locations)
 
     override fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         lines.render(graphics)
