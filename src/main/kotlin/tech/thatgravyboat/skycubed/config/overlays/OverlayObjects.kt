@@ -128,11 +128,13 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
     var minColumns by int(3) {
         this.translation = "skycubed.config.overlays.tablist.min_columns"
         this.range = 1..9
+        this.slider = true
     }.update()
 
     var maxColumns by int(5) {
         this.translation = "skycubed.config.overlays.tablist.max_columns"
         this.range = 1..9
+        this.slider = true
     }.update()
 
     var targetColumnSize by int(20) {
