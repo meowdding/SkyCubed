@@ -132,7 +132,7 @@ class MapsWidget(
                     graphics.translated(x + width / 2.0f, z + height / 2.0f) {
                         val profile = McPlayer.skin ?: return
                         graphics.scale(1f / scale, 1f / scale)
-                        graphics.rotate(/*? if >= 1.21.9 {*/ /*headRot *//*?} else {*/ 180 + headRot /*?}*/)
+                        graphics.rotate(/*? if >= 1.21.9 {*/ headRot /*?} else {*/ /*180 + headRot *//*?}*/)
                         PlayerFaceRenderer.draw(graphics, profile.texture, -4, -4, 8, true, true, -1)
                     }
                 }
