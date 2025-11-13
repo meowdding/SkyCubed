@@ -2,8 +2,6 @@ package tech.thatgravyboat.skycubed.features.overlays.commissions
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.builder.DisplayFactory
-import me.owdding.lib.displays.Displays
-import me.owdding.lib.displays.withPadding
 import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -13,14 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
-import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
-import tech.thatgravyboat.skycubed.utils.CachedValue
-import tech.thatgravyboat.skycubed.utils.OverlayBackground
-import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
-import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
+import tech.thatgravyboat.skycubed.utils.*
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
@@ -45,7 +36,7 @@ object CommissionsOverlay : SkyCubedOverlay {
             commissions.forEach { commission ->
                 string("${commission.name}: ${CommissionFormatters.format(commission.name, commission.progress)}")
             }
-        }.withPadding(4)
+        }
     }
 
     override val name: Component = Text.of("Commissions")
@@ -53,7 +44,7 @@ object CommissionsOverlay : SkyCubedOverlay {
     override val bounds: Pair<Int, Int> get() = lines.getWidth() to lines.getHeight()
     override val enabled: Boolean get() = CommissionOverlayConfig.enabled //&& SkyBlockIsland.inAnyIsland(locations)
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         lines.render(graphics)
     }
 

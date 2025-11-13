@@ -113,16 +113,18 @@ object Config : ConfigKt("skycubed/config") {
     override val patches: Map<Int, UnaryOperator<JsonObject>> = mapOf(
         0 to UnaryOperator { json ->
             fun fix(@Language("JSONPath") path: String) {
-                val category =  json.getPath(path)?.asJsonObject ?: return
+                val category = json.getPath(path)?.asJsonObject ?: return
                 val background = category.get("background")?.asBoolean ?: true
                 val backgroundEnum = if (background) "TEXTURED" else "COLORED"
                 category.addProperty("background", backgroundEnum)
             }
 
             fix("overlays.commissions")
+            fix("overlays.sacks")
+            fix("overlays.trophy_fish")
 
             json
-        }
+        },
     )
 
     override val version = patches.size

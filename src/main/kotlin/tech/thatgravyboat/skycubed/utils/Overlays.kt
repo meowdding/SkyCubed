@@ -4,6 +4,7 @@ import me.owdding.ktmodules.AutoCollect
 import me.owdding.lib.overlays.Overlay
 import net.minecraft.client.gui.GuiGraphics
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
+import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import tech.thatgravyboat.skycubed.SkyCubed
 
 @Retention(AnnotationRetention.SOURCE)
@@ -16,12 +17,23 @@ interface SkyCubedOverlay : Overlay {
     val background: OverlayBackground get() = OverlayBackground.TEXTURED
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        when (background) {
-            OverlayBackground.TEXTURED -> graphics.drawSprite(SkyCubedTextures.backgroundBox, 0, 0, bounds.first, bounds.second)
-            OverlayBackground.COLORED -> graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
-            OverlayBackground.NO_BACKGROUND -> {}
+        val offset = when (background) {
+            OverlayBackground.TEXTURED -> {
+                graphics.drawSprite(SkyCubedTextures.backgroundBox, 0, 0, bounds.first, bounds.second)
+                4
+            }
+
+            OverlayBackground.COLORED -> {
+                graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
+                4
+            }
+
+            OverlayBackground.NO_BACKGROUND -> 0
         }
-        renderWithBackground(graphics, mouseX, mouseY, partialTicks)
+
+        graphics.translated(offset, offset) {
+            renderWithBackground(graphics, mouseX + offset, mouseY + offset, partialTicks)
+        }
     }
 
     fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) = renderWithBackground(graphics, mouseX, mouseY)

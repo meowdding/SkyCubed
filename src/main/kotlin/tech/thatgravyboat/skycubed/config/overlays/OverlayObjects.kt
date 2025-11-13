@@ -75,7 +75,7 @@ object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
         this.translation = "skycubed.config.overlays.sacks.enabled"
     }
 
-    var background by boolean(false) {
+    var background by enum(OverlayBackground.COLORED) {
         this.translation = "skycubed.config.overlays.sacks.background"
     }
 
@@ -90,7 +90,7 @@ object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
         this.translation = "skycubed.config.overlays.trophy_fish.enabled"
     }
 
-    var background by boolean(false) {
+    var background by enum(OverlayBackground.COLORED) {
         this.translation = "skycubed.config.overlays.trophy_fish.background"
     }
 
