@@ -32,7 +32,7 @@ interface SkyCubedOverlay : Overlay {
         }
 
         graphics.translated(offset, offset) {
-            renderWithBackground(graphics, mouseX + offset, mouseY + offset, partialTicks)
+            renderWithBackground(graphics, mouseX - offset, mouseY - offset, partialTicks)
         }
     }
 
