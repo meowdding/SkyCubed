@@ -1,5 +1,5 @@
 [versions]
-
+minecraft_start = "1.21.6"
 minecraft = "1.21.8"
 parchment = "2025.09.14"
 fabric-api = "0.136.0+1.21.8"

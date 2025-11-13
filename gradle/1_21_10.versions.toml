@@ -1,5 +1,5 @@
 [versions]
-
+minecraft_start = "1.21.9"
 minecraft = "1.21.10"
 parchment = "2025.10.05"
 sbapi-mc-version = "1.21.9"
