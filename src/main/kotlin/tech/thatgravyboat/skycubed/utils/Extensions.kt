@@ -48,8 +48,8 @@ internal fun GuiGraphics.blitSpritePercent(
     direction: ScreenDirection = ScreenDirection.RIGHT,
 ) {
     when (direction) {
-        ScreenDirection.LEFT, ScreenDirection.RIGHT -> this.blitSpritePercentX(id, x, y, width, height, percent, direction)
-        ScreenDirection.UP, ScreenDirection.DOWN -> this.blitSpritePercentY(id, x, y, width, height, percent, direction)
+        ScreenDirection.LEFT, ScreenDirection.RIGHT -> this.blitSpritePercentX(id, x, y, width, height, percent, direction == ScreenDirection.LEFT)
+        ScreenDirection.UP, ScreenDirection.DOWN -> this.blitSpritePercentY(id, x, y, width, height, percent, direction == ScreenDirection.UP)
     }
 }
 
@@ -60,18 +60,16 @@ internal fun GuiGraphics.blitSpritePercentX(
     width: Int,
     height: Int,
     percent: Float,
-    direction: ScreenDirection = ScreenDirection.RIGHT,
+    reversed: Boolean = false,
 ) {
-    when (direction) {
-        ScreenDirection.LEFT -> this.scissor(x + width - (width * percent).toInt(), y, (width * percent).toInt(), height) {
+    if (reversed) {
+        this.scissor(x + width - (width * percent).toInt(), y, (width * percent).toInt(), height) {
             this.drawSprite(id, x, y, width, height)
         }
-
-        ScreenDirection.RIGHT -> this.scissor(x, y, (width * percent).toInt(), height) {
+    } else {
+        this.scissor(x, y, (width * percent).toInt(), height) {
             this.drawSprite(id, x, y, width, height)
         }
-
-        else -> {}
     }
 }
 
@@ -82,18 +80,16 @@ internal fun GuiGraphics.blitSpritePercentY(
     width: Int,
     height: Int,
     percent: Float,
-    direction: ScreenDirection = ScreenDirection.DOWN,
+    reversed: Boolean = false,
 ) {
-    when (direction) {
-        ScreenDirection.UP -> this.scissor(x, y + height - (height * percent).toInt(), width, (height * percent).toInt()) {
+    if (reversed) {
+        this.scissor(x, y + height - (height * percent).toInt(), width, (height * percent).toInt()) {
             this.drawSprite(id, x, y, width, height)
         }
-
-        ScreenDirection.DOWN -> this.scissor(x, y, width, (height * percent).toInt()) {
+    } else {
+        this.scissor(x, y, width, (height * percent).toInt()) {
             this.drawSprite(id, x, y, width, height)
         }
-
-        else -> {}
     }
 }
 
