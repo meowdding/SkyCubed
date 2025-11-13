@@ -3,8 +3,9 @@ package tech.thatgravyboat.skycubed.features.info.base
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 
-object RiftBaseInfoOverlay : InfoDisplayOverride {
+object RiftBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_RIFT) {
     private val clockIcon = icon("rift/clock")
     private val pausedIcon = icon("rift/paused")
 

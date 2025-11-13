@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.features.info.base
 
 import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
 
-object DefaultBaseInfoOverlay : InfoDisplayOverride {
+object DefaultBaseInfoOverlay : InfoDisplayOverride() {
     private val sunIcon = icon("sun")
     private val moonIcon = icon("moon")
 

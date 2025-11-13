@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.info
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Displays
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
-import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.base.DefaultBaseInfoOverlay
 import tech.thatgravyboat.skycubed.features.info.base.DungeonBaseInfoOverlay
@@ -17,12 +16,9 @@ object BaseInfoDisplay {
     val RIGHT_LINE = SkyCubed.id("info/right")
     val LEFT_LINE = SkyCubed.id("info/left")
 
-    private val islandOverrides: Map<SkyBlockIsland, InfoDisplayOverride> = mapOf(
-        SkyBlockIsland.THE_RIFT to RiftBaseInfoOverlay,
-        SkyBlockIsland.THE_CATACOMBS to DungeonBaseInfoOverlay,
-    )
+    private val islandOverrides: List<InfoDisplayOverride> = listOf(RiftBaseInfoOverlay, DungeonBaseInfoOverlay)
 
-    private val currentOverride get() = islandOverrides[LocationAPI.island] ?: DefaultBaseInfoOverlay
+    private val currentOverride get() = islandOverrides.firstOrNull { it.island == LocationAPI.island } ?: DefaultBaseInfoOverlay
 
     val baseDisplay = DisplayFactory.vertical {
         spacer(34, 5)

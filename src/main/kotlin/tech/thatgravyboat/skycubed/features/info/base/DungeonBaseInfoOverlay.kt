@@ -1,8 +1,9 @@
 package tech.thatgravyboat.skycubed.features.info.base
 
 import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonAPI
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 
-object DungeonBaseInfoOverlay : InfoDisplayOverride {
+object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS) {
     private val dungeonFloorIcon = listOf(
         icon("dungeons/entrance"),
         icon("dungeons/bonzo"),
