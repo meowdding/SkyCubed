@@ -3,8 +3,8 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.navigation.ScreenDirection
 import net.minecraft.client.resources.SkinManager
-import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -46,11 +46,11 @@ internal fun GuiGraphics.blitSpritePercent(
     width: Int,
     height: Int,
     percent: Float,
-    direction: Direction = Direction.EAST,
+    direction: ScreenDirection = ScreenDirection.RIGHT,
 ) {
     when (direction) {
-        Direction.WEST, Direction.EAST -> this.blitSpritePercentX(id, x, y, width, height, percent, direction)
-        Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH -> this.blitSpritePercentY(id, x, y, width, height, percent, direction)
+        ScreenDirection.LEFT, ScreenDirection.RIGHT -> this.blitSpritePercentX(id, x, y, width, height, percent, direction)
+        ScreenDirection.UP, ScreenDirection.DOWN -> this.blitSpritePercentY(id, x, y, width, height, percent, direction)
         else -> throw IllegalArgumentException("Direction must be WEST, EAST, UP or DOWN")
     }
 }
@@ -62,18 +62,18 @@ internal fun GuiGraphics.blitSpritePercentX(
     width: Int,
     height: Int,
     percent: Float,
-    direction: Direction = Direction.EAST,
+    direction: ScreenDirection = ScreenDirection.RIGHT,
 ) {
     when (direction) {
-        Direction.WEST -> this.scissor(x + width - (width * percent).toInt(), y, (width * percent).toInt(), height) {
+        ScreenDirection.LEFT -> this.scissor(x + width - (width * percent).toInt(), y, (width * percent).toInt(), height) {
             this.drawSprite(id, x, y, width, height)
         }
 
-        Direction.EAST -> this.scissor(x, y, (width * percent).toInt(), height) {
+        ScreenDirection.RIGHT -> this.scissor(x, y, (width * percent).toInt(), height) {
             this.drawSprite(id, x, y, width, height)
         }
 
-        else -> SkyCubed.error("Direction must be WEST or EAST")
+        else -> SkyCubed.error("Direction must be LEFT or RIGHT")
     }
 }
 
@@ -84,18 +84,18 @@ internal fun GuiGraphics.blitSpritePercentY(
     width: Int,
     height: Int,
     percent: Float,
-    direction: Direction = Direction.DOWN,
+    direction: ScreenDirection = ScreenDirection.DOWN,
 ) {
     when (direction) {
-        Direction.UP, Direction.NORTH -> this.scissor(x, y + height - (height * percent).toInt(), width, (height * percent).toInt()) {
+        ScreenDirection.UP -> this.scissor(x, y + height - (height * percent).toInt(), width, (height * percent).toInt()) {
             this.drawSprite(id, x, y, width, height)
         }
 
-        Direction.DOWN, Direction.SOUTH -> this.scissor(x, y, width, (height * percent).toInt()) {
+        ScreenDirection.DOWN -> this.scissor(x, y, width, (height * percent).toInt()) {
             this.drawSprite(id, x, y, width, height)
         }
 
-        else -> SkyCubed.error("Direction must be UP, NORTH, DOWN or SOUTH")
+        else -> SkyCubed.error("Direction must be UP or DOWN")
     }
 }
 
