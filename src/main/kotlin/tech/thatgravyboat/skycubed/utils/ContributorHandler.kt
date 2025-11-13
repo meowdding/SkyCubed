@@ -1,8 +1,10 @@
 package tech.thatgravyboat.skycubed.utils
 
-import kotlinx.coroutines.runBlocking
 import me.owdding.ktmodules.Module
-import tech.thatgravyboat.skycubed.SkyCubed
+import me.owdding.lib.cosmetics.MlibCosmetics
+import me.owdding.lib.events.FinishRepoLoadingEvent
+import net.minecraft.network.chat.Component
+import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import java.util.*
 
 @Module
@@ -10,17 +12,12 @@ object ContributorHandler {
     var contributors: Map<UUID, ContributorData> = emptyMap()
         private set
 
-    init {
-        runBlocking {
-            try {
-                contributors = SkyCubed.loadFromRepo<Map<UUID, ContributorData>>("contributors") ?: emptyMap()
-            } catch (e: Exception) {
-                println(e)
-            }
-        }
+    @Subscription
+    fun onRepoLoad(event: FinishRepoLoadingEvent) {
+        contributors = MlibCosmetics.mlibCosmetics.mapNotNull { it.key to ContributorData(it.value.suffix ?: return@mapNotNull null) }.toMap()
     }
 }
 
 data class ContributorData(
-    val symbol: String,
+    val symbol: Component,
 )
