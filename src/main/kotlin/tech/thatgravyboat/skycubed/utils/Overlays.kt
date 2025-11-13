@@ -14,21 +14,21 @@ annotation class RegisterOverlay
 
 interface SkyCubedOverlay : Overlay {
     override val modId: String get() = SkyCubed.MOD_ID
-    val background: OverlayBackground get() = OverlayBackground.TEXTURED
+    val background: OverlayBackgroundConfig get() = OverlayBackgroundConfig.TEXTURED
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
         val offset = when (background) {
-            OverlayBackground.TEXTURED -> {
+            OverlayBackgroundConfig.TEXTURED -> {
                 graphics.drawSprite(SkyCubedTextures.backgroundBox, 0, 0, bounds.first, bounds.second)
                 4
             }
 
-            OverlayBackground.COLORED -> {
+            OverlayBackgroundConfig.COLORED -> {
                 graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
                 4
             }
 
-            OverlayBackground.NO_BACKGROUND -> 0
+            OverlayBackgroundConfig.NO_BACKGROUND -> 0
         }
 
         graphics.translated(offset, offset) {
@@ -40,7 +40,7 @@ interface SkyCubedOverlay : Overlay {
     fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {}
 }
 
-enum class OverlayBackground {
+enum class OverlayBackgroundConfig {
     TEXTURED,
     COLORED,
     NO_BACKGROUND;

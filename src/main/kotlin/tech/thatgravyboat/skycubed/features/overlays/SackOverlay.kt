@@ -28,7 +28,7 @@ object SackOverlay : SkyCubedOverlay {
     override val position: ConfigPosition get() = OverlayPositions.sack
     override val bounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
-    override val background: OverlayBackground get() = SackOverlayConfig.background
+    override val background: OverlayBackgroundConfig get() = SackOverlayConfig.background
 
     private val display by CachedValue(1.seconds) {
         if (SackOverlayConfig.sackItems.isEmpty()) return@CachedValue Displays.empty(0, 0)
@@ -56,9 +56,9 @@ object SackOverlay : SkyCubedOverlay {
             McClient.setScreenAsync { SackHudEditScreen() }
         }
         val text = when (SackOverlayConfig.background) {
-            OverlayBackground.TEXTURED -> "Textured Background"
-            OverlayBackground.COLORED -> "Colored Background"
-            OverlayBackground.NO_BACKGROUND -> "No Background"
+            OverlayBackgroundConfig.TEXTURED -> "Textured Background"
+            OverlayBackgroundConfig.COLORED -> "Colored Background"
+            OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
             SackOverlayConfig.background = SackOverlayConfig.background.next()

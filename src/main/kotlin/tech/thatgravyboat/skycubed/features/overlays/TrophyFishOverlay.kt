@@ -66,7 +66,7 @@ object TrophyFishOverlay : SkyCubedOverlay {
     override val position: ConfigPosition get() = OverlayPositions.trophyFish
     override val bounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = config.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
-    override val background: OverlayBackground get() = config.background
+    override val background: OverlayBackgroundConfig get() = config.background
 
     private val display by CachedValue(5.seconds) {
         listOf(title, *TrophyFishType.entries.map { it.createDisplay() }.toTypedArray()).toColumn()
@@ -83,9 +83,9 @@ object TrophyFishOverlay : SkyCubedOverlay {
             }
         }
         val text = when (config.background) {
-            OverlayBackground.TEXTURED -> "Textured Background"
-            OverlayBackground.COLORED -> "Colored Background"
-            OverlayBackground.NO_BACKGROUND -> "No Background"
+            OverlayBackgroundConfig.TEXTURED -> "Textured Background"
+            OverlayBackgroundConfig.COLORED -> "Colored Background"
+            OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
             config.background = config.background.next()
