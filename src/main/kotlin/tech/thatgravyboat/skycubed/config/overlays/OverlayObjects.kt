@@ -13,6 +13,7 @@ import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablistSorting
+import tech.thatgravyboat.skycubed.utils.OverlayBackground
 
 // This is because we need to use the property delegate in the init block
 private val EMPTY_PROPERTY = object {}
@@ -229,7 +230,7 @@ object CommissionOverlayConfig : OverlayConfig("Edit Commissions Overlay") {
         this.translation = "skycubed.config.overlays.commissions.format"
     }
 
-    var background by boolean(false) {
+    var background by enum(OverlayBackground.COLORED) {
         this.translation = "skycubed.config.overlays.commissions.background"
     }
 }
