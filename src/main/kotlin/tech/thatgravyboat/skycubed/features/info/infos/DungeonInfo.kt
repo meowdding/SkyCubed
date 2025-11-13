@@ -65,7 +65,7 @@ object DungeonInfo : InfoProvider {
         }
     }
 
-    @Subscription(event = [ServerChangeEvent::class, ServerDisconnectEvent::class])
+    @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
     fun onClear() {
         roomSecrets = 0
         roomMaxSecrets = 0
