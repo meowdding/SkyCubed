@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.utils
 
+import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import me.owdding.ktmodules.AutoCollect
 import me.owdding.lib.overlays.Overlay
 import net.minecraft.client.gui.GuiGraphics
@@ -40,8 +41,10 @@ interface SkyCubedOverlay : Overlay {
     fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {}
 }
 
-enum class OverlayBackgroundConfig {
+enum class OverlayBackgroundConfig : Translatable {
     TEXTURED,
     COLORED,
     NO_BACKGROUND;
+
+    override fun getTranslationKey(): String = "skycubed.config.overlays.background.${this.name.lowercase()}"
 }

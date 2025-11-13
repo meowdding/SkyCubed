@@ -49,6 +49,11 @@
             },
             "overlays": {
                 "@value": "Overlays",
+                "background": {
+                    "textured": "Textured Background",
+                    "colored": "Colored Background",
+                    "no_background": "No Background"
+                },
                 "health_display": {
                     "@value": "Enable Health Text Overlay",
                     "desc": "Enables the health text overlay."
