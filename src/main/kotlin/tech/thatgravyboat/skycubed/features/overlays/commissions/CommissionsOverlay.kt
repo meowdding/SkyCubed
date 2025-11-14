@@ -41,8 +41,9 @@ object CommissionsOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Commissions")
     override val position: ConfigPosition get() = OverlayPositions.commissions
-    override val bounds: Pair<Int, Int> get() = lines.getWidth() to lines.getHeight()
+    override val actualBounds: Pair<Int, Int> get() = lines.getWidth() to lines.getHeight()
     override val enabled: Boolean get() = CommissionOverlayConfig.enabled && SkyBlockIsland.inAnyIsland(locations)
+    override val background: OverlayBackgroundConfig get() = CommissionOverlayConfig.background
 
     override fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         lines.render(graphics)
@@ -53,9 +54,9 @@ object CommissionsOverlay : SkyCubedOverlay {
             CommissionOverlayConfig.format = !CommissionOverlayConfig.format
             this::lines.invalidateCache()
         }
-        val text = when (CommissionOverlayConfig.background) {
+        val text = when (CommissionOverlayConfig.background.next()) {
             OverlayBackgroundConfig.TEXTURED -> "Textured Background"
-            OverlayBackgroundConfig.COLORED -> "Colored Background"
+            OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {

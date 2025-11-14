@@ -64,7 +64,7 @@ object TrophyFishOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Trophy Fish Overlay")
     override val position: ConfigPosition get() = OverlayPositions.trophyFish
-    override val bounds get() = display.getWidth() to display.getHeight()
+    override val actualBounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = config.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
     override val background: OverlayBackgroundConfig get() = config.background
 
@@ -82,9 +82,9 @@ object TrophyFishOverlay : SkyCubedOverlay {
                 McClient.sendClientCommand("sbpv pv ${McPlayer.name}")
             }
         }
-        val text = when (config.background) {
+        val text = when (config.background.next()) {
             OverlayBackgroundConfig.TEXTURED -> "Textured Background"
-            OverlayBackgroundConfig.COLORED -> "Colored Background"
+            OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {

@@ -51,7 +51,7 @@
                 "@value": "Overlays",
                 "background": {
                     "textured": "Textured Background",
-                    "colored": "Colored Background",
+                    "translucent": "Translucent Background",
                     "no_background": "No Background"
                 },
                 "health_display": {
