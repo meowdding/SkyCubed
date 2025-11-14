@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info.base
 
+import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import tech.thatgravyboat.skyblockapi.api.area.dungeon.DungeonAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -14,6 +15,7 @@ import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.anyMatch
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
 
+@Module
 object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS) {
     private val dungeonFloorIcon = listOf(
         icon("dungeons/entrance"),
