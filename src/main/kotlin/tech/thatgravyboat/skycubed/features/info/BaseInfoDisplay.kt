@@ -18,7 +18,7 @@ object BaseInfoDisplay {
 
     private val islandOverrides: List<InfoDisplayOverride> = listOf(RiftBaseInfoOverlay, DungeonBaseInfoOverlay)
 
-    private val currentOverride get() = islandOverrides.firstOrNull { it.island == LocationAPI.island } ?: DefaultBaseInfoOverlay
+    val currentOverride get() = islandOverrides.firstOrNull { it.island == LocationAPI.island } ?: DefaultBaseInfoOverlay
 
     val baseDisplay = DisplayFactory.vertical {
         spacer(34, 5)
