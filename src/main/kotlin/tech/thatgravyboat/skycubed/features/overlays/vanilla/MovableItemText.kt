@@ -14,11 +14,11 @@ import tech.thatgravyboat.skycubed.config.overlays.ItemTextOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.mixins.GuiAccessor
+import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 
 @RegisterOverlay
-object MovableItemText : SkyCubedOverlay {
+object MovableItemText : BackgroundLessSkyCubedOverlay {
 
     const val WIDTH = 182
 
@@ -26,7 +26,7 @@ object MovableItemText : SkyCubedOverlay {
     override val enabled: Boolean get() = ItemTextOverlayConfig.moveable && LocationAPI.isOnSkyBlock
     override val properties: Collection<EditableProperty> = setOf(EditableProperty.X, EditableProperty.Y)
     override val position: ConfigPosition = OverlayPositions.itemtext
-    override val bounds: Pair<Int, Int> = WIDTH to 11
+    override val actualBounds: Pair<Int, Int> = WIDTH to 11
 
     /**
      * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]

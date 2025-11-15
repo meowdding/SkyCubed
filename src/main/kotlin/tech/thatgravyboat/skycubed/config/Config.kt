@@ -115,13 +115,13 @@ object Config : ConfigKt("skycubed/config") {
             fun fix(@Language("JSONPath") path: String) {
                 val category = json.getPath(path)?.asJsonObject ?: return
                 val background = category.get("background")?.asBoolean ?: true
-                val backgroundEnum = if (background) "TEXTURED" else "COLORED"
+                val backgroundEnum = if (background) "TEXTURED" else "TRANSLUCENT"
                 category.addProperty("background", backgroundEnum)
             }
 
             fix("overlays.commissions")
-            fix("overlays.sacks")
-            fix("overlays.trophy_fish")
+            fix("overlays.sack")
+            fix("overlays.trophyFish")
 
             json
         },
