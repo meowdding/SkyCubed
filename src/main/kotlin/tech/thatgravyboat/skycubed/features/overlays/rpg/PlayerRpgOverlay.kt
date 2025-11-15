@@ -63,15 +63,15 @@ object PlayerRpgOverlay : SkyCubedOverlay {
             GlaciteAPI.inGlaciteTunnels() && GlaciteAPI.cold > OverlaysConfig.coldOverlay -> HEALTH_FREEZE
             else -> HEALTH_NORMAL
         }
+        val positions = RpgOverlayPositionHandler.positions
 
         graphics.drawSprite(BASE, 0, 0, baseWidth, baseHeight)
 
         val player = McPlayer.self as? AbstractClientPlayer
         if (RpgOverlayConfig.playerDisplay != PlayerDisplay.DISABLED && player != null) {
-            Utils.drawRpgPlayer(graphics, player, baseHeight, baseHeight, 30f)
+            val playerConfig = positions.player
+            Utils.drawRpgPlayer(graphics, player, playerConfig.x, playerConfig.y, playerConfig.width, playerConfig.height, playerConfig.scale)
         }
-
-        val positions = RpgOverlayPositionHandler.positions
 
         graphics.blitSpritePercentX(healthSprite, positions.health, healthPercent)
         graphics.blitSpritePercentX(ABSORPTION, positions.health, absorptionPercent)
