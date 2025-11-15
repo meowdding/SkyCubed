@@ -166,8 +166,6 @@ val CompletableFuture<*>.isActuallyDone: Boolean
         return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
     }
 
-expect fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin>
-
 fun <T : Enum<T>> T.next(): T {
     val constants = if (this.javaClass.isEnum) this.javaClass.enumConstants else this.javaClass.superclass.enumConstants
     return constants[(this.ordinal + 1) % constants.size] as T

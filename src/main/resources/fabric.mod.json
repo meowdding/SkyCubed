@@ -1,0 +1,36 @@
+{
+    "schemaVersion": 1,
+    "id": "skycubed",
+    "version": "${version}",
+    "name": "SkyCubed",
+    "description": "SkyCubed is a Hypixel SkyBlock UI overhaul mod, changing all aspects of the UI in-game to be more inline into it looking like its own game.",
+    "authors": [
+        "ThatGravyBoat",
+        "j10a1n15"
+    ],
+    "license": "MIT",
+    "icon": "assets/skycubed/icon.png",
+    "mixins": [
+        "skycubed.client.mixins.json"
+    ],
+    "entrypoints": {
+        "main": [
+            {
+                "value": "tech.thatgravyboat.skycubed.SkyCubed",
+                "adapter": "kotlin"
+            }
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=0.16.10",
+        "minecraft": ">=${minecraft_start} <=${minecraft_end}",
+        "fabric": "*",
+        "fabric-language-kotlin": ">=${fabric_lang_kotlin}",
+        "resourcefullib": ">=${rlib}",
+        "olympus": ">=${olympus}",
+        "skyblock-api": ">=${sbapi}",
+        "meowdding-lib": ">=${mlib}",
+        "resourcefulconfigkt": ">=${rconfigkt}",
+        "resourcefulconfig": ">=${rconfig}"
+    }
+}
