@@ -1,9 +1,12 @@
 package tech.thatgravyboat.skycubed.features.info.base
 
+import me.owdding.lib.builder.DisplayFactory
 import tech.thatgravyboat.skyblockapi.api.area.rift.RiftAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skycubed.features.info.InfoProvider
 
 object RiftBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_RIFT) {
     private val clockIcon = icon("rift/clock")
@@ -21,4 +24,14 @@ object RiftBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_RIFT) {
     override fun getIcon() = if (isTimePaused()) pausedIcon else clockIcon
     override fun getText() = RiftAPI.time?.let { toBeautiful(it) } ?: "0s"
     override fun getTextColor() = if (isTimePaused()) 0xAAAAAAu else 0x55FF55u
+
+    override fun topRight(): InfoProvider = InfoProvider {
+        DisplayFactory.horizontal {
+            display(getIconDisplay("info/icons/rift/timecharm"))
+            textDisplay("${RiftAPI.timecharms.first}/${RiftAPI.timecharms.second}", shadow = true) { color = 0xFF5555 }
+
+            display(getIconDisplay("info/icons/rift/enigma"))
+            textDisplay("${RiftAPI.enigmaSouls.first}/${RiftAPI.enigmaSouls.second}", shadow = true) { color = 0xAA00AA }
+        }
+    }
 }
