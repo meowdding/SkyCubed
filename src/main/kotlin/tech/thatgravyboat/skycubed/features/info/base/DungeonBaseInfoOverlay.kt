@@ -16,6 +16,7 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.anyMatch
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
+import kotlin.time.Duration.Companion.seconds
 
 @Module
 object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS) {
@@ -42,7 +43,7 @@ object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS
 
     override fun getIcon() = DungeonAPI.dungeonFloor?.floorNumber?.let { dungeonFloorIcon[it] } ?: clockIcon
     override fun getText() = toBeautiful(DungeonAPI.time)
-    override fun getTextColor() = 0x55FF55u
+    override fun getTextColor() = if (DungeonAPI.time == 0.seconds) 0xAAAAAAu else 0x55FF55u
 
     override fun topRight(): InfoProvider = InfoProvider {
         DisplayFactory.horizontal {
