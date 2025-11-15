@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.utils
 
+//? if > 1.21.5 {
 import com.mojang.blaze3d.pipeline.BlendFunction
 import com.mojang.blaze3d.pipeline.RenderPipeline
 import com.mojang.blaze3d.platform.Lighting
@@ -19,10 +20,8 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.state.EntityRenderState
-import net.minecraft.client.renderer.entity.state.PlayerRenderState
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.player.Player
 import org.joml.Matrix3x2f
 import org.joml.Quaternionf
 import org.joml.Vector3f
@@ -32,6 +31,16 @@ import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import java.util.concurrent.CompletableFuture
 import java.util.function.Function
+
+//? if > 1.21.8 {
+import net.minecraft.client.renderer.entity.state.AvatarRenderState
+import net.minecraft.client.renderer.state.CameraRenderState
+import net.minecraft.client.renderer.LightTexture
+import net.minecraft.world.entity.Avatar
+//?} else {
+/*import net.minecraft.world.entity.player.Player as Avatar
+import net.minecraft.client.renderer.entity.state.PlayerRenderState as AvatarRenderState
+ *///?}
 
 class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictureRenderer<RpgPlayerRenderer.State>(buffer) {
 
@@ -48,25 +57,39 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         renderer.lighting.setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
         stack.mulPose(state.rotation)
+        //? if > 1.21.8 {
+        val cameraState = CameraRenderState()
+        val featureRenderer = McClient.self.gameRenderer.featureRenderDispatcher
+        //?}
         if (state.cameraAngle != null) {
-            dispatcher.overrideCameraOrientation(state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI))
+            val rotation = state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI)
+            //? if > 1.21.8 {
+            cameraState.orientation = rotation
+            //?} else
+            /*dispatcher.overrideCameraOrientation(rotation)*/
         }
 
-        dispatcher.setRenderShadow(false)
+        //? if > 1.21.8 {
+        state.state.lightCoords = LightTexture.FULL_BRIGHT
+        dispatcher.submit(state.state, cameraState, 0.0, 0.0, 0.0, stack, featureRenderer.submitNodeStorage)
+        featureRenderer.renderAllFeatures()
+        //?} else {
+        /*dispatcher.setRenderShadow(false)
         dispatcher.render(state.state, 0.0, 0.0, 0.0, stack, this.bufferSource, 15728880)
         dispatcher.setRenderShadow(true)
+        *///?}
     }
 
     override fun blitTexture(state: State, gui: GuiRenderState) {
         val mask = McClient.self.textureManager.getTexture(SkyCubed.id("textures/gui/sprites/rpg/mask.png")).textureView
 
         gui.submitBlitToCurrentLayer(BlitRenderState(
-            pipeline,
-            TextureSetup.doubleTexture(this.textureView!!, mask),
-            state.pose(),
-            state.x0(), state.y0(), state.x1(), state.y1(),
-            0.0F, 1.0F, 1.0F, 0.0F,
-            -1, state.scissorArea(), null)
+                pipeline,
+                TextureSetup.doubleTexture(this.textureView!!, mask),
+                state.pose(),
+                state.x0(), state.y0(), state.x1(), state.y1(),
+                0.0F, 1.0F, 1.0F, 0.0F,
+                -1, state.scissorArea(), null)
         )
     }
 
@@ -78,7 +101,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         val x0: Int, val y0: Int, val x1: Int, val y1: Int,
         val scale: Float,
         val scissor: ScreenRectangle?, val bounds: ScreenRectangle?,
-        val pose: Matrix3x2f
+        val pose: Matrix3x2f,
     ) : OlympusPictureInPictureRenderState<State> {
 
         override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<State>> =
@@ -131,15 +154,18 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
 
 
             val fakeplayer = DisplayEntityPlayer(CompletableFuture.completedFuture(entity.skin), armor, false)
-            val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Player, PlayerRenderState>
+            val renderer = McClient.self.entityRenderDispatcher.getRenderer(fakeplayer) as EntityRenderer<Avatar, AvatarRenderState>
             val state = renderer.createRenderState()
-            renderer.extractRenderState(fakeplayer as Player, state, 1f)
+            renderer.extractRenderState(fakeplayer as Avatar, state, 1f)
 
             state.hitboxesRenderState = null
             state.x = 0.0
             state.y = 0.0
             state.z = 0.0
-            state.swinging = false
+            //? if > 1.21.8 {
+            state.isVisuallySwimming = false
+            //?} else
+            /*state.swinging = false*/
             state.attackTime = 0f
             state.walkAnimationPos = 0f
             state.walkAnimationSpeed = 0f
@@ -156,7 +182,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         fun draw(
             graphics: GuiGraphics,
             entity: AbstractClientPlayer,
-            width: Int, height: Int, scale: Float
+            width: Int, height: Int, scale: Float,
         ) {
             graphics.nextStratum()
 
@@ -177,9 +203,10 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
                 scale,
                 graphics.scissorStack.peek(),
                 PictureInPictureRenderState.getBounds(0, 0, width, height, graphics.scissorStack.peek()),
-                Matrix3x2f(graphics.pose())
+                Matrix3x2f(graphics.pose()),
             )
             graphics.guiRenderState.submitPicturesInPictureState(state)
         }
     }
 }
+
