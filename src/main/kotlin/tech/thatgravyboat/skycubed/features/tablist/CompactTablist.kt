@@ -11,8 +11,11 @@ import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
+import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabListHeaderFooterChangeEvent
+import tech.thatgravyboat.skyblockapi.api.events.info.TabWidget
+import tech.thatgravyboat.skyblockapi.api.events.profile.ProfileChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
@@ -23,8 +26,9 @@ import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
 import tech.thatgravyboat.skyblockapi.platform.id
 import tech.thatgravyboat.skyblockapi.platform.name
 import tech.thatgravyboat.skyblockapi.platform.texture
-import tech.thatgravyboat.skyblockapi.utils.extentions.chunked
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
+import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
+import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -35,7 +39,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.time.until
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.overlays.TabListOverlayConfig
-import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.EMPTY
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
@@ -44,8 +47,6 @@ import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
-private typealias Segment = List<Line>
-
 private data class Line(
     val component: Component,
     var face: PlayerSkin? = null,
@@ -53,8 +54,7 @@ private data class Line(
     var skyblockLevel: Int? = null,
     var extraEmblems: MutableList<Component> = mutableListOf(),
 ) {
-    val string: String get() = component.string
-    val stripped: String get() = component.stripped
+    val stripped: String = component.stripped
 
     companion object {
         fun List<Component>.toLines() = map { Line(it) }
@@ -70,7 +70,7 @@ enum class CompactTablistSorting {
     FRIENDS,
     ;
 
-    private val formattedName = name.split("_").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercase) }
+    private val formattedName = toFormattedName()
 
     override fun toString() = formattedName
 }
@@ -86,64 +86,29 @@ object CompactTablist {
     private var godPotionInFooter = false
     private var filteredFooter: List<FormattedText> = emptyList()
 
-    fun onSortingUpdate() {
-        createDisplay(lastTablist)
-    }
-
-    fun onToggle(enabled: Boolean) {
-        if (enabled) {
-            createDisplay(lastTablist)
+    @Subscription(ProfileChangeEvent::class)
+    fun update() {
+        if (isEnabled()) {
+            createNewDisplay(lastTablist)
         } else {
             display = null
         }
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onTablistUpdate(event: TabListChangeEvent) {
         lastTablist = event.new
-        if (!isEnabled()) return
-        createDisplay(lastTablist)
+        update()
     }
 
     @Subscription
+    @OnlyOnSkyBlock
     fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
         boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
         godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
         handleLeftOverFooterLines(event.newFooter)
-        if (!isEnabled()) return
-
-        createDisplay(lastTablist)
-    }
-
-    private fun createDisplay(tablist: List<List<Component>>) {
-        val segments = tablist.flatMap { it + listOf(CommonText.EMPTY) }.toLines().addFooterSegment()
-            .map { if (titleRegex.match(it.stripped)) EMPTY else it }
-            .chunked { it.string.isBlank() }
-            .map { it.filterNot { it.string.isBlank() } }.filterNot(List<Line>::isEmpty)
-            .splitListIntoParts(4)
-            .map { it.flatMap { it + listOf(EMPTY) } }
-            .map { list -> list.map { it.formatPlayer() } }
-            .map { it.sortPlayers() }
-
-        val mainElement = segments.map { segment ->
-            segment.map { line ->
-                line.face?.let { face ->
-                    listOfNotNull(
-                        Displays.face({ face.texture!! }),
-                        Displays.text(line.component),
-                        *line.extraEmblems.map { Displays.text(it) }.toTypedArray(),
-                    ).toRow(3)
-                } ?: Displays.text(line.component)
-            }.toColumn()
-        }.toRow(5)
-
-        val footerElement =
-            filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
-
-        display = ExtraDisplays.background(
-            TabListOverlayConfig.backgroundColor.toUInt(), 2f,
-            Displays.padding(5, listOf(mainElement, footerElement).toColumn()),
-        )
+        update()
     }
 
     val footerLinesToRemove = listOf(
@@ -170,13 +135,13 @@ object CompactTablist {
     }
 
     private fun Line.formatPlayer(): Line {
-        playerRegex.match(this.string, "level", "name") { (level, name) ->
+        playerRegex.match(stripped, "level", "name") { (level, name) ->
             val player = McClient.players.firstOrNull { it.profile.name == name }
             val contributor = ContributorHandler.contributors[player?.profile?.id]
 
             playerName = name
             face = player?.toSkin()
-            skyblockLevel = level.toInt()
+            skyblockLevel = level.toIntValue()
             // party > coop > friends > guild
             // Todo add apis for this in sbapi
             val isCoop = false
@@ -204,38 +169,103 @@ object CompactTablist {
         return this
     }
 
-    private fun List<Line>.sortPlayers(): List<Line> {
-        val linesWithLevels = this.filter { it.skyblockLevel != null }.sortedWith { o1, o2 ->
-            when (TabListOverlayConfig.sorting) {
-                CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
-                CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2?.playerName ?: "", true) ?: 0
-                CompactTablistSorting.FRIENDS -> {
-                    val o1Friend = o1?.playerName?.let(FriendsAPI::getFriend)
-                    val o2Friend = o2?.playerName?.let(FriendsAPI::getFriend)
-                    return@sortedWith when {
-                        o1Friend == null && o2Friend == null -> 0 // Not Friends
-                        o1Friend == null -> -1 // o2 is friends but o1 is not
-                        o2Friend == null -> 1 // o1 is friends but o2 is not
-                        o1Friend.bestFriend && o2Friend.bestFriend -> 0 // o1 and o2 are both best friends
-                        o1Friend.bestFriend -> 1 // o1 is best friends but o2 is not
-                        o2Friend.bestFriend -> -1 // o2 is best friends but o1 is not
-                        else -> 0 // o1 and o2 are both friends but not best friends
-                    }
-                }
+    private val widgetRegexes = TabWidget.entries.map { it.regex }
 
-                else -> 0
+
+    private fun createNewDisplay(tablist: List<List<Component>>) {
+        if (tablist.isEmpty()) return
+        val components: List<List<Line>> = tablist.map { it.toLines() }
+
+        val blocks = mutableListOf<MutableList<Line>>()
+
+        val currentBlock = mutableListOf<Line>()
+
+        fun flushBlock() {
+            if (currentBlock.isNotEmpty()) {
+                blocks.add(currentBlock.toMutableList())
+                currentBlock.clear()
             }
         }
 
-        val iterator = linesWithLevels.iterator()
+        for ((i, column) in components.withIndex()) {
+            for (line in column) {
+                val stripped = line.stripped
+                if (titleRegex.matches(stripped)) continue
+                if (stripped.isBlank()) flushBlock()
+                else {
+                    if (widgetRegexes.any { it.matches(stripped) }) {
+                        flushBlock()
+                    }
+                    currentBlock.add(line.formatPlayer())
+                }
+            }
+            if (i == 0) flushBlock()
+        }
+        flushBlock()
 
-        return this.map { line ->
-            if (line.skyblockLevel != null) iterator.next() else line
+        val playerIndexes = mutableListOf<Pair<Int, Int>>()
+        val players = mutableListOf<Line>()
+        for ((i, block) in blocks.withIndex()) {
+            for ((j, line) in block.withIndex()) {
+                if (line.playerName == null) continue
+                players.add(line)
+                playerIndexes.add(i to j)
+            }
+        }
+        players.sortWith(playerComparator)
+
+        for ((index, pos) in playerIndexes.withIndex()) {
+            val (blockIndex, lineIndex) = pos
+            blocks[blockIndex][lineIndex] = players[index]
+        }
+        val footer = getFooterSegment().toMutableList()
+        if (footer.isNotEmpty()) blocks.addLast(footer)
+        val split = blocks.splitParts()
+
+        val mainElement = split.map { segment ->
+            segment.map { line ->
+                line.face?.let { face ->
+                    listOfNotNull(
+                        Displays.face({ face.texture!! }),
+                        Displays.text(line.component),
+                        *line.extraEmblems.map { Displays.text(it) }.toTypedArray(),
+                    ).toRow(3)
+                } ?: Displays.text(line.component)
+            }.toColumn()
+        }.toRow(5)
+
+        val footerElement =
+            filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
+
+        display = ExtraDisplays.background(
+            TabListOverlayConfig.backgroundColor.toUInt(), 2f,
+            Displays.padding(5, listOf(mainElement, footerElement).toColumn(5)),
+        )
+    }
+
+    private val playerComparator = Comparator<Line> { o1, o2 ->
+        when (TabListOverlayConfig.sorting) {
+            CompactTablistSorting.SKYBLOCK_LEVEL -> o2.skyblockLevel?.compareTo(o1.skyblockLevel ?: 0) ?: 0
+            CompactTablistSorting.ALPHABETICAL -> o1.playerName?.compareTo(o2.playerName ?: "", true) ?: 0
+            CompactTablistSorting.FRIENDS -> {
+                val o1Friend = o1.playerName?.let(FriendsAPI::getFriend)
+                val o2Friend = o2.playerName?.let(FriendsAPI::getFriend)
+                return@Comparator when {
+                    o1Friend == null && o2Friend == null -> 0 // Not Friends
+                    o1Friend == null -> -1 // o2 is friends but o1 is not
+                    o2Friend == null -> 1 // o1 is friends but o2 is not
+                    o1Friend.bestFriend && o2Friend.bestFriend -> 0 // o1 and o2 are both best friends
+                    o1Friend.bestFriend -> 1 // o1 is best friends but o2 is not
+                    o2Friend.bestFriend -> -1 // o2 is best friends but o1 is not
+                    else -> 0 // o1 and o2 are both friends but not best friends
+                }
+            }
+
+            else -> 0
         }
     }
 
-    // TODO: Potion effects
-    private fun Segment.addFooterSegment(): Segment = this + buildList {
+    private fun getFooterSegment(): List<Line> = buildList {
         fun createDuration(
             label: String,
             duration: Duration,
@@ -296,43 +326,90 @@ object CompactTablist {
         return true
     }
 
+    private fun List<List<Line>>.splitParts(): List<List<Line>> {
+        val totalSize = sumOf { it.size } + size
+        val range = TabListOverlayConfig.minColumns..TabListOverlayConfig.maxColumns
+        val columns = Math.ceilDiv(totalSize, TabListOverlayConfig.targetColumnSize).let {
+            if (range.isEmpty()) it
+            else it.coerceIn(range)
+        }.coerceAtLeast(1)
+        if (columns >= size) return this
+        val blockSizes = IntArray(size) { this[it].size }
+        val partitions = balanceBlocks(blockSizes, columns)
+        var index = 0
+        return partitions.map { count ->
+            subList(index, index + count).flattenWithSpacing().also { index += count }
+        }
+    }
 
-    private fun List<Segment>.splitListIntoParts(numberOfParts: Int): List<List<Segment>> {
-        val totalSize = this.sumOf { it.size }
+    private var lastBlocksData: BlockSizeData = BlockSizeData(IntArray(0), -1, emptyList())
 
-        val baseSize = totalSize / numberOfParts
-        val extraSize = totalSize % numberOfParts
+    private class BlockSizeData(
+        val blockSizes: IntArray,
+        val parts: Int,
+        val result: List<Int>
+    )
 
-        val result = mutableListOf<List<Segment>>()
-        var currentPart = mutableListOf<Segment>()
-        var currentSize = 0
-        var currentPartSize = baseSize
+    private fun balanceBlocks(blockSizes: IntArray, parts: Int): List<Int> {
+        val cached = lastBlocksData
+        if (cached.blockSizes.contentEquals(blockSizes) && cached.parts == parts) {
+            return cached.result
+        }
+        val cumulativeSums = blockSizes.runningFold(0) { acc, size -> acc + size }
+        val maxGroupSize = findMinMaxGroupSize(blockSizes, cumulativeSums, parts)
+        val result = partitionBlocks(blockSizes, cumulativeSums, parts, maxGroupSize)
+        lastBlocksData = BlockSizeData(blockSizes, parts, result)
+        return result
+    }
 
-        var extraParts = extraSize
+    private fun findMinMaxGroupSize(blocks: IntArray, cumulativeSums: List<Int>, parts: Int): Int {
+        val n = blocks.size
+        val partitionCost = Array(parts + 1) { IntArray(n + 1) { Int.MAX_VALUE } }
+        partitionCost[0][0] = 0
 
-        for (segment in this) {
-            currentPart.add(segment)
-            currentSize += segment.size
-
-            if (currentSize >= currentPartSize) {
-                result.add(currentPart)
-                currentPart = mutableListOf()
-                currentSize = 0
-
-                if (extraParts > 0) {
-                    currentPartSize = baseSize + 1
-                    extraParts--
-                } else {
-                    currentPartSize = baseSize
+        for (p in 1..parts) {
+            for (j in 1..n) {
+                for (prev in 0..<j) {
+                    val groupSum = cumulativeSums[j] - cumulativeSums[prev]
+                    partitionCost[p][j] = minOf(partitionCost[p][j], maxOf(partitionCost[p - 1][prev], groupSum))
                 }
             }
         }
 
-        if (currentPart.isNotEmpty()) {
-            result.add(currentPart)
+        return partitionCost[parts][n]
+    }
+
+    private fun partitionBlocks(blocks: IntArray, cumulativeSums: List<Int>, parts: Int, maxSize: Int): List<Int> {
+        val result = mutableListOf<Int>()
+        var index = 0
+        var remaining = parts
+
+        while (remaining > 0 && index < blocks.size) {
+            val start = index
+            var sum = 0
+            val avgTarget = (cumulativeSums.last() - cumulativeSums[index]) / remaining
+
+            while (index < blocks.size) {
+                val nextSum = sum + blocks[index]
+                val itemsLeft = blocks.size - index - 1
+                if (nextSum > maxSize || itemsLeft < remaining - 1 || sum >= avgTarget) break
+                sum = nextSum
+                index++
+            }
+
+            if (index == start) index++
+            result += index - start
+            remaining--
         }
 
         return result
+    }
+
+    private fun List<List<Line>>.flattenWithSpacing(): List<Line> {
+        if (size == 1) return first()
+        return flatMapIndexed { i, lines ->
+            if (i == lastIndex) lines else lines + Line.EMPTY
+        }
     }
 
     private fun isEnabled() = LocationAPI.isOnSkyBlock && TabListOverlayConfig.enabled
