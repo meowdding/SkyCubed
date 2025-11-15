@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.info
 
+import java.lang.UnsupportedOperationException
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
@@ -25,6 +26,32 @@ interface InfoProvider {
 
     fun getIconDisplay(string: String) = getIconDisplay(SkyCubed.id(string))
     fun getIconDisplay(location: ResourceLocation) = Displays.sprite(location, 8, 8).withPadding(left = 1, right = 1)
+
+    companion object {
+        operator fun invoke(
+            areas: List<SkyBlockArea> = emptyList(),
+            islands: List<SkyBlockIsland> = emptyList(),
+            predicate: (() -> Boolean)? = null,
+            displayProvider: InfoProvider.() -> Display
+        ) = of(areas, islands, predicate, displayProvider)
+        fun of(
+            areas: List<SkyBlockArea> = emptyList(),
+            islands: List<SkyBlockIsland> = emptyList(),
+            predicate: (() -> Boolean)? = null,
+            displayProvider: InfoProvider.() -> Display
+        ): InfoProvider = DefaultInfoProvider(areas, islands, predicate, displayProvider)
+    }
+}
+
+private class DefaultInfoProvider(
+    override val areas: List<SkyBlockArea> = emptyList(),
+    override val islands: List<SkyBlockIsland> = emptyList(),
+    val predicate: (() -> Boolean)? = null,
+    val displayProvider: InfoProvider.() -> Display
+) : InfoProvider {
+    override val location: InfoLocation get() = throw UnsupportedOperationException("Default providers should only be used in overrides!")
+    override fun getDisplay() = displayProvider()
+    override fun shouldDisplay(): Boolean = if (predicate == null) super.shouldDisplay() else predicate()
 }
 
 enum class InfoLocation(val withBackground: (Display) -> Display) {

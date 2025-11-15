@@ -73,6 +73,16 @@ object InfoOverlay : SkyCubedOverlay {
 
         infoOverlays.forEach { (location, overlays) ->
             if (location !in InfoHudOverlayConfig.enabledLocations) return@forEach
+
+            val currentOverride = BaseInfoDisplay.currentOverride
+            val override = when (location) {
+                InfoLocation.TOP_LEFT -> currentOverride.topLeft()
+                InfoLocation.BOTTOM_LEFT -> currentOverride.bottomLeft()
+                InfoLocation.TOP_RIGHT -> currentOverride.topRight()
+                InfoLocation.BOTTOM_RIGHT -> currentOverride.bottomRight()
+            }
+            val display = override ?: overlays.firstOrNull { it.shouldDisplay() } ?: return@forEach
+
             val (xOffset, horizontalAlignment) = when (location) {
                 InfoLocation.TOP_LEFT, InfoLocation.BOTTOM_LEFT -> 0 to 1f
                 InfoLocation.TOP_RIGHT, InfoLocation.BOTTOM_RIGHT -> 34 to 0f
@@ -81,7 +91,6 @@ object InfoOverlay : SkyCubedOverlay {
                 InfoLocation.TOP_LEFT, InfoLocation.TOP_RIGHT -> 2
                 InfoLocation.BOTTOM_LEFT, InfoLocation.BOTTOM_RIGHT -> 18
             }
-            val display = overlays.firstOrNull { it.shouldDisplay() } ?: return@forEach
             location.withBackground(display.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
         }
     }
