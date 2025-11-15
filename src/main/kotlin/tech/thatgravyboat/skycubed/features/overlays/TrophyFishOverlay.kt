@@ -82,7 +82,7 @@ object TrophyFishOverlay : SkyCubedOverlay {
                 McClient.sendClientCommand("sbpv pv ${McPlayer.name}")
             }
         }
-        val text = when (config.background.next()) {
+        val text = when (config.background) {
             OverlayBackgroundConfig.TEXTURED -> "Textured Background"
             OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"

@@ -54,7 +54,7 @@ object SackOverlay : SkyCubedOverlay {
         it.button(Text.of("Open Sack Edit Screen")) {
             McClient.setScreenAsync { SackHudEditScreen() }
         }
-        val text = when (SackOverlayConfig.background.next()) {
+        val text = when (SackOverlayConfig.background) {
             OverlayBackgroundConfig.TEXTURED -> "Textured Background"
             OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"

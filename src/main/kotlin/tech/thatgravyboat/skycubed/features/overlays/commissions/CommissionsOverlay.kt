@@ -54,7 +54,7 @@ object CommissionsOverlay : SkyCubedOverlay {
             CommissionOverlayConfig.format = !CommissionOverlayConfig.format
             this::lines.invalidateCache()
         }
-        val text = when (CommissionOverlayConfig.background.next()) {
+        val text = when (CommissionOverlayConfig.background) {
             OverlayBackgroundConfig.TEXTURED -> "Textured Background"
             OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
