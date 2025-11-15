@@ -1,14 +1,17 @@
 package tech.thatgravyboat.skycubed.config
 
+import com.google.gson.JsonObject
 import com.teamresourceful.resourcefulconfig.api.types.info.ResourcefulConfigLink
 import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
 import com.teamresourceful.resourcefulconfigkt.api.ConfigKt
 import me.owdding.lib.overlays.EditOverlaysScreen
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen
+import org.intellij.lang.annotations.Language
 import tech.thatgravyboat.skyblockapi.api.events.info.ActionBarWidget
 import tech.thatgravyboat.skyblockapi.api.events.render.HudElement
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
+import tech.thatgravyboat.skyblockapi.utils.json.getPath
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
@@ -18,6 +21,7 @@ import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
 import tech.thatgravyboat.skycubed.features.notifications.NotificationsScreen
 import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
+import java.util.function.UnaryOperator
 
 object Config : ConfigKt("skycubed/config") {
 
@@ -104,4 +108,25 @@ object Config : ConfigKt("skycubed/config") {
             }
         }
     }
+
+    //region Patches
+    override val patches: Map<Int, UnaryOperator<JsonObject>> = mapOf(
+        0 to UnaryOperator { json ->
+            fun fix(@Language("JSONPath") path: String) {
+                val category = json.getPath(path)?.asJsonObject ?: return
+                val background = category.get("background")?.asBoolean ?: true
+                val backgroundEnum = if (background) "TEXTURED" else "TRANSLUCENT"
+                category.addProperty("background", backgroundEnum)
+            }
+
+            fix("overlays.commissions")
+            fix("overlays.sack")
+            fix("overlays.trophyFish")
+
+            json
+        },
+    )
+
+    override val version = patches.size
+    //endregion
 }

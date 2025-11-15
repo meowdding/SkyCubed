@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.dialogue
 
 import com.mojang.blaze3d.platform.InputConstants
+import kotlin.math.max
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.*
 import me.owdding.lib.overlays.ConfigPosition
@@ -30,14 +31,13 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
+import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
-import kotlin.math.max
 
 @Module
 @RegisterOverlay
-object DialogueOverlay : SkyCubedOverlay {
+object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     private val messageRegex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
     private val yesNoRegex = listOf(
@@ -55,7 +55,7 @@ object DialogueOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Dialogue")
     override val position: ConfigPosition = ConfigPosition(0, 0)
-    override val bounds: Pair<Int, Int> = 0 to 0
+    override val actualBounds: Pair<Int, Int> = 0 to 0
     override val properties: Collection<EditableProperty> = setOf()
     override val enabled: Boolean get() = config.enabled
 

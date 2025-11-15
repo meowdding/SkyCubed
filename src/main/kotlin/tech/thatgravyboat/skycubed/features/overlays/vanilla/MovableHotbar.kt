@@ -7,15 +7,15 @@ import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
+import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 
 @RegisterOverlay
-object MovableHotbar : SkyCubedOverlay {
+object MovableHotbar : BackgroundLessSkyCubedOverlay {
     override val name: Component = Text.of("Moveable Hotbar")
     override val enabled: Boolean get() = OverlaysConfig.movableHotbar && LocationAPI.isOnSkyBlock
     override val position: ConfigPosition = OverlayPositions.hotbar
-    override val bounds: Pair<Int, Int> = 182 to 22
+    override val actualBounds: Pair<Int, Int> = 182 to 22
 
     /**
      * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
