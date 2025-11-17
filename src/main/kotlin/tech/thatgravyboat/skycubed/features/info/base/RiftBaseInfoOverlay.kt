@@ -22,7 +22,7 @@ object RiftBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_RIFT) {
     private fun isTimePaused(): Boolean = LocationAPI.area in pausedRiftTimeAreas
 
     override fun getIcon() = if (isTimePaused()) pausedIcon else clockIcon
-    override fun getText() = RiftAPI.time?.let { toBeautiful(it) } ?: "0s"
+    override fun getText() = RiftAPI.time?.let { formatTime(it) } ?: "0s"
     override fun getTextColor() = if (isTimePaused()) 0xAAAAAAu else 0x55FF55u
 
     override fun topRight(): InfoProvider = InfoProvider {

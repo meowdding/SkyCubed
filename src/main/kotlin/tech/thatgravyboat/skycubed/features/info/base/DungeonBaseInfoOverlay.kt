@@ -33,7 +33,7 @@ object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS
     private val clockIcon = icon("rift/clock")
 
     private val secretsRegex = " Secrets Found: (?<secrets>\\d+)".toRegex()
-    private val scoreRegex = "Cleared: (?<percentage>[\\d,.]+)% \\((?<score>[\\d,.]+)\\)".toRegex()
+    private val scoreRegex = "\\s*Cleared: (?<percentage>[\\d,.]+)% \\((?<score>[\\d,.]+)\\)".toRegex()
 
     private var roomSecrets: Int = 0
     private var roomMaxSecrets: Int = 0
@@ -42,7 +42,7 @@ object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS
 
 
     override fun getIcon() = DungeonAPI.dungeonFloor?.floorNumber?.let { dungeonFloorIcon[it] } ?: clockIcon
-    override fun getText() = toBeautiful(DungeonAPI.time)
+    override fun getText() = formatTime(DungeonAPI.time)
     override fun getTextColor() = if (DungeonAPI.time == 0.seconds) 0xAAAAAAu else 0x55FF55u
 
     override fun topRight(): InfoProvider = InfoProvider {

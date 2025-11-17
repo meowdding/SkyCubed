@@ -7,6 +7,6 @@ object DefaultBaseInfoOverlay : InfoDisplayOverride() {
     private val moonIcon = icon("moon")
 
     override fun getIcon() = if (DateTimeAPI.isDay) sunIcon else moonIcon
-    override fun getText() = toBeautiful(DateTimeAPI.hour, DateTimeAPI.minute)
+    override fun getText() = formatTime(DateTimeAPI.hour, DateTimeAPI.minute)
     override fun getTextColor() = if (DateTimeAPI.isDay) 0xFFFF55u else 0xAAAAAAu
 }
