@@ -10,4 +10,8 @@ object RenderingConfig : CategoryKt("render") {
     var showOwnTag by boolean(false) {
         this.translation = "skycubed.config.rendering.show_own_tag"
     }
+
+    val customDamage = obj("custom_damage", CustomDamageConfig) {
+        this.translation = "skycubed.config.rendering.custom_damage"
+    }
 }
