@@ -19,18 +19,18 @@ import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.Maps.getMapsForLocationOrNull
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.map.screen.MapsWidget
+import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.GettingState
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundBox
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures.backgroundCircle
 
 @Module
 @RegisterOverlay
-object MinimapOverlay : SkyCubedOverlay {
+object MinimapOverlay : BackgroundLessSkyCubedOverlay {
     override val name: Component = Text.of("Minimap")
     override val position: ConfigPosition = OverlayPositions.map
-    override val bounds: Pair<Int, Int> = 90 to 90
+    override val actualBounds: Pair<Int, Int> = 90 to 90
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && (display != null && MapOverlayConfig.enabled) || DungeonMapOverlay.canRender
 
     private var display: Display? = null

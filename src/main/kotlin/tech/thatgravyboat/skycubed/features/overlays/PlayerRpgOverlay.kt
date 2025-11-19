@@ -24,7 +24,7 @@ private const val WIDTH = 119
 private const val HEIGHT = 48
 
 @RegisterOverlay
-object PlayerRpgOverlay : SkyCubedOverlay {
+object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
 
     private val BASE = SkyCubed.id("rpg/base")
     private val HEALTH_NORMAL = SkyCubed.id("rpg/health/normal")
@@ -43,7 +43,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
     override val name: Component = Text.of("Player RPG Hud")
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && RpgOverlayConfig.enabled
     override val position: ConfigPosition = OverlayPositions.rpg
-    override val bounds: Pair<Int, Int> get() = WIDTH to HEIGHT
+    override val actualBounds: Pair<Int, Int> get() = WIDTH to HEIGHT
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
