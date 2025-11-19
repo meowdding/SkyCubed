@@ -1,7 +1,10 @@
 package tech.thatgravyboat.skycubed.config.overlays
 
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
+import com.teamresourceful.resourcefulconfigkt.api.ConfigDelegateProvider
 import com.teamresourceful.resourcefulconfigkt.api.ObjectKt
+import com.teamresourceful.resourcefulconfigkt.api.ObservableEntry
+import com.teamresourceful.resourcefulconfigkt.api.RConfigKtEntry
 import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -109,26 +112,37 @@ object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
 
 object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
 
-    var enabled by observable(
-        boolean(true) {
-            this.translation = "skycubed.config.overlays.tablist.enabled"
-        },
-    ) { _, new ->
-        CompactTablist.onToggle(new)
-    }
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.tablist.enabled"
+    }.update()
 
-    var sorting by observable(
-        enum<CompactTablistSorting>(CompactTablistSorting.NORMAL) {
-            this.translation = "skycubed.config.overlays.tablist.sorting"
-        },
-    ) { _, _ ->
-        CompactTablist.onSortingUpdate()
-    }
+    var sorting by enum(CompactTablistSorting.NORMAL) {
+        this.translation = "skycubed.config.overlays.tablist.sorting"
+    }.update()
 
     var backgroundColor by color(0xC0000000u.toInt()) {
         this.translation = "skycubed.config.overlays.tablist.background_color"
         this.allowAlpha = true
-    }
+    }.update()
+
+    var minColumns by int(3) {
+        this.translation = "skycubed.config.overlays.tablist.min_columns"
+        this.range = 1..9
+        this.slider = true
+    }.update()
+
+    var maxColumns by int(5) {
+        this.translation = "skycubed.config.overlays.tablist.max_columns"
+        this.range = 1..9
+        this.slider = true
+    }.update()
+
+    var targetColumnSize by int(20) {
+        this.translation = "skycubed.config.overlays.tablist.target_column_size"
+        this.range = 1..30
+    }.update()
+
+    private fun <T> ConfigDelegateProvider<RConfigKtEntry<T>>.update() = ObservableEntry(this) { _, _ -> CompactTablist.update() }
 }
 
 object MapOverlayConfig : OverlayConfig("Edit Map Overlay") {
@@ -262,7 +276,7 @@ object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
         this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_full"
     }
 
-    var removeBarWhenObjective  by boolean(false) {
+    var removeBarWhenObjective by boolean(false) {
         this.translation = "skycubed.config.overlays.bossbar.remove_bar_when_objective"
     }
 }

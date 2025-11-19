@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.resources.SkinManager
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -120,8 +119,6 @@ fun AbstractContainerMenu.click(slot: Slot) {
 val CompletableFuture<*>.isActuallyDone: Boolean get() {
     return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
 }
-
-expect fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin>
 
 fun <T : Enum<T>> T.next(): T {
     val constants = if (this.javaClass.isEnum) this.javaClass.enumConstants else this.javaClass.superclass.enumConstants

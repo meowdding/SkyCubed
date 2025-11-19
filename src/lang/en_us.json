@@ -137,6 +137,18 @@
                     "background_color": {
                         "@value": "Background Color",
                         "desc": "The color of the background of the tab list."
+                    },
+                    "min_columns": {
+                        "@value": "Minimum Columns",
+                        "desc": "The minimum amount of columns the tab list should have."
+                    },
+                    "max_columns": {
+                        "@value": "Maximum Columns",
+                        "desc": "The maximum amount of columns the tab list should have."
+                    },
+                    "target_column_size": {
+                        "@value": "Target Column Size",
+                        "desc": "The target size of each column in the tab list."
                     }
                 },
                 "map": {
