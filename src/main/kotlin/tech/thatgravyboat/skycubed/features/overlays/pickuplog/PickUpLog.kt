@@ -27,11 +27,11 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PickupLogOverlayConfig
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
+import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 
 @Module
 @RegisterOverlay
-object PickUpLog : SkyCubedOverlay {
+object PickUpLog : BackgroundLessSkyCubedOverlay {
 
     private val exampleDisplay by lazy {
         Displays.column(
@@ -52,7 +52,7 @@ object PickUpLog : SkyCubedOverlay {
 
     override val name = Text.of("Item Pick Up Log")
     override val position = OverlayPositions.pickupLog
-    override val bounds get() = exampleDisplay.getWidth() to exampleDisplay.getHeight()
+    override val actualBounds get() = exampleDisplay.getWidth() to exampleDisplay.getHeight()
     override val editBounds: Rect
         get() {
             if (display != null) {
