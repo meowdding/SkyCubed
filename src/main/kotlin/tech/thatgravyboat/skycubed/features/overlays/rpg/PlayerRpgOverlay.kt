@@ -98,7 +98,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
         drawSprite(rl, element.x, element.y, element.width, element.height)
     }
 
-    private fun GuiGraphics.blitSpritePercentX(rl: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
+    private fun GuiGraphics.blitSpritePercentX(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
         blitSpritePercent(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
     }
 
