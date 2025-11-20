@@ -94,7 +94,7 @@ object PlayerRpgOverlay : SkyCubedOverlay {
         }
     }
 
-    private fun GuiGraphics.drawSprite(rl: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement) {
+    private fun GuiGraphics.drawSprite(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement) {
         drawSprite(rl, element.x, element.y, element.width, element.height)
     }
 
