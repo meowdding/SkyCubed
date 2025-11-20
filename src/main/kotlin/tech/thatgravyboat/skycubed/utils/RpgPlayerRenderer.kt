@@ -1,8 +1,6 @@
 package tech.thatgravyboat.skycubed.utils
 
 //? if > 1.21.5 {
-
-//? if > 1.21.8 {
 import com.mojang.blaze3d.pipeline.BlendFunction
 import com.mojang.blaze3d.pipeline.RenderPipeline
 import com.mojang.blaze3d.platform.Lighting
@@ -18,15 +16,11 @@ import net.minecraft.client.gui.render.state.BlitRenderState
 import net.minecraft.client.gui.render.state.GuiRenderState
 import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState
 import net.minecraft.client.player.AbstractClientPlayer
-import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.entity.EntityRenderer
-import net.minecraft.client.renderer.entity.state.AvatarRenderState
 import net.minecraft.client.renderer.entity.state.EntityRenderState
-import net.minecraft.client.renderer.state.CameraRenderState
 import net.minecraft.util.Mth
-import net.minecraft.world.entity.Avatar
 import net.minecraft.world.entity.EquipmentSlot
 import org.joml.Matrix3x2f
 import org.joml.Quaternionf
@@ -39,6 +33,11 @@ import tech.thatgravyboat.skycubed.features.overlays.rpg.RpgOverlayPositionHandl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Function
 
+//? if > 1.21.8 {
+import net.minecraft.client.renderer.entity.state.AvatarRenderState
+import net.minecraft.client.renderer.state.CameraRenderState
+import net.minecraft.client.renderer.LightTexture
+import net.minecraft.world.entity.Avatar
 //?} else {
 /*import net.minecraft.world.entity.player.Player as Avatar
 import net.minecraft.client.renderer.entity.state.PlayerRenderState as AvatarRenderState
