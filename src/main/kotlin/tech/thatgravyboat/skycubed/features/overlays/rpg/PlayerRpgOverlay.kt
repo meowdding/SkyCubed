@@ -95,11 +95,11 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     }
 
     private fun GuiGraphics.drawSprite(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement) {
-        drawSprite(rl, element.x, element.y, element.width, element.height)
+        drawSprite(sprite, element.x, element.y, element.width, element.height)
     }
 
     private fun GuiGraphics.blitSpritePercentX(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
-        blitSpritePercent(rl, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
+        blitSpritePercent(sprite, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
     }
 
     override fun onRightClick() = ContextMenu.open {
