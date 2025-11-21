@@ -3,6 +3,8 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.navigation.ScreenDirection
+import net.minecraft.client.resources.SkinManager
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -36,15 +38,58 @@ fun ItemStack.getTooltipLines(): List<Component> = getTooltipLines(
     if (McClient.options.advancedItemTooltips) TooltipFlag.ADVANCED else TooltipFlag.NORMAL,
 )
 
-internal fun GuiGraphics.blitSpritePercentX(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
-    this.scissor(x, y, (width * percent).toInt(), height) {
-        this.drawSprite(id, x, y, width, height)
+internal fun GuiGraphics.blitSpritePercent(
+    id: ResourceLocation,
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+    percent: Float,
+    direction: ScreenDirection = ScreenDirection.RIGHT,
+) {
+    when (direction) {
+        ScreenDirection.LEFT, ScreenDirection.RIGHT -> this.blitSpritePercentX(id, x, y, width, height, percent, direction == ScreenDirection.LEFT)
+        ScreenDirection.UP, ScreenDirection.DOWN -> this.blitSpritePercentY(id, x, y, width, height, percent, direction == ScreenDirection.UP)
     }
 }
 
-internal fun GuiGraphics.blitSpritePercentY(id: ResourceLocation, x: Int, y: Int, width: Int, height: Int, percent: Float) {
-    this.scissor(x, y, width, (height * percent).toInt()) {
-        this.drawSprite(id, x, y, width, height)
+internal fun GuiGraphics.blitSpritePercentX(
+    id: ResourceLocation,
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+    percent: Float,
+    reversed: Boolean = false,
+) {
+    if (reversed) {
+        this.scissor(x + width - (width * percent).toInt(), y, (width * percent).toInt(), height) {
+            this.drawSprite(id, x, y, width, height)
+        }
+    } else {
+        this.scissor(x, y, (width * percent).toInt(), height) {
+            this.drawSprite(id, x, y, width, height)
+        }
+    }
+}
+
+internal fun GuiGraphics.blitSpritePercentY(
+    id: ResourceLocation,
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+    percent: Float,
+    reversed: Boolean = false,
+) {
+    if (reversed) {
+        this.scissor(x, y + height - (height * percent).toInt(), width, (height * percent).toInt()) {
+            this.drawSprite(id, x, y, width, height)
+        }
+    } else {
+        this.scissor(x, y, width, (height * percent).toInt()) {
+            this.drawSprite(id, x, y, width, height)
+        }
     }
 }
 
@@ -61,12 +106,12 @@ internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: I
 internal fun GuiGraphics.fillRect(
     x: Int, y: Int, width: Int, height: Int,
     backgroundColor: Int, borderColor: Int = 0x0,
-    borderSize: Int = 0, radius: Int = 0
+    borderSize: Int = 0, radius: Int = 0,
 ) {
     this.drawRoundedRectangle(
         x, y, width, height,
         backgroundColor.toUInt(), borderColor.toUInt(),
-        width.coerceAtMost(height) * (radius / 100f), borderSize
+        width.coerceAtMost(height) * (radius / 100f), borderSize,
     )
 }
 
@@ -112,13 +157,14 @@ fun AbstractContainerMenu.click(slot: Slot) {
         slot.index,
         InputConstants.MOUSE_BUTTON_LEFT,
         ClickType.PICKUP,
-        player
+        player,
     )
 }
 
-val CompletableFuture<*>.isActuallyDone: Boolean get() {
-    return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
-}
+val CompletableFuture<*>.isActuallyDone: Boolean
+    get() {
+        return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
+    }
 
 fun <T : Enum<T>> T.next(): T {
     val constants = if (this.javaClass.isEnum) this.javaClass.enumConstants else this.javaClass.superclass.enumConstants

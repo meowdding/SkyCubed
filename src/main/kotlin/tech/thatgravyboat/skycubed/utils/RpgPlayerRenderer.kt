@@ -29,6 +29,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
+import tech.thatgravyboat.skycubed.features.overlays.rpg.RpgOverlayPositionHandler
 import java.util.concurrent.CompletableFuture
 import java.util.function.Function
 
@@ -83,13 +84,15 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
     override fun blitTexture(state: State, gui: GuiRenderState) {
         val mask = McClient.self.textureManager.getTexture(SkyCubed.id("textures/gui/sprites/rpg/mask.png")).textureView
 
-        gui.submitBlitToCurrentLayer(BlitRenderState(
+        gui.submitBlitToCurrentLayer(
+            BlitRenderState(
                 pipeline,
                 TextureSetup.doubleTexture(this.textureView!!, mask),
                 state.pose(),
                 state.x0(), state.y0(), state.x1(), state.y1(),
                 0.0F, 1.0F, 1.0F, 0.0F,
-                -1, state.scissorArea(), null)
+                -1, state.scissorArea(), null,
+            ),
         )
     }
 
@@ -141,6 +144,8 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
 
         @Suppress("UNCHECKED_CAST")
         fun createNewState(entity: AbstractClientPlayer): EntityRenderState {
+            val playerOptions = RpgOverlayPositionHandler.positions.player
+
             val armor = if (RpgOverlayConfig.playerDisplay == PlayerDisplay.ARMORED) {
                 listOf(
                     entity.getItemBySlot(EquipmentSlot.HEAD).copy(),
@@ -172,8 +177,8 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             state.wornHeadAnimationPos = 0f
             state.ageInTicks = 0f
             state.yRot = 0f
-            state.bodyRot = 180f - 15f
-            state.xRot = 0f
+            state.bodyRot = 180f + playerOptions.xRot
+            state.xRot = playerOptions.yRot
             state.isCrouching = false
 
             return state
@@ -182,7 +187,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         fun draw(
             graphics: GuiGraphics,
             entity: AbstractClientPlayer,
-            width: Int, height: Int, scale: Float,
+            x: Int, y: Int, width: Int, height: Int, scale: Float,
         ) {
             graphics.nextStratum()
 
@@ -199,10 +204,10 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             val state = State(
                 createNewState(entity),
                 positionOffset, baseRotation, tiltRotation,
-                0, 0, width, height,
+                x, y, x + width, y + height,
                 scale,
                 graphics.scissorStack.peek(),
-                PictureInPictureRenderState.getBounds(0, 0, width, height, graphics.scissorStack.peek()),
+                PictureInPictureRenderState.getBounds(x, y, x + width, y + height, graphics.scissorStack.peek()),
                 Matrix3x2f(graphics.pose()),
             )
             graphics.guiRenderState.submitPicturesInPictureState(state)

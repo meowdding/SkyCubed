@@ -1,0 +1,49 @@
+{
+    "player": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48,
+        "xRot": -15,
+        "yRot": 0,
+        "scale": 30
+    },
+    "base": {
+        "width": 119,
+        "height": 48
+    },
+    "mana": {
+        "x": 47,
+        "y": 18,
+        "width": 57,
+        "height": 4
+    },
+    "health": {
+        "x": 47,
+        "y": 23,
+        "width": 70,
+        "height": 5
+    },
+    "xpBar": {
+        "x": 47,
+        "y": 29,
+        "width": 67,
+        "height": 4
+    },
+    "xpText": {
+        "x": 3,
+        "y": 33
+    },
+    "airBase": {
+        "x": 38,
+        "y": 34,
+        "width": 64,
+        "height": 6
+    },
+    "airBar": {
+        "x": 40,
+        "y": 34,
+        "width": 60,
+        "height": 4
+    }
+}

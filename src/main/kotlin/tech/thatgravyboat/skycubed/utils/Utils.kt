@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.authlib.SignatureState
 import com.mojang.authlib.minecraft.MinecraftProfileTexture
 import com.mojang.authlib.minecraft.MinecraftProfileTextures
-import java.util.concurrent.CompletableFuture
 import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
@@ -13,16 +12,17 @@ import net.minecraft.client.resources.SkinManager
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
 import tech.thatgravyboat.skycubed.mixins.SkinManagerInvoker
+import java.util.concurrent.CompletableFuture
 
 object Utils {
 
     fun drawRpgPlayer(
         graphics: GuiGraphics,
         entity: AbstractClientPlayer,
-        width: Int, height: Int, scale: Float,
+        x: Int, y: Int, width: Int, height: Int, scale: Float,
     ) {
         //? if > 1.21.5
-        RpgPlayerRenderer.draw(graphics, entity, width, height, scale)
+        RpgPlayerRenderer.draw(graphics, entity, x, y, width, height, scale)
     }
 
     fun Screen.fullyRender(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {

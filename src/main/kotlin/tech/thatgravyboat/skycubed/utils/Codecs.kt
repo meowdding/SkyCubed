@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import me.owdding.ktcodecs.IncludedCodec
+import org.joml.Vector2i
+import org.joml.Vector2ic
 import org.joml.Vector3i
 import java.util.function.Function
 
@@ -27,4 +29,12 @@ object Codecs {
 
     @IncludedCodec
     val VEC3I: Codec<Vector3i> = vec3i("x", "y", "z")
+
+    @IncludedCodec
+    val vec2iCodec: Codec<Vector2i> = RecordCodecBuilder.create {
+        it.group(
+            Codec.INT.fieldOf("x").forGetter(Vector2ic::x),
+            Codec.INT.fieldOf("y").forGetter(Vector2ic::y),
+        ).apply(it, ::Vector2i)
+    }
 }
