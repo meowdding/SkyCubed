@@ -16,8 +16,8 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.barDisabled
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.disabled
 import tech.thatgravyboat.skycubed.mixins.BossHealthOverlayAccessor
+import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 
 @AutoCollect("RegisteredInfos")
 @Retention(AnnotationRetention.SOURCE)
@@ -25,7 +25,7 @@ import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 annotation class RegisterInfoOverlay
 
 @RegisterOverlay
-object InfoOverlay : SkyCubedOverlay {
+object InfoOverlay : BackgroundLessSkyCubedOverlay {
 
     private val infoOverlays = mutableMapOf<InfoLocation, List<InfoProvider>>()
 
@@ -65,7 +65,7 @@ object InfoOverlay : SkyCubedOverlay {
         }
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && InfoHudOverlayConfig.enabled
     override val properties: Collection<EditableProperty> = setOf(EditableProperty.Y, EditableProperty.SCALE, EditableProperty.MISC)
-    override val bounds: Pair<Int, Int> = 34 to 34
+    override val actualBounds: Pair<Int, Int> = 34 to 34
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         graphics.drawSprite(BaseInfoDisplay.BASE, 0, 0, 34, 34)
@@ -73,6 +73,16 @@ object InfoOverlay : SkyCubedOverlay {
 
         infoOverlays.forEach { (location, overlays) ->
             if (location !in InfoHudOverlayConfig.enabledLocations) return@forEach
+
+            val currentOverride = BaseInfoDisplay.currentOverride
+            val override = when (location) {
+                InfoLocation.TOP_LEFT -> currentOverride.topLeft()
+                InfoLocation.BOTTOM_LEFT -> currentOverride.bottomLeft()
+                InfoLocation.TOP_RIGHT -> currentOverride.topRight()
+                InfoLocation.BOTTOM_RIGHT -> currentOverride.bottomRight()
+            }
+            val display = override ?: overlays.firstOrNull { it.shouldDisplay() } ?: return@forEach
+
             val (xOffset, horizontalAlignment) = when (location) {
                 InfoLocation.TOP_LEFT, InfoLocation.BOTTOM_LEFT -> 0 to 1f
                 InfoLocation.TOP_RIGHT, InfoLocation.BOTTOM_RIGHT -> 34 to 0f
@@ -81,7 +91,6 @@ object InfoOverlay : SkyCubedOverlay {
                 InfoLocation.TOP_LEFT, InfoLocation.TOP_RIGHT -> 2
                 InfoLocation.BOTTOM_LEFT, InfoLocation.BOTTOM_RIGHT -> 18
             }
-            val display = overlays.firstOrNull { it.shouldDisplay() } ?: return@forEach
             location.withBackground(display.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
         }
     }

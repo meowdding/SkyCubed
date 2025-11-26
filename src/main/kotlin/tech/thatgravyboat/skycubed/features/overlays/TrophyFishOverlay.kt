@@ -3,7 +3,10 @@ package tech.thatgravyboat.skycubed.features.overlays
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
-import me.owdding.lib.displays.*
+import me.owdding.lib.displays.Alignment
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.withTooltip
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.utils.KnownMods
 import net.minecraft.client.gui.GuiGraphics
@@ -61,32 +64,32 @@ object TrophyFishOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Trophy Fish Overlay")
     override val position: ConfigPosition get() = OverlayPositions.trophyFish
-    override val bounds get() = display.getWidth() to display.getHeight()
+    override val actualBounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = config.enabled && SkyBlockIsland.CRIMSON_ISLE.inIsland()
+    override val background: OverlayBackgroundConfig get() = config.background
 
     private val display by CachedValue(5.seconds) {
-        val display = listOf(title, *TrophyFishType.entries.map { it.createDisplay() }.toTypedArray()).toColumn().withPadding(2)
-        if (config.background) {
-            Displays.background(SkyCubedTextures.backgroundBox, display)
-        } else display
+        listOf(title, *TrophyFishType.entries.map { it.createDisplay() }.toTypedArray()).toColumn()
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
+    override fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
         display.render(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {
         if (KnownMods.SKYBLOCK_PV.installed) {
             it.button(Text.of("Open SkyBlockPv to update data")) {
-                // TODO: remove backwards compat with 1.21.6 or 1.22
-                val command = if (KnownMods.SKYBLOCK_PV.version!! > "1.2.0") "sbpv pv" else "pv"
-                McClient.sendClientCommand("$command ${McPlayer.name}")
+                McClient.sendClientCommand("sbpv pv ${McPlayer.name}")
             }
         }
-        it.button(Text.of("${if (config.background) "Disable" else "Enable"} Custom Background")) {
-            config.background = !config.background
-            ::display.invalidateCache()
+        val text = when (config.background) {
+            OverlayBackgroundConfig.TEXTURED -> "Textured Background"
+            OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
+            OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
+        }
+        it.button(Text.of(text)) {
+            config.background = config.background.next()
+            this::display.invalidateCache()
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {

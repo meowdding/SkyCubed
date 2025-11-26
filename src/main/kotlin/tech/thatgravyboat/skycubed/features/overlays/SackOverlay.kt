@@ -4,7 +4,6 @@ import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.displays.Displays
-import me.owdding.lib.displays.withPadding
 import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -27,13 +26,14 @@ object SackOverlay : SkyCubedOverlay {
 
     override val name: Component = Text.of("Sack Overlay")
     override val position: ConfigPosition get() = OverlayPositions.sack
-    override val bounds get() = display.getWidth() to display.getHeight()
+    override val actualBounds get() = display.getWidth() to display.getHeight()
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && SackOverlayConfig.enabled && SackOverlayConfig.sackItems.isNotEmpty()
+    override val background: OverlayBackgroundConfig get() = SackOverlayConfig.background
 
     private val display by CachedValue(1.seconds) {
         if (SackOverlayConfig.sackItems.isEmpty()) return@CachedValue Displays.empty(0, 0)
 
-        val display = DisplayFactory.vertical {
+        DisplayFactory.vertical {
             SackOverlayConfig.sackItems.forEach { item ->
                 val stack = SackCodecs.sackItems[item] ?: return@forEach
                 horizontal(5, Alignment.CENTER) {
@@ -43,15 +43,10 @@ object SackOverlay : SkyCubedOverlay {
                     string(Text.of("x${sackItems.toFormattedString()}") { color = TextColor.PINK })
                 }
             }
-        }.withPadding(4)
-
-        if (SackOverlayConfig.background) {
-            Displays.background(SkyCubedTextures.backgroundBox, display)
-        } else display
+        }
     }
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        graphics.fill(0, 0, bounds.first, bounds.second, 0x50000000)
         display.render(graphics)
     }
 
@@ -59,8 +54,13 @@ object SackOverlay : SkyCubedOverlay {
         it.button(Text.of("Open Sack Edit Screen")) {
             McClient.setScreenAsync { SackHudEditScreen() }
         }
-        it.button(Text.of("${if (SackOverlayConfig.background) "Disable" else "Enable"} Custom Background")) {
-            SackOverlayConfig.background = !SackOverlayConfig.background
+        val text = when (SackOverlayConfig.background) {
+            OverlayBackgroundConfig.TEXTURED -> "Textured Background"
+            OverlayBackgroundConfig.TRANSLUCENT -> "Translucent Background"
+            OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
+        }
+        it.button(Text.of(text)) {
+            SackOverlayConfig.background = SackOverlayConfig.background.next()
             this::display.invalidateCache()
         }
         it.divider()
