@@ -17,7 +17,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
 import tech.thatgravyboat.skyblockapi.utils.time.since
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.features.misc.CustomDamage.DamageType.Companion.damageType
 import java.util.concurrent.ConcurrentLinkedQueue
