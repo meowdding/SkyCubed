@@ -11,8 +11,10 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.entity.NameChangedEvent
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderWorldEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.platform.drawString
+import tech.thatgravyboat.skyblockapi.utils.extentions.toLongValue
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
@@ -37,14 +39,13 @@ object CustomDamage {
     fun onArmorStand(event: NameChangedEvent) {
         if (!config.enabled) return
 
-        val entity = event.infoLineEntity
-        if (entity !is ArmorStand) return
+        val entity = event.infoLineEntity as? ArmorStand ?: return
 
         val entityName = event.component
 
         damageRegex.matchEntire(entityName.string)?.let {
             val type = it.damageType(entityName.siblings[0]?.color)
-            val amount = (it.groups[2]?.value ?: return).replace(",", "").toLong()
+            val amount = (it.groups[2]?.value ?: return).toLongValue()
             val close = if (config.combining) damageList.firstOrNull { existing ->
                 existing.type == type && entity.position().distanceTo(existing.position) < config.combineThreshold
             } else null
@@ -60,11 +61,13 @@ object CustomDamage {
                 )
             } else {
                 close.amount += amount
-                if (close.actualSpawnTime >= currentInstant() - config.fullTimeout.milliseconds) {
+                if (close.actualSpawnTime.since() >= config.fullTimeout.milliseconds) {
                     close.time = currentInstant()
                 }
             }
-            entity.isCustomNameVisible = false
+            McClient.runNextTick {
+                entity.isCustomNameVisible = false
+            }
         }
     }
 
