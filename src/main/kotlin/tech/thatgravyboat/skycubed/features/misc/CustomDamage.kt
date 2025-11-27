@@ -38,7 +38,6 @@ object CustomDamage {
         if (!config.enabled) return
 
         val entity = event.infoLineEntity
-
         if (entity !is ArmorStand) return
 
         val entityName = event.component
@@ -147,19 +146,19 @@ object CustomDamage {
         OVERLOAD_CRIT(0xf2cdcd, "✯"),
         LOVE(0xf5c2e7, "❤"),
         END_STONE(0xf5e0dc, "⚔"),
-        CONTAGION(0xcba6f7, "💥"), // Explosion
+        CONTAGION(0xcba6f7, "💥"),
         LIGHTING(0x89dceb, "⚡"),
-        FIRE(0xfab387, "🔥"), // Fire
+        FIRE(0xfab387, "🔥"),
         VENOMOUS(0xa6e3a1, "☣"),
-        PET(0xf5c2e7, "☃"), // Snowman
-        TARANTULA(0xb4befe, "🕸️"), // Web
-        VOODOO(0xf38ba8, "🐡"),// Pufferfish
-        TRUE(0xcdd6f4, "❂"),
-        SUFFOCATION(0x89b4fa, "🫧"), // Bubbles
-        ALIGNMENT(0x94e2d5, "🛡️"), // Shield //TODO: Dealt when sharing damage, probably when tanking 3 lines at the suffix + green
-        BLAST(0xf38ba8, "💥"), // Explosion //TODO: Dealt by some mobs idk which, gray color and sun-like symbol suffix
-        ANTI_CHEESE(0xf9e2af, "🧀"), // Cheese //TODO: Dealt by rev horror and sven when on 1 spot too long I think? green + upwards pointing arrow
-        VOIDGLOOM(0x11111b, "🌑"), // The Moon //TODO: Voidgloom T2+, ourple :3
+        PET(0xf5c2e7, "☃"),
+        TARANTULA(0xb4befe, "🕸️"),
+        VOODOO(0xf38ba8, "🐡"),
+        TRUE_DAMAGE(0xcdd6f4, "❂"),
+        SUFFOCATION(0x89b4fa, "🫧"),
+        ALIGNMENT(0x94e2d5, "🛡️"), // TODO: Dealt when sharing damage, probably when tanking 3 lines at the suffix + green
+        BLAST(0xf38ba8, "💥"), // TODO: Dealt by some mobs idk which, gray color and sun-like symbol suffix
+        ANTI_CHEESE(0xf9e2af, "🧀"), // TODO: Dealt by rev horror and sven when on 1 spot too long I think? green + upwards pointing arrow
+        VOIDGLOOM(0x11111b, "🌑"), // TODO: Voidgloom T2+, ourple :3
         NORMAL(0x6c7086, "");
 
         companion object {
@@ -176,7 +175,7 @@ object CustomDamage {
                     16755200 -> FIRE
                     43520 -> VENOMOUS
                     5592575 -> LIGHTING
-                    16777215 -> TRUE
+                    16777215 -> TRUE_DAMAGE
                     43690 -> SUFFOCATION
                     else -> NORMAL
                 }
