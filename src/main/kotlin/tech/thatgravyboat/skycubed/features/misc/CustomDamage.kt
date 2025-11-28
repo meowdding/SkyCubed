@@ -61,7 +61,7 @@ object CustomDamage {
                 )
             } else {
                 close.amount += amount
-                if (close.actualSpawnTime.since() >= config.fullTimeout.milliseconds) {
+                if (close.actualSpawnTime.since() <= config.fullTimeout.milliseconds) {
                     close.time = currentInstant()
                 }
             }
