@@ -22,7 +22,6 @@ import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEv
 import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerInitializedEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McClient.clipboard
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
@@ -31,12 +30,10 @@ import tech.thatgravyboat.skyblockapi.utils.json.Json.toData
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentMatchResult
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
-import tech.thatgravyboat.skyblockapi.utils.regex.matchWhen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.Text.send
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
@@ -57,8 +54,7 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     private var options: List<Component> = emptyList()
 
-    private var yesNo: Pair<String, String>? = null
-    private var displayedYesNo = false
+    private var displayedOptions = false
     private var hudOverlayDisplay: Display = Displays.empty()
     private var inventoryOverlayDisplay: Display = Displays.empty()
 
@@ -119,8 +115,8 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         if (System.currentTimeMillis() > nextCheck) {
             if (queue.isEmpty()) {
                 nextCheck = System.currentTimeMillis() + minimumDurationPerMessage
-                if (yesNo != null && !displayedYesNo) {
-                    hudOverlayDisplay = createYesNoDisplay()
+                if (options.isNotEmpty() && !displayedOptions) {
+                    hudOverlayDisplay = createOptionsDisplay()
                 } else {
                     reset()
                 }
@@ -136,13 +132,13 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             }
         }
 
-        val (yesCommand, noCommand) = yesNo ?: return
+        /*val (yesCommand, noCommand) = yesNo ?: return
         val isYes = yesKeys.isDown()
         val isNo = noKeys.isDown()
 
         val command = if (isYes) yesCommand else if (isNo) noCommand else return
         McClient.sendCommand(command.removePrefix("/"))
-        reset()
+        reset()*/
     }
 
     private fun createMainDisplay(name: Component, message: Component, npc: DialogueNpc, maxWidth: Int): Display? {
@@ -178,36 +174,33 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         }
     }
 
-    private fun createYesNoDisplay(): Display {
-        displayedYesNo = true
+    private fun createOptionsDisplay(): Display {
+        displayedOptions = true
         nextCheck = System.currentTimeMillis() + displayActionDuration
 
-        val options = listOf(
-            Text.of("[1] Yes") { this.color = TextColor.GREEN },
-            Text.of("[2] No") { this.color = TextColor.RED },
-        )
+        val yesNoDisplay = options.mapIndexed { index, component ->
+            val text = Text.join(Text.of("${index + 1}. ").withColor(TextColor.GRAY), component)
+            Displays.background(SkyCubedTextures.backgroundBox, Displays.text(text).withPadding(5))
+        }.toColumn(5, Alignment.START)
 
-        val yesNoDisplay = options.map {
-            Displays.background(SkyCubedTextures.backgroundBox, Displays.padding(5, Displays.text(it)))
-        }.toColumn(10, Alignment.START)
+        return object : Display {
+            private val main = hudOverlayDisplay
+            override fun getWidth(): Int = main.getWidth()
+            override fun getHeight(): Int = main.getHeight()
 
-        return listOf(
-            hudOverlayDisplay,
-            Displays.pushPop(yesNoDisplay)
-            {
-                translate(
-                    hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
-                    -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                    -1000f,
-                )
-            },
-        ).asLayer()
+            override fun render(graphics: GuiGraphics) {
+                main.render(graphics)
+                graphics.translated(main.getWidth() - yesNoDisplay.getWidth() - 10f, -1f * yesNoDisplay.getHeight() - 10f) {
+                    yesNoDisplay.render(graphics)
+                }
+            }
+        }
     }
 
     private fun reset() {
         DialogueEntities.updateCache(max(minimumDurationPerMessage, displayActionDuration) + 5000)
-        yesNo = null
-        displayedYesNo = false
+        options = emptyList()
+        displayedOptions = false
         hudOverlayDisplay = Displays.empty()
         inventoryOverlayDisplay = Displays.empty()
         nextCheck = 0
