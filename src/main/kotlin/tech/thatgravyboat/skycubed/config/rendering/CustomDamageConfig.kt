@@ -22,16 +22,16 @@ object CustomDamageConfig : ObjectKt() {
         this.translation = "skycubed.config.rendering.custom_damage.combineThreshold"
     }
 
-    var touchiness by int(1) {
+    var precision by int(1) {
         this.translation = "skycubed.config.rendering.custom_damage.touchiness"
         this.range = 1..3
     }
 
-    var timeout by long(3000) {
+    var timeout by double(3.0) {
         this.translation = "skycubed.config.rendering.custom_damage.timeout"
     }
 
-    var fullTimeout by long(10000) {
+    var fullTimeout by double(10.0) {
         this.translation = "skycubed.config.rendering.custom_damage.fullTimeout"
     }
 

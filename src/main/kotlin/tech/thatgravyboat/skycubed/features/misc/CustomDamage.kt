@@ -24,6 +24,7 @@ import tech.thatgravyboat.skycubed.features.misc.CustomDamage.DamageType.Compani
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.math.sin
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
 
 @Module
@@ -61,7 +62,7 @@ object CustomDamage {
                 )
             } else {
                 close.amount += amount
-                if (close.actualSpawnTime.since() <= config.fullTimeout.milliseconds) {
+                if (close.actualSpawnTime.since() <= config.fullTimeout.seconds) {
                     close.time = currentInstant()
                 }
             }
@@ -74,15 +75,15 @@ object CustomDamage {
     @Subscription(TickEvent::class)
     @OnlyOnSkyBlock
     fun onTick() {
-        damageList.removeIf { it.time.since() > config.timeout.milliseconds }
+        damageList.removeIf { it.time.since() > config.timeout.seconds }
     }
 
     @Subscription
     fun onRender(event: RenderWorldEvent.AfterTranslucent) {
         damageList.forEach { damage ->
-            val progress = ((currentInstant() - damage.time) / config.timeout.milliseconds).coerceIn(0.0, 1.0)
+            val progress = ((currentInstant() - damage.time) / config.timeout.seconds).coerceIn(0.0, 1.0)
 
-            val damageText = Text.of(damage.amount.shorten(config.touchiness).addIcons(damage.type)) {
+            val damageText = Text.of(damage.amount.shorten(config.precision).addIcons(damage.type)) {
                 this.color = damage.type.color
             }
 
