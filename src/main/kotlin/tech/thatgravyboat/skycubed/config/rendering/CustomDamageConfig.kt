@@ -23,7 +23,7 @@ object CustomDamageConfig : ObjectKt() {
     }
 
     var precision by int(1) {
-        this.translation = "skycubed.config.rendering.custom_damage.touchiness"
+        this.translation = "skycubed.config.rendering.custom_damage.precision"
         this.range = 1..3
     }
 

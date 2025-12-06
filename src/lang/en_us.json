@@ -425,17 +425,17 @@
                         "@value": "Combine Threshold",
                         "desc": "The maximum distance between two damage tags for them to be combined."
                     },
-                    "touchiness": {
-                        "@value": "Touchiness",
+                    "precision": {
+                        "@value": "Precision",
                         "desc": "How many points of precision the tags display."
                     },
                     "timeout": {
                         "@value": "Timeout",
-                        "desc": "The time in milliseconds of how long a damage tag should be displayed for."
+                        "desc": "The time in seconds of how long a damage tag should be displayed for."
                     },
                     "fullTimeout": {
                         "@value": "Full Timeout",
-                        "desc": "Timeout in milliseconds before the combined tags fade out, independent of individual tag timeouts."
+                        "desc": "Timeout in seconds before the combined tags fade out, independent of individual tag timeouts."
                     },
                     "droppingTags": {
                         "@value": "Dropping Tags",
