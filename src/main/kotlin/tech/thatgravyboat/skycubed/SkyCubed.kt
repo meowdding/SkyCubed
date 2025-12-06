@@ -3,6 +3,8 @@ package tech.thatgravyboat.skycubed
 import com.google.gson.JsonElement
 import com.mojang.serialization.Codec
 import kotlinx.coroutines.runBlocking
+import me.owdding.ktmodules.Module
+import me.owdding.lib.events.overlay.FinishOverlayEditingEvent
 import me.owdding.lib.overlays.Overlays
 import me.owdding.lib.utils.DataPatcher
 import me.owdding.lib.utils.MeowddingUpdateChecker
@@ -18,6 +20,7 @@ import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
+import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.McVersionGroup
 import tech.thatgravyboat.skyblockapi.utils.json.Json
@@ -30,6 +33,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.hover
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.url
+import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
 import tech.thatgravyboat.skycubed.renderdoc.RenderDoc
 import java.net.URI
@@ -37,6 +41,7 @@ import java.nio.file.Files
 import kotlin.reflect.jvm.javaType
 import kotlin.reflect.typeOf
 
+@Module
 object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") {
 
     val mod: ModContainer = FabricLoader.getInstance().getModContainer("skycubed").orElseThrow()
@@ -93,6 +98,13 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
             Text.of("Click to download.").withLink().sendWithPrefix()
             Text.of().send()
         }
+    }
+
+    @Subscription
+    fun onOverlayEditFinish(event: FinishOverlayEditingEvent) {
+        if (event.modId == MOD_ID)
+            ConfigManager.save()
+
     }
 
     fun id(path: String): ResourceLocation {
