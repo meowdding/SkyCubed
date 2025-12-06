@@ -45,7 +45,7 @@ import kotlin.math.max
 object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     private val messageRegex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
-    private val selectAnOptionRegex = ComponentRegex("(?:Select|Click) an option: (?<options>(?:\\[.+] ?)+)")
+    private val selectAnOptionRegex = ComponentRegex(".*(?:Select|Click) an option: (?<options>.+)")
     private val optionRegex = ComponentRegex("\\[(?<option>.*?)]")
     private val wordRegex = Regex("\\s+")
 
@@ -182,6 +182,8 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             val text = Text.join(Text.of("${index + 1}. ").withColor(TextColor.GRAY), component)
             Displays.background(SkyCubedTextures.backgroundBox, Displays.text(text).withPadding(5))
         }.toColumn(5, Alignment.START)
+
+        println("Created options display with options: $options")
 
         return object : Display {
             private val main = hudOverlayDisplay
