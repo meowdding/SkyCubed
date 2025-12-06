@@ -82,7 +82,9 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             options = optionRegex.findAll(optionsComponent).mapNotNull { it["option"] }.mapIndexed { index, option ->
                 Option(
                     component = option,
-                    keys = keys { 49 + index },
+                    keys = keys {
+                        withKey(49 + index)
+                    },
                     command = option.command ?: "",
                 )
             }
