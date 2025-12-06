@@ -270,6 +270,10 @@ object NpcOverlayConfig : OverlayConfig("Edit NPC Overlay") {
     var hideChatMessage by boolean(true) {
         this.translation = "skycubed.config.overlays.npc.hide_chat_message"
     }
+
+    var hideSelectAnOptionMessage by boolean(false) {
+        this.translation = "skycubed.config.overlays.npc.hide_select_an_option_message"
+    }
 }
 
 object BossbarOverlayConfig : OverlayConfig("Vanilla Bossbar Overlay") {
