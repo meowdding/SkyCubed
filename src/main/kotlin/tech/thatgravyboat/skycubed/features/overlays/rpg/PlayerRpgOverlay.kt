@@ -73,24 +73,24 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
             Utils.drawRpgPlayer(graphics, player, playerConfig.x, playerConfig.y, playerConfig.width, playerConfig.height, playerConfig.scale)
         }
 
-        graphics.blitSpritePercentX(healthSprite, positions.health, healthPercent)
-        graphics.blitSpritePercentX(ABSORPTION, positions.health, absorptionPercent)
+        graphics.blitSpritePercent(healthSprite, positions.health, healthPercent)
+        graphics.blitSpritePercent(ABSORPTION, positions.health, absorptionPercent)
 
-        graphics.blitSpritePercentX(MANA_DEPLETED, positions.mana, manaUsePercent)
-        graphics.blitSpritePercentX(MANA, positions.mana, manaPercent)
-        graphics.blitSpritePercentX(MANA_NEEDED, positions.mana, manaUsePercent.coerceAtMost(manaPercent))
+        graphics.blitSpritePercent(MANA_DEPLETED, positions.mana, manaUsePercent)
+        graphics.blitSpritePercent(MANA, positions.mana, manaPercent)
+        graphics.blitSpritePercent(MANA_NEEDED, positions.mana, manaUsePercent.coerceAtMost(manaPercent))
 
         if (RpgOverlayConfig.skyblockLevel) {
-            graphics.blitSpritePercentX(SKYBLOCK_XP, positions.xpBar, skyblockLevelPercent)
+            graphics.blitSpritePercent(SKYBLOCK_XP, positions.xpBar, skyblockLevelPercent)
             graphics.drawScaledString("${ProfileAPI.sbLevel}", positions.xpText.x, positions.xpText.y, 16, 0x55FFFF)
         } else {
-            graphics.blitSpritePercentX(XP, positions.xpBar, xpPercent)
+            graphics.blitSpritePercent(XP, positions.xpBar, xpPercent)
             graphics.drawScaledString("${McPlayer.xpLevel}", positions.xpText.x, positions.xpText.y, 16, 0x78EC20)
         }
 
         if (airPercent < 1f) {
             graphics.drawSprite(AIR_BASE, positions.airBase)
-            graphics.blitSpritePercentX(AIR, positions.airBar, airPercent)
+            graphics.blitSpritePercent(AIR, positions.airBar, airPercent)
         }
     }
 
@@ -98,7 +98,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         drawSprite(sprite, element.x, element.y, element.width, element.height)
     }
 
-    private fun GuiGraphics.blitSpritePercentX(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
+    private fun GuiGraphics.blitSpritePercent(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
         blitSpritePercent(sprite, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
     }
 
