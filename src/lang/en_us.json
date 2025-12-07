@@ -405,6 +405,50 @@
                 "show_own_tag": {
                     "@value": "Render own name tag",
                     "desc": "Renders your own name tag in third person."
+                },
+                "custom_damage": {
+                    "@value": "Custom Damage Tags",
+                    "desc": "Replaces the default SkyBlock damage tags with custom ones.",
+                    "enabled": {
+                        "@value": "Enabled",
+                        "desc": "Enables the custom damage tags."
+                    },
+                    "shadow": {
+                        "@value": "Text Shadow",
+                        "desc": "Adds a shadow to the damage tag."
+                    },
+                    "combining": {
+                        "@value": "Combine Damage Tags",
+                        "desc": "Combines damage tags that are very close to each other into one tag with the total damage."
+                    },
+                    "combineThreshold": {
+                        "@value": "Combine Threshold",
+                        "desc": "The maximum distance between two damage tags for them to be combined."
+                    },
+                    "precision": {
+                        "@value": "Precision",
+                        "desc": "How many points of precision the tags display."
+                    },
+                    "timeout": {
+                        "@value": "Timeout",
+                        "desc": "The time in seconds of how long a damage tag should be displayed for."
+                    },
+                    "fullTimeout": {
+                        "@value": "Full Timeout",
+                        "desc": "Timeout in seconds before the combined tags fade out, independent of individual tag timeouts."
+                    },
+                    "droppingTags": {
+                        "@value": "Dropping Tags",
+                        "desc": "Makes the tags drop downwards as they fade out."
+                    },
+                    "fadingTags": {
+                        "@value": "Fading Tags",
+                        "desc": "Makes the tags fade out as they reach their timeout."
+                    },
+                    "icons": {
+                        "@value": "Show Icons",
+                        "desc": "Shows icons depending on the damage type next to the damage number."
+                    }
                 }
             },
             "notifications": {
