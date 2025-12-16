@@ -5,7 +5,7 @@ import net.minecraft.world.entity.npc.villager.Villager
 import net.minecraft.world.entity.npc.villager.VillagerProfession
 import net.minecraft.world.entity.npc.villager.VillagerType
 //?} else {
-/* import net.minecraft.world.entity.npc.Villager
+/*import net.minecraft.world.entity.npc.Villager
 import net.minecraft.world.entity.npc.VillagerProfession
 import net.minecraft.world.entity.npc.VillagerType
 *///?}

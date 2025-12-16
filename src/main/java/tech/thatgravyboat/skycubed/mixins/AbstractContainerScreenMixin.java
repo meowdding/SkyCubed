@@ -19,12 +19,12 @@ public abstract class AbstractContainerScreenMixin implements AbstractContainerS
     }
 
     //?} else {
-    /*
-    @Shadow public abstract void renderSlot(GuiGraphics guiGraphics, Slot slot);
+    
+    /*@Shadow public abstract void renderSlot(GuiGraphics guiGraphics, Slot slot);
     @Override
     public void skycubed$renderSlot(GuiGraphics guiGraphics, Slot slot, int mouseX, int mouseY) {
         this.renderSlot(guiGraphics, slot);
     }
-    */
-    //?}
+    
+    *///?}
 }
