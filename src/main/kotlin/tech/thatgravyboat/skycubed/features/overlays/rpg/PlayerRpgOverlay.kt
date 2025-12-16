@@ -5,7 +5,7 @@ import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.effect.MobEffects
 import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
@@ -94,11 +94,11 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         }
     }
 
-    private fun GuiGraphics.drawSprite(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement) {
+    private fun GuiGraphics.drawSprite(sprite: Identifier, element: RpgOverlayPositionHandler.RpgOverlayElement) {
         drawSprite(sprite, element.x, element.y, element.width, element.height)
     }
 
-    private fun GuiGraphics.blitSpritePercent(sprite: ResourceLocation, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
+    private fun GuiGraphics.blitSpritePercent(sprite: Identifier, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
         blitSpritePercent(sprite, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
     }
 

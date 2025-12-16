@@ -46,7 +46,10 @@ object WardrobeFeature {
         WardrobeScreen.currentPage = currentPage
 
         val (mouseX, mouseY) = McClient.mouse
-        WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)
+        //? if > 1.21.10 {
+        WardrobeScreen.init(event.screen.width, event.screen.height)
+        //?} else
+        /*WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)*/
         WardrobeScreen.fullyRender(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
     }
 

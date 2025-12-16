@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.features.equipment
 import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.Slot
@@ -20,13 +20,13 @@ import tech.thatgravyboat.skyblockapi.platform.showTooltip
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.ScreensConfig
-import tech.thatgravyboat.skycubed.mixins.AbstractContainerScreenAccessor
+import tech.thatgravyboat.skycubed.hooks.AbstractContainerScreenAccessor
 import tech.thatgravyboat.skycubed.utils.getTooltipLines
 
 @Module
 object EquipmentManager {
 
-    private val slotTexture = ResourceLocation.withDefaultNamespace("container/slot")
+    private val slotTexture = Identifier.withDefaultNamespace("container/slot")
     private val necklaceTexture = SkyCubed.id("equipment/necklace")
     private val cloakTexture = SkyCubed.id("equipment/cloak")
     private val beltTexture = SkyCubed.id("equipment/belt")
@@ -60,7 +60,7 @@ object EquipmentManager {
                 graphics.drawSprite(getEmptySlotTexture(slot), leftPos + 1, y + 1, 16, 16)
             } else {
                 val accessor = screen as AbstractContainerScreenAccessor
-                stack.useSlot(leftPos + 1, y + 1) { accessor.`skycubed$renderSlot`(graphics, it) }
+                stack.useSlot(leftPos + 1, y + 1) { accessor.`skycubed$renderSlot`(graphics, it, mouseX, mouseY) }
             }
         }
     }
@@ -96,7 +96,7 @@ object EquipmentManager {
         }
     }
 
-    private fun getEmptySlotTexture(slot: EquipmentSlot): ResourceLocation = when (slot) {
+    private fun getEmptySlotTexture(slot: EquipmentSlot): Identifier = when (slot) {
         EquipmentSlot.NECKLACE -> necklaceTexture
         EquipmentSlot.CLOAK -> cloakTexture
         EquipmentSlot.BELT -> beltTexture

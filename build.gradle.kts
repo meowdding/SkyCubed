@@ -55,6 +55,8 @@ dependencies {
         })
     })
 
+    modRuntimeOnly(versionedCatalog["placeholders"])
+
     api(libs.skyblockapi) {
         capabilities { requireCapability("tech.thatgravyboat:skyblock-api-${stonecutter.current.version}") }
     }

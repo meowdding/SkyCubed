@@ -13,7 +13,7 @@ plugins {
 }
 rootProject.name = "skycubed"
 
-val versions = listOf("1.21.10", "1.21.8", "1.21.5")
+val versions = listOf("1.21.11", "1.21.10", "1.21.8", "1.21.5")
 
 stonecutter {
     create(rootProject) {

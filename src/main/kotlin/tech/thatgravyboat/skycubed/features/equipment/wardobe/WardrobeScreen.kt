@@ -19,7 +19,7 @@ import net.minecraft.client.gui.components.WidgetSprites
 import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeSlot
@@ -189,7 +189,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
     }
 
     private fun getSmallTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
-        fun icon(loc: ResourceLocation, i: Int) =
+        fun icon(loc: Identifier, i: Int) =
             Displays.sprite(loc, 10, 10).withTooltip(slot.armor.getOrNull(i)?.takeUnless(ItemStack::isEmpty)?.getTooltipLines())
 
         display(icon(HELMET_SMALL, 0))

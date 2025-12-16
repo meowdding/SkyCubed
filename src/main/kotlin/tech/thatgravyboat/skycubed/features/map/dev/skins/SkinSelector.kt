@@ -1,9 +1,21 @@
 package tech.thatgravyboat.skycubed.features.map.dev.skins
 
+//? if > 1.21.10 {
 import net.minecraft.core.Holder
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.animal.Cow
+import net.minecraft.world.entity.animal.cow.Cow
+import net.minecraft.world.entity.animal.cow.MushroomCow
+import net.minecraft.world.entity.animal.sheep.Sheep
+import net.minecraft.world.entity.monster.MagmaCube
+import net.minecraft.world.entity.monster.Witch
+import net.minecraft.world.entity.monster.skeleton.Skeleton
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton
+import net.minecraft.world.entity.npc.villager.Villager
+import net.minecraft.world.entity.player.Player
+
+//?} else {
+/* import net.minecraft.world.entity.animal.Cow
 import net.minecraft.world.entity.animal.MushroomCow
 import net.minecraft.world.entity.animal.sheep.Sheep
 import net.minecraft.world.entity.monster.MagmaCube
@@ -12,14 +24,14 @@ import net.minecraft.world.entity.monster.Witch
 import net.minecraft.world.entity.monster.WitherSkeleton
 import net.minecraft.world.entity.npc.Villager
 import net.minecraft.world.entity.player.Player
+*///?}
 
 interface SkinSelector<E : Entity> {
     fun getSkin(entity: E): String
 
-    operator fun <T> ResourceKey<T>.contains(other: Holder<T>): Boolean {
+    operator fun <T : Any> ResourceKey<T>.contains(other: Holder<T>): Boolean {
         return other.`is`(this)
     }
-
 
     companion object {
         fun getSkin(entity: Entity): String {

@@ -1,10 +1,11 @@
 package tech.thatgravyboat.skycubed.utils
 
-//? if > 1.21.5 {
 import com.mojang.blaze3d.pipeline.BlendFunction
 import com.mojang.blaze3d.pipeline.RenderPipeline
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.textures.FilterMode
+import com.mojang.blaze3d.textures.GpuSampler
 import com.mojang.blaze3d.textures.GpuTextureView
 import com.mojang.blaze3d.vertex.PoseStack
 import earth.terrarium.olympus.client.pipelines.pips.OlympusPictureInPictureRenderState
@@ -16,11 +17,15 @@ import net.minecraft.client.gui.render.state.BlitRenderState
 import net.minecraft.client.gui.render.state.GuiRenderState
 import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState
 import net.minecraft.client.player.AbstractClientPlayer
+import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.entity.EntityRenderer
+import net.minecraft.client.renderer.entity.state.AvatarRenderState
 import net.minecraft.client.renderer.entity.state.EntityRenderState
+import net.minecraft.client.renderer.state.CameraRenderState
 import net.minecraft.util.Mth
+import net.minecraft.world.entity.Avatar
 import net.minecraft.world.entity.EquipmentSlot
 import org.joml.Matrix3x2f
 import org.joml.Quaternionf
@@ -33,24 +38,16 @@ import tech.thatgravyboat.skycubed.features.overlays.rpg.RpgOverlayPositionHandl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Function
 
-//? if > 1.21.8 {
-import net.minecraft.client.renderer.entity.state.AvatarRenderState
-import net.minecraft.client.renderer.state.CameraRenderState
-import net.minecraft.client.renderer.LightTexture
-import net.minecraft.world.entity.Avatar
-//?} else {
-/*import net.minecraft.world.entity.player.Player as Avatar
-import net.minecraft.client.renderer.entity.state.PlayerRenderState as AvatarRenderState
- *///?}
-
 class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictureRenderer<RpgPlayerRenderer.State>(buffer) {
 
     private var textureView: GpuTextureView? = null
+    private var sampler: GpuSampler? = null
 
     override fun getRenderStateClass(): Class<State> = State::class.java
 
     override fun renderToTexture(state: State, stack: PoseStack) {
         this.textureView = RenderSystem.outputColorTextureOverride // Internally before this method is called, the texture is set to the output color texture.
+        this.sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST)
 
         val dispatcher = McClient.self.entityRenderDispatcher
         val renderer = McClient.self.gameRenderer
@@ -58,36 +55,24 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         renderer.lighting.setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
         stack.mulPose(state.rotation)
-        //? if > 1.21.8 {
         val cameraState = CameraRenderState()
         val featureRenderer = McClient.self.gameRenderer.featureRenderDispatcher
-        //?}
         if (state.cameraAngle != null) {
             val rotation = state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI)
-            //? if > 1.21.8 {
             cameraState.orientation = rotation
-            //?} else
-            /*dispatcher.overrideCameraOrientation(rotation)*/
         }
-
-        //? if > 1.21.8 {
         state.state.lightCoords = LightTexture.FULL_BRIGHT
         dispatcher.submit(state.state, cameraState, 0.0, 0.0, 0.0, stack, featureRenderer.submitNodeStorage)
         featureRenderer.renderAllFeatures()
-        //?} else {
-        /*dispatcher.setRenderShadow(false)
-        dispatcher.render(state.state, 0.0, 0.0, 0.0, stack, this.bufferSource, 15728880)
-        dispatcher.setRenderShadow(true)
-        *///?}
     }
 
     override fun blitTexture(state: State, gui: GuiRenderState) {
-        val mask = McClient.self.textureManager.getTexture(SkyCubed.id("textures/gui/sprites/rpg/mask.png")).textureView
+        val mask = McClient.self.textureManager.getTexture(SkyCubed.id("textures/gui/sprites/rpg/mask.png"))
 
         gui.submitBlitToCurrentLayer(
             BlitRenderState(
                 pipeline,
-                TextureSetup.doubleTexture(this.textureView!!, mask),
+                TextureSetup.doubleTexture(this.textureView!!, this.sampler!!, mask.textureView, mask.sampler),
                 state.pose(),
                 state.x0(), state.y0(), state.x1(), state.y1(),
                 0.0F, 1.0F, 1.0F, 0.0F,
@@ -163,14 +148,10 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             val state = renderer.createRenderState()
             renderer.extractRenderState(fakeplayer as Avatar, state, 1f)
 
-            state.hitboxesRenderState = null
             state.x = 0.0
             state.y = 0.0
             state.z = 0.0
-            //? if > 1.21.8 {
             state.isVisuallySwimming = false
-            //?} else
-            /*state.swinging = false*/
             state.attackTime = 0f
             state.walkAnimationPos = 0f
             state.walkAnimationSpeed = 0f
@@ -214,4 +195,3 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         }
     }
 }
-

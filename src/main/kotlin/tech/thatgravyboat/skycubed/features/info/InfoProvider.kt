@@ -1,10 +1,9 @@
 package tech.thatgravyboat.skycubed.features.info
 
-import java.lang.UnsupportedOperationException
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
@@ -25,7 +24,7 @@ interface InfoProvider {
     fun shouldDisplay() = (islands.isEmpty() || SkyBlockIsland.inAnyIsland(islands)) && (areas.isEmpty() || SkyBlockArea.inAnyArea(*areas.toTypedArray()))
 
     fun getIconDisplay(string: String) = getIconDisplay(SkyCubed.id(string))
-    fun getIconDisplay(location: ResourceLocation) = Displays.sprite(location, 8, 8).withPadding(left = 1, right = 1)
+    fun getIconDisplay(location: Identifier) = Displays.sprite(location, 8, 8).withPadding(left = 1, right = 1)
 
     companion object {
         operator fun invoke(

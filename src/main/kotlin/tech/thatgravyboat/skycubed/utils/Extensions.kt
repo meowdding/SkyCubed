@@ -4,9 +4,8 @@ import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.navigation.ScreenDirection
-import net.minecraft.client.resources.SkinManager
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ClickType
 import net.minecraft.world.inventory.Slot
@@ -39,7 +38,7 @@ fun ItemStack.getTooltipLines(): List<Component> = getTooltipLines(
 )
 
 internal fun GuiGraphics.blitSpritePercent(
-    id: ResourceLocation,
+    id: Identifier,
     x: Int,
     y: Int,
     width: Int,
@@ -54,7 +53,7 @@ internal fun GuiGraphics.blitSpritePercent(
 }
 
 internal fun GuiGraphics.blitSpritePercentX(
-    id: ResourceLocation,
+    id: Identifier,
     x: Int,
     y: Int,
     width: Int,
@@ -74,7 +73,7 @@ internal fun GuiGraphics.blitSpritePercentX(
 }
 
 internal fun GuiGraphics.blitSpritePercentY(
-    id: ResourceLocation,
+    id: Identifier,
     x: Int,
     y: Int,
     width: Int,

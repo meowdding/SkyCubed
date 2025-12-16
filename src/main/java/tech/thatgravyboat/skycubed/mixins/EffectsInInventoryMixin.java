@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.mixins;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +12,7 @@ import tech.thatgravyboat.skycubed.config.Config;
 public class EffectsInInventoryMixin {
 
     @Inject(method = "renderEffects", at = @At("HEAD"), cancellable = true)
-    private void renderEffects(GuiGraphics $$0, int $$1, int $$2, CallbackInfo ci) {
+    private void renderEffects(CallbackInfo ci) {
         if (Config.INSTANCE.getHiddenHudElements().contains(HudElement.EFFECTS)) {
             ci.cancel();
         }

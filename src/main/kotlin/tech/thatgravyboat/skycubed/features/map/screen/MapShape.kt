@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import tech.thatgravyboat.skyblockapi.platform.drawTexture
 import tech.thatgravyboat.skycubed.features.map.IslandData
 import kotlin.math.min
@@ -15,7 +15,7 @@ enum class MapShape(
 
     fun drawMapPart(
         graphics: GuiGraphics,
-        texture: ResourceLocation,
+        texture: Identifier,
         map: IslandData,
         posX: Float,
         posY: Float,

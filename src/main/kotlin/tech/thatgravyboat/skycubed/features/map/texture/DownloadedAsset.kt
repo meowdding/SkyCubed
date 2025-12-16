@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.map.texture
 
 import com.google.common.hash.Hashing
-import net.minecraft.Util
+import net.minecraft.util.Util
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import tech.thatgravyboat.skyblockapi.helpers.McClient

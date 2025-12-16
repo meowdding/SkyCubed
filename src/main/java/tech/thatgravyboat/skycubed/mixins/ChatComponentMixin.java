@@ -2,26 +2,20 @@ package tech.thatgravyboat.skycubed.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MessageSignature;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.util.FormattedCharSequence;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tech.thatgravyboat.skyblockapi.impl.events.chat.ChatIdHolder;
 import tech.thatgravyboat.skycubed.features.chat.ChatTabColors;
 
-import java.util.List;
-
 @Mixin(ChatComponent.class)
 public class ChatComponentMixin {
-
-    @Shadow @Final private List<GuiMessage.Line> trimmedMessages;
 
     @WrapOperation(
             method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
@@ -37,13 +31,26 @@ public class ChatComponentMixin {
         );
     }
 
-    @Inject(method = "addMessageToDisplayQueue", at = @At(value = "INVOKE", target = "Ljava/util/List;add(ILjava/lang/Object;)V", shift = At.Shift.AFTER))
-    private void addMessageToDisplayQueue(GuiMessage message, CallbackInfo ci) {
+    @WrapOperation(
+        method = "addMessageToDisplayQueue",
+        at = @At(
+            value = "NEW",
+            target = "(ILnet/minecraft/util/FormattedCharSequence;Lnet/minecraft/client/GuiMessageTag;Z)Lnet/minecraft/client/GuiMessage$Line;"
+        )
+    )
+    private GuiMessage.Line addMessageToDisplayQueue(
+        int addedTime,
+        FormattedCharSequence content,
+        GuiMessageTag tag,
+        boolean endOfEntry,
+        Operation<GuiMessage.Line> original,
+        @Local(ordinal = 0, argsOnly = true) GuiMessage message
+    ) {
+        var line = original.call(addedTime, content, tag, endOfEntry);
         String id = ((ChatIdHolder) (Object) message).skyblockapi$getId();
-        if (id != null && !this.trimmedMessages.isEmpty()) {
-            ChatIdHolder holder = (ChatIdHolder) (Object) this.trimmedMessages.getFirst();
-            assert holder != null;
+        if (id != null && (Object) line instanceof ChatIdHolder holder) {
             holder.skyblockapi$setId(id);
         }
+        return line;
     }
 }

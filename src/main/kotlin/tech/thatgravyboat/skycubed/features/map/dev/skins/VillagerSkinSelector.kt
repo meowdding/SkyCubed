@@ -1,8 +1,14 @@
 package tech.thatgravyboat.skycubed.features.map.dev.skins
 
-import net.minecraft.world.entity.npc.Villager
+//? if > 1.21.10 {
+import net.minecraft.world.entity.npc.villager.Villager
+import net.minecraft.world.entity.npc.villager.VillagerProfession
+import net.minecraft.world.entity.npc.villager.VillagerType
+//?} else {
+/* import net.minecraft.world.entity.npc.Villager
 import net.minecraft.world.entity.npc.VillagerProfession
 import net.minecraft.world.entity.npc.VillagerType
+*///?}
 
 data class VillagerSkin(
     val default: String,

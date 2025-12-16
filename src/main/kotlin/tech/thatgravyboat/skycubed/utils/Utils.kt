@@ -3,12 +3,12 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.authlib.SignatureState
 import com.mojang.authlib.minecraft.MinecraftProfileTexture
 import com.mojang.authlib.minecraft.MinecraftProfileTextures
-import net.minecraft.Util
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.multiplayer.PlayerInfo
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.resources.SkinManager
+import net.minecraft.util.Util
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
 import tech.thatgravyboat.skycubed.mixins.SkinManagerInvoker

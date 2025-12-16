@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.utils
 
 import com.mojang.authlib.GameProfile
-import net.minecraft.Util
+import net.minecraft.util.Util
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.HumanoidArm
 import net.minecraft.world.entity.player.Player

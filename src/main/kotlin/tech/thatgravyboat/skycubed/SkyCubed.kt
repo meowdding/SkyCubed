@@ -16,7 +16,7 @@ import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.ModContainer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import tech.thatgravyboat.skyblockapi.api.SkyBlockAPI
@@ -35,7 +35,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.hover
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.url
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
-import tech.thatgravyboat.skycubed.renderdoc.RenderDoc
 import java.net.URI
 import java.nio.file.Files
 import kotlin.reflect.jvm.javaType
@@ -72,7 +71,6 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
     fun Component.sendWithPrefix() = Text.join(prefix, this).send()
 
     override fun onInitialize() {
-        RenderDoc.init()
         SkyCubedModules.init { SkyBlockAPI.eventBus.register(it) }
         MeowddingUpdateChecker("znwUKvZc", mod, ::updateMessage)
 
@@ -107,11 +105,11 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
 
     }
 
-    fun id(path: String): ResourceLocation {
-        return ResourceLocation.fromNamespaceAndPath("skycubed", path)
+    fun id(path: String): Identifier {
+        return Identifier.fromNamespaceAndPath("skycubed", path)
     }
 
-    fun olympus(path: String): ResourceLocation = ResourceLocation.fromNamespaceAndPath("olympus", path)
+    fun olympus(path: String): Identifier = Identifier.fromNamespaceAndPath("olympus", path)
 
     inline fun <reified T : Any> loadFromRepo(file: String): T? = runBlocking {
         try {

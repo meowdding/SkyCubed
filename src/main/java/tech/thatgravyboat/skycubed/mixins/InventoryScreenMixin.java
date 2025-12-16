@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +18,7 @@ import tech.thatgravyboat.skycubed.config.Config;
 import tech.thatgravyboat.skycubed.features.equipment.EquipmentManager;
 
 @Mixin(InventoryScreen.class)
-public abstract class InventoryScreenMixin extends AbstractContainerScreen<InventoryMenu> {
+public abstract class InventoryScreenMixin extends AbstractContainerScreen<@NotNull InventoryMenu> {
 
     public InventoryScreenMixin(InventoryMenu abstractContainerMenu, Inventory inventory, Component component) {
         super(abstractContainerMenu, inventory, component);

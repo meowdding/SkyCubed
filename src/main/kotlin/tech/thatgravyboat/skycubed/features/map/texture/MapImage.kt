@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.NativeImage
 import com.mojang.serialization.Codec
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.renderer.texture.DynamicTexture
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.features.map.texture.DownloadedAsset.runDownload
 import java.io.File
@@ -13,7 +13,7 @@ import java.io.FileInputStream
 class MapImage(private val url: String) {
 
     private val id: String = DownloadedAsset.getUrlHash(url)
-    private val location: ResourceLocation = ResourceLocation.fromNamespaceAndPath("skycubed_map", this.id)
+    private val location: Identifier = Identifier.fromNamespaceAndPath("skycubed_map", this.id)
     private val file: File = FabricLoader.getInstance().configDir.resolve("skycubed").resolve("map").resolve(this.id).toFile()
 
     private var uploaded: Boolean = false
@@ -34,7 +34,7 @@ class MapImage(private val url: String) {
         McClient.self.textureManager.register(this.location, DynamicTexture({ "Map Default $url" }, default))
     }
 
-    fun getId(): ResourceLocation {
+    fun getId(): Identifier {
         if (!this.uploaded) {
             this.loadDefaultTexture()
             this.loadFromFile()
