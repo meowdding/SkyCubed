@@ -54,8 +54,19 @@ dependencies {
             artifactType("zip")
         })
     })
-    includeImplementation(libs.skyblockapi)
-    includeImplementation(libs.meowdding.lib)
+
+    api(libs.skyblockapi) {
+        capabilities { requireCapability("tech.thatgravyboat:skyblock-api-${stonecutter.current.version}") }
+    }
+    include(libs.skyblockapi) {
+        capabilities { requireCapability("tech.thatgravyboat:skyblock-api-${stonecutter.current.version}-remapped") }
+    }
+    api(libs.meowdding.lib) {
+        capabilities { requireCapability("me.owdding.meowdding-lib:meowdding-lib-${stonecutter.current.version}") }
+    }
+    include(libs.meowdding.lib) {
+        capabilities { requireCapability("me.owdding.meowdding-lib:meowdding-lib-${stonecutter.current.version}-remapped") }
+    }
     includeImplementation(libs.meowdding.remote.repo)
     //includeImplementation(versionedCatalog["placeholders"])
     modImplementation(libs.fabric.loader)
@@ -69,6 +80,8 @@ dependencies {
     compileOnly(libs.meowdding.ktcodecs)
     ksp(libs.meowdding.ktmodules)
     ksp(libs.meowdding.ktcodecs)
+
+    modRuntimeOnly(libs.hypixel.modapi.fabric)
 }
 
 fun DependencyHandler.includeImplementation(dep: Any) {
@@ -116,6 +129,9 @@ tasks.withType<JavaCompile>().configureEach {
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
     compilerOptions.optIn.add("kotlin.time.ExperimentalTime")
+    compilerOptions.freeCompilerArgs.addAll(
+        "-Xnullability-annotations=@org.jspecify.annotations:warn"
+    )
 }
 
 tasks.processResources {

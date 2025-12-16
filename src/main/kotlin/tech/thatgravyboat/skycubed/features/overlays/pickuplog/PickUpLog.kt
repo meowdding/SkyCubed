@@ -91,7 +91,7 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
         }
         if (McScreen.self != null && McScreen.self !is ChatScreen) return
 
-        val flattenedInventory = listOfNotNull(McPlayer.inventory, McPlayer.self?.getArmor(), listOf(McPlayer.self?.offhandItem))
+        val flattenedInventory = listOfNotNull(McPlayer.inventory, McPlayer.self?.getArmor(), listOfNotNull(McPlayer.self?.offhandItem))
             .flatten()
             .filterIndexed { index, _ -> index != 8 }
             .filter { !it.isEmpty }
