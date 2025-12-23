@@ -95,6 +95,10 @@ object PowerOrbOverlayConfig : OverlayConfig("Edit Power Orb Overlay") {
     var background by enum(OverlayBackgroundConfig.TRANSLUCENT) {
         this.translation = "skycubed.config.overlays.power_orb.background"
     }
+
+    var arrow by boolean(true) {
+        this.translation = "skycubed.config.overlays.power_orb.arrow"
+    }
 }
 
 object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {

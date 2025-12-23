@@ -5,6 +5,7 @@ import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.overlays.ConfigPosition
+import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
@@ -15,22 +16,17 @@ import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.ServerDisconnectEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PowerOrbOverlayConfig
-import tech.thatgravyboat.skycubed.config.overlays.SackOverlayConfig
-import tech.thatgravyboat.skycubed.features.screens.SackHudEditScreen
-import tech.thatgravyboat.skycubed.utils.CachedValue
-import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
-import tech.thatgravyboat.skycubed.utils.RegisterOverlay
-import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
-import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
+import tech.thatgravyboat.skycubed.utils.*
+import kotlin.math.atan2
 import kotlin.math.sqrt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -46,8 +42,9 @@ object PowerOrbOverlay : SkyCubedOverlay {
     override val background: OverlayBackgroundConfig get() = PowerOrbOverlayConfig.background
 
     private var orbs: MutableMap<Entity, OrbInfo> = mutableMapOf()
+    private val ARROWS = arrayOf("⬆", "⬈", "➡", "⬊", "⬇", "⬋", "⬅", "⬉")
 
-    private val display by CachedValue(1.seconds) {
+    private val display by CachedValue(0.25.seconds) {
         DisplayFactory.vertical {
             orbs = orbs.filter {
                 it.value.timeLeft > Duration.ZERO || it.key.isAlive
@@ -55,6 +52,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
                 item(orb.deployable.item, 20, 20)
+
                 vertical(alignment = Alignment.CENTER) {
                     string(orb.deployable.item.hoverName)
                     val range = orb.deployable.range
@@ -62,12 +60,26 @@ object PowerOrbOverlay : SkyCubedOverlay {
                     val inRange = distance <= range
                     string(Text.of(if (inRange) "In Range" else "Out of Range", if (inRange) TextColor.GREEN else TextColor.RED))
                 }
+
                 val timeColor = when {
                     orb.timeLeft.inWholeSeconds <= 5 -> TextColor.RED
                     orb.timeLeft.inWholeSeconds <= 15 -> TextColor.YELLOW
                     else -> TextColor.GREEN
                 }
                 string(Text.of("${orb.timeLeft.inWholeSeconds}s", timeColor))
+
+                if (!PowerOrbOverlayConfig.arrow) return@horizontal
+                val playerPos = McPlayer.self?.position() ?: return@horizontal
+                val entityPos = entity.position()
+                val angleToOrb = Math.toDegrees(atan2(playerPos.x - entityPos.x, entityPos.z - playerPos.z))
+                var relativeYaw = (angleToOrb - McPlayer.self!!.yRot) % 360
+                if (relativeYaw < 0) relativeYaw += 360
+                val index = (((relativeYaw + 22.5) % 360) / 45).toInt()
+                val arrowChar = ARROWS[index % 8]
+                string(arrowChar) {
+                    bold = true
+                    color = TextColor.GRAY
+                }
             }
         }
     }
@@ -84,6 +96,10 @@ object PowerOrbOverlay : SkyCubedOverlay {
         }
         it.button(Text.of(text)) {
             PowerOrbOverlayConfig.background = PowerOrbOverlayConfig.background.next()
+            this::display.invalidateCache()
+        }
+        it.button(Text.of("Toggle Arrow")) {
+            PowerOrbOverlayConfig.arrow = !PowerOrbOverlayConfig.arrow
             this::display.invalidateCache()
         }
         it.divider()
