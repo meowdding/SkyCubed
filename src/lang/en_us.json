@@ -125,7 +125,19 @@
                     },
                     "background": {
                         "@value": "Background",
-                        "desc": "Use the SkyCubed background texture instead of a color."
+                        "desc": "Choose between different overlay backgrounds."
+                    }
+                },
+                "power_orb": {
+                    "@value": "Power Orb Overlay",
+                    "desc": "Settings for the power orb overlay.",
+                    "enabled": {
+                        "@value": "Enable Power Orb Overlay",
+                        "desc": "Enables the power orb overlay, showing your current power orb charge."
+                    },
+                    "background": {
+                        "@value": "Background",
+                        "desc": "Choose between different overlay backgrounds."
                     }
                 },
                 "tablist": {
@@ -237,7 +249,7 @@
                     },
                     "background": {
                         "@value": "Background",
-                        "desc": "Use the SkyCubed background texture instead of a color."
+                        "desc": "Choose between different overlay backgrounds."
                     },
                     "show_numbers": {
                         "@value": "Show Numbers",
