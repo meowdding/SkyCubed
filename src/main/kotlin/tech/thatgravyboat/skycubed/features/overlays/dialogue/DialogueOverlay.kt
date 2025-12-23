@@ -1,16 +1,14 @@
 package tech.thatgravyboat.skycubed.features.overlays.dialogue
 
-import com.mojang.blaze3d.platform.InputConstants
-import kotlin.math.max
 import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.*
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
+import me.owdding.lib.utils.KeyboardInputs
 import me.owdding.lib.utils.keys
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
@@ -24,32 +22,37 @@ import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.left
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.extentions.translated
+import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentMatchResult
 import tech.thatgravyboat.skyblockapi.utils.regex.component.ComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.component.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.command
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedTextures
+import kotlin.math.max
 
 @Module
 @RegisterOverlay
 object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     private val messageRegex = ComponentRegex("\\[NPC] (?<name>[^:]+): (?<message>.+)")
-    private val yesNoRegex = listOf(
-        ComponentRegex("Select an option: (?<yes>\\[YES]) (?<no>\\[NO]) "),
-        ComponentRegex("\\nAccept the trapper's task to hunt the animal\\?\\nClick an option: (?<yes>\\[YES]) - (?<no>\\[NO])"),
+    private val selectAnOptionRegex = listOf(
+        ComponentRegex(".*(?:Select|Click) an option: (?<options>.+)"),
+        ComponentRegex("\\nAccept the trapper's task to hunt the animal\\?\\nClick an option: (?<options>.+)"),
     )
+    private val optionRegex = ComponentRegex("\\[(?<option>.*?)]")
     private val wordRegex = Regex("\\s+")
 
     private val queue = mutableListOf<Pair<Component, Component>>()
     private var nextCheck = 0L
-    private var yesNo: Pair<String, String>? = null
-    private var displayedYesNo = false
+
+    private var options: List<Option> = emptyList()
+
+    private var displayedOptions = false
     private var hudOverlayDisplay: Display = Displays.empty()
     private var inventoryOverlayDisplay: Display = Displays.empty()
 
@@ -75,12 +78,17 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             queue.add(name to message)
             if (config.hideChatMessage) event.cancel()
         }
-        yesNoRegex.match(event.component, "yes", "no") { (yes, no) ->
-            yesNo = Pair(
-                ((yes.style.clickEvent as? ClickEvent.RunCommand)?.command() ?: ""),
-                ((no.style.clickEvent as? ClickEvent.RunCommand)?.command() ?: ""),
-            )
-            if (config.hideChatMessage) event.cancel()
+        selectAnOptionRegex.match(event.component, "options") { (optionsComponent) ->
+            options = optionRegex.findAll(optionsComponent).mapNotNull { it["option"] }.mapIndexed { index, option ->
+                Option(
+                    component = option,
+                    keys = keys {
+                        withKey(49 + index)
+                    },
+                    command = option.command ?: "",
+                )
+            }
+            if (config.hideSelectAnOptionMessage) event.cancel()
         }
     }
 
@@ -97,14 +105,6 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         containerLeftPos = event.screen.left
     }
 
-    val yesKeys = keys {
-        InputConstants.KEY_1
-    }
-
-    val noKeys = keys {
-        InputConstants.KEY_2
-    }
-
     @Subscription
     @OnlyOnSkyBlock
     fun onTick(event: TickEvent) {
@@ -113,8 +113,8 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         if (System.currentTimeMillis() > nextCheck) {
             if (queue.isEmpty()) {
                 nextCheck = System.currentTimeMillis() + minimumDurationPerMessage
-                if (yesNo != null && !displayedYesNo) {
-                    hudOverlayDisplay = createYesNoDisplay()
+                if (options.isNotEmpty() && !displayedOptions) {
+                    hudOverlayDisplay = createOptionsDisplay()
                 } else {
                     reset()
                 }
@@ -125,21 +125,21 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
                 nextCheck = System.currentTimeMillis() + calculateDisplayDuration(message)
 
-                createMainDisplay(name, message, npc, McClient.window.guiScaledWidth / 3)?.let { hudOverlayDisplay = it }
-                createMainDisplay(name, message, npc, inventoryOverlayWidth - 30)?.let { inventoryOverlayDisplay = it }
+                hudOverlayDisplay = createMainDisplay(name, message, npc, McClient.window.guiScaledWidth / 3)
+                inventoryOverlayDisplay = createMainDisplay(name, message, npc, inventoryOverlayWidth - 30)
             }
         }
 
-        val (yesCommand, noCommand) = yesNo ?: return
-        val isYes = yesKeys.isDown()
-        val isNo = noKeys.isDown()
-
-        val command = if (isYes) yesCommand else if (isNo) noCommand else return
-        McClient.sendCommand(command.removePrefix("/"))
-        reset()
+        options.forEach { (_, keys, command) ->
+            if (keys.isDown()) {
+                McClient.sendCommand(command.removePrefix("/"))
+                reset()
+                return
+            }
+        }
     }
 
-    private fun createMainDisplay(name: Component, message: Component, npc: DialogueNpc, maxWidth: Int): Display? {
+    private fun createMainDisplay(name: Component, message: Component, npc: DialogueNpc, maxWidth: Int): Display {
         val entity = DialogueEntities.get(name.stripped, npc)
         val npcNameDisplay = Displays.background(
             SkyCubedTextures.backgroundBox,
@@ -172,36 +172,33 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         }
     }
 
-    private fun createYesNoDisplay(): Display {
-        displayedYesNo = true
+    private fun createOptionsDisplay(): Display {
+        displayedOptions = true
         nextCheck = System.currentTimeMillis() + displayActionDuration
 
-        val options = listOf(
-            Text.of("[1] Yes") { this.color = TextColor.GREEN },
-            Text.of("[2] No") { this.color = TextColor.RED },
-        )
+        val yesNoDisplay = options.mapIndexed { index, (component) ->
+            val text = Text.join(Text.of("${index + 1}. ").withColor(TextColor.GRAY), component)
+            Displays.background(SkyCubedTextures.backgroundBox, Displays.text(text).withPadding(5))
+        }.toColumn(5, Alignment.START)
 
-        val yesNoDisplay = options.map {
-            Displays.background(SkyCubedTextures.backgroundBox, Displays.padding(5, Displays.text(it)))
-        }.toColumn(10, Alignment.START)
+        return object : Display {
+            private val main = hudOverlayDisplay
+            override fun getWidth(): Int = main.getWidth()
+            override fun getHeight(): Int = main.getHeight()
 
-        return listOf(
-            hudOverlayDisplay,
-            Displays.pushPop(yesNoDisplay)
-            {
-                translate(
-                    hudOverlayDisplay.getWidth() - yesNoDisplay.getWidth() - 10f,
-                    -1f * yesNoDisplay.getHeight() + 30f, // 40f because of the text box move, -10f for padding
-                    -1000f,
-                )
-            },
-        ).asLayer()
+            override fun render(graphics: GuiGraphics) {
+                main.render(graphics)
+                graphics.translated(main.getWidth() - yesNoDisplay.getWidth() - 10f, -1f * yesNoDisplay.getHeight() - 10f) {
+                    yesNoDisplay.render(graphics)
+                }
+            }
+        }
     }
 
     private fun reset() {
         DialogueEntities.updateCache(max(minimumDurationPerMessage, displayActionDuration) + 5000)
-        yesNo = null
-        displayedYesNo = false
+        options = emptyList()
+        displayedOptions = false
         hudOverlayDisplay = Displays.empty()
         inventoryOverlayDisplay = Displays.empty()
         nextCheck = 0
@@ -232,6 +229,14 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
     private fun calculateDisplayDuration(message: Component): Long {
         val wpmDuration = ((message.stripped.split(wordRegex).count().toLong() * 60000) / messageWordsPerMinute)
         return wpmDuration.coerceAtLeast(minimumDurationPerMessage)
-
     }
+
+    private fun ComponentRegex.findAll(component: Component) = regex().findAll(component.stripped).map { ComponentMatchResult(component, it) }.toList()
+
+
+    private data class Option(
+        val component: Component,
+        val keys: KeyboardInputs,
+        val command: String,
+    )
 }
