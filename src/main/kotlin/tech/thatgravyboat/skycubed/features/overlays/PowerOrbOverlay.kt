@@ -5,7 +5,6 @@ import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
@@ -23,6 +22,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PowerOrbOverlayConfig
 import tech.thatgravyboat.skycubed.utils.*
@@ -51,7 +51,8 @@ object PowerOrbOverlay : SkyCubedOverlay {
             }.toMutableMap()
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
-                item(orb.deployable.item, 20, 20)
+                //item(orb.deployable.item, 20, 20)
+                display(ExtraDisplays.spinningItem(orb.deployable.item, scale = 20 / 16f))
 
                 vertical(alignment = Alignment.CENTER) {
                     string(orb.deployable.item.hoverName)

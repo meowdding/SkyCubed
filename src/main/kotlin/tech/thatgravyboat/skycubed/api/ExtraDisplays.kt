@@ -4,6 +4,10 @@ import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.navigation.ScreenRectangle
+import net.minecraft.world.item.ItemStack
+import org.joml.Vector2f
+import tech.thatgravyboat.skycubed.utils.SpinningItemRenderState
 
 object ExtraDisplays {
     fun background(color: UInt, radius: Float, border: UInt = 0x0u, display: Display): Display {
@@ -30,5 +34,25 @@ object ExtraDisplays {
                 Displays.row(filledDisplay(0xFF000000u), filledDisplay(0xFFFF00FFu)),
             ),
         )
+    }
+
+    fun spinningItem(item: ItemStack, xSpeed: Float = 0f, ySpeed: Float = 0f, zSpeed: Float = 0f, scale: Float = 1f): Display = object : Display {
+        override fun getWidth(): Int = (16 * scale).toInt()
+        override fun getHeight(): Int = (16 * scale).toInt()
+
+        override fun render(graphics: GuiGraphics) {
+            val thing = graphics.pose().transformPosition(Vector2f(0f, 0f))
+            val bounds = ScreenRectangle(thing.x.toInt(), thing.y.toInt(), (16 * scale).toInt(), (16 * scale).toInt())
+            graphics.guiRenderState.submitPicturesInPictureState(
+                SpinningItemRenderState(
+                    item, xSpeed, ySpeed, zSpeed,
+                    scale,
+                    bounds,
+                    graphics.scissorStack.peek(),
+                    graphics.pose(),
+                ),
+            )
+        }
+
     }
 }
