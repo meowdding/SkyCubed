@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
+import me.owdding.lib.compat.meowdding.MeowddingFeatures.features
 import me.owdding.lib.rendering.MeowddingPipState
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 import org.joml.Matrix3x2f
+import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
@@ -26,11 +28,15 @@ class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPi
         stack.pushPop {
             stack.translate(0f, state.bounds.height() / -2f - 3f, 0f)
             stack.scale(20f, 20f, 20f)
-            stack.mulPose(Axis.ZN.rotationDegrees(180f))
 
-            if (state.xSpeed != 0) stack.mulPose(Axis.XP.rotationDegrees(45f + (System.currentTimeMillis() / state.xSpeed) % 360))
-            if (state.ySpeed != 0) stack.mulPose(Axis.YP.rotationDegrees(45f + (System.currentTimeMillis() / state.ySpeed) % 360))
-            if (state.zSpeed != 0) stack.mulPose(Axis.ZP.rotationDegrees(45f + (System.currentTimeMillis() / state.zSpeed) % 360))
+            stack.mulPose(Axis.ZN.rotationDegrees(180f))
+            stack.mulPose(Axis.XP.rotationDegrees(-30f))
+            stack.mulPose(Axis.YP.rotationDegrees(225f))
+
+            val seconds = TickEvent.ticks / 20f
+            if (state.xSpeed != 0) stack.mulPose(Axis.XP.rotationDegrees(45f + (seconds * state.xSpeed.toFloat()).toInt() % 360))
+            if (state.ySpeed != 0) stack.mulPose(Axis.YP.rotationDegrees(45f + (seconds * state.ySpeed.toFloat()).toInt() % 360))
+            if (state.zSpeed != 0) stack.mulPose(Axis.ZP.rotationDegrees(45f + (seconds * state.zSpeed.toFloat()).toInt() % 360))
 
             val item = state.item
             val features = McClient.self.gameRenderer.featureRenderDispatcher

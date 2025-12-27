@@ -47,16 +47,12 @@ object PowerOrbOverlay : SkyCubedOverlay {
     private val display by CachedValue(0.25.seconds) {
         DisplayFactory.vertical {
             orbs = orbs.filter {
-                it.value.timeLeft > Duration.ZERO || it.key.isAlive
+                it.value.timeLeft > Duration.ZERO && it.key.isAlive
             }.toMutableMap()
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
-                //item(orb.deployable.item, 20, 20)
-                display(ExtraDisplays.spinningItem(
-                    orb.deployable.item,
-                    ySpeed = 20,
-                    scale = 20 / 16f
-                ))
+                if (PowerOrbOverlayConfig.spinningItem) display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
+                else item(orb.deployable.item, 20, 20)
 
                 vertical(alignment = Alignment.CENTER) {
                     string(orb.deployable.item.hoverName)
@@ -105,6 +101,10 @@ object PowerOrbOverlay : SkyCubedOverlay {
         }
         it.button(Text.of("Toggle Arrow")) {
             PowerOrbOverlayConfig.arrow = !PowerOrbOverlayConfig.arrow
+            this::display.invalidateCache()
+        }
+        it.button(Text.of("Toggle Spinning Item")) {
+            PowerOrbOverlayConfig.spinningItem = !PowerOrbOverlayConfig.spinningItem
             this::display.invalidateCache()
         }
         it.divider()
