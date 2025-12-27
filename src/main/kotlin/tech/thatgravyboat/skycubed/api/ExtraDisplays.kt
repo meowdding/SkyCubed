@@ -6,6 +6,7 @@ import me.owdding.lib.platform.drawRoundedRectangle
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.world.item.ItemStack
+//? > 1.21.5
 import tech.thatgravyboat.skycubed.utils.SpinningItemRenderState
 
 object ExtraDisplays {
@@ -41,6 +42,7 @@ object ExtraDisplays {
 
         override fun render(graphics: GuiGraphics) {
             val bounds = ScreenRectangle(0, 0, (16 * scale).toInt(), (16 * scale).toInt())
+            //? > 1.21.5 {
             graphics.guiRenderState.submitPicturesInPictureState(
                 SpinningItemRenderState(
                     item, xSpeed, ySpeed, zSpeed,
@@ -50,6 +52,7 @@ object ExtraDisplays {
                     graphics.pose(),
                 ),
             )
+            //?}
         }
 
     }

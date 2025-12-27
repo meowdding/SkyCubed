@@ -16,6 +16,7 @@ import tech.thatgravyboat.skyblockapi.api.events.location.ServerDisconnectEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.McVersionGroup
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -51,8 +52,9 @@ object PowerOrbOverlay : SkyCubedOverlay {
             }.toMutableMap()
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
-                if (PowerOrbOverlayConfig.spinningItem) display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
-                else item(orb.deployable.item, 20, 20)
+                if (PowerOrbOverlayConfig.spinningItem && !McVersionGroup.MC_1_21_5.isActive) {
+                    display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
+                } else item(orb.deployable.item, 20, 20)
 
                 vertical(alignment = Alignment.CENTER) {
                     string(orb.deployable.item.hoverName)

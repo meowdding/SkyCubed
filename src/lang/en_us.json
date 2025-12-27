@@ -138,6 +138,17 @@
                     "background": {
                         "@value": "Background",
                         "desc": "Choose between different overlay backgrounds."
+                    },
+                    "spinning_item": {
+                        "@value": "Spinning Item",
+                        "desc": [
+                            "Spins the item Icon.",
+                            "<red>Requires 1.21.6 or higher!</red>"
+                        ]
+                    },
+                    "arrow": {
+                        "@value": "Arrow Indicator",
+                        "desc": "Shows an arrow do the direction of the power orb."
                     }
                 },
                 "tablist": {

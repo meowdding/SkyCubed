@@ -1,9 +1,9 @@
 package tech.thatgravyboat.skycubed.utils
 
+//? > 1.21.5 {
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
-import me.owdding.lib.compat.meowdding.MeowddingFeatures.features
 import me.owdding.lib.rendering.MeowddingPipState
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer
@@ -39,12 +39,14 @@ class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPi
             if (state.zSpeed != 0) stack.mulPose(Axis.ZP.rotationDegrees(45f + (seconds * state.zSpeed.toFloat()).toInt() % 360))
 
             val item = state.item
-            val features = McClient.self.gameRenderer.featureRenderDispatcher
-
             McClient.self.gameRenderer.lighting.setupFor(if (item.usesBlockLight()) Lighting.Entry.ITEMS_3D else Lighting.Entry.ITEMS_FLAT)
 
+            //? if > 1.21.8 {
+            val features = McClient.self.gameRenderer.featureRenderDispatcher
             item.submit(stack, features.submitNodeStorage, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0)
             features.renderAllFeatures()
+            //?} else
+            /*state.item.render(stack, this.bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY)*/
         }
     }
 
@@ -92,3 +94,4 @@ data class SpinningItemRenderState(
     override val y0: Int = bounds.top()
     override val y1: Int = bounds.bottom()
 }
+//?}
