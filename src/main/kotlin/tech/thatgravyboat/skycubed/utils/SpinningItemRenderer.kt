@@ -46,7 +46,7 @@ class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPi
             item.submit(stack, features.submitNodeStorage, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0)
             features.renderAllFeatures()
             //?} else
-            /*state.item.render(stack, this.bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY)*/
+            /*state.item.render(stack, this@SpinningItemRenderer.bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY)*/
         }
     }
 
