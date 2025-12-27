@@ -87,6 +87,24 @@ object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
     }
 }
 
+object PowerOrbOverlayConfig : OverlayConfig("Edit Power Orb Overlay") {
+    var enabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.power_orb.enabled"
+    }
+
+    var background by enum(OverlayBackgroundConfig.TRANSLUCENT) {
+        this.translation = "skycubed.config.overlays.power_orb.background"
+    }
+
+    var spinningItem by boolean(true) {
+        this.translation = "skycubed.config.overlays.power_orb.spinning_item"
+    }
+
+    var arrow by boolean(true) {
+        this.translation = "skycubed.config.overlays.power_orb.arrow"
+    }
+}
+
 object TrophyFishOverlayConfig : OverlayConfig("Edit Trophy Fish Overlay") {
 
     var enabled by boolean(false) {
