@@ -52,7 +52,11 @@ object PowerOrbOverlay : SkyCubedOverlay {
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
                 //item(orb.deployable.item, 20, 20)
-                display(ExtraDisplays.spinningItem(orb.deployable.item, scale = 20 / 16f))
+                display(ExtraDisplays.spinningItem(
+                    orb.deployable.item,
+                    ySpeed = 20,
+                    scale = 20 / 16f
+                ))
 
                 vertical(alignment = Alignment.CENTER) {
                     string(orb.deployable.item.hoverName)

@@ -22,25 +22,23 @@ class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPi
 
     override fun getRenderStateClass(): Class<SpinningItemRenderState> = SpinningItemRenderState::class.java
 
-    override fun renderToTexture(renderState: SpinningItemRenderState, poseStack: PoseStack) {
-        poseStack.pushPop {
-            with(renderState) {
-                poseStack.translate(0f, bounds.height() / -2f - 5f, 0f)
-                poseStack.scale(scale, scale, scale)
-                poseStack.mulPose(Axis.XP.rotationDegrees(System.currentTimeMillis() % xSpeed * 100))
-                poseStack.mulPose(Axis.YP.rotationDegrees(System.currentTimeMillis() % ySpeed * 100))
-                poseStack.mulPose(Axis.ZP.rotationDegrees(System.currentTimeMillis() % zSpeed * 100))
+    override fun renderToTexture(state: SpinningItemRenderState, stack: PoseStack) {
+        stack.pushPop {
+            stack.translate(0f, state.bounds.height() / -2f - 3f, 0f)
+            stack.scale(20f, 20f, 20f)
+            stack.mulPose(Axis.ZN.rotationDegrees(180f))
 
-                McClient.self.gameRenderer.lighting.setupFor(if (item.usesBlockLight()) Lighting.Entry.ITEMS_3D else Lighting.Entry.ITEMS_FLAT)
+            if (state.xSpeed != 0) stack.mulPose(Axis.XP.rotationDegrees(45f + (System.currentTimeMillis() / state.xSpeed) % 360))
+            if (state.ySpeed != 0) stack.mulPose(Axis.YP.rotationDegrees(45f + (System.currentTimeMillis() / state.ySpeed) % 360))
+            if (state.zSpeed != 0) stack.mulPose(Axis.ZP.rotationDegrees(45f + (System.currentTimeMillis() / state.zSpeed) % 360))
 
-                item.submit(
-                    poseStack,
-                    McClient.self.gameRenderer.featureRenderDispatcher.submitNodeStorage,
-                    LightTexture.FULL_BRIGHT,
-                    OverlayTexture.NO_OVERLAY,
-                    0,
-                )
-            }
+            val item = state.item
+            val features = McClient.self.gameRenderer.featureRenderDispatcher
+
+            McClient.self.gameRenderer.lighting.setupFor(if (item.usesBlockLight()) Lighting.Entry.ITEMS_3D else Lighting.Entry.ITEMS_FLAT)
+
+            item.submit(stack, features.submitNodeStorage, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0)
+            features.renderAllFeatures()
         }
     }
 
@@ -49,19 +47,19 @@ class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPi
 
 data class SpinningItemRenderState(
     val item: TrackingItemStackRenderState,
-    val xSpeed: Float = 0f,
-    val ySpeed: Float = 0f,
-    val zSpeed: Float = 0f,
-    override val scale: Float = 20f,
+    val xSpeed: Int = 0,
+    val ySpeed: Int = 0,
+    val zSpeed: Int = 0,
+    override val scale: Float = 1f,
     override val bounds: ScreenRectangle,
     override val scissorArea: ScreenRectangle?,
     override val pose: Matrix3x2f,
 ) : MeowddingPipState<SpinningItemRenderState>() {
     constructor(
         item: ItemStack,
-        xSpeed: Float = 0f,
-        ySpeed: Float = 0f,
-        zSpeed: Float = 0f,
+        xSpeed: Int = 0,
+        ySpeed: Int = 0,
+        zSpeed: Int = 0,
         scale: Float = 20f,
         bounds: ScreenRectangle,
         scissorArea: ScreenRectangle?,
@@ -76,15 +74,13 @@ data class SpinningItemRenderState(
         scale,
         bounds,
         scissorArea,
-        pose,
+        Matrix3x2f(pose),
     )
 
     override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<SpinningItemRenderState>> =
         Function { buffer -> SpinningItemRenderer(buffer) }
 
-    override val shrinkToScissor: Boolean
-        get() = false
-
+    override val shrinkToScissor: Boolean get() = false
     override val x0: Int = bounds.left()
     override val x1: Int = bounds.right()
     override val y0: Int = bounds.top()
