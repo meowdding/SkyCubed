@@ -146,6 +146,10 @@
                             "<red>Requires 1.21.6 or higher!</red>"
                         ]
                     },
+                    "name_and_range": {
+                        "@value": "Name and Range",
+                        "desc": "Shows the name of the power orb and if it is in range."
+                    },
                     "arrow": {
                         "@value": "Arrow Indicator",
                         "desc": "Shows an arrow do the direction of the power orb."

@@ -56,12 +56,14 @@ object PowerOrbOverlay : SkyCubedOverlay {
                     display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
                 } else item(orb.deployable.item, 20, 20)
 
-                vertical(alignment = Alignment.CENTER) {
-                    string(orb.deployable.item.hoverName)
-                    val range = orb.deployable.range
-                    val distance = sqrt(McPlayer.distanceSqr(entity.position()))
-                    val inRange = distance <= range
-                    string(Text.of(if (inRange) "In Range" else "Out of Range", if (inRange) TextColor.GREEN else TextColor.RED))
+                if (PowerOrbOverlayConfig.nameAndRange) {
+                    vertical(alignment = Alignment.CENTER) {
+                        string(orb.deployable.item.hoverName)
+                        val range = orb.deployable.range
+                        val distance = sqrt(McPlayer.distanceSqr(entity.position()))
+                        val inRange = distance <= range
+                        string(Text.of(if (inRange) "In Range" else "Out of Range", if (inRange) TextColor.GREEN else TextColor.RED))
+                    }
                 }
 
                 val timeColor = when {
@@ -101,12 +103,16 @@ object PowerOrbOverlay : SkyCubedOverlay {
             PowerOrbOverlayConfig.background = PowerOrbOverlayConfig.background.next()
             this::display.invalidateCache()
         }
-        it.button(Text.of("Toggle Arrow")) {
-            PowerOrbOverlayConfig.arrow = !PowerOrbOverlayConfig.arrow
-            this::display.invalidateCache()
-        }
         it.button(Text.of("Toggle Spinning Item")) {
             PowerOrbOverlayConfig.spinningItem = !PowerOrbOverlayConfig.spinningItem
+            this::display.invalidateCache()
+        }
+        it.button(Text.of("Toggle Name and Range")) {
+            PowerOrbOverlayConfig.nameAndRange = !PowerOrbOverlayConfig.nameAndRange
+            this::display.invalidateCache()
+        }
+        it.button(Text.of("Toggle Arrow")) {
+            PowerOrbOverlayConfig.arrow = !PowerOrbOverlayConfig.arrow
             this::display.invalidateCache()
         }
         it.divider()

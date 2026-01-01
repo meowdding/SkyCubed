@@ -100,6 +100,10 @@ object PowerOrbOverlayConfig : OverlayConfig("Edit Power Orb Overlay") {
         this.translation = "skycubed.config.overlays.power_orb.spinning_item"
     }
 
+    var nameAndRange by boolean(true) {
+        this.translation = "skycubed.config.overlays.power_orb.name_and_range"
+    }
+
     var arrow by boolean(true) {
         this.translation = "skycubed.config.overlays.power_orb.arrow"
     }
