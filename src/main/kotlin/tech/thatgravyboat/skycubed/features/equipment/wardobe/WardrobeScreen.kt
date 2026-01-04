@@ -182,6 +182,12 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
         }
     }
 
+    fun clickWardrobeSlot(slotIndex: Int) {
+        (screen as? AbstractContainerScreen<*>)?.menu?.let { menu ->
+            menu.click(menu.slots[slotIndex])
+        }
+    }
+
     private fun getTooltips(slot: WardrobeSlot, width: Int, height: Int) = when (WardrobeConfig.tooltipType) {
         WardrobeTooltipType.MINIMAL -> getSmallTooltip(slot, width, height)
         WardrobeTooltipType.WHOLE -> getWholeTooltip(slot, width, height)

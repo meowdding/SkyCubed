@@ -7,6 +7,7 @@ import me.owdding.lib.platform.screens.KeyEvent
 import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.platform.screens.mouseClicked
 import me.owdding.lib.platform.screens.mouseReleased
+import me.owdding.lib.utils.MeowddingKeybind
 import me.owdding.lib.utils.matches
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
@@ -19,6 +20,7 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseReleasedEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.screens.WardrobeConfig
 import tech.thatgravyboat.skycubed.utils.Utils
 import tech.thatgravyboat.skycubed.utils.Utils.fullyRender
@@ -28,6 +30,34 @@ object WardrobeFeature {
 
     private val regex = Regex("Wardrobe \\((?<currentPage>\\d+)/\\d+\\)")
     var isEditing = false
+
+    val wardrobeKeyBinds: MutableMap<MeowddingKeybind, Int> = mutableMapOf()
+
+    init {
+        for (slot in 1..9) {
+            wardrobeKeyBinds[
+                MeowddingKeybind(
+                    SkyCubed.id("wardrobe"),
+                    "skycubed.key.wardrobe.slot.$slot",
+                    InputConstants.UNKNOWN.value
+                )
+            ] = slot + 35
+        }
+        wardrobeKeyBinds[
+            MeowddingKeybind(
+                SkyCubed.id("wardrobe"),
+                "skycubed.key.wardrobe.prev_page",
+                InputConstants.UNKNOWN.value
+            )
+        ] = 45
+        wardrobeKeyBinds[
+            MeowddingKeybind(
+                SkyCubed.id("wardrobe"),
+                "skycubed.key.wardrobe.next_page",
+                InputConstants.UNKNOWN.value
+            )
+        ] = 53
+    }
 
     @Subscription
     fun onContainerRender(event: RenderScreenBackgroundEvent) {
@@ -86,6 +116,15 @@ object WardrobeFeature {
                 event.screen.onClose()
                 WardrobeScreen.screen = null
             }
+        }
+
+        val clickedWardrobeKey = wardrobeKeyBinds.keys.firstOrNull {
+            it.matches(event)
+        }
+
+        if (clickedWardrobeKey != null) {
+            val slotIndex = wardrobeKeyBinds[clickedWardrobeKey] ?: return
+            WardrobeScreen.clickWardrobeSlot(slotIndex)
         }
     }
 

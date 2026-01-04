@@ -7,6 +7,7 @@
         "@references": {}
     },
     "key.category.skycubed.map": "Sky Cubed",
+    "key.category.skycubed.wardrobe": "Sky Cubed Wardrobe",
     "skycubed": {
         "ui.overlay.edit": {
             "@value": "<gold>Click to edit overlay.</gold>",
@@ -593,7 +594,22 @@
         },
         "key": {
             "category": "SkyCubed",
-            "map": "Open Map"
+            "map": "Open Map",
+            "wardrobe": {
+                "slot": {
+                    "1": "Select Hotbar Slot 1",
+                    "2": "Select Hotbar Slot 2",
+                    "3": "Select Hotbar Slot 3",
+                    "4": "Select Hotbar Slot 4",
+                    "5": "Select Hotbar Slot 5",
+                    "6": "Select Hotbar Slot 6",
+                    "7": "Select Hotbar Slot 7",
+                    "8": "Select Hotbar Slot 8",
+                    "9": "Select Hotbar Slot 9"
+                },
+                "prev_page": "Previous Wardrobe Page",
+                "next_page": "Next Wardrobe Page"
+            }
         }
     },
     "jade.theme.jade.skycubed": "SkyCubed"
