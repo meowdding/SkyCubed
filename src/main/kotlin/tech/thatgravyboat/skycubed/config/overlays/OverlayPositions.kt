@@ -14,6 +14,7 @@ object OverlayPositions : CategoryKt("positions") {
     val speed = obj("speed", ConfigPosition(x = 126, y = 3))
     val commissions = obj("commissions", ConfigPosition(x = 0, y = 100))
     val sack = obj("sack", ConfigPosition(x = -300, y = 10))
+    val powerOrb = obj("powerOrb", ConfigPosition(x = -200, y = 50))
     val trophyFish = obj("trophyFish", ConfigPosition(x = -600, y = 10))
     val pickupLog = obj("pickupLog", ConfigPosition(x = 0, y = 150))
     val map = obj("map", ConfigPosition(x = -90, y = 0))

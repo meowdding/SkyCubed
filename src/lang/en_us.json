@@ -125,7 +125,34 @@
                     },
                     "background": {
                         "@value": "Background",
-                        "desc": "Use the SkyCubed background texture instead of a color."
+                        "desc": "Choose between different overlay backgrounds."
+                    }
+                },
+                "power_orb": {
+                    "@value": "Power Orb Overlay",
+                    "desc": "Settings for the power orb overlay.",
+                    "enabled": {
+                        "@value": "Enable Power Orb Overlay",
+                        "desc": "Enables the power orb overlay, showing your current power orb charge."
+                    },
+                    "background": {
+                        "@value": "Background",
+                        "desc": "Choose between different overlay backgrounds."
+                    },
+                    "spinning_item": {
+                        "@value": "Spinning Item",
+                        "desc": [
+                            "Spins the item Icon.",
+                            "<red>Requires 1.21.6 or higher!</red>"
+                        ]
+                    },
+                    "name_and_range": {
+                        "@value": "Name and Range",
+                        "desc": "Shows the name of the power orb and if it is in range."
+                    },
+                    "arrow": {
+                        "@value": "Arrow Indicator",
+                        "desc": "Shows an arrow do the direction of the power orb."
                     }
                 },
                 "tablist": {
@@ -237,7 +264,7 @@
                     },
                     "background": {
                         "@value": "Background",
-                        "desc": "Use the SkyCubed background texture instead of a color."
+                        "desc": "Choose between different overlay backgrounds."
                     },
                     "show_numbers": {
                         "@value": "Show Numbers",
