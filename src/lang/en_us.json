@@ -6,8 +6,8 @@
         "objectAsKeys": true,
         "@references": {}
     },
-    "key.category.skycubed.map": "Sky Cubed",
-    "key.category.skycubed.wardrobe": "Sky Cubed Wardrobe",
+    "key.category.skycubed.map": "SkyCubed",
+    "key.category.skycubed.wardrobe": "SkyCubed Wardrobe",
     "skycubed": {
         "ui.overlay.edit": {
             "@value": "<gold>Click to edit overlay.</gold>",
