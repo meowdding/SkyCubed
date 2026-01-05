@@ -11,7 +11,12 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.utils.*
+import tech.thatgravyboat.skycubed.utils.CachedValue
+import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
+import tech.thatgravyboat.skycubed.utils.invalidateCache
+import tech.thatgravyboat.skycubed.utils.next
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
@@ -34,7 +39,7 @@ object CommissionsOverlay : SkyCubedOverlay {
                 return@vertical
             }
             commissions.forEach { commission ->
-                string("${commission.name}: ${CommissionFormatters.format(commission.name, commission.progress)}")
+                string(Text.join("${commission.name}: ", CommissionFormatters.format(commission.name, commission.progress)))
             }
         }
     }
