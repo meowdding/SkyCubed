@@ -161,7 +161,7 @@
                 ]
             },
             {
-                "values": [ "member", "kick", "transfer", "setrank", "promote", "demote" ],
+                "values": [ "member", "transfer", "promote", "demote" ],
                 "children": [
                     {
                         "name": "member"
@@ -169,11 +169,52 @@
                 ]
             },
             {
-                "values": [ "mute", "unmute" ],
+                "values": [ "unmute" ],
                 "children": [
                     {
                         "name": "member",
                         "suggestions": [ "everyone" ]
+                    }
+                ]
+            },
+            {
+                "values": [ "kick" ],
+                "children": [
+                    {
+                        "name": "player",
+                        "children": [
+                            {
+                                "name": "reason",
+                                "greedy": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "values": [ "mute" ],
+                "children": [
+                    {
+                        "name": "member",
+                        "suggestions": [ "everyone" ],
+                        "children": [
+                            {
+                                "name": "time"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "values": [ "setrank" ],
+                "children": [
+                    {
+                        "name": "member",
+                        "children": [
+                            {
+                                "name": "rank"
+                            }
+                        ]
                     }
                 ]
             }
