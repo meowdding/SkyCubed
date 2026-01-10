@@ -151,16 +151,10 @@ object PowerOrbOverlay : SkyCubedOverlay {
                 val info = OrbInfo(it, time.toIntValue().seconds)
                 orbs[entity] = info
 
-                entity.glow = true
-                entity.glowColor = 0xFF00FF
-
                 if (it.hasExtraLine) {
                     McClient.runNextTick {
                         entity.level().getEntities(entity, entity.boundingBox.inflate(0.0, 4.0, 0.0)).forEach { entity ->
                             orbs[entity] = info
-
-                            entity.glow = true
-                            entity.glowColor = 0xFF00FF
                         }
                     }
                 }
