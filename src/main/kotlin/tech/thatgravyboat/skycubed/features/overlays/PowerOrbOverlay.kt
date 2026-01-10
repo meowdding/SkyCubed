@@ -15,8 +15,10 @@ import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.ServerDisconnectEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
+import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.McVersionGroup
+import tech.thatgravyboat.skyblockapi.utils.extentions.parseDuration
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -24,9 +26,16 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
+import tech.thatgravyboat.skycubed.api.accessors.glow
+import tech.thatgravyboat.skycubed.api.accessors.glowColor
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.PowerOrbOverlayConfig
-import tech.thatgravyboat.skycubed.utils.*
+import tech.thatgravyboat.skycubed.utils.CachedValue
+import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
+import tech.thatgravyboat.skycubed.utils.invalidateCache
+import tech.thatgravyboat.skycubed.utils.next
 import kotlin.math.atan2
 import kotlin.math.sqrt
 import kotlin.time.Duration
@@ -52,7 +61,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
             }.toMutableMap()
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
-                if (PowerOrbOverlayConfig.spinningItem && !McVersionGroup.MC_1_21_5.isActive) {
+                if (PowerOrbOverlayConfig.spinningItem && !McVersionGroup.MC_1_21_5.isActive && orb.deployable.canSpin) {
                     display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
                 } else item(orb.deployable.item, 20, 20)
 
@@ -121,13 +130,40 @@ object PowerOrbOverlay : SkyCubedOverlay {
         }
     }
 
+    private val remainingRegex = Regex("Remaining: (?<seconds>.*?)")
+
     @Subscription
     fun onEntityAdd(event: NameChangedEvent) {
         val entity = event.infoLineEntity
+        if (orbs.containsKey(entity)) run {
+            val orb = orbs[entity]?.takeIf { it.deployable.hasExtraLine } ?: return@run
+            remainingRegex.match(event.literalComponent, "seconds") { (seconds) ->
+                orb.timeLeft = seconds.parseDuration() ?: return@match
+            }
+            return
+        }
+
+
         Deployable.entries.forEach {
-            it.regex.match(event.literalComponent, "seconds") { (time) ->
+            it.regex.match(event.literalComponent) { destructured ->
+                val time = if (it.hasExtraLine) "50" else destructured["seconds"]
+
                 val info = OrbInfo(it, time.toIntValue().seconds)
                 orbs[entity] = info
+
+                entity.glow = true
+                entity.glowColor = 0xFF00FF
+
+                if (it.hasExtraLine) {
+                    McClient.runNextTick {
+                        entity.level().getEntities(entity, entity.boundingBox.inflate(0.0, 4.0, 0.0)).forEach { entity ->
+                            orbs[entity] = info
+
+                            entity.glow = true
+                            entity.glowColor = 0xFF00FF
+                        }
+                    }
+                }
             }
         }
     }
@@ -135,17 +171,28 @@ object PowerOrbOverlay : SkyCubedOverlay {
     @Subscription(ServerDisconnectEvent::class, ServerChangeEvent::class)
     fun onLeave() = orbs.clear()
 
-    private enum class Deployable(@Language("RegExp") title: String, val range: Int) {
+    private enum class Deployable(@Language("RegExp") title: String, val range: Int, val hasExtraLine: Boolean = false) {
         RADIANT_POWER_ORB("^Radiant", 18),
         MANA_FLUX_POWER_ORB("^Mana Flux", 18),
         OVERFLUX_POWER_ORB("^Overflux", 18),
         PLASMAFLUX_POWER_ORB("^Plasmaflux", 20),
+
+        UMBERELLA("^Umberella", 30),
+
+        TOTEM_OF_CORRUPTION("", 30, true) {
+            override val regex: Regex = Regex("^Totem of Corruption")
+            override val canSpin: Boolean = false
+        },
         ;
 
-        val regex = "$title (?<seconds>\\d+)s".toRegex()
+        open val canSpin = true
+        open val regex = "$title (?<seconds>\\d+)s".toRegex()
         val item by lazy { RepoItemsAPI.getItem(name) }
     }
 
-    private data class OrbInfo(val deployable: Deployable, val timeLeft: Duration)
+    private data class OrbInfo(
+        val deployable: Deployable,
+        var timeLeft: Duration,
+    )
 }
 
