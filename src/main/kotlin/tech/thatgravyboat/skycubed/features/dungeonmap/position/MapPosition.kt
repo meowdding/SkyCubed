@@ -2,7 +2,6 @@ package tech.thatgravyboat.skycubed.features.dungeonmap.position
 
 import net.minecraft.util.Mth
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonInstance
-import kotlin.math.roundToInt
 
 class MapPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<MapPosition>(x, y, instance) {
     companion object {
@@ -37,7 +36,7 @@ class MapPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<M
                 -200 + (rooms * 32.0),
                 topLeft.toDouble(),
                 bottomRight.toDouble(),
-            ).roundToInt()
+            ).round(topLeft)
         }
     }
 
@@ -69,7 +68,7 @@ class MapPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<M
             bottomRight.toDouble() + hallwaySize,
             -200.0,
             -200 + (rooms * 32.0),
-        ).roundToInt()
+        ).round(-200)
     }
 
 }

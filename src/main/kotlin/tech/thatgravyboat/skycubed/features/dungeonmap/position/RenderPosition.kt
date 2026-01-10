@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.dungeonmap.position
 import net.minecraft.util.Mth
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonInstance
 import kotlin.math.max
-import kotlin.math.roundToInt
 
 const val roomWidth = 20
 const val hallwaySize = 4
@@ -40,7 +39,7 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
                 -200 + (rooms * 32.0),
                 0.0,
                 max * (combinedSize + 2.0) - hallwaySize,
-            ).roundToInt() - 2
+            ).round(0) - 2
         }
     }
 
@@ -68,7 +67,7 @@ class RenderPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPositio
             (6 * combinedSize) * ((rooms.toDouble()) / max),
             -200.0,
             -200 + (rooms * 32.0),
-        ).roundToInt() - 2
+        ).round(-200) - 2
     }
 
 }

@@ -2,8 +2,12 @@ package tech.thatgravyboat.skycubed.features.dungeonmap.position
 
 import org.joml.Vector2i
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonInstance
+import kotlin.math.roundToInt
 
 abstract class DungeonPosition<T : DungeonPosition<T>>(x: Int, y: Int, val instance: DungeonInstance) : Vector2i(x, y) {
+    companion object {
+        protected fun Double.round(default: Int) : Int = if (this.isNaN()) default else this.roundToInt()
+    }
 
     inline fun <reified T : DungeonPosition<T>> convertTo(): T {
         return when (T::class) {
