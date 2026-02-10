@@ -130,6 +130,7 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             }
         }
 
+        if (McScreen.self != null) return
         options.forEach { (_, keys, command) ->
             if (keys.isDown()) {
                 McClient.sendCommand(command.removePrefix("/"))
