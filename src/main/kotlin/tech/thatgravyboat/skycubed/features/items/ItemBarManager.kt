@@ -43,5 +43,9 @@ object ItemBarManager {
             event.percent = it / THREE_HUNDRED_HOURS
             event.color = TextColor.RED
         }
+        event.item.getData(DataTypes.WATER_LEVEL)?.let {
+            event.percent = it.first.toFloat() / it.second.toFloat()
+            event.color = TextColor.BLUE
+        }
     }
 }
