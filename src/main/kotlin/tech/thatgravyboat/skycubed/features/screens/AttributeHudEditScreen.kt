@@ -45,7 +45,7 @@ class AttributeHudEditScreen : BaseUiScreen("Attribute Hud Editor") {
             display(ExtraDisplays.background(0xA0000000u, 2f, Displays.empty(6, uiHeight - 10)))
             vertical(5, 0.5f) {
                 string("Search Attributes")
-                val allIds = RepoAPI.attributes().attributes().keys.map { SkyBlockId.attribute(it) }
+                val allIds = RepoAPI.attributes().attributes().values.map { SkyBlockId.attribute(it.attributeId.lowercase()) }
 
                 addItems(false, rightState, columnWidth, allIds)
 
