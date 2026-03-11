@@ -129,6 +129,27 @@
                         "desc": "Choose between different overlay backgrounds."
                     }
                 },
+                "attributes": {
+                    "@value": "Attribute Overlay",
+                    "desc": "Settings for the attribute overlay.",
+                    "enabled": {
+                        "@value": "Enable Attribute Overlay",
+                        "desc": "Enables the attribute overlay, showing your current attributes."
+                    },
+                    "background": {
+                        "@value": "Background",
+                        "desc": "Choose between different overlay backgrounds."
+                    },
+                    "elements": {
+                        "@value": "Displayed Elements",
+                        "desc": "Customize the elements used to display the overlay.",
+                        "stack": "Item Stack",
+                        "name": "Attribute Name",
+                        "owned": "Owned Value",
+                        "syphoned": "Syphoned Value",
+                        "level": "Attribute Level"
+                    }
+                },
                 "power_orb": {
                     "@value": "Power Orb Overlay",
                     "desc": "Settings for the power orb overlay.",

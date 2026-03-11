@@ -12,6 +12,7 @@ import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
+import tech.thatgravyboat.skycubed.features.overlays.AttributeOverlay.AttributeElements
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
 import tech.thatgravyboat.skycubed.features.tablist.CompactTablist
@@ -83,6 +84,24 @@ object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
     }
 
     var sackItems by strings {
+        this.condition = { false }
+    }
+}
+
+object AttributeOverlayConfig : OverlayConfig("Edit Attribute Overlay") {
+    var enabled by boolean(true) {
+        this.translation = "skycubed.config.overlays.attributes.enabled"
+    }
+
+    var background by enum(OverlayBackgroundConfig.TRANSLUCENT) {
+        this.translation = "skycubed.config.overlays.attributes.background"
+    }
+
+    var elements by draggable(*AttributeElements.DEFAULT.toTypedArray()) {
+        this.translation = "skycubed.config.overlays.attributes.elements"
+    }
+
+    var attributes by strings {
         this.condition = { false }
     }
 }
