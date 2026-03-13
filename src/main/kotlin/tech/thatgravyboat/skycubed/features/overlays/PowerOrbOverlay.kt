@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.api.events.entity.NameChangedEvent
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.ServerDisconnectEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -70,7 +71,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
                         string(orb.deployable.item.hoverName)
                         val range = orb.deployable.range
                         val distance = sqrt(McPlayer.distanceSqr(entity.position()))
-                        val inRange = distance <= range
+                        val inRange = distance <= range()
                         string(Text.of(if (inRange) "In Range" else "Out of Range", if (inRange) TextColor.GREEN else TextColor.RED))
                     }
                 }
@@ -165,11 +166,17 @@ object PowerOrbOverlay : SkyCubedOverlay {
     @Subscription(ServerDisconnectEvent::class, ServerChangeEvent::class)
     fun onLeave() = orbs.clear()
 
-    private enum class Deployable(@Language("RegExp") title: String, val range: Int, val hasExtraLine: Boolean = false) {
+    private enum class Deployable(@Language("RegExp") title: String, val range: () -> Int, val hasExtraLine: Boolean = false) {
         RADIANT_POWER_ORB("^Radiant", 18),
         MANA_FLUX_POWER_ORB("^Mana Flux", 18),
         OVERFLUX_POWER_ORB("^Overflux", 18),
         PLASMAFLUX_POWER_ORB("^Plasmaflux", 20),
+
+        LANTERN("^Dwarven Lantern", 30),
+        MITHRIL_LANTERN("^Mithril Lantern", 30),
+        TITANIUM_LANTERN("^Titanium Lantern", 30),
+        GLACITE_LANTERN("^Glacite Lantern", if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30),
+        WILL_O_WISP_LANTERN("^Will-o'-Wisp", if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30),
 
         UMBERELLA("^Umberella", 30),
 
@@ -178,6 +185,8 @@ object PowerOrbOverlay : SkyCubedOverlay {
             override val canSpin: Boolean = false
         },
         ;
+
+        constructor(@Language("RegExp") title: String, range: Int, hasExtraLine: Boolean = false) : this(title, { range }, hasExtraLine)
 
         open val canSpin = true
         open val regex = "$title (?<seconds>\\d+)s".toRegex()
