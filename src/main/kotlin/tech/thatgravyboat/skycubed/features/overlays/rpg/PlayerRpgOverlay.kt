@@ -103,17 +103,15 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     }
 
     override fun onRightClick() = ContextMenu.open {
-        if (SkyCubed.is1218) {
-            val text = when (RpgOverlayConfig.playerDisplay) {
-                PlayerDisplay.DISABLED -> "Show Armored Player"
-                PlayerDisplay.ARMORED -> "Show Unarmored Player"
-                PlayerDisplay.UNARMORED -> "Hide Player"
-            }
-            it.button(Text.of(text)) {
-                RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.next()
-            }
-            it.divider()
+        val text = when (RpgOverlayConfig.playerDisplay) {
+            PlayerDisplay.DISABLED -> "Show Armored Player"
+            PlayerDisplay.ARMORED -> "Show Unarmored Player"
+            PlayerDisplay.UNARMORED -> "Hide Player"
         }
+        it.button(Text.of(text)) {
+            RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.next()
+        }
+        it.divider()
         it.dangerButton(Text.of("Reset Position")) {
             position.resetPosition()
         }

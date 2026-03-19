@@ -142,10 +142,7 @@
                     },
                     "spinning_item": {
                         "@value": "Spinning Item",
-                        "desc": [
-                            "Spins the item Icon.",
-                            "<red>Requires 1.21.6 or higher!</red>"
-                        ]
+                        "desc": "Spins the item Icon."
                     },
                     "name_and_range": {
                         "@value": "Name and Range",

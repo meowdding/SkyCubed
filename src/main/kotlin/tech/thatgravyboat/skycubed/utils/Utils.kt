@@ -21,17 +21,17 @@ object Utils {
         entity: AbstractClientPlayer,
         x: Int, y: Int, width: Int, height: Int, scale: Float,
     ) {
-        //? if > 1.21.5
         RpgPlayerRenderer.draw(graphics, entity, x, y, width, height, scale)
     }
 
     fun Screen.fullyRender(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        this./*? if > 1.21.8 {*/renderWithTooltipAndSubtitles/*?} else {*//*renderWithTooltip*//*?}*/(graphics, mouseX, mouseY, partialTicks)
+        this.renderWithTooltipAndSubtitles(graphics, mouseX, mouseY, partialTicks)
     }
 
     fun PlayerInfo.toSkin(): PlayerSkin = this.skin
 
     fun resetCursor() {
+        // TODO: what
         //? if < 1.21.9
         /*com.teamresourceful.resourcefullib.client.utils.CursorUtils.setDefault()*/
     }
