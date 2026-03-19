@@ -11,6 +11,7 @@ import me.owdding.lib.layouts.setPos
 import tech.thatgravyboat.repolib.api.RepoAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
+import tech.thatgravyboat.skyblockapi.api.remote.api.RepoAttributeAPI
 import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.cleanName
@@ -68,7 +69,13 @@ class AttributeHudEditScreen : BaseUiScreen("Attribute Hud Editor") {
             if (input.isEmpty()) {
                 items
             } else {
-                items.filter { (k, v) -> k.skyblockId.contains(input, true) || v.cleanName.contains(input, true) }
+                items.filter { (id, item) ->
+                    listOfNotNull(
+                        RepoAttributeAPI.getAttributeDataById(id.cleanId)?.name,
+                        id.skyblockId,
+                        item.cleanName,
+                    ).any { it.contains(input, true) }
+                }
             }.onEachIndexed { i, (k, v) ->
                 val color = if (i % 2 == 0) 0xFFA1A3A3u else 0xFFC7C6C9u
                 val display = DisplayFactory.vertical {
