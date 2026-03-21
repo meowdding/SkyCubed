@@ -8,13 +8,16 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.overlays.ConfigPosition
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
+import net.minecraft.world.item.Items
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.hunting.AttributeAPI
 import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.AttributeOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.features.screens.AttributeHudEditScreen
@@ -33,18 +36,30 @@ object AttributeOverlay : SkyCubedOverlay {
     private val display by CachedValue(1.seconds) {
         if (AttributeOverlayConfig.attributes.isEmpty()) return@CachedValue Displays.empty(0, 0)
 
-        DisplayFactory.vertical {
-            AttributeOverlayConfig.attributes.map { SkyBlockId.attribute(it) }.forEach { id ->
-                val data = AttributeAPI.attributeMap[id]
+        DisplayFactory.horizontal(5, alignment = Alignment.CENTER) {
+            AttributeOverlayConfig.elements.forEach { element ->
+                vertical(alignment = Alignment.CENTER) {
+                    when (element) {
+                        AttributeElements.STACK -> display(Displays.item(Items.LEAD, McFont.height, McFont.height))
+                        AttributeElements.NAME -> string(Text.of("Attribute", TextColor.GOLD))
+                        AttributeElements.INTERNAL_NAME -> string(Text.of("SbId", TextColor.GOLD))
+                        AttributeElements.OWNED -> string(Text.of("Owned", TextColor.GREEN))
+                        AttributeElements.SYPHONED -> string(Text.of("Syphoned", TextColor.AQUA))
+                        AttributeElements.LEVEL -> string(Text.of("Level", TextColor.PINK))
+                    }
 
-                horizontal(5, Alignment.CENTER) {
-                    AttributeOverlayConfig.elements.forEach { element ->
+                    spacer(0, 4)
+
+                    AttributeOverlayConfig.attributes.map { SkyBlockId.attribute(it) }.forEach { id ->
+                        val data = AttributeAPI.attributeMap[id]
+
                         when (element) {
-                            AttributeElements.STACK -> display(Displays.item(id.toItem()))
+                            AttributeElements.STACK -> display(Displays.item(id.toItem(), McFont.height, McFont.height))
                             AttributeElements.NAME -> string(id.toItem().hoverName)
-                            AttributeElements.OWNED -> string(Text.of("O ${(data?.owned ?: 0).toFormattedString()}", TextColor.GREEN))
-                            AttributeElements.SYPHONED -> string(Text.of("S ${(data?.syphoned ?: 0).toFormattedString()}", TextColor.AQUA))
-                            AttributeElements.LEVEL -> string(Text.of("L ${(data?.level ?: 0).toFormattedString()}", TextColor.PINK))
+                            AttributeElements.INTERNAL_NAME -> string(Text.of(id.id.substringAfter(":"), id.toItem().hoverName.color))
+                            AttributeElements.OWNED -> string(Text.of((data?.owned ?: 0).toFormattedString(), TextColor.GREEN))
+                            AttributeElements.SYPHONED -> string(Text.of((data?.syphoned ?: 0).toFormattedString(), TextColor.AQUA))
+                            AttributeElements.LEVEL -> string(Text.of((data?.level ?: 0).toFormattedString(), TextColor.PINK))
                         }
                     }
                 }
@@ -78,6 +93,7 @@ object AttributeOverlay : SkyCubedOverlay {
     enum class AttributeElements : Translatable {
         STACK,
         NAME,
+        INTERNAL_NAME,
         OWNED,
         SYPHONED,
         LEVEL,

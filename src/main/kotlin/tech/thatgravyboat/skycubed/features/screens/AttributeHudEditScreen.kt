@@ -9,12 +9,14 @@ import me.owdding.lib.builder.LayoutFactory
 import me.owdding.lib.displays.*
 import me.owdding.lib.layouts.setPos
 import tech.thatgravyboat.repolib.api.RepoAPI
+import tech.thatgravyboat.skyblockapi.api.data.SkyBlockRarity
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.remote.api.RepoAttributeAPI
 import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.cleanName
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.config.overlays.AttributeOverlayConfig
@@ -46,7 +48,12 @@ class AttributeHudEditScreen : BaseUiScreen("Attribute Hud Editor") {
             display(ExtraDisplays.background(0xA0000000u, 2f, Displays.empty(6, uiHeight - 10)))
             vertical(5, 0.5f) {
                 string("Search Attributes")
-                val allIds = RepoAPI.attributes().attributes().values.map { SkyBlockId.attribute(it.attributeId.lowercase()) }
+                val allIds = RepoAPI.attributes().attributes().values
+                    .map { SkyBlockId.attribute(it.attributeId.lowercase()) }
+                    .filter { it !in selectedItems }
+                    .sortedBy {
+                        SkyBlockRarity.entries.find { entry -> entry.color == it.toItem().hoverName.color } ?: SkyBlockRarity.COMMON
+                    }
 
                 addItems(false, rightState, columnWidth, allIds)
 

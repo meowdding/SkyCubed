@@ -145,6 +145,7 @@
                         "desc": "Customize the elements used to display the overlay.",
                         "stack": "Item Stack",
                         "name": "Attribute Name",
+                        "internal_name": "Attribute ID",
                         "owned": "Owned Value",
                         "syphoned": "Syphoned Value",
                         "level": "Attribute Level"
