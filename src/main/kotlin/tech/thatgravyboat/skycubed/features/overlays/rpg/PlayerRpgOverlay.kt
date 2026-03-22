@@ -35,6 +35,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     private val MANA = SkyCubed.id("rpg/mana/normal")
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
     private val MANA_NEEDED = SkyCubed.id("rpg/mana/needed")
+    private val MANA_OVERFLOW = SkyCubed.id("rpg/mana/overflow")
     private val XP = SkyCubed.id("rpg/xp")
     private val SKYBLOCK_XP = SkyCubed.id("rpg/skyblock_xp")
 
@@ -51,11 +52,15 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
 
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
         val absorptionPercent = healthPercent - 1f
-        val manaPercent = StatsAPI.mana.toFloat() / StatsAPI.maxMana.toFloat()
+
+        val totalManaPool = StatsAPI.maxMana.toFloat() + StatsAPI.overflowMana
+        val overflowPercent = StatsAPI.overflowMana.toFloat() / totalManaPool
+        val manaPercent = (StatsAPI.mana.toFloat() + StatsAPI.overflowMana) / totalManaPool
+        val manaUsePercent = (McPlayer.heldItem.getData(DataTypes.RIGHT_CLICK_MANA_ABILITY)?.second?.toFloat() ?: 0f) / totalManaPool
+
         val xpPercent = McPlayer.xpLevelProgress
         val skyblockLevelPercent = ProfileAPI.sbLevelProgress / 100f
         val airPercent = McPlayer.air.toFloat() / McPlayer.maxAir.toFloat()
-        val manaUsePercent = (McPlayer.heldItem.getData(DataTypes.RIGHT_CLICK_MANA_ABILITY)?.second?.toFloat() ?: 0f) / StatsAPI.maxMana.toFloat()
 
         val healthSprite = when {
             McPlayer.self?.hasEffect(MobEffects.POISON) == true -> HEALTH_POISON
@@ -78,6 +83,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
 
         graphics.blitSpritePercent(MANA_DEPLETED, positions.mana, manaUsePercent)
         graphics.blitSpritePercent(MANA, positions.mana, manaPercent)
+        graphics.blitSpritePercent(MANA_OVERFLOW, positions.mana, overflowPercent)
         graphics.blitSpritePercent(MANA_NEEDED, positions.mana, manaUsePercent.coerceAtMost(manaPercent))
 
         if (RpgOverlayConfig.skyblockLevel) {
