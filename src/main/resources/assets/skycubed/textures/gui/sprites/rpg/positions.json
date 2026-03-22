@@ -34,13 +34,13 @@
         "x": 3,
         "y": 33
     },
-    "airBase": {
+    "extraBase": {
         "x": 38,
         "y": 34,
         "width": 64,
         "height": 6
     },
-    "airBar": {
+    "extraBar": {
         "x": 40,
         "y": 34,
         "width": 60,

@@ -8,9 +8,11 @@ import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
 import net.minecraft.world.effect.MobEffects
 import tech.thatgravyboat.skyblockapi.api.area.mining.GlaciteAPI
+import tech.thatgravyboat.skyblockapi.api.area.mining.HollowsAPI
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.profile.ProfileAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
@@ -18,7 +20,6 @@ import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
-import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.utils.*
@@ -30,7 +31,6 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     private val HEALTH_NORMAL = SkyCubed.id("rpg/health/normal")
     private val HEALTH_POISON = SkyCubed.id("rpg/health/poison")
     private val HEALTH_WITHER = SkyCubed.id("rpg/health/wither")
-    private val HEALTH_FREEZE = SkyCubed.id("rpg/health/freeze")
     private val ABSORPTION = SkyCubed.id("rpg/health/absorption")
     private val MANA = SkyCubed.id("rpg/mana/normal")
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
@@ -39,8 +39,10 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     private val XP = SkyCubed.id("rpg/xp")
     private val SKYBLOCK_XP = SkyCubed.id("rpg/skyblock_xp")
 
-    private val AIR_BASE = SkyCubed.id("rpg/air/base")
-    private val AIR = SkyCubed.id("rpg/air/normal")
+    private val EXTRA_BASE = SkyCubed.id("rpg/extra/base")
+    private val AIR = SkyCubed.id("rpg/extra/air")
+    private val COLD = SkyCubed.id("rpg/extra/cold")
+    private val HEAT = SkyCubed.id("rpg/extra/heat")
 
     override val name: Component = Text.of("Player RPG Hud")
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && RpgOverlayConfig.enabled
@@ -60,12 +62,23 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
 
         val xpPercent = McPlayer.xpLevelProgress
         val skyblockLevelPercent = ProfileAPI.sbLevelProgress / 100f
-        val airPercent = McPlayer.air.toFloat() / McPlayer.maxAir.toFloat()
+
+        val (extraPercent, extraSprite, showExtra) = when {
+            GlaciteAPI.inGlaciteTunnels() && GlaciteAPI.cold > 0 -> ExtraElement(GlaciteAPI.cold / 100f, COLD)
+            SkyBlockIsland.CRYSTAL_HOLLOWS.inIsland() -> {
+                when {
+                    HollowsAPI.immuneToHeat -> ExtraElement(1f, HEAT, true)
+                    (HollowsAPI.heat ?: 0) > 0 -> ExtraElement((HollowsAPI.heat ?: 0) / 100f, HEAT)
+                    else -> ExtraElement(0f, HEAT, false)
+                }
+            }
+
+            else -> ExtraElement(McPlayer.air.toFloat() / McPlayer.maxAir.toFloat(), AIR)
+        }
 
         val healthSprite = when {
             McPlayer.self?.hasEffect(MobEffects.POISON) == true -> HEALTH_POISON
             McPlayer.self?.hasEffect(MobEffects.WITHER) == true -> HEALTH_WITHER
-            GlaciteAPI.inGlaciteTunnels() && GlaciteAPI.cold > OverlaysConfig.coldOverlay -> HEALTH_FREEZE
             else -> HEALTH_NORMAL
         }
         val positions = RpgOverlayPositionHandler.positions
@@ -94,9 +107,9 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
             graphics.drawScaledString("${McPlayer.xpLevel}", positions.xpText.x, positions.xpText.y, 16, 0x78EC20)
         }
 
-        if (airPercent < 1f) {
-            graphics.drawSprite(AIR_BASE, positions.airBase)
-            graphics.blitSpritePercent(AIR, positions.airBar, airPercent)
+        if (showExtra) {
+            graphics.drawSprite(EXTRA_BASE, positions.extraBase)
+            graphics.blitSpritePercent(extraSprite, positions.extraBar, extraPercent)
         }
     }
 
@@ -123,5 +136,9 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         it.dangerButton(Text.of("Reset Position")) {
             position.resetPosition()
         }
+    }
+
+    private data class ExtraElement(val percent: Float, val sprite: Identifier, val show: Boolean) {
+        constructor(percent: Float, sprite: Identifier) : this(percent, sprite, percent < 1f)
     }
 }
