@@ -16,6 +16,7 @@ object OverlaysConfig : CategoryKt("overlays") {
         obj("text", TextOverlaysConfig) { this.translation = "skycubed.config.overlays.text" }
         obj("tablist", TabListOverlayConfig) { this.translation = "skycubed.config.overlays.tablist" }
         obj("sack", SackOverlayConfig) { this.translation = "skycubed.config.overlays.sacks" }
+        obj("attribute", AttributeOverlayConfig) { this.translation = "skycubed.config.overlays.attributes" }
         obj("powerOrb", PowerOrbOverlayConfig) { this.translation = "skycubed.config.overlays.power_orb" }
         obj("trophyFish", TrophyFishOverlayConfig) { this.translation = "skycubed.config.overlays.trophy_fish" }
         obj("map", MapOverlayConfig) { this.translation = "skycubed.config.overlays.map" }
