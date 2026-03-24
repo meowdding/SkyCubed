@@ -6,7 +6,7 @@ import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
 import me.owdding.lib.utils.KeyboardInputs
 import me.owdding.lib.utils.keys
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
@@ -157,15 +157,15 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             override fun getWidth(): Int = npcTextDisplay.getWidth()
             override fun getHeight(): Int = npcTextDisplay.getHeight()
 
-            override fun render(graphics: GuiGraphics) {
-                npcTextDisplay.render(graphics)
-                npcNameDisplay.render(graphics, 60.takeIf { entity != null } ?: 5, -npcNameDisplay.getHeight() / 2)
+            override fun extract(graphics: GuiGraphicsExtractor) {
+                npcTextDisplay.extract(graphics)
+                npcNameDisplay.extract(graphics, 60.takeIf { entity != null } ?: 5, -npcNameDisplay.getHeight() / 2)
 
                 if (entity != null) {
                     val display = Displays.entity(entity, 60, 80, 35, 80f, 40f)
                     graphics.translated(0, -45) {
                         graphics.scissor(0..60, 0..45) {
-                            display.render(graphics)
+                            display.extract(graphics)
                         }
                     }
                 }
@@ -187,10 +187,10 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
             override fun getWidth(): Int = main.getWidth()
             override fun getHeight(): Int = main.getHeight()
 
-            override fun render(graphics: GuiGraphics) {
-                main.render(graphics)
+            override fun extract(graphics: GuiGraphicsExtractor) {
+                main.extract(graphics)
                 graphics.translated(main.getWidth() - yesNoDisplay.getWidth() - 10f, -1f * yesNoDisplay.getHeight() - 10f) {
-                    yesNoDisplay.render(graphics)
+                    yesNoDisplay.extract(graphics)
                 }
             }
         }
@@ -211,10 +211,10 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         if (!enabled) return
         val graphics = event.graphics
 
-        render(graphics, 0, 0)
+        extract(graphics, 0, 0)
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         val screen = McScreen.self
         if (screen is AbstractContainerScreen<*>) {
             inventoryOverlayDisplay.render(

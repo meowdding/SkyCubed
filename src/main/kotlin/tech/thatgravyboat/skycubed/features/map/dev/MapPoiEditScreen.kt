@@ -8,7 +8,7 @@ import me.owdding.lib.builder.LayoutFactory
 import me.owdding.lib.builder.MIDDLE
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.world.entity.Entity
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -183,9 +183,9 @@ class MapPoiEditScreen(poi: Poi, val list: MutableList<Poi>, val parent: Screen?
 
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, f: Float) {
-        parent?.render(graphics, -1, -1, f)
-        super.render(graphics, mouseX, mouseY, f)
+    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, f: Float) {
+        parent?.extractRenderState(graphics, -1, -1, f)
+        super.extractRenderState(graphics, mouseX, mouseY, f)
     }
 
 //     override fun renderBlurredBackground() {}

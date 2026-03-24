@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
 import net.minecraft.client.gui.Font
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.toasts.Toast
 import net.minecraft.client.gui.components.toasts.ToastManager
 import net.minecraft.network.chat.Component
@@ -25,8 +25,8 @@ data class NotificationToast(
 
     override fun getToken(): Any = this.id ?: Toast.NO_TOKEN
 
-    override fun render(graphics: GuiGraphics, font: Font, ignored2: Long) {
-        render(graphics)
+    override fun extractRenderState(graphics: GuiGraphicsExtractor, font: Font, fullyVisibleForMs: Long) {
+        extract(graphics)
     }
 
     override fun getWantedVisibility(): Toast.Visibility {
@@ -37,7 +37,7 @@ data class NotificationToast(
 
     }
 
-    fun render(graphics: GuiGraphics) {
+    fun extract(graphics: GuiGraphicsExtractor) {
         if (this.removalTime == -1L || this.replaced) {
             this.removalTime = System.currentTimeMillis() + this.displayTime
             this.replaced = false

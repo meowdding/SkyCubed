@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.equipment
 
 import me.owdding.ktmodules.Module
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.resources.Identifier
 import net.minecraft.world.SimpleContainer
@@ -39,7 +39,7 @@ object EquipmentManager {
 
     private val fakeContainer = SimpleContainer(ItemStack.EMPTY)
 
-    fun onRenderScreen(screen: InventoryScreen, graphics: GuiGraphics, left: Int, top: Int, mouseX: Int, mouseY: Int) {
+    fun onExtractScreen(screen: InventoryScreen, graphics: GuiGraphicsExtractor, left: Int, top: Int, mouseX: Int, mouseY: Int) {
         if (!this.isEnabled) return
         replaceSlot(screen.menu)
 

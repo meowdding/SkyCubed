@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -29,9 +29,9 @@ public abstract class InventoryScreenMixin extends AbstractContainerScreen<@NotN
         return !Config.INSTANCE.getHiddenHudElements().contains(HudElement.EFFECTS) && original.call();
     }
 
-    @Inject(method = "renderBg", at = @At("TAIL"))
-    private void renderBg(GuiGraphics graphics, float f, int i, int j, CallbackInfo ci) {
-        EquipmentManager.INSTANCE.onRenderScreen(
+    @Inject(method = "extractBackground", at = @At("TAIL"))
+    private void renderBg(GuiGraphicsExtractor graphics, int i, int j, float f, CallbackInfo ci) {
+        EquipmentManager.INSTANCE.onExtractScreen(
                 (InventoryScreen) (Object) this,
                 graphics,
                 this.leftPos,

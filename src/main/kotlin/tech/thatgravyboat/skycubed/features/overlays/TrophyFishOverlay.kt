@@ -9,7 +9,7 @@ import me.owdding.lib.displays.toColumn
 import me.owdding.lib.displays.withTooltip
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.utils.KnownMods
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishTier
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishType
@@ -72,8 +72,8 @@ object TrophyFishOverlay : SkyCubedOverlay {
         listOf(title, *TrophyFishType.entries.map { it.createDisplay() }.toTypedArray()).toColumn()
     }
 
-    override fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display.render(graphics)
+    override fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
+        display.extract(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {

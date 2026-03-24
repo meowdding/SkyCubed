@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.utils
 import com.mojang.authlib.SignatureState
 import com.mojang.authlib.minecraft.MinecraftProfileTexture
 import com.mojang.authlib.minecraft.MinecraftProfileTextures
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.multiplayer.PlayerInfo
 import net.minecraft.client.player.AbstractClientPlayer
@@ -17,15 +17,15 @@ import java.util.concurrent.CompletableFuture
 object Utils {
 
     fun drawRpgPlayer(
-        graphics: GuiGraphics,
+        graphics: GuiGraphicsExtractor,
         entity: AbstractClientPlayer,
         x: Int, y: Int, width: Int, height: Int, scale: Float,
     ) {
         RpgPlayerRenderer.draw(graphics, entity, x, y, width, height, scale)
     }
 
-    fun Screen.fullyRender(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        this.renderWithTooltipAndSubtitles(graphics, mouseX, mouseY, partialTicks)
+    fun Screen.fullyRender(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        this.extractRenderStateWithTooltipAndSubtitles(graphics, mouseX, mouseY, partialTicks)
     }
 
     fun PlayerInfo.toSkin(): PlayerSkin = this.skin
