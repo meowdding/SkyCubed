@@ -11,14 +11,9 @@ import net.minecraft.world.scores.PlayerTeam
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import java.util.concurrent.CompletableFuture
 
-//? if > 1.21.8 {
 import net.minecraft.client.entity.ClientMannequin
 import tech.thatgravyboat.skyblockapi.platform.toResolvableProfile
 import net.minecraft.world.item.component.ResolvableProfile
-//?} else {
-/*import net.minecraft.client.player.RemotePlayer as ClientMannequin
-import net.minecraft.world.entity.player.PlayerModelPart
-*///?}
 
 
 class DisplayEntityPlayer(
@@ -27,26 +22,14 @@ class DisplayEntityPlayer(
     var isTransparent: Boolean = false,
 ) : ClientMannequin(
     McClient.self.level,
-    //? if > 1.21.8 {
     McClient.self.playerSkinRenderCache(),
-    //?} else
-    /*GameProfile(Util.NIL_UUID, "Display"),*/
 ) {
 
-    //? if > 1.21.8 {
     private val skin: CompletableFuture<PlayerSkin> = skin.thenApply { PlayerSkin(it.body(), null, null, it.model(), it.secure()) }
     private val _profile = GameProfile(Util.NIL_UUID, "Display").toResolvableProfile()
     override fun getProfile(): ResolvableProfile {
         return _profile
     }
-    //?} else {
-    /*private val skin: CompletableFuture<PlayerSkin> = skin.thenApply { PlayerSkin(it.texture(), it.textureUrl(), null, null, it.model(), it.secure()) }
-
-    override fun isSpectator() = false
-    override fun isCreative() = false
-
-    override fun isModelPartShown(part: PlayerModelPart): Boolean = true
-    *///?}
 
     private val hasNoArmor: Boolean = armor.all(ItemStack::isEmpty)
 

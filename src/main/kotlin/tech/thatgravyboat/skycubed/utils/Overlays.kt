@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.utils
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import me.owdding.ktmodules.AutoCollect
 import me.owdding.lib.overlays.Overlay
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.utils.extentions.translated
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -24,7 +24,7 @@ interface SkyCubedOverlay : Overlay {
             return (width + 8) to (height + 8)
         }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
         val offset = when (background) {
             OverlayBackgroundConfig.TEXTURED -> {
                 graphics.drawSprite(SkyCubedTextures.backgroundBox, 0, 0, bounds.first, bounds.second)
@@ -40,12 +40,12 @@ interface SkyCubedOverlay : Overlay {
         }
 
         graphics.translated(offset, offset) {
-            renderWithBackground(graphics, mouseX - offset, mouseY - offset, partialTicks)
+            extractWithBackground(graphics, mouseX - offset, mouseY - offset, partialTicks)
         }
     }
 
-    fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) = renderWithBackground(graphics, mouseX, mouseY)
-    fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) = render(graphics, mouseX, mouseY)
+    fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) = extractWithBackground(graphics, mouseX, mouseY)
+    fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) = render(graphics, mouseX, mouseY)
 }
 
 interface BackgroundLessSkyCubedOverlay : SkyCubedOverlay {

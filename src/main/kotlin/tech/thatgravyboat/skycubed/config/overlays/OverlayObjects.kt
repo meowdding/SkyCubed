@@ -50,7 +50,6 @@ object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
 
     var playerDisplay by enum(PlayerDisplay.DISABLED) {
         this.translation = "skycubed.config.overlays.rpg.player_display"
-        this.condition = { SkyCubed.is1218 }
     }
 }
 

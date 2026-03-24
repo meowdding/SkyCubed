@@ -16,9 +16,9 @@ import tech.thatgravyboat.skyblockapi.platform.drawString
 import tech.thatgravyboat.skyblockapi.platform.pushPop
 import tech.thatgravyboat.skyblockapi.platform.scale
 import tech.thatgravyboat.skyblockapi.platform.translate
+import tech.thatgravyboat.skyblockapi.utils.extentions.currentInstant
+import tech.thatgravyboat.skyblockapi.utils.extentions.since
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
-import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant

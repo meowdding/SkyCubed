@@ -11,14 +11,14 @@ import me.owdding.lib.platform.screens.KeyEvent
 import me.owdding.lib.platform.screens.MeowddingScreen
 import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.utils.matches
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.extentions.currentInstant
+import tech.thatgravyboat.skyblockapi.utils.extentions.since
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
-import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.features.map.Maps
 import tech.thatgravyboat.skycubed.features.map.dev.MapEditor
 import tech.thatgravyboat.skycubed.features.map.pois.Poi
@@ -105,8 +105,8 @@ class MapScreen : MeowddingScreen(CommonText.EMPTY) {
         ).build(this::addRenderableWidget)
     }
 
-    override fun renderBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        renderTransparentBackground(graphics)
+    override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
+        extractTransparentBackground(graphics)
     }
 
     override fun keyPressed(keyEvent: KeyEvent): Boolean {

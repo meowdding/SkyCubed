@@ -47,8 +47,6 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
     val MOD_ID: String get() = mod.metadata.id
     val VERSION: String = mod.metadata.version.friendlyString
 
-    val is1218 = !McVersionGroup.MC_1_21_5.isActive
-
     val repoPatcher: DataPatcher?
 
     val prefix = Text.of {

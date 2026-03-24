@@ -1,15 +1,15 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
 import com.mojang.blaze3d.platform.InputConstants
-import com.teamresourceful.resourcefullib.client.screens.CursorScreen.Cursor
+import com.mojang.blaze3d.platform.cursor.CursorTypes
 import earth.terrarium.olympus.client.utils.State
 import me.owdding.lib.platform.screens.BaseWidget
 import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.waypoints.MeowddingWaypoint
 import me.owdding.lib.waypoints.MeowddingWaypointHandler
 import me.owdding.lib.waypoints.MeowddingWaypointTag
-import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.gui.components.PlayerFaceRenderer
+import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.client.gui.components.PlayerFaceExtractor
 import net.minecraft.util.Mth
 import org.joml.component1
 import org.joml.component2
@@ -52,11 +52,8 @@ class MapsWidget(
     private val maps = Maps.getMaps(map)
     private val showPlayer = Maps.getMapsForLocation() == map
 
-    private var cursor: Cursor = Cursor.DEFAULT
 
-    override fun renderWidget(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        this.cursor = Cursor.DEFAULT
-
+    override fun extractWidgetRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         val (posX, posY) = graphics.getTranslation()
         val (scaleX, scaleY) = graphics.getScale()
 
@@ -68,7 +65,7 @@ class MapsWidget(
 
                 val headRot = Mth.rotLerp(partialTick, McPlayer.self!!.yHeadRotO, McPlayer.self!!.yHeadRot)
                 // TODO: fix, in 1.21.8 the code for this seems to be broken if rotating the texture, needs to be fixed.
-                if (rotate.get() && (!SkyCubed.is1218 || shape == MapShape.SQUARE)) {
+                if (rotate.get() && shape == MapShape.SQUARE) {
                     graphics.rotate(180 - headRot, xOffset + width / 2, zOffset + height / 2)
                 }
 
@@ -78,10 +75,10 @@ class MapsWidget(
                         val texture = map.getTexture()
 
                         if (default != texture) {
-                            shape.drawMapPart(graphics, default.getId(), map, posX, posY, width, height, scaleX, scaleY, 0xFF3F3F3F.toInt())
+                            shape.extractMapPart(graphics, default.getId(), map, posX, posY, width, height, scaleX, scaleY, 0xFF3F3F3F.toInt())
                         }
 
-                        shape.drawMapPart(graphics, texture.getId(), map, posX, posY, width, height, scaleX, scaleY)
+                        shape.extractMapPart(graphics, texture.getId(), map, posX, posY, width, height, scaleX, scaleY)
                     }
 
                     map.pois.forEach { poi ->
@@ -90,11 +87,11 @@ class MapsWidget(
                         graphics.pushPop {
                             graphics.translate(poi.position.x + map.offsetX + width / 2f, poi.position.z + map.offsetY + height / 2f)
                             graphics.translate(-poi.bounds.x / 2f, -poi.bounds.y / 2f)
-                            poi.display.render(graphics)
+                            poi.display.extract(graphics)
 
                             if (isMouseOver(map, poi.rect, mouseX - x, mouseY - y)) {
                                 graphics.showTooltip(Text.multiline(poi.tooltip))
-                                cursor = Cursor.POINTER
+                                graphics.requestCursor(CursorTypes.POINTING_HAND)
                             }
                         }
                     }
@@ -119,7 +116,7 @@ class MapsWidget(
                                         Text.of(" ${position.x}, ${position.y}, ${position.z}"),
                                     ),
                                 )
-                                cursor = Cursor.POINTER
+                                graphics.requestCursor(CursorTypes.POINTING_HAND)
                             }
                         }
                     }
@@ -133,7 +130,7 @@ class MapsWidget(
                         val profile = McPlayer.skin ?: return
                         graphics.scale(1f / scale, 1f / scale)
                         graphics.rotate(/*? if >= 1.21.9 {*/ headRot /*?} else {*/ /*180 + headRot *//*?}*/)
-                        PlayerFaceRenderer.draw(graphics, profile.texture, -4, -4, 8, true, true, -1)
+                        PlayerFaceExtractor.extractRenderState(graphics, profile.texture, -4, -4, 8, true, true, -1)
                     }
                 }
             }
@@ -171,8 +168,6 @@ class MapsWidget(
         }
         return super.mouseClicked(event, doubleClick)
     }
-
-    override fun getCursor() = this.cursor
 
     private fun isMouseOver(map: IslandData, rect: Rect, mouseX: Int, mouseY: Int): Boolean {
         if (!isMouseOver(mouseX.toDouble(), mouseY.toDouble())) return false
