@@ -2,7 +2,6 @@ package tech.thatgravyboat.skycubed.features.overlays
 
 import me.owdding.lib.extensions.round
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -11,7 +10,10 @@ import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextBuilder.append
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.HealthDisplay
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
@@ -42,29 +44,34 @@ class TextOverlay(
                     if (TextOverlaysConfig.healthDisplay == HealthDisplay.EFFECTIVE) {
                         val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
                         val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
-                        Text.of("❤ $health/$maxHealth").withStyle(ChatFormatting.GREEN)
+                        Text.of("❤ $health/$maxHealth", TextColor.GREEN)
                     } else {
-                        Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}").withStyle(ChatFormatting.RED)
+                        Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}", TextColor.RED)
                     }
                 },
             ),
             TextOverlay(
                 Text.of("Mana"), OverlayPositions.mana, { TextOverlaysConfig.manaEnabled },
                 {
-                    Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}").withStyle(ChatFormatting.AQUA)
+                    Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}") {
+                        color = TextColor.AQUA
+                        if (StatsAPI.overflowMana > 0) {
+                            append(" ʬ ${StatsAPI.overflowMana}", TextColor.DARK_AQUA)
+                        }
+                    }
                 },
             ),
             TextOverlay(
                 Text.of("Defense"), OverlayPositions.defense, { TextOverlaysConfig.defenseEnabled },
                 {
-                    Text.of("❈ ${StatsAPI.defense}").withStyle(ChatFormatting.GREEN)
+                    Text.of("❈ ${StatsAPI.defense}", TextColor.GREEN)
                 },
             ),
             TextOverlay(
                 Text.of("Speed"), OverlayPositions.speed, { TextOverlaysConfig.speedEnabled },
                 {
                     val speed = McPlayer.self?.getAttribute(Attributes.MOVEMENT_SPEED)?.baseValue ?: 0.0
-                    Text.of("✦ ${speed.times(1000).round()}").withStyle(ChatFormatting.WHITE)
+                    Text.of("✦ ${speed.times(1000).round()}", TextColor.WHITE)
                 },
             ),
         )
