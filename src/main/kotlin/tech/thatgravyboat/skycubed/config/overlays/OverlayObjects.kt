@@ -11,6 +11,7 @@ import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
+import tech.thatgravyboat.skycubed.features.info.InfoProvider
 import tech.thatgravyboat.skycubed.features.map.screen.MapShape
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
 import tech.thatgravyboat.skycubed.features.overlays.pickuplog.PickUpLogComponents
@@ -36,6 +37,9 @@ object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
         this.translation = "skycubed.config.overlays.info.enabled_positions"
     }
 
+    var formatting by enum(InfoProvider.Companion.InfoFormatting.LONG) {
+        this.translation = "skycubed.config.overlays.info.formatting"
+    }
 }
 
 object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {
