@@ -167,21 +167,21 @@ object PowerOrbOverlay : SkyCubedOverlay {
     fun onLeave() = orbs.clear()
 
     private enum class Deployable(@Language("RegExp") title: String, val range: () -> Int, val hasExtraLine: Boolean = false) {
-        (?i)RADIANT_POWER_ORB("^Radiant", 18),
-        (?i)MANA_FLUX_POWER_ORB("^Mana Flux", 18),
-        (?i)OVERFLUX_POWER_ORB("^Overflux", 18),
-        (?i)PLASMAFLUX_POWER_ORB("^Plasmaflux", 20),
+        RADIANT_POWER_ORB("(?i)^Radiant", 18),
+        MANA_FLUX_POWER_ORB("(?i)^Mana Flux", 18),
+        OVERFLUX_POWER_ORB("(?i)^Overflux", 18),
+        PLASMAFLUX_POWER_ORB("(?i)^Plasmaflux", 20),
 
-        (?i)LANTERN("^Dwarven Lantern", 30),
-        (?i)MITHRIL_LANTERN("^Mithril Lantern", 30),
-        (?i)TITANIUM_LANTERN("^Titanium Lantern", 30),
-        (?i)GLACITE_LANTERN("^Glacite Lantern", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
-        (?i)WILL_O_WISP_LANTERN("^Will-o'-wisp", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
+        LANTERN("(?i)^Dwarven Lantern", 30),
+        MITHRIL_LANTERN("(?i)^Mithril Lantern", 30),
+        TITANIUM_LANTERN("(?i)^Titanium Lantern", 30),
+        GLACITE_LANTERN("(?i)^Glacite Lantern", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
+        WILL_O_WISP_LANTERN("(?i)^Will-o'-wisp", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
 
-        (?i)UMBERELLA("^Umberella", 30),
+        UMBERELLA("(?i)^Umberella", 30),
 
-        (?i)TOTEM_OF_CORRUPTION("", 30, true) {
-            override val regex: Regex = Regex("^Totem of Corruption")
+        TOTEM_OF_CORRUPTION("", 30, true) {
+            override val regex: Regex = Regex("(?i)^Totem of Corruption")
             override val canSpin: Boolean = false
         },
         ;
