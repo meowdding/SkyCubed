@@ -176,7 +176,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
         MITHRIL_LANTERN("(?i)^Mithril Lantern", 30),
         TITANIUM_LANTERN("(?i)^Titanium Lantern", 30),
         GLACITE_LANTERN("(?i)^Glacite Lantern", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
-        WILL_O_WISP_LANTERN("(?i)^Will-o'-wisp", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
+        WILL_O_WISP("(?i)^Will-o'-wisp", { if (SkyBlockIsland.MINESHAFT.inIsland()) 200 else 30 }),
 
         UMBERELLA("(?i)^Umberella", 30),
 
