@@ -60,7 +60,7 @@ class DungeonMap(val instance: DungeonInstance) {
         processMapData(state)
     }
 
-    private fun getMapData(mapId: MapId) = McLevel.self.getMapData(mapId)
+    private fun getMapData(mapId: MapId) = McLevel.self?.getMapData(mapId)
 
     @Subscription
     fun onTick(event: TickEvent) = instance.runCatching {

@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.misc
 import me.owdding.ktmodules.Module
 import me.owdding.lib.extensions.shorten
 import net.minecraft.client.gui.Font
-import net.minecraft.client.renderer.LightTexture
 import net.minecraft.world.entity.decoration.ArmorStand
 import net.minecraft.world.phys.Vec3
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -14,16 +13,15 @@ import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.platform.drawString
+import tech.thatgravyboat.skyblockapi.utils.extentions.currentInstant
+import tech.thatgravyboat.skyblockapi.utils.extentions.since
 import tech.thatgravyboat.skyblockapi.utils.extentions.toLongValue
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
-import tech.thatgravyboat.skyblockapi.utils.time.currentInstant
-import tech.thatgravyboat.skyblockapi.utils.time.since
 import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.features.misc.CustomDamage.DamageType.Companion.damageType
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.math.sin
-import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
 
@@ -122,7 +120,6 @@ object CustomDamage {
                     config.shadow,
                     Font.DisplayMode.SEE_THROUGH,
                     0x00000000u,
-                    LightTexture.FULL_BRIGHT
                 )
             }
         }

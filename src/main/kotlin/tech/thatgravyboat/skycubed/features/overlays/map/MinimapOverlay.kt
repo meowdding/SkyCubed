@@ -6,7 +6,7 @@ import me.owdding.ktmodules.Module
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
@@ -35,11 +35,11 @@ object MinimapOverlay : BackgroundLessSkyCubedOverlay {
 
     private var display: Display? = null
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
         if (display != null && MapOverlayConfig.enabled) {
-            display!!.render(graphics)
+            display!!.extract(graphics)
         } else if (DungeonMapOverlay.canRender) {
-            DungeonMapOverlay.render(graphics, partialTicks)
+            DungeonMapOverlay.extract(graphics, partialTicks)
         }
     }
 

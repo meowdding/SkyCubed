@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.features.overlays.commissions
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
@@ -50,8 +50,8 @@ object CommissionsOverlay : SkyCubedOverlay {
     override val enabled: Boolean get() = CommissionOverlayConfig.enabled && SkyBlockIsland.inAnyIsland(locations)
     override val background: OverlayBackgroundConfig get() = CommissionOverlayConfig.background
 
-    override fun renderWithBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        lines.render(graphics)
+    override fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
+        lines.extract(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {

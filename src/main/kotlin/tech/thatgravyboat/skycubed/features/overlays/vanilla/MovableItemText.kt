@@ -4,7 +4,7 @@ import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -31,7 +31,7 @@ object MovableItemText : BackgroundLessSkyCubedOverlay {
     /**
      * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
      */
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         if (!this.isEditing()) return
         val gui = McClient.self.gui ?: return
         val accessor = gui as? GuiAccessor ?: return

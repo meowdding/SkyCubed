@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import com.teamresourceful.resourcefullib.common.utils.TriState
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.compound.LayoutWidget
@@ -10,13 +9,14 @@ import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.layouts.Layout
 import net.minecraft.client.gui.layouts.LayoutElement
 import net.minecraft.client.gui.layouts.LayoutSettings
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.CommonComponents
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 
 
-abstract class SkyCubedScreen(title: Component = CommonComponents.EMPTY) : BaseCursorScreen(title) {
+abstract class SkyCubedScreen(title: Component = CommonComponents.EMPTY) : Screen(title) {
     constructor(title: String) : this(Text.of(title))
 
     fun olympus(path: String) = SkyCubed.olympus(path)

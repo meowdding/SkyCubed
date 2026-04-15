@@ -5,7 +5,7 @@ import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import org.intellij.lang.annotations.Language
@@ -99,8 +99,8 @@ object PowerOrbOverlay : SkyCubedOverlay {
         }
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display.render(graphics)
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
+        display.extract(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {

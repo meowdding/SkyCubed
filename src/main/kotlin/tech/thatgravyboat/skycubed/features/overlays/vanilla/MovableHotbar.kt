@@ -1,7 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.vanilla
 
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.utils.text.Text
@@ -20,7 +20,7 @@ object MovableHotbar : BackgroundLessSkyCubedOverlay {
     /**
      * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
      */
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
     }
 
 }

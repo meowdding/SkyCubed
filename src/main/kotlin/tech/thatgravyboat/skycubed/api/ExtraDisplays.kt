@@ -3,10 +3,9 @@ package tech.thatgravyboat.skycubed.api
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.platform.drawRoundedRectangle
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.world.item.ItemStack
-//? > 1.21.5
 import tech.thatgravyboat.skycubed.utils.SpinningItemRenderState
 
 object ExtraDisplays {
@@ -14,9 +13,9 @@ object ExtraDisplays {
         return object : Display {
             override fun getWidth() = display.getWidth()
             override fun getHeight() = display.getHeight()
-            override fun render(graphics: GuiGraphics) {
+            override fun extract(graphics: GuiGraphicsExtractor) {
                 graphics.drawRoundedRectangle(0, 0, getWidth(), getHeight(), color, border, radius, 2)
-                display.render(graphics)
+                display.extract(graphics)
             }
         }
     }
@@ -40,10 +39,13 @@ object ExtraDisplays {
         override fun getWidth(): Int = (16 * scale).toInt()
         override fun getHeight(): Int = (16 * scale).toInt()
 
-        override fun render(graphics: GuiGraphics) {
+        override fun extract(graphics: GuiGraphicsExtractor) {
             val bounds = ScreenRectangle(0, 0, (16 * scale).toInt(), (16 * scale).toInt())
-            //? > 1.21.5 {
-            graphics.guiRenderState.submitPicturesInPictureState(
+            //? if > 1.21.11 {
+            graphics.guiRenderState.addPicturesInPictureState(
+            //? } else {
+            /*graphics.guiRenderState.submitPicturesInPictureState(*/
+            //? }
                 SpinningItemRenderState(
                     item, xSpeed, ySpeed, zSpeed,
                     scale,
@@ -52,7 +54,6 @@ object ExtraDisplays {
                     graphics.pose(),
                 ),
             )
-            //?}
         }
 
     }
