@@ -155,11 +155,11 @@ object CustomDamage {
         FIRE(0xfab387, "🔥"),
         VENOMOUS(0xa6e3a1, "☣"),
         PET(0xf5c2e7, "☃"),
-        TARANTULA(0xb4befe, "🕸️"),
+        TARANTULA(0xb4befe, "🕸"),
         VOODOO(0xf38ba8, "🐡"),
         TRUE_DAMAGE(0xcdd6f4, "❂"),
         SUFFOCATION(0x89b4fa, "🫧"),
-        ALIGNMENT(0x94e2d5, "🛡️"), // TODO: Dealt when sharing damage, probably when tanking 3 lines at the suffix + green
+        ALIGNMENT(0x94e2d5, "🛡"), // TODO: Dealt when sharing damage, probably when tanking 3 lines at the suffix + green
         BLAST(0xf38ba8, "💥"), // TODO: Dealt by some mobs idk which, gray color and sun-like symbol suffix
         ANTI_CHEESE(0xf9e2af, "🧀"), // TODO: Dealt by rev horror and sven when on 1 spot too long I think? green + upwards pointing arrow
         VOIDGLOOM(0x11111b, "🌑"), // TODO: Voidgloom T2+, ourple :3
