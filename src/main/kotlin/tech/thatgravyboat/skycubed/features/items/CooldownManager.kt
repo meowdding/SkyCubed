@@ -13,12 +13,15 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.getLore
 import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
 import kotlin.math.roundToLong
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skyblockapi.api.remote.RepoPetsAPI
 
 @Module
 object CooldownManager {
 
     private val cooldowns: MutableMap<String, Pair<Long, Long>> = mutableMapOf()
     val breakingPowerRegex = Regex("(?i)Breaking Power \\d+")
+    val crowPet = RepoPetsAPI.getPetInfo("Crow")
+    val balPet = RepoPetsAPI.getPetInfo("Bal")
 
     @Subscription
     fun onItemRightClick(event: RightClickEvent) {
@@ -38,19 +41,21 @@ object CooldownManager {
 
     private fun getPetCDRMultiplier(): Double {
         val pet = PetsAPI.pet
-        val level = PetsAPI.level
         val rarity = PetsAPI.rarity
 
         return when (pet) {
-            "Bal" -> if (rarity == SkyBlockRarity.LEGENDARY) 1.0 - level * (0.1 / 100.0) else 1.0
-            "Crow" -> {
-                val aboveRare = rarity == SkyBlockRarity.EPIC || rarity == SkyBlockRarity.LEGENDARY
-                val baseMulti = if (aboveRare) 0.12 else 0.07
-                1.0 - ((level * baseMulti) + 3.0) / 100.0
-            }
-
+            balPet?.name -> if (rarity == SkyBlockRarity.LEGENDARY) calculatePetCDRMultiplier(balPet, rarity, "2") else 1.0
+            crowPet?.name -> calculatePetCDRMultiplier(crowPet, rarity, "0")
             else -> 1.0
         }
+    }
+
+    private fun calculatePetCDRMultiplier(petData: tech.thatgravyboat.repolib.api.PetsAPI.Data?, rarity: SkyBlockRarity?, perkMinMaxVariable: String): Double {
+        val level = PetsAPI.level
+        val tier = petData?.tiers[rarity?.name] ?: return 1.0
+        val minMax = tier.variables[perkMinMaxVariable] ?: return 1.0
+        val reduction = minMax.first + (minMax.second - minMax.first) * ((level - 1.0) / 99.0)
+        return (1.0 - reduction / 100.0)
     }
 
     private fun hasBreakingPower(stack: ItemStack): Boolean {
