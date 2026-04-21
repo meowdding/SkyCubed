@@ -14,14 +14,15 @@ import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
 import kotlin.math.roundToLong
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.api.remote.RepoPetsAPI
+import tech.thatgravyboat.repolib.api.PetsAPI.Data
 
 @Module
 object CooldownManager {
 
     private val cooldowns: MutableMap<String, Pair<Long, Long>> = mutableMapOf()
     val breakingPowerRegex = Regex("(?i)Breaking Power \\d+")
-    val crowPet = RepoPetsAPI.getPetInfo("Crow")
-    val balPet = RepoPetsAPI.getPetInfo("Bal")
+    val crowPet: Data? by lazy { RepoPetsAPI.getPetInfo("Crow") }
+    val balPet: Data? by lazy { RepoPetsAPI.getPetInfo("Bal") }
 
     @Subscription
     fun onItemRightClick(event: RightClickEvent) {
@@ -50,7 +51,7 @@ object CooldownManager {
         }
     }
 
-    private fun calculatePetCDRMultiplier(petData: tech.thatgravyboat.repolib.api.PetsAPI.Data?, rarity: SkyBlockRarity?, perkMinMaxVariable: String): Double {
+    private fun calculatePetCDRMultiplier(petData: Data?, rarity: SkyBlockRarity?, perkMinMaxVariable: String): Double {
         val level = PetsAPI.level
         val tier = petData?.tiers[rarity?.name] ?: return 1.0
         val minMax = tier.variables[perkMinMaxVariable] ?: return 1.0
