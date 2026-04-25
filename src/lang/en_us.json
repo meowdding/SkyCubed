@@ -84,6 +84,10 @@
                             "Select which four info positions should be enabled and be shown on the screen.",
                             "Elements in the disabled positions will not be shown on the screen."
                         ]
+                    },
+                    "formatting": {
+                        "@value": "Number Formatting",
+                        "desc": "Select if numbers should be shortened or stay normal."
                     }
                 },
                 "rpg": {
