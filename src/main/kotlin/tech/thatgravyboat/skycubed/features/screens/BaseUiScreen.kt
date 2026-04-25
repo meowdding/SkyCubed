@@ -7,12 +7,14 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.layouts.FrameLayout
+import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.platform.applyBackgroundBlur
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
+import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 
 private const val ASPECT_RATIO = 16.0 / 9.0
 
-abstract class BaseUiScreen() : BaseCursorScreen(CommonText.EMPTY) {
+abstract class BaseUiScreen(title: String) : BaseCursorScreen(title.asComponent()) {
 
     val uiWidth get() = (uiHeight * ASPECT_RATIO).toInt()
     val uiHeight get() = (this.height * 0.7).toInt()
