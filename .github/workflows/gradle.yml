@@ -29,14 +29,6 @@ jobs:
                 uses: actions/upload-artifact@v7.0.0
                 with:
                     archive: false
-                    path: build/libs/*-1.21.5.jar
-            -   uses: actions/upload-artifact@v7.0.0
-                with:
-                    archive: false
-                    path: build/libs/*-1.21.8.jar
-            -   uses: actions/upload-artifact@v7.0.0
-                with:
-                    archive: false
                     path: build/libs/*-1.21.10.jar
             -   uses: actions/upload-artifact@v7.0.0
                 with:
