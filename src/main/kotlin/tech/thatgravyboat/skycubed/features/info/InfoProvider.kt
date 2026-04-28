@@ -3,11 +3,14 @@ package tech.thatgravyboat.skycubed.features.info
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
+import me.owdding.lib.extensions.shorten
 import net.minecraft.resources.Identifier
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
+import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skycubed.SkyCubed
+import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlayConfig
 import tech.thatgravyboat.skycubed.features.info.BaseInfoDisplay.LEFT_LINE
 import tech.thatgravyboat.skycubed.features.info.BaseInfoDisplay.RIGHT_LINE
 
@@ -26,6 +29,11 @@ interface InfoProvider {
     fun getIconDisplay(string: String) = getIconDisplay(SkyCubed.id(string))
     fun getIconDisplay(location: Identifier) = Displays.sprite(location, 8, 8).withPadding(left = 1, right = 1)
 
+    fun Number.format() = when (InfoHudOverlayConfig.formatting) {
+        InfoFormatting.LONG -> toDouble().toFormattedString()
+        InfoFormatting.SHORT -> shorten()
+    }
+
     companion object {
         operator fun invoke(
             areas: List<SkyBlockArea> = emptyList(),
@@ -39,6 +47,14 @@ interface InfoProvider {
             predicate: (() -> Boolean)? = null,
             displayProvider: InfoProvider.() -> Display
         ): InfoProvider = DefaultInfoProvider(areas, islands, predicate, displayProvider)
+
+        enum class InfoFormatting {
+            LONG,
+            SHORT;
+
+            private val formattedName = toFormattedName()
+            override fun toString(): String = formattedName
+        }
     }
 }
 

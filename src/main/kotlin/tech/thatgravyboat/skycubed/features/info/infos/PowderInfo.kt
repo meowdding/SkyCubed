@@ -6,7 +6,6 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockArea
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockAreas
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.profile.hotm.PowderAPI
-import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -42,7 +41,7 @@ object PowderInfo : InfoProvider {
             else -> return@horizontal
         }
         display(getIconDisplay(icon))
-        textDisplay(powder.first.toFormattedString(), shadow = true) { color = powder.second }
+        textDisplay(powder.first.format(), shadow = true) { color = powder.second }
     }
 
 }

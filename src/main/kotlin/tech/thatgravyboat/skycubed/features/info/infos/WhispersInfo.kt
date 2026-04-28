@@ -3,7 +3,6 @@ package tech.thatgravyboat.skycubed.features.info.infos
 import me.owdding.lib.builder.DisplayFactory
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.profile.hotf.WhispersAPI
-import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -20,6 +19,6 @@ object WhispersInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/forest")))
-        textDisplay(WhispersAPI.forest.toFormattedString(), shadow = true) { color = TextColor.DARK_AQUA }
+        textDisplay(WhispersAPI.forest.format(), shadow = true) { color = TextColor.DARK_AQUA }
     }
 }

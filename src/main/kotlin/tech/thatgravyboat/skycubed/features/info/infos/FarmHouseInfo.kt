@@ -27,6 +27,8 @@ object FarmHouseInfo : InfoProvider {
         else -> false
     }
 
+    override val priority: Int = 1
+
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/gold")))
         textDisplay(FarmhouseAPI.goldMedals.toFormattedString(), shadow = true) { color = TextColor.GOLD }

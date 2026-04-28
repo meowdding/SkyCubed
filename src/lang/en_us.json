@@ -84,6 +84,10 @@
                             "Select which four info positions should be enabled and be shown on the screen.",
                             "Elements in the disabled positions will not be shown on the screen."
                         ]
+                    },
+                    "formatting": {
+                        "@value": "Number Formatting",
+                        "desc": "Select if numbers should be shortened or stay normal."
                     }
                 },
                 "rpg": {
@@ -127,6 +131,28 @@
                     "background": {
                         "@value": "Background",
                         "desc": "Choose between different overlay backgrounds."
+                    }
+                },
+                "attributes": {
+                    "@value": "Attribute Overlay",
+                    "desc": "Settings for the attribute overlay.",
+                    "enabled": {
+                        "@value": "Enable Attribute Overlay",
+                        "desc": "Enables the attribute overlay, showing your current attributes."
+                    },
+                    "background": {
+                        "@value": "Background",
+                        "desc": "Choose between different overlay backgrounds."
+                    },
+                    "elements": {
+                        "@value": "Displayed Elements",
+                        "desc": "Customize the elements used to display the overlay.",
+                        "stack": "Item Stack",
+                        "name": "Attribute Name",
+                        "internal_name": "Attribute ID",
+                        "owned": "Owned Value",
+                        "syphoned": "Syphoned Value",
+                        "level": "Attribute Level"
                     }
                 },
                 "power_orb": {
