@@ -1,12 +1,12 @@
 [versions]
-minecraft = "26.1-rc-1"
+minecraft = "26.1"
 
 sbapi-mc-version = "26.1"
 fabric-api = "0.144.0+26.1"
 
 resourceful-lib = "4.0.0-beta.2"
 resourceful-config = "4.0.0-beta.2"
-olympus = "1.8.0-beta.3"
+olympus = "1.8.0-beta.1"
 placeholders = "3.0.0-beta.2+26.1"
 
 resourceful-config-kotlin = "4.0.0-beta.1"

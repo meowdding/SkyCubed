@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.teamresourceful.resourcefullib.common.utils.TriState
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.compound.LayoutWidget
 import me.owdding.lib.builder.LayoutFactory
@@ -82,7 +81,7 @@ abstract class SkyCubedScreen(title: Component = CommonComponents.EMPTY) : Scree
         allwaysShowScrollBar: Boolean = false,
     ): LayoutWidget<FrameLayout> {
         val scrollable = Widgets.frame { frame ->
-            frame.withScrollableY(TriState.of(allwaysShowScrollBar.takeIf { it }))
+            frame.withScrollableY(Utils.tristate(allwaysShowScrollBar.takeIf { it }))
                 .withSize(width, this.height.coerceAtMost(height))
                 .withContents { contents ->
                     contents.setMinWidth(width - 10)

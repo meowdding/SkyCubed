@@ -1,6 +1,9 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
-import com.teamresourceful.resourcefullib.common.utils.TriState
+//? if >= 26.1 {
+import net.minecraft.util.TriState
+//? } else
+//import com.teamresourceful.resourcefullib.common.utils.TriState
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
@@ -56,9 +59,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
                 Layouts.row()
                     .withPosition(x + PADDING, y + PADDING)
                     .withChild(
-                        Displays.text(
-                            Component.translatable("skycubed.notifications"),
-                        ).asWidget().apply {
+                        Displays.text(Component.translatable("skycubed.notifications")).asWidget().apply {
                             withSize(WIDTH - 24, 24)
                         },
                     )

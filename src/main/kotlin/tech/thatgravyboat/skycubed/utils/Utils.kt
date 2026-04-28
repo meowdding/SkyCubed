@@ -8,6 +8,10 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.multiplayer.PlayerInfo
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.resources.SkinManager
+//? if >= 26.1 {
+import net.minecraft.util.TriState
+//? } else
+//import com.teamresourceful.resourcefullib.common.utils.TriState
 import net.minecraft.util.Util
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
@@ -37,6 +41,11 @@ object Utils {
         /*com.teamresourceful.resourcefullib.client.utils.CursorUtils.setDefault()*/
     }
 
+    fun tristate(boolean: Boolean?): TriState = when (boolean) {
+        true -> TriState.TRUE
+        false -> TriState.FALSE
+        null -> /*? >= 26.1 {*/ TriState.DEFAULT /*?} else */// TriState.UNDEFINED
+    }
 }
 
 fun SkinManager.getSkin(texture: String): CompletableFuture<PlayerSkin> {
