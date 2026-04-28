@@ -45,7 +45,7 @@ interface SkyCubedOverlay : Overlay {
     }
 
     fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) = extractWithBackground(graphics, mouseX, mouseY)
-    fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) = render(graphics, mouseX, mouseY)
+    fun extractWithBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) = extract(graphics, mouseX, mouseY)
 }
 
 interface BackgroundLessSkyCubedOverlay : SkyCubedOverlay {

@@ -217,13 +217,13 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
     override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         val screen = McScreen.self
         if (screen is AbstractContainerScreen<*>) {
-            inventoryOverlayDisplay.render(
+            inventoryOverlayDisplay.extract(
                 graphics,
                 5,
                 graphics.guiHeight() / 2 - inventoryOverlayDisplay.getHeight() / 2,
             )
         } else if (screen is ChatScreen || screen == null) {
-            hudOverlayDisplay.render(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
+            hudOverlayDisplay.extract(graphics, graphics.guiWidth() / 2, graphics.guiHeight() - 120, 0.5f, 1f)
         }
     }
 

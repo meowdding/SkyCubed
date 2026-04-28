@@ -15,20 +15,12 @@ public abstract class AbstractContainerScreenMixin implements AbstractContainerS
     public void skycubed$renderSlot(net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, Slot slot, int mouseX, int mouseY) {
         this.extractSlot(guiGraphics, slot, mouseX, mouseY);
     }
-    //?} else if > 1.21.10 {
+    //?} else {
     /*
     @Shadow protected abstract void renderSlot(net.minecraft.client.gui.GuiGraphics par1, Slot par2, int par3, int par4);
     @Override
     public void skycubed$renderSlot(net.minecraft.client.gui.GuiGraphics guiGraphics, Slot slot, int mouseX, int mouseY) {
         this.renderSlot(guiGraphics, slot, mouseX, mouseY);
     }
-    *///?} else {
-    
-    /*@Shadow public abstract void renderSlot(net.minecraft.client.gui.GuiGraphics guiGraphics, Slot slot);
-    @Override
-    public void skycubed$renderSlot(net.minecraft.client.gui.GuiGraphics guiGraphics, Slot slot, int mouseX, int mouseY) {
-        this.renderSlot(guiGraphics, slot);
-    }
-    
     *///?}
 }

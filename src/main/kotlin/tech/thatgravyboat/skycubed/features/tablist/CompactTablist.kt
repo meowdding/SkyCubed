@@ -321,7 +321,7 @@ object CompactTablist {
         if (!isEnabled()) return false
         val display = display ?: return false
 
-        Displays.center(width = graphics.guiWidth(), display = display).render(graphics, 0, 3)
+        Displays.center(width = graphics.guiWidth(), display = display).extract(graphics, 0, 3)
 
         return true
     }

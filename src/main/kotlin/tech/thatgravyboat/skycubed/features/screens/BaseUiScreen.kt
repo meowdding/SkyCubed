@@ -4,6 +4,7 @@ import earth.terrarium.olympus.client.ui.UIConstants
 import me.owdding.lib.displays.DisplayWidget
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
+import me.owdding.lib.platform.screens.MeowddingScreen
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.screens.Screen
@@ -14,7 +15,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 
 private const val ASPECT_RATIO = 16.0 / 9.0
 
-abstract class BaseUiScreen(title: String) : Screen(title.asComponent()) {
+abstract class BaseUiScreen(title: String) : MeowddingScreen(title.asComponent()) {
 
     val uiWidth get() = (uiHeight * ASPECT_RATIO).toInt()
     val uiHeight get() = (this.height * 0.7).toInt()

@@ -139,7 +139,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
             )
 
             if (WardrobeConfig.textured) {
-                entityDisplay.render(graphics, context.x, context.y)
+                entityDisplay.extract(graphics, context.x, context.y)
             } else {
                 ExtraDisplays.background(
                     when {
@@ -153,10 +153,10 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
                         else -> 0x0u
                     },
                     entityDisplay,
-                ).render(graphics, context.x, context.y)
+                ).extract(graphics, context.x, context.y)
             }
             val yOffset = if (WardrobeConfig.textured) 0 else 5
-            getTooltips(this, displayWidth, displayHeight).render(graphics, context.x, context.y + yOffset)
+            getTooltips(this, displayWidth, displayHeight).extract(graphics, context.x, context.y + yOffset)
         }
         it.withTexture(
             when {
