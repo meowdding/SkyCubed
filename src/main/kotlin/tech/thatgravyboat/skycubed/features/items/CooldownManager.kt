@@ -2,25 +2,66 @@ package tech.thatgravyboat.skycubed.features.items
 
 import me.owdding.ktmodules.Module
 import net.minecraft.world.item.ItemStack
+import tech.thatgravyboat.skyblockapi.api.data.SkyBlockRarity
 import tech.thatgravyboat.skyblockapi.api.datatype.DataTypes
 import tech.thatgravyboat.skyblockapi.api.datatype.getData
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.level.RightClickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skycubed.config.items.ItemsConfig
+import tech.thatgravyboat.skyblockapi.utils.extentions.getLore
+import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
+import kotlin.math.roundToLong
+import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
+import tech.thatgravyboat.skyblockapi.api.remote.RepoPetsAPI
+import tech.thatgravyboat.repolib.api.PetsAPI.Data
 
 @Module
 object CooldownManager {
 
     private val cooldowns: MutableMap<String, Pair<Long, Long>> = mutableMapOf()
+    val breakingPowerRegex = Regex("(?i)Breaking Power \\d+")
+    val crowPet: Data? by lazy { RepoPetsAPI.getPetInfo("Crow") }
+    val balPet: Data? by lazy { RepoPetsAPI.getPetInfo("Bal") }
 
     @Subscription
     fun onItemRightClick(event: RightClickEvent) {
         val ability = event.stack.getData(DataTypes.COOLDOWN_ABILITY)
         if (ability != null) {
-            addCooldown(ability.first, ability.second.inWholeMilliseconds)
+            if (hasBreakingPower(event.stack)) {
+                val cooldownReduction = getPetCDRMultiplier() // TODO: add support for Mineshaft Mayhem and SkyMall
+                val calculatedSeconds = (ability.second.inWholeMilliseconds * cooldownReduction).roundToLong()
+                addCooldown(ability.first, calculatedSeconds)
+            } else {
+                addCooldown(ability.first, ability.second.inWholeMilliseconds)
+            }
         } else if (event.stack.getData(DataTypes.ID) == "GRAPPLING_HOOK" && !isWearingBatPerson()) {
             addCooldown("Grappling Hook", 2000)
+        }
+    }
+
+    private fun getPetCDRMultiplier(): Double {
+        val pet = PetsAPI.pet
+        val rarity = PetsAPI.rarity
+
+        return when (pet) {
+            balPet?.name -> if (rarity == SkyBlockRarity.LEGENDARY) calculatePetCDRMultiplier(balPet, rarity, "2") else 1.0
+            crowPet?.name -> calculatePetCDRMultiplier(crowPet, rarity, "0")
+            else -> 1.0
+        }
+    }
+
+    private fun calculatePetCDRMultiplier(petData: Data?, rarity: SkyBlockRarity?, perkMinMaxVariable: String): Double {
+        val level = PetsAPI.level
+        val tier = petData?.tiers[rarity?.name] ?: return 1.0
+        val minMax = tier.variables[perkMinMaxVariable] ?: return 1.0
+        val reduction = minMax.first + (minMax.second - minMax.first) * ((level - 1.0) / 99.0)
+        return (1.0 - reduction / 100.0)
+    }
+
+    private fun hasBreakingPower(stack: ItemStack): Boolean {
+        return stack.getLore().any { line ->
+            line.stripped.contains(breakingPowerRegex)
         }
     }
 
@@ -37,9 +78,9 @@ object CooldownManager {
 
     private fun isWearingBatPerson(): Boolean {
         return McPlayer.boots.getData(DataTypes.ID) == "BAT_PERSON_BOOTS" &&
-                McPlayer.leggings.getData(DataTypes.ID) == "BAT_PERSON_LEGGINGS" &&
-                McPlayer.chestplate.getData(DataTypes.ID) == "BAT_PERSON_CHESTPLATE" &&
-                McPlayer.helmet.getData(DataTypes.ID) == "BAT_PERSON_HELMET"
+            McPlayer.leggings.getData(DataTypes.ID) == "BAT_PERSON_LEGGINGS" &&
+            McPlayer.chestplate.getData(DataTypes.ID) == "BAT_PERSON_CHESTPLATE" &&
+            McPlayer.helmet.getData(DataTypes.ID) == "BAT_PERSON_HELMET"
     }
 
     private fun addCooldown(ability: String, duration: Long) {
