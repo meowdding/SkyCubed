@@ -62,7 +62,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
             }.toMutableMap()
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
-                if (PowerOrbOverlayConfig.spinningItem && !McVersionGroup.MC_1_21_5.isActive && orb.deployable.canSpin) {
+                if (PowerOrbOverlayConfig.spinningItem && orb.deployable.canSpin) {
                     display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
                 } else item(orb.deployable.item, 20, 20)
 
