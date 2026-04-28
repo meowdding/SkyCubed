@@ -1,3 +1,4 @@
+//~ gui_graphics
 package tech.thatgravyboat.skycubed.mixins;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -16,12 +17,14 @@ import tech.thatgravyboat.skycubed.features.overlays.vanilla.VanillaBossbarOverl
 @Mixin(BossHealthOverlay.class)
 public class BossHealthOverlayMixin {
     @Inject(
-            method = "extractRenderState",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;extractBar(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IILnet/minecraft/world/BossEvent;)V"
-            ),
-            cancellable = true
+        //~ if >= 26.1 'render' -> 'extractRenderState'
+        method = "extractRenderState",
+        at = @At(
+            value = "INVOKE",
+            //~ if >= 26.1 'drawBar' -> 'extractBar'
+            target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;extractBar(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IILnet/minecraft/world/BossEvent;)V"
+        ),
+        cancellable = true
     )
     private void onRenderFull(GuiGraphicsExtractor guiGraphics, CallbackInfo ci, @Local LerpingBossEvent event) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderFull(event)) {
@@ -33,11 +36,13 @@ public class BossHealthOverlayMixin {
     }
 
     @WrapWithCondition(
-            method = "extractRenderState",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;extractBar(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IILnet/minecraft/world/BossEvent;)V"
-            )
+        //~ if >= 26.1 'render' -> 'extractRenderState'
+        method = "extractRenderState",
+        at = @At(
+            value = "INVOKE",
+            //~ if >= 26.1 'drawBar' -> 'extractBar'
+            target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;extractBar(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IILnet/minecraft/world/BossEvent;)V"
+        )
     )
     private boolean onRenderBar(BossHealthOverlay instance, GuiGraphicsExtractor guiGraphics, int x, int y, BossEvent bossEvent) {
         if (VanillaBossbarOverlay.INSTANCE.onRenderTitle(bossEvent)) {

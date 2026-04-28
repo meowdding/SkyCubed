@@ -25,6 +25,7 @@ object Utils {
     }
 
     fun Screen.fullyRender(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        //~ if >= 26.1 'render' -> 'extractRenderState'
         this.extractRenderStateWithTooltipAndSubtitles(graphics, mouseX, mouseY, partialTicks)
     }
 

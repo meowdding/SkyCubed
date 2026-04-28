@@ -1,3 +1,4 @@
+//~ gui_graphics
 package tech.thatgravyboat.skycubed.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -13,11 +14,12 @@ import tech.thatgravyboat.skycubed.features.items.CooldownManager;
 public class GuiGraphicsMixin {
 
     @WrapOperation(
-            method = "itemCooldown",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemCooldowns;getCooldownPercent(Lnet/minecraft/world/item/ItemStack;F)F"
-            )
+        //~ if >= 26.1 'renderItemCooldown' -> 'itemCooldown'
+        method = "itemCooldown",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/item/ItemCooldowns;getCooldownPercent(Lnet/minecraft/world/item/ItemStack;F)F"
+        )
     )
     public float onCooldown(ItemCooldowns instance, ItemStack item, float f, Operation<Float> original) {
         Float cooldown = CooldownManager.INSTANCE.getCooldown(item);

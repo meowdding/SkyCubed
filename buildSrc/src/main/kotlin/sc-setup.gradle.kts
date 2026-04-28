@@ -193,6 +193,8 @@ dependencies {
     "compileOnly"(versionedCatalog["meowdding.ktcodecs"])
     "ksp"(versionedCatalog["meowdding.ktmodules"])
     "ksp"(versionedCatalog["meowdding.ktcodecs"])
+
+    if (!isUnobfuscated()) maybeModRuntimeOnly(versionedCatalog["hypixel.modapi.fabric"])
 }
 
 fun DependencyHandlerScope.includeImplementation(dep: Any) {

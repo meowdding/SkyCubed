@@ -1,3 +1,4 @@
+//~ gui_graphics
 package tech.thatgravyboat.skycubed.mixins;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;

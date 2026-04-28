@@ -10,9 +10,9 @@ kotlin-symbol-processor = "2.3.5"
 
 resourceful-config-kotlin = "3.5.15"
 
-skyblockapi = "4.0.13+26.1-rc2+build.2"
+skyblockapi = "4.1.3"
 
-meowdding-lib = "4.0.10-beta.2"
+meowdding-lib = "4.1.5"
 meowdding-auto-mixins = "1.0.5"
 meowdding-remote-repo = "1.0.4"
 meowdding-resources = "1.0.17"

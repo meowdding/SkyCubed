@@ -25,6 +25,7 @@ data class NotificationToast(
 
     override fun getToken(): Any = this.id ?: Toast.NO_TOKEN
 
+    //~ if >= 26.1 'render' -> 'extractRenderState'
     override fun extractRenderState(graphics: GuiGraphicsExtractor, font: Font, fullyVisibleForMs: Long) {
         extract(graphics)
     }

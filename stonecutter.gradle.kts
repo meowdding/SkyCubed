@@ -58,6 +58,14 @@ stonecutter parameters {
 
     replacements.regex {
         direction = eval(current.version, "< 26.1")
+        id = "gui_graphics"
+        replace(
+            "GuiGraphicsExtractor", "GuiGraphics",
+            "GuiGraphics", "GuiGraphicsExtractor"
+        )
+    }
+    replacements.regex {
+        direction = eval(current.version, "< 26.1")
         replace(
             "import net.minecraft.client.gui.GuiGraphicsExtractor(?!;)", "import net.minecraft.client.gui.GuiGraphics as GuiGraphicsExtractor",
             "import net.minecraft.client.gui.GuiGraphics as GuiGraphicsExtractor", "import net.minecraft.client.gui.GuiGraphicsExtractor"

@@ -105,9 +105,11 @@ class MapScreen : MeowddingScreen(CommonText.EMPTY) {
         ).build(this::addRenderableWidget)
     }
 
+    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         extractTransparentBackground(graphics)
     }
+    //~ }
 
     override fun keyPressed(keyEvent: KeyEvent): Boolean {
         if ((this.findFocused() as? TextBox)?.isFocused != true) {

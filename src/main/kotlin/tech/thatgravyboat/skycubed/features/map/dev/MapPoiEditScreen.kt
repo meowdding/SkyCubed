@@ -183,10 +183,12 @@ class MapPoiEditScreen(poi: Poi, val list: MutableList<Poi>, val parent: Screen?
 
     }
 
+    //~ if >= 26.1 'render' -> 'extractRenderState' {
     override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, f: Float) {
         parent?.extractRenderState(graphics, -1, -1, f)
         super.extractRenderState(graphics, mouseX, mouseY, f)
     }
+    //~ }
 
 //     override fun renderBlurredBackground() {}
 

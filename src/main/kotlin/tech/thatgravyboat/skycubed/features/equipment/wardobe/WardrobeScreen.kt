@@ -210,6 +210,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
         }
     }.withPadding(2)
 
+    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(
         graphics: GuiGraphicsExtractor,
         mouseX: Int,
@@ -219,6 +220,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
         graphics.applyBackgroundBlur()
         this.extractTransparentBackground(graphics)
     }
+    //~ }
 
     private fun LayoutBuilder.createButton(
         sprite: WidgetSprites,

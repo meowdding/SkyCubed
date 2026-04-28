@@ -28,6 +28,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
 
     private val category: DropdownState<String?> = DropdownState.empty()
 
+    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
         super.extractBackground(graphics, mouseX, mouseY, partialTicks)
         this.extractTransparentBackground(graphics)
@@ -39,6 +40,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
             this.height
         )
     }
+    //~ }
 
     override fun init() {
         val notifications = NotificationToast.notifications()
