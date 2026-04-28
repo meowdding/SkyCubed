@@ -23,7 +23,7 @@
     },
     "depends": {
         "fabricloader": ">=0.16.10",
-        "fabric": "*",
+        "fabric-api": "*",
         "fabric-language-kotlin": ">=${fabric_lang_kotlin}",
         "resourcefullib": ">=${rlib}",
         "olympus": ">=${olympus}",
