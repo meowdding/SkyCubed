@@ -35,7 +35,8 @@ object WardrobeFeature {
 
     private var lastWidth = -1
     private var lastHeight = -1
-    private var lastPage = -1
+    private var lastTitle = ""
+    private var currentPage = -1
 
     init {
         for (slot in 1..9) {
@@ -67,9 +68,16 @@ object WardrobeFeature {
     fun onContainerRender(event: RenderScreenBackgroundEvent) {
         if (!event.screen.isEnabled() || isEditing) return
 
-        var currentPage = -1
-        regex.match(event.screen.title.stripped, "currentPage") { (page) ->
-            currentPage = page.toIntOrNull() ?: 0
+        val title = event.screen.title.stripped
+        var needsInit = false
+
+        if (title != lastTitle) {
+            lastTitle = title
+            currentPage = -1
+            needsInit = true // Maybe not needed?
+            regex.match(title, "currentPage") { (page) ->
+                currentPage = page.toIntOrNull() ?: 0
+            }
         }
 
         if (currentPage == -1) return
@@ -79,15 +87,13 @@ object WardrobeFeature {
         WardrobeScreen.screen = event.screen
         WardrobeScreen.currentPage = currentPage
 
-        val needsInit =
-            event.screen.width != lastWidth ||
-                event.screen.height != lastHeight ||
-                currentPage != lastPage
+        if (!needsInit) {
+            needsInit = event.screen.width != lastWidth || event.screen.height != lastHeight
+        }
 
         if (needsInit) {
             lastWidth = event.screen.width
             lastHeight = event.screen.height
-            lastPage = currentPage
 
             //? if > 1.21.10 {
             WardrobeScreen.init(event.screen.width, event.screen.height)
