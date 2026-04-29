@@ -33,6 +33,10 @@ object WardrobeFeature {
 
     val wardrobeKeyBinds: MutableMap<MeowddingKeybind, Int> = mutableMapOf()
 
+    private var lastWidth = -1
+    private var lastHeight = -1
+    private var lastPage = -1
+
     init {
         for (slot in 1..9) {
             wardrobeKeyBinds[
@@ -75,11 +79,23 @@ object WardrobeFeature {
         WardrobeScreen.screen = event.screen
         WardrobeScreen.currentPage = currentPage
 
+        val needsInit =
+            event.screen.width != lastWidth ||
+                event.screen.height != lastHeight ||
+                currentPage != lastPage
+
+        if (needsInit) {
+            lastWidth = event.screen.width
+            lastHeight = event.screen.height
+            lastPage = currentPage
+
+            //? if > 1.21.10 {
+            WardrobeScreen.init(event.screen.width, event.screen.height)
+            //?} else
+            /*WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)*/
+        }
+
         val (mouseX, mouseY) = McClient.mouse
-        //? if > 1.21.10 {
-        WardrobeScreen.init(event.screen.width, event.screen.height)
-        //?} else
-        /*WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)*/
         WardrobeScreen.fullyRender(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
     }
 
