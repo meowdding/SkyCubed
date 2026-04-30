@@ -162,33 +162,34 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
             entityDisplay.mouseX = context.mouseX.toFloat() - context.x
             entityDisplay.mouseY = context.mouseY.toFloat() - context.y
 
-            val hovered = context.mouseX >= context.x && context.mouseX < context.x + context.width &&
-                context.mouseY >= context.y && context.mouseY < context.y + context.height
-            val isSelected = id == WardrobeAPI.currentSlot
-
-            if (cachedBackground == null || hovered != lastHovered || isSelected != lastSelected) {
-                cachedBackground = ExtraDisplays.background(
-                    if (hovered)
-                        BACKGROUND_COLOR_HOVERED
-                    else
-                        BACKGROUND_COLOR,
-                    BACKGROUND_RADIUS,
-                    when {
-                        hovered -> HOVER_COLOR
-                        isSelected -> SELECTED_COLOR
-                        else -> 0x0u
-                    },
-                    entityDisplay,
-                )
-                lastHovered = hovered
-                lastSelected = isSelected
-            }
-
             if (WardrobeConfig.textured) {
                 entityDisplay.render(graphics, context.x, context.y)
             } else {
+                val hovered = context.mouseX >= context.x && context.mouseX < context.x + context.width &&
+                    context.mouseY >= context.y && context.mouseY < context.y + context.height
+                val isSelected = id == WardrobeAPI.currentSlot
+
+                if (cachedBackground == null || hovered != lastHovered || isSelected != lastSelected) {
+                    cachedBackground = ExtraDisplays.background(
+                        if (hovered)
+                            BACKGROUND_COLOR_HOVERED
+                        else
+                            BACKGROUND_COLOR,
+                        BACKGROUND_RADIUS,
+                        when {
+                            hovered -> HOVER_COLOR
+                            isSelected -> SELECTED_COLOR
+                            else -> 0x0u
+                        },
+                        entityDisplay,
+                    )
+                    lastHovered = hovered
+                    lastSelected = isSelected
+                }
+
                 cachedBackground.render(graphics, context.x, context.y)
             }
+
             val yOffset = if (WardrobeConfig.textured) 0 else 5
             tooltipDisplay.render(graphics, context.x, context.y + yOffset)
         }
