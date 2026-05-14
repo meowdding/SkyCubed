@@ -1,7 +1,6 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
-import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
 import earth.terrarium.olympus.client.constants.MinecraftColors
@@ -13,7 +12,7 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
 import me.owdding.lib.displays.withPadding
 import me.owdding.lib.displays.withTooltip
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.AbstractWidget
 import net.minecraft.client.gui.components.WidgetSprites
 import net.minecraft.client.gui.layouts.FrameLayout
@@ -56,7 +55,7 @@ private val CHESTPLATE_SMALL = SkyCubed.id("equipment/chestplate_small")
 private val LEGGINGS_SMALL = SkyCubed.id("equipment/leggings_small")
 private val BOOTS_SMALL = SkyCubed.id("equipment/boots_small")
 
-object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
+object WardrobeScreen : Screen(CommonText.EMPTY) {
 
     private val TITLE by lazy {
         ExtraDisplays.background(
@@ -140,7 +139,7 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
             )
 
             if (WardrobeConfig.textured) {
-                entityDisplay.render(graphics, context.x, context.y)
+                entityDisplay.extract(graphics, context.x, context.y)
             } else {
                 ExtraDisplays.background(
                     when {
@@ -154,10 +153,10 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
                         else -> 0x0u
                     },
                     entityDisplay,
-                ).render(graphics, context.x, context.y)
+                ).extract(graphics, context.x, context.y)
             }
             val yOffset = if (WardrobeConfig.textured) 0 else 5
-            getTooltips(this, displayWidth, displayHeight).render(graphics, context.x, context.y + yOffset)
+            getTooltips(this, displayWidth, displayHeight).extract(graphics, context.x, context.y + yOffset)
         }
         it.withTexture(
             when {
@@ -211,15 +210,17 @@ object WardrobeScreen : BaseCursorScreen(CommonText.EMPTY) {
         }
     }.withPadding(2)
 
-    override fun renderBackground(
-        graphics: GuiGraphics,
+    //~ if >= 26.1 'render' -> 'extract' {
+    override fun extractBackground(
+        graphics: GuiGraphicsExtractor,
         mouseX: Int,
         mouseY: Int,
         partialTick: Float,
     ) {
         graphics.applyBackgroundBlur()
-        this.renderTransparentBackground(graphics)
+        this.extractTransparentBackground(graphics)
     }
+    //~ }
 
     private fun LayoutBuilder.createButton(
         sprite: WidgetSprites,

@@ -7,7 +7,7 @@ import com.mojang.datafixers.util.Either
 import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.minecraft.commands.SharedSuggestionProvider
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -43,7 +43,7 @@ data class ArgumentHypixelCommand(
 
     override fun toCommand(): List<ArgumentBuilder<FabricClientCommandSource, *>> {
         val argument = if (greedy) StringArgumentType.greedyString() else StringArgumentType.string()
-        return listOf(ClientCommandManager.argument(name, argument).apply {
+        return listOf(ClientCommands.argument(name, argument).apply {
             suggests { _, builder ->
                 SharedSuggestionProvider.suggest(suggestions(), builder)
             }
@@ -80,7 +80,7 @@ data class LiteralHypixelCommand(
 
     override fun toCommand(): List<LiteralArgumentBuilder<FabricClientCommandSource>> {
         return values.map { value ->
-            ClientCommandManager.literal(value).apply {
+            ClientCommands.literal(value).apply {
                 executes {
                     McClient.sendCommand(it.input)
                     1

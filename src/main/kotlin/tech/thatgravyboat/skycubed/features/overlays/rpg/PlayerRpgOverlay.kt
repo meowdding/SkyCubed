@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.features.overlays.rpg
 
 import earth.terrarium.olympus.client.ui.context.ContextMenu
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
@@ -49,7 +49,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     override val position: ConfigPosition = OverlayPositions.rpg
     override val actualBounds: Pair<Int, Int> get() = RpgOverlayPositionHandler.positions.base.let { it.width to it.height }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         val (baseWidth, baseHeight) = RpgOverlayPositionHandler.positions.base.let { it.width to it.height }
 
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
@@ -113,26 +113,24 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         }
     }
 
-    private fun GuiGraphics.drawSprite(sprite: Identifier, element: RpgOverlayPositionHandler.RpgOverlayElement) {
+    private fun GuiGraphicsExtractor.drawSprite(sprite: Identifier, element: RpgOverlayPositionHandler.RpgOverlayElement) {
         drawSprite(sprite, element.x, element.y, element.width, element.height)
     }
 
-    private fun GuiGraphics.blitSpritePercent(sprite: Identifier, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
+    private fun GuiGraphicsExtractor.blitSpritePercent(sprite: Identifier, element: RpgOverlayPositionHandler.RpgOverlayElement, percent: Float) {
         blitSpritePercent(sprite, element.x, element.y, element.width, element.height, percent.coerceIn(0f, 1f), element.direction)
     }
 
     override fun onRightClick() = ContextMenu.open {
-        if (SkyCubed.is1218) {
-            val text = when (RpgOverlayConfig.playerDisplay) {
-                PlayerDisplay.DISABLED -> "Show Armored Player"
-                PlayerDisplay.ARMORED -> "Show Unarmored Player"
-                PlayerDisplay.UNARMORED -> "Hide Player"
-            }
-            it.button(Text.of(text)) {
-                RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.next()
-            }
-            it.divider()
+        val text = when (RpgOverlayConfig.playerDisplay) {
+            PlayerDisplay.DISABLED -> "Show Armored Player"
+            PlayerDisplay.ARMORED -> "Show Unarmored Player"
+            PlayerDisplay.UNARMORED -> "Hide Player"
         }
+        it.button(Text.of(text)) {
+            RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.next()
+        }
+        it.divider()
         it.dangerButton(Text.of("Reset Position")) {
             position.resetPosition()
         }

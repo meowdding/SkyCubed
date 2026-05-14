@@ -5,7 +5,7 @@ import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.sacks.SacksAPI
@@ -46,8 +46,8 @@ object SackOverlay : SkyCubedOverlay {
         }
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display.render(graphics)
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
+        display.extract(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {

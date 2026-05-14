@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.features.info.icons
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -21,7 +21,7 @@ object LocationIcons : Display {
     override fun getWidth(): Int = 10
     override fun getHeight(): Int = 8
 
-    override fun render(graphics: GuiGraphics) {
+    override fun extract(graphics: GuiGraphicsExtractor) {
         when (LocationAPI.island) {
             SkyBlockIsland.HUB -> hub
             SkyBlockIsland.THE_RIFT -> rift
@@ -31,6 +31,6 @@ object LocationIcons : Display {
             SkyBlockIsland.GARDEN -> garden
             SkyBlockIsland.KUUDRA -> kuudra
             else -> hub
-        }.withPadding(left = 1, right = 1).render(graphics)
+        }.withPadding(left = 1, right = 1).extract(graphics)
     }
 }

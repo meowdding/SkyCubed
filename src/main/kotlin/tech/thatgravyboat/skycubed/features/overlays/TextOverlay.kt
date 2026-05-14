@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.features.overlays
 
 import me.owdding.lib.extensions.round
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.ai.attributes.Attributes
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
@@ -31,7 +31,7 @@ class TextOverlay(
     override val bounds: Pair<Int, Int> get() = text().width to 10
     override val enabled: Boolean get() = LocationAPI.isOnSkyBlock && this.isEnabled()
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         graphics.drawString(text(), 0, 1, shadow = true)
     }
 
