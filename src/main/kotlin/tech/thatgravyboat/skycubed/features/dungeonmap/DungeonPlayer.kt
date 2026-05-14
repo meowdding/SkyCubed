@@ -41,10 +41,11 @@ class DungeonPlayer(
 
     private fun tryFindUUID(): UUID? {
         if (!McLevel.hasLevel) return null
-        return McLevel.self.players().filter { it.name != null }
-            .firstOrNull { it.name.stripped.equals(name, ignoreCase = true) }?.also {
-                this.player = it as? AbstractClientPlayer
-            }?.uuid
+        return McLevel.self?.players()
+            ?.filter { it.name != null }
+            ?.firstOrNull { it.name.stripped.equals(name, ignoreCase = true) }
+            ?.also { this.player = it as? AbstractClientPlayer }
+            ?.uuid
     }
 
     fun update(player: DungeonPlayer) {

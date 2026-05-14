@@ -2,8 +2,8 @@ package tech.thatgravyboat.skycubed.features.overlays.map
 
 import earth.terrarium.olympus.client.utils.Orientation
 import me.owdding.ktmodules.Module
-import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.gui.components.PlayerFaceRenderer
+import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.client.gui.components.PlayerFaceExtractor
 import net.minecraft.util.Mth
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -25,7 +25,7 @@ object DungeonMapOverlay {
 
     val canRender: Boolean get() = DungeonMapOverlayConfig.enabled && DungeonFeatures.currentInstance?.map?.cachedMapId != null
 
-    fun render(graphics: GuiGraphics, partialTicks: Float) {
+    fun extract(graphics: GuiGraphicsExtractor, partialTicks: Float) {
         val instance = DungeonFeatures.currentInstance ?: return
         val map = instance.map ?: return
 
@@ -41,10 +41,10 @@ object DungeonMapOverlay {
 
             instance.runCatching {
                 map.doors.forEach { door ->
-                    map.renderDoor(graphics, door)
+                    map.extractDoor(graphics, door)
                 }
                 map.roomMap.flatten().distinct().filterNotNull().forEach { room ->
-                    map.renderRoom(graphics, room)
+                    map.extractRoom(graphics, room)
                 }
             }
         }
@@ -75,14 +75,14 @@ object DungeonMapOverlay {
                 graphics.translate((lerpX + 8f) * scaleFactor, (lerpY + 8f) * scaleFactor)
                 graphics.rotate(180f + actualPlayer.yRot)
                 graphics.translate(-4f, -4f)
-                PlayerFaceRenderer.draw(graphics, skin, 0, 0, 8)
+                PlayerFaceExtractor.extractRenderState(graphics, skin, 0, 0, 8)
             }
         }
 
         graphics.disableScissor()
     }
 
-    private fun DungeonMap.renderDoor(graphics: GuiGraphics, door: DungeonDoor) {
+    private fun DungeonMap.extractDoor(graphics: GuiGraphicsExtractor, door: DungeonDoor) {
         val pos = door.pos.convertTo<RoomPosition>()
         val x = pos.x * (combinedSize + 2)
         val y = pos.y * (combinedSize + 2)
@@ -93,7 +93,7 @@ object DungeonMapOverlay {
         }
     }
 
-    private fun DungeonMap.renderRoom(graphics: GuiGraphics, room: DungeonRoom) {
+    private fun DungeonMap.extractRoom(graphics: GuiGraphicsExtractor, room: DungeonRoom) {
         var iconed = false
 
         room.positions.map { it.convertTo<RoomPosition>() }.forEach { (x, y) ->
@@ -132,7 +132,7 @@ object DungeonMapOverlay {
         }
     }
 
-    private fun GuiGraphics.color(x: Int, y: Int, width: Int, height: Int, color: Int) {
+    private fun GuiGraphicsExtractor.color(x: Int, y: Int, width: Int, height: Int, color: Int) {
         this.fill(x, y, x + width, y + height, color.or(0xFF000000.toInt()))
     }
 }

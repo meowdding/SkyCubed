@@ -16,7 +16,7 @@ class RoomPosition(x: Int, y: Int, instance: DungeonInstance) : DungeonPosition<
         }
 
         private fun convertToRoomIndex(value: Int): Int {
-            return (((value + 200) / 32 * 2.0).roundToInt() / 2).toInt()
+            return ((value + 200) / 32 * 2.0).roundToInt() / 2
         }
 
     }

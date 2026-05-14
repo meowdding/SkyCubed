@@ -5,7 +5,7 @@ import me.owdding.ktmodules.AutoCollect
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
 import me.owdding.skycubed.generated.SkyCubedRegisteredInfos
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -67,9 +67,9 @@ object InfoOverlay : BackgroundLessSkyCubedOverlay {
     override val properties: Collection<EditableProperty> = setOf(EditableProperty.Y, EditableProperty.SCALE, EditableProperty.MISC)
     override val actualBounds: Pair<Int, Int> = 34 to 34
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         graphics.drawSprite(BaseInfoDisplay.BASE, 0, 0, 34, 34)
-        BaseInfoDisplay.baseDisplay.render(graphics, 0, 0)
+        BaseInfoDisplay.baseDisplay.extract(graphics, 0, 0)
 
         infoOverlays.forEach { (location, overlays) ->
             if (location !in InfoHudOverlayConfig.enabledLocations) return@forEach
@@ -91,7 +91,7 @@ object InfoOverlay : BackgroundLessSkyCubedOverlay {
                 InfoLocation.TOP_LEFT, InfoLocation.TOP_RIGHT -> 2
                 InfoLocation.BOTTOM_LEFT, InfoLocation.BOTTOM_RIGHT -> 18
             }
-            location.withBackground(display.getDisplay()).render(graphics, xOffset, yOffset, horizontalAlignment)
+            location.withBackground(display.getDisplay()).extract(graphics, xOffset, yOffset, horizontalAlignment)
         }
     }
 

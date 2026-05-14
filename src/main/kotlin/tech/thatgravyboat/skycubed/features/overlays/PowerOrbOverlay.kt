@@ -5,7 +5,7 @@ import me.owdding.ktmodules.Module
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Alignment
 import me.owdding.lib.overlays.ConfigPosition
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Entity
 import org.intellij.lang.annotations.Language
@@ -62,7 +62,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
             }.toMutableMap()
             val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
-                if (PowerOrbOverlayConfig.spinningItem && !McVersionGroup.MC_1_21_5.isActive && orb.deployable.canSpin) {
+                if (PowerOrbOverlayConfig.spinningItem && orb.deployable.canSpin) {
                     display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
                 } else item(orb.deployable.item, 20, 20)
 
@@ -99,8 +99,8 @@ object PowerOrbOverlay : SkyCubedOverlay {
         }
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        display.render(graphics)
+    override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
+        display.extract(graphics)
     }
 
     override fun onRightClick() = ContextMenu.open {

@@ -2,12 +2,11 @@ package tech.thatgravyboat.skycubed.utils
 
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.lib.platform.drawRoundedRectangle
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.navigation.ScreenDirection
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ClickType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -37,7 +36,7 @@ fun ItemStack.getTooltipLines(): List<Component> = getTooltipLines(
     if (McClient.options.advancedItemTooltips) TooltipFlag.ADVANCED else TooltipFlag.NORMAL,
 )
 
-internal fun GuiGraphics.blitSpritePercent(
+internal fun GuiGraphicsExtractor.blitSpritePercent(
     id: Identifier,
     x: Int,
     y: Int,
@@ -52,7 +51,7 @@ internal fun GuiGraphics.blitSpritePercent(
     }
 }
 
-internal fun GuiGraphics.blitSpritePercentX(
+internal fun GuiGraphicsExtractor.blitSpritePercentX(
     id: Identifier,
     x: Int,
     y: Int,
@@ -72,7 +71,7 @@ internal fun GuiGraphics.blitSpritePercentX(
     }
 }
 
-internal fun GuiGraphics.blitSpritePercentY(
+internal fun GuiGraphicsExtractor.blitSpritePercentY(
     id: Identifier,
     x: Int,
     y: Int,
@@ -92,7 +91,7 @@ internal fun GuiGraphics.blitSpritePercentY(
     }
 }
 
-internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: Int, color: Int, shadow: Boolean = true) {
+internal fun GuiGraphicsExtractor.drawScaledString(text: String, x: Int, y: Int, width: Int, color: Int, shadow: Boolean = true) {
     this.pushPop {
         val textWidth = McFont.width(text)
         val scale = (width.toFloat() / textWidth)
@@ -102,7 +101,7 @@ internal fun GuiGraphics.drawScaledString(text: String, x: Int, y: Int, width: I
     }
 }
 
-internal fun GuiGraphics.fillRect(
+internal fun GuiGraphicsExtractor.fillRect(
     x: Int, y: Int, width: Int, height: Int,
     backgroundColor: Int, borderColor: Int = 0x0,
     borderSize: Int = 0, radius: Int = 0,
@@ -151,21 +150,31 @@ internal fun Duration.formatReadableTime(biggestUnit: DurationUnit, maxUnits: In
 
 fun AbstractContainerMenu.click(slot: Slot) {
     val player = McPlayer.self ?: return
-    McClient.self.gameMode?.handleInventoryMouseClick(
+    //? if > 1.21.11 {
+    McClient.self.gameMode?.handleContainerInput(
         this.containerId,
         slot.index,
         InputConstants.MOUSE_BUTTON_LEFT,
-        ClickType.PICKUP,
+        net.minecraft.world.inventory.ContainerInput.PICKUP,
         player,
     )
+    //?} else {
+    /*McClient.self.gameMode?.handleInventoryMouseClick(
+        this.containerId,
+        slot.index,
+        InputConstants.MOUSE_BUTTON_LEFT,
+        net.minecraft.world.inventory.ClickType.PICKUP,
+        player,
+    )
+    *///?}
 }
 
 val CompletableFuture<*>.isActuallyDone: Boolean
-    get() {
-        return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
-    }
+get() {
+    return this.isDone && !this.isCompletedExceptionally && !this.isCancelled
+}
 
 fun <T : Enum<T>> T.next(): T {
-    val constants = if (this.javaClass.isEnum) this.javaClass.enumConstants else this.javaClass.superclass.enumConstants
-    return constants[(this.ordinal + 1) % constants.size] as T
+val constants = if (this.javaClass.isEnum) this.javaClass.enumConstants else this.javaClass.superclass.enumConstants
+return constants[(this.ordinal + 1) % constants.size] as T
 }

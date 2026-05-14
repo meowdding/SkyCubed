@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.resources.Identifier
 import tech.thatgravyboat.skyblockapi.platform.drawTexture
 import tech.thatgravyboat.skycubed.features.map.IslandData
@@ -13,8 +13,8 @@ enum class MapShape(
     SQUARE("Square"),
     ;
 
-    fun drawMapPart(
-        graphics: GuiGraphics,
+    fun extractMapPart(
+        graphics: GuiGraphicsExtractor,
         texture: Identifier,
         map: IslandData,
         posX: Float,

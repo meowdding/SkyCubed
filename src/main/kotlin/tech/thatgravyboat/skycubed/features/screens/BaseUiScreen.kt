@@ -1,12 +1,13 @@
 package tech.thatgravyboat.skycubed.features.screens
 
-import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen
 import earth.terrarium.olympus.client.ui.UIConstants
 import me.owdding.lib.displays.DisplayWidget
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
-import net.minecraft.client.gui.GuiGraphics
+import me.owdding.lib.platform.screens.MeowddingScreen
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.layouts.FrameLayout
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.platform.applyBackgroundBlur
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -14,7 +15,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 
 private const val ASPECT_RATIO = 16.0 / 9.0
 
-abstract class BaseUiScreen(title: String) : BaseCursorScreen(title.asComponent()) {
+abstract class BaseUiScreen(title: String) : MeowddingScreen(title.asComponent()) {
 
     val uiWidth get() = (uiHeight * ASPECT_RATIO).toInt()
     val uiHeight get() = (this.height * 0.7).toInt()
@@ -30,8 +31,10 @@ abstract class BaseUiScreen(title: String) : BaseCursorScreen(title.asComponent(
         create(bg)
     }
 
-    override fun renderBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
+    //~ if >= 26.1 'render' -> 'extract' {
+    override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         graphics.applyBackgroundBlur()
-        this.renderTransparentBackground(graphics)
+        this.extractTransparentBackground(graphics)
     }
+    //~ }
 }

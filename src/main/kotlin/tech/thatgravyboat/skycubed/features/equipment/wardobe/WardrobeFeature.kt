@@ -95,10 +95,7 @@ object WardrobeFeature {
             lastWidth = event.screen.width
             lastHeight = event.screen.height
 
-            //? if > 1.21.10 {
             WardrobeScreen.init(event.screen.width, event.screen.height)
-            //?} else
-            /*WardrobeScreen.init(McClient.self, event.screen.width, event.screen.height)*/
         }
 
         val (mouseX, mouseY) = McClient.mouse

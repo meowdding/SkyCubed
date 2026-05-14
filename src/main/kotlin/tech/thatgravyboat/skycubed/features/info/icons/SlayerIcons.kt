@@ -3,7 +3,7 @@ package tech.thatgravyboat.skycubed.features.info.icons
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.withPadding
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerAPI
 import tech.thatgravyboat.skyblockapi.api.area.slayer.SlayerType
 import tech.thatgravyboat.skycubed.SkyCubed
@@ -20,7 +20,7 @@ object SlayerIcons : Display {
     override fun getWidth(): Int = 10
     override fun getHeight(): Int = 8
 
-    override fun render(graphics: GuiGraphics) {
+    override fun extract(graphics: GuiGraphicsExtractor) {
         when (SlayerAPI.type) {
             SlayerType.REVENANT_HORROR -> revenant
             SlayerType.TARANTULA_BROODFATHER -> tarantula
@@ -29,6 +29,6 @@ object SlayerIcons : Display {
             SlayerType.RIFTSTALKER_BLOODFIEND -> riftstalker
             SlayerType.INFERNO_DEMONLORD -> inferno
             else -> Displays.empty(8, 8)
-        }.withPadding(left = 1, right = 1).render(graphics)
+        }.withPadding(left = 1, right = 1).extract(graphics)
     }
 }

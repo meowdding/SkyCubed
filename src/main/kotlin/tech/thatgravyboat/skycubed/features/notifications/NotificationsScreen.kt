@@ -1,6 +1,9 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
-import com.teamresourceful.resourcefullib.common.utils.TriState
+//? if >= 26.1 {
+import net.minecraft.util.TriState
+//? } else
+//import com.teamresourceful.resourcefullib.common.utils.TriState
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
@@ -12,7 +15,7 @@ import earth.terrarium.olympus.client.ui.UIIcons
 import earth.terrarium.olympus.client.ui.UITexts
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import org.apache.commons.lang3.function.Consumers
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
@@ -28,9 +31,10 @@ class NotificationsScreen : Overlay(McScreen.self) {
 
     private val category: DropdownState<String?> = DropdownState.empty()
 
-    override fun renderBackground(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        super.renderBackground(graphics, mouseX, mouseY, partialTicks)
-        this.renderTransparentBackground(graphics)
+    //~ if >= 26.1 'render' -> 'extract' {
+    override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTicks)
+        this.extractTransparentBackground(graphics)
         graphics.drawSprite(
             UIConstants.MODAL,
             this.width - WIDTH - PADDING * 2,
@@ -39,6 +43,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
             this.height
         )
     }
+    //~ }
 
     override fun init() {
         val notifications = NotificationToast.notifications()
@@ -54,9 +59,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
                 Layouts.row()
                     .withPosition(x + PADDING, y + PADDING)
                     .withChild(
-                        Displays.text(
-                            Component.translatable("skycubed.notifications"),
-                        ).asWidget().apply {
+                        Displays.text(Component.translatable("skycubed.notifications")).asWidget().apply {
                             withSize(WIDTH - 24, 24)
                         },
                     )
@@ -100,7 +103,7 @@ class NotificationsScreen : Overlay(McScreen.self) {
                                 it.withRenderer { graphics, context, _ ->
                                     graphics.pushPop {
                                         graphics.translate(context.x.toDouble(), context.y.toDouble())
-                                        toast.render(graphics)
+                                        toast.extract(graphics)
                                     }
                                 }
                             })
