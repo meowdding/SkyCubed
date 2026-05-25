@@ -39,7 +39,7 @@ class SackHudEditScreen : BaseUiScreen("Sack Hud Editor") {
             vertical(5, 0.5f) {
                 string("Selected Items")
 
-                addItems(true,  leftState, columnWidth, selectedItems.associateWith { SackCodecs.sackItems[it] ?: Items.BARRIER.defaultInstance })
+                addItems(true, leftState, columnWidth, selectedItems.associateWith { SackCodecs.sackItems[it]?.create() ?: Items.BARRIER.defaultInstance })
 
                 spacer(width = columnWidth)
             }
@@ -47,7 +47,7 @@ class SackHudEditScreen : BaseUiScreen("Sack Hud Editor") {
             vertical(5, 0.5f) {
                 string("Search Items")
 
-                addItems(false, rightState, columnWidth, SackCodecs.sackItems)
+                addItems(false, rightState, columnWidth, SackCodecs.sackItems.map { it.key to it.value.create() }.toMap())
 
                 spacer(width = columnWidth)
             }

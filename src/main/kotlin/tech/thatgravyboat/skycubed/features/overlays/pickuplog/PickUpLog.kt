@@ -17,7 +17,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.SacksChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
-import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
+import tech.thatgravyboat.skyblockapi.api.repo.apis.SkyBlockItemsRepo
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.utils.extentions.getArmor
@@ -141,7 +141,7 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
         if (!PickupLogOverlayConfig.sackItems) return
 
         event.changedItems.forEach { (item, diff) ->
-            val stack = RepoItemsAPI.getItem(item)
+            val stack = SkyBlockItemsRepo.getItemStack(item) ?: return@forEach
             if (diff < 0) {
                 removedItems.add(PickUpLogItem(stack, diff, System.currentTimeMillis()))
             } else if (diff > 0) {

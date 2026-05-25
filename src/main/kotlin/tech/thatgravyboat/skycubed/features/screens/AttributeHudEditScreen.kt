@@ -12,8 +12,8 @@ import tech.thatgravyboat.repolib.api.RepoAPI
 import tech.thatgravyboat.skyblockapi.api.data.SkyBlockRarity
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
-import tech.thatgravyboat.skyblockapi.api.remote.api.RepoAttributeAPI
 import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
+import tech.thatgravyboat.skyblockapi.api.repo.apis.SkyBlockAttributesRepo
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.utils.extentions.cleanName
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
@@ -78,7 +78,7 @@ class AttributeHudEditScreen : BaseUiScreen("Attribute Hud Editor") {
             } else {
                 items.filter { (id, item) ->
                     listOfNotNull(
-                        RepoAttributeAPI.getAttributeDataById(id.cleanId)?.name,
+                        SkyBlockAttributesRepo.get(id.cleanId)?.name,
                         id.skyblockId,
                         item.cleanName,
                     ).any { it.contains(input, true) }

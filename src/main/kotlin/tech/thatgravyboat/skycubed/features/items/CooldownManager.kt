@@ -13,16 +13,16 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.getLore
 import tech.thatgravyboat.skyblockapi.api.profile.PetsAPI
 import kotlin.math.roundToLong
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skyblockapi.api.remote.RepoPetsAPI
 import tech.thatgravyboat.repolib.api.PetsAPI.Data
+import tech.thatgravyboat.skyblockapi.api.repo.apis.SkyBlockPetsRepo
 
 @Module
 object CooldownManager {
 
     private val cooldowns: MutableMap<String, Pair<Long, Long>> = mutableMapOf()
     val breakingPowerRegex = Regex("(?i)Breaking Power \\d+")
-    val crowPet: Data? by lazy { RepoPetsAPI.getPetInfo("Crow") }
-    val balPet: Data? by lazy { RepoPetsAPI.getPetInfo("Bal") }
+    val crowPet: Data? by lazy { SkyBlockPetsRepo.get("Crow") }
+    val balPet: Data? by lazy { SkyBlockPetsRepo.get("Bal") }
 
     @Subscription
     fun onItemRightClick(event: RightClickEvent) {

@@ -15,7 +15,7 @@ import tech.thatgravyboat.skyblockapi.api.events.hypixel.ServerChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.ServerDisconnectEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
-import tech.thatgravyboat.skyblockapi.api.remote.RepoItemsAPI
+import tech.thatgravyboat.skyblockapi.api.repo.apis.SkyBlockItemsRepo
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.McVersionGroup
@@ -190,7 +190,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
 
         open val canSpin = true
         open val regex = "$title (?<seconds>\\d+)s".toRegex()
-        val item by lazy { RepoItemsAPI.getItem(name) }
+        val item get() = SkyBlockItemsRepo.getItemStackOrDefault(name)
     }
 
     private data class OrbInfo(

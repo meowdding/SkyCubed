@@ -35,7 +35,7 @@ object SackOverlay : SkyCubedOverlay {
 
         DisplayFactory.vertical {
             SackOverlayConfig.sackItems.forEach { item ->
-                val stack = SackCodecs.sackItems[item] ?: return@forEach
+                val stack = SackCodecs.sackItems[item]?.create() ?: return@forEach
                 horizontal(5, Alignment.CENTER) {
                     display(Displays.item(stack))
                     string(stack.hoverName)
