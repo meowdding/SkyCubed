@@ -366,7 +366,7 @@
             },
             "notifications": {
                 "@value": "通知",
-                "hide_chat_messages": {
+                "hide_chat_message": {
                     "@value": "隐藏聊天消息",
                     "desc": "隐藏通知类聊天消息。\n<yellow>服务器语言不是英文的话标为\"\u26a0\"的通知可能无法匹配！</yellow>"
                 },

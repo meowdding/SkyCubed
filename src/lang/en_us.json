@@ -504,7 +504,7 @@
             },
             "notifications": {
                 "@value": "Notifications",
-                "hide_chat_messages": {
+                "hide_chat_message": {
                     "@value": "Hide Chat Messages",
                     "desc": "If enabled the chat messages will be hidden when a notification is displayed."
                 },
