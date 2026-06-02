@@ -40,16 +40,15 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         this.positions = modifiers
     }
 
-    @GenerateCodec
     data class RpgOverlayPosition(
-        val player: RpgOverlayPlayer = RpgOverlayPlayer(),
-        val base: RpgOverlayBase = RpgOverlayBase(119, 48),
-        val mana: RpgOverlayElement = RpgOverlayElement(47, 18, 57, 4),
-        val health: RpgOverlayElement = RpgOverlayElement(47, 23, 70, 5),
-        val xpBar: RpgOverlayElement = RpgOverlayElement(47, 29, 67, 4),
-        val xpText: Vector2i = Vector2i(3, 33),
-        val extraBase: RpgOverlayElement = RpgOverlayElement(38, 34, 64, 6),
-        var extraBar: RpgOverlayElement = RpgOverlayElement(40, 34, 60, 4),
+        val player: RpgOverlayPlayer? = RpgOverlayPlayer(),
+        val base: RpgOverlayBase? = RpgOverlayBase(119, 48),
+        val mana: RpgOverlayElement? = RpgOverlayElement(47, 18, 57, 4),
+        val health: RpgOverlayElement? = RpgOverlayElement(47, 23, 70, 5),
+        val xpBar: RpgOverlayElement? = RpgOverlayElement(47, 29, 67, 4),
+        val xpText: Vector2i? = Vector2i(3, 33),
+        val extraBase: RpgOverlayElement? = RpgOverlayElement(38, 34, 64, 6),
+        var extraBar: RpgOverlayElement? = RpgOverlayElement(40, 34, 60, 4),
     )
 
     @GenerateCodec
