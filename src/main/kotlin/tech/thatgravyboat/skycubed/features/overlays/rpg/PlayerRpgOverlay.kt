@@ -86,28 +86,34 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         graphics.drawSprite(BASE, 0, 0, baseWidth, baseHeight)
 
         val player = McPlayer.self as? AbstractClientPlayer
-        if (RpgOverlayConfig.playerDisplay != PlayerDisplay.DISABLED && player != null) {
+        if (RpgOverlayConfig.playerDisplay != PlayerDisplay.DISABLED && player != null && positions.player != null) {
             val playerConfig = positions.player
             Utils.drawRpgPlayer(graphics, player, playerConfig.x, playerConfig.y, playerConfig.width, playerConfig.height, playerConfig.scale)
         }
 
-        graphics.blitSpritePercent(healthSprite, positions.health, healthPercent)
-        graphics.blitSpritePercent(ABSORPTION, positions.health, absorptionPercent)
-
-        graphics.blitSpritePercent(MANA_DEPLETED, positions.mana, manaUsePercent)
-        graphics.blitSpritePercent(MANA, positions.mana, manaPercent)
-        graphics.blitSpritePercent(MANA_OVERFLOW, positions.mana, overflowPercent)
-        graphics.blitSpritePercent(MANA_NEEDED, positions.mana, manaUsePercent.coerceAtMost(manaPercent))
-
-        if (RpgOverlayConfig.skyblockLevel) {
-            graphics.blitSpritePercent(SKYBLOCK_XP, positions.xpBar, skyblockLevelPercent)
-            graphics.drawScaledString("${ProfileAPI.sbLevel}", positions.xpText.x, positions.xpText.y, 16, 0x55FFFF)
-        } else {
-            graphics.blitSpritePercent(XP, positions.xpBar, xpPercent)
-            graphics.drawScaledString("${McPlayer.xpLevel}", positions.xpText.x, positions.xpText.y, 16, 0x78EC20)
+        if (positions.health != null) {
+            graphics.blitSpritePercent(healthSprite, positions.health, healthPercent)
+            graphics.blitSpritePercent(ABSORPTION, positions.health, absorptionPercent)
         }
 
-        if (showExtra) {
+        if (positions.mana != null) {
+            graphics.blitSpritePercent(MANA_DEPLETED, positions.mana, manaUsePercent)
+            graphics.blitSpritePercent(MANA, positions.mana, manaPercent)
+            graphics.blitSpritePercent(MANA_OVERFLOW, positions.mana, overflowPercent)
+            graphics.blitSpritePercent(MANA_NEEDED, positions.mana, manaUsePercent.coerceAtMost(manaPercent))
+        }
+
+        if (positions.xpBar != null && positions.xpText != null) {
+            if (RpgOverlayConfig.skyblockLevel) {
+                graphics.blitSpritePercent(SKYBLOCK_XP, positions.xpBar, skyblockLevelPercent)
+                graphics.drawScaledString("${ProfileAPI.sbLevel}", positions.xpText.x, positions.xpText.y, 16, 0x55FFFF)
+            } else {
+                graphics.blitSpritePercent(XP, positions.xpBar, xpPercent)
+                graphics.drawScaledString("${McPlayer.xpLevel}", positions.xpText.x, positions.xpText.y, 16, 0x78EC20)
+            }
+        }
+
+        if (showExtra && positions.extraBase != null && positions.extraBar != null) {
             graphics.drawSprite(EXTRA_BASE, positions.extraBase)
             graphics.blitSpritePercent(extraSprite, positions.extraBar, extraPercent)
         }

@@ -158,8 +158,10 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             state.wornHeadAnimationPos = 0f
             state.ageInTicks = 0f
             state.yRot = 0f
-            state.bodyRot = 180f + playerOptions.xRot
-            state.xRot = playerOptions.yRot
+            if (playerOptions != null) {
+                state.bodyRot = 180f + playerOptions.xRot
+                state.xRot = playerOptions.yRot
+            }
             state.isCrouching = false
 
             return state
