@@ -57,7 +57,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
     val RPG_OVERLAY_CODEC = RecordCodecBuilder.mapCodec {
         it.group(
             OptionalDefaultedCodec("player", SkyCubedCodecs.getCodec(), ::RpgOverlayPlayer).forNullGetter(RpgOverlayPosition::player),
-            OptionalDefaultedCodec("base", SkyCubedCodecs.getCodec()) { RpgOverlayBase(119, 58) }.forNullGetter(RpgOverlayPosition::base),
+            SkyCubedCodecs.RpgOverlayBaseCodec.codec().optionalFieldOf("base", RpgOverlayBase(119, 48)).forGetter(RpgOverlayPosition::base),
             OptionalDefaultedCodec("mana", SkyCubedCodecs.getCodec()) {
                 RpgOverlayElement(
                     47,
@@ -80,7 +80,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         ).apply(it) { player, base, mana, health, xpBar, xpText, extraBase, extraBar ->
             RpgOverlayPosition(
                 player.getOrNull(),
-                base.getOrNull(),
+                base,
                 mana.getOrNull(),
                 health.getOrNull(),
                 xpBar.getOrNull(),
