@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.overlays.rpg
 
 import com.google.gson.JsonElement
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import me.owdding.ktcodecs.GenerateCodec
 import me.owdding.ktmodules.Module
 import me.owdding.skycubed.generated.SkyCubedCodecs
@@ -10,9 +11,11 @@ import net.minecraft.server.packs.resources.SimplePreparableReloadListener
 import net.minecraft.util.profiling.ProfilerFiller
 import org.joml.Vector2i
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.extentions.forNullGetter
 import tech.thatgravyboat.skyblockapi.utils.json.Json.gson
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
 import tech.thatgravyboat.skycubed.SkyCubed
+import tech.thatgravyboat.skycubed.utils.OptionalDefaultedCodec
 import kotlin.jvm.optionals.getOrNull
 
 @Module
@@ -50,6 +53,53 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         val extraBase: RpgOverlayElement? = RpgOverlayElement(38, 34, 64, 6),
         var extraBar: RpgOverlayElement? = RpgOverlayElement(40, 34, 60, 4),
     )
+
+    val RPG_OVERLAY_CODEC = RecordCodecBuilder.mapCodec {
+        it.group(
+            OptionalDefaultedCodec("player", SkyCubedCodecs.getCodec(), ::RpgOverlayPlayer).forNullGetter(RpgOverlayPosition::player),
+            OptionalDefaultedCodec("base", SkyCubedCodecs.getCodec()) { RpgOverlayBase(119, 58) }.forNullGetter(RpgOverlayPosition::base),
+            OptionalDefaultedCodec("mana", SkyCubedCodecs.getCodec()) {
+                RpgOverlayElement(
+                    47,
+                    18,
+                    57,
+                    4,
+                )
+            }.forNullGetter(RpgOverlayPosition::mana),
+            OptionalDefaultedCodec("health", SkyCubedCodecs.getCodec()) { RpgOverlayElement(47, 23, 70, 5) }.forNullGetter(
+                RpgOverlayPosition::health,
+            ),
+            OptionalDefaultedCodec("xpBar", SkyCubedCodecs.getCodec()) {
+                RpgOverlayElement(
+                    47,
+                    29,
+                    67,
+                    4,
+                )
+            }.forNullGetter(RpgOverlayPosition::xpBar),
+
+            OptionalDefaultedCodec("xpText", SkyCubedCodecs.getCodec()) { Vector2i(3, 33) }.forNullGetter(RpgOverlayPosition::xpText),
+            OptionalDefaultedCodec(
+                "extraBase", SkyCubedCodecs.getCodec(),
+            ) { RpgOverlayElement(38, 34, 64, 6) }.forNullGetter(RpgOverlayPosition::extraBase),
+            OptionalDefaultedCodec(
+                "extraBar", SkyCubedCodecs.getCodec(),
+            ) {
+                RpgOverlayElement(40, 34, 60, 4)
+            }.forNullGetter(RpgOverlayPosition::extraBar),
+        ).apply(it) { player, base, mana, health, xpBar, xpText, extraBase, extraBar ->
+            RpgOverlayPosition(
+                player.getOrNull(),
+                base.getOrNull(),
+                mana.getOrNull(),
+                health.getOrNull(),
+                xpBar.getOrNull(),
+                xpText.getOrNull(),
+                extraBase.getOrNull(),
+                extraBar.getOrNull(),
+            )
+        }
+    }
 
     @GenerateCodec
     data class RpgOverlayElement(
