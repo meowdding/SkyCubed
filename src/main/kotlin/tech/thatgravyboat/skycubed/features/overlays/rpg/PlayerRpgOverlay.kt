@@ -50,7 +50,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     override val actualBounds: Pair<Int, Int> get() = RpgOverlayPositionHandler.positions.base.let { it.width to it.height }
 
     override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
-        val (baseWidth, baseHeight) = RpgOverlayPositionHandler.positions.base?.let { it.width to it.height }
+        val (baseWidth, baseHeight) = RpgOverlayPositionHandler.positions.base.let { it.width to it.height }
 
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
         val absorptionPercent = healthPercent - 1f
