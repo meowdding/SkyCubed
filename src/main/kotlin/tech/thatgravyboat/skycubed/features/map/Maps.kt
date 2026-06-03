@@ -31,6 +31,7 @@ object Maps {
         "dungeon_hub",
         "jerrys_workshop",
         "backwater",
+        "lotus_atoll",
     )
     val MAP_KEYBIND = SkyCubedKeybind("skycubed.key.map", InputConstants.KEY_M) {
         McClient.setScreenAsync { MapScreen() }
