@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.overlays.rpg
 import com.google.gson.JsonElement
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import me.owdding.ktcodecs.GenerateCodec
+import me.owdding.ktcodecs.IncludedCodec
 import me.owdding.ktmodules.Module
 import me.owdding.skycubed.generated.SkyCubedCodecs
 import net.minecraft.client.gui.navigation.ScreenDirection
@@ -54,6 +55,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         val extraBar: RpgOverlayElement? = RpgOverlayElement(40, 34, 60, 4),
     )
 
+    @IncludedCodec
     val RPG_OVERLAY_CODEC = RecordCodecBuilder.mapCodec {
         it.group(
             OptionalDefaultedCodec("player", SkyCubedCodecs.getCodec(), ::RpgOverlayPlayer).forNullGetter(RpgOverlayPosition::player),
