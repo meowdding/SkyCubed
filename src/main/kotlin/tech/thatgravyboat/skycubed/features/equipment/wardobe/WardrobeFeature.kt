@@ -138,9 +138,9 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onItemListOverlay(event: ItemListEvent.RegisterExclusionZones) {
+    fun onItemListOverlay(event: ItemListEvent.RegisterExcludedScreen) {
         if (event.screen == WardrobeScreen.screen && !isEditing) {
-            event.cancel()
+            event.exclude("SkyCubed Wardrobe")
         }
     }
 
