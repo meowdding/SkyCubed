@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.equipment.wardobe
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
 import me.owdding.lib.compat.REIRenderOverlayEvent
+import me.owdding.lib.events.ItemListEvent
 import me.owdding.lib.platform.screens.KeyEvent
 import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.platform.screens.mouseClicked
@@ -137,7 +138,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onReiOverlay(event: REIRenderOverlayEvent) {
+    fun onItemListOverlay(event: ItemListEvent.RegisterExclusionZones) {
         if (event.screen == WardrobeScreen.screen && !isEditing) {
             event.cancel()
         }
