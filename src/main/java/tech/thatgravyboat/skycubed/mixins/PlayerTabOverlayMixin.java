@@ -1,4 +1,3 @@
-//~ gui_graphics
 package tech.thatgravyboat.skycubed.mixins;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -14,7 +13,6 @@ import tech.thatgravyboat.skycubed.features.tablist.CompactTablist;
 
 @Mixin(PlayerTabOverlay.class)
 public class PlayerTabOverlayMixin {
-    //~ if >= 26.1 'render' -> 'extractRenderState'
     @Inject(method = "extractRenderState", at = @At("HEAD"), cancellable = true)
     private void render(GuiGraphicsExtractor graphics, int width, Scoreboard scoreboard, @Nullable Objective objective, CallbackInfo ci) {
         if (CompactTablist.INSTANCE.renderCompactTablist(graphics)) ci.cancel();

@@ -9,21 +9,21 @@ import com.mojang.blaze3d.textures.GpuSampler
 import com.mojang.blaze3d.textures.GpuTextureView
 import com.mojang.blaze3d.vertex.PoseStack
 import earth.terrarium.olympus.client.pipelines.pips.OlympusPictureInPictureRenderState
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.TextureSetup
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer
-import net.minecraft.client.gui.render.state.BlitRenderState
-import net.minecraft.client.gui.render.state.GuiRenderState
-import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState
 import net.minecraft.client.player.AbstractClientPlayer
-import net.minecraft.client.renderer.LightTexture
-import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
+import net.minecraft.client.renderer.SubmitNodeCollector
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.state.AvatarRenderState
 import net.minecraft.client.renderer.entity.state.EntityRenderState
-import net.minecraft.client.renderer.state.CameraRenderState
+import net.minecraft.client.renderer.state.gui.BlitRenderState
+import net.minecraft.client.renderer.state.gui.GuiRenderState
+import net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState
+import net.minecraft.client.renderer.state.level.CameraRenderState
+import net.minecraft.util.LightCoordsUtil
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Avatar
 import net.minecraft.world.entity.EquipmentSlot
@@ -36,23 +36,23 @@ import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.features.overlays.rpg.RpgOverlayPositionHandler
 import java.util.concurrent.CompletableFuture
-import java.util.function.Function
+import java.util.function.Supplier
 
-class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictureRenderer<RpgPlayerRenderer.State>(buffer) {
+class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() {
 
     private var textureView: GpuTextureView? = null
     private var sampler: GpuSampler? = null
 
     override fun getRenderStateClass(): Class<State> = State::class.java
 
-    override fun renderToTexture(state: State, stack: PoseStack) {
+    override fun renderToTexture(state: State, stack: PoseStack/*? >= 26.2 >> ')'*/, submitNodeCollector: SubmitNodeCollector) {
         this.textureView = RenderSystem.outputColorTextureOverride // Internally before this method is called, the texture is set to the output color texture.
         this.sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST)
 
         val dispatcher = McClient.self.entityRenderDispatcher
         val renderer = McClient.self.gameRenderer
 
-        renderer.lighting.setupFor(Lighting.Entry.ENTITY_IN_UI)
+        renderer.lighting().setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
         stack.mulPose(state.rotation)
         val cameraState = CameraRenderState()
@@ -61,7 +61,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
             val rotation = state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI)
             cameraState.orientation = rotation
         }
-        state.state.lightCoords = LightTexture.FULL_BRIGHT
+        state.state.lightCoords = LightCoordsUtil.FULL_BRIGHT
         dispatcher.submit(state.state, cameraState, 0.0, 0.0, 0.0, stack, featureRenderer.submitNodeStorage)
         featureRenderer.renderAllFeatures()
     }
@@ -69,7 +69,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
     override fun blitTexture(state: State, gui: GuiRenderState) {
         val mask = McClient.self.textureManager.getTexture(SkyCubed.id("textures/gui/sprites/rpg/mask.png"))
 
-        gui.submitBlitToCurrentLayer(
+        gui.addBlitToCurrentLayer(
             BlitRenderState(
                 pipeline,
                 TextureSetup.doubleTexture(this.textureView!!, this.sampler!!, mask.textureView, mask.sampler),
@@ -92,8 +92,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         val pose: Matrix3x2f,
     ) : OlympusPictureInPictureRenderState<State> {
 
-        override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<State>> =
-            Function { RpgPlayerRenderer(it) }
+        override fun getFactory(): Supplier<PictureInPictureRenderer<State>> = Supplier { RpgPlayerRenderer() }
 
         override fun x0(): Int = x0
         override fun x1(): Int = x1
@@ -168,7 +167,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         }
 
         fun draw(
-            graphics: GuiGraphics,
+            graphics: GuiGraphicsExtractor,
             entity: AbstractClientPlayer,
             x: Int, y: Int, width: Int, height: Int, scale: Float,
         ) {
@@ -193,7 +192,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
                 PictureInPictureRenderState.getBounds(x, y, x + width, y + height, graphics.scissorStack.peek()),
                 Matrix3x2f(graphics.pose()),
             )
-            graphics.guiRenderState.submitPicturesInPictureState(state)
+            graphics.guiRenderState.addPicturesInPictureState(state)
         }
     }
 }

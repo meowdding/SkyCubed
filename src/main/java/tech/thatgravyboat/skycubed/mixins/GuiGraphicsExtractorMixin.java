@@ -1,4 +1,3 @@
-//~ gui_graphics
 package tech.thatgravyboat.skycubed.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -11,10 +10,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import tech.thatgravyboat.skycubed.features.items.CooldownManager;
 
 @Mixin(GuiGraphicsExtractor.class)
-public class GuiGraphicsMixin {
+public class GuiGraphicsExtractorMixin {
 
     @WrapOperation(
-        //~ if >= 26.1 'renderItemCooldown' -> 'itemCooldown'
         method = "itemCooldown",
         at = @At(
             value = "INVOKE",

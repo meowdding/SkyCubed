@@ -38,7 +38,8 @@ object InfoOverlay : BackgroundLessSkyCubedOverlay {
     override val name: Component = Component.literal("Info Overlay")
     override val position: ConfigPosition = ConfigPosition(0, 0)
         get() {
-            val bossEvents = (McClient.gui.bossOverlay as? BossHealthOverlayAccessor)?.events
+            //~if >= 26.2 'gui.bossOverlay' -> 'gui.hud.bossOverlay'
+            val bossEvents = (McClient.gui.hud.bossOverlay as? BossHealthOverlayAccessor)?.events
             val modifier: Int = bossEvents.let { events ->
                 var modifier = 0
                 events?.forEach { event ->

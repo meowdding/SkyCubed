@@ -1,12 +1,14 @@
 package tech.thatgravyboat.skycubed.utils
 
+//? 26.1
+//import net.minecraft.client.renderer.MultiBufferSource
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
 import me.owdding.lib.rendering.MeowddingPipState
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer
-import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.SubmitNodeCollector
 import net.minecraft.client.renderer.item.TrackingItemStackRenderState
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.world.item.ItemDisplayContext
@@ -16,13 +18,14 @@ import tech.thatgravyboat.skyblockapi.api.events.time.TickEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
-import java.util.function.Function
+import java.util.function.Supplier
 
-class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictureRenderer<SpinningItemRenderState>(buffer) {
+//~ if >= 26.2 '(buffer: MultiBufferSource.BufferSource) : ' -> '() : ', '(buffer)' -> '()'
+class SpinningItemRenderer() : PictureInPictureRenderer<SpinningItemRenderState>() {
 
     override fun getRenderStateClass(): Class<SpinningItemRenderState> = SpinningItemRenderState::class.java
 
-    override fun renderToTexture(state: SpinningItemRenderState, stack: PoseStack) {
+    override fun renderToTexture(state: SpinningItemRenderState, stack: PoseStack/*? >= 26.2 >> ')'*/, submitNodeCollector: SubmitNodeCollector) {
         stack.pushPop {
             stack.translate(0f, state.bounds.height() / -2f - 3f, 0f)
             stack.scale(20f, 20f, 20f)
@@ -37,11 +40,14 @@ class SpinningItemRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPi
             if (state.zSpeed != 0) stack.mulPose(Axis.ZP.rotationDegrees(45f + (seconds * state.zSpeed.toFloat()).toInt() % 360))
 
             val item = state.item
-            McClient.self.gameRenderer.lighting.setupFor(if (item.usesBlockLight()) Lighting.Entry.ITEMS_3D else Lighting.Entry.ITEMS_FLAT)
+            //~ if >= 26.2 '.lighting' -> '.lighting()'
+            McClient.self.gameRenderer.lighting().setupFor(if (item.usesBlockLight()) Lighting.Entry.ITEMS_3D else Lighting.Entry.ITEMS_FLAT)
 
-            val features = McClient.self.gameRenderer.featureRenderDispatcher
-            item.submit(stack, features.submitNodeStorage, 15728880, OverlayTexture.NO_OVERLAY, 0)
-            features.renderAllFeatures()
+            //? 26.1 {
+            /*val featureRenderer = McClient.self.gameRenderer.featureRenderDispatcher
+            val submitNodeCollector = featureRenderer.submitNodeStorage
+            *///? }
+            item.submit(stack, submitNodeCollector, 15728880, OverlayTexture.NO_OVERLAY, 0)
         }
     }
 
@@ -80,8 +86,10 @@ data class SpinningItemRenderState(
         Matrix3x2f(pose),
     )
 
-    override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<SpinningItemRenderState>> =
-        Function { buffer -> SpinningItemRenderer(buffer) }
+    //? if >= 26.2 {
+    override fun getFactory(): Supplier<PictureInPictureRenderer<SpinningItemRenderState>> = Supplier { SpinningItemRenderer() }
+    //? } else
+    //override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<SpinningItemRenderState>> = Function { buffer -> SpinningItemRenderer(buffer) }
 
     override val shrinkToScissor: Boolean get() = false
     override val x0: Int = bounds.left()

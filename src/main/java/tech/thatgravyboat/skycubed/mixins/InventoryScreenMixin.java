@@ -1,4 +1,3 @@
-//~ gui_graphics
 package tech.thatgravyboat.skycubed.mixins;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;

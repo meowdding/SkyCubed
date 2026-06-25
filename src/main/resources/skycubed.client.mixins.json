@@ -13,7 +13,7 @@
         "GuiAccessor",
         "GuiGraphicsMixin",
         "GuiMessageLineMixin",
-        "GuiMixin",
+        "HudMixin",
         "InventoryScreenMixin",
         "MoveableItemTextMixin",
         "OverlayAccessor",

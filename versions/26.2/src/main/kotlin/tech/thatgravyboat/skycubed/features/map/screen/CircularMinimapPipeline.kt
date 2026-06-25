@@ -16,14 +16,14 @@ import earth.terrarium.olympus.client.pipelines.uniforms.RenderPipelineUniformsS
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.TextureSetup
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer
-import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderPipelines
+import net.minecraft.client.renderer.SubmitNodeCollector
 import net.minecraft.resources.Identifier
 import org.joml.Vector2f
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skycubed.SkyCubed
 import java.nio.ByteBuffer
-import java.util.function.Function
+import java.util.function.Supplier
 
 class CircularMinimapUniform(
     val resolution: Vector2f,
@@ -90,9 +90,7 @@ data class CircularMinimapPipState(
     override fun scissorArea(): ScreenRectangle? = null
     override fun bounds(): ScreenRectangle = bounds
 
-    override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<CircularMinimapPipState>> = Function { buffer ->
-        CircularMinimapPipRenderer(buffer)
-    }
+    override fun getFactory(): Supplier<PictureInPictureRenderer<CircularMinimapPipState>> = Supplier { CircularMinimapPipRenderer() }
 }
 
 private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
@@ -107,13 +105,11 @@ private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
         .build(),
 )
 
-class CircularMinimapPipRenderer(
-    buffer: MultiBufferSource.BufferSource,
-) : PictureInPictureRenderer<CircularMinimapPipState>(buffer) {
+class CircularMinimapPipRenderer() : PictureInPictureRenderer<CircularMinimapPipState>() {
 
     override fun getRenderStateClass(): Class<CircularMinimapPipState> = CircularMinimapPipState::class.java
 
-    override fun renderToTexture(state: CircularMinimapPipState, stack: PoseStack) {
+    override fun renderToTexture(state: CircularMinimapPipState, stack: PoseStack, submitNodeCollector: SubmitNodeCollector) {
         val bounds = state.bounds
 
         val scale = McClient.window.guiScale.toFloat()

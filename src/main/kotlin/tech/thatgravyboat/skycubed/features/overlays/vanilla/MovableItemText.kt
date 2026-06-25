@@ -29,7 +29,7 @@ object MovableItemText : BackgroundLessSkyCubedOverlay {
     override val actualBounds: Pair<Int, Int> = WIDTH to 11
 
     /**
-     * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
+     * Handling happens in [tech.thatgravyboat.skycubed.mixins.HudMixin]
      */
     override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         if (!this.isEditing()) return
