@@ -29,7 +29,7 @@ import tech.thatgravyboat.skycubed.utils.Utils.fullyRender
 @Module
 object WardrobeFeature {
 
-    private val regex = Regex("(?:Wardrobe )?\((?<currentPage>\d+)\/\d+\)(?: Armor Sets)?")
+    private val regex = Regex("(?:Wardrobe )?\\((?<currentPage>\\d+)/\\d+\\)(?: Armor Sets)?")
     var isEditing = false
 
     val wardrobeKeyBinds: MutableMap<MeowddingKeybind, Int> = mutableMapOf()
