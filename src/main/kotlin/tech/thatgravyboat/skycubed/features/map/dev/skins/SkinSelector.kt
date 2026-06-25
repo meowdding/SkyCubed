@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.features.map.dev.skins
 
-//~ if >= 26.2 'monster.MagmaCube' -> 'monster.cubemob.MagmaCube'
 import net.minecraft.core.Holder
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.Entity
@@ -8,6 +7,7 @@ import net.minecraft.world.entity.animal.cow.Cow
 import net.minecraft.world.entity.animal.cow.MushroomCow
 import net.minecraft.world.entity.animal.sheep.Sheep
 import net.minecraft.world.entity.monster.Witch
+//~ if >= 26.2 'monster.MagmaCube' -> 'monster.cubemob.MagmaCube'
 import net.minecraft.world.entity.monster.cubemob.MagmaCube
 import net.minecraft.world.entity.monster.skeleton.Skeleton
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton

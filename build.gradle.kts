@@ -35,7 +35,7 @@ repositories {
 }
 
 val mcVersion = stonecutter.current.version.replace(".", "")
-val accessWidenerFile = rootProject.file("src/skycubed.obf.accesswidener")
+val accessWidenerFile = rootProject.file("src/skycubed.accesswidener")
 
 val loom = extensions.getByName<LoomGradleExtensionAPI>("loom")
 loom.apply {

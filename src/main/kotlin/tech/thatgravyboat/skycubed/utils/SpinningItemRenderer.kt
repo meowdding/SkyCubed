@@ -19,6 +19,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import java.util.function.Supplier
+import java.util.function.Function
 
 //~ if >= 26.2 '(buffer: MultiBufferSource.BufferSource) : ' -> '() : ', '(buffer)' -> '()'
 class SpinningItemRenderer() : PictureInPictureRenderer<SpinningItemRenderState>() {
