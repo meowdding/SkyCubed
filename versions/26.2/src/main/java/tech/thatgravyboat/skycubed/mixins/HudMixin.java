@@ -6,8 +6,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.owdding.lib.overlays.Position;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.Hud;
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,10 +16,10 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions;
 import tech.thatgravyboat.skycubed.config.overlays.OverlaysConfig;
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.MovableHotbar;
 
-@Mixin(Gui.class)
-public class GuiMixin {
+@Mixin(Hud.class)
+public class HudMixin {
 
-    @ModifyExpressionValue(method = "renderCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;getTicksFrozen()I"))
+    @ModifyExpressionValue(method = "extractCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;getTicksFrozen()I"))
     private int modifyCameraOverlays(int ticks) {
         var cold = GlaciteAPI.INSTANCE.getCold();
         var coldStart = OverlaysConfig.INSTANCE.getColdOverlay();
@@ -30,14 +30,14 @@ public class GuiMixin {
     }
 
     @WrapOperation(
-        method = "renderCameraOverlays",
+        method = "extractCameraOverlays",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/Gui;renderTextureOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/Identifier;F)V",
+            target = "Lnet/minecraft/client/gui/Hud;extractTextureOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/resources/Identifier;F)V",
             ordinal = 1
         )
     )
-    private void wrapRenderCameraOverlays(Gui instance, GuiGraphics guiGraphics, Identifier resourceLocation, float f, Operation<Void> original) {
+    private void wrapRenderCameraOverlays(Hud instance, GuiGraphicsExtractor guiGraphics, Identifier resourceLocation, float f, Operation<Void> original) {
         var cold = GlaciteAPI.INSTANCE.getCold();
         var coldStart = OverlaysConfig.INSTANCE.getColdOverlay();
         if (cold > coldStart && coldStart != 0) {
@@ -48,8 +48,8 @@ public class GuiMixin {
         }
     }
 
-    @WrapMethod(method = "renderItemHotbar")
-    private void wrapRenderItemHotbar(GuiGraphics guiGraphics, DeltaTracker deltaTracker, Operation<Void> original) {
+    @WrapMethod(method = "extractItemHotbar")
+    private void wrapRenderItemHotbar(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, Operation<Void> original) {
         if (!MovableHotbar.INSTANCE.getEnabled()) {
             original.call(guiGraphics, deltaTracker);
             return;

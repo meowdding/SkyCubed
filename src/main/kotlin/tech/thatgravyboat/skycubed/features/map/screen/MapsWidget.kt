@@ -16,6 +16,7 @@ import org.joml.component2
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.platform.*
 import tech.thatgravyboat.skyblockapi.utils.extentions.scissor
 import tech.thatgravyboat.skyblockapi.utils.extentions.translated
@@ -162,7 +163,7 @@ class MapsWidget(
         val poi = getPoiAt(event.x, event.y)
         if (event.button == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
             if (MapEditor.enabled && !event.hasShiftDown()) {
-                McClient.setScreenAsync { MapPoiEditScreen(poi.first, poi.second.pois, McClient.self.screen) }
+                McClient.setScreenAsync { MapPoiEditScreen(poi.first, poi.second.pois, McScreen.self) }
                 return true
             }
             poi.first.click()

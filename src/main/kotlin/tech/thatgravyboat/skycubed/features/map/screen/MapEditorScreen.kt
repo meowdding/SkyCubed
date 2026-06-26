@@ -41,8 +41,8 @@ object MapEditorScreen {
                                 {},
                             ) {
                                 it.withCallback { poi ->
-                                    if (McClient.self.screen is ActionModal) {
-                                        McClient.self.screen?.onClose()
+                                    if (McScreen.self is ActionModal) {
+                                        McScreen.self?.onClose()
                                     }
 
                                     val newPoi = if (poi == "insignificant_npc") {

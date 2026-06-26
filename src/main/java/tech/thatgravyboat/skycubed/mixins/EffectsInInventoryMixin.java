@@ -11,7 +11,6 @@ import tech.thatgravyboat.skycubed.config.Config;
 @Mixin(EffectsInInventory.class)
 public class EffectsInInventoryMixin {
 
-    //~ if >= 26.1 'renderEffects' -> 'extractEffects'
     @Inject(method = "extractEffects", at = @At("HEAD"), cancellable = true)
     private void renderEffects(CallbackInfo ci) {
         if (Config.INSTANCE.getHiddenHudElements().contains(HudElement.EFFECTS)) {

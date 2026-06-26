@@ -13,7 +13,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.config.overlays.ItemTextOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.features.overlays.map.MinimapOverlay
-import tech.thatgravyboat.skycubed.mixins.GuiAccessor
+import tech.thatgravyboat.skycubed.mixins.HudAccessor
 import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 
@@ -29,12 +29,12 @@ object MovableItemText : BackgroundLessSkyCubedOverlay {
     override val actualBounds: Pair<Int, Int> = WIDTH to 11
 
     /**
-     * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
+     * Handling happens in [tech.thatgravyboat.skycubed.mixins.HudMixin]
      */
     override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
         if (!this.isEditing()) return
         val gui = McClient.self.gui ?: return
-        val accessor = gui as? GuiAccessor ?: return
+        val accessor = gui as? HudAccessor ?: return
         accessor.setToolHighlightTimer(20)
     }
 

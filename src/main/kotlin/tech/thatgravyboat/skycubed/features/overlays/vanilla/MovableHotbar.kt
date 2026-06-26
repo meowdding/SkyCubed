@@ -18,7 +18,7 @@ object MovableHotbar : BackgroundLessSkyCubedOverlay {
     override val actualBounds: Pair<Int, Int> = 182 to 22
 
     /**
-     * Handling happens in [tech.thatgravyboat.skycubed.mixins.GuiMixin]
+     * Handling happens in [tech.thatgravyboat.skycubed.mixins.HudMixin]
      */
     override fun extract(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int) {
     }

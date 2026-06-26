@@ -8,11 +8,11 @@ kotlin = "2.3.0"
 kotlin-gradle-plugin = "2.3.0"
 kotlin-symbol-processor = "2.3.5"
 
-resourceful-config-kotlin = "3.5.15"
+resourceful-config-kotlin = "4.0.0-beta.1"
 
-skyblockapi = "4.1.11"
+skyblockapi = "4.2.2"
 
-meowdding-lib = "4.1.9"
+meowdding-lib = "4.2.0"
 meowdding-auto-mixins = "1.0.5"
 meowdding-remote-repo = "1.0.4"
 meowdding-resources = "1.0.17"
@@ -31,7 +31,7 @@ fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-l
 
 skyblockapi = { module = "tech.thatgravyboat:skyblock-api", version.ref = "skyblockapi" }
 
-resourceful-config-kotlin = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-fabric-1.21.5", version.ref = "resourceful-config-kotlin" }
+resourceful-config-kotlin = { module = "com.teamresourceful.resourcefulconfigkt:resourcefulconfigkt-26.1-rc-1", version.ref = "resourceful-config-kotlin" }
 
 meowdding-lib = { module = "me.owdding.meowdding-lib:meowdding-lib", version.ref = "meowdding-lib" }
 meowdding-remote-repo = { module = "me.owdding.repo:remote-repo", version.ref = "meowdding-remote-repo" }

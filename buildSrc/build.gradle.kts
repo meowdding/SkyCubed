@@ -4,6 +4,7 @@ plugins {
 
 repositories {
     gradlePluginPortal()
+    maven("https://maven.kikugie.dev/snapshots")
     maven("https://maven.teamresourceful.com/repository/maven-public/")
 }
 
@@ -24,5 +25,5 @@ dependencies {
     implementation(plugin(libs.plugins.meowdding.auto.mixins))
     implementation(plugin(libs.plugins.fabric.loom.asProvider()))
     implementation(plugin(libs.plugins.fabric.loom.remap))
-    implementation("dev.kikugie.stonecutter:dev.kikugie.stonecutter.gradle.plugin:0.8.3")
+    implementation("dev.kikugie.stonecutter:dev.kikugie.stonecutter.gradle.plugin:0.10-alpha.2")
 }

@@ -3,8 +3,8 @@ package tech.thatgravyboat.skycubed.mixins;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.Hud;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,11 +15,11 @@ import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions;
 import tech.thatgravyboat.skycubed.features.overlays.vanilla.MovableItemText;
 import tech.thatgravyboat.skycubed.utils.ExtensionsKt;
 
-@Mixin(Gui.class)
+@Mixin(Hud.class)
 public abstract class MoveableItemTextMixin {
 
     @Unique
-    private void drawBackground(GuiGraphics graphics, int x, int y, int width, int color) {
+    private void drawBackground(GuiGraphicsExtractor graphics, int x, int y, int width, int color) {
         var radius = ItemTextOverlayConfig.INSTANCE.getRadius();
         int bg = ARGB.multiply(ItemTextOverlayConfig.INSTANCE.getColor(), color);
         if (bg != 0) {
@@ -27,15 +27,15 @@ public abstract class MoveableItemTextMixin {
         }
     }
 
-    @WrapOperation(method = "renderSelectedItemName", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawStringWithBackdrop(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIII)V"))
-    private void wrapRenderSelectedItemName(GuiGraphics graphics, Font font, Component text, int x, int y, int width, int color, Operation<Void> original) {
+    @WrapOperation(method = "extractSelectedItemName", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;textWithBackdrop(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIII)V"))
+    private void wrapRenderSelectedItemName(GuiGraphicsExtractor graphics, Font font, Component text, int x, int y, int width, int color, Operation<Void> original) {
         if (ItemTextOverlayConfig.INSTANCE.getHidden()) {
             return;
         }
 
         if (!MovableItemText.INSTANCE.getEnabled()) {
             this.drawBackground(graphics, x, y, width, color);
-            graphics.drawString(font, text, x, y, color, true);
+            graphics.text(font, text, x, y, color, true);
         } else {
 
             var stack = graphics.pose();
@@ -55,7 +55,7 @@ public abstract class MoveableItemTextMixin {
 
             this.drawBackground(graphics, alignment, 0, width, color);
 
-            graphics.drawString(font, text, alignment, 0, color, true);
+            graphics.text(font, text, alignment, 0, color, true);
 
             stack.popMatrix();
         }

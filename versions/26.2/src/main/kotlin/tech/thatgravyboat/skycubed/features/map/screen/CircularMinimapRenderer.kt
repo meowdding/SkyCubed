@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skycubed.features.map.screen
 
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.resources.Identifier
 
@@ -8,7 +8,7 @@ import net.minecraft.resources.Identifier
 object CircularMinimapRenderer {
 
     fun drawMapPart(
-        graphics: GuiGraphics,
+        graphics: GuiGraphicsExtractor,
         texture: Identifier,
         circleCenterX: Float,
         circleCenterY: Float,
@@ -30,7 +30,7 @@ object CircularMinimapRenderer {
         val minV = vOffset / textureHeight
         val maxV = (vOffset + vHeight) / textureHeight
 
-        graphics.guiRenderState.submitPicturesInPictureState(
+        graphics.guiRenderState.addPicturesInPictureState(
             CircularMinimapPipState(
                 texture,
                 circleCenterX,
