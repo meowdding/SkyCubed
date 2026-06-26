@@ -104,14 +104,12 @@ private val MAP_RENDER_PIPELINE: RenderPipeline = RenderPipelines.register(
         .withBindGroupLayout(
             BindGroupLayout.builder()
                 .withUniform(CircularMinimapUniform.UNIFORM_NAME, UniformType.UNIFORM_BUFFER)
-                .withUniform("DynamicTransforms", UniformType.UNIFORM_BUFFER)
-                .withUniform("Projection", UniformType.UNIFORM_BUFFER)
                 .build(),
         )
         .build(),
 )
 
-class CircularMinimapPipRenderer() : PictureInPictureRenderer<CircularMinimapPipState>() {
+class CircularMinimapPipRenderer : PictureInPictureRenderer<CircularMinimapPipState>() {
 
     override fun getRenderStateClass(): Class<CircularMinimapPipState> = CircularMinimapPipState::class.java
 

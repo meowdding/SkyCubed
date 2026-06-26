@@ -14,6 +14,7 @@ import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.TextureSetup
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer
 import net.minecraft.client.player.AbstractClientPlayer
+import net.minecraft.client.renderer.BindGroupLayouts
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.client.renderer.SubmitNodeCollector
 import net.minecraft.client.renderer.entity.EntityRenderer
@@ -45,7 +46,7 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
 
     override fun getRenderStateClass(): Class<State> = State::class.java
 
-    override fun renderToTexture(state: State, stack: PoseStack/*? >= 26.2 >> ')'*/, submitNodeCollector: SubmitNodeCollector) {
+    override fun renderToTexture(state: State, stack: PoseStack, submitNodeCollector: SubmitNodeCollector) {
         this.textureView = RenderSystem.outputColorTextureOverride // Internally before this method is called, the texture is set to the output color texture.
         this.sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST)
 
@@ -116,12 +117,7 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
         private val pipeline = RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
             .withLocation(SkyCubed.id("pipeline/gui_rpg_player"))
             .withFragmentShader(SkyCubed.id("rpg_player"))
-            .withBindGroupLayout(
-                BindGroupLayout.builder()
-                    .withSampler("Sampler0")
-                    .withSampler("Sampler1")
-                    .build(),
-            )
+            .withBindGroupLayout(BindGroupLayouts.SAMPLER1) // SAMPLER0 is alr included in above
             .build()
 
         // Height of the player, bc we cant use boundingbox (sneaking my beloved)
