@@ -1,8 +1,6 @@
 package tech.thatgravyboat.skycubed.utils
 
-//? >= 26.2
 import com.mojang.blaze3d.pipeline.BindGroupLayout
-import com.mojang.blaze3d.pipeline.BlendFunction
 import com.mojang.blaze3d.pipeline.RenderPipeline
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.systems.RenderSystem
@@ -38,15 +36,8 @@ import tech.thatgravyboat.skycubed.config.overlays.PlayerDisplay
 import tech.thatgravyboat.skycubed.config.overlays.RpgOverlayConfig
 import tech.thatgravyboat.skycubed.features.overlays.rpg.RpgOverlayPositionHandler
 import java.util.concurrent.CompletableFuture
-//? >= 26.2
 import java.util.function.Supplier
 
-//? 26.1 {
-/*import net.minecraft.client.renderer.MultiBufferSource
-import java.util.function.Function
-*///?}
-
-//~ if >= 26.2 '(source: MultiBufferSource.BufferSource) : ' -> '() : ', '(source)' -> '()'
 class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() {
 
     private var textureView: GpuTextureView? = null
@@ -61,16 +52,10 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
         val dispatcher = McClient.self.entityRenderDispatcher
         val renderer = McClient.self.gameRenderer
 
-        //~ if >= 26.2 '.lighting' -> '.lighting()'
         renderer.lighting().setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
         stack.mulPose(state.rotation)
         val cameraState = CameraRenderState()
-
-        //? 26.1 {
-        /*val featureRenderer = McClient.self.gameRenderer.featureRenderDispatcher
-        val submitNodeCollector = featureRenderer.submitNodeStorage
-        *///?}
 
         if (state.cameraAngle != null) {
             val rotation = state.cameraAngle.conjugate(Quaternionf()).rotateY(Mth.PI)
@@ -78,9 +63,6 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
         }
         state.state.lightCoords = LightCoordsUtil.FULL_BRIGHT
         dispatcher.submit(state.state, cameraState, 0.0, 0.0, 0.0, stack, submitNodeCollector)
-
-        //? 26.1
-        //featureRenderer.renderAllFeatures()
     }
 
     override fun blitTexture(state: State, gui: GuiRenderState) {
@@ -109,10 +91,7 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
         val pose: Matrix3x2f,
     ) : OlympusPictureInPictureRenderState<State> {
 
-        //? if >= 26.2 {
         override fun getFactory(): Supplier<PictureInPictureRenderer<State>> = Supplier { RpgPlayerRenderer() }
-        //? } else
-        //override fun getFactory(): Function<MultiBufferSource.BufferSource, PictureInPictureRenderer<State>> = Function { buffer -> RpgPlayerRenderer(buffer) }
 
         override fun x0(): Int = x0
         override fun x1(): Int = x1
@@ -137,18 +116,12 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
         private val pipeline = RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
             .withLocation(SkyCubed.id("pipeline/gui_rpg_player"))
             .withFragmentShader(SkyCubed.id("rpg_player"))
-            //? >= 26.2 {
             .withBindGroupLayout(
                 BindGroupLayout.builder()
                     .withSampler("Sampler0")
                     .withSampler("Sampler1")
                     .build(),
             )
-            //?} else {
-            /*.withBlend(BlendFunction.TRANSLUCENT_PREMULTIPLIED_ALPHA)
-            .withSampler("Sampler0")
-            .withSampler("Sampler1")
-            *///?}
             .build()
 
         // Height of the player, bc we cant use boundingbox (sneaking my beloved)
