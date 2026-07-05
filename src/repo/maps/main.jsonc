@@ -1,53 +1,11 @@
 [
     {
         "island": "HUB",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/hub.png",
-        "images": [
-            {
-                "condition": {
-                    "conditions": [
-                        {
-                            "position": "x > -72 && x < 4 && y < 80 && z > 55 && z < 105",
-                            "condition": "position"
-                        },
-                        {
-                            "position": "y < 64 && x > -39 && x < 53 && z > 10 && z < 142",
-                            "condition": "position"
-                        }
-                    ],
-                    "condition": "or"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/hub_museum.png"
-            },
-            {
-                "condition": {
-                    "conditions": [
-                        {
-                            "position": "y < 65 && x > -194 && x < -62 && z < -73 && z > -148",
-                            "condition": "position"
-                        },
-                        {
-                            "position": "y < 67 && z < -111 && z > -172 && x > -62 && x < -35",
-                            "condition": "position"
-                        },
-                        {
-                            "position": "y < 75 && x > -35 && x < -5 && z < -150 && z > -177",
-                            "condition": "position"
-                        },
-                        {
-                            "position": "y < 69 && x > -22 && x < 66 && z < -177 && z > -232",
-                            "condition": "position"
-                        }
-                    ],
-                    "condition": "or"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/hub_crypts.png"
-            }
-        ],
-        "topX": -298,
-        "topY": -258,
-        "bottomX": 201,
-        "bottomY": 241,
+        "default": "https://femboy-hooters.net/u/dgZDp4.png",
+        "topX": -283,
+        "topY": -207,
+        "bottomX": 182,
+        "bottomY": 204,
         "pois": [
             {
                 "enabled": {
@@ -1949,20 +1907,11 @@
     },
     {
         "island": "SPIDERS_DEN",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/spiders_den.png",
-        "images": [
-            {
-                "condition": {
-                    "position": "y < 77",
-                    "condition": "position"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/spiders_den_underground.png"
-            }
-        ],
-        "topX": -408,
-        "topY": -408,
-        "bottomX": -106,
-        "bottomY": -106,
+        "default": "https://femboy-hooters.net/u/TAnZMJ.png",
+        "topX": -423,
+        "topY": -369,
+        "bottomX": -130,
+        "bottomY": -133,
         "pois": [
             {
                 "tooltip": [
@@ -2154,33 +2103,10 @@
     },
     {
         "island": "THE_PARK",
-        "default": "https://femboy-hooters.net/u/HmYF3y.png",
-        "images": [
-            {
-                "condition": {
-                    "position": "y < 114 && x > -484 && x < -440 && z > -98 && z < -32",
-                    "condition": "position"
-                },
-                "image": "https://femboy-hooters.net/u/yG9nus.png"
-            },
-            {
-                "condition": {
-                    "position": "y < 103 && x > -452 && x < -405 && z > -9 && z < 56",
-                    "condition": "position"
-                },
-                "image": "https://femboy-hooters.net/u/OKVjpD.png"
-            },
-            {
-                "condition": {
-                    "position": "y < 89 && x > -406 && x < -364 && z > -89 && z < -41",
-                    "condition": "position"
-                },
-                "image": "https://femboy-hooters.net/u/yeOmx0.png"
-            }
-        ],
+        "default": "https://femboy-hooters.net/u/KAiuXS.png",
         "topX": -499,
         "topY": -127,
-        "bottomX": -259,
+        "bottomX": -258,
         "bottomY": 92,
         "pois": [
             {
@@ -2437,20 +2363,11 @@
     },
     {
         "island": "THE_BARN",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/farming_islands.png",
-        "images": [
-            {
-                "condition": {
-                    "position": "y < 60",
-                    "condition": "position"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/farming_islands_underground.png"
-            }
-        ],
-        "topX": 82,
-        "topY": -618,
-        "bottomX": 400,
-        "bottomY": -194,
+        "default": "https://femboy-hooters.net/u/0Cb0kB.png",
+        "topX": 83,
+        "topY": -616,
+        "bottomX": 399,
+        "bottomY": -195,
         "pois": [
             {
                 "texture": "http://textures.minecraft.net/texture/d6f9b9b62404c5cf94c385c7f1c86adde0d9aef9a9cd29e2ab583fa1de63f426",
@@ -2744,11 +2661,11 @@
     },
     {
         "island": "CRIMSON_ISLE",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/crimson_isle.png",
-        "topX": -772,
-        "topY": -1180,
-        "bottomX": 51,
-        "bottomY": -357,
+        "default": "https://femboy-hooters.net/u/SRBBPJ.png",
+        "topX": -753,
+        "topY": -1089,
+        "bottomX": 36,
+        "bottomY": -408,
         "pois": [
             {
                 "tooltip": [
@@ -4014,27 +3931,11 @@
     },
     {
         "island": "THE_END",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/end.png",
-        "images": [
-            {
-                "condition": {
-                    "position": "y < 115 && x < -512",
-                    "condition": "position"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/end_underground-1.png"
-            },
-            {
-                "condition": {
-                    "position": "y < 60",
-                    "condition": "position"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/end_underground-2.png"
-            }
-        ],
-        "topX": -790,
-        "topY": -422,
-        "bottomX": -447,
-        "bottomY": -123,
+        "default": "https://femboy-hooters.net/u/c7GUdY.png",
+        "topX": -786,
+        "topY": -412,
+        "bottomX": -450,
+        "bottomY": -131,
         "pois": [
             {
                 "tooltip": [
@@ -4162,20 +4063,11 @@
     },
     {
         "island": "GOLD_MINES",
-        "default": "https://api.dediamondpro.dev/skyguide/medium/gold_mine.png",
-        "images": [
-            {
-                "condition": {
-                    "position": "y < 72",
-                    "condition": "position"
-                },
-                "image": "https://api.dediamondpro.dev/skyguide/medium/gold_mine_underground.png"
-            }
-        ],
-        "topX": -90,
-        "topY": -401,
-        "bottomX": 45,
-        "bottomY": -266,
+        "default": "https://femboy-hooters.net/u/7neNFu.png",
+        "topX": -87,
+        "topY": -399,
+        "bottomX": 44,
+        "bottomY": -268,
         "pois": [
             {
                 "tooltip": [
@@ -4505,7 +4397,7 @@
     },
     {
         "island": "GALATEA",
-        "default": "https://femboy-hooters.net/u/5cYfbe.png",
+        "default": "https://femboy-hooters.net/u/XyqThF.png",
         "images": [
             {
                 "condition": {
@@ -4538,9 +4430,9 @@
                 "image": "https://femboy-hooters.net/u/aMSJaT.png"
             }
         ],
-        "topX": -770,
-        "topY": -97,
-        "bottomX": -527,
+        "topX": -771,
+        "topY": -98,
+        "bottomX": -526,
         "bottomY": 110,
         "pois": [
             {
