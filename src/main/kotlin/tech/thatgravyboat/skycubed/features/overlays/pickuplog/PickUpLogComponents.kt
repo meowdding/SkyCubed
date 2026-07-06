@@ -12,7 +12,7 @@ enum class PickUpLogComponents(val display: (PickUpLogItem) -> Display) {
         if (it.difference < 0) Displays.text(Text.of(it.difference.toFormattedString()).withColor(TextColor.RED))
         else Displays.text(Text.of("+${it.difference.toFormattedString()}").withColor(TextColor.GREEN))
     }),
-    NAME({ Displays.text(it.stack.hoverName) }),
+    NAME({ Displays.text(it.hoverName) }),
     ;
 
     private val formattedName = name.split("_").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercase) }
