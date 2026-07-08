@@ -91,7 +91,7 @@ object EquipmentManager {
         EquipmentSlot.entries.forEachIndexed { index, _ ->
             val slotY = y + index * 18
             if (event.x.toInt() in x + 1..x + 16 && event.y.toInt() in slotY + 1..slotY + 16) {
-                McClient.sendCommand("equipment")
+                McClient.sendCommand("stats")
             }
         }
     }
