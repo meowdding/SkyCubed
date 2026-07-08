@@ -49,6 +49,8 @@ class SpinningItemRenderer() : PictureInPictureRenderer<SpinningItemRenderState>
             val submitNodeCollector = featureRenderer.submitNodeStorage
             *///? }
             item.submit(stack, submitNodeCollector, 15728880, OverlayTexture.NO_OVERLAY, 0)
+            //? 26.1
+            //featureRenderer.renderAllFeatures()
         }
     }
 
