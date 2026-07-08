@@ -44,19 +44,19 @@ class TextOverlay(
                     if (TextOverlaysConfig.healthDisplay == HealthDisplay.EFFECTIVE) {
                         val health = (StatsAPI.health * (1 + StatsAPI.defense / 100.0)).roundToInt()
                         val maxHealth = (StatsAPI.maxHealth * (1 + StatsAPI.defense / 100.0)).roundToInt()
-                        Text.of("❤ $health/$maxHealth", TextColor.GREEN)
+                        Text.of("\uE010 $health/$maxHealth", TextColor.GREEN)
                     } else {
-                        Text.of("❤ ${StatsAPI.health}/${StatsAPI.maxHealth}", TextColor.RED)
+                        Text.of("\uE010 ${StatsAPI.health}/${StatsAPI.maxHealth}", TextColor.RED)
                     }
                 },
             ),
             TextOverlay(
                 Text.of("Mana"), OverlayPositions.mana, { TextOverlaysConfig.manaEnabled },
                 {
-                    Text.of("✎ ${StatsAPI.mana}/${StatsAPI.maxMana}") {
+                    Text.of("\uE003 ${StatsAPI.mana}/${StatsAPI.maxMana}") {
                         color = TextColor.AQUA
                         if (StatsAPI.overflowMana > 0) {
-                            append(" ʬ ${StatsAPI.overflowMana}", TextColor.DARK_AQUA)
+                            append(" \uE017 ${StatsAPI.overflowMana}", TextColor.DARK_AQUA)
                         }
                     }
                 },
@@ -64,14 +64,14 @@ class TextOverlay(
             TextOverlay(
                 Text.of("Defense"), OverlayPositions.defense, { TextOverlaysConfig.defenseEnabled },
                 {
-                    Text.of("❈ ${StatsAPI.defense}", TextColor.GREEN)
+                    Text.of("\uE008 ${StatsAPI.defense}", TextColor.GREEN)
                 },
             ),
             TextOverlay(
                 Text.of("Speed"), OverlayPositions.speed, { TextOverlaysConfig.speedEnabled },
                 {
                     val speed = McPlayer.self?.getAttribute(Attributes.MOVEMENT_SPEED)?.baseValue ?: 0.0
-                    Text.of("✦ ${speed.times(1000).round()}", TextColor.WHITE)
+                    Text.of("\uE022 ${speed.times(1000).round()}", TextColor.WHITE)
                 },
             ),
         )
