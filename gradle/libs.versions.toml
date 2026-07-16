@@ -12,7 +12,7 @@ resourceful-config-kotlin = "4.0.0-beta.1"
 
 skyblockapi = "4.2.8"
 
-meowdding-lib = "4.2.5"
+meowdding-lib = "4.2.8"
 meowdding-auto-mixins = "1.0.5"
 meowdding-remote-repo = "1.0.4"
 meowdding-resources = "1.0.17"
