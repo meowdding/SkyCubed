@@ -10,7 +10,7 @@ import tech.thatgravyboat.skycubed.config.chat.ChatConfig
 object ChatTabColors {
 
     private val playerMessageRegex = Regex("\\[\\d+] (?:. )?(?:\\[(?:VIP|MVP)\\+*] )?\\w{3,16}: .*")
-    private val friendJoinLeaveRegex = Regex("Friend > \\w{3,16} (joined|left)\\.")
+    private val friendJoinLeaveRegex = Regex("Friend > \\w{3,16} (joined|left)\\..*")
     private val partyMessageRegex = Regex("Party > .*")
     private val guildMessageRegex = Regex("Guild > .*")
     private val privateMessageRegex = Regex("(?:To|From) .*: .*")
