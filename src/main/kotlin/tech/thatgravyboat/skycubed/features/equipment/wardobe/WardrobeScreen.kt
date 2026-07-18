@@ -1,5 +1,6 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
+import com.sun.tools.javac.jvm.ByteCodes.ret
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers
@@ -8,8 +9,10 @@ import earth.terrarium.olympus.client.ui.UIConstants
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.builder.LayoutBuilder
 import me.owdding.lib.builder.LayoutFactory
+import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
+import me.owdding.lib.displays.withIconographicCompat
 import me.owdding.lib.displays.withPadding
 import me.owdding.lib.displays.withTooltip
 import net.minecraft.client.gui.GuiGraphicsExtractor
@@ -20,8 +23,8 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.resources.Identifier
 import net.minecraft.world.item.ItemStack
-import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeAPI
-import tech.thatgravyboat.skyblockapi.api.profile.items.wardrobe.WardrobeSlot
+import tech.thatgravyboat.skyblockapi.api.profile.items.loadout.ArmorWardrobeAPI
+import tech.thatgravyboat.skyblockapi.api.profile.items.loadout.WardrobeSlot
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.applyBackgroundBlur
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -109,7 +112,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
 
 
         val rows = LayoutFactory.vertical(CARD_SPACING) {
-            WardrobeAPI.slots.chunked(9).forEachIndexed { page, slots ->
+            ArmorWardrobeAPI.slots.chunked(9).forEachIndexed { page, slots ->
                 horizontal(CARD_SPACING) {
                     slots.forEach { widget(it.getButton(displayWidth, page + 1)) }
                 }
@@ -132,7 +135,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
                 context.mouseY in context.y until context.y + context.height
 
             val entityDisplay = Displays.entity(
-                DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), armor, pageNumber != currentPage),
+                DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), slots, pageNumber != currentPage),
                 displayWidth, displayHeight,
                 (displayWidth / 2.0).toInt(),
                 context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y,
@@ -149,7 +152,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
                     BACKGROUND_RADIUS,
                     when {
                         hovered -> HOVER_COLOR
-                        id == WardrobeAPI.currentSlot -> SELECTED_COLOR
+                        id == ArmorWardrobeAPI.currentSlot -> SELECTED_COLOR
                         else -> 0x0u
                     },
                     entityDisplay,
@@ -160,7 +163,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
         }
         it.withTexture(
             when {
-                WardrobeConfig.textured && id == WardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
+                WardrobeConfig.textured && id == ArmorWardrobeAPI.currentSlot -> UIConstants.PRIMARY_BUTTON
                 WardrobeConfig.textured && pageNumber != currentPage -> UIConstants.DARK_BUTTON
                 WardrobeConfig.textured -> UIConstants.BUTTON
                 else -> null
@@ -173,7 +176,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
                     menu.click(menu.slots[NEXT_PAGE_SLOT])
                 } else if (pageNumber < currentPage) {
                     menu.click(menu.slots[PREV_PAGE_SLOT])
-                } else if (!armor.all { it.isEmpty }) {
+                } else if (!slots.all { it.isEmpty }) {
                     val index = (id - 1) % 9
                     menu.click(menu.slots[index + 36])
                 }
@@ -188,14 +191,17 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
     }
 
     private fun getTooltips(slot: WardrobeSlot, width: Int, height: Int) = when (WardrobeConfig.tooltipType) {
-        WardrobeTooltipType.MINIMAL -> getSmallTooltip(slot, width, height)
+        WardrobeTooltipType.MINIMAL -> getSmallTooltip(slot)
         WardrobeTooltipType.WHOLE -> getWholeTooltip(slot, width, height)
         else -> Displays.empty()
     }
 
-    private fun getSmallTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
-        fun icon(loc: Identifier, i: Int) =
-            Displays.sprite(loc, 10, 10).withTooltip(slot.armor.getOrNull(i)?.takeUnless(ItemStack::isEmpty)?.getTooltipLines())
+    private fun getSmallTooltip(slot: WardrobeSlot) = DisplayFactory.vertical(spacing = 1) {
+        fun icon(loc: Identifier, i: Int): Display {
+            val stack = slot.slots.getOrNull(i)
+            val display = Displays.sprite(loc, 10, 10).withTooltip(stack?.takeUnless(ItemStack::isEmpty)?.getTooltipLines())
+            return if (stack != null) display.withIconographicCompat(stack) else display
+        }
 
         display(icon(HELMET_SMALL, 0))
         display(icon(CHESTPLATE_SMALL, 1))
@@ -205,12 +211,11 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
 
     private fun getWholeTooltip(slot: WardrobeSlot, width: Int, height: Int) = DisplayFactory.vertical(spacing = 1) {
         val boxHeight = height / 4
-        slot.armor.forEach {
-            display(Displays.empty(width, boxHeight).withTooltip(it.takeUnless(ItemStack::isEmpty)?.getTooltipLines()))
+        slot.slots.forEach {
+            display(Displays.empty(width, boxHeight).withTooltip(it.takeUnless(ItemStack::isEmpty)?.getTooltipLines()).withIconographicCompat(it))
         }
     }.withPadding(2)
 
-    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(
         graphics: GuiGraphicsExtractor,
         mouseX: Int,
@@ -220,7 +225,6 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
         graphics.applyBackgroundBlur()
         this.extractTransparentBackground(graphics)
     }
-    //~ }
 
     private fun LayoutBuilder.createButton(
         sprite: WidgetSprites,
