@@ -33,6 +33,11 @@ object WardrobeFeature {
 
     val wardrobeKeyBinds: MutableMap<MeowddingKeybind, Int> = mutableMapOf()
 
+    private var lastWidth = -1
+    private var lastHeight = -1
+    private var lastTitle = ""
+    private var currentPage = -1
+
     init {
         for (slot in 1..9) {
             wardrobeKeyBinds[
@@ -63,9 +68,16 @@ object WardrobeFeature {
     fun onContainerRender(event: RenderScreenBackgroundEvent) {
         if (!event.screen.isEnabled() || isEditing) return
 
-        var currentPage = -1
-        regex.match(event.screen.title.stripped, "currentPage") { (page) ->
-            currentPage = page.toIntOrNull() ?: 0
+        val title = event.screen.title.stripped
+        var needsInit = false
+
+        if (title != lastTitle) {
+            lastTitle = title
+            currentPage = -1
+            needsInit = true // Maybe not needed?
+            regex.match(title, "currentPage") { (page) ->
+                currentPage = page.toIntOrNull() ?: 0
+            }
         }
 
         if (currentPage == -1) return
@@ -75,8 +87,18 @@ object WardrobeFeature {
         WardrobeScreen.screen = event.screen
         WardrobeScreen.currentPage = currentPage
 
+        if (!needsInit) {
+            needsInit = event.screen.width != lastWidth || event.screen.height != lastHeight
+        }
+
+        if (needsInit) {
+            lastWidth = event.screen.width
+            lastHeight = event.screen.height
+
+            WardrobeScreen.init(event.screen.width, event.screen.height)
+        }
+
         val (mouseX, mouseY) = McClient.mouse
-        WardrobeScreen.init(event.screen.width, event.screen.height)
         WardrobeScreen.fullyRender(event.graphics, mouseX.toInt(), mouseY.toInt(), 0f)
     }
 

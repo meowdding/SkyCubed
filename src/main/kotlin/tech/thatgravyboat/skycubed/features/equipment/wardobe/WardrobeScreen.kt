@@ -8,6 +8,7 @@ import earth.terrarium.olympus.client.ui.UIConstants
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.builder.LayoutBuilder
 import me.owdding.lib.builder.LayoutFactory
+import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
 import me.owdding.lib.displays.withPadding
@@ -125,38 +126,69 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
         footer.visitWidgets(this::addRenderableWidget)
     }
 
-    private fun WardrobeSlot.getButton(displayWidth: Int, pageNumber: Int) = Widgets.button {
-        val displayHeight = (displayWidth * ASPECT_RATIO).toInt()
-        it.withRenderer { graphics, context, _ ->
-            val hovered = context.mouseX in context.x until context.x + context.width &&
-                context.mouseY in context.y until context.y + context.height
+    private class MutableEntityDisplay(
+        val entity: DisplayEntityPlayer,
+        @get:JvmName("getDisplayWidth") val width: Int,
+        @get:JvmName("getDisplayHeight") val height: Int,
+        val scale: Int
+    ) : Display {
+        var mouseX: Float = Float.NaN
+        var mouseY: Float = Float.NaN
+        private val delegate get() = Displays.entity(entity, width, height, scale, mouseX, mouseY)
 
-            val entityDisplay = Displays.entity(
-                DisplayEntityPlayer(CompletableFuture.completedFuture(McPlayer.skin), armor, pageNumber != currentPage),
-                displayWidth, displayHeight,
-                (displayWidth / 2.0).toInt(),
-                context.mouseX.toFloat() - context.x, context.mouseY.toFloat() - context.y,
-            )
+        override fun getWidth() = width
+        override fun getHeight() = height
+        override fun render(graphics: GuiGraphics) = delegate.render(graphics)
+    }
+
+    private fun WardrobeSlot.getButton(displayWidth: Int, pageNumber: Int) = Widgets.button {
+        var cachedBackground: Display? = null
+        var lastHovered = false
+        var lastSelected = false
+
+        val displayHeight = (displayWidth * ASPECT_RATIO).toInt()
+        val tooltipDisplay = getTooltips(this, displayWidth, displayHeight)
+        val entityDisplay = MutableEntityDisplay(
+            DisplayEntityPlayer(
+                CompletableFuture.completedFuture(McPlayer.skin),
+                armor,
+                pageNumber != currentPage
+            ),
+            displayWidth, displayHeight,
+            displayWidth / 2
+        )
+        it.withRenderer { graphics, context, _ ->
+            entityDisplay.mouseX = context.mouseX.toFloat() - context.x
+            entityDisplay.mouseY = context.mouseY.toFloat() - context.y
 
             if (WardrobeConfig.textured) {
                 entityDisplay.extract(graphics, context.x, context.y)
             } else {
-                ExtraDisplays.background(
-                    when {
-                        hovered -> BACKGROUND_COLOR_HOVERED
-                        else -> BACKGROUND_COLOR
-                    },
-                    BACKGROUND_RADIUS,
-                    when {
-                        hovered -> HOVER_COLOR
-                        id == WardrobeAPI.currentSlot -> SELECTED_COLOR
-                        else -> 0x0u
-                    },
-                    entityDisplay,
-                ).extract(graphics, context.x, context.y)
+                val hovered = context.mouseX >= context.x && context.mouseX < context.x + context.width &&
+                    context.mouseY >= context.y && context.mouseY < context.y + context.height
+                val isSelected = id == WardrobeAPI.currentSlot
+
+                if (cachedBackground == null || hovered != lastHovered || isSelected != lastSelected) {
+                    cachedBackground = ExtraDisplays.background(
+                        if (hovered) BACKGROUND_COLOR_HOVERED
+                        else BACKGROUND_COLOR,
+                        BACKGROUND_RADIUS,
+                        when {
+                            hovered -> HOVER_COLOR
+                            isSelected -> SELECTED_COLOR
+                            else -> 0x0u
+                        },
+                        entityDisplay,
+                    )
+                    lastHovered = hovered
+                    lastSelected = isSelected
+                }
+
+                cachedBackground.extract(graphics, context.x, context.y)
             }
+
             val yOffset = if (WardrobeConfig.textured) 0 else 5
-            getTooltips(this, displayWidth, displayHeight).extract(graphics, context.x, context.y + yOffset)
+            tooltipDisplay.extract(graphics, context.x, context.y + yOffset)
         }
         it.withTexture(
             when {
@@ -173,7 +205,7 @@ object WardrobeScreen : Screen(CommonText.EMPTY) {
                     menu.click(menu.slots[NEXT_PAGE_SLOT])
                 } else if (pageNumber < currentPage) {
                     menu.click(menu.slots[PREV_PAGE_SLOT])
-                } else if (!armor.all { it.isEmpty }) {
+                } else if (!armor.all { i -> i.isEmpty }) {
                     val index = (id - 1) % 9
                     menu.click(menu.slots[index + 36])
                 }
