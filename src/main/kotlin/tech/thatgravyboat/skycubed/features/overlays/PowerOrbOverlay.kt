@@ -60,7 +60,11 @@ object PowerOrbOverlay : SkyCubedOverlay {
             orbs = orbs.filter {
                 it.value.timeLeft > Duration.ZERO && it.key.isAlive
             }.toMutableMap()
-            val (entity, orb) = orbs.toList().sortedBy { it.second.deployable.ordinal }.maxByOrNull { it.second.deployable.ordinal } ?: return@vertical
+            val (entity, orb, inRange) = orbs.toList().map { (entity, orb) ->
+                Triple(entity, orb, sqrt(McPlayer.distanceSqr(entity.position())) <= orb.deployable.range())
+            }.maxByOrNull { (_, orb, inRange) ->
+                (if (inRange) Deployable.entries.size else 0) + orb.deployable.ordinal
+            } ?: return@vertical
             horizontal(5, alignment = Alignment.CENTER) {
                 if (PowerOrbOverlayConfig.spinningItem && orb.deployable.canSpin) {
                     display(ExtraDisplays.spinningItem(orb.deployable.item, ySpeed = -200, scale = 20 / 16f))
@@ -69,9 +73,6 @@ object PowerOrbOverlay : SkyCubedOverlay {
                 if (PowerOrbOverlayConfig.nameAndRange) {
                     vertical(alignment = Alignment.CENTER) {
                         string(orb.deployable.item.hoverName)
-                        val range = orb.deployable.range
-                        val distance = sqrt(McPlayer.distanceSqr(entity.position()))
-                        val inRange = distance <= range()
                         string(Text.of(if (inRange) "In Range" else "Out of Range", if (inRange) TextColor.GREEN else TextColor.RED))
                     }
                 }
@@ -198,4 +199,3 @@ object PowerOrbOverlay : SkyCubedOverlay {
         var timeLeft: Duration,
     )
 }
-
