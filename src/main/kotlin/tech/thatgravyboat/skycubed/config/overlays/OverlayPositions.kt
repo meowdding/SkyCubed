@@ -12,6 +12,7 @@ object OverlayPositions : CategoryKt("positions") {
     val mana = obj("mana", ConfigPosition(x = 54, y = 10, scale = 0.5f))
     val defense = obj("defense", ConfigPosition(x = 90, y = 3))
     val speed = obj("speed", ConfigPosition(x = 126, y = 3))
+    val vitality = obj("vitality", ConfigPosition(x = 90, y = 16))
     val commissions = obj("commissions", ConfigPosition(x = 0, y = 100))
     val sack = obj("sack", ConfigPosition(x = -300, y = 10))
     val attribute = obj("attribute", ConfigPosition(x = -300, y = 30))

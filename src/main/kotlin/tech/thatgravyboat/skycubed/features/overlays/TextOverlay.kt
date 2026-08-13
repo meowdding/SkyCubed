@@ -74,6 +74,12 @@ class TextOverlay(
                     Text.of("\uE022 ${speed.times(1000).round()}", TextColor.WHITE)
                 },
             ),
+            TextOverlay(
+                Text.of("Vitality"), OverlayPositions.vitality, { TextOverlaysConfig.vitalityEnabled },
+                {
+                    Text.of("\ue028 ${StatsAPI.vitaliy}/${StatsAPI.maxVitaliy}", TextColor.RED)
+                },
+            ),
         )
     }
 }

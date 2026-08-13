@@ -71,6 +71,10 @@
                     "@value": "Enable Speed Text Overlay",
                     "desc": "Enables the speed text overlay."
                 },
+                "vitality_enabled": {
+                    "@value": "Enable Vitality Text Overlay",
+                    "desc": "Enables the vitality text overlay."
+                },
                 "info": {
                     "@value": "Info HUD Overlay",
                     "desc": "Settings for the info HUD overlay.",

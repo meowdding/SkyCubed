@@ -7,7 +7,6 @@ import com.teamresourceful.resourcefulconfigkt.api.ObservableEntry
 import com.teamresourceful.resourcefulconfigkt.api.RConfigKtEntry
 import me.owdding.lib.displays.Alignment
 import net.minecraft.util.ARGB
-import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonDoorType
 import tech.thatgravyboat.skycubed.features.dungeonmap.DungeonRoomType
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
@@ -74,6 +73,10 @@ object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
 
     var speedEnabled by boolean(false) {
         this.translation = "skycubed.config.overlays.speed_enabled"
+    }
+
+    var vitalityEnabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.vitality_enabled"
     }
 }
 
