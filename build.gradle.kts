@@ -90,10 +90,17 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 tasks.processResources {
+    val range = if (versionedCatalog.versions.has("minecraft.range")) {
+        versionedCatalog.versions.get("minecraft.range").toString()
+    } else {
+        val start = versionedCatalog.versions.getOrFallback("minecraft.start", "minecraft")
+        val end = versionedCatalog.versions.getOrFallback("minecraft.end", "minecraft")
+        ">=$start <=$end"
+    }
+
     val replacements = mapOf(
         "version" to version,
-        "minecraft_start" to versionedCatalog.versions.getOrFallback("minecraft.start", "minecraft"),
-        "minecraft_end" to versionedCatalog.versions.getOrFallback("minecraft.end", "minecraft"),
+        "minecraft_range" to range,
         "fabric_lang_kotlin" to versionedCatalog.versions["fabric.language.kotlin"],
         "rlib" to versionedCatalog.versions["resourceful.lib"],
         "olympus" to versionedCatalog.versions["olympus"],
