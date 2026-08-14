@@ -39,6 +39,6 @@ object ParkInfo : InfoProvider {
 
     override fun getDisplay() = DisplayFactory.horizontal {
         display(getIconDisplay(SkyCubed.id("info/icons/bucket")))
-        string(rainTime ?: Text.of("N/A").withColor(TextColor.RED))
+        string(rainTime ?: Text.of("N/A", TextColor.RED))
     }
 }
