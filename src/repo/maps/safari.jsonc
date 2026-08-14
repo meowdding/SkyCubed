@@ -1,0 +1,22 @@
+{
+    "island": "SAFARI",
+    "default": "https://images.teamresourceful.com/u/LNmcVJ.png",
+    "topX": -181,
+    "topY": -119,
+    "bottomX": 62,
+    "bottomY": 106,
+    "pois": [
+        {
+            "tooltip": [
+                "§bLotus Atoll"
+            ],
+            "pos": {
+                "x": -15,
+                "y": 71,
+                "z": 1
+            },
+            "destination": "lotus",
+            "type": "portal"
+        }
+    ]
+}

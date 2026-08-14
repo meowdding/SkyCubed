@@ -4960,5 +4960,27 @@
                 "type": "npc"
             }
         ]
+    },
+    {
+        "island": "TORRHUS_CANYON",
+        "default": "http://images.teamresourceful.com/u/ugqhb2.png",
+        "topX": -771,
+        "topY": 127,
+        "bottomX": -498,
+        "bottomY": 311,
+        "pois": [
+            {
+                "tooltip": [
+                    "§bLotus Atoll"
+                ],
+                "pos": {
+                    "x": -15,
+                    "y": 71,
+                    "z": 1
+                },
+                "destination": "lotus",
+                "type": "portal"
+            }
+        ]
     }
 ]
