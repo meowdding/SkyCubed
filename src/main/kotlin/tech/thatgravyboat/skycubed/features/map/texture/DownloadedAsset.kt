@@ -18,6 +18,7 @@ object DownloadedAsset {
     private val ALLOWED_DOMAINS: Set<String> = setOf(
         "teamresourceful.com",
         "files.teamresourceful.com",
+        "images.teamresourceful.com",
         "raw.githubusercontent.com",
         "femboy-hooters.net",
         "api.dediamondpro.dev"

@@ -630,6 +630,8 @@
             "dungeon_hub": "Dungeon Hub",
             "jerrys_workshop": "Jerry's Workshop",
             "backwater": "Backwater Bayou",
+            "lotus_atoll": "Lotus Atoll",
+            "safari": "Critter Safari",
             "waypoints": {
                 "create": {
                     "title": "Create Waypoint",

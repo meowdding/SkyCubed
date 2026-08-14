@@ -8,15 +8,63 @@
     "pois": [
         {
             "tooltip": [
-                "§bLotus Atoll"
+                "§2Safari"
             ],
             "pos": {
-                "x": -15,
-                "y": 71,
-                "z": 1
+                "x": -50,
+                "y": 68,
+                "z": 25
             },
-            "destination": "lotus",
+            "destination": "safari",
             "type": "portal"
+        },
+        {
+            "texture": "http://textures.minecraft.net/texture/fc95a7707e2b571ae72c315e732ad81e729f83503d7594204d05051330c4dc37",
+            "link": "https://wiki.hypixel.net/$name",
+            "name": "§2Safari Manager",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -51,
+                "y": 68,
+                "z": 22
+            },
+            "type": "npc"
+        },
+        {
+            "texture": "http://textures.minecraft.net/texture/584ee174ff2607e4620fbb2330bec18d1190aae4b0b4cd5aca0010dbc5a52f05",
+            "link": "https://wiki.hypixel.net/$name",
+            "name": "§b\"Hunter\" Tobias",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -49,
+                "y": 66,
+                "z": 3
+            },
+            "type": "npc"
+        },
+        {
+            "texture": "http://textures.minecraft.net/texture/bed3b4353204f6907f9703b02219f3cc32f79c4f164fd4b5b3333a3016b3f69b",
+            "link": "https://wiki.hypixel.net/$name",
+            "name": "§6Archie",
+            "tooltip": [
+                "$name",
+                "",
+                "§7§lClick to view wiki!"
+            ],
+            "position": {
+                "x": -36,
+                "y": 65,
+                "z": 3
+            },
+            "type": "npc"
         }
     ]
 }

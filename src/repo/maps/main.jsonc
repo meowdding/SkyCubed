@@ -4963,7 +4963,7 @@
     },
     {
         "island": "TORRHUS_CANYON",
-        "default": "http://images.teamresourceful.com/u/ugqhb2.png",
+        "default": "https://images.teamresourceful.com/u/ugqhb2.png",
         "topX": -771,
         "topY": 127,
         "bottomX": -498,
@@ -4971,15 +4971,271 @@
         "pois": [
             {
                 "tooltip": [
-                    "§bLotus Atoll"
+                    "§6Torrhus Canyon"
                 ],
                 "pos": {
-                    "x": -15,
-                    "y": 71,
-                    "z": 1
+                    "x": -720,
+                    "y": 94,
+                    "z": 141
                 },
-                "destination": "lotus",
+                "destination": "torrhus",
                 "type": "portal"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/ac9dd7cc7ec4af23de1ea938b1d2bf20942ae9a649aa304d5d87b1eaed0cb2af",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§2Helia",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -690,
+                    "y": 93,
+                    "z": 156
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/8e0ca40dd210d8b8e0ea81875de51ba88376494ab1243bace8b3c2508a12117f",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§bSafari Shill",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -697,
+                    "y": 94,
+                    "z": 178
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/2280650aa78190c5a92922df44ba155a3cf0bafe4b356a3f2464b8a0991a3e2e",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§aSafari Receptionist",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -719,
+                    "y": 99,
+                    "z": 179
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/fc95a7707e2b571ae72c315e732ad81e729f83503d7594204d05051330c4dc37",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§2Safari Manager",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -732,
+                    "y": 99,
+                    "z": 186
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/6614f627c5b4499e546b267cb1777f2e9bd86fe7de2eca67884eb02662e9c3a5",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§aAndrea",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -711,
+                    "y": 108,
+                    "z": 179
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/bed3b4353204f6907f9703b02219f3cc32f79c4f164fd4b5b3333a3016b3f69b",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§6Archie",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -706,
+                    "y": 108,
+                    "z": 166
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/37f7a197ef273d049749d52bcd046e03aeb21bc5d55f4b5b9d944ccf2defd54f",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§aFreddy",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -694,
+                    "y": 95,
+                    "z": 201
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/388ab9514c11cbe0e8c39d63387e8cc6c1e94594f1dc2bd622789c73d6795d3d",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§bMiria",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -654,
+                    "y": 98,
+                    "z": 221
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/98bb9f931f705de9fedadac252df6519eef66a5f1ccf1df018160bc664c4d1f5",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§6Honey",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -627,
+                    "y": 99,
+                    "z": 227
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/63c7a8c5282a2851a1d9c371d55757feb0415e462dee075c2f4516e04c13f84",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§2Treehugger Timothy",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -541,
+                    "y": 110,
+                    "z": 277
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/b12550ed345055b119592afcc8904c73a99eaadcac7981a7481dc25be8b17940",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§bHunter Jean",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -665,
+                    "y": 145,
+                    "z": 171
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/46acd06e8483b176e8ea39fc12fe105eb3a2a4970f5100057e9d84d4b60bdfa7",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§bDory",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -645,
+                    "y": 161,
+                    "z": 195
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/cefe7efa8e9c35434c553448dcef77d8ddef4c0201674f4081c29fec0bd3a7e4",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§6Maxim",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -574,
+                    "y": 153,
+                    "z": 249
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/c60812527ebb2d72e6119effd0cce5f1f2966ad45edbb705ed04948aba6f1b74",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§2Sanger",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -746,
+                    "y": 93,
+                    "z": 262
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/f0b1bcaa331a2f8f185ec89d2d75f1449dd93c95552d187e84a27bbd278ea56b",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§bHunter McNeil",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -652,
+                    "y": 103,
+                    "z": 168
+                },
+                "type": "npc"
+            },
+            {
+                "texture": "http://textures.minecraft.net/texture/b35b15aeb2b31b8022a311d8b5ffeaee7e72777eb60551f9c0281dd0cadf486",
+                "link": "https://wiki.hypixel.net/$name",
+                "name": "§6Beekeeper Bartholomew",
+                "tooltip": [
+                    "$name",
+                    "",
+                    "§7§lClick to view wiki!"
+                ],
+                "position": {
+                    "x": -666,
+                    "y": 95,
+                    "z": 167
+                },
+                "type": "npc"
             }
         ]
     }
