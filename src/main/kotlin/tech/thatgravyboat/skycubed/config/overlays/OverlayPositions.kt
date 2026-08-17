@@ -7,7 +7,7 @@ object OverlayPositions : CategoryKt("positions") {
 
     override val hidden: Boolean = true
 
-    val rpg = obj("rpg", ConfigPosition(x = 5, y = 5))
+    val rpg = obj("rpg", ConfigPosition(x = 5, y = 10))
     val health = obj("health", ConfigPosition(x = 54, y = 16, scale = 0.5f))
     val mana = obj("mana", ConfigPosition(x = 54, y = 10, scale = 0.5f))
     val defense = obj("defense", ConfigPosition(x = 90, y = 3))

@@ -49,6 +49,7 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
         val base: RpgOverlayBase = RpgOverlayBase(119, 48),
         val mana: RpgOverlayElement? = RpgOverlayElement(47, 18, 57, 4),
         val health: RpgOverlayElement? = RpgOverlayElement(47, 23, 70, 5),
+        val vitality: RpgOverlayElement? = RpgOverlayElement(47, 13, 51, 4),
         val xpBar: RpgOverlayElement? = RpgOverlayElement(47, 29, 67, 4),
         val xpText: Vector2i? = Vector2i(3, 33),
         val extraBase: RpgOverlayElement? = RpgOverlayElement(38, 34, 64, 6),
@@ -71,6 +72,9 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
             OptionalDefaultedCodec("health", SkyCubedCodecs.getCodec()) { RpgOverlayElement(47, 23, 70, 5) }.forNullGetter(
                 RpgOverlayPosition::health,
             ),
+            OptionalDefaultedCodec("vitality", SkyCubedCodecs.getCodec()) { RpgOverlayElement(47, 13, 51, 4) }.forNullGetter(
+                RpgOverlayPosition::vitality,
+            ),
             OptionalDefaultedCodec("xpBar", SkyCubedCodecs.getCodec()) {
                 RpgOverlayElement(47, 29, 67, 4)
             }.forNullGetter(RpgOverlayPosition::xpBar),
@@ -79,12 +83,13 @@ object RpgOverlayPositionHandler : SimplePreparableReloadListener<RpgOverlayPosi
             OptionalDefaultedCodec("extraBar", SkyCubedCodecs.getCodec()) {
                 RpgOverlayElement(40, 34, 60, 4)
             }.forNullGetter(RpgOverlayPosition::extraBar),
-        ).apply(it) { player, base, mana, health, xpBar, xpText, extraBase, extraBar ->
+        ).apply(it) { player, base, mana, health, vitality, xpBar, xpText, extraBase, extraBar ->
             RpgOverlayPosition(
                 player.getOrNull(),
                 base,
                 mana.getOrNull(),
                 health.getOrNull(),
+                vitality.getOrNull(),
                 xpBar.getOrNull(),
                 xpText.getOrNull(),
                 extraBase.getOrNull(),

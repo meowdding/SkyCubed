@@ -32,6 +32,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
     private val HEALTH_POISON = SkyCubed.id("rpg/health/poison")
     private val HEALTH_WITHER = SkyCubed.id("rpg/health/wither")
     private val ABSORPTION = SkyCubed.id("rpg/health/absorption")
+    private val VITALITY = SkyCubed.id("rpg/vitality")
     private val MANA = SkyCubed.id("rpg/mana/normal")
     private val MANA_DEPLETED = SkyCubed.id("rpg/mana/depleted")
     private val MANA_NEEDED = SkyCubed.id("rpg/mana/needed")
@@ -54,6 +55,8 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
 
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
         val absorptionPercent = healthPercent - 1f
+
+        val vitalityPercent = StatsAPI.vitaliy.toFloat() / StatsAPI.maxVitaliy.toFloat()
 
         val totalManaPool = StatsAPI.maxMana.toFloat() + StatsAPI.overflowMana
         val overflowPercent = StatsAPI.overflowMana.toFloat() / totalManaPool
@@ -94,6 +97,10 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         if (positions.health != null) {
             graphics.blitSpritePercent(healthSprite, positions.health, healthPercent)
             graphics.blitSpritePercent(ABSORPTION, positions.health, absorptionPercent)
+        }
+
+        if (positions.vitality != null) {
+            graphics.blitSpritePercent(VITALITY, positions.vitality, vitalityPercent)
         }
 
         if (positions.mana != null) {
