@@ -42,7 +42,7 @@ interface Poi {
 
         fun createByType(type: String, vector3i: Vector3i): Poi? = when (type) {
             "portal" -> PortalPoi(mutableListOf(), vector3i, "")
-            "npc" -> NpcPoi("", "https://wiki.hypixel.net/\$name", "", mutableListOf(), vector3i)
+            "npc" -> NpcPoi("", "https://hypixelskyblock.minecraft.wiki/w/\$name", "", mutableListOf(), vector3i)
             "effigy" -> EffigyPoi(0)
             else -> {
                 Text.of("Can't created type $type").send()

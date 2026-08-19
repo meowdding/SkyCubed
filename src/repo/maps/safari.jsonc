@@ -20,7 +20,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/fc95a7707e2b571ae72c315e732ad81e729f83503d7594204d05051330c4dc37",
-            "link": "https://wiki.hypixel.net/$name",
+            "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§2Safari Manager",
             "tooltip": [
                 "$name",
@@ -36,7 +36,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/584ee174ff2607e4620fbb2330bec18d1190aae4b0b4cd5aca0010dbc5a52f05",
-            "link": "https://wiki.hypixel.net/$name",
+            "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§b\"Hunter\" Tobias",
             "tooltip": [
                 "$name",
@@ -52,7 +52,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/bed3b4353204f6907f9703b02219f3cc32f79c4f164fd4b5b3333a3016b3f69b",
-            "link": "https://wiki.hypixel.net/$name",
+            "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§6Archie",
             "tooltip": [
                 "$name",

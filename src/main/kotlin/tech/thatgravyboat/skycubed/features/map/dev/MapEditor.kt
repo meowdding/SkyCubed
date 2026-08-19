@@ -130,7 +130,7 @@ object MapEditor {
 
         val npc = NpcPoi(
             entity.texture,
-            "https://wiki.hypixel.net/\$name",
+            "https://hypixelskyblock.minecraft.wiki/w/\$name",
             "unknown",
             mutableListOf(
                 "\$name",

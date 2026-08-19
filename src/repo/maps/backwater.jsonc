@@ -22,7 +22,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/aa4503e7f161985d02731a306735ae94e407c790f5eb47b63119077dd883476b",
-            "link": "https://wiki.hypixel.net/$name",
+          "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§2Junker Joel",
             "tooltip": [
                 "$name",
@@ -38,7 +38,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/a8741e1be7ccee7a7b66d19ac0f6f436fae68d4adf3e75d20f595221c229301",
-            "link": "https://wiki.hypixel.net/$name",
+          "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§dHattie",
             "tooltip": [
                 "$name",
@@ -54,7 +54,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/c2a3659e6b99646f2d4ab1c7b3a1c92113bbd97b73df919ae014beda87b8daab",
-            "link": "https://wiki.hypixel.net/$name",
+          "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§bJonesy",
             "tooltip": [
                 "$name",
@@ -70,7 +70,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/4dca97153c4e98bf5d620face19df9de104bb60f88441a6996580810613eef47",
-            "link": "https://wiki.hypixel.net/$name",
+          "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§2Carly",
             "tooltip": [
                 "$name",
@@ -90,7 +90,7 @@
             },
             "poi": {
                 "texture": "http://textures.minecraft.net/texture/a5474de2c6394063dd2f0575b43d82fa550ab5f7644bf15fa001fec5f33b2a75",
-                "link": "https://wiki.hypixel.net/$name",
+              "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Researcher Gilbert",
                 "tooltip": [
                     "$name",
@@ -108,7 +108,7 @@
         },
         {
             "texture": "http://textures.minecraft.net/texture/17cad9f27d74de3e59f2a517d04a282e2cf86e4c5e40639daeca7b1aae7f5a71",
-            "link": "https://wiki.hypixel.net/$name",
+          "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
             "name": "§2Roddy",
             "tooltip": [
                 "$name",

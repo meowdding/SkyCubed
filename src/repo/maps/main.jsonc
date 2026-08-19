@@ -43,7 +43,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cd654531816ec7200a6a461d7a03c2dadf31f449a591c85f3b31cb2a83dd7366",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Clerk Seraphine",
                 "tooltip": [
                     "$name",
@@ -59,7 +59,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9017b6acf22deb1686293d7cccffe40901aa5aa4a6fa90f8e1217114e1d37302",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dElizabeth",
                 "tooltip": [
                     "$name",
@@ -75,7 +75,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7019289055890c1211acd3725a70f05155e6ec16ea8326c37f41b21612661db8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Biblio",
                 "tooltip": [
                     "$name",
@@ -95,7 +95,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/d4cd9c707c7092d4759fe2b2b6a713215b6e39919ec4e7afb1ae2b6f8576674c",
-                    "link": "https://wiki.hypixel.net/$name_(NPC)",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name_(NPC)",
                     "name": "§6Bingo",
                     "tooltip": [
                         "$name",
@@ -113,7 +113,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b6298ded6a8c9e6cdfb5db0e54eb3529f8b08fe0b0709b10471ff467eff84661",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cSecurity Sloth",
                 "tooltip": [
                     "$name",
@@ -129,7 +129,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5314d27844eadea55035e350575a19ea0e44c155e08bdcaa1091ea1143b6ed83",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Hub Selector",
                 "tooltip": [
                     "$name",
@@ -145,7 +145,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/31971d796dc4dc9af38cc97067963de4ed2bf999224257416dfb841488fd9e0d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Auction Master",
                 "tooltip": [
                     "$name",
@@ -165,7 +165,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/8e2e182e24f3e3665338dbdc62e24551a5ccc4119fef3b5f8d4ea4e9edf450c1",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§6Auction Agent",
                     "tooltip": [
                         "$name",
@@ -187,7 +187,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/18614241b980319c02f5ee3ae1a7fc7ebf8b3fdd5301ed3d4e2159a80dae1d2c",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§6Auction Agent",
                     "tooltip": [
                         "$name",
@@ -205,7 +205,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c232e3820897429157619b0ee099fec0628f602fff12b695de54aef11d923ad7",
-                "link": "https://wiki.hypixel.net/$name_(NPC)",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name_(NPC)",
                 "name": "§6Bazaar",
                 "tooltip": [
                     "$name",
@@ -225,7 +225,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/6c9453b589e177670d86f3e5d4f1713133ad792bf8c54fa61d07b5044d57db99",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§6Bazaar Agent",
                     "tooltip": [
                         "$name",
@@ -243,7 +243,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/3f1e8f9f5cea7baf56d9e0791057a7b23e79356e7683ed3f4760eaa6fc5dc4b1",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Banker",
                 "tooltip": [
                     "$name",
@@ -259,7 +259,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c8ccd4fdf58b30aa83017cfa5fed977196c024c8d1a276004e9068e8ecbb0b79",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Builder",
                 "tooltip": [
                     "$name",
@@ -275,7 +275,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ec36394d774ade59c25618494d0515d90f2bd2f2b4472ba3c038d750953f9a43",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Mad Redstone Engineer",
                 "tooltip": [
                     "$name",
@@ -291,7 +291,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/64e587c08b3403d761cdafe54f4d530cbe14b4c5c2a01e87ea18af11d0e04c20",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Wool Weaver",
                 "tooltip": [
                     "$name",
@@ -307,7 +307,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2d5955cc5af6fa3390df36c9a23a3264c8426991e7533ad2d081f41ea130c63b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Amelia",
                 "tooltip": [
                     "$name",
@@ -323,7 +323,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/987b8952be2a29a57d7f0e788f79fcfdc1fbd25ffec012fbfef34d7be4639b49",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Christopher",
                 "tooltip": [
                     "$name",
@@ -339,7 +339,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2bbcf73a4603b5aa5491cefc155f770de1a82466a5850604ba5ea24980cb5479",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Zog",
                 "tooltip": [
                     "$name",
@@ -355,7 +355,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/bc1354d525ca150ea27aa06f8d8db498dcc0b59c3f2776dedd83742f539dfa0f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Fann",
                 "tooltip": [
                     "$name",
@@ -371,7 +371,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e3c34b9e51f352d6c69c821a1fc29f500509803a1eec024c387015b5c43c773a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Bea",
                 "tooltip": [
                     "$name",
@@ -387,7 +387,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/eaae812775706b56596683486abeaf857ea1c068cb34a8bc1de9a57c638cf411",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bKat",
                 "tooltip": [
                     "$name",
@@ -403,7 +403,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/99bb13737979f98ba236e37ae48fd5dddedba719ec62068e8ac962abf7e07d83",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "George",
                 "tooltip": [
                     "$name",
@@ -419,7 +419,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/18ca0c89bef8c4e7e521b113821ffdf00e7b5eb552a378f9037cbec655dd27c8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bTaylor",
                 "tooltip": [
                     "$name",
@@ -435,7 +435,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c8aac4e631398c0f47fe85615e7f49215500040bb90819d568e824acf94bfa4e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Seymor",
                 "tooltip": [
                     "$name",
@@ -451,7 +451,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b35cb38b86c4ebb637fc02d37f73dfbfeb17f46267d819b3828add469d93e39a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§9Fisherwoman Enid",
                 "tooltip": [
                     "$name",
@@ -467,7 +467,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/94f9077b2657e4d8e799be1a0fbc1bbf76643212864f125af408fa294479ef5a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Karis",
                 "tooltip": [
                     "$name",
@@ -483,7 +483,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/db5647f93fd8e1da9cdb151dd9bdf4f48bb59a1d11748f1918c136c86804b2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Alda",
                 "tooltip": [
                     "$name",
@@ -499,7 +499,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/fce6604157fc4ab5591e4bcf507a749918ee9c41e357d47376e0ee7342074c90",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Alchemist",
                 "tooltip": [
                     "$name",
@@ -515,7 +515,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/83903844873998fdca8f95c23b06e1095494fdff2cf33824a5c560e4654274fc",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Farm Merchant",
                 "tooltip": [
                     "$name",
@@ -531,7 +531,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cc2e819906eb179439b8dd5551132e54eb47173e0f458861ad2a8c9379183891",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Arthur",
                 "tooltip": [
                     "$name",
@@ -547,7 +547,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7b8bb1b48f4babc67ce39547208fdbed722ca598cdf30681e367c6247cab1918",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Jacob",
                 "tooltip": [
                     "$name",
@@ -563,7 +563,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4d4e9d2a8c88d0efd750e852732ba05fa3f302e204e2bdc88dad605e2557e2a6",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Anita",
                 "tooltip": [
                     "$name",
@@ -579,7 +579,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/87e7193a0c3ff82c18927d5a73015f057d087ff92c4bce1557be4623d30950ff",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Shania",
                 "tooltip": [
                     "$name",
@@ -595,7 +595,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/45232a8e85a6750836c5dfbc3404c3ab3145349620f0bc5208dedb16bb4c4830",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Farmer Rigby",
                 "tooltip": [
                     "$name",
@@ -611,7 +611,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7dfa07fd1244eb8945f4ededd00426750b77ef5dfbaf03ed775633459ece415a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Blacksmith",
                 "tooltip": [
                     "$name",
@@ -627,7 +627,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7dfa07fd1244eb8945f4ededd00426750b77ef5dfbaf03ed775633459ece415a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Smithmonger",
                 "tooltip": [
                     "$name",
@@ -643,7 +643,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7ca85c1563bf569d88bf7bc375cbc820d7d4a73c92aaf7d9479af5ef5255d040",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Dusk",
                 "tooltip": [
                     "$name",
@@ -659,7 +659,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/608990656492d722a8ea896b816d01911368b387a2ac4bc74f70a0aedd7eb7f8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Mining Merchant",
                 "tooltip": [
                     "$name",
@@ -675,7 +675,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/1db85032146106b19f0bed06caa03ab999f08079676804e6e0df2ff1d28e2cb1",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Jax",
                 "tooltip": [
                     "$name",
@@ -691,7 +691,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/af3f7a69c9a7ad95e90f212da304990c8be36e93197db874c2b0fe08106e323b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Weaponsmith",
                 "tooltip": [
                     "$name",
@@ -707,7 +707,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4103073f716ffd371882d94ba5af0e5e5c0d37619c4a1dba5996afd73225873b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Rosetta",
                 "tooltip": [
                     "$name",
@@ -723,7 +723,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/329bdc074719895a239e6e59fc019ef28256cf74a33342e1b83dd862fa963090",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Richard",
                 "tooltip": [
                     "$name",
@@ -739,7 +739,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/3d56620e40ddb46135681890a04a4488a70230a6cdbec3afe307d2eaba56a7de",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Liz",
                 "tooltip": [
                     "$name",
@@ -755,7 +755,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/af88490e20ba3472e42ba946366dc1cdd1da527641470c876b1974b866be378e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Zarina",
                 "tooltip": [
                     "$name",
@@ -771,7 +771,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8d34f38c1bb106e11908ad3cc90162c18b863d678265c84a84a358903f8f7a1c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Adventurer",
                 "tooltip": [
                     "$name",
@@ -787,7 +787,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/44cdf4a842c1dce3ad2cfae40366e539e9f4f057a39bdb777e3c19f2ea686e82",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Maxwell",
                 "tooltip": [
                     "$name",
@@ -803,7 +803,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/bf9b5156083f5a77997763baee9b4a3eace92aa4239c6b538371145a12029894",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Ozanne",
                 "tooltip": [
                     "$name",
@@ -819,7 +819,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5b1a684e274f61bd250d8ddce571c81666c3056ccf2f3df5d0a3d60274bd3e8c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Jacobus",
                 "tooltip": [
                     "$name",
@@ -835,7 +835,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e66a53fc707ce1ff88a576ef40200ce8d49fae4acad1e3b3789c7d1cc1cc541a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Librarian",
                 "tooltip": [
                     "$name",
@@ -851,7 +851,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/738c687dd8887c509d55865ebb62ab6087ef743e9425cd5dc6b4c7b93b747ff2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Maddox the Slayer",
                 "tooltip": [
                     "$name",
@@ -867,7 +867,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/aabd19aefdfdac7e27dea62166b41f9c134841a2906f704f22d0d3cd04cf3c0f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Dante",
                 "tooltip": [
                     "$name",
@@ -887,7 +887,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/ad265b004b410052ff15bc09ac8c48e8ef0ca9aa66f37b44644175667f14f606",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§cMalik",
                     "tooltip": [
                         "$name",
@@ -909,7 +909,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/9b56895b9659896ad647f58599238af532d46db9c1b0389b8bbeb70999dab33d",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§bMort",
                     "tooltip": [
                         "$name",
@@ -931,7 +931,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/fc57e3398daeb32d8d82a3394f9381de2a57f643896ede0db9a656a7068c789",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§cOphelia",
                     "tooltip": [
                         "$name",
@@ -949,7 +949,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/92396b0ad352b2531139c9dc4cef9a32350c7cc14ed7bcfc5185ce15a7a7d5eb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§7Pat",
                 "tooltip": [
                     "$name",
@@ -965,7 +965,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e66a53fc707ce1ff88a576ef40200ce8d49fae4acad1e3b3789c7d1cc1cc541a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Maths Enjoyer",
                 "tooltip": [
                     "$name",
@@ -981,7 +981,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6825030e7752faf7f816ac2a20b11432af4b2cde4932dc0e920831e621808ee8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Lumber Jack",
                 "tooltip": [
                     "$name",
@@ -997,7 +997,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7c4f1befa02b09fa349f02986fb4f4b520cb81a0c52ffbb5bddd0740b0f030f5",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Lumber Merchant",
                 "tooltip": [
                     "$name",
@@ -1013,7 +1013,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cc8d2a5af975c53cf081b531566148bae366141314b35aa5726e97cc97ef118b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Carpenter",
                 "tooltip": [
                     "$name",
@@ -1029,7 +1029,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7dfa07fd1244eb8945f4ededd00426750b77ef5dfbaf03ed775633459ece415a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Apprentice",
                 "tooltip": [
                     "$name",
@@ -1045,7 +1045,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5ada8751790c7ade03d3a8ac32506a3ded18cbfae812689d03f6f34c7a962628",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Lonely Philosopher",
                 "tooltip": [
                     "$name",
@@ -1079,7 +1079,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/aa2ac614e533328c07a25cebcb02a40d3bc41c1cc2c24a65065f830b05952c4f",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§dElise",
                     "tooltip": [
                         "$name",
@@ -1101,7 +1101,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/5eaee7e51a87693a8fb7fe430a887ffb27eeb9749cea816d65245e2df655cf32",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§bUdium",
                     "tooltip": [
                         "$name",
@@ -1123,7 +1123,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/91f07c6336e43659c517374639bf6c96d84eb8240802ecdfba4a5f5449987471",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§9Erihann",
                     "tooltip": [
                         "$name",
@@ -1145,7 +1145,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/320673a7a552fac094661b838b75fb7ab1200e691de7beec0a846a9e9781058d",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Grumblefoot",
                     "tooltip": [
                         "$name",
@@ -1163,7 +1163,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2f69ab2f4e7341ac262597083ca38ad01bfbbf8730fbfbdd10ca90aee337a2dd",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dWizard",
                 "tooltip": [
                     "$name",
@@ -1183,7 +1183,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/48a3d43283f12ab1fa4d1b901df897589140f4cc1f6748222e574cdc70ce83a4",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Nicole",
                     "tooltip": [
                         "$name",
@@ -1215,7 +1215,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/73f072940a942b953a3f9d1391ff342b7d19076f7a1a3e944040d6420c7d4980",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dTia the Fairy",
                 "tooltip": [
                     "$name",
@@ -1231,7 +1231,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6c01b213574f630616dd00b7a3bc61774fd7d467136476bd7b7a99ec25ee2757",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Shifty",
                 "tooltip": [
                     "$name",
@@ -1247,7 +1247,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e4d8951cd209768db5715bdc443621a5452d25f4eb5b6a1c0e7286b1842941f9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Lucius",
                 "tooltip": [
                     "$name",
@@ -1267,7 +1267,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/f71caac6bec64066042cf5bfbd9dff2dddeeab1c6956f351e18d82714b56b12b",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "§bGladiator",
                     "tooltip": [
                         "$name",
@@ -1285,7 +1285,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9ba3c4f582fc8749e3d8e35ef1e63280c4752e4ac83aab69f674dac24a375803",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bVincent",
                 "tooltip": [
                     "$name",
@@ -1301,7 +1301,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4945d06438f7fff291ccd15b156e3fb872bc25cd8e22a5f765c703eb339f8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Marco",
                 "tooltip": [
                     "$name",
@@ -1317,7 +1317,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6742e9341f64774c5f9da6cfd4a44cf2497bc124b2d47473ac7b85251d489787",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bGwynnie",
                 "tooltip": [
                     "$name",
@@ -1333,7 +1333,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a675f071efb0cf27bf16081e3f82f9b5f8ae88eca9ee9523b6216e617f6f45c9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§1Fisherman Gerald",
                 "tooltip": [
                     "$name",
@@ -1349,7 +1349,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7dfa07fd1244eb8945f4ededd00426750b77ef5dfbaf03ed775633459ece415a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Plumber Joe",
                 "tooltip": [
                     "$name",
@@ -1365,7 +1365,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/52c4ee0479b901f177c286895da310a806dfe897c9a8678b9de88abbb1bff4b1",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bFishing Merchant",
                 "tooltip": [
                     "$name",
@@ -1381,7 +1381,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4c4eaf9939e5c0d964cffc953e35c12106cfed9d5ab0cee15b69a162a270407",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dAngler Angus",
                 "tooltip": [
                     "$name",
@@ -1397,7 +1397,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d6e3756d8cfac54055bcd5525d2a3abefe6cef77924f8a99846bea2feff76114",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bGavin",
                 "tooltip": [
                     "$name",
@@ -1413,7 +1413,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/371c44ad407c021737ad78907b5068d7bcc0c658b2a2fbabf01706563bd9447d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Captain Baha",
                 "tooltip": [
                     "$name",
@@ -1429,7 +1429,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e9e23be7f04556fa33351a4c771a3f05f4a6d27de413a36d0230c61f71698799",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Guy",
                 "tooltip": [
                     "$name",
@@ -1445,7 +1445,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/287934bdd9df2705b251bb997e029b18c1e94df12992b8107e74497b205ca7e8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Bro",
                 "tooltip": [
                     "$name",
@@ -1461,7 +1461,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/bc0cc67e79c228e541e68aeb1d81ed7af51166622ad4db9417d7a29d1b89af95",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dCoach Rabbit",
                 "tooltip": [
                     "$name",
@@ -1477,7 +1477,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a982825c01b658f348a099b4579029a180d2e415183951b2e6e5e27257df4254",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Cousin",
                 "tooltip": [
                     "$name",
@@ -1493,7 +1493,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/35ca98bede3865dd1205e4d091036cd9dc36791b83ea4e0ff4a99ad61b71e898",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Dog",
                 "tooltip": [
                     "$name",
@@ -1509,7 +1509,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d6eb2d85ee8e3af1c2ec934beb70a39c5e766b23bdab63210bd2aacd73cbbfc8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Granny",
                 "tooltip": [
                     "$name",
@@ -1525,7 +1525,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a865176723a0b9ee2916180a55a04cccb7704ad1f31fdf3e9d89c798f6802e6b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Uncle",
                 "tooltip": [
                     "$name",
@@ -1541,7 +1541,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/57cab0c34d7ddcf72db56ff36f2883f554cff76eb5d3b3e0562338036c976043",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Daddy",
                 "tooltip": [
                     "$name",
@@ -1557,7 +1557,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/fd076e0e3d4072d0fffee0a87a5d726fc34b2bcec38c264fb9b67871a8ead633",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bRabbit Sis",
                 "tooltip": [
                     "$name",
@@ -1577,7 +1577,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/2ed4fb341e2540a551f20d0fd6023a3480dab3a60b49f3827e87adf55b20474f",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1595,7 +1595,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6633f1e8da8bff44b91744dd59c3ce28104b3f8914d9e92efa2d25f2f9a75788",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cRabbit Security",
                 "tooltip": [
                     "$name",
@@ -1615,7 +1615,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/2ed4fb341e2540a551f20d0fd6023a3480dab3a60b49f3827e87adf55b20474f",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1637,7 +1637,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/48945a50b25ed9c03f3b29fd54c24591e1cbf18cec1229184f267479dd06196a",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1659,7 +1659,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/2ed4fb341e2540a551f20d0fd6023a3480dab3a60b49f3827e87adf55b20474f",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1681,7 +1681,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/48945a50b25ed9c03f3b29fd54c24591e1cbf18cec1229184f267479dd06196a",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1703,7 +1703,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/97c794079bd57e0efb42cf793ad39eda71a8f2eb3d870a907e72b18390aff9b2",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1725,7 +1725,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/9bdfef77476896b940deb7b609c7167cac3be33166e2422c6be2a30fece903ab",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Finance Rabbit",
                     "tooltip": [
                         "$name",
@@ -1743,7 +1743,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4a3ff897d3287af820a1f24004340e3af6257dc5f8dc0f8d2f9dbebdc53e366b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5The Handler",
                 "tooltip": [
                     "$name",
@@ -1759,7 +1759,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b7e0fc8df9067d393c977f1f34025634223db145e9403dc32c311889e3365965",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Madame Eleanor Q. Goldsworth III",
                 "tooltip": [
                     "$name",
@@ -1775,7 +1775,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ff22b034d3721d1fad70828e375925ba41b5f952873cd9fc6dbbe1e80be7beb5",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dCurrator",
                 "tooltip": [
                     "$name",
@@ -1819,7 +1819,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/952bb48af2f57d6ac9c8e875c0c9877a3953f0480817d2841e586e747c87ce0c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bSalesman",
                 "tooltip": [
                     "$name",
@@ -1835,7 +1835,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6632bdf1162b4bfb159da9c0dc61b0d3f998a0c1540c1b43513d6f09a642e8c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Damia",
                 "tooltip": [
                     "$name",
@@ -1851,7 +1851,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a898ad58d3664cfacf1bf11aad9f513d25a8b9bb91a77382b32c10b7d0a4bc9b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Scoop",
                 "tooltip": [
                     "$name",
@@ -1867,7 +1867,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/eedd8f16b202c42b3b5ad457d436cc639952107e361ab1e61b91689e40c78be7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Bartender",
                 "tooltip": [
                     "$name",
@@ -1887,7 +1887,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/eedd8f16b202c42b3b5ad457d436cc639952107e361ab1e61b91689e40c78be7",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Bartender",
                     "tooltip": [
                         "$name",
@@ -1957,7 +1957,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/86b9f56b817676d513556584b32bb9c6aa0ddd512d1d1aadfe6a58a29052fef8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Haymitch",
                 "tooltip": [
                     "$name",
@@ -1973,7 +1973,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/aaef517998b9d93f62d00567cf6bc68851a34bd99f370698f8b6d62d9de4c3e4",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cBramass Beastslayer",
                 "tooltip": [
                     "$name",
@@ -1989,7 +1989,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/258f88dcbd2af110c77cffaa00eab7a499c00133e61575599d9e06e61b8a24a6",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cShaggy",
                 "tooltip": [
                     "$name",
@@ -2005,7 +2005,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/839193c09bcad9d1f901afef4e2c0cad83aae1a570335c3ecbc7d05fde198795",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cGrandma Wolf",
                 "tooltip": [
                     "$name",
@@ -2021,7 +2021,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/92396b0ad352b2531139c9dc4cef9a32350c7cc14ed7bcfc5185ce15a7a7d5eb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Rick",
                 "tooltip": [
                     "$name",
@@ -2037,7 +2037,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8ef40a38742d18d33041fae0e43bb3405c21e576f6321bbee0636e7214d6eff2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cSpider Tamer",
                 "tooltip": [
                     "$name",
@@ -2053,7 +2053,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/685e83a09951a2c2db78360bc9546bb0d454975b5e5a344ca1daff408a67e9f1",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bArchaeologist",
                 "tooltip": [
                     "$name",
@@ -2069,7 +2069,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e0130271c816e36ab17f8ef5ef06304c8cbda95230788285412bf53466b07034",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Ike",
                 "tooltip": [
                     "$name",
@@ -2085,7 +2085,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/394776dc5c46307b1f1b730d3596cc33838ae90634f8100da598bccfe37466fa",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Michael",
                 "tooltip": [
                     "$name",
@@ -2153,7 +2153,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5766eb097bb486b3ea707ac1313a1bfff8846a2f55460082cef212f189130f1c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Charlie",
                 "tooltip": [
                     "$name",
@@ -2169,7 +2169,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/49e2979c8e2c58898c2774b3669ea4a1b29767fcdc2dd5937ec0cf0da3a8fb67",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Vanessa",
                 "tooltip": [
                     "$name",
@@ -2185,7 +2185,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6eb3f9e2ac0dd5f974e0ae710ee74f1d8e96e866a530b0f4b4177b9e635f34d7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Kelly",
                 "tooltip": [
                     "$name",
@@ -2201,7 +2201,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cfafe6f5014c52c0e973592984906ae1d19e8105e2dcfd7eacbe01ef87ce320c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§aGustave",
                 "tooltip": [
                     "$name",
@@ -2217,7 +2217,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cd51043d6a18fc014f264b1e7d7fc1833afa8cf6ca29f2b8f691fdf54dafefda",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bMelancholic Viking",
                 "tooltip": [
                     "$name",
@@ -2233,7 +2233,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5176cb13a4436318ae4c2bc31df09d556192daebb70a3b28020f7ab9ca1709bb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cRyan",
                 "tooltip": [
                     "$name",
@@ -2249,7 +2249,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/57a517865b820a4451cd3cc6765f370fd0522b6489c9c94fb345fdee2689451a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Old Shaman Nyko",
                 "tooltip": [
                     "$name",
@@ -2265,7 +2265,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/92b7acbfa9308a22e7506a36bccafd0160afa0d500818efee9fa9835214c14fa",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Master Tactician Funk",
                 "tooltip": [
                     "$name",
@@ -2281,7 +2281,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4d238ccc818ab0c0fdebd07d4a56c353ff5eb541c85d386362161781d1dd74cc",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Melody §d♫",
                 "tooltip": [
                     "$name",
@@ -2297,7 +2297,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f20783e2743b8976b00f827ee283675d7911140c98284239f6bc1c8dd1d27c81",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Molbert",
                 "tooltip": [
                     "$name",
@@ -2313,7 +2313,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/621aabed3ba8b88b8de343b267bc49b2df0468c0ba4f20feb9852b74c22f3020",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Juliette",
                 "tooltip": [
                     "$name",
@@ -2329,7 +2329,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b3351f22f63b43f40fa8e28def66b73b17ba265773fe9980971da2f1515032d9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Romero",
                 "tooltip": [
                     "$name",
@@ -2345,7 +2345,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d20913d84bbf14c7c6c70204ff684980178f59859d5dbe6804e5c90de64c7642",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Worker Xavier",
                 "tooltip": [
                     "$name",
@@ -2371,7 +2371,7 @@
         "pois": [
             {
                 "texture": "http://textures.minecraft.net/texture/d6f9b9b62404c5cf94c385c7f1c86adde0d9aef9a9cd29e2ab583fa1de63f426",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Hungry Hiker",
                 "tooltip": [
                     "$name",
@@ -2429,7 +2429,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/55a0b07e36eafdecf059c8cb134a7bf0a167f900966f1099252d903276461cce",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Farmhand",
                 "tooltip": [
                     "$name",
@@ -2445,7 +2445,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cabb2c04635a29b08e161d859b11bdadb75a29d3c64df7e84a108c37f7f83c0",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Beth",
                 "tooltip": [
                     "$name",
@@ -2461,7 +2461,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/3fcb4296285e331a936030072be716fcb4b7ba3e3f5447793294c03eee1c927c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Mason",
                 "tooltip": [
                     "$name",
@@ -2477,7 +2477,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c35a20f5780c667c5f576ba6307db61b35a3c9f3adc6a865454725f4e77a112",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Friendly Hiker",
                 "tooltip": [
                     "$name",
@@ -2493,7 +2493,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/282904d3c4fce8291718dae90995e1373871cb69e228cc204495620a1a0ec50a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Farmer Jon",
                 "tooltip": [
                     "$name",
@@ -2509,7 +2509,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/1d34fcf772631b818d2c6afb878e393376707a2b57019b5ff870d6952fddd11a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Tony",
                 "tooltip": [
                     "$name",
@@ -2525,7 +2525,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6102f82148461ced1f7b62e326eb2db3a94a33cba81d4281452af4d8aeca4991",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Trevor",
                 "tooltip": [
                     "$name",
@@ -2541,7 +2541,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9b688545e326e4f1fd1c405873d9c5b8bbe69dd26889ce3dea10b4d9e3d7b4db",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Moby",
                 "tooltip": [
                     "$name",
@@ -2557,7 +2557,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d51cc7c1d11aa0a08a73cbc184547051aebd07b3bb50d86f1188fd7a7dad2ed3",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Jake",
                 "tooltip": [
                     "$name",
@@ -2573,7 +2573,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/eeaf43c747497e20fe0667d67810aa1f3cb0aeb96fcc94b7ce18f5d165c8284d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Treasure Hunter",
                 "tooltip": [
                     "$name",
@@ -2589,7 +2589,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7a8ab2267ae443e83b05e3a8d67b8b760adfaad335c9047338c0e1774a65c372",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Shepherd",
                 "tooltip": [
                     "$name",
@@ -2605,7 +2605,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a7dc94fb7165f7470ff2557bd3bcda5798dd3fafb9991504fccfad721cc42262",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Hunter Ava",
                 "tooltip": [
                     "$name",
@@ -2621,7 +2621,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/55a0b07e36eafdecf059c8cb134a7bf0a167f900966f1099252d903276461cce",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Windmill Operator",
                 "tooltip": [
                     "$name",
@@ -2641,7 +2641,7 @@
                 },
                 "poi": {
                     "texture": "http://textures.minecraft.net/texture/cedc6e772d50e63556bfde914e785c75489361fcc7985164c40b300e7f91bc08",
-                    "link": "https://wiki.hypixel.net/$name",
+                    "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                     "name": "Tammy",
                     "tooltip": [
                         "$name",
@@ -2697,7 +2697,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2333aa2414bcf1c291fddf6a9b0f805f996546ec4150ff3cef10bd529cc98261",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cElle",
                 "tooltip": [
                     "$name",
@@ -2713,7 +2713,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6a826b59c43ff020674efad9793a448b0b010786652d36114e6166f3acbbe68b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§eMaster Tao",
                 "tooltip": [
                     "$name",
@@ -2729,7 +2729,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/60990bf8914544d3f58acd9341cf51e1f5375566c2756692ec81ec5a54d180bc",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cArch",
                 "tooltip": [
                     "$name",
@@ -2745,7 +2745,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/37cca696327683e2309e20a5c171e9ae01bbe330703099b6218bab4e01277fb4",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§eBarbarian Guard",
                 "tooltip": [
                     "$name",
@@ -2761,7 +2761,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/37cca696327683e2309e20a5c171e9ae01bbe330703099b6218bab4e01277fb4",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§eBarbarian Guard",
                 "tooltip": [
                     "$name",
@@ -2777,7 +2777,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b56e0ad486e3aa7d0f10f432f2164c68eb5b0fb2bc320ca7ac41f5ddd6e7630b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§e§lChief Scorn",
                 "tooltip": [
                     "$name",
@@ -2793,7 +2793,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/4afabbae24c1945188f72f8592ae1a35038698e6784558559e2c05f012b33599",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dSuus",
                 "tooltip": [
                     "$name",
@@ -2809,7 +2809,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2ff966461b4bd68df3ff7c6adae0cda5f27ac853a16e2a2c7849b3c026101390",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dBruuh",
                 "tooltip": [
                     "$name",
@@ -2825,7 +2825,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/666cb1b66ec5811be8db4381161c615ba7c96db3541720f0fc543a810c5c0e8a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dGrog",
                 "tooltip": [
                     "$name",
@@ -2841,7 +2841,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2ff966461b4bd68df3ff7c6adae0cda5f27ac853a16e2a2c7849b3c026101390",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dNall",
                 "tooltip": [
                     "$name",
@@ -2857,7 +2857,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f3b3d4cfbcd4ad0fc3f0342891d94e883a82b5b65f9df29a8d99ca0c44dccecb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dKutral",
                 "tooltip": [
                     "$name",
@@ -2873,7 +2873,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9cc5c5d29854357a399ee65f86f2ffdba3add0b0357c5bf11562bfe978234426",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dDeng",
                 "tooltip": [
                     "$name",
@@ -2889,7 +2889,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ef4e48404b5ceb88e708646b7ba0b64c4640473b8daa16e4b37f92ab3fe85ac2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Auction Master",
                 "tooltip": [
                     "$name",
@@ -2905,7 +2905,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ef4e48404b5ceb88e708646b7ba0b64c4640473b8daa16e4b37f92ab3fe85ac2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Auction Helper",
                 "tooltip": [
                     "$name",
@@ -2921,7 +2921,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ef4e48404b5ceb88e708646b7ba0b64c4640473b8daa16e4b37f92ab3fe85ac2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Auction Helper",
                 "tooltip": [
                     "$name",
@@ -2937,7 +2937,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b9c075ac7d93936a49fb0fb255b38e837ef07f9871830613a421890e4568662d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Banker",
                 "tooltip": [
                     "$name",
@@ -2953,7 +2953,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/1b895de201d97205c1cbbcaf28cd191c8fc4dc8ee896bfd6f274697aea8c9e3f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dPorc",
                 "tooltip": [
                     "$name",
@@ -2969,7 +2969,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/95fa13cc26539853fea59552b2e5e9016dc414dda2f837b72aa959f7f173cf3",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dJine",
                 "tooltip": [
                     "$name",
@@ -2985,7 +2985,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/63630d9b02088ea1924a872242abc75b6262c2aca92aecf8714a57a41eea0b9d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dStrux",
                 "tooltip": [
                     "$name",
@@ -3001,7 +3001,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/17f7bd102631111aaa4223c2a7e6428d2a8a94b0d81408ec35fc3d5add75d0b9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dChihai",
                 "tooltip": [
                     "$name",
@@ -3017,7 +3017,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5951d7428cd5f4a73f9428e8b3075f717dbfdd28679c4ec842bff8a0d51299df",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dMarthos",
                 "tooltip": [
                     "$name",
@@ -3033,7 +3033,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/17f7bd102631111aaa4223c2a7e6428d2a8a94b0d81408ec35fc3d5add75d0b9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dAn",
                 "tooltip": [
                     "$name",
@@ -3049,7 +3049,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2ff966461b4bd68df3ff7c6adae0cda5f27ac853a16e2a2c7849b3c026101390",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dBaar",
                 "tooltip": [
                     "$name",
@@ -3065,7 +3065,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2cc903e243cb5d15fafcc04df3fe6d114f1db63df3fabfdaa1910e7809914f57",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dYoink",
                 "tooltip": [
                     "$name",
@@ -3081,7 +3081,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d2ad33d667449a7e10480d322b0b2766f1a1fff9e5c019b00c5257c25ee2ad41",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dTruu",
                 "tooltip": [
                     "$name",
@@ -3097,7 +3097,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9cc5c5d29854357a399ee65f86f2ffdba3add0b0357c5bf11562bfe978234426",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dPomtair",
                 "tooltip": [
                     "$name",
@@ -3113,7 +3113,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f3b3d4cfbcd4ad0fc3f0342891d94e883a82b5b65f9df29a8d99ca0c44dccecb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dPlenk",
                 "tooltip": [
                     "$name",
@@ -3129,7 +3129,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/63630d9b02088ea1924a872242abc75b6262c2aca92aecf8714a57a41eea0b9d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dBarbarian Emissary",
                 "tooltip": [
                     "$name",
@@ -3145,7 +3145,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2ff966461b4bd68df3ff7c6adae0cda5f27ac853a16e2a2c7849b3c026101390",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dIgor",
                 "tooltip": [
                     "$name",
@@ -3161,7 +3161,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2cc903e243cb5d15fafcc04df3fe6d114f1db63df3fabfdaa1910e7809914f57",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dLasea",
                 "tooltip": [
                     "$name",
@@ -3177,7 +3177,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2ff966461b4bd68df3ff7c6adae0cda5f27ac853a16e2a2c7849b3c026101390",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dKaus",
                 "tooltip": [
                     "$name",
@@ -3193,7 +3193,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/63630d9b02088ea1924a872242abc75b6262c2aca92aecf8714a57a41eea0b9d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cKuudra Archaeologist",
                 "tooltip": [
                     "$name",
@@ -3209,7 +3209,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2cc903e243cb5d15fafcc04df3fe6d114f1db63df3fabfdaa1910e7809914f57",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dGris",
                 "tooltip": [
                     "$name",
@@ -3225,7 +3225,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/804b2253c24d814bef3199f0a8611eeab54f7ce2ebf71a4bbe0028eb1a7bb08f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dSirih",
                 "tooltip": [
                     "$name",
@@ -3241,7 +3241,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7fb672571623fc427477af584ed1f6b0a6a5714c872e4234119e02b5a34bbc",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dCorm",
                 "tooltip": [
                     "$name",
@@ -3257,7 +3257,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/973ec2ad381fc8831a8a6a238f38d8006ca51d56542dd9919e4955b9ac89af4d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Odger",
                 "tooltip": [
                     "$name",
@@ -3273,7 +3273,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f226538302f8796dd96b3525df2f060cb65fa09f29c3cb6073ae92e007e0d38f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Mage Emissary",
                 "tooltip": [
                     "$name",
@@ -3289,7 +3289,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7aeae71e34580887a0b7e38164b4a2159abe219d4cab9454d979b1c603cc0b76",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dColore",
                 "tooltip": [
                     "$name",
@@ -3305,7 +3305,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d8ed8aea24a58d9e2c0e8d74d70492ff908491631514533ec814d51deb77b7c7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Alwin",
                 "tooltip": [
                     "$name",
@@ -3321,7 +3321,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/54e50795ca428aabc3f38026cdcf744498c9810d922026b8baeba17d4fe26356",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Offea",
                 "tooltip": [
                     "$name",
@@ -3337,7 +3337,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b0dac3131afa83ec50a9d653b84f7c087966ee614d5c50e63eba08b433efbd8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dSelenar",
                 "tooltip": [
                     "$name",
@@ -3353,7 +3353,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/528581630628409f84df20c502c687f6e24fa74c1cb7a9a41d77be17ef63ce2e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Elmar",
                 "tooltip": [
                     "$name",
@@ -3369,7 +3369,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5008b6003c607ca8340bd53f4d55dd2d3451be120de7b35406ffd6d7100c90d7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Belanor",
                 "tooltip": [
                     "$name",
@@ -3385,7 +3385,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5d0c25fd9d32e1204a1d32e5d95a2f1cfa09525a8f98e1deef5b2a3c77f98a8c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Udel",
                 "tooltip": [
                     "$name",
@@ -3401,7 +3401,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f226538302f8796dd96b3525df2f060cb65fa09f29c3cb6073ae92e007e0d38f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§eZiri",
                 "tooltip": [
                     "$name",
@@ -3417,7 +3417,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/54e50795ca428aabc3f38026cdcf744498c9810d922026b8baeba17d4fe26356",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Hilda",
                 "tooltip": [
                     "$name",
@@ -3433,7 +3433,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/81a704158fda337dcecf5ec19d6723d17ccae3a310667924f37dd96202edbd0a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Ezekiel",
                 "tooltip": [
                     "$name",
@@ -3449,7 +3449,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b4182c695239748c2cf0b8bf69c5430b98ff061141cb8dbbf8facccbbb45ff27",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Rulenor",
                 "tooltip": [
                     "$name",
@@ -3465,7 +3465,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/405db41a3555560be0d447f1c2edbc57dae5addccafbf90b3d0a802766db01bb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Carrolyn",
                 "tooltip": [
                     "$name",
@@ -3481,7 +3481,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/405db41a3555560be0d447f1c2edbc57dae5addccafbf90b3d0a802766db01bb",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dArba",
                 "tooltip": [
                     "$name",
@@ -3497,7 +3497,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d8ed8aea24a58d9e2c0e8d74d70492ff908491631514533ec814d51deb77b7c7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dAbadak",
                 "tooltip": [
                     "$name",
@@ -3513,7 +3513,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5d0c25fd9d32e1204a1d32e5d95a2f1cfa09525a8f98e1deef5b2a3c77f98a8c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dMazakala",
                 "tooltip": [
                     "$name",
@@ -3529,7 +3529,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5d0c25fd9d32e1204a1d32e5d95a2f1cfa09525a8f98e1deef5b2a3c77f98a8c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dIgrupan",
                 "tooltip": [
                     "$name",
@@ -3545,7 +3545,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ef7a4ddde2bf681ed9bfb9f89e9a4397d1ec9e3b7d109e6f56b6ed5222baa013",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§eAlchemage",
                 "tooltip": [
                     "$name",
@@ -3561,7 +3561,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5b5a3b961823bec47e4e8ac23e7a3b2ae736c9c81347fa2b1be03c68c41faa1e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Velyna",
                 "tooltip": [
                     "$name",
@@ -3577,7 +3577,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c0cd626baf163cfd4fe768f4753f80d50dd1197700e4c3a2d5850cf79beb0947",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Kheharad",
                 "tooltip": [
                     "$name",
@@ -3593,7 +3593,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5d0c25fd9d32e1204a1d32e5d95a2f1cfa09525a8f98e1deef5b2a3c77f98a8c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Odexar",
                 "tooltip": [
                     "$name",
@@ -3609,7 +3609,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5b5a3b961823bec47e4e8ac23e7a3b2ae736c9c81347fa2b1be03c68c41faa1e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Rhanora",
                 "tooltip": [
                     "$name",
@@ -3625,7 +3625,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7aeae71e34580887a0b7e38164b4a2159abe219d4cab9454d979b1c603cc0b76",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Seffea",
                 "tooltip": [
                     "$name",
@@ -3641,7 +3641,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/54e50795ca428aabc3f38026cdcf744498c9810d922026b8baeba17d4fe26356",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Ulyn",
                 "tooltip": [
                     "$name",
@@ -3657,7 +3657,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b560b6ee2afab78d567f0f1d15104e1fbba5734df73dec49e7f3ed8b9cef606d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Mollim",
                 "tooltip": [
                     "$name",
@@ -3673,7 +3673,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9b3bce03918e4baef733ce4780796a9278935ada0c01aaf5b177dfced6e87b8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§d§lQueen Nyx",
                 "tooltip": [
                     "$name",
@@ -3689,7 +3689,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b560b6ee2afab78d567f0f1d15104e1fbba5734df73dec49e7f3ed8b9cef606d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Lys",
                 "tooltip": [
                     "$name",
@@ -3705,7 +3705,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d8ed8aea24a58d9e2c0e8d74d70492ff908491631514533ec814d51deb77b7c7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Rollim",
                 "tooltip": [
                     "$name",
@@ -3721,7 +3721,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b8f2535a6c963141883717cd10ca2fafb602022aa532ab88c67171fac9a81074",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cAvorius",
                 "tooltip": [
                     "$name",
@@ -3737,7 +3737,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/52439b7110e8a1fb9a63e39391eefe58a2e7d048117f4081ebea326644637a0",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Dean",
                 "tooltip": [
                     "$name",
@@ -3753,7 +3753,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c0cd626baf163cfd4fe768f4753f80d50dd1197700e4c3a2d5850cf79beb0947",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Scholar Alluin",
                 "tooltip": [
                     "$name",
@@ -3769,7 +3769,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f226538302f8796dd96b3525df2f060cb65fa09f29c3cb6073ae92e007e0d38f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Eludore",
                 "tooltip": [
                     "$name",
@@ -3785,7 +3785,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d8ed8aea24a58d9e2c0e8d74d70492ff908491631514533ec814d51deb77b7c7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Cyndarin",
                 "tooltip": [
                     "$name",
@@ -3801,7 +3801,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/775ea42050a478f28394884120b42091aa4212154876dc3d72062aea07cac0e9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§eDesperate Engineer",
                 "tooltip": [
                     "$name",
@@ -3817,7 +3817,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/35e248da2e108f09813a6b848a0fcef111300978180eda41d3d1a7a8e4dba3c3",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cAranya",
                 "tooltip": [
                     "$name",
@@ -3833,7 +3833,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e7f9b8b809985ba98dd6124fe385f6a4466aa6e18249a1fe637cb65c40dfc797",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cVulcan",
                 "tooltip": [
                     "$name",
@@ -3849,7 +3849,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ff94b7e38d8a2d4049e7b1eb43fca78ab424c56980ec4b8debcba10347a726e7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cKuudra Gatekeeper",
                 "tooltip": [
                     "$name",
@@ -3865,7 +3865,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/dc7b83f81e58f2a117985c662771833c34da684417c3aa7e2960b01275e31e9a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§cKuudra Believer",
                 "tooltip": [
                     "$name",
@@ -3881,7 +3881,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/bed099416323172c9d1ff832e1ae17e4ba55fe00fbd0eeb0326f9cfbc6d5949",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Aura",
                 "tooltip": [
                     "$name",
@@ -3897,7 +3897,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b9c075ac7d93936a49fb0fb255b38e837ef07f9871830613a421890e4568662d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Barter",
                 "tooltip": [
                     "$name",
@@ -3913,7 +3913,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/5b5a3b961823bec47e4e8ac23e7a3b2ae736c9c81347fa2b1be03c68c41faa1e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Velyna",
                 "tooltip": [
                     "$name",
@@ -3981,7 +3981,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/77f7b51ca6966be2decfeb3d585d2d654193b03cb8c13658a4369b5914dfe86c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Pearl Dealer",
                 "tooltip": [
                     "$name",
@@ -3997,7 +3997,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8fcc53a860c4d621bb75fc86b97b12cb3d6d977f8eb983e7458f5e261b3d1279",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dGuber",
                 "tooltip": [
                     "$name",
@@ -4013,7 +4013,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8d34f38c1bb106e11908ad3cc90162c18b863d678265c84a84a358903f8f7a1c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Lone Adventurer",
                 "tooltip": [
                     "$name (Step 1 & 2)",
@@ -4029,7 +4029,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/63c4edd1c27db3162e92f870810fce3646dcbf8ef5ebb46f2ddad5d88425e2ee",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§5Tyzzo",
                 "tooltip": [
                     "$name",
@@ -4045,7 +4045,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8d34f38c1bb106e11908ad3cc90162c18b863d678265c84a84a358903f8f7a1c",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Lone Adventurer",
                 "tooltip": [
                     "$name (After Step 2)",
@@ -4085,7 +4085,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/37ca0ff17936be33eaa317624db4744fc3f292e612357858453258e4f9e7ca79",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Gold Forger",
                 "tooltip": [
                     "$name",
@@ -4101,7 +4101,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/e66a53fc707ce1ff88a576ef40200ce8d49fae4acad1e3b3789c7d1cc1cc541a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Rusty",
                 "tooltip": [
                     "$name",
@@ -4117,7 +4117,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d93d9636aa9556acf4be2cc58d93ff0b532e68098f80a7dc151a0f1d16b8e5f8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Lazy Miner",
                 "tooltip": [
                     "$name",
@@ -4133,7 +4133,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/661e1a3a94bf22caf2825b2f1676cad37a164e4774f278376f7293b431434f18",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Iron Forger",
                 "tooltip": [
                     "$name",
@@ -4149,7 +4149,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/7dfa07fd1244eb8945f4ededd00426750b77ef5dfbaf03ed775633459ece415a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Blacksmith",
                 "tooltip": [
                     "$name",
@@ -4235,7 +4235,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLift Operator",
                 "tooltip": [
                     "$name",
@@ -4251,7 +4251,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLift Operator",
                 "tooltip": [
                     "$name",
@@ -4267,7 +4267,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLift Operator",
                 "tooltip": [
                     "$name",
@@ -4283,7 +4283,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLift Operator",
                 "tooltip": [
                     "$name",
@@ -4299,7 +4299,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLift Operator",
                 "tooltip": [
                     "$name",
@@ -4315,7 +4315,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8652a06f7b99e4822b495ba9b6089d4d5151e83bed956a7cccb847ea46a25725",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLift Operator",
                 "tooltip": [
                     "$name",
@@ -4331,7 +4331,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/43ac21b653a27632dbc8373c6e6fba5b8c97b7ecbfef2d793630d149b116ba81",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Walter",
                 "tooltip": [
                     "$name",
@@ -4347,7 +4347,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6b20b23c1aa2be0270f016b4c90d6ee6b8330a17cfef87869d6ad60b2ffbf3b5",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dRhys",
                 "tooltip": [
                     "$name",
@@ -4363,7 +4363,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9503c00890326605067ff16fffbc2d0502251b3680c1acc1d68cd3d064d0577",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Redstone Miner",
                 "tooltip": [
                     "$name",
@@ -4379,7 +4379,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/bfaaf5de0d25ae26b287a2ba51961b968a3add8bbc2472e97a76fdc68ce41f78",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Lapis Miner",
                 "tooltip": [
                     "$name",
@@ -4437,7 +4437,7 @@
         "pois": [
             {
                 "texture": "http://textures.minecraft.net/texture/513be4d37a35840024b26f8d623ff14119e761784592f1a2cc4b01fca8fb7b2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bHina",
                 "tooltip": [
                     "$name",
@@ -4453,7 +4453,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/375c57dcc85a4c6037f52af00fdcef404f746276c0d31a22b2a550c6aed932ee",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bSwoop",
                 "tooltip": [
                     "$name",
@@ -4469,7 +4469,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/62c1a365dbabf9098962d27bda8919a94253c91ccb6c353da4f6406f4316ffab",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bDavid Hunterborough",
                 "tooltip": [
                     "$name",
@@ -4485,7 +4485,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/613328c0a46f97f1e7af86c45934aca87008612721b51b3efeae75a5f40c80fd",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bKysha",
                 "tooltip": [
                     "$name",
@@ -4501,7 +4501,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bAmaury",
                 "tooltip": [
                     "$name",
@@ -4517,7 +4517,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/86e7bcfc056908ce267062140c5343503fb08bde81da9962a1b6649aa9591098",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bAlbert",
                 "tooltip": [
                     "$name",
@@ -4533,7 +4533,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bLoras",
                 "tooltip": [
                     "$name",
@@ -4549,7 +4549,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bAuryon",
                 "tooltip": [
                     "$name",
@@ -4565,7 +4565,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bPounce",
                 "tooltip": [
                     "$name",
@@ -4581,7 +4581,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bOden",
                 "tooltip": [
                     "$name",
@@ -4597,7 +4597,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/9c78b9459f8c64c9d62cc227224c6db7fa31cb31cbe144907e10bb70eb17b60f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Banker Bonsai",
                 "tooltip": [
                     "$name",
@@ -4613,7 +4613,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bAlan",
                 "tooltip": [
                     "$name",
@@ -4629,7 +4629,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§aTeddy",
                 "tooltip": [
                     "$name",
@@ -4645,7 +4645,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8af610d5c4aa82943cfbb47b437adb84e0f4e3781dbfed70a7f18e60d778c56f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bKiara",
                 "tooltip": [
                     "$name",
@@ -4661,7 +4661,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/fce6604157fc4ab5591e4bcf507a749918ee9c41e357d47376e0ee7342074c90",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§dCoral",
                 "tooltip": [
                     "$name",
@@ -4677,7 +4677,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/107f1657ebfedd0c34730be7d863c5aab64faa429808aa10e952f04feb6a27b8",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bJaeger",
                 "tooltip": [
                     "$name",
@@ -4693,7 +4693,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d8f11c2b1eb0568cac64f976e50e0e45f3c09a65801e7ed72734b1a99f1606ca",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bNemo",
                 "tooltip": [
                     "$name",
@@ -4709,7 +4709,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c228d11c94322aa26aafc8f46b54cf7eea7387e77ebd19f4f20dfe877bffa655",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bMartin",
                 "tooltip": [
                     "$name",
@@ -4725,7 +4725,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/abdb6f57df6e84518f67b4235412774c4f61c72b91a2b740b06a50a0f7347e21",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bTalia",
                 "tooltip": [
                     "$name",
@@ -4741,7 +4741,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8af610d5c4aa82943cfbb47b437adb84e0f4e3781dbfed70a7f18e60d778c56f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bVaeri",
                 "tooltip": [
                     "$name",
@@ -4757,7 +4757,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b3f1a4f00cbb0b04a780f4720fdc5ccc76828a129be950d56e5f79b54453fe51",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bBoris",
                 "tooltip": [
                     "$name",
@@ -4773,7 +4773,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/d50ae3482d83898e0e55c1516b1ead1a7d1cd54ccf4c24343869a28bd5621f04",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bSawyer",
                 "tooltip": [
                     "$name",
@@ -4789,7 +4789,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2ce524d14f6fbe764f87fb3a25109335e494606f9ddd1193eb04b01be9d91f17",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§3Brian",
                 "tooltip": [
                     "$name",
@@ -4805,7 +4805,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a8856eaafad96d76fa3b5edd0e3b5f45ee49a3067306ad94df9ab3bd5b2d142d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Soul Campfire Initiate",
                 "tooltip": [
                     "$name",
@@ -4821,7 +4821,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a8856eaafad96d76fa3b5edd0e3b5f45ee49a3067306ad94df9ab3bd5b2d142d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Soul Campfire Adept",
                 "tooltip": [
                     "$name",
@@ -4837,7 +4837,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/a8856eaafad96d76fa3b5edd0e3b5f45ee49a3067306ad94df9ab3bd5b2d142d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "Soul Campfire Initiate",
                 "tooltip": [
                     "$name",
@@ -4853,7 +4853,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8d5c739358283ddb0ed30df07f7438e18424b0186b595df2266e0dbde34655f2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bDax",
                 "tooltip": [
                     "$name",
@@ -4869,7 +4869,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/19043d3d31c5e76fda79493fd13e6f8f3161a1a3d8ec74c65792f03406a3a1a3",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§aRosemary",
                 "tooltip": [
                     "$name",
@@ -4899,7 +4899,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/aac66af77e58ba9b89175831f96d100f0562c2326bb2dd43184942adafbf825a",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bSalvage Old Attributes",
                 "tooltip": [
                     "$name",
@@ -4915,7 +4915,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8de120debcc6c5873bf73232cb6bf9677240aa3718412b12929313211e7e42f9",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bTilus",
                 "tooltip": [
                     "$name",
@@ -4945,7 +4945,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/dd2180e4bd153cb49ba4906098604c17858ea4516ffbf04cfe50feae4be476f2",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bAgatha",
                 "tooltip": [
                     "$name",
@@ -4983,7 +4983,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/ac9dd7cc7ec4af23de1ea938b1d2bf20942ae9a649aa304d5d87b1eaed0cb2af",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Helia",
                 "tooltip": [
                     "$name",
@@ -4999,7 +4999,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/8e0ca40dd210d8b8e0ea81875de51ba88376494ab1243bace8b3c2508a12117f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bSafari Shill",
                 "tooltip": [
                     "$name",
@@ -5015,7 +5015,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/2280650aa78190c5a92922df44ba155a3cf0bafe4b356a3f2464b8a0991a3e2e",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§aSafari Receptionist",
                 "tooltip": [
                     "$name",
@@ -5031,7 +5031,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/fc95a7707e2b571ae72c315e732ad81e729f83503d7594204d05051330c4dc37",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Safari Manager",
                 "tooltip": [
                     "$name",
@@ -5047,7 +5047,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/6614f627c5b4499e546b267cb1777f2e9bd86fe7de2eca67884eb02662e9c3a5",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§aAndrea",
                 "tooltip": [
                     "$name",
@@ -5063,7 +5063,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/bed3b4353204f6907f9703b02219f3cc32f79c4f164fd4b5b3333a3016b3f69b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Archie",
                 "tooltip": [
                     "$name",
@@ -5079,7 +5079,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/37f7a197ef273d049749d52bcd046e03aeb21bc5d55f4b5b9d944ccf2defd54f",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§aFreddy",
                 "tooltip": [
                     "$name",
@@ -5095,7 +5095,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/388ab9514c11cbe0e8c39d63387e8cc6c1e94594f1dc2bd622789c73d6795d3d",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bMiria",
                 "tooltip": [
                     "$name",
@@ -5111,7 +5111,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/98bb9f931f705de9fedadac252df6519eef66a5f1ccf1df018160bc664c4d1f5",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Honey",
                 "tooltip": [
                     "$name",
@@ -5127,7 +5127,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/63c7a8c5282a2851a1d9c371d55757feb0415e462dee075c2f4516e04c13f84",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Treehugger Timothy",
                 "tooltip": [
                     "$name",
@@ -5143,7 +5143,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b12550ed345055b119592afcc8904c73a99eaadcac7981a7481dc25be8b17940",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bHunter Jean",
                 "tooltip": [
                     "$name",
@@ -5159,7 +5159,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/46acd06e8483b176e8ea39fc12fe105eb3a2a4970f5100057e9d84d4b60bdfa7",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bDory",
                 "tooltip": [
                     "$name",
@@ -5175,7 +5175,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/cefe7efa8e9c35434c553448dcef77d8ddef4c0201674f4081c29fec0bd3a7e4",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Maxim",
                 "tooltip": [
                     "$name",
@@ -5191,7 +5191,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/c60812527ebb2d72e6119effd0cce5f1f2966ad45edbb705ed04948aba6f1b74",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§2Sanger",
                 "tooltip": [
                     "$name",
@@ -5207,7 +5207,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/f0b1bcaa331a2f8f185ec89d2d75f1449dd93c95552d187e84a27bbd278ea56b",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§bHunter McNeil",
                 "tooltip": [
                     "$name",
@@ -5223,7 +5223,7 @@
             },
             {
                 "texture": "http://textures.minecraft.net/texture/b35b15aeb2b31b8022a311d8b5ffeaee7e72777eb60551f9c0281dd0cadf486",
-                "link": "https://wiki.hypixel.net/$name",
+                "link": "https://hypixelskyblock.minecraft.wiki/w/$name",
                 "name": "§6Beekeeper Bartholomew",
                 "tooltip": [
                     "$name",
