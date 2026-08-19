@@ -55,13 +55,9 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
     override val actualBounds get() = exampleDisplay.getWidth() to exampleDisplay.getHeight()
     override val editBounds: Rect
         get() {
-            if (display != null) {
-                val (x, y) = position
-                val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
-                val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
-                return Rect(x + relativeX, y + relativeY, display?.getWidth() ?: 0, display?.getHeight() ?: 0)
-            }
-            return Rect(position, exampleDisplay.getWidth(), exampleDisplay.getHeight())
+            val width = display?.getWidth() ?: exampleDisplay.getWidth()
+            val height = display?.getHeight() ?: exampleDisplay.getHeight()
+            return Rect(position, width, height)
         }
 
     private var display: Display? = null
@@ -76,9 +72,7 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
         if (this.isEditing()) {
             exampleDisplay.extract(graphics)
         } else if (display != null && PickupLogOverlayConfig.enabled) {
-            val relativeX = if (position.isRight()) exampleDisplay.getWidth() - display!!.getWidth() else 0
-            val relativeY = if (position.isBottom()) exampleDisplay.getHeight() - display!!.getHeight() else 0
-            display!!.extract(graphics, relativeX, relativeY)
+            display!!.extract(graphics)
         }
     }
 
