@@ -80,6 +80,14 @@ class TextOverlay(
                     Text.of("\ue028 ${StatsAPI.vitaliy}/${StatsAPI.maxVitaliy}", TextColor.RED)
                 },
             ),
+            TextOverlay(
+                Text.of("Air"),
+                OverlayPositions.air,
+                { TextOverlaysConfig.airEnabled && (TextOverlaysConfig.showAirWhenFull || McPlayer.air < McPlayer.maxAir) },
+                {
+                    Text.of("○ ${McPlayer.air}/${McPlayer.maxAir}", TextColor.WHITE)
+                },
+            ),
         )
     }
 }

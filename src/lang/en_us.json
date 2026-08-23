@@ -75,6 +75,14 @@
                     "@value": "Enable Vitality Text Overlay",
                     "desc": "Enables the vitality text overlay."
                 },
+                "air_enabled": {
+                    "@value": "Enable Air Text Overlay",
+                    "desc": "Enables the air text overlay."
+                },
+                "show_air_when_full": {
+                    "@value": "Show Air When Full",
+                    "desc": "Shows the air text overlay even when the air bar is full."
+                },
                 "info": {
                     "@value": "Info HUD Overlay",
                     "desc": "Settings for the info HUD overlay.",

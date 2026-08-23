@@ -78,6 +78,14 @@ object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
     var vitalityEnabled by boolean(false) {
         this.translation = "skycubed.config.overlays.vitality_enabled"
     }
+
+    var airEnabled by boolean(false) {
+        this.translation = "skycubed.config.overlays.air_enabled"
+    }
+
+    var showAirWhenFull by boolean(false) {
+        this.translation = "skycubed.config.overlays.air_show_when_full"
+    }
 }
 
 object SackOverlayConfig : OverlayConfig("Edit Sack Overlay") {
