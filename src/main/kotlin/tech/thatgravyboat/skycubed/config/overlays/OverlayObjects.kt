@@ -84,7 +84,7 @@ object TextOverlaysConfig : OverlayConfig("Edit Text Overlays") {
     }
 
     var showAirWhenFull by boolean(false) {
-        this.translation = "skycubed.config.overlays.air_show_when_full"
+        this.translation = "skycubed.config.overlays.show_air_when_full"
     }
 }
 
