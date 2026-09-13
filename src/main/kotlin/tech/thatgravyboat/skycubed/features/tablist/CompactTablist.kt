@@ -1,6 +1,7 @@
 package tech.thatgravyboat.skycubed.features.tablist
 
 import me.owdding.ktmodules.Module
+import me.owdding.lib.config.MeowddingLibConfig
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
@@ -164,7 +165,7 @@ object CompactTablist {
                 isGuild -> addExtraTag("ɢ", TextColor.DARK_GREEN)
                 else -> {}
             }
-            contributor?.symbol?.let { extraEmblems.add(it) }
+            contributor?.symbol?.let { if (MeowddingLibConfig.suffixCosmetic) extraEmblems.add(it) }
         }
         return this
     }
