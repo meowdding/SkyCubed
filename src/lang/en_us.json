@@ -382,7 +382,7 @@
                         "@value": "Item Text Alignment",
                         "desc": "The alignment of the item text overlay.\n§lNote: This will only work if the item text overlay is moveable."
                     },
-                    "color": {
+                    "background_color": {
                         "@value": "Background Color",
                         "desc": "The color of the background of the item text overlay."
                     },
