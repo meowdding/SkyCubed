@@ -77,7 +77,7 @@ class TextOverlay(
             TextOverlay(
                 Text.of("Vitality"), OverlayPositions.vitality, { TextOverlaysConfig.vitalityEnabled },
                 {
-                    Text.of("\ue028 ${StatsAPI.vitaliy}/${StatsAPI.maxVitaliy}", TextColor.RED)
+                    Text.of("\ue028 ${StatsAPI.vitality}/${StatsAPI.maxVitality}", TextColor.RED)
                 },
             ),
             TextOverlay(

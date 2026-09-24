@@ -2,14 +2,14 @@ package tech.thatgravyboat.skycubed.features.map.screen
 
 import com.mojang.blaze3d.platform.InputConstants
 import com.mojang.blaze3d.platform.cursor.CursorTypes
+import earth.terrarium.olympus.client.components.base.BaseWidget
 import earth.terrarium.olympus.client.utils.State
-import me.owdding.lib.platform.screens.BaseWidget
-import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.waypoints.MeowddingWaypoint
 import me.owdding.lib.waypoints.MeowddingWaypointHandler
 import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.PlayerFaceExtractor
+import net.minecraft.client.input.MouseButtonEvent
 import net.minecraft.util.Mth
 import org.joml.component1
 import org.joml.component2
@@ -141,7 +141,7 @@ class MapsWidget(
     }
 
     override fun mouseDragged(event: MouseButtonEvent, deltaX: Double, deltaY: Double): Boolean {
-        if (event.button == InputConstants.MOUSE_BUTTON_LEFT) {
+        if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
             xOffset -= deltaX / scale
             zOffset -= deltaY / scale
             return true
@@ -161,7 +161,7 @@ class MapsWidget(
 
     override fun mouseClicked(event: MouseButtonEvent, doubleClick: Boolean): Boolean {
         val poi = getPoiAt(event.x, event.y)
-        if (event.button == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
+        if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
             if (MapEditor.enabled && !event.hasShiftDown()) {
                 McClient.setScreenAsync { MapPoiEditScreen(poi.first, poi.second.pois, McScreen.self) }
                 return true

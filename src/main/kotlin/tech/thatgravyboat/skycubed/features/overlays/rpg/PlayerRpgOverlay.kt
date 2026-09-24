@@ -56,7 +56,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
         val healthPercent = StatsAPI.health.toFloat() / StatsAPI.maxHealth.toFloat()
         val absorptionPercent = healthPercent - 1f
 
-        val vitalityPercent = StatsAPI.vitaliy.toFloat() / StatsAPI.maxVitaliy.toFloat()
+        val vitalityPercent = StatsAPI.vitality.toFloat() / StatsAPI.maxVitality.toFloat()
 
         val totalManaPool = StatsAPI.maxMana.toFloat() + StatsAPI.overflowMana
         val overflowPercent = StatsAPI.overflowMana.toFloat() / totalManaPool

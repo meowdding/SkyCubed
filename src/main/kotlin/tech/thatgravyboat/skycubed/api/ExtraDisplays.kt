@@ -44,7 +44,7 @@ object ExtraDisplays {
             //? if > 1.21.11 {
             graphics.guiRenderState.addPicturesInPictureState(
             //? } else {
-            /*graphics.guiRenderState.submitPicturesInPictureState(*/
+            //graphics.guiRenderState.submitPicturesInPictureState(
             //? }
                 SpinningItemRenderState(
                     item, xSpeed, ySpeed, zSpeed,

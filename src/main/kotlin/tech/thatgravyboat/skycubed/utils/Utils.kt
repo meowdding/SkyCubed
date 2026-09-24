@@ -38,13 +38,13 @@ object Utils {
     fun resetCursor() {
         // TODO: what
         //? if < 1.21.9
-        /*com.teamresourceful.resourcefullib.client.utils.CursorUtils.setDefault()*/
+        //com.teamresourceful.resourcefullib.client.utils.CursorUtils.setDefault()
     }
 
     fun tristate(boolean: Boolean?): TriState = when (boolean) {
         true -> TriState.TRUE
         false -> TriState.FALSE
-        null -> /*? >= 26.1 {*/ TriState.DEFAULT /*?} else */// TriState.UNDEFINED
+        null -> /*? >= 26.1 {*/ TriState.DEFAULT /*?} else */ //TriState.UNDEFINED
     }
 }
 

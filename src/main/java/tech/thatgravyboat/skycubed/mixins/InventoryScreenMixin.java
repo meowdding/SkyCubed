@@ -29,17 +29,11 @@ public abstract class InventoryScreenMixin extends AbstractContainerScreen<@NotN
         return !Config.INSTANCE.getHiddenHudElements().contains(HudElement.EFFECTS) && original.call();
     }
 
-    //~ if >= 26.1 'renderBg' -> 'extractBackground'
     @Inject(method = "extractBackground", at = @At("TAIL"))
     private void extractBackground(
         GuiGraphicsExtractor graphics,
-        //? >= 26.1 {
         int i, int j,
         float f,
-        //? } else {
-        /*float f,
-        int i, int j,
-        *///? }
         CallbackInfo ci
     ) {
         EquipmentManager.INSTANCE.onExtractScreen(

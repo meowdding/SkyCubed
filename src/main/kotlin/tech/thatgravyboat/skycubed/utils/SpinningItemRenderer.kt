@@ -31,14 +31,16 @@ class SpinningItemRenderer() : PictureInPictureRenderer<SpinningItemRenderState>
             stack.translate(0f, state.bounds.height() / -2f - 3f, 0f)
             stack.scale(20f, 20f, 20f)
 
-            stack.mulPose(Axis.ZN.rotationDegrees(180f))
-            stack.mulPose(Axis.XP.rotationDegrees(-30f))
-            stack.mulPose(Axis.YP.rotationDegrees(225f))
+            //~ if >= 26.3 '.mulPose(' -> '.rotate(' {
+            stack.rotate(Axis.ZN.rotationDegrees(180f))
+            stack.rotate(Axis.XP.rotationDegrees(-30f))
+            stack.rotate(Axis.YP.rotationDegrees(225f))
 
             val seconds = TickEvent.ticks / 20f
-            if (state.xSpeed != 0) stack.mulPose(Axis.XP.rotationDegrees(45f + (seconds * state.xSpeed.toFloat()).toInt() % 360))
-            if (state.ySpeed != 0) stack.mulPose(Axis.YP.rotationDegrees(45f + (seconds * state.ySpeed.toFloat()).toInt() % 360))
-            if (state.zSpeed != 0) stack.mulPose(Axis.ZP.rotationDegrees(45f + (seconds * state.zSpeed.toFloat()).toInt() % 360))
+            if (state.xSpeed != 0) stack.rotate(Axis.XP.rotationDegrees(45f + (seconds * state.xSpeed.toFloat()).toInt() % 360))
+            if (state.ySpeed != 0) stack.rotate(Axis.YP.rotationDegrees(45f + (seconds * state.ySpeed.toFloat()).toInt() % 360))
+            if (state.zSpeed != 0) stack.rotate(Axis.ZP.rotationDegrees(45f + (seconds * state.zSpeed.toFloat()).toInt() % 360))
+            //~ }
 
             val item = state.item
             //~ if >= 26.2 '.lighting' -> '.lighting()'
