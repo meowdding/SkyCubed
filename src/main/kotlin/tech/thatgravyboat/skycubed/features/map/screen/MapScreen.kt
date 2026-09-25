@@ -7,11 +7,10 @@ import earth.terrarium.olympus.client.layouts.Layouts
 import earth.terrarium.olympus.client.ui.UIConstants
 import earth.terrarium.olympus.client.utils.Orientation
 import earth.terrarium.olympus.client.utils.State
-import me.owdding.lib.platform.screens.KeyEvent
-import me.owdding.lib.platform.screens.MeowddingScreen
-import me.owdding.lib.platform.screens.MouseButtonEvent
-import me.owdding.lib.utils.matches
 import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.input.KeyEvent
+import net.minecraft.client.input.MouseButtonEvent
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.utils.extentions.currentInstant
@@ -26,7 +25,7 @@ import tech.thatgravyboat.skycubed.utils.ResettingState
 import tech.thatgravyboat.skycubed.utils.findFocused
 import kotlin.time.Duration.Companion.milliseconds
 
-class MapScreen : MeowddingScreen(CommonText.EMPTY) {
+class MapScreen : Screen(CommonText.EMPTY) {
 
     private val search = State.of("")
 
@@ -105,11 +104,9 @@ class MapScreen : MeowddingScreen(CommonText.EMPTY) {
         ).build(this::addRenderableWidget)
     }
 
-    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         extractTransparentBackground(graphics)
     }
-    //~ }
 
     override fun keyPressed(keyEvent: KeyEvent): Boolean {
         if ((this.findFocused() as? TextBox)?.isFocused != true) {
@@ -130,9 +127,9 @@ class MapScreen : MeowddingScreen(CommonText.EMPTY) {
 
     override fun mouseClicked(mouseEvent: MouseButtonEvent, doubleClicked: Boolean): Boolean {
         val widget = this.children().filterIsInstance<MapsWidget>().firstOrNull()
-        if (MapEditor.enabled && MapEditorScreen.mouseClicked(widget, mouseEvent.x, mouseEvent.y, mouseEvent.button)) {
+        if (MapEditor.enabled && MapEditorScreen.mouseClicked(widget, mouseEvent.x, mouseEvent.y, mouseEvent.button())) {
             return true
-        } else if (MapWaypointsScreen.mouseClicked(widget, mouseEvent.x, mouseEvent.y, mouseEvent.button)) {
+        } else if (MapWaypointsScreen.mouseClicked(widget, mouseEvent.x, mouseEvent.y, mouseEvent.button())) {
             return true
         }
         return super.mouseClicked(mouseEvent, doubleClicked)

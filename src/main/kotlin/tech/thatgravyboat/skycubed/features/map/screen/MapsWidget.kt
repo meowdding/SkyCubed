@@ -2,14 +2,14 @@ package tech.thatgravyboat.skycubed.features.map.screen
 
 import com.mojang.blaze3d.platform.InputConstants
 import com.mojang.blaze3d.platform.cursor.CursorTypes
+import earth.terrarium.olympus.client.components.base.BaseWidget
 import earth.terrarium.olympus.client.utils.State
-import me.owdding.lib.platform.screens.BaseWidget
-import me.owdding.lib.platform.screens.MouseButtonEvent
 import me.owdding.lib.waypoints.MeowddingWaypoint
 import me.owdding.lib.waypoints.MeowddingWaypointHandler
 import me.owdding.lib.waypoints.MeowddingWaypointTag
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.PlayerFaceExtractor
+import net.minecraft.client.input.MouseButtonEvent
 import net.minecraft.util.Mth
 import org.joml.component1
 import org.joml.component2
@@ -54,7 +54,6 @@ class MapsWidget(
     private val showPlayer = Maps.getMapsForLocation() == map
 
 
-    //~ if >= 26.1 'renderWidget' -> 'extractWidgetRenderState'
     override fun extractWidgetRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         val (posX, posY) = graphics.getTranslation()
         val (scaleX, scaleY) = graphics.getScale()
@@ -132,7 +131,6 @@ class MapsWidget(
                         val profile = McPlayer.skin ?: return
                         graphics.scale(1f / scale, 1f / scale)
                         graphics.rotate(headRot)
-                        //~ if >= 26.1 'render' -> 'extract'
                         PlayerFaceExtractor.extractRenderState(graphics, profile.texture, -4, -4, 8, true, true, -1)
                     }
                 }
@@ -141,7 +139,7 @@ class MapsWidget(
     }
 
     override fun mouseDragged(event: MouseButtonEvent, deltaX: Double, deltaY: Double): Boolean {
-        if (event.button == InputConstants.MOUSE_BUTTON_LEFT) {
+        if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
             xOffset -= deltaX / scale
             zOffset -= deltaY / scale
             return true
@@ -161,7 +159,7 @@ class MapsWidget(
 
     override fun mouseClicked(event: MouseButtonEvent, doubleClick: Boolean): Boolean {
         val poi = getPoiAt(event.x, event.y)
-        if (event.button == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
+        if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && poi != null) {
             if (MapEditor.enabled && !event.hasShiftDown()) {
                 McClient.setScreenAsync { MapPoiEditScreen(poi.first, poi.second.pois, McScreen.self) }
                 return true

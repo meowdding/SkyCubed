@@ -3,14 +3,12 @@ package tech.thatgravyboat.skycubed.features.equipment.wardobe
 import com.mojang.blaze3d.platform.InputConstants
 import me.owdding.ktmodules.Module
 import me.owdding.lib.events.ItemListEvent
-import me.owdding.lib.platform.screens.KeyEvent
-import me.owdding.lib.platform.screens.MouseButtonEvent
-import me.owdding.lib.platform.screens.mouseClicked
-import me.owdding.lib.platform.screens.mouseReleased
 import me.owdding.lib.utils.MeowddingKeybind
-import me.owdding.lib.utils.matches
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.input.KeyEvent
+import net.minecraft.client.input.MouseButtonEvent
+import net.minecraft.client.input.MouseButtonInfo
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenBackgroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenInitializedEvent
@@ -85,7 +83,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseClicked(MouseButtonEvent(event.x, event.y, event.button), false)
+        WardrobeScreen.mouseClicked(MouseButtonEvent(event.x, event.y, MouseButtonInfo(event.button, 0)), false)
     }
 
     @Subscription
@@ -93,7 +91,7 @@ object WardrobeFeature {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
-        WardrobeScreen.mouseReleased(MouseButtonEvent(event.x, event.y, event.button))
+        WardrobeScreen.mouseReleased(MouseButtonEvent(event.x, event.y, MouseButtonInfo(event.button, 0)))
     }
 
     @Subscription
@@ -102,7 +100,7 @@ object WardrobeFeature {
 
         event.cancel()
 
-        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(KeyEvent(event.key, event.scanCode, 0))
+        val shouldClose = event.key == InputConstants.KEY_ESCAPE || McClient.options.keyInventory.matches(KeyEvent(event.key, event.modifiers, 0))
 
         if (isEditing) {
             if (shouldClose) {

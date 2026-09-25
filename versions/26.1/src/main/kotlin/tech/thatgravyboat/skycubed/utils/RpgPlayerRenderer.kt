@@ -39,13 +39,13 @@ import java.util.function.Function
 
 class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictureRenderer<RpgPlayerRenderer.State>(buffer) {
 
-    private var textureView: GpuTextureView? = null
+    private var prevTextureView: GpuTextureView? = null
     private var sampler: GpuSampler? = null
 
     override fun getRenderStateClass(): Class<State> = State::class.java
 
     override fun renderToTexture(state: State, stack: PoseStack) {
-        this.textureView = RenderSystem.outputColorTextureOverride // Internally before this method is called, the texture is set to the output color texture.
+        this.prevTextureView = RenderSystem.outputColorTextureOverride // Internally before this method is called, the texture is set to the output color texture.
         this.sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST)
 
         val dispatcher = McClient.self.entityRenderDispatcher
@@ -71,7 +71,7 @@ class RpgPlayerRenderer(buffer: MultiBufferSource.BufferSource) : PictureInPictu
         gui.addBlitToCurrentLayer(
             BlitRenderState(
                 pipeline,
-                TextureSetup.doubleTexture(this.textureView!!, this.sampler!!, mask.textureView, mask.sampler),
+                TextureSetup.doubleTexture(this.prevTextureView!!, this.sampler!!, mask.textureView, mask.sampler),
                 state.pose(),
                 state.x0(), state.y0(), state.x1(), state.y1(),
                 0.0F, 1.0F, 1.0F, 0.0F,

@@ -1,0 +1,3 @@
+classTweaker v1 official
+
+accessible field net/minecraft/client/gui/render/pip/PictureInPictureRenderer textureView Lcom/mojang/renderpearl/api/textures/GpuTextureView;

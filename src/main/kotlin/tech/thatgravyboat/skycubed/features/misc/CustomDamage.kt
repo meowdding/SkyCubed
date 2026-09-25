@@ -101,7 +101,8 @@ object CustomDamage {
                     position.z + 0.5
                 )
                 translate(0f, 0.5F * -scale, 0f)
-                mulPose(event.cameraRotation)
+                //~ if >= 26.3 'mulPose' -> 'rotate'
+                rotate(event.cameraRotation)
                 scale(scale, -scale, scale)
                 val xOffset = -McFont.width(damageText) / 2.0f
 

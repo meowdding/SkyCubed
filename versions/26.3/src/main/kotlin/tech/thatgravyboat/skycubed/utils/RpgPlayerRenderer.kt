@@ -1,12 +1,12 @@
 package tech.thatgravyboat.skycubed.utils
 
-import com.mojang.blaze3d.pipeline.RenderPipeline
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.textures.FilterMode
-import com.mojang.blaze3d.textures.GpuSampler
-import com.mojang.blaze3d.textures.GpuTextureView
 import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.renderpearl.api.pipeline.RenderPipeline
+import com.mojang.renderpearl.api.textures.FilterMode
+import com.mojang.renderpearl.api.textures.GpuSampler
+import com.mojang.renderpearl.api.textures.GpuTextureView
 import earth.terrarium.olympus.client.pipelines.pips.OlympusPictureInPictureRenderState
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.navigation.ScreenRectangle
@@ -38,7 +38,7 @@ import tech.thatgravyboat.skycubed.features.overlays.rpg.RpgOverlayPositionHandl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Supplier
 
-class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() {
+class RpgPlayerRenderer : PictureInPictureRenderer<RpgPlayerRenderer.State>() {
 
     private var prevTextureView: GpuTextureView? = null
     private var sampler: GpuSampler? = null
@@ -46,7 +46,7 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
     override fun getRenderStateClass(): Class<State> = State::class.java
 
     override fun renderToTexture(state: State, stack: PoseStack, submitNodeCollector: SubmitNodeCollector) {
-        this.prevTextureView = RenderSystem.outputColorTextureOverride // Internally before this method is called, the texture is set to the output color texture.
+        this.prevTextureView = this.textureView
         this.sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST)
 
         val dispatcher = McClient.self.entityRenderDispatcher
@@ -54,7 +54,7 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
 
         renderer.lighting().setupFor(Lighting.Entry.ENTITY_IN_UI)
         stack.translate(state.translation.x, state.translation.y, state.translation.z)
-        stack.mulPose(state.rotation)
+        stack.rotate(state.rotation)
         val cameraState = CameraRenderState()
 
         if (state.cameraAngle != null) {
@@ -149,7 +149,7 @@ class RpgPlayerRenderer() : PictureInPictureRenderer<RpgPlayerRenderer.State>() 
             state.y = 0.0
             state.z = 0.0
             state.isVisuallySwimming = false
-            state.attackTime = 0f
+            state.swingAnimation = 0f
             state.walkAnimationPos = 0f
             state.walkAnimationSpeed = 0f
             state.wornHeadAnimationPos = 0f
