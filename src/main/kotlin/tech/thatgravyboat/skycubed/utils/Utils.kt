@@ -8,10 +8,7 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.multiplayer.PlayerInfo
 import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.resources.SkinManager
-//? if >= 26.1 {
 import net.minecraft.util.TriState
-//? } else
-//import com.teamresourceful.resourcefullib.common.utils.TriState
 import net.minecraft.util.Util
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
@@ -29,7 +26,6 @@ object Utils {
     }
 
     fun Screen.fullyRender(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
-        //~ if >= 26.1 'render' -> 'extractRenderState'
         this.extractRenderStateWithTooltipAndSubtitles(graphics, mouseX, mouseY, partialTicks)
     }
 
@@ -37,14 +33,12 @@ object Utils {
 
     fun resetCursor() {
         // TODO: what
-        //? if < 1.21.9
-        //com.teamresourceful.resourcefullib.client.utils.CursorUtils.setDefault()
     }
 
     fun tristate(boolean: Boolean?): TriState = when (boolean) {
         true -> TriState.TRUE
         false -> TriState.FALSE
-        null -> /*? >= 26.1 {*/ TriState.DEFAULT /*?} else */ //TriState.UNDEFINED
+        null -> TriState.DEFAULT
     }
 }
 

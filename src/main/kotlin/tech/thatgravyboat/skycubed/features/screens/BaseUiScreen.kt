@@ -30,10 +30,8 @@ abstract class BaseUiScreen(title: String) : Screen(title.asComponent()) {
         create(bg)
     }
 
-    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         graphics.applyBackgroundBlur()
         this.extractTransparentBackground(graphics)
     }
-    //~ }
 }

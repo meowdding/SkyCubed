@@ -1,9 +1,6 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
-//? if >= 26.1 {
 import net.minecraft.util.TriState
-//? } else
-//import com.teamresourceful.resourcefullib.common.utils.TriState
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
@@ -31,7 +28,6 @@ class NotificationsScreen : Overlay(McScreen.self) {
 
     private val category: DropdownState<String?> = DropdownState.empty()
 
-    //~ if >= 26.1 'render' -> 'extract' {
     override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
         super.extractBackground(graphics, mouseX, mouseY, partialTicks)
         this.extractTransparentBackground(graphics)
@@ -43,7 +39,6 @@ class NotificationsScreen : Overlay(McScreen.self) {
             this.height
         )
     }
-    //~ }
 
     override fun init() {
         val notifications = NotificationToast.notifications()

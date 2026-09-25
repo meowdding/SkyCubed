@@ -150,7 +150,6 @@ internal fun Duration.formatReadableTime(biggestUnit: DurationUnit, maxUnits: In
 
 fun AbstractContainerMenu.click(slot: Slot) {
     val player = McPlayer.self ?: return
-    //? if > 1.21.11 {
     McClient.self.gameMode?.handleContainerInput(
         this.containerId,
         slot.index,
@@ -158,15 +157,6 @@ fun AbstractContainerMenu.click(slot: Slot) {
         net.minecraft.world.inventory.ContainerInput.PICKUP,
         player,
     )
-    //?} else {
-    /*McClient.self.gameMode?.handleInventoryMouseClick(
-        this.containerId,
-        slot.index,
-        InputConstants.MOUSE_BUTTON_LEFT,
-        net.minecraft.world.inventory.ClickType.PICKUP,
-        player,
-    )
-    *///?}
 }
 
 val CompletableFuture<*>.isActuallyDone: Boolean

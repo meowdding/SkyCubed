@@ -54,7 +54,6 @@ class MapsWidget(
     private val showPlayer = Maps.getMapsForLocation() == map
 
 
-    //~ if >= 26.1 'renderWidget' -> 'extractWidgetRenderState'
     override fun extractWidgetRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
         val (posX, posY) = graphics.getTranslation()
         val (scaleX, scaleY) = graphics.getScale()
@@ -132,7 +131,6 @@ class MapsWidget(
                         val profile = McPlayer.skin ?: return
                         graphics.scale(1f / scale, 1f / scale)
                         graphics.rotate(headRot)
-                        //~ if >= 26.1 'render' -> 'extract'
                         PlayerFaceExtractor.extractRenderState(graphics, profile.texture, -4, -4, 8, true, true, -1)
                     }
                 }

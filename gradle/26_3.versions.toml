@@ -8,7 +8,7 @@ fabric-api = "0.160.4+26.3"
 resourceful-lib = "6.0.0"
 resourceful-config = "6.0.1"
 olympus = "1.9.5"
-placeholders = "3.1.0-beta.1+26.2"
+placeholders = "3.2.0+26.3"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }

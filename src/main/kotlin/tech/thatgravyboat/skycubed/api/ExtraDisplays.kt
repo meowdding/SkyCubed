@@ -41,11 +41,7 @@ object ExtraDisplays {
 
         override fun extract(graphics: GuiGraphicsExtractor) {
             val bounds = ScreenRectangle(0, 0, (16 * scale).toInt(), (16 * scale).toInt())
-            //? if > 1.21.11 {
             graphics.guiRenderState.addPicturesInPictureState(
-            //? } else {
-            //graphics.guiRenderState.submitPicturesInPictureState(
-            //? }
                 SpinningItemRenderState(
                     item, xSpeed, ySpeed, zSpeed,
                     scale,
