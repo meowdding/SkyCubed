@@ -14,8 +14,10 @@ import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishTier
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishType
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishingAPI
+import tech.thatgravyboat.skyblockapi.api.datatype.defaults.trophy.TrophyTier
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyIn
+import tech.thatgravyboat.skyblockapi.api.events.location.TrophyCaughtEvent
 import tech.thatgravyboat.skyblockapi.api.events.location.isle.TrophyFishCaughtEvent
 import tech.thatgravyboat.skyblockapi.api.events.profile.ProfileChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.remote.SkyBlockPvOpenedEvent
@@ -99,10 +101,10 @@ object TrophyFishOverlay : SkyCubedOverlay {
 
     fun TrophyFishType.createDisplay() = DisplayFactory.horizontal(5, Alignment.CENTER) {
         val caught = TrophyFishingAPI.getCaught(this@createDisplay).toMutableMap().apply {
-            TrophyFishTier.entries.forEach {
+            TrophyTier.entries.forEach {
                 this.computeIfAbsent(it) { 0 }
             }
-        }.entries.sortedBy { it.key.ordinal }.filter { it.key != TrophyFishTier.NONE }
+        }.entries.sortedBy { it.key.ordinal }.filter { it.key != TrophyTier.NONE }
 
         display(Displays.item(this@createDisplay.diamond))
         caught.forEach { (t, a) ->
@@ -127,7 +129,7 @@ object TrophyFishOverlay : SkyCubedOverlay {
     }
 
     @OptIn(SkyBlockPvRequired::class)
-    @Subscription(event = [TrophyFishCaughtEvent::class, SkyBlockPvOpenedEvent::class, ContainerCloseEvent::class, ProfileChangeEvent::class])
+    @Subscription(event = [TrophyCaughtEvent.Fish::class, SkyBlockPvOpenedEvent::class, ContainerCloseEvent::class, ProfileChangeEvent::class])
     @OnlyIn(SkyBlockIsland.CRIMSON_ISLE)
     fun onInvalidate() = ::display.invalidateCache()
 }
