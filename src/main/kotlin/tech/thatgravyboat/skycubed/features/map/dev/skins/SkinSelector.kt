@@ -7,12 +7,13 @@ import net.minecraft.world.entity.animal.cow.Cow
 import net.minecraft.world.entity.animal.cow.MushroomCow
 import net.minecraft.world.entity.animal.sheep.Sheep
 import net.minecraft.world.entity.monster.Witch
-//~ if >= 26.2 'monster.MagmaCube' -> 'monster.cubemob.MagmaCube'
-import net.minecraft.world.entity.monster.cubemob.MagmaCube
 import net.minecraft.world.entity.monster.skeleton.Skeleton
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton
 import net.minecraft.world.entity.npc.villager.Villager
 import net.minecraft.world.entity.player.Player
+
+//~ if >= 26.2 'monster.MagmaCube' -> 'monster.cubemob.MagmaCube'
+import net.minecraft.world.entity.monster.cubemob.MagmaCube
 
 interface SkinSelector<E : Entity> {
     fun getSkin(entity: E): String

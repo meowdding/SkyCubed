@@ -7,9 +7,7 @@ import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.layouts.FrameLayout
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.platform.applyBackgroundBlur
-import tech.thatgravyboat.skyblockapi.utils.text.CommonText
 import tech.thatgravyboat.skyblockapi.utils.text.Text.asComponent
 
 private const val ASPECT_RATIO = 16.0 / 9.0

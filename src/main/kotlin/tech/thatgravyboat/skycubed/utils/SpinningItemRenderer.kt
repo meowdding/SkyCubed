@@ -1,7 +1,5 @@
 package tech.thatgravyboat.skycubed.utils
 
-//? 26.1
-//import net.minecraft.client.renderer.MultiBufferSource
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
@@ -20,6 +18,9 @@ import tech.thatgravyboat.skyblockapi.helpers.McLevel
 import tech.thatgravyboat.skyblockapi.utils.extentions.pushPop
 import java.util.function.Supplier
 import java.util.function.Function
+
+//? 26.1
+//import net.minecraft.client.renderer.MultiBufferSource
 
 //~ if >= 26.2 '(buffer: MultiBufferSource.BufferSource) : ' -> '() : ', '(buffer)' -> '()'
 class SpinningItemRenderer() : PictureInPictureRenderer<SpinningItemRenderState>() {

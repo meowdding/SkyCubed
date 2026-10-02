@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.features.notifications
 
-import net.minecraft.util.TriState
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.buttons.Button
 import earth.terrarium.olympus.client.components.dropdown.DropdownState
@@ -14,6 +13,7 @@ import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.asWidget
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
+import net.minecraft.util.TriState
 import org.apache.commons.lang3.function.Consumers
 import tech.thatgravyboat.skyblockapi.helpers.McScreen
 import tech.thatgravyboat.skyblockapi.platform.drawSprite

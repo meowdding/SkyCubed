@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skycubed.features.equipment.wardobe
 
-import com.sun.tools.javac.jvm.ByteCodes.ret
 import com.teamresourceful.resourcefulconfig.api.types.info.Translatable
 import earth.terrarium.olympus.client.components.Widgets
 import earth.terrarium.olympus.client.components.renderers.WidgetRenderers

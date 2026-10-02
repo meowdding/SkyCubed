@@ -11,14 +11,12 @@ import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.utils.KnownMods
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
-import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishTier
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishType
 import tech.thatgravyboat.skyblockapi.api.area.isle.trophyfish.TrophyFishingAPI
 import tech.thatgravyboat.skyblockapi.api.datatype.defaults.trophy.TrophyTier
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyIn
 import tech.thatgravyboat.skyblockapi.api.events.location.TrophyCaughtEvent
-import tech.thatgravyboat.skyblockapi.api.events.location.isle.TrophyFishCaughtEvent
 import tech.thatgravyboat.skyblockapi.api.events.profile.ProfileChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.remote.SkyBlockPvOpenedEvent
 import tech.thatgravyboat.skyblockapi.api.events.remote.SkyBlockPvRequired
@@ -33,7 +31,12 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.config.overlays.TrophyFishOverlayConfig
-import tech.thatgravyboat.skycubed.utils.*
+import tech.thatgravyboat.skycubed.utils.CachedValue
+import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
+import tech.thatgravyboat.skycubed.utils.RegisterOverlay
+import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
+import tech.thatgravyboat.skycubed.utils.invalidateCache
+import tech.thatgravyboat.skycubed.utils.next
 import kotlin.time.Duration.Companion.seconds
 
 @Module
