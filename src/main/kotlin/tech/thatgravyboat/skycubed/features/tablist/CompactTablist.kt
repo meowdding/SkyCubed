@@ -2,14 +2,18 @@ package tech.thatgravyboat.skycubed.features.tablist
 
 import me.owdding.ktmodules.Module
 import me.owdding.lib.config.MeowddingLibConfig
+import me.owdding.lib.displays.Alignment
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
 import me.owdding.lib.displays.toColumn
 import me.owdding.lib.displays.toRow
+import me.owdding.lib.displays.withPadding
 import net.minecraft.client.gui.GuiGraphicsExtractor
+import net.minecraft.client.multiplayer.PlayerInfo
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
+import net.minecraft.util.ARGB
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
@@ -24,8 +28,6 @@ import tech.thatgravyboat.skyblockapi.api.profile.party.PartyAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
-import tech.thatgravyboat.skyblockapi.platform.id
-import tech.thatgravyboat.skyblockapi.platform.name
 import tech.thatgravyboat.skyblockapi.platform.texture
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
@@ -45,6 +47,7 @@ import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
 import tech.thatgravyboat.skycubed.utils.Utils.toSkin
 import tech.thatgravyboat.skycubed.utils.formatReadableTime
+import kotlin.math.roundToInt
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
@@ -135,9 +138,9 @@ object CompactTablist {
         }
     }
 
-    private fun Line.formatPlayer(): Line {
+    private fun Line.formatPlayer(playerMap: Map<String, PlayerInfo>): Line {
         playerRegex.match(stripped, "level", "name") { (level, name) ->
-            val player = McClient.players.firstOrNull { it.profile.name == name }
+            val player = playerMap[name]
             val contributor = ContributorHandler.contributors[player?.profile?.id]
 
             playerName = name
@@ -188,6 +191,8 @@ object CompactTablist {
             }
         }
 
+        val playersMap = McClient.players.associateBy { it.profile.name }
+
         for ((i, column) in components.withIndex()) {
             for (line in column) {
                 val stripped = line.stripped
@@ -197,7 +202,7 @@ object CompactTablist {
                     if (widgetRegexes.any { it.matches(stripped) }) {
                         flushBlock()
                     }
-                    currentBlock.add(line.formatPlayer())
+                    currentBlock.add(line.formatPlayer(playersMap))
                 }
             }
             if (i == 0) flushBlock()
@@ -221,27 +226,47 @@ object CompactTablist {
         }
         val footer = getFooterSegment().toMutableList()
         if (footer.isNotEmpty()) blocks.addLast(footer)
-        val split = blocks.splitParts()
+        val mainElement = blocks.splitParts().toRow(5)
 
-        val mainElement = split.map { segment ->
-            segment.map { line ->
-                line.face?.let { face ->
-                    listOfNotNull(
-                        Displays.face({ face.texture!! }),
-                        Displays.text(line.component),
-                        *line.extraEmblems.map { Displays.text(it) }.toTypedArray(),
-                    ).toRow(3)
-                } ?: Displays.text(line.component)
-            }.toColumn()
-        }.toRow(5)
-
-        val footerElement =
-            filteredFooter.map { Displays.center(mainElement.getWidth(), display = Displays.text(it)) }.toColumn()
+        var footerElement: Display? = null
+        if (filteredFooter.isNotEmpty()) {
+            val footerDisplays = filteredFooter.map {
+                Displays.text(it)
+            }
+            val maxWidth = footerDisplays.maxOf { it.getWidth() }
+            val footer = footerDisplays.map { Displays.center(width = maxWidth, display = it) }.toColumn()
+            footerElement = if (TabListOverlayConfig.sectionBackground) {
+                addSectionBackground(footer, TabListOverlayConfig.columnColor, TabListOverlayConfig.backgroundColor)
+            } else footer
+        }
 
         display = ExtraDisplays.background(
             TabListOverlayConfig.backgroundColor.toUInt(), 2f,
-            Displays.padding(5, listOf(mainElement, footerElement).toColumn(5)),
+            Displays.padding(5, listOfNotNull(mainElement, footerElement).toColumn(5, Alignment.CENTER)),
         )
+    }
+
+    private fun addSectionBackground(display: Display, color: Int, colorUnderneath: Int): Display {
+        val unblended = getColorNeededToBlend(
+            100,
+            destination = colorUnderneath,
+            result = color
+        )
+        return ExtraDisplays.background(
+            unblended.toUInt(),
+            2f,
+            display.withPadding(2),
+        )
+    }
+
+    private fun createLineDisplay(line: Line): Display {
+        return line.face?.let { face ->
+            listOfNotNull(
+                Displays.face({ face.texture!! }),
+                Displays.text(line.component),
+                *line.extraEmblems.map { Displays.text(it) }.toTypedArray(),
+            ).toRow(3)
+        } ?: Displays.text(line.component)
     }
 
     private val playerComparator = Comparator<Line> { o1, o2 ->
@@ -296,13 +321,13 @@ object CompactTablist {
                         this.color = TextColor.GOLD
                         this.bold = true
                     },
-                    Text.of(": ").withColor(TextColor.GRAY),
-                    Text.of(SpookyFestivalAPI.greenCandy.toString()).withColor(TextColor.GREEN),
-                    Text.of(", ").withColor(TextColor.GRAY),
-                    Text.of(SpookyFestivalAPI.purpleCandy.toString()).withColor(TextColor.DARK_PURPLE),
-                    Text.of(" (").withColor(TextColor.GRAY),
-                    Text.of(SpookyFestivalAPI.points.toString()).withColor(TextColor.GOLD),
-                    Text.of(")").withColor(TextColor.GRAY),
+                    Text.of(": ", TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.greenCandy.toString(), TextColor.GREEN),
+                    Text.of(", ", TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.purpleCandy.toString(), TextColor.DARK_PURPLE),
+                    Text.of(" (", TextColor.GRAY),
+                    Text.of(SpookyFestivalAPI.points.toString(), TextColor.GOLD),
+                    Text.of(")", TextColor.GRAY),
                 ).toLine(),
             )
         }
@@ -327,19 +352,24 @@ object CompactTablist {
         return true
     }
 
-    private fun List<List<Line>>.splitParts(): List<List<Line>> {
+    private fun List<List<Line>>.splitParts(): List<Display> {
         val totalSize = sumOf { it.size } + size
         val range = TabListOverlayConfig.minColumns..TabListOverlayConfig.maxColumns
         val columns = Math.ceilDiv(totalSize, TabListOverlayConfig.targetColumnSize).let {
             if (range.isEmpty()) it
             else it.coerceIn(range)
         }.coerceAtLeast(1)
-        if (columns >= size) return this
+        if (columns >= size) return listOf(this.createColumnDisplay())
         val blockSizes = IntArray(size) { this[it].size }
         val partitions = balanceBlocks(blockSizes, columns)
         var index = 0
+
         return partitions.map { count ->
-            subList(index, index + count).flattenWithSpacing().also { index += count }
+            subList(index, index + count).createColumnDisplay().also { index += count }
+        }.map {
+            if (TabListOverlayConfig.sectionBackground) {
+                addSectionBackground(it, TabListOverlayConfig.columnColor, TabListOverlayConfig.backgroundColor)
+            } else it
         }
     }
 
@@ -406,11 +436,57 @@ object CompactTablist {
         return result
     }
 
-    private fun List<List<Line>>.flattenWithSpacing(): List<Line> {
-        if (size == 1) return first()
-        return flatMapIndexed { i, lines ->
-            if (i == lastIndex) lines else lines + Line.EMPTY
+
+    private fun List<List<Line>>.createColumnDisplay(): Display {
+        val widgets = map { lines ->
+            lines.map(::createLineDisplay).toColumn()
         }
+        val maxWidth = widgets.maxOf { it.getWidth() }
+        val displays = widgets.map { widget ->
+            val width = widget.getWidth()
+            val neededPadding = maxWidth - width
+            if (neededPadding <= 0) return@map widget
+            widget.withPadding(right = neededPadding)
+        }.let { displays ->
+            if (TabListOverlayConfig.sectionBackground) {
+                displays.map { addSectionBackground(it, TabListOverlayConfig.widgetColor, TabListOverlayConfig.columnColor) }
+            } else displays
+        }
+        return displays.toColumn(8)
+    }
+
+    // this is supposed to get the color you need to use to make something look like a specific color when blended on top.
+    // but, I don't even know anymore what this even does or if it's correct or anything
+    private fun getColorNeededToBlend(
+        sourceAlpha: Int,
+        destination: Int,
+        result: Int,
+    ): Int {
+        fun Int.getComponentsARGB(): IntArray = intArrayOf(
+            ARGB.alpha(this),
+            ARGB.red(this),
+            ARGB.green(this),
+            ARGB.blue(this),
+        )
+
+        val sa = sourceAlpha / 255.0
+        if (sa == 0.0) return ARGB.color(sourceAlpha, 0)
+
+        val (da, dr, dg, db) = destination.getComponentsARGB()
+        val (ra, rr, rg, rb) = result.getComponentsARGB()
+
+        fun solve(sourceResult: Int, destinationColor: Int): Int {
+            val value = (sourceResult * (ra / 255.0) - destinationColor * (da / 255.0) * (1.0 - sa)) / sa
+
+            return value.roundToInt().coerceIn(0, 255)
+        }
+
+        return ARGB.color(
+            sourceAlpha,
+            solve(rr, dr),
+            solve(rg, dg),
+            solve(rb, db),
+        )
     }
 
     private fun isEnabled() = LocationAPI.isOnSkyBlock && TabListOverlayConfig.enabled

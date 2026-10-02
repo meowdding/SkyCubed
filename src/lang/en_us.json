@@ -217,6 +217,18 @@
                     "target_column_size": {
                         "@value": "Target Column Size",
                         "desc": "The target size of each column in the tab list."
+                    },
+                    "section_background": {
+                        "@value": "Section Background",
+                        "desc": "If a background on columns and widgets should be drawn."
+                    },
+                    "column_color": {
+                        "@value": "Column Color",
+                        "desc": "The color used as a background on columns."
+                    },
+                    "widget_color": {
+                        "@value": "Widget Color",
+                        "desc": "The color used as a background on widgets."
                     }
                 },
                 "map": {

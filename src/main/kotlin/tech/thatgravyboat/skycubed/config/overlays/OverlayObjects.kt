@@ -198,6 +198,20 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
         this.range = 1..30
     }.update()
 
+    var sectionBackground by boolean(false) {
+        this.translation = "skycubed.config.overlays.tablist.section_background"
+    }.update()
+
+    var columnColor by color(0x66191919u.toInt()) {
+        this.translation = "skycubed.config.overlays.tablist.column_color"
+        this.allowAlpha = true
+    }.update()
+
+    var widgetColor by color(0x602D2D2Du.toInt()) {
+        this.translation = "skycubed.config.overlays.tablist.widget_color"
+        this.allowAlpha = true
+    }.update()
+
     private fun <T> ConfigDelegateProvider<RConfigKtEntry<T>>.update() = ObservableEntry(this) { _, _ -> CompactTablist.update() }
 }
 
