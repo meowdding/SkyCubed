@@ -1,7 +1,11 @@
 package tech.thatgravyboat.skycubed.features.overlays.dialogue
 
 import me.owdding.ktmodules.Module
-import me.owdding.lib.displays.*
+import me.owdding.lib.displays.Alignment
+import me.owdding.lib.displays.Display
+import me.owdding.lib.displays.Displays
+import me.owdding.lib.displays.toColumn
+import me.owdding.lib.displays.withPadding
 import me.owdding.lib.overlays.ConfigPosition
 import me.owdding.lib.overlays.EditableProperty
 import me.owdding.lib.utils.KeyboardInputs
@@ -9,7 +13,9 @@ import me.owdding.lib.utils.keys
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.ChatScreen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
+import net.minecraft.network.protocol.common.ServerboundCustomClickActionPacket
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.base.predicates.OnlyOnSkyBlock
 import tech.thatgravyboat.skyblockapi.api.events.chat.ChatReceivedEvent
@@ -29,6 +35,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.command
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.customPayloadClick
 import tech.thatgravyboat.skycubed.config.overlays.NpcOverlayConfig
 import tech.thatgravyboat.skycubed.utils.BackgroundLessSkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
@@ -80,13 +87,21 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         }
         selectAnOptionRegex.match(event.component, "options") { (optionsComponent) ->
             options = optionRegex.findAll(optionsComponent).mapNotNull { it["option"] }.mapIndexed { index, option ->
-                Option(
-                    component = option,
-                    keys = keys {
-                        withKey(49 + index)
-                    },
-                    command = option.command ?: "",
-                )
+                val payload = option.customPayloadClick
+                val keyboardKeys = keys { withKey(49 + index) }
+                if (payload != null) {
+                    Option.ClickPayload(
+                        component = option,
+                        keys = keyboardKeys,
+                        payload = payload,
+                    )
+                } else {
+                    Option.Command(
+                        component = option,
+                        keys = keyboardKeys,
+                        command = option.command ?: "",
+                    )
+                }
             }
             if (config.hideSelectAnOptionMessage) event.cancel()
         }
@@ -131,9 +146,18 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         }
 
         if (McScreen.self != null) return
-        options.forEach { (_, keys, command) ->
-            if (keys.isDown()) {
-                McClient.sendCommand(command.removePrefix("/"))
+        options.forEach { option ->
+            if (option.keys.isDown()) {
+                when (option) {
+                    is Option.Command -> {
+                        McClient.sendCommand(option.command.removePrefix("/"))
+                    }
+
+                    is Option.ClickPayload -> {
+                        // A bit fucked sending the Packet directly, but we can't use the vanilla method from Screens.java L267
+                        McClient.connection?.send(ServerboundCustomClickActionPacket(option.payload.id(), option.payload.payload()))
+                    }
+                }
                 reset()
                 return
             }
@@ -177,8 +201,8 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
         displayedOptions = true
         nextCheck = System.currentTimeMillis() + displayActionDuration
 
-        val yesNoDisplay = options.mapIndexed { index, (component) ->
-            val text = Text.join(Text.of("${index + 1}. ").withColor(TextColor.GRAY), component)
+        val yesNoDisplay = options.mapIndexed { index, option ->
+            val text = Text.join(Text.of("${index + 1}. ").withColor(TextColor.GRAY), option.component)
             Displays.background(SkyCubedTextures.backgroundBox, Displays.text(text).withPadding(5))
         }.toColumn(5, Alignment.START)
 
@@ -189,7 +213,7 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
             override fun extract(graphics: GuiGraphicsExtractor) {
                 main.extract(graphics)
-                graphics.translated(main.getWidth() - yesNoDisplay.getWidth() - 10f, -1f * yesNoDisplay.getHeight() - 10f) {
+                graphics.translated(main.getWidth() - yesNoDisplay.getWidth() - 10f, -yesNoDisplay.getHeight() - 10f) {
                     yesNoDisplay.extract(graphics)
                 }
             }
@@ -234,10 +258,11 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     private fun ComponentRegex.findAll(component: Component) = regex().findAll(component.stripped).map { ComponentMatchResult(component, it) }.toList()
 
+    private sealed interface Option {
+        val component: Component
+        val keys: KeyboardInputs
 
-    private data class Option(
-        val component: Component,
-        val keys: KeyboardInputs,
-        val command: String,
-    )
+        class Command(override val component: Component, override val keys: KeyboardInputs, val command: String) : Option
+        class ClickPayload(override val component: Component, override val keys: KeyboardInputs, val payload: ClickEvent.Custom) : Option
+    }
 }
