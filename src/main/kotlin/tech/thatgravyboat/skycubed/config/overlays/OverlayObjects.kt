@@ -40,6 +40,10 @@ object InfoHudOverlayConfig : OverlayConfig("Edit Info Hud Overlay") {
     var formatting by enum(InfoProvider.Companion.InfoFormatting.LONG) {
         this.translation = "skycubed.config.overlays.info.formatting"
     }
+
+    var showWeatherInLocation by boolean(true) {
+        this.translation = "skycubed.config.overlays.info.weather_in_location"
+    }
 }
 
 object RpgOverlayConfig : OverlayConfig("Edit RPG Overlay") {

@@ -1,7 +1,10 @@
 package tech.thatgravyboat.skycubed.features.info.infos
 
 import me.owdding.lib.builder.DisplayFactory
+import tech.thatgravyboat.skyblockapi.api.environmental.WeatherAPI
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skycubed.config.overlays.InfoHudOverlayConfig
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
 import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
@@ -14,5 +17,14 @@ object LocationInfo : InfoProvider {
     override fun getDisplay() = DisplayFactory.horizontal {
         display(LocationIcons)
         string(LocationAPI.area.name)
+
+        if (InfoHudOverlayConfig.showWeatherInLocation && WeatherAPI.isActive) {
+            val currentEvent = WeatherAPI.currentEvent ?: return@horizontal
+            val currentIntensity = WeatherAPI.currentIntensity ?: return@horizontal
+            spacer(width = 5)
+            string(currentEvent.type.component)
+            string(" ")
+            string(currentIntensity.displayName.first().toString()) { color = currentIntensity.color }
+        }
     }
 }

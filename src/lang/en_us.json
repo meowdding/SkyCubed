@@ -100,6 +100,10 @@
                     "formatting": {
                         "@value": "Number Formatting",
                         "desc": "Select if numbers should be shortened or stay normal."
+                    },
+                    "weather_in_location": {
+                        "@value": "Show Weather in Location Line",
+                        "desc": "Shows the currently ongoing weather in the location line."
                     }
                 },
                 "rpg": {
