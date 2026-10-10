@@ -57,7 +57,7 @@ object MinimapOverlay : BackgroundLessSkyCubedOverlay {
     }
 
 	@Subscription(IslandChangeEvent::class)
-    private fun updateDisplay() {
+    internal fun updateDisplay() {
         display = getMapsForLocationOrNull()?.let {
             val minimapWidget = Displays.center(
                 90, 90,

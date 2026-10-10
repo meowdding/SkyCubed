@@ -91,7 +91,7 @@ object CompactTablist {
     private var filteredFooter: List<FormattedText> = emptyList()
 
     @Subscription(ProfileChangeEvent::class)
-    private fun update() {
+    internal fun update() {
         if (isEnabled()) {
             createNewDisplay(lastTablist)
         } else {
