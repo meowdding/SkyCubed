@@ -134,5 +134,5 @@ object TrophyFishOverlay : SkyCubedOverlay {
     @OptIn(SkyBlockPvRequired::class)
     @Subscription(event = [TrophyCaughtEvent.Fish::class, SkyBlockPvOpenedEvent::class, ContainerCloseEvent::class, ProfileChangeEvent::class])
     @OnlyIn(SkyBlockIsland.CRIMSON_ISLE)
-    fun onInvalidate() = ::display.invalidateCache()
+    private fun onInvalidate() = ::display.invalidateCache()
 }

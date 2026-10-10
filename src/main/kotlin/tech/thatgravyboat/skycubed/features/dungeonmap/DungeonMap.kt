@@ -63,7 +63,7 @@ class DungeonMap(val instance: DungeonInstance) {
     private fun getMapData(mapId: MapId) = McLevel.self?.getMapData(mapId)
 
     @Subscription
-    fun onTick(event: TickEvent) = instance.runCatching {
+    private fun onTick(event: TickEvent) = instance.runCatching {
         if (McPlayer.self == null) return
         val stack = McPlayer.inventory[8]
         val isMap = stack.`is`(Items.FILLED_MAP)

@@ -31,7 +31,7 @@ object WindOverlay {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.DWARVEN_MINES, SkyBlockIsland.CRYSTAL_HOLLOWS)
-    fun onHudRender(event: RenderHudEvent) {
+    private fun onHudRender(event: RenderHudEvent) {
         if (!OverlaysConfig.windOverlay) return
         windCompassComponent?.let {
             event.graphics.pushPop {
@@ -50,7 +50,7 @@ object WindOverlay {
     @Subscription
     @TimePassed("2t")
     @OnlyIn(SkyBlockIsland.DWARVEN_MINES, SkyBlockIsland.CRYSTAL_HOLLOWS)
-    fun onTick(event: TickEvent) {
+    private fun onTick(event: TickEvent) {
         if (windEnded.since() < 5.seconds) return
         val scoreboard = McClient.scoreboard.toList()
         val index = scoreboard.indexOfFirst { it.stripped == "Wind Compass" }.takeUnless { it == -1 } ?: return
@@ -60,7 +60,7 @@ object WindOverlay {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.DWARVEN_MINES, SkyBlockIsland.CRYSTAL_HOLLOWS)
-    fun onChatMessage(event: ChatReceivedEvent) {
+    private fun onChatMessage(event: ChatReceivedEvent) {
         if (event.text.contains("GONE WITH THE WIND ENDED!")) {
             windCompassComponent = null
             windEnded = currentInstant()
@@ -68,7 +68,7 @@ object WindOverlay {
     }
 
     @Subscription
-    fun onServerChange(event: ServerChangeEvent) {
+    private fun onServerChange(event: ServerChangeEvent) {
         windCompassComponent = null
     }
 }

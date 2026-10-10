@@ -26,7 +26,7 @@ object ConfigManager {
     }
 
     @Subscription
-    fun onRegisterCommands(event: RegisterCommandsEvent) {
+    private fun onRegisterCommands(event: RegisterCommandsEvent) {
         event.register("skycubed") {
             thenCallback("version") {
                 Text.of("Version: $VERSION").withColor(TextColor.GRAY).sendWithPrefix()

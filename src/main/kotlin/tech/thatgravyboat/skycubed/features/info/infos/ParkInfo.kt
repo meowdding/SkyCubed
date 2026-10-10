@@ -27,7 +27,7 @@ object ParkInfo : InfoProvider {
     @Subscription
     @OnlyOnSkyBlock
     @OnlyWidget(TabWidget.AREA)
-    fun onWidgetUpdate(event: TabWidgetChangeEvent) {
+    private fun onWidgetUpdate(event: TabWidgetChangeEvent) {
         rainTimeRegex.anyMatch(event.newComponents, "time") { (time) ->
             rainTime = time
         }

@@ -78,7 +78,7 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onTick(event: TickEvent) {
+    private fun onTick(event: TickEvent) {
         if (!PickupLogOverlayConfig.enabled) {
             display = null
             return
@@ -131,7 +131,7 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
     }
 
     @Subscription
-    fun onSack(event: SacksChangeEvent) {
+    private fun onSack(event: SacksChangeEvent) {
         if (!PickupLogOverlayConfig.sackItems) return
 
         event.changedItems.forEach { (item, diff) ->
@@ -145,7 +145,7 @@ object PickUpLog : BackgroundLessSkyCubedOverlay {
     }
 
     @Subscription
-    fun onServerChange(event: ServerChangeEvent) {
+    private fun onServerChange(event: ServerChangeEvent) {
         lastWorldSwap = System.currentTimeMillis()
         addedItems.clear()
         removedItems.clear()

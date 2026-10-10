@@ -66,7 +66,7 @@ object EquipmentManager {
     }
 
     @Subscription
-    fun onRenderForeground(event: RenderScreenForegroundEvent) {
+    private fun onRenderForeground(event: RenderScreenForegroundEvent) {
         if (!this.isEnabled) return
         if (event.screen !is InventoryScreen) return
         val x = lastX + 76
@@ -83,7 +83,7 @@ object EquipmentManager {
     }
 
     @Subscription
-    fun onMouseClick(event: ScreenMouseClickEvent) {
+    private fun onMouseClick(event: ScreenMouseClickEvent) {
         if (!this.isEnabled) return
         if (event.screen !is InventoryScreen) return
         val x = lastX + 76

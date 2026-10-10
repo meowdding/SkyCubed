@@ -91,7 +91,7 @@ object CompactTablist {
     private var filteredFooter: List<FormattedText> = emptyList()
 
     @Subscription(ProfileChangeEvent::class)
-    fun update() {
+    private fun update() {
         if (isEnabled()) {
             createNewDisplay(lastTablist)
         } else {
@@ -101,14 +101,14 @@ object CompactTablist {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onTablistUpdate(event: TabListChangeEvent) {
+    private fun onTablistUpdate(event: TabListChangeEvent) {
         lastTablist = event.new
         update()
     }
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
+    private fun onFooterUpdate(event: TabListHeaderFooterChangeEvent) {
         boosterCookieInFooter = event.newFooter.string.contains("\nCookie Buff\n")
         godPotionInFooter = event.newFooter.string.contains("\nYou have a God Potion active!")
         handleLeftOverFooterLines(event.newFooter)

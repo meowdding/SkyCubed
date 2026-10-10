@@ -14,12 +14,12 @@ object DungeonFeatures {
 
     @Subscription(priority = Subscription.LOWEST)
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
-    fun onEnterDungeon(event: ServerChangeEvent) {
+    private fun onEnterDungeon(event: ServerChangeEvent) {
         currentInstance = DungeonInstance(event.name)
     }
 
     @Subscription
-    fun onExitDungeon(islandChangeEvent: IslandChangeEvent) {
+    private fun onExitDungeon(islandChangeEvent: IslandChangeEvent) {
         if (islandChangeEvent.old == SkyBlockIsland.THE_CATACOMBS) {
             currentInstance?.onRemove()
             currentInstance = null

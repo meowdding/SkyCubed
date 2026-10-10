@@ -49,7 +49,7 @@ object GardenInfo : InfoProvider {
 
     @Subscription
     @OnlyWidget(TabWidget.VISITORS)
-    fun onTabWidget(event: TabWidgetUpdateEvent) {
+    private fun onTabWidget(event: TabWidgetUpdateEvent) {
         TabWidget.VISITORS.regex.anyMatch(event.new, "amount") { (amount) ->
             visitorAmount = amount.toIntValue()
         }

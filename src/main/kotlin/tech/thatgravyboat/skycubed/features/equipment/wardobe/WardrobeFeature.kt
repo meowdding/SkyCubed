@@ -58,7 +58,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onContainerRender(event: RenderScreenBackgroundEvent) {
+    private fun onContainerRender(event: RenderScreenBackgroundEvent) {
         if (!event.screen.isEnabled() || isEditing) return
 
         var currentPage = -1
@@ -79,7 +79,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onContainerClick(event: ScreenMouseClickEvent.Pre) {
+    private fun onContainerClick(event: ScreenMouseClickEvent.Pre) {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
@@ -87,7 +87,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onContainerClick(event: ScreenMouseReleasedEvent.Pre) {
+    private fun onContainerClick(event: ScreenMouseReleasedEvent.Pre) {
         if (!event.screen.isEnabled() || isEditing) return
         event.cancel()
 
@@ -95,7 +95,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onContainerKey(event: ScreenKeyPressedEvent.Pre) {
+    private fun onContainerKey(event: ScreenKeyPressedEvent.Pre) {
         if (!event.screen.isEnabled()) return
 
         event.cancel()
@@ -124,7 +124,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onScreenInit(event: ScreenInitializedEvent) {
+    private fun onScreenInit(event: ScreenInitializedEvent) {
         if (event.screen.isEnabled()) {
             ScreenEvents.remove(event.screen).register {
                 Utils.resetCursor()
@@ -135,7 +135,7 @@ object WardrobeFeature {
     }
 
     @Subscription
-    fun onItemListOverlay(event: ItemListEvent.RegisterExcludedScreen) {
+    private fun onItemListOverlay(event: ItemListEvent.RegisterExcludedScreen) {
         if (event.screen == WardrobeScreen.screen && !isEditing) {
             event.exclude("SkyCubed Wardrobe")
         }

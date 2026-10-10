@@ -96,7 +96,7 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
     }
 
     @Subscription
-    fun onOverlayEditFinish(event: FinishOverlayEditingEvent) {
+    private fun onOverlayEditFinish(event: FinishOverlayEditingEvent) {
         if (event.modId == MOD_ID)
             ConfigManager.save()
 

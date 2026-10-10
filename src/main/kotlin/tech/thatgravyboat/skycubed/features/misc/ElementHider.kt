@@ -12,7 +12,7 @@ object ElementHider {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onRenderHudElement(event: RenderHudElementEvent) {
+    private fun onRenderHudElement(event: RenderHudElementEvent) {
         if (event.element in Config.hiddenHudElements) {
             event.cancel()
         }
@@ -20,7 +20,7 @@ object ElementHider {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onRenderActionBarWidget(event: RenderActionBarWidgetEvent) {
+    private fun onRenderActionBarWidget(event: RenderActionBarWidgetEvent) {
         if (event.widget in Config.hiddenActionBarWidgets) {
             event.cancel()
         }

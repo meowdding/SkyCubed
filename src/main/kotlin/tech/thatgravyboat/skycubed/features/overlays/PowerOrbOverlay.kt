@@ -132,7 +132,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
     private val remainingRegex = Regex("Remaining: (?<seconds>.*?)")
 
     @Subscription
-    fun onEntityAdd(event: NameChangedEvent) {
+    private fun onEntityAdd(event: NameChangedEvent) {
         val entity = event.infoLineEntity
         if (orbs.containsKey(entity)) run {
             val orb = orbs[entity]?.takeIf { it.deployable.hasExtraLine } ?: return@run
@@ -162,7 +162,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
     }
 
     @Subscription(ServerDisconnectEvent::class, ServerChangeEvent::class)
-    fun onLeave() = orbs.clear()
+    private fun onLeave() = orbs.clear()
 
     private enum class Deployable(@Language("RegExp") title: String, val range: () -> Int, val hasExtraLine: Boolean = false) {
         RADIANT_POWER_ORB("(?i)^Radiant", 18),

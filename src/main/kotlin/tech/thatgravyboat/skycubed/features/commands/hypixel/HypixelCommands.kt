@@ -47,7 +47,7 @@ object HypixelCommands {
     }
 
     @Subscription
-    fun onCommandRegistration(event: RegisterCommandsEvent) {
+    private fun onCommandRegistration(event: RegisterCommandsEvent) {
         if (!ChatConfig.modifyHypixelCommands) return
         commands.forEach { command ->
             command.toCommand().forEach {

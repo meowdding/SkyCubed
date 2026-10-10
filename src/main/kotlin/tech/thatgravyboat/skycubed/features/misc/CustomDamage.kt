@@ -35,7 +35,7 @@ object CustomDamage {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onArmorStand(event: NameChangedEvent) {
+    private fun onArmorStand(event: NameChangedEvent) {
         if (!config.enabled) return
 
         val entity = event.infoLineEntity as? ArmorStand ?: return
@@ -72,12 +72,12 @@ object CustomDamage {
 
     @Subscription(TickEvent::class)
     @OnlyOnSkyBlock
-    fun onTick() {
+    private fun onTick() {
         damageList.removeIf { it.time.since() > config.timeout.seconds }
     }
 
     @Subscription
-    fun onRender(event: RenderWorldEvent.AfterTranslucent) {
+    private fun onRender(event: RenderWorldEvent.AfterTranslucent) {
         damageList.forEach { damage ->
             val progress = ((currentInstant() - damage.time) / config.timeout.seconds).coerceIn(0.0, 1.0)
 

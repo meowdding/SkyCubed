@@ -112,7 +112,7 @@ class SackHudEditScreen : BaseUiScreen("Sack Hud Editor") {
     @Module
     companion object {
         @Subscription
-        fun onCommand(event: RegisterCommandsEvent) {
+        private fun onCommand(event: RegisterCommandsEvent) {
             event.register("skycubed sackhud") {
                 callback {
                     McClient.setScreen(SackHudEditScreen())

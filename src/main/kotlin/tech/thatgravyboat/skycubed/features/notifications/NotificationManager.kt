@@ -62,7 +62,7 @@ object NotificationManager {
     )
 
     @Subscription
-    fun onScreenInit(event: ScreenInitializedEvent) {
+    private fun onScreenInit(event: ScreenInitializedEvent) {
         if (!NotificationsConfig.enableNotificationsWidget) return
         if (event.screen is PauseScreen) {
             event.widgets.add(
@@ -84,7 +84,7 @@ object NotificationManager {
     }
 
     @Subscription(priority = Subscription.HIGHEST, receiveCancelled = true)
-    fun onChatMessage(event: ChatReceivedEvent.Pre) {
+    private fun onChatMessage(event: ChatReceivedEvent.Pre) {
         for (notification in notifications) {
             val config = notification.config()
             if (!config.shouldCheck()) continue

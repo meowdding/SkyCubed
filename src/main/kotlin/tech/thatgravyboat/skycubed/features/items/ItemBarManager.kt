@@ -17,7 +17,7 @@ object ItemBarManager {
     // TODO armadillo egg
 
     @Subscription
-    fun onRenderItemBar(event: RenderItemBarEvent) {
+    private fun onRenderItemBar(event: RenderItemBarEvent) {
         if (!ItemsConfig.itembars) return
         event.item.getData(DataTypes.FUEL)?.let {
             event.color = TextColor.DARK_GREEN

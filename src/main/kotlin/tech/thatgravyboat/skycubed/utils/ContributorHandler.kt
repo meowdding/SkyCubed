@@ -13,7 +13,7 @@ object ContributorHandler {
         private set
 
     @Subscription
-    fun onRepoLoad(event: FinishRepoLoadingEvent) {
+    private fun onRepoLoad(event: FinishRepoLoadingEvent) {
         contributors = MlibCosmetics.mlibCosmetics.mapNotNull { it.key to ContributorData(it.value.suffix ?: return@mapNotNull null) }.toMap()
     }
 }

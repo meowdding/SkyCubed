@@ -80,28 +80,28 @@ object DungeonBaseInfoOverlay : InfoDisplayOverride(SkyBlockIsland.THE_CATACOMBS
     }
 
     @Subscription
-    fun onActionbarWidget(event: SecretsActionBarWidgetChangeEvent) {
+    private fun onActionbarWidget(event: SecretsActionBarWidgetChangeEvent) {
         roomSecrets = event.current
         roomMaxSecrets = event.max
     }
 
     @Subscription
     @OnlyWidget(TabWidget.DISCOVERIES)
-    fun onTabWidget(event: TabWidgetChangeEvent) {
+    private fun onTabWidget(event: TabWidgetChangeEvent) {
         secretsRegex.anyMatch(event.new, "secrets") { (secrets) ->
             totalSecrets = secrets.toIntValue()
         }
     }
 
     @Subscription
-    fun onScoreboard(event: ScoreboardUpdateEvent) {
+    private fun onScoreboard(event: ScoreboardUpdateEvent) {
         scoreRegex.anyMatch(event.new, "score") { (score) ->
             this.score = score.toIntValue()
         }
     }
 
     @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
-    fun onClear() {
+    private fun onClear() {
         roomSecrets = 0
         roomMaxSecrets = 0
         totalSecrets = 0

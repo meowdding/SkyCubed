@@ -25,7 +25,7 @@ object CooldownManager {
     val balPet: Data? by lazy { SkyBlockPetsRepo.get("Bal") }
 
     @Subscription
-    fun onItemRightClick(event: RightClickEvent) {
+    private fun onItemRightClick(event: RightClickEvent) {
         val ability = event.stack.getData(DataTypes.COOLDOWN_ABILITY)
         if (ability != null) {
             if (hasBreakingPower(event.stack)) {

@@ -17,7 +17,7 @@ object SackCodecs {
         private set
 
     @Subscription
-    fun onRepo(event: FinishRepoLoadingEvent) {
+    private fun onRepo(event: FinishRepoLoadingEvent) {
         val repoData = RemoteRepo.getFileContentAsJson("sacks.json").toData(SkyCubedCodecs.getCodec<Sack>().listOf()) ?: emptyList()
         sackItems = repoData.flatMap { it.items }
             .mapNotNull { id -> SkyBlockItemsRepo.getLazyItemStack(id)?.let { id to it } }

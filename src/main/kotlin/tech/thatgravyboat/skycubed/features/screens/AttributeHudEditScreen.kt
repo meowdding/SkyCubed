@@ -125,7 +125,7 @@ class AttributeHudEditScreen : BaseUiScreen("Attribute Hud Editor") {
     @Module
     companion object {
         @Subscription
-        fun onCommand(event: RegisterCommandsEvent) {
+        private fun onCommand(event: RegisterCommandsEvent) {
             event.registerWithCallback("skycubed attributehud") {
                 McClient.setScreen(AttributeHudEditScreen())
             }

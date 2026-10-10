@@ -52,12 +52,12 @@ class DungeonInstance(val serverId: String) {
     }
 
     @Subscription(priority = Subscription.LOWEST)
-    fun onAreaChange(event: AreaChangeEvent) {
+    private fun onAreaChange(event: AreaChangeEvent) {
         floor = DungeonAPI.dungeonFloor?.floorNumber ?: -1
     }
 
     @Subscription(priority = Subscription.LOWEST)
-    fun onTabWidgetChange(event: TabListChangeEvent) = runCatching {
+    private fun onTabWidgetChange(event: TabListChangeEvent) = runCatching {
         var index = 0
         DungeonAPI.teammates.filterNot { it === DungeonAPI.ownPlayer }.forEach { player ->
             if (index >= players.size) {
@@ -89,7 +89,7 @@ class DungeonInstance(val serverId: String) {
 
     @Subscription
     @OnlyWidget(TabWidget.PUZZLES)
-    fun onPuzzleWidgetChange(event: TabWidgetChangeEvent) = runCatching {
+    private fun onPuzzleWidgetChange(event: TabWidgetChangeEvent) = runCatching {
         puzzles = puzzles ?: createPuzzlesArray(event)
 
         val localPuzzles = puzzles ?: return@runCatching

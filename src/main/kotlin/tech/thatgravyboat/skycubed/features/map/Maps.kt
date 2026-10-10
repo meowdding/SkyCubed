@@ -73,12 +73,12 @@ object Maps {
     }
 
     @Subscription
-    fun onIslandChange(event: IslandChangeEvent) {
+    private fun onIslandChange(event: IslandChangeEvent) {
         currentIsland = groups[islands[event.new]]?.find { it.island == event.new }
     }
 
     @Subscription
-    fun onCommand(event: RegisterCommandsEvent) {
+    private fun onCommand(event: RegisterCommandsEvent) {
         event.registerWithCallback("skycubed map") {
             McClient.setScreenAsync { MapScreen() }
         }

@@ -78,7 +78,7 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onChatReceived(event: ChatReceivedEvent.Pre) {
+    private fun onChatReceived(event: ChatReceivedEvent.Pre) {
         if (!enabled) return
 
         messageRegex.match(event.component, "name", "message") { (name, message) ->
@@ -109,20 +109,20 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onServerChange(event: ServerChangeEvent) {
+    private fun onServerChange(event: ServerChangeEvent) {
         queue.clear()
         reset()
     }
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onInventoryInit(event: ContainerInitializedEvent) {
+    private fun onInventoryInit(event: ContainerInitializedEvent) {
         containerLeftPos = event.screen.left
     }
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onTick(event: TickEvent) {
+    private fun onTick(event: TickEvent) {
         if (!enabled) return
 
         if (System.currentTimeMillis() > nextCheck) {
@@ -231,7 +231,7 @@ object DialogueOverlay : BackgroundLessSkyCubedOverlay {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onForeground(event: RenderScreenForegroundEvent) {
+    private fun onForeground(event: RenderScreenForegroundEvent) {
         if (!enabled) return
         val graphics = event.graphics
 

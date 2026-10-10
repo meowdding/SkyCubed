@@ -23,7 +23,7 @@ object SafariInfo : InfoProvider {
 
     @Subscription
     @OnlyOnSkyBlock
-    fun onScoreboard(event: ScoreboardChangeEvent) {
+    private fun onScoreboard(event: ScoreboardChangeEvent) {
         val match = regex.anyMatch(event.new, "amount") { (amount) ->
             capturedMobs = amount.toIntValue()
         }

@@ -19,7 +19,7 @@ object ChatManager {
     )
 
     @Subscription
-    fun onChatReceivedPre(event: ChatReceivedEvent.Pre) {
+    private fun onChatReceivedPre(event: ChatReceivedEvent.Pre) {
         for (regex in ChatConfig.messagesToClean) {
             if (regex.find(event.text) != null) {
                 event.cancel()
@@ -29,7 +29,7 @@ object ChatManager {
     }
 
     @Subscription
-    fun onChatReceivedPost(event: ChatReceivedEvent.Post) {
+    private fun onChatReceivedPost(event: ChatReceivedEvent.Post) {
         if (ChatConfig.compactChat) {
             for ((id, regex) in compactMessage) {
                 if (regex.find(event.text) != null) {
