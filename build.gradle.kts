@@ -9,7 +9,7 @@ plugins {
     id("versioned-catalogues")
     kotlin("jvm")
     id("me.owdding.auto-mixins")
-    id("me.owdding.resources")
+    //id("me.owdding.resources")
     id("com.google.devtools.ksp")
 }
 
@@ -58,12 +58,12 @@ loom.apply {
     }
 }
 
-compactingResources {
-    basePath = "repo"
-    pathDirectory = "../../src"
-
-    configureTask(tasks.named<AbstractCopyTask>("processResources").get())
-}
+//compactingResources {
+//    basePath = "repo"
+//    pathDirectory = "../../src"
+//
+//    configureTask(tasks.named<AbstractCopyTask>("processResources").get())
+//}
 
 ksp {
     arg("meowdding.project_name", "SkyCubed")
