@@ -63,7 +63,6 @@ compactingResources {
     pathDirectory = "../../src"
 
     configureTask(tasks.named<AbstractCopyTask>("processResources").get())
-    compactToArray("rooms")
 }
 
 ksp {
