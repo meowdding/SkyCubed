@@ -6,6 +6,7 @@ import me.owdding.ktcodecs.FieldName
 import me.owdding.ktcodecs.GenerateCodec
 import me.owdding.lib.displays.Display
 import me.owdding.lib.displays.Displays
+import me.owdding.lib.rendering.text.serialization.TagComponentSerialization
 import me.owdding.skycubed.generated.SkyCubedCodecs
 import net.minecraft.client.resources.DefaultPlayerSkin
 import net.minecraft.network.chat.Component
@@ -15,7 +16,7 @@ import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
 import tech.thatgravyboat.skyblockapi.platform.texture
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
-import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.utils.CachedValue
 import tech.thatgravyboat.skycubed.utils.getSkin
@@ -33,9 +34,9 @@ data class NpcPoi(
 ) : Poi {
     internal val skin: CompletableFuture<PlayerSkin> by lazy { McClient.self.skinManager.getSkin(this.texture) }
 
-    val link get() = actualLink.applyReplacements().stripColor().replace(" ", "_")
+    val link by CachedValue(5.seconds) { TagComponentSerialization.deserialize(actualLink.applyReplacements()).stripped.replace(" ", "_") }
     override val tooltip: MutableList<Component> by CachedValue(5.seconds) {
-        stringTooltip.map { Text.of(it.applyReplacements()) }.toMutableList()
+        stringTooltip.map { TagComponentSerialization.deserialize(it.applyReplacements()) }.toMutableList()
     }
     override val id: String = "npc"
     override val bounds: Vector2i = Vector2i(10, 10)
