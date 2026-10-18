@@ -4,6 +4,8 @@ import com.google.gson.JsonArray
 import com.mojang.brigadier.tree.RootCommandNode
 import kotlinx.coroutines.runBlocking
 import me.owdding.ktmodules.Module
+import me.owdding.lib.events.FinishRepoLoadingEvent
+import me.owdding.repo.RemoteRepo
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.utils.json.Json.toDataOrThrow
@@ -16,18 +18,17 @@ object HypixelCommands {
     private val commands: MutableList<LiteralHypixelCommand> = mutableListOf()
     private val roots: MutableList<String> = mutableListOf()
 
-    init {
-        runBlocking {
-            try {
-                val file = SkyCubed.loadFromRepo<JsonArray>("commands")
-                file.toDataOrThrow(LiteralHypixelCommand.CODEC.listOf())?.let(commands::addAll)
-            } catch (e: Exception) {
-                println(e)
-            }
+    @Subscription(FinishRepoLoadingEvent::class)
+    private fun loadData() {
+        try {
+            val file = RemoteRepo.getFileContentAsJson("skycubed/commands")
+            file.toDataOrThrow(LiteralHypixelCommand.CODEC.listOf())?.let(commands::addAll)
+        } catch (e: Exception) {
+            println(e)
+        }
 
-            for (command in commands) {
-                roots.addAll(command.values)
-            }
+        for (command in commands) {
+            roots.addAll(command.values)
         }
     }
 

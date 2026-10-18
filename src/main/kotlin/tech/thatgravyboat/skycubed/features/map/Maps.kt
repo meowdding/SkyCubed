@@ -7,6 +7,8 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
 import kotlinx.coroutines.runBlocking
 import me.owdding.ktmodules.Module
+import me.owdding.lib.events.FinishRepoLoadingEvent
+import me.owdding.repo.RemoteRepo
 import net.minecraft.core.BlockPos
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.location.IslandChangeEvent
@@ -44,32 +46,24 @@ object Maps {
     var currentIsland: IslandData? = null
         private set
 
-    init {
-        runBlocking {
-            runCatching {
-                TYPES.forEach { type ->
-                    val file = this.javaClass.getResourceAsStream("/repo/maps/$type.jsonc")?.readJsonc<JsonElement>() ?: return@runCatching
-                    try {
-                        SkyCubed.repoPatcher?.patch(file, "maps/$type")
-                    } catch (_: Exception) {
-                        SkyCubed.warn("Failed to patch map $type.")
-                    }
-                    val result = Codec.either(IslandData.CODEC, IslandData.CODEC.listOf())
-                        .xmap({ it.map(::listOf, Function.identity()) }, { Either.right(it) })
-                        .parse(JsonOps.INSTANCE, file)
+    @Subscription(FinishRepoLoadingEvent::class)
+    private fun loadRepo() = runCatching {
+        TYPES.forEach { type ->
+            val file = RemoteRepo.getFileContentAsJson("skycubed/maps/$type") ?: return@forEach
+            val result = Codec.either(IslandData.CODEC, IslandData.CODEC.listOf())
+                .xmap({ it.map(::listOf, Function.identity()) }, { Either.right(it) })
+                .parse(JsonOps.INSTANCE, file)
 
-                    result.ifError {
-                        SkyCubed.error("Error parsing maps/$type.json, error: {}", it)
-                    }
-                    result.ifSuccess { islands ->
-                        groups[type] = islands
-                        islands.forEach { Maps.islands[it.island] = type }
-                    }
-                }
-            }.onFailure {
-                it.printStackTrace()
+            result.ifError {
+                SkyCubed.error("Error parsing maps/$type.json, error: {}", it)
+            }
+            result.ifSuccess { islands ->
+                groups[type] = islands
+                islands.forEach { Maps.islands[it.island] = type }
             }
         }
+    }.getOrElse {
+        SkyCubed.error("Failed to load map data", it)
     }
 
     @Subscription

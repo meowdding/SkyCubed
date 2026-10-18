@@ -6,7 +6,6 @@ import kotlinx.coroutines.runBlocking
 import me.owdding.ktmodules.Module
 import me.owdding.lib.events.overlay.FinishOverlayEditingEvent
 import me.owdding.lib.overlays.Overlays
-import me.owdding.lib.utils.DataPatcher
 import me.owdding.lib.utils.MeowddingUpdateChecker
 import me.owdding.skycubed.generated.SkyCubedCodecs
 import me.owdding.skycubed.generated.SkyCubedModules
@@ -34,7 +33,6 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.hover
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.url
 import tech.thatgravyboat.skycubed.config.ConfigManager
 import tech.thatgravyboat.skycubed.features.overlays.TextOverlay
-import java.net.URI
 import java.nio.file.Files
 import kotlin.reflect.jvm.javaType
 import kotlin.reflect.typeOf
@@ -46,23 +44,10 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
     val MOD_ID: String get() = mod.metadata.id
     val VERSION: String = mod.metadata.version.friendlyString
 
-    val repoPatcher: DataPatcher?
-
     val prefix = Text.of {
         append("[") { color = TextColor.GRAY }
         append("SkyCubed") { color = TextColor.YELLOW }
         append("] ") { color = TextColor.GRAY }
-    }
-
-    init {
-        var patch: DataPatcher?
-        try {
-            patch = DataPatcher(URI.create("https://patches.owdding.me/${McClient.version.replace(".", "_")}.json").toURL(), mod)
-        } catch (e: Exception) {
-            error("Failed to load patches!", e)
-            patch = null
-        }
-        repoPatcher = patch
     }
 
     fun Component.sendWithPrefix() = Text.join(prefix, this).send()
@@ -107,36 +92,4 @@ object SkyCubed : ModInitializer, Logger by LoggerFactory.getLogger("SkyCubed") 
     }
 
     fun olympus(path: String): Identifier = Identifier.fromNamespaceAndPath("olympus", path)
-
-    inline fun <reified T : Any> loadFromRepo(file: String): T? = runBlocking {
-        try {
-            val json = mod.findPath("repo/$file.json").orElseThrow()?.let(Files::readString)?.readJson<JsonElement>() ?: return@runBlocking null
-            try {
-                repoPatcher?.patch(json, file)
-            } catch (e: Exception) {
-                error("Failed to apply patches for file $file", e)
-                return@runBlocking null
-            }
-            return@runBlocking Json.gson.fromJson(json, typeOf<T>().javaType)
-        } catch (e: Exception) {
-            error("Failed to load $file from repo", e)
-            return@runBlocking null
-        }
-    }
-
-    internal inline fun <reified T : Any> loadRepoData(file: String): T {
-        return loadRepoData<T, T>(file) { it }
-    }
-
-    internal inline fun <reified T : Any, B : Any> loadRepoData(file: String, modifier: (Codec<T>) -> Codec<B>): B {
-        return loadFromRepo<JsonElement>(file).toDataOrThrow(SkyCubedCodecs.getCodec<T>().let(modifier))
-    }
-
-    internal inline fun <B : Any> loadRepoData(file: String, supplier: () -> Codec<B>): B {
-        return loadFromRepo<JsonElement>(file).toDataOrThrow(supplier())
-    }
-
-    internal fun <B : Any> loadRepoData(file: String, codec: Codec<B>): B {
-        return loadFromRepo<JsonElement>(file).toDataOrThrow(codec)
-    }
 }
