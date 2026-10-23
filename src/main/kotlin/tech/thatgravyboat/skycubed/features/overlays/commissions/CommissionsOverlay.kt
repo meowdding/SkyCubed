@@ -9,6 +9,9 @@ import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextColor
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
+import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.overlays.CommissionOverlayConfig
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
 import tech.thatgravyboat.skycubed.utils.CachedValue
@@ -30,6 +33,12 @@ object CommissionsOverlay : SkyCubedOverlay {
 
     private val lines by CachedValue(1.seconds) {
         DisplayFactory.vertical {
+            if (CommissionOverlayConfig.title) {
+                string(Text.of("Commissions") {
+                    bold = true
+                    color = TextColor.BLUE
+                })
+            }
             val area = CommissionArea.entries.firstOrNull { it.areaCheck() } ?: run {
                 string("No commissions available")
                 return@vertical
