@@ -338,6 +338,10 @@
                         "@value": "Enable Commissions Overlay",
                         "desc": "Enables the commissions overlay, showing which commissions you have on mining islands."
                     },
+                    "title": {
+                        "@value": "Add Overlay Title",
+                        "desc": "Adds an additional \"Commissions\" title to the overlay."
+                    },
                     "format": {
                         "@value": "Format Commission Displays",
                         "desc": "If enabled the commissions will display as a number out of another number or a check mark instead of just a percentage."
