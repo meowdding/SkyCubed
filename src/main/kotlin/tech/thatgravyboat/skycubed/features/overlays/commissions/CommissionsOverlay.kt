@@ -33,12 +33,6 @@ object CommissionsOverlay : SkyCubedOverlay {
 
     private val lines by CachedValue(1.seconds) {
         DisplayFactory.vertical {
-            if (CommissionOverlayConfig.title) {
-                string(Text.of("Commissions") {
-                    bold = true
-                    color = TextColor.BLUE
-                })
-            }
             val area = CommissionArea.entries.firstOrNull { it.areaCheck() } ?: run {
                 string("No commissions available")
                 return@vertical
@@ -46,6 +40,12 @@ object CommissionsOverlay : SkyCubedOverlay {
             val commissions = CommissionsAPI.commissions.filter { it.area == area }.takeIf { it.isNotEmpty() } ?: run {
                 string("No commissions available")
                 return@vertical
+            }
+            if (CommissionOverlayConfig.title) {
+                string(Text.of("Commissions") {
+                    bold = true
+                    color = TextColor.BLUE
+                })
             }
             commissions.forEach { commission ->
                 string(Text.join("${commission.name}: ", CommissionFormatters.format(commission.name, commission.progress)))
