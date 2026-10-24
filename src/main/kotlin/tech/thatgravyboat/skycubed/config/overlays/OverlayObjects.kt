@@ -313,6 +313,10 @@ object CommissionOverlayConfig : OverlayConfig("Edit Commissions Overlay") {
         this.translation = "skycubed.config.overlays.commissions.enabled"
     }
 
+    var title by boolean(false) {
+        this.translation = "skycubed.config.overlays.commissions.title"
+    }
+
     var format by boolean(true) {
         this.translation = "skycubed.config.overlays.commissions.format"
     }
