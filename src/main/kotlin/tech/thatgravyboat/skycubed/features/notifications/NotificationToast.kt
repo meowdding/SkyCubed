@@ -59,41 +59,6 @@ data class NotificationToast(
         this.replaced = true
     }
 
-    fun add(id: String?, text: Component, time: Int) {
-        val component = McClient.toasts
-        val font = component.minecraft.font
-        val list = font.split(text, 152)
-
-        if (NotificationsConfig.vanillaToasts) {
-            SystemToast.add(component, SystemToast.SystemToastId.PERIODIC_NOTIFICATION, text, null)
-            record(NotificationToast(list, id, time))
-            return
-        }
-
-        if (id != null) {
-            val existing = component.getToast(NotificationToast::class.java, id)
-            if (existing != null) {
-                existing.replace(list)
-                return
-            }
-        }
-
-        val toast = NotificationToast(list, id, time)
-        component.addToast(toast)
-        record(toast)
-    }
-
-    private fun record(toast: NotificationToast) {
-        this.notifications.add(toast)
-
-        if (this.notifications.size > 50) {
-            this.notifications.removeFirst()
-        }
-    }
-
-
-
-
     companion object {
 
         private val BACKGROUND = SkyCubed.id("notification")
@@ -104,6 +69,13 @@ data class NotificationToast(
             val component = McClient.toasts
             val font = component.minecraft.font
             val list = font.split(text, 152)
+
+            if (NotificationsConfig.vanillaToasts) {
+                SystemToast.add(component, SystemToast.SystemToastId.PERIODIC_NOTIFICATION, text, null)
+                record(NotificationToast(list, id, time))
+                return
+            }
+
             if (id != null) {
                 val existing = component.getToast(NotificationToast::class.java, id)
                 if (existing != null) {
@@ -111,14 +83,20 @@ data class NotificationToast(
                     return
                 }
             }
+
             val toast = NotificationToast(list, id, time)
             component.addToast(toast)
+            record(toast)
+        }
+
+        private fun record(toast: NotificationToast) {
             this.notifications.add(toast)
+
             if (this.notifications.size > 50) {
                 this.notifications.removeFirst()
             }
         }
 
         fun notifications(): List<NotificationToast> = this.notifications
-    }
+    } 
 }
