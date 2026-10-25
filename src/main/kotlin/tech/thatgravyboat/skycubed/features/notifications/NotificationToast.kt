@@ -4,11 +4,13 @@ import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.toasts.Toast
 import net.minecraft.client.gui.components.toasts.ToastManager
+import net.minecraft.client.gui.components.toasts.SystemToast
 import net.minecraft.network.chat.Component
 import net.minecraft.util.FormattedCharSequence
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.platform.drawString
+import tech.thatgrayboat.skycubed.config.notifications.NotificationsConfig
 import tech.thatgravyboat.skycubed.SkyCubed
 
 data class NotificationToast(
@@ -56,6 +58,41 @@ data class NotificationToast(
         this.text = text
         this.replaced = true
     }
+
+    fun add(id: String?, text: Component, time: Int) {
+        val component = McClient.toasts
+        val font = component.minecraft.font
+        val list = font.split(text, 152)
+
+        if (NotificationsConfig.vanillaToasts) {
+            SystemToast.add(component, SystemToast.SystemToastId.PERIODIC_NOTIFICATION, text, null)
+            record(NotificationToast(list, id, time))
+            return
+        }
+
+        if (id != null) {
+            val existing = component.getToast(NotificationToast::class.java, id)
+            if (existing != null) {
+                existing.replace(list)
+                return
+            }
+        }
+
+        val toast = NotificationToast(list, id, time)
+        component.addToast(toast)
+        record(toast)
+    }
+
+    private fun record(toast: NotificationToast) {
+        this.notifications.add(toast)
+        
+        if (this.notifications.size > 50) {
+            this.notifications.removeFirst()
+        }
+    }
+
+
+
 
     companion object {
 
