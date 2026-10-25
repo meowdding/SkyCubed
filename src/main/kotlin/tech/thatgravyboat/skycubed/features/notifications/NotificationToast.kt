@@ -10,7 +10,7 @@ import net.minecraft.util.FormattedCharSequence
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
 import tech.thatgravyboat.skyblockapi.platform.drawString
-import tech.thatgrayboat.skycubed.config.notifications.NotificationsConfig
+import tech.thatgravyboat.skycubed.config.notifications.NotificationsConfig
 import tech.thatgravyboat.skycubed.SkyCubed
 
 data class NotificationToast(
@@ -85,7 +85,7 @@ data class NotificationToast(
 
     private fun record(toast: NotificationToast) {
         this.notifications.add(toast)
-        
+
         if (this.notifications.size > 50) {
             this.notifications.removeFirst()
         }
