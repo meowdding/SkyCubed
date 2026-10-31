@@ -2,7 +2,7 @@ package tech.thatgravyboat.skycubed.utils
 
 import me.owdding.ktmodules.Module
 import me.owdding.lib.cosmetics.MlibCosmetics
-import me.owdding.lib.events.FinishRepoLoadingEvent
+import me.owdding.lib.events.CosmeticLoadEvent
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import java.util.*
@@ -13,7 +13,7 @@ object ContributorHandler {
         private set
 
     @Subscription
-    private fun onRepoLoad(event: FinishRepoLoadingEvent) {
+    private fun onRepoLoad(event: CosmeticLoadEvent) {
         contributors = MlibCosmetics.mlibCosmetics.mapNotNull { it.key to ContributorData(it.value.suffix ?: return@mapNotNull null) }.toMap()
     }
 }
