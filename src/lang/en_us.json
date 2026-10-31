@@ -222,6 +222,10 @@
                         "@value": "Target Column Size",
                         "desc": "The target size of each column in the tab list."
                     },
+                    "margin": {
+                        "@value": "Margin",
+                        "desc": "Space between top of the screen and the tab list."
+                    },
                     "section_background": {
                         "@value": "Section Background",
                         "desc": "If a background on columns and widgets should be drawn."
