@@ -202,6 +202,10 @@ object TabListOverlayConfig : OverlayConfig("Edit Tab List Overlay") {
         this.range = 1..30
     }.update()
 
+    var margin by int(3) {
+        this.translation = "skycubed.config.overlays.tablist.margin"
+    }.update()
+
     var sectionBackground by boolean(false) {
         this.translation = "skycubed.config.overlays.tablist.section_background"
     }.update()
