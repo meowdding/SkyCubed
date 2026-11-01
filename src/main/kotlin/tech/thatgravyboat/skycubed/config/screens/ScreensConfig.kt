@@ -11,6 +11,10 @@ object ScreensConfig : CategoryKt("screens") {
         this.translation = "skycubed.config.screens.equipment"
     }
 
+    var equipmentShowSetsOnClick by boolean(false) {
+        this.translation = "skycubed.config.screens.equipmentShowSetsOnClick"
+    }
+
     init {
         obj("wardrobe", WardrobeConfig) { this.translation = "skycubed.config.screens.wardrobe" }
     }

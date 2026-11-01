@@ -12,6 +12,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
 import tech.thatgravyboat.skyblockapi.api.events.render.RenderScreenForegroundEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.ScreenMouseClickEvent
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
+import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.profile.items.equipment.EquipmentAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.equipment.EquipmentSlot
 import tech.thatgravyboat.skyblockapi.helpers.McClient
@@ -91,7 +92,11 @@ object EquipmentManager {
         EquipmentSlot.entries.forEachIndexed { index, _ ->
             val slotY = y + index * 18
             if (event.x.toInt() in x + 1..x + 16 && event.y.toInt() in slotY + 1..slotY + 16) {
-                McClient.sendCommand("stats")
+                if (ScreensConfig.equipmentShowSetsOnClick && !SkyBlockIsland.THE_RIFT.inIsland()) {
+                    McClient.sendCommand("equipment")
+                } else {
+                    McClient.sendCommand("stats")
+                }
             }
         }
     }
