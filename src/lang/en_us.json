@@ -436,7 +436,7 @@
                 },
                 "equipmentShowSetsOnClick": {
                     "@value": "Open Sets Menu On Click",
-                    "desc": "Clicking on your equipment in inventory will open Equipment Sets instead of Stats & Equipment menu."
+                    "desc": "Clicking on your equipment in inventory will open Equipment Sets instead of Stats & Equipment menu. Will still use the latter in The Rift."
                 },
                 "wardrobe": {
                     "@value": "Custom Wardrobe",
