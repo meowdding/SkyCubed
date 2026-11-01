@@ -434,6 +434,10 @@
                     "@value": "Show Equipment",
                     "desc": "Shows your equipment in your inventory next to your player like armor."
                 },
+                "equipmentShowSetsOnClick": {
+                    "@value": "Open Sets Menu On Click",
+                    "desc": "Clicking on your equipment in inventory will open Equipment Sets instead of Stats & Equipment menu."
+                },
                 "wardrobe": {
                     "@value": "Custom Wardrobe",
                     "desc": "Changes the wardrobe to be a custom wardrobe with more options.",
