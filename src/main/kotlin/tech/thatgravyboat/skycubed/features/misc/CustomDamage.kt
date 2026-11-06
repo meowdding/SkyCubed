@@ -3,6 +3,7 @@ package tech.thatgravyboat.skycubed.features.misc
 import me.owdding.ktmodules.Module
 import me.owdding.lib.extensions.shorten
 import net.minecraft.client.gui.Font
+import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.decoration.ArmorStand
 import net.minecraft.world.phys.Vec3
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -17,6 +18,7 @@ import tech.thatgravyboat.skyblockapi.utils.extentions.currentInstant
 import tech.thatgravyboat.skyblockapi.utils.extentions.since
 import tech.thatgravyboat.skyblockapi.utils.extentions.toLongValue
 import tech.thatgravyboat.skyblockapi.utils.text.Text
+import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.width
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import tech.thatgravyboat.skycubed.config.rendering.RenderingConfig
 import tech.thatgravyboat.skycubed.features.misc.CustomDamage.DamageType.Companion.damageType
@@ -49,15 +51,17 @@ object CustomDamage {
                 existing.type == type && entity.position().distanceTo(existing.position) < config.combineThreshold
             } else null
             if (close == null) {
-                damageList.add(
-                    Damage(
-                        amount,
-                        type,
-                        currentInstant(),
-                        entity.position(),
-                        currentInstant()
-                    ),
-                )
+                McClient.runOrNextTick {
+                    damageList.add(
+                        Damage(
+                            amount,
+                            type,
+                            currentInstant(),
+                            entity.position(),
+                            currentInstant()
+                        ),
+                    )
+                }
             } else {
                 close.amount += amount
                 if (close.actualSpawnTime.since() <= config.fullTimeout.seconds) {
@@ -81,9 +85,7 @@ object CustomDamage {
         damageList.forEach { damage ->
             val progress = ((currentInstant() - damage.time) / config.timeout.seconds).coerceIn(0.0, 1.0)
 
-            val damageText = Text.of(damage.amount.shorten(config.precision).addIcons(damage.type)) {
-                this.color = damage.type.color
-            }
+            val damageText = damage.text
 
             val scale = 0.03F
 
@@ -104,7 +106,7 @@ object CustomDamage {
                 //~ if >= 26.3 'mulPose' -> 'rotate'
                 rotate(event.cameraRotation)
                 scale(scale, -scale, scale)
-                val xOffset = -McFont.width(damageText) / 2.0f
+                val xOffset = -damage.width / 2.0f
 
                 val alpha = if (progress < 0.7 || !config.fadingTags) {
                     1.0F
@@ -140,7 +142,11 @@ object CustomDamage {
         val type: DamageType,
         var time: Instant,
         val position: Vec3,
-        val actualSpawnTime: Instant
+        val actualSpawnTime: Instant,
+        val text: Component = Text.of(amount.shorten(config.precision).addIcons(type)) {
+            this.color = type.color
+        },
+        val width: Int = text.width
     )
 
     private enum class DamageType(val color: Int, val icon: String) {
