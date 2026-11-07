@@ -556,6 +556,10 @@
                     "@value": "Toast Duration",
                     "desc": "The time in seconds of how long a toast notification should be displayed for."
                 },
+                "vanilla_toasts": {
+                    "@value": "Use Vanilla Toasts",
+                    "desc": "Shows notifications as vanilla system toasts. (Uses Vanilla duration)"
+                },
                 "friend_join_leave": {
                     "@value": "Friend Join/Leave",
                     "desc": [
