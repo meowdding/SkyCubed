@@ -40,6 +40,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
+import tech.thatgravyboat.skyblockapi.utils.text.TextUtils.splitLines
 import tech.thatgravyboat.skycubed.api.ExtraDisplays
 import tech.thatgravyboat.skycubed.config.overlays.TabListOverlayConfig
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
@@ -129,13 +130,10 @@ object CompactTablist {
     )
 
     private fun handleLeftOverFooterLines(footer: Component) {
-        val split = McFont.self.splitter.splitLines(footer, Int.MAX_VALUE, Style.EMPTY)
-
-        val filteredFooter = split.filter { it.string.stripColor().isNotBlank() }
-
-        this.filteredFooter = filteredFooter.filter { line ->
-            footerLinesToRemove.none { line.string.contains(it) }
-        }
+        this.filteredFooter = footer.splitLines()
+            .filter { it.string.stripColor().isNotBlank() }
+            .let { lines -> lines.filterIndexed { i, _ -> lines.getOrNull(i - 1)?.string != "Cookie Buff" } }
+            .filter { line -> footerLinesToRemove.none { line.string.contains(it) } }
     }
 
     private fun Line.formatPlayer(playerMap: Map<String, PlayerInfo>): Line {
