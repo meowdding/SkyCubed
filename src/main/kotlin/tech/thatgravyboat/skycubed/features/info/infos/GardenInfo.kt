@@ -11,6 +11,7 @@ import tech.thatgravyboat.skyblockapi.api.profile.garden.PlotAPI
 import tech.thatgravyboat.skyblockapi.utils.extentions.fromNow
 import tech.thatgravyboat.skyblockapi.utils.extentions.parseDuration
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
+import tech.thatgravyboat.skyblockapi.utils.extentions.toReadableTime
 import tech.thatgravyboat.skyblockapi.utils.extentions.until
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.anyMatch
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
@@ -19,7 +20,6 @@ import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider
 import tech.thatgravyboat.skycubed.features.info.RegisterInfoOverlay
-import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import kotlin.time.DurationUnit
 import kotlin.time.Instant
 
@@ -35,7 +35,7 @@ object GardenInfo : InfoProvider {
         display(getIconDisplay(SkyCubed.id("info/icons/visitor")))
         textDisplay("$visitorAmount", shadow = true) { color = TextColor.AQUA }
         visitorTime?.let {
-            textDisplay(" (${it.until().formatReadableTime(DurationUnit.MINUTES, 2)})", shadow = true) { color = TextColor.GREEN }
+            textDisplay(" (${it.until().toReadableTime(DurationUnit.MINUTES, 2)})", shadow = true) { color = TextColor.GREEN }
         } ?: run {
             textDisplay(" (Full)", shadow = true) { color = TextColor.RED }
         }

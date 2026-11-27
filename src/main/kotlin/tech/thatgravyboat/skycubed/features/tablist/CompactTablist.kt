@@ -12,7 +12,6 @@ import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.multiplayer.PlayerInfo
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
-import net.minecraft.network.chat.Style
 import net.minecraft.util.ARGB
 import tech.thatgravyboat.skyblockapi.api.area.hub.SpookyFestivalAPI
 import tech.thatgravyboat.skyblockapi.api.events.base.Subscription
@@ -26,12 +25,12 @@ import tech.thatgravyboat.skyblockapi.api.profile.effects.EffectsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.friends.FriendsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.party.PartyAPI
 import tech.thatgravyboat.skyblockapi.helpers.McClient
-import tech.thatgravyboat.skyblockapi.helpers.McFont
 import tech.thatgravyboat.skyblockapi.platform.PlayerSkin
 import tech.thatgravyboat.skyblockapi.platform.texture
 import tech.thatgravyboat.skyblockapi.utils.extentions.stripColor
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
+import tech.thatgravyboat.skyblockapi.utils.extentions.toReadableTime
 import tech.thatgravyboat.skyblockapi.utils.extentions.until
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 import tech.thatgravyboat.skyblockapi.utils.text.CommonText
@@ -47,7 +46,6 @@ import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLine
 import tech.thatgravyboat.skycubed.features.tablist.Line.Companion.toLines
 import tech.thatgravyboat.skycubed.utils.ContributorHandler
 import tech.thatgravyboat.skycubed.utils.Utils.toSkin
-import tech.thatgravyboat.skycubed.utils.formatReadableTime
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
@@ -301,7 +299,7 @@ object CompactTablist {
                 this.bold = true
             },
             Text.of(
-                if (duration.inWholeSeconds > 0) ": ${duration.formatReadableTime(DurationUnit.DAYS, 2)}"
+                if (duration.inWholeSeconds > 0) ": ${duration.toReadableTime(DurationUnit.DAYS, 2)}"
                 else inactiveText,
             ).withColor(TextColor.GRAY),
         ).toLine()
