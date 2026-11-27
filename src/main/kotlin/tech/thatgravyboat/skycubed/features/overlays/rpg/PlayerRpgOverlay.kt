@@ -17,6 +17,7 @@ import tech.thatgravyboat.skyblockapi.api.profile.StatsAPI
 import tech.thatgravyboat.skyblockapi.api.profile.profile.ProfileAPI
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
 import tech.thatgravyboat.skyblockapi.platform.drawSprite
+import tech.thatgravyboat.skyblockapi.utils.extentions.nextCycling
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skycubed.SkyCubed
 import tech.thatgravyboat.skycubed.config.overlays.OverlayPositions
@@ -27,7 +28,6 @@ import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.Utils
 import tech.thatgravyboat.skycubed.utils.blitSpritePercent
 import tech.thatgravyboat.skycubed.utils.drawScaledString
-import tech.thatgravyboat.skycubed.utils.next
 
 @RegisterOverlay
 object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
@@ -146,7 +146,7 @@ object PlayerRpgOverlay : BackgroundLessSkyCubedOverlay {
             PlayerDisplay.UNARMORED -> "Hide Player"
         }
         it.button(Text.of(text)) {
-            RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.next()
+            RpgOverlayConfig.playerDisplay = RpgOverlayConfig.playerDisplay.nextCycling()
         }
         it.divider()
         it.dangerButton(Text.of("Reset Position")) {

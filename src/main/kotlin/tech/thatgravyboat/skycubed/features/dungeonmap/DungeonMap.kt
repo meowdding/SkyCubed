@@ -62,26 +62,28 @@ class DungeonMap(val instance: DungeonInstance) {
 
     private fun getMapData(mapId: MapId) = McLevel.self?.getMapData(mapId)
 
-    @Subscription
-    private fun onTick(event: TickEvent) = instance.runCatching {
-        if (McPlayer.self == null) return
-        val stack = McPlayer.inventory[8]
-        val isMap = stack.`is`(Items.FILLED_MAP)
+    @Subscription(TickEvent::class)
+    private fun onTick() {
+        instance.runCatching {
+            if (McPlayer.self == null) return
+            val stack = McPlayer.inventory[8]
+            val isMap = stack.`is`(Items.FILLED_MAP)
 
-        if (!isMap && cachedMapId != null) {
-            processWithCachedInfo()
-            return
-        }
+            if (!isMap && cachedMapId != null) {
+                processWithCachedInfo()
+                return
+            }
 
-        val mapIdComponent = stack.get(DataComponents.MAP_ID)
-        if (mapIdComponent != null && this.cachedMapId == null) {
-            this.cachedMapId = mapIdComponent.id()
+            val mapIdComponent = stack.get(DataComponents.MAP_ID)
+            if (mapIdComponent != null && this.cachedMapId == null) {
+                this.cachedMapId = mapIdComponent.id()
+            }
+            if (mapIdComponent == null) {
+                return
+            }
+            val mapData = getMapData(mapIdComponent) ?: return
+            processMapData(mapData)
         }
-        if (mapIdComponent == null) {
-            return
-        }
-        val mapData = getMapData(mapIdComponent) ?: return
-        processMapData(mapData)
     }
 
     private fun timeout() {

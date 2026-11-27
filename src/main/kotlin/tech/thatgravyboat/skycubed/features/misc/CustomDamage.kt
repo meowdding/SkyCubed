@@ -45,7 +45,7 @@ object CustomDamage {
         val entityName = event.component
 
         damageRegex.matchEntire(entityName.string)?.let {
-            val type = it.damageType(entityName.siblings[0]?.color)
+            val type = it.damageType(entityName.siblings.firstOrNull()?.color)
             val amount = (it.groups[2]?.value ?: return).toLongValue()
             val close = if (config.combining) damageList.firstOrNull { existing ->
                 existing.type == type && entity.position().distanceTo(existing.position) < config.combineThreshold

@@ -2,8 +2,8 @@ package tech.thatgravyboat.skycubed.features.info.infos
 
 import me.owdding.lib.builder.DisplayFactory
 import me.owdding.lib.displays.Displays
-import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
-import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
+import tech.thatgravyboat.skyblockapi.api.environmental.DateTimeAPI
+import tech.thatgravyboat.skyblockapi.api.environmental.SkyBlockSeason
 import tech.thatgravyboat.skyblockapi.utils.extentions.toTitleCase
 import tech.thatgravyboat.skycubed.features.info.InfoLocation
 import tech.thatgravyboat.skycubed.features.info.InfoProvider

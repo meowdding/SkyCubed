@@ -3,8 +3,8 @@ package tech.thatgravyboat.skycubed.api.conditions
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.teamresourceful.resourcefullib.common.codecs.EnumCodec
-import tech.thatgravyboat.skyblockapi.api.datetime.DateTimeAPI
-import tech.thatgravyboat.skyblockapi.api.datetime.SkyBlockSeason
+import tech.thatgravyboat.skyblockapi.api.environmental.DateTimeAPI
+import tech.thatgravyboat.skyblockapi.api.environmental.SkyBlockSeason
 
 data class SeasonCondition(private val season: SkyBlockSeason) : Condition {
 

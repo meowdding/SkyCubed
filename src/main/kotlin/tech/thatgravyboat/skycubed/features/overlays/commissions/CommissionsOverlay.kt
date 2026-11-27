@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionArea
 import tech.thatgravyboat.skyblockapi.api.area.mining.CommissionsAPI
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
+import tech.thatgravyboat.skyblockapi.utils.extentions.nextCycling
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.bold
@@ -19,7 +20,6 @@ import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
@@ -74,7 +74,7 @@ object CommissionsOverlay : SkyCubedOverlay {
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
-            CommissionOverlayConfig.background = CommissionOverlayConfig.background.next()
+            CommissionOverlayConfig.background = CommissionOverlayConfig.background.nextCycling()
             this::lines.invalidateCache()
         }
         it.divider()

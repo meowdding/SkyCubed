@@ -14,6 +14,7 @@ import tech.thatgravyboat.skyblockapi.api.profile.hunting.AttributeAPI
 import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McFont
+import tech.thatgravyboat.skyblockapi.utils.extentions.nextCycling
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
@@ -26,7 +27,6 @@ import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
@@ -86,7 +86,7 @@ object AttributeOverlay : SkyCubedOverlay {
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
-            AttributeOverlayConfig.background = AttributeOverlayConfig.background.next()
+            AttributeOverlayConfig.background = AttributeOverlayConfig.background.nextCycling()
             this::display.invalidateCache()
         }
         it.divider()

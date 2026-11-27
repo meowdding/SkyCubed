@@ -9,7 +9,9 @@ import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.api.location.LocationAPI
 import tech.thatgravyboat.skyblockapi.api.profile.items.sacks.SacksAPI
+import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
 import tech.thatgravyboat.skyblockapi.helpers.McClient
+import tech.thatgravyboat.skyblockapi.utils.extentions.nextCycling
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
@@ -23,7 +25,6 @@ import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
 import kotlin.time.Duration.Companion.seconds
 
 @RegisterOverlay
@@ -41,10 +42,12 @@ object SackOverlay : SkyCubedOverlay {
         DisplayFactory.vertical {
             SackOverlayConfig.sackItems.forEach { item ->
                 val stack = SackCodecs.sackItems[item]?.create() ?: return@forEach
+                val id = SkyBlockId.item(item)
                 horizontal(5, Alignment.CENTER) {
                     display(Displays.item(stack))
                     string(stack.hoverName)
-                    val sackItems = SacksAPI.sackItems[item] ?: 0
+
+                    val sackItems = SacksAPI.items[id] ?: 0
                     string(Text.of("x${sackItems.toFormattedString()}") { color = TextColor.PINK })
                 }
             }
@@ -65,7 +68,7 @@ object SackOverlay : SkyCubedOverlay {
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
-            SackOverlayConfig.background = SackOverlayConfig.background.next()
+            SackOverlayConfig.background = SackOverlayConfig.background.nextCycling()
             this::display.invalidateCache()
         }
         it.divider()

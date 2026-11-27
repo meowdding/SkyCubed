@@ -44,7 +44,7 @@ class DungeonPlayer(
         return McLevel.self?.players()
             ?.filter { it.name != null }
             ?.firstOrNull { it.name.stripped.equals(name, ignoreCase = true) }
-            ?.also { this.player = it as? AbstractClientPlayer }
+            ?.also { this.player = it }
             ?.uuid
     }
 

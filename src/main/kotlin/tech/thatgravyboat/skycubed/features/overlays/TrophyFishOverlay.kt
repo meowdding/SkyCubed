@@ -24,6 +24,7 @@ import tech.thatgravyboat.skyblockapi.api.events.screen.ContainerCloseEvent
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.extentions.nextCycling
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedString
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
@@ -36,7 +37,6 @@ import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
 import kotlin.time.Duration.Companion.seconds
 
 @Module
@@ -93,7 +93,7 @@ object TrophyFishOverlay : SkyCubedOverlay {
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
-            config.background = config.background.next()
+            config.background = config.background.nextCycling()
             this::display.invalidateCache()
         }
         it.divider()

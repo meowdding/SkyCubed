@@ -18,6 +18,7 @@ import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
 import tech.thatgravyboat.skyblockapi.api.repo.apis.SkyBlockItemsRepo
 import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
+import tech.thatgravyboat.skyblockapi.utils.extentions.nextCycling
 import tech.thatgravyboat.skyblockapi.utils.extentions.parseDuration
 import tech.thatgravyboat.skyblockapi.utils.extentions.toIntValue
 import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
@@ -33,7 +34,6 @@ import tech.thatgravyboat.skycubed.utils.OverlayBackgroundConfig
 import tech.thatgravyboat.skycubed.utils.RegisterOverlay
 import tech.thatgravyboat.skycubed.utils.SkyCubedOverlay
 import tech.thatgravyboat.skycubed.utils.invalidateCache
-import tech.thatgravyboat.skycubed.utils.next
 import kotlin.math.atan2
 import kotlin.math.sqrt
 import kotlin.time.Duration
@@ -108,7 +108,7 @@ object PowerOrbOverlay : SkyCubedOverlay {
             OverlayBackgroundConfig.NO_BACKGROUND -> "No Background"
         }
         it.button(Text.of(text)) {
-            PowerOrbOverlayConfig.background = PowerOrbOverlayConfig.background.next()
+            PowerOrbOverlayConfig.background = PowerOrbOverlayConfig.background.nextCycling()
             this::display.invalidateCache()
         }
         it.button(Text.of("Toggle Spinning Item")) {
