@@ -8,6 +8,7 @@ import com.mojang.renderpearl.api.textures.FilterMode
 import com.mojang.renderpearl.api.textures.GpuSampler
 import com.mojang.renderpearl.api.textures.GpuTextureView
 import earth.terrarium.olympus.client.pipelines.pips.OlympusPictureInPictureRenderState
+import me.owdding.ktmodules.Module
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.navigation.ScreenRectangle
 import net.minecraft.client.gui.render.TextureSetup
@@ -111,13 +112,16 @@ class RpgPlayerRenderer : PictureInPictureRenderer<RpgPlayerRenderer.State>() {
         }
     }
 
+    @Module
     companion object {
 
-        private val pipeline = RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
-            .withLocation(SkyCubed.id("pipeline/gui_rpg_player"))
-            .withFragmentShader(SkyCubed.id("rpg_player"))
-            .withBindGroupLayout(BindGroupLayouts.SAMPLER1) // SAMPLER0 is alr included in above
-            .build()
+        private val pipeline = RenderPipelines.register(
+            RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
+                .withLocation(SkyCubed.id("pipeline/gui_rpg_player"))
+                .withFragmentShader(SkyCubed.id("rpg_player"))
+                .withBindGroupLayout(BindGroupLayouts.SAMPLER1) // SAMPLER0 is alr included in above
+                .build()
+        )
 
         // Height of the player, bc we cant use boundingbox (sneaking my beloved)
         private const val PLAYER_HEIGHT = 1.8f
