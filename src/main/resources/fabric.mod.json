@@ -33,5 +33,6 @@
         "meowdding-lib": ">=${mlib}",
         "resourcefulconfigkt": ">=${rconfigkt}",
         "resourcefulconfig": ">=${rconfig}"
-    }
+    },
+    "accessWidener": "skycubed.accesswidener"
 }
