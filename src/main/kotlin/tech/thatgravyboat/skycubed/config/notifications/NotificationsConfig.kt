@@ -6,6 +6,10 @@ import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 object NotificationsConfig : CategoryKt("notifications") {
 
     override val name: TranslatableValue = Translated("skycubed.config.notifications")
+    var vanillaToasts by boolean(false) {
+        this.translation = "skycubed.config.notifications.vanilla_toasts"
+    }
+
 
     init {
         separator {
