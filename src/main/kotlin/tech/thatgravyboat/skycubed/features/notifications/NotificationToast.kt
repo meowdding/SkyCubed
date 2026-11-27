@@ -98,5 +98,5 @@ data class NotificationToast(
         }
 
         fun notifications(): List<NotificationToast> = this.notifications
-    } 
+    }
 }
